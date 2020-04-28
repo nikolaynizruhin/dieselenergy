@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 
 class BuilderServiceProvider extends ServiceProvider

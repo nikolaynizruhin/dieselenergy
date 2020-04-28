@@ -5,7 +5,6 @@ namespace Tests\Feature\User;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class UpdateUserTest extends TestCase

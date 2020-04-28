@@ -104,7 +104,7 @@ class UserController extends Controller
                 'string',
                 'email',
                 'max:255',
-                Rule::unique('users')->ignore($user)
+                Rule::unique('users')->ignore($user),
             ],
         ]);
 

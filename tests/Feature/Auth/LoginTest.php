@@ -4,7 +4,6 @@ namespace Tests\Feature\Auth;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
@@ -137,8 +136,8 @@ class LoginTest extends TestCase
             ->assertSessionHasErrors([
                 'email' => Lang::get('auth.throttle', [
                     'seconds' => config('auth.passwords.users.throttle'),
-                    'minutes' => ceil(config('auth.passwords.users.throttle') / 60)
-                ])
+                    'minutes' => ceil(config('auth.passwords.users.throttle') / 60),
+                ]),
             ]);
 
         $this->assertTrue(session()->hasOldInput('email'));
