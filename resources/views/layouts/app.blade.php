@@ -20,7 +20,7 @@
         @include('layouts.partials.nav')
 
         <main class="py-4">
-            <div class="container">
+            <div class="container-lg">
                 <div class="row">
                     <div class="col-md-2">
                         @include('layouts.partials.sidebar')
