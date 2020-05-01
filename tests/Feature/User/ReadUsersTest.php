@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ShowUsersTest extends TestCase
+class ReadUsersTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -26,6 +26,7 @@ class ShowUsersTest extends TestCase
             ->get(route('users.index'))
             ->assertSuccessful()
             ->assertViewIs('users.index')
+            ->assertViewHas('users')
             ->assertSee($admin->email)
             ->assertSee($user->email);
     }
