@@ -9,7 +9,7 @@
             <form action="{{ route('users.index') }}" method="GET">
                 <div class="form-group">
                     <label for="search" class="sr-only">{{ __('Search') }}</label>
-                    <input type="text" name="search" class="form-control shadow-sm border-0" id="search" aria-describedby="search" placeholder="Search...">
+                    <input type="text" name="search" class="form-control shadow-sm border-0" value="{{ request('search') }}" id="search" aria-describedby="search" placeholder="Search...">
                 </div>
             </form>
         </div>
@@ -19,14 +19,6 @@
     </div>
 
     <div class="card shadow-sm">
-        <div class="card-body p-0">
-            @include('users.partials.list')
-        </div>
-        <div class="card-footer bg-white text-muted">
-            <div class="d-flex justify-content-between align-items-center">
-                About {{ $users->total() }} results
-                {{ $users->withQueryString()->links() }}
-            </div>
-        </div>
+        @include('users.partials.'.($users->total() ? 'list' : 'empty'))
     </div>
 @endsection
