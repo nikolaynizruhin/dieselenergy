@@ -9,6 +9,6 @@ $factory->define(Product::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence,
         'description' => $faker->paragraph,
-        'price' => $faker->randomNumber(5)
+        'price' => $faker->randomNumber(5),
     ];
 });
