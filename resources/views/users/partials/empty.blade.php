@@ -4,7 +4,7 @@
         <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
     </svg>
     {{ __('No users matched the given criteria.') }}
-    <a class="btn btn-primary d-block d-md-inline-block shadow-sm mt-3" href="{{ route('users.create') }}" role="button">
+    <a class="btn btn-outline-primary d-block d-md-inline-block mt-3" href="{{ route('users.create') }}" role="button">
         {{ __('Add User') }}
     </a>
 </div>
