@@ -21,8 +21,6 @@ class ReadProductsTest extends TestCase
     /** @test */
     public function user_can_read_products()
     {
-        $this->withoutExceptionHandling();
-
         $user = factory(User::class)->create();
 
         [$petrol, $diesel] = factory(Product::class, 2)->create();

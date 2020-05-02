@@ -14,9 +14,9 @@ class SearchProductsTest extends TestCase
     /** @test */
     public function guest_cant_search_products()
     {
-        $diesel = factory(Product::class)->create(['name' => 'Diesel']);
+        $product = factory(Product::class)->create();
 
-        $this->get(route('products.index', ['search' => $diesel->name]))
+        $this->get(route('products.index', ['search' => $product->name]))
             ->assertRedirect(route('login'));
     }
 
