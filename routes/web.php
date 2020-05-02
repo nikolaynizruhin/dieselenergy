@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('products', 'ProductController');
 Route::resource('brands', 'BrandController');
+Route::resource('categories', 'CategoryController');
 
 Route::resource('users', 'UserController');
 Route::put('users/{user}/password', 'UserPasswordController@update')->name('users.password.update');
