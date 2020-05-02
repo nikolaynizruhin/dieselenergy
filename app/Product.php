@@ -12,6 +12,22 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'price',
+        'name', 'description', 'price', 'brand_id', 'category_id',
     ];
+
+    /**
+     * Get the brand of the product.
+     */
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    /**
+     * Get the category of the product.
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
