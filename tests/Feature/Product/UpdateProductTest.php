@@ -205,5 +205,4 @@ class UpdateProductTest extends TestCase
             ->put(route('products.update', $product), $stub)
             ->assertSessionHasErrors('category_id');
     }
-
 }
