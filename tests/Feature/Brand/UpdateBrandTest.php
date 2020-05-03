@@ -39,7 +39,7 @@ class UpdateBrandTest extends TestCase
         $brand = factory(Brand::class)->create();
 
         $this->put(route('brands.update', $brand), [
-            'name' => $this->faker->sentence,
+            'name' => $this->faker->word,
         ])->assertRedirect(route('login'));
     }
 

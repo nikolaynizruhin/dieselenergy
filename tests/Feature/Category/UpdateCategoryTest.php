@@ -39,7 +39,7 @@ class UpdateCategoryTest extends TestCase
         $category = factory(Category::class)->create();
 
         $this->put(route('categories.update', $category), [
-            'name' => $this->faker->sentence,
+            'name' => $this->faker->word,
         ])->assertRedirect(route('login'));
     }
 
