@@ -25,7 +25,9 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::search('name', $request->search)->paginate(10);
+        $products = Product::with(['brand', 'category'])
+            ->search('name', $request->search)
+            ->paginate(10);
 
         return view('products.index', compact('products'));
     }
