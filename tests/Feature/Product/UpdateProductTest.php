@@ -132,4 +132,77 @@ class UpdateProductTest extends TestCase
             ->put(route('products.update', $product), $stub)
             ->assertSessionHasErrors('price');
     }
+
+    /** @test */
+    public function user_cant_update_product_without_brand()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+        $stub = factory(Product::class)->raw(['brand_id' => null]);
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub)
+            ->assertSessionHasErrors('brand_id');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_string_brand()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+        $stub = factory(Product::class)->raw(['brand_id' => 'string']);
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub)
+            ->assertSessionHasErrors('brand_id');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_nonexistent_brand()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+        $stub = factory(Product::class)->raw(['brand_id' => 100]);
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub)
+            ->assertSessionHasErrors('brand_id');
+    }
+
+    /** @test */
+    public function user_cant_update_product_without_category()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+        $stub = factory(Product::class)->raw(['category_id' => null]);
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub)
+            ->assertSessionHasErrors('category_id');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_string_category()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+        $stub = factory(Product::class)->raw(['category_id' => 'string']);
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub)
+            ->assertSessionHasErrors('category_id');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_nonexistent_category()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+        $stub = factory(Product::class)->raw(['category_id' => 100]);
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub)
+            ->assertSessionHasErrors('category_id');
+    }
+
 }

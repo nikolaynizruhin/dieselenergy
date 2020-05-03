@@ -130,4 +130,70 @@ class CreateProductTest extends TestCase
             ->post(route('products.store'), $product)
             ->assertSessionHasErrors('price');
     }
+
+    /** @test */
+    public function user_cant_create_product_without_brand()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw(['brand_id' => null]);
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product)
+            ->assertSessionHasErrors('brand_id');
+    }
+
+    /** @test */
+    public function user_cant_create_product_with_string_brand()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw(['brand_id' => 'string']);
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product)
+            ->assertSessionHasErrors('brand_id');
+    }
+
+    /** @test */
+    public function user_cant_create_product_with_nonexistent_brand()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw(['brand_id' => 1]);
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product)
+            ->assertSessionHasErrors('brand_id');
+    }
+
+    /** @test */
+    public function user_cant_create_product_without_category()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw(['category_id' => null]);
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product)
+            ->assertSessionHasErrors('category_id');
+    }
+
+    /** @test */
+    public function user_cant_create_product_with_string_category()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw(['category_id' => 'string']);
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product)
+            ->assertSessionHasErrors('category_id');
+    }
+
+    /** @test */
+    public function user_cant_create_product_with_nonexistent_category()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw(['category_id' => 1]);
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product)
+            ->assertSessionHasErrors('category_id');
+    }
 }
