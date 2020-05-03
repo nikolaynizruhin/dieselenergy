@@ -5,8 +5,7 @@
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('Name') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('Brand') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('Category') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('Status') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('Price') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('Actions') }}</th>
             </tr>
@@ -16,8 +15,11 @@
                 <tr>
                     <th scope="row" class="font-weight-normal">{{ $products->firstItem() + $key }}</th>
                     <td>{{ $product->name }}</td>
-                    <td>{{ $product->brand->name }}</td>
-                    <td>{{ $product->category->name }}</td>
+                    <td>
+                        <span class="badge badge-pill badge-{{ $product->is_active ? 'success' : 'danger' }}">
+                            {{ $product->is_active ? __('Active') : __('Inactive') }}
+                        </span>
+                    </td>
                     <td>{{ $product->price / 100 }}</td>
                     <td>
                         <a href="{{ route('products.edit', $product) }}" class="mr-2">

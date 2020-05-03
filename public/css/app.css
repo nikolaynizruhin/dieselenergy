@@ -13,6 +13,16 @@ input[name=search]:focus {
   border: 1px solid #80bdff !important;
 }
 
+.badge-success {
+  color: #03543f !important;
+  background-color: #def7ec !important;
+}
+
+.badge-danger {
+  color: #9b1c1c !important;
+  background-color: #fde8e8 !important;
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors

@@ -12,6 +12,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'name' => $faker->unique()->sentence,
         'description' => $faker->paragraph,
         'price' => $faker->randomNumber(5),
+        'is_active' => $faker->boolean,
         'brand_id' => factory(Brand::class),
         'category_id' => factory(Category::class),
     ];

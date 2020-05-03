@@ -197,4 +197,39 @@ class CreateProductTest extends TestCase
             ->post(route('products.store'), $product)
             ->assertSessionHasErrors('category_id');
     }
+
+    /** @test */
+    public function user_cant_create_product_with_null_status()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw(['is_active' => null]);
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product)
+            ->assertSessionHasErrors('is_active');
+    }
+
+    /** @test */
+    public function user_cant_create_product_with_string_status()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw(['is_active' => 'string']);
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product)
+            ->assertSessionHasErrors('is_active');
+    }
+
+    /** @test */
+    public function by_default_product_should_be_inactive()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->make()->makeHidden('is_active');
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product->toArray())
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('products', ['is_active' => 0]);
+    }
 }

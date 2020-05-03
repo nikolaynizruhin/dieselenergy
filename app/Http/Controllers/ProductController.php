@@ -25,9 +25,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::with(['brand', 'category'])
-            ->search('name', $request->search)
-            ->paginate(10);
+        $products = Product::search('name', $request->search)->paginate(10);
 
         return view('products.index', compact('products'));
     }
@@ -54,9 +52,12 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:1',
+            'is_active' => 'boolean',
             'brand_id' => 'required|numeric|exists:brands,id',
             'category_id' => 'required|numeric|exists:categories,id',
         ]);
+
+        $validatedData['is_active'] = $request->get('is_active', false);
 
         Product::create($validatedData);
 
@@ -100,9 +101,12 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:1',
+            'is_active' => 'boolean',
             'brand_id' => 'required|numeric|exists:brands,id',
             'category_id' => 'required|numeric|exists:categories,id',
         ]);
+
+        $validatedData['is_active'] = $request->get('is_active', false);
 
         $product->update($validatedData);
 

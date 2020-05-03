@@ -24,6 +24,25 @@
                     </div>
                 </div>
 
+                <!-- Status -->
+                <div class="form-group row">
+                    <div class="col-md-3">{{ __('Status') }}</div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input type="checkbox" id="inputStatus" class="form-check-input @error('is_active') is-invalid @enderror" value="1" name="is_active" @if (old('is_active')) checked @endif>
+                            <label class="form-check-label" for="inputStatus">
+                                {{ __('Active') }}
+                            </label>
+
+                            @error('is_active')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Brand -->
                 <div class="form-group row">
                     <label for="inputBrand" class="col-md-3 col-form-label">{{ __('Brand') }}</label>

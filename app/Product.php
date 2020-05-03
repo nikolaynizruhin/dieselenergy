@@ -12,7 +12,16 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'price', 'brand_id', 'category_id',
+        'name', 'description', 'price', 'brand_id', 'category_id', 'is_active',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_active' => 'boolean',
     ];
 
     /**
