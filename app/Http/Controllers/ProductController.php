@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProduct;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -43,23 +44,12 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreProduct  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:1',
-            'is_active' => 'boolean',
-            'brand_id' => 'required|numeric|exists:brands,id',
-            'category_id' => 'required|numeric|exists:categories,id',
-        ]);
-
-        $validatedData['is_active'] = $request->get('is_active', false);
-
-        Product::create($validatedData);
+        Product::create($request->prepared());
 
         return redirect()
             ->route('products.index')
@@ -91,24 +81,13 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreProduct  $request
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(StoreProduct $request, Product $product)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:1',
-            'is_active' => 'boolean',
-            'brand_id' => 'required|numeric|exists:brands,id',
-            'category_id' => 'required|numeric|exists:categories,id',
-        ]);
-
-        $validatedData['is_active'] = $request->get('is_active', false);
-
-        $product->update($validatedData);
+        $product->update($request->prepared());
 
         return redirect()
             ->route('products.index')
