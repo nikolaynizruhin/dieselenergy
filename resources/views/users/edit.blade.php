@@ -10,6 +10,8 @@
             @csrf
             @method('PUT')
             <div class="card-body">
+
+                <!-- Name -->
                 <div class="form-group row">
                     <label for="inputName" class="col-md-3 col-form-label">{{ __('Name') }}</label>
                     <div class="col-md-6">
@@ -22,6 +24,8 @@
                         @enderror
                     </div>
                 </div>
+
+                <!-- Email -->
                 <div class="form-group row">
                     <label for="inputEmail" class="col-md-3 col-form-label">{{ __('Email') }}</label>
                     <div class="col-md-6">
@@ -51,6 +55,8 @@
             @csrf
             @method('PUT')
             <div class="card-body">
+
+                <!-- Password -->
                 <div class="form-group row">
                     <label for="inputPassword" class="col-md-3 col-form-label">{{ __('Password') }}</label>
                     <div class="col-md-6">
@@ -63,6 +69,8 @@
                         @enderror
                     </div>
                 </div>
+
+                <!-- Password Confirmation -->
                 <div class="form-group row">
                     <label for="inputPasswordConfirmation" class="col-md-3 col-form-label">{{ __('Password Confirmation') }}</label>
                     <div class="col-md-6">

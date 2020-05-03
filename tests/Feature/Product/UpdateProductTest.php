@@ -30,7 +30,8 @@ class UpdateProductTest extends TestCase
         $this->actingAs($user)
             ->get(route('products.edit', $product))
             ->assertViewIs('products.edit')
-            ->assertViewHas('product', $product);
+            ->assertViewHas('product', $product)
+            ->assertViewHas(['brands', 'categories']);
     }
 
     /** @test */

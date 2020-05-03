@@ -9,6 +9,8 @@
         <form action="{{ route('products.store') }}" method="POST">
             @csrf
             <div class="card-body">
+
+                <!-- Name -->
                 <div class="form-group row">
                     <label for="inputName" class="col-md-3 col-form-label">{{ __('Name') }}</label>
                     <div class="col-md-6">
@@ -21,6 +23,50 @@
                         @enderror
                     </div>
                 </div>
+
+                <!-- Brand -->
+                <div class="form-group row">
+                    <label for="inputBrand" class="col-md-3 col-form-label">{{ __('Brand') }}</label>
+                    <div class="col-md-6">
+                        <select class="form-control @error('brand_id') is-invalid @enderror" name="brand_id" id="inputBrand" required>
+                            <option value="">Select a brand</option>
+                            @foreach ($brands as $brand)
+                                <option value="{{ $brand->id }}" @if (old('brand_id') === $brand->id) selected @endif>
+                                    {{ $brand->name }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        @error('brand_id')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Category -->
+                <div class="form-group row">
+                    <label for="inputCategory" class="col-md-3 col-form-label">{{ __('Category') }}</label>
+                    <div class="col-md-6">
+                        <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="inputCategory" required>
+                            <option value="">Select a category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" @if (old('category_id') === $category->id) selected @endif>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        @error('category_id')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Description -->
                 <div class="form-group row">
                     <label for="inputDescription" class="col-md-3 col-form-label">{{ __('Description') }}</label>
                     <div class="col-md-6">
