@@ -42,7 +42,7 @@ class ProductTest extends TestCase
         $attribute = factory(Attribute::class)->create();
 
         $product->attributes()
-            ->attach($attribute->id, ['value' => $value = $this->faker->randomDigit]);
+            ->attach($attribute, ['value' => $value = $this->faker->randomDigit]);
 
         $this->assertTrue($product->attributes->contains($attribute));
         $this->assertInstanceOf(Collection::class, $product->attributes);
