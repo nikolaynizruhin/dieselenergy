@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    use Attributable;
+
     /**
      * The attributes that are mass assignable.
      *

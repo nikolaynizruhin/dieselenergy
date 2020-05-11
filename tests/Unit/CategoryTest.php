@@ -2,15 +2,17 @@
 
 namespace Tests\Unit;
 
+use App\Attribute;
 use App\Category;
 use App\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     /** @test */
     public function it_has_many_products()
@@ -20,5 +22,19 @@ class CategoryTest extends TestCase
 
         $this->assertTrue($category->products->contains($product));
         $this->assertInstanceOf(Collection::class, $category->products);
+    }
+
+    /** @test */
+    public function it_has_many_attributes()
+    {
+        $category = factory(Category::class)->create();
+        $attribute = factory(Attribute::class)->create();
+
+        $category->attributes()
+            ->attach($attribute->id, ['value' => $value = $this->faker->randomDigit]);
+
+        $this->assertTrue($category->attributes->contains($attribute));
+        $this->assertInstanceOf(Collection::class, $category->attributes);
+        $this->assertEquals($value, $category->attributes->first()->pivot->value);
     }
 }
