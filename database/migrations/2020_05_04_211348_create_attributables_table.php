@@ -14,7 +14,8 @@ class CreateAttributablesTable extends Migration
     public function up()
     {
         Schema::create('attributables', function (Blueprint $table) {
-            $table->primary(['attribute_id', 'attributable_id', 'attributable_type'], 'attributables_primary');
+            $table->id();
+            $table->unique(['attribute_id', 'attributable_id', 'attributable_type'], 'attributables_primary');
             $table->foreignId('attribute_id')->constrained()->onDelete('cascade');
             $table->morphs('attributable');
             $table->string('value')->nullable();

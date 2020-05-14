@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use Attributable;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -21,5 +19,16 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    /**
+     * The attributes that belong to the model.
+     */
+    public function attributes()
+    {
+        return $this->morphToMany(Attribute::class, 'attributable')
+            ->using(Specification::class)
+            ->withPivot('id', 'value')
+            ->withTimestamps();
     }
 }

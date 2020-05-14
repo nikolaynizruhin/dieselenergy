@@ -19,7 +19,8 @@ class Attribute extends Model
     public function categories()
     {
         return $this->morphedByMany(Category::class, 'attributable')
-            ->withPivot('value')
+            ->using(Specification::class)
+            ->withPivot('id', 'value')
             ->withTimestamps();
     }
 
@@ -29,7 +30,7 @@ class Attribute extends Model
     public function products()
     {
         return $this->morphedByMany(Product::class, 'attributable')
-            ->withPivot('value')
+            ->withPivot('id', 'value')
             ->withTimestamps();
     }
 }

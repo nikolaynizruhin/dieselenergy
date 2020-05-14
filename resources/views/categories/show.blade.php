@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card shadow-sm">
+    @include('layouts.partials.alert')
+
+    <div class="card shadow-sm mb-4">
         <div class="card-header border-0 bg-white lead">
             {{ __('Category Details') }}
         </div>
@@ -14,4 +16,6 @@
             </div>
         </div>
     </div>
+
+    @include('specifications.index')
 @endsection

@@ -4607,7 +4607,7 @@ __webpack_require__.r(__webpack_exports__);
   var uriAttrs = ['background', 'cite', 'href', 'itemtype', 'longdesc', 'poster', 'src', 'xlink:href'];
   var ARIA_ATTRIBUTE_PATTERN = /^aria-[\w-]*$/i;
   var DefaultWhitelist = {
-    // Global attributes allowed on any supplied element below.
+    // Global specifications allowed on any supplied element below.
     '*': ['class', 'dir', 'id', 'lang', 'role', ARIA_ATTRIBUTE_PATTERN],
     a: ['target', 'href', 'title', 'rel'],
     area: [],
@@ -7321,7 +7321,7 @@ function assert( fn ) {
 
 /**
  * Adds the same handler for all of the specified attrs
- * @param {String} attrs Pipe-separated list of attributes
+ * @param {String} attrs Pipe-separated list of specifications
  * @param {Function} handler The method that will be applied
  */
 function addHandle( attrs, handler ) {
@@ -7545,7 +7545,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	---------------------------------------------------------------------- */
 
 	// Support: IE<8
-	// Verify that getAttribute really returns attributes and not properties
+	// Verify that getAttribute really returns specifications and not properties
 	// (excepting IE8 booleans)
 	support.attributes = assert( function( el ) {
 		el.className = "i";
@@ -7709,7 +7709,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			}
 
 			// Support: IE8
-			// Boolean attributes and "value" are not treated correctly
+			// Boolean specifications and "value" are not treated correctly
 			if ( !el.querySelectorAll( "[selected]" ).length ) {
 				rbuggyQSA.push( "\\[" + whitespace + "*(?:value|" + booleans + ")" );
 			}
@@ -7757,7 +7757,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 				"<select disabled='disabled'><option/></select>";
 
 			// Support: Windows 8 Native Apps
-			// The type and name attributes are restricted during .innerHTML assignment
+			// The type and name specifications are restricted during .innerHTML assignment
 			var input = document.createElement( "input" );
 			input.setAttribute( "type", "hidden" );
 			el.appendChild( input ).setAttribute( "name", "D" );
@@ -8577,7 +8577,7 @@ Expr = Sizzle.selectors = {
 			// http://www.w3.org/TR/selectors/#empty-pseudo
 			// :empty is negated by element (1) or content nodes (text: 3; cdata: 4; entity ref: 5),
 			//   but not by others (comment: 8; processing instruction: 7; etc.)
-			// nodeType < 6 works because attributes (2) do not appear as children
+			// nodeType < 6 works because specifications (2) do not appear as children
 			for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
 				if ( elem.nodeType < 6 ) {
 					return false;
@@ -9549,7 +9549,7 @@ var rootjQuery,
 							if ( isFunction( this[ match ] ) ) {
 								this[ match ]( context[ match ] );
 
-							// ...and otherwise set as attributes
+							// ...and otherwise set as specifications
 							} else {
 								this.attr( match, context[ match ] );
 							}
@@ -13759,7 +13759,7 @@ function defaultPrefilter( elem, props, opts ) {
 	if ( isBox && elem.nodeType === 1 ) {
 
 		// Support: IE <=9 - 11, Edge 12 - 15
-		// Record all 3 overflow attributes because IE does not infer the shorthand
+		// Record all 3 overflow specifications because IE does not infer the shorthand
 		// from identically-valued overflowX and overflowY and Edge just mirrors
 		// the overflowX value there.
 		opts.overflow = [ style.overflow, style.overflowX, style.overflowY ];
@@ -14366,12 +14366,12 @@ jQuery.extend( {
 		var ret, hooks,
 			nType = elem.nodeType;
 
-		// Don't get/set attributes on text, comment and attribute nodes
+		// Don't get/set specifications on text, comment and attribute nodes
 		if ( nType === 3 || nType === 8 || nType === 2 ) {
 			return;
 		}
 
-		// Fallback to prop when attributes are not supported
+		// Fallback to prop when specifications are not supported
 		if ( typeof elem.getAttribute === "undefined" ) {
 			return jQuery.prop( elem, name, value );
 		}
@@ -14404,7 +14404,7 @@ jQuery.extend( {
 
 		ret = jQuery.find.attr( elem, name );
 
-		// Non-existent attributes return null, we normalize to undefined
+		// Non-existent specifications return null, we normalize to undefined
 		return ret == null ? undefined : ret;
 	},
 
@@ -14440,12 +14440,12 @@ jQuery.extend( {
 	}
 } );
 
-// Hooks for boolean attributes
+// Hooks for boolean specifications
 boolHook = {
 	set: function( elem, value, name ) {
 		if ( value === false ) {
 
-			// Remove boolean attributes when set to false
+			// Remove boolean specifications when set to false
 			jQuery.removeAttr( elem, name );
 		} else {
 			elem.setAttribute( name, name );
@@ -14980,7 +14980,7 @@ jQuery.each( [ "radio", "checkbox" ], function() {
 
 
 
-// Return jQuery for attributes-only inclusion
+// Return jQuery for specifications-only inclusion
 
 
 support.focusin = "onfocusin" in window;
@@ -35516,10 +35516,10 @@ function setStyles(element, styles) {
 }
 
 /**
- * Set the attributes to the given popper
+ * Set the specifications to the given popper
  * @method
  * @memberof Popper.Utils
- * @argument {Element} element - Element to apply the attributes to
+ * @argument {Element} element - Element to apply the specifications to
  * @argument {Object} styles
  * Object with a list of properties and values which will be applied to the element
  */
@@ -35539,7 +35539,7 @@ function setAttributes(element, attributes) {
  * @memberof Modifiers
  * @argument {Object} data - The data object generated by `update` method
  * @argument {Object} data.styles - List of style properties - values to apply to popper element
- * @argument {Object} data.attributes - List of attribute properties - values to apply to popper element
+ * @argument {Object} data.specifications - List of attribute properties - values to apply to popper element
  * @argument {Object} options - Modifiers configuration and options
  * @returns {Object} The same data object
  */
@@ -35550,8 +35550,8 @@ function applyStyle(data) {
   // lines of this modifier!
   setStyles(data.instance.popper, data.styles);
 
-  // any property present in `data.attributes` will be applied to the popper,
-  // they will be set as HTML attributes of the element
+  // any property present in `data.specifications` will be applied to the popper,
+  // they will be set as HTML specifications of the element
   setAttributes(data.instance.popper, data.attributes);
 
   // if arrowElement is defined and arrowStyles has some properties
@@ -35731,7 +35731,7 @@ function computeStyle(data, options) {
     'x-placement': data.placement
   };
 
-  // Update `data` attributes, styles and arrowStyles
+  // Update `data` specifications, styles and arrowStyles
   data.attributes = _extends({}, attributes, data.attributes);
   data.styles = _extends({}, styles, data.styles);
   data.arrowStyles = _extends({}, data.offsets.arrow, data.arrowStyles);
@@ -39921,7 +39921,7 @@ function extractPropsFromVNodeData (
             "Prop \"" + keyInLowerCase + "\" is passed to component " +
             (formatComponentName(tag || Ctor)) + ", but the declared prop name is" +
             " \"" + key + "\". " +
-            "Note that HTML attributes are case-insensitive and camelCased " +
+            "Note that HTML specifications are case-insensitive and camelCased " +
             "props need to use their kebab-case equivalents when using in-DOM " +
             "templates. You should probably use \"" + altKey + "\" instead of \"" + key + "\"."
           );
@@ -41499,7 +41499,7 @@ function eventsMixin (Vue) {
         tip(
           "Event \"" + lowerCaseEvent + "\" is emitted in component " +
           (formatComponentName(vm)) + " but the handler is registered for \"" + event + "\". " +
-          "Note that HTML attributes are case-insensitive and you cannot use " +
+          "Note that HTML specifications are case-insensitive and you cannot use " +
           "v-on to listen to camelCase events when using in-DOM templates. " +
           "You should probably use \"" + (hyphenate(event)) + "\" instead of \"" + event + "\"."
         );
@@ -43076,7 +43076,7 @@ Vue.version = '2.6.11';
 // during template compilation
 var isReservedAttr = makeMap('style,class');
 
-// attributes that should be using props for binding
+// specifications that should be using props for binding
 var acceptValue = makeMap('input,textarea,option,select,progress');
 var mustUseProp = function (tag, type, attr) {
   return (
@@ -46753,7 +46753,7 @@ function transformNode (el, options) {
     if (res) {
       warn(
         "class=\"" + staticClass + "\": " +
-        'Interpolation inside attributes has been removed. ' +
+        'Interpolation inside specifications has been removed. ' +
         'Use v-bind or the colon shorthand instead. For example, ' +
         'instead of <div class="{{ val }}">, use <div :class="val">.',
         el.rawAttrsMap['class']
@@ -46798,7 +46798,7 @@ function transformNode$1 (el, options) {
       if (res) {
         warn(
           "style=\"" + staticStyle + "\": " +
-          'Interpolation inside attributes has been removed. ' +
+          'Interpolation inside specifications has been removed. ' +
           'Use v-bind or the colon shorthand instead. For example, ' +
           'instead of <div style="{{ val }}">, use <div :style="val">.',
           el.rawAttrsMap['style']
@@ -46870,7 +46870,7 @@ var isNonPhrasingTag = makeMap(
  * Not type-checking this file because it's mostly vendor code.
  */
 
-// Regular Expressions for parsing tags and attributes
+// Regular Expressions for parsing tags and specifications
 var attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/;
 var dynamicArgAttribute = /^\s*((?:v-[\w-]+:|@|:|#)\[[^=]+\][^\s"'<>\/=]*)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/;
 var ncname = "[a-zA-Z_][\\-\\.0-9_a-zA-Z" + (unicodeRegExp.source) + "]*";
@@ -47560,7 +47560,7 @@ function processRawAttrs (el) {
       }
     }
   } else if (!el.pre) {
-    // non root node in pre blocks with no attributes
+    // non root node in pre blocks with no specifications
     el.plain = true;
   }
 }
@@ -47572,7 +47572,7 @@ function processElement (
   processKey(element);
 
   // determine whether this is a plain element after
-  // removing structural attributes
+  // removing structural specifications
   element.plain = (
     !element.key &&
     !element.scopedSlots &&
@@ -48007,7 +48007,7 @@ function processAttrs (el) {
         if (res) {
           warn$2(
             name + "=\"" + value + "\": " +
-            'Interpolation inside attributes has been removed. ' +
+            'Interpolation inside specifications has been removed. ' +
             'Use v-bind or the colon shorthand instead. For example, ' +
             'instead of <div id="{{ val }}">, use <div :id="val">.',
             list[i]
@@ -48752,7 +48752,7 @@ function genData$2 (el, state) {
   for (var i = 0; i < state.dataGenFns.length; i++) {
     data += state.dataGenFns[i](el);
   }
-  // attributes
+  // specifications
   if (el.attrs) {
     data += "attrs:" + (genProps(el.attrs)) + ",";
   }
@@ -49779,7 +49779,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -49799,7 +49799,7 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 

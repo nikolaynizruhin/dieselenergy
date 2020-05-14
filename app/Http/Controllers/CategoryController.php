@@ -63,11 +63,14 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Category  $category
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Category $category, Request $request)
     {
-        return view('categories.show', compact('category'));
+        $attributes = $category->attributes()->where('name', 'LIKE', '%'.$request->search.'%')->paginate(10);
+
+        return view('categories.show', compact('category', 'attributes'));
     }
 
     /**
