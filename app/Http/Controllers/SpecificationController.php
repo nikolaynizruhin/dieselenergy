@@ -36,10 +36,7 @@ class SpecificationController extends Controller
      */
     public function create()
     {
-        $attributes = Attribute::all();
-        $categories = Category::all();
-
-        return view('specifications.create', compact('attributes', 'categories'));
+        return view('specifications.create');
     }
 
     /**

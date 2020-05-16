@@ -68,7 +68,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category, Request $request)
     {
-        $attributes = $category->attributes()->where('name', 'LIKE', '%'.$request->search.'%')->paginate(10);
+        $attributes = $category->attributes()
+            ->where('name', 'LIKE', '%'.$request->search.'%')
+            ->paginate(10);
 
         return view('categories.show', compact('category', 'attributes'));
     }
