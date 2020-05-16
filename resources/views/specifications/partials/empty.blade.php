@@ -4,7 +4,7 @@
         <path fill-rule="evenodd" d="M13.5 10a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13v-1.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
         <path fill-rule="evenodd" d="M13 12.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
     </svg>
-    {{ __('No category attributes matched the given criteria.') }}
+    {{ __('No attributes matched the given criteria.') }}
     <a class="btn btn-outline-primary d-block d-md-inline-block mt-3" href="{{ route('specifications.create', ['category_id' => $category->id]) }}" role="button">
         {{ __('Attach Attribute') }}
     </a>

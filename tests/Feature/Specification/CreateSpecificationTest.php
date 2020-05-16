@@ -56,7 +56,7 @@ class CreateSpecificationTest extends TestCase
                 'category_id' => $category->id,
                 'attribute_id' => $attribute->id,
             ])->assertRedirect(route('categories.show', $category))
-            ->assertSessionHas('status', 'Category attribute was created successfully!');
+            ->assertSessionHas('status', 'Category attribute was attached successfully!');
 
         $id = $category->fresh()->attributes()->find($attribute->id)->pivot->id;
 

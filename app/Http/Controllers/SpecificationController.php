@@ -63,7 +63,7 @@ class SpecificationController extends Controller
 
         return redirect()
             ->route('categories.show', $request->category_id)
-            ->with('status', 'Category attribute was created successfully!');
+            ->with('status', 'Category attribute was attached successfully!');
     }
 
     /**
