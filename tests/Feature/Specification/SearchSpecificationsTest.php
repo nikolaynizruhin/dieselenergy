@@ -13,7 +13,7 @@ class SearchSpecificationsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function user_can_search_category_attributes()
+    public function user_can_search_specifications()
     {
         $user = factory(User::class)->create();
 

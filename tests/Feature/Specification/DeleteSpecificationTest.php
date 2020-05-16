@@ -13,7 +13,7 @@ class DeleteSpecificationTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function guest_cant_delete_category_attribute()
+    public function guest_cant_delete_specification()
     {
         $attribute = factory(Attribute::class)->create();
         $category = factory(Category::class)->create();
@@ -27,7 +27,7 @@ class DeleteSpecificationTest extends TestCase
     }
 
     /** @test */
-    public function user_can_delete_category_attribute()
+    public function user_can_delete_specification()
     {
         $user = factory(User::class)->create();
 

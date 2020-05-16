@@ -13,7 +13,7 @@ class ReadSpecificationsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function user_can_read_category_attributes()
+    public function user_can_read_specifications()
     {
         $user = factory(User::class)->create();
 
