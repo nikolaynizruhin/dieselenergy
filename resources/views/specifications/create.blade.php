@@ -15,7 +15,6 @@
                         <select id="selectCategory"
                                 class="form-control @error('category_id') is-invalid @enderror"
                                 name="category_id"
-                                @if (request('category_id')) readonly @endif
                                 required>
                             <option value="">Select a category...</option>
                             @foreach ($categories as $category)
