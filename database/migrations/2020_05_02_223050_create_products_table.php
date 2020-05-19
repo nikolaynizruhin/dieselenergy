@@ -19,8 +19,8 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->unsignedInteger('price');
             $table->boolean('is_active')->default(0);
-            $table->foreignId('brand_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
