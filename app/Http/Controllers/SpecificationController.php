@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Attribute;
 use App\Category;
 use App\Specification;
 use Illuminate\Http\Request;
