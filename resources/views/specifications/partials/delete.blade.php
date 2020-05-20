@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer border-0 bg-light">
                 <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('Close') }}</button>
-                <form action="{{ route('specifications.destroy', $attribute->categories()->find($category->id)->pivot->id) }}" method="POST">
+                <form action="{{ route('specifications.destroy', $attribute->pivot->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">{{ __('Detach') }}</button>
