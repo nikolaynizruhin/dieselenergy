@@ -30,6 +30,7 @@ class StoreProduct extends FormRequest
             'is_active' => 'boolean',
             'brand_id' => 'required|numeric|exists:brands,id',
             'category_id' => 'required|numeric|exists:categories,id',
+            'attributes.*' => 'required|max:255',
         ];
     }
 

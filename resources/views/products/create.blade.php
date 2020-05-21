@@ -50,7 +50,7 @@
                         <select class="form-control @error('brand_id') is-invalid @enderror" name="brand_id" id="inputBrand" required>
                             <option value="">Select a brand</option>
                             @foreach ($brands as $brand)
-                                <option value="{{ $brand->id }}" @if (old('brand_id') === $brand->id) selected @endif>
+                                <option value="{{ $brand->id }}" @if (old('brand_id') == $brand->id) selected @endif>
                                     {{ $brand->name }}
                                 </option>
                             @endforeach
@@ -115,7 +115,13 @@
                     <div class="form-group row">
                         <label for="inputAttribute{{ $attribute->id }}" class="col-md-3 col-form-label">{{ $attribute->name }}</label>
                         <div class="col-md-6">
-                            <input type="text" id="inputAttribute{{ $attribute->id }}" class="form-control" name="attributes[{{ $attribute->id }}]" value="">
+                            <input type="text" id="inputAttribute{{ $attribute->id }}" class="form-control @error('attributes.'.$attribute->id) is-invalid @enderror" name="attributes[{{ $attribute->id }}]" value="{{ old('attributes.'.$attribute->id) }}">
+
+                            @error('attributes.'.$attribute->id)
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
                         </div>
                     </div>
                 @endforeach
