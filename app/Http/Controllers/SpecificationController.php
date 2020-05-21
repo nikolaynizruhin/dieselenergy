@@ -31,11 +31,14 @@ class SpecificationController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('specifications.create');
+        $category = Category::findOrFail($request->category_id);
+
+        return view('specifications.create', compact('category'));
     }
 
     /**

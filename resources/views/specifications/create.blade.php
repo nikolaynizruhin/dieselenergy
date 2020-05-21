@@ -16,12 +16,9 @@
                                 class="form-control @error('category_id') is-invalid @enderror"
                                 name="category_id"
                                 required>
-                            <option value="">Select a category...</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" @if (old('category_id', request('category_id')) == $category->id) selected @endif>
-                                    {{ $category->name }}
-                                </option>
-                            @endforeach
+                            <option value="{{ $category->id }}" selected>
+                                {{ $category->name }}
+                            </option>
                         </select>
 
                         @error('category_id')

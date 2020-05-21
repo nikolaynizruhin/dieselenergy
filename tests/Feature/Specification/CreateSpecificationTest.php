@@ -23,9 +23,10 @@ class CreateSpecificationTest extends TestCase
     public function user_can_visit_create_specification_page()
     {
         $user = factory(User::class)->create();
+        $category = factory(Category::class)->create();
 
         $this->actingAs($user)
-            ->get(route('specifications.create'))
+            ->get(route('specifications.create', ['category_id' => $category->id]))
             ->assertViewIs('specifications.create');
     }
 

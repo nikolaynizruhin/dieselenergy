@@ -29,7 +29,7 @@ class CreateProductTest extends TestCase
         $this->actingAs($user)
             ->get(route('products.create', ['category_id' => $category->id]))
             ->assertViewIs('products.create')
-            ->assertViewHas(['brands', 'categories']);
+            ->assertViewHas(['brands', 'category']);
     }
 
     /** @test */

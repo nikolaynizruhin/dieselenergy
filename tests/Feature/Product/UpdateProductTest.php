@@ -31,7 +31,7 @@ class UpdateProductTest extends TestCase
             ->get(route('products.edit', $product))
             ->assertViewIs('products.edit')
             ->assertViewHas('product', $product)
-            ->assertViewHas(['brands', 'categories']);
+            ->assertViewHas(['brands']);
     }
 
     /** @test */

@@ -16,9 +16,6 @@ class ProductComposer
      */
     public function compose(View $view)
     {
-        $view->with([
-            'brands' => Brand::all(),
-            'categories' => Category::all(),
-        ]);
+        $view->with(['brands' => Brand::all()]);
     }
 }
