@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProduct;
+use App\Http\Requests\UpdateProduct;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -81,11 +82,11 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\StoreProduct  $request
+     * @param  \App\Http\Requests\UpdateProduct  $request
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreProduct $request, Product $product)
+    public function update(UpdateProduct $request, Product $product)
     {
         $product->update($request->prepared());
 
