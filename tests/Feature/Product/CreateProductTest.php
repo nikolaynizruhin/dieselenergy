@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Product;
 
+use App\Attribute;
 use App\Category;
 use App\Product;
 use App\User;
@@ -45,14 +46,26 @@ class CreateProductTest extends TestCase
     public function user_can_create_product()
     {
         $user = factory(User::class)->create();
-        $product = factory(Product::class)->raw();
+        $category = factory(Category::class)->create();
+        $attribute = factory(Attribute::class)->create();
+
+        $category->attributes()->attach($attribute);
+
+        $product = factory(Product::class)->raw(['category_id' => $category->id]);
 
         $this->actingAs($user)
-            ->post(route('products.store'), $product)
-            ->assertRedirect(route('products.index'))
+            ->post(route('products.store'), $product + [
+                'attributes' => [
+                    $attribute->id => $value = $this->faker->randomDigit,
+                ],
+            ])->assertRedirect(route('products.index'))
             ->assertSessionHas('status', 'Product was created successfully!');
 
         $this->assertDatabaseHas('products', $product);
+        $this->assertDatabaseHas('attributables', [
+            'attributable_type' => Product::class,
+            'value' => $value,
+        ]);
     }
 
     /** @test */
