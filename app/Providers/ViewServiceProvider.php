@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\View\Composers\ProductComposer;
+use App\Http\View\Composers\ProductsComposer;
 use App\Http\View\Composers\SpecificationComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -26,6 +27,11 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer(
+            ['products.index'],
+            ProductsComposer::class
+        );
+
         View::composer(
             ['products.create', 'products.edit'],
             ProductComposer::class

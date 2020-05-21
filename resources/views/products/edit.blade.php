@@ -113,6 +113,16 @@
                         @enderror
                     </div>
                 </div>
+
+                <!-- Attributes -->
+                @foreach($product->attributes as $attribute)
+                    <div class="form-group row">
+                        <label for="inputAttribute{{ $attribute->id }}" class="col-md-3 col-form-label">{{ $attribute->name }}</label>
+                        <div class="col-md-6">
+                            <input type="text" id="inputAttribute{{ $attribute->id }}" class="form-control" name="attributes[{{ $attribute->id }}]" value="{{ $attribute->pivot->value }}">
+                        </div>
+                    </div>
+                @endforeach
             </div>
 
             <div class="card-footer bg-light text-right border-0">

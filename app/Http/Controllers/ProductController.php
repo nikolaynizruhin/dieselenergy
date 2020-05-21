@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\StoreProduct;
 use App\Http\Requests\UpdateProduct;
 use App\Product;
@@ -35,11 +36,14 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('products.create');
+        $category = Category::with('attributes')->findOrFail($request->category_id);
+
+        return view('products.create', compact('category'));
     }
 
     /**
@@ -50,7 +54,15 @@ class ProductController extends Controller
      */
     public function store(StoreProduct $request)
     {
-        Product::create($request->prepared());
+        $attributes = $request->get('attributes', []);
+
+        $product = Product::create($request->prepared());
+
+        $attributes = collect($attributes)->map(function ($attribute) {
+            return ['value' => $attribute];
+        });
+
+        $product->attributes()->attach($attributes);
 
         return redirect()
             ->route('products.index')
@@ -76,6 +88,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $product->load('attributes');
+
         return view('products.edit', compact('product'));
     }
 
@@ -88,7 +102,15 @@ class ProductController extends Controller
      */
     public function update(UpdateProduct $request, Product $product)
     {
+        $attributes = $request->get('attributes', []);
+
         $product->update($request->prepared());
+
+        $attributes = collect($attributes)->map(function ($attribute) {
+            return ['value' => $attribute];
+        });
+
+        $product->attributes()->sync($attributes);
 
         return redirect()
             ->route('products.index')

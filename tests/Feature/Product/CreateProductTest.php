@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Product;
 
+use App\Category;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -23,9 +24,10 @@ class CreateProductTest extends TestCase
     public function user_can_visit_create_product_page()
     {
         $user = factory(User::class)->create();
+        $category = factory(Category::class)->create();
 
         $this->actingAs($user)
-            ->get(route('products.create'))
+            ->get(route('products.create', ['category_id' => $category->id]))
             ->assertViewIs('products.create')
             ->assertViewHas(['brands', 'categories']);
     }

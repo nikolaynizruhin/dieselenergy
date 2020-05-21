@@ -71,7 +71,7 @@
                         <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="inputCategory" required>
                             <option value="">Select a category</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" @if (old('category_id') === $category->id) selected @endif>
+                                <option value="{{ $category->id }}" @if (old('category_id', request('category_id')) == $category->id) selected @endif>
                                     {{ $category->name }}
                                 </option>
                             @endforeach
@@ -110,6 +110,16 @@
                         @enderror
                     </div>
                 </div>
+
+                <!-- Attributes -->
+                @foreach($category->attributes as $attribute)
+                    <div class="form-group row">
+                        <label for="inputAttribute{{ $attribute->id }}" class="col-md-3 col-form-label">{{ $attribute->name }}</label>
+                        <div class="col-md-6">
+                            <input type="text" id="inputAttribute{{ $attribute->id }}" class="form-control" name="attributes[{{ $attribute->id }}]" value="">
+                        </div>
+                    </div>
+                @endforeach
             </div>
 
             <div class="card-footer bg-light text-right border-0">
