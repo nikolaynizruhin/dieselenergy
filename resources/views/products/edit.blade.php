@@ -58,9 +58,9 @@
                         </select>
 
                         @error('brand_id')
-                        <div class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </div>
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
                         @enderror
                     </div>
                 </div>
@@ -90,9 +90,9 @@
                         <input type="number" id="inputPrice" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $product->price) }}" name="price" required>
 
                         @error('price')
-                        <div class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </div>
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
                         @enderror
                     </div>
                 </div>
