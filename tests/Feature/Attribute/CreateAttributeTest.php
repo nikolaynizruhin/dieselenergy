@@ -83,4 +83,16 @@ class CreateAttributeTest extends TestCase
                 'name' => str_repeat('a', 256),
             ])->assertSessionHasErrors('name');
     }
+
+    /** @test */
+    public function user_cant_create_attribute_with_existing_name()
+    {
+        $user = factory(User::class)->create();
+        $attribute = factory(Attribute::class)->create();
+
+        $this->actingAs($user)
+            ->post(route('attributes.store'), [
+                'name' => $attribute->name,
+            ])->assertSessionHasErrors('name');
+    }
 }

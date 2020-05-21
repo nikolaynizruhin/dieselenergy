@@ -99,6 +99,21 @@ class UpdateProductTest extends TestCase
     }
 
     /** @test */
+    public function user_cant_update_product_with_existing_name()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+        $existing = factory(Product::class)->create();
+        $stub = factory(Product::class)->raw([
+            'name' => $existing->name,
+        ]);
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub)
+            ->assertSessionHasErrors('name');
+    }
+
+    /** @test */
     public function user_cant_update_product_without_price()
     {
         $user = factory(User::class)->create();

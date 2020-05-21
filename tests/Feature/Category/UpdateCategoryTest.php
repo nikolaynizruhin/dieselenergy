@@ -93,4 +93,17 @@ class UpdateCategoryTest extends TestCase
                 'name' => str_repeat('a', 256),
             ])->assertSessionHasErrors('name');
     }
+
+    /** @test */
+    public function user_cant_update_category_with_existing_name()
+    {
+        $user = factory(User::class)->create();
+        $category = factory(Category::class)->create();
+        $existing = factory(Category::class)->create();
+
+        $this->actingAs($user)
+            ->put(route('categories.update', $category), [
+                'name' => $existing,
+            ])->assertSessionHasErrors('name');
+    }
 }

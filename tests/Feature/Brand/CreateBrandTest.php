@@ -79,8 +79,20 @@ class CreateBrandTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->actingAs($user)
-            ->post(route('products.store'), [
+            ->post(route('brands.store'), [
                 'name' => str_repeat('a', 256),
+            ])->assertSessionHasErrors('name');
+    }
+
+    /** @test */
+    public function user_cant_create_brand_with_existing_name()
+    {
+        $user = factory(User::class)->create();
+        $brand = factory(Brand::class)->create();
+
+        $this->actingAs($user)
+            ->post(route('brands.store'), [
+                'name' => $brand->name,
             ])->assertSessionHasErrors('name');
     }
 }

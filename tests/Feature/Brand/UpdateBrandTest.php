@@ -93,4 +93,17 @@ class UpdateBrandTest extends TestCase
                 'name' => str_repeat('a', 256),
             ])->assertSessionHasErrors('name');
     }
+
+    /** @test */
+    public function user_cant_update_brand_with_existing_name()
+    {
+        $user = factory(User::class)->create();
+        $brand = factory(Brand::class)->create();
+        $existing = factory(Brand::class)->create();
+
+        $this->actingAs($user)
+            ->put(route('brands.update', $brand), [
+                'name' => $existing->name,
+            ])->assertSessionHasErrors('name');
+    }
 }

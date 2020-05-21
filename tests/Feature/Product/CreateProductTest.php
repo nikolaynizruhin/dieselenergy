@@ -89,6 +89,20 @@ class CreateProductTest extends TestCase
     }
 
     /** @test */
+    public function user_cant_create_product_with_existing_name()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+        $stub = factory(Product::class)->raw([
+            'name' => $product->name,
+        ]);
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $stub)
+            ->assertSessionHasErrors('name');
+    }
+
+    /** @test */
     public function user_cant_create_product_with_integer_description()
     {
         $user = factory(User::class)->create();
