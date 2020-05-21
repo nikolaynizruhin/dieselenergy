@@ -261,4 +261,42 @@ class CreateProductTest extends TestCase
 
         $this->assertDatabaseHas('products', ['is_active' => 0]);
     }
+
+    /** @test */
+    public function user_cant_create_product_without_attributes()
+    {
+        $user = factory(User::class)->create();
+        $category = factory(Category::class)->create();
+        $attribute = factory(Attribute::class)->create();
+
+        $category->attributes()->attach($attribute);
+
+        $product = factory(Product::class)->raw([
+            'category_id' => $category->id,
+            'attributes' => [$attribute->id => null]
+        ]);
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product)
+            ->assertSessionHasErrors('attributes.'.$attribute->id);
+    }
+
+    /** @test */
+    public function user_cant_create_product_with_attribute_more_than_255_chars()
+    {
+        $user = factory(User::class)->create();
+        $category = factory(Category::class)->create();
+        $attribute = factory(Attribute::class)->create();
+
+        $category->attributes()->attach($attribute);
+
+        $product = factory(Product::class)->raw([
+            'category_id' => $category->id,
+            'attributes' => [$attribute->id => str_repeat('a', 256)],
+        ]);
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product)
+            ->assertSessionHasErrors('attributes.'.$attribute->id);
+    }
 }
