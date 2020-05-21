@@ -86,20 +86,6 @@
                     </div>
                 </div>
 
-                <!-- Description -->
-                <div class="form-group row">
-                    <label for="inputDescription" class="col-md-3 col-form-label">{{ __('Description') }}</label>
-                    <div class="col-md-6">
-                        <textarea name="description" class="form-control @error('email') is-invalid @enderror" id="inputDescription" rows="3">{{ old('description', $product->description) }}</textarea>
-
-                        @error('description')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-
                 <!-- Price -->
                 <div class="form-group row">
                     <label for="inputPrice" class="col-md-3 col-form-label">{{ __('Price') }}</label>
@@ -107,6 +93,20 @@
                         <input type="number" id="inputPrice" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $product->price) }}" name="price" required>
 
                         @error('price')
+                        <div class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group row">
+                    <label for="inputDescription" class="col-md-3 col-form-label">{{ __('Description') }}</label>
+                    <div class="col-md-6">
+                        <textarea name="description" class="form-control @error('email') is-invalid @enderror" id="inputDescription" rows="3">{{ old('description', $product->description) }}</textarea>
+
+                        @error('description')
                             <div class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </div>
