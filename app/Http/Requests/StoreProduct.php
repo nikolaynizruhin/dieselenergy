@@ -34,18 +34,24 @@ class StoreProduct extends FormRequest
     }
 
     /**
-     * Get prepared data.
+     * Get attribute values.
      *
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
-    public function prepared()
+    public function getAttributeValues()
     {
-        $validatedData = $this->validated();
+        $attributes = $this->get('attributes', []);
 
-        if (! $this->has('is_active')) {
-            $validatedData['is_active'] = false;
-        }
+        return collect($attributes)->map(fn ($attribute) => ['value' => $attribute]);
+    }
 
-        return $validatedData;
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge(['is_active' => $this->get('is_active', false)]);
     }
 }

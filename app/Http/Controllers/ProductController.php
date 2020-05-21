@@ -54,15 +54,9 @@ class ProductController extends Controller
      */
     public function store(StoreProduct $request)
     {
-        $attributes = $request->get('attributes', []);
+        $product = Product::create($request->validated());
 
-        $product = Product::create($request->prepared());
-
-        $attributes = collect($attributes)->map(function ($attribute) {
-            return ['value' => $attribute];
-        });
-
-        $product->attributes()->attach($attributes);
+        $product->attributes()->attach($request->getAttributeValues());
 
         return redirect()
             ->route('products.index')
@@ -100,15 +94,9 @@ class ProductController extends Controller
      */
     public function update(UpdateProduct $request, Product $product)
     {
-        $attributes = $request->get('attributes', []);
+        $product->update($request->validated());
 
-        $product->update($request->prepared());
-
-        $attributes = collect($attributes)->map(function ($attribute) {
-            return ['value' => $attribute];
-        });
-
-        $product->attributes()->sync($attributes);
+        $product->attributes()->sync($request->getAttributeValues());
 
         return redirect()
             ->route('products.index')
