@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Specification;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 
 class StoreProduct extends FormRequest
 {
@@ -30,8 +32,7 @@ class StoreProduct extends FormRequest
             'is_active' => 'boolean',
             'brand_id' => 'required|numeric|exists:brands,id',
             'category_id' => 'required|numeric|exists:categories,id',
-            'attributes.*' => 'required|max:255',
-        ];
+        ] + $this->getAttributeRules();
     }
 
     /**
@@ -41,9 +42,19 @@ class StoreProduct extends FormRequest
      */
     public function getAttributeValues()
     {
-        $attributes = $this->get('attributes', []);
+        $attributes = Arr::get($this->validated(), 'attributes', []);
 
         return collect($attributes)->map(fn ($attribute) => ['value' => $attribute]);
+    }
+
+    /**
+     * Get validated data without attributes.
+     *
+     * @return array
+     */
+    public function withoutAttributes()
+    {
+        return Arr::except($this->validated(), 'attributes');
     }
 
     /**
@@ -54,5 +65,15 @@ class StoreProduct extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge(['is_active' => $this->get('is_active', false)]);
+    }
+
+    /**
+     * Get attributes rules.
+     *
+     * @return array
+     */
+    protected function getAttributeRules()
+    {
+        return Specification::getValidationRules($this->category_id);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Product;
 
+use App\Attribute;
+use App\Category;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -243,5 +245,47 @@ class UpdateProductTest extends TestCase
         $this->actingAs($user)
             ->put(route('products.update', $product), $stub)
             ->assertSessionHasErrors('is_active');
+    }
+
+    /** @test */
+    public function user_cant_update_product_without_attributes()
+    {
+        $user = factory(User::class)->create();
+        $category = factory(Category::class)->create();
+        $attribute = factory(Attribute::class)->create();
+
+        $category->attributes()->attach($attribute);
+
+        $product = factory(Product::class)->create();
+
+        $stub = factory(Product::class)->raw([
+            'category_id' => $category->id,
+            'attributes' => [$attribute->id => null]
+        ]);
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub)
+            ->assertSessionHasErrors('attributes.'.$attribute->id);
+    }
+
+    /** @test */
+    public function user_cant_create_product_with_attribute_more_than_255_chars()
+    {
+        $user = factory(User::class)->create();
+        $category = factory(Category::class)->create();
+        $attribute = factory(Attribute::class)->create();
+
+        $category->attributes()->attach($attribute);
+
+        $product = factory(Product::class)->create();
+
+        $stub = factory(Product::class)->raw([
+            'category_id' => $category->id,
+            'attributes' => [$attribute->id => str_repeat('a', 256)],
+        ]);
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub)
+            ->assertSessionHasErrors('attributes.'.$attribute->id);
     }
 }

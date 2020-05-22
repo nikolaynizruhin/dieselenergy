@@ -54,7 +54,7 @@ class ProductController extends Controller
      */
     public function store(StoreProduct $request)
     {
-        $product = Product::create($request->validated());
+        $product = Product::create($request->withoutAttributes());
 
         $product->attributes()->attach($request->getAttributeValues());
 
@@ -98,7 +98,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProduct $request, Product $product)
     {
-        $product->update($request->validated());
+        $product->update($request->withoutAttributes());
 
         $product->attributes()->sync($request->getAttributeValues());
 
