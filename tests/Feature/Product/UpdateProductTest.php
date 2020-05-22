@@ -288,4 +288,24 @@ class UpdateProductTest extends TestCase
             ->put(route('products.update', $product), $stub)
             ->assertSessionHasErrors('attributes.'.$attribute->id);
     }
+
+    /** @test */
+    public function unrelated_attribute_should_not_be_attached_to_product()
+    {
+        $user = factory(User::class)->create();
+        $category = factory(Category::class)->create();
+        $unrelated = factory(Attribute::class)->create();
+        $product = factory(Product::class)->create();
+
+        $stub = factory(Product::class)->raw([
+            'category_id' => $category->id,
+            'attributes' => [$unrelated->id => $this->faker->randomDigit],
+        ]);
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub)
+            ->assertRedirect();
+
+        $this->assertFalse($product->fresh()->attributes->contains($unrelated));
+    }
 }
