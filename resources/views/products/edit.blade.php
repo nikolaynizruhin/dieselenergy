@@ -87,7 +87,7 @@
                 <div class="form-group row">
                     <label for="inputPrice" class="col-md-3 col-form-label">{{ __('Price') }}</label>
                     <div class="col-md-6">
-                        <input type="number" id="inputPrice" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $product->price) }}" name="price" required>
+                        <input type="number" id="inputPrice" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $product->price) }}" name="price" min="1" required>
 
                         @error('price')
                             <div class="invalid-feedback" role="alert">
