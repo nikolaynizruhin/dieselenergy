@@ -38,9 +38,11 @@
                                 required>
                             <option value="">Select an attribute...</option>
                             @foreach ($attributes as $attribute)
-                                <option value="{{ $attribute->id }}" @if (old('attribute_id') == $attribute->id) selected @endif>
-                                    {{ $attribute->name }}
-                                </option>
+                                @unless ($category->attributes->contains($attribute))
+                                    <option value="{{ $attribute->id }}" @if (old('attribute_id') == $attribute->id) selected @endif>
+                                        {{ $attribute->name }}
+                                    </option>
+                                @endunless
                             @endforeach
                         </select>
 

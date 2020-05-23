@@ -37,7 +37,7 @@ class SpecificationController extends Controller
      */
     public function create(Request $request)
     {
-        $category = Category::findOrFail($request->category_id);
+        $category = Category::with('attributes')->findOrFail($request->category_id);
 
         return view('specifications.create', compact('category'));
     }
