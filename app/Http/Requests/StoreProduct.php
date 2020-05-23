@@ -32,7 +32,7 @@ class StoreProduct extends FormRequest
             'is_active' => 'boolean',
             'brand_id' => 'required|numeric|exists:brands,id',
             'category_id' => 'required|numeric|exists:categories,id',
-        ] + $this->getAttributeRules();
+        ] + $this->getAttributeRules('required|max:255');
     }
 
     /**
@@ -70,10 +70,11 @@ class StoreProduct extends FormRequest
     /**
      * Get attributes rules.
      *
+     * @param  string|array  $rules
      * @return array
      */
-    protected function getAttributeRules()
+    protected function getAttributeRules($rules)
     {
-        return Specification::getValidationRules($this->category_id);
+        return Specification::getValidationRules($this->category_id, $rules);
     }
 }

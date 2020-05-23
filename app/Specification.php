@@ -24,16 +24,17 @@ class Specification extends MorphPivot
      * Get validation rules for category.
      *
      * @param  int  $categoryId
+     * @param  string|array  $rules
      * @return array
      */
-    public static function getValidationRules($categoryId)
+    public static function getValidationRules($categoryId, $rules)
     {
         return self::where([
             'attributable_id' => $categoryId,
             'attributable_type' => Category::class,
         ])->pluck('attribute_id')
             ->mapWithKeys(fn ($id) => [
-                'attributes.'.$id => 'required|max:255',
+                'attributes.'.$id => $rules,
             ])->all();
     }
 }
