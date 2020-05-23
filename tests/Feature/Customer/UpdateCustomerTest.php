@@ -188,4 +188,16 @@ class UpdateCustomerTest extends TestCase
             ->put(route('customers.update', $customer), $stub)
             ->assertSessionHasErrors('phone');
     }
+
+    /** @test */
+    public function user_cant_update_customer_with_integer_notes()
+    {
+        $user = factory(User::class)->create();
+        $customer = factory(Customer::class)->create();
+        $stub = factory(Customer::class)->raw(['notes' => 1]);
+
+        $this->actingAs($user)
+            ->put(route('customers.update', $customer), $stub)
+            ->assertSessionHasErrors('notes');
+    }
 }

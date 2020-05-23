@@ -53,6 +53,7 @@ class CustomerController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:customers',
             'phone' => 'required|string|max:255',
+            'notes' => 'nullable|string',
         ]);
 
         Customer::create($validatedData);
@@ -96,6 +97,7 @@ class CustomerController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
+            'notes' => 'nullable|string',
             'email' => [
                 'required',
                 'string',

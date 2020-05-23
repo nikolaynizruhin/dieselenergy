@@ -172,4 +172,15 @@ class CreateCustomerTest extends TestCase
             ->post(route('customers.store'), $customer)
             ->assertSessionHasErrors('phone');
     }
+
+    /** @test */
+    public function user_cant_create_customer_with_integer_notes()
+    {
+        $user = factory(User::class)->create();
+        $customer = factory(Customer::class)->raw(['notes' => 1]);
+
+        $this->actingAs($user)
+            ->post(route('customers.store'), $customer)
+            ->assertSessionHasErrors('notes');
+    }
 }

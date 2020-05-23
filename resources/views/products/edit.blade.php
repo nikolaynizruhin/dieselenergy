@@ -101,7 +101,7 @@
                 <div class="form-group row">
                     <label for="inputDescription" class="col-md-3 col-form-label">{{ __('Description') }}</label>
                     <div class="col-md-6">
-                        <textarea name="description" class="form-control @error('email') is-invalid @enderror" id="inputDescription" rows="3">{{ old('description', $product->description) }}</textarea>
+                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="3">{{ old('description', $product->description) }}</textarea>
 
                         @error('description')
                             <div class="invalid-feedback" role="alert">

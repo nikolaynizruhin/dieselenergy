@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->unsignedInteger('price');
             $table->boolean('is_active')->default(0);
             $table->foreignId('brand_id')->constrained()->cascadeOnDelete();

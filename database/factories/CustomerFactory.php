@@ -10,5 +10,6 @@ $factory->define(Customer::class, function (Faker $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'phone' => $faker->e164PhoneNumber,
+        'notes' => $faker->sentence,
     ];
 });
