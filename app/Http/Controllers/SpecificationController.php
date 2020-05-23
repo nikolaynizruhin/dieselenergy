@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Specification;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class SpecificationController extends Controller
 {
@@ -51,7 +52,15 @@ class SpecificationController extends Controller
     {
         $request->validate([
             'category_id' => 'required|numeric|exists:categories,id',
-            'attribute_id' => 'required|numeric|exists:attributes,id',
+            'attribute_id' => [
+                'required',
+                'numeric',
+                'exists:attributes,id',
+                Rule::unique('attributables')->where(fn ($query) => $query->where([
+                    'attributable_id' => $request->category_id,
+                    'attributable_type' => Category::class,
+                ]))
+            ],
         ]);
 
         Specification::create([

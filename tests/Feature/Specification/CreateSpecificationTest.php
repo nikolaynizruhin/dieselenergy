@@ -145,4 +145,21 @@ class CreateSpecificationTest extends TestCase
                 'attribute_id' => 1,
             ])->assertSessionHasErrors('attribute_id');
     }
+
+    /** @test */
+    public function user_cant_create_existing_specification()
+    {
+        $user = factory(User::class)->create();
+
+        $category = factory(Category::class)->create();
+        $attribute = factory(Attribute::class)->create();
+
+        $category->attributes()->attach($attribute);
+
+        $this->actingAs($user)
+            ->post(route('specifications.store'), [
+                'category_id' => $category->id,
+                'attribute_id' => $attribute->id,
+            ])->assertSessionHasErrors('attribute_id');
+    }
 }
