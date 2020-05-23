@@ -96,7 +96,7 @@ class AttributeController extends Controller
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('attributes')->ignore($attribute)
+                Rule::unique('attributes')->ignore($attribute),
             ],
         ]);
 

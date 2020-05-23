@@ -3,7 +3,6 @@
 namespace App\Http\View\Composers;
 
 use App\Brand;
-use App\Category;
 use Illuminate\View\View;
 
 class ProductComposer

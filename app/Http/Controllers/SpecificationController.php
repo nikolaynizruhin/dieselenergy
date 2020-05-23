@@ -59,7 +59,7 @@ class SpecificationController extends Controller
                 Rule::unique('attributables')->where(fn ($query) => $query->where([
                     'attributable_id' => $request->category_id,
                     'attributable_type' => Category::class,
-                ]))
+                ])),
             ],
         ]);
 

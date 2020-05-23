@@ -273,7 +273,7 @@ class CreateProductTest extends TestCase
 
         $product = factory(Product::class)->raw([
             'category_id' => $category->id,
-            'attributes' => [$attribute->id => null]
+            'attributes' => [$attribute->id => null],
         ]);
 
         $this->actingAs($user)
