@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Order extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,14 +12,14 @@ class Customer extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'notes',
+        'customer_id',
     ];
 
     /**
-     * Get the orders for the customer.
+     * Get the customer that owns the order.
      */
-    public function orders()
+    public function customer()
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsTo(Customer::class);
     }
 }
