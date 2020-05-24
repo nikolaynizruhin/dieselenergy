@@ -17,8 +17,8 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
-            $table->enum('status', Order::statuses())->default(Order::NEW);
-            $table->unsignedInteger('total');
+            $table->enum('status', Order::statuses());
+            $table->unsignedInteger('total')->default(0);
             $table->text('notes')->nullable();
             $table->timestamps();
         });

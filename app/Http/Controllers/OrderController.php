@@ -58,7 +58,7 @@ class OrderController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        Order::create($validatedData + ['total' => 0]);
+        Order::create($validatedData);
 
         return redirect()
             ->route('orders.index')
