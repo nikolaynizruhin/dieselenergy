@@ -19,7 +19,9 @@
                             {{ $order->customer->name }}
                         </a>
                     </td>
-                    <td>{{ $order->status }}</td>
+                    <td>
+                        @include('orders.partials.status')
+                    </td>
                     <td>{{ $order->total }}</td>
                     <td>
                         <a href="{{ route('orders.edit', $order) }}" class="mr-2">

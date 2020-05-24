@@ -13,6 +13,11 @@ input[name=search]:focus {
   border: 1px solid #80bdff !important;
 }
 
+.badge-primary {
+  color: #2145a0 !important;
+  background-color: #e1effe !important;
+}
+
 .badge-success {
   color: #03543f !important;
   background-color: #def7ec !important;
@@ -21,6 +26,11 @@ input[name=search]:focus {
 .badge-danger {
   color: #9b1c1c !important;
   background-color: #fde8e8 !important;
+}
+
+.badge-warning {
+  color: #743e16 !important;
+  background-color: #fdf6b2 !important;
 }
 
 /*!
