@@ -3,18 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $orders = Order::whereHas('customer', function (Builder $query) use ($request) {
+            $query->where('name', 'like', '%'.$request->search.'%');
+        })->paginate(10);
+
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -24,7 +41,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('orders.create');
     }
 
     /**
@@ -35,7 +52,17 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'customer_id' => 'required|numeric|exists:customers,id',
+            'status' => ['required', 'string', Rule::in(Order::statuses())],
+            'notes' => 'nullable|string',
+        ]);
+
+        Order::create($validatedData + ['total' => 0]);
+
+        return redirect()
+            ->route('orders.index')
+            ->with('status', 'Order was created successfully!');
     }
 
     /**
@@ -57,7 +84,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return view('orders.edit', compact('order'));
     }
 
     /**
@@ -69,7 +96,18 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $validatedData = $request->validate([
+            'customer_id' => 'required|numeric|exists:customers,id',
+            'status' => ['required', 'string', Rule::in(Order::statuses())],
+            'notes' => 'nullable|string',
+            'total' => 'required|numeric',
+        ]);
+
+        $order->update($validatedData);
+
+        return redirect()
+            ->route('orders.index')
+            ->with('status', 'Order was updated successfully!');
     }
 
     /**
@@ -80,6 +118,8 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+
+        return back()->with('status', 'Order was deleted successfully!');
     }
 }

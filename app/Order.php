@@ -6,13 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    const NEW = 'New';
+    const PENDING = 'Pending';
+    const DONE = 'Done';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'customer_id',
+        'customer_id', 'status', 'total', 'notes',
     ];
 
     /**
@@ -31,5 +35,19 @@ class Order extends Model
         return $this->belongsToMany(Product::class)
             ->withPivot('quantity')
             ->withTimestamps();
+    }
+
+    /**
+     * Get statuses.
+     *
+     * @return string[]
+     */
+    public static function statuses()
+    {
+        return [
+            self::NEW,
+            self::PENDING,
+            self::DONE,
+        ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\OrderComposer;
 use App\Http\View\Composers\ProductComposer;
 use App\Http\View\Composers\ProductsComposer;
 use App\Http\View\Composers\SpecificationComposer;
@@ -35,6 +36,11 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(
             ['products.create', 'products.edit'],
             ProductComposer::class
+        );
+
+        View::composer(
+            ['orders.create', 'orders.edit'],
+            OrderComposer::class
         );
 
         View::composer(

@@ -9,6 +9,8 @@
         <form action="{{ route('specifications.store') }}" method="POST">
             @csrf
             <div class="card-body">
+
+                <!-- Category -->
                 <div class="form-group row">
                     <label for="selectCategory" class="col-md-3 col-form-label">{{ __('Category') }}</label>
                     <div class="col-md-6">
@@ -29,6 +31,7 @@
                     </div>
                 </div>
 
+                <!-- Attribute -->
                 <div class="form-group row">
                     <label for="selectAttribute" class="col-md-3 col-form-label">{{ __('Attribute') }}</label>
                     <div class="col-md-6">

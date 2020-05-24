@@ -15,7 +15,7 @@ class BuilderServiceProvider extends ServiceProvider
     public function register()
     {
         Builder::macro('search', function ($attribute, $search) {
-            return $this->orWhere($attribute, 'LIKE', '%'.$search.'%');
+            return $this->orWhere($attribute, 'like', '%'.$search.'%');
         });
     }
 
