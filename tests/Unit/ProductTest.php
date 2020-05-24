@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Attribute;
 use App\Brand;
 use App\Category;
+use App\Order;
 use App\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -47,5 +48,18 @@ class ProductTest extends TestCase
         $this->assertTrue($product->attributes->contains($attribute));
         $this->assertInstanceOf(Collection::class, $product->attributes);
         $this->assertEquals($value, $product->attributes->first()->pivot->value);
+    }
+
+    /** @test */
+    public function it_has_many_orders()
+    {
+        $product = factory(Product::class)->create();
+        $order = factory(Order::class)->create();
+
+        $product->orders()->attach($order, ['quantity' => $quantity = $this->faker->randomDigit]);
+
+        $this->assertTrue($product->orders->contains($order));
+        $this->assertInstanceOf(Collection::class, $product->orders);
+        $this->assertEquals($quantity, $product->orders->first()->pivot->quantity);
     }
 }

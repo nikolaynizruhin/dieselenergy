@@ -22,4 +22,14 @@ class Order extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    /**
+     * The products that belong to the order.
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class)
+            ->withPivot('quantity')
+            ->withTimestamps();
+    }
 }
