@@ -84,24 +84,41 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Cart $cart)
     {
-        //
+        return view('carts.edit', compact('cart'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Cart $cart)
     {
-        //
+        $validatedDate = $request->validate([
+            'order_id' => 'required|numeric|exists:orders,id',
+            'quantity' => 'required|numeric|min:1',
+            'product_id' => [
+                'required',
+                'numeric',
+                'exists:products,id',
+                Rule::unique('order_product')->ignore($cart)->where(fn ($query) => $query->where([
+                    'order_id' => $request->order_id,
+                ])),
+            ],
+        ]);
+
+        $cart->update($validatedDate);
+
+        return redirect()
+            ->route('orders.show', $request->order_id)
+            ->with('status', 'Cart was updated successfully!');
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Cart;
 
+use App\Cart;
 use App\Order;
 use App\Product;
 use App\User;
@@ -34,182 +35,133 @@ class CreateCartTest extends TestCase
     /** @test */
     public function guest_cant_create_cart()
     {
-        $order = factory(Order::class)->create();
-        $product = factory(Product::class)->create();
+        $cart = factory(Cart::class)->raw();
 
-        $this->post(route('carts.store'), [
-            'order_id' => $order->id,
-            'product_id' => $product->id,
-            'quantity' => $this->faker->randomDigit,
-        ])->assertRedirect(route('login'));
+        $this->post(route('carts.store'), $cart)
+            ->assertRedirect(route('login'));
     }
 
     /** @test */
     public function user_can_create_cart()
     {
         $user = factory(User::class)->create();
-
-        $order = factory(Order::class)->create();
-        $product = factory(Product::class)->create();
+        $cart = factory(Cart::class)->raw();
 
         $this->actingAs($user)
-            ->post(route('carts.store'), [
-                'order_id' => $order->id,
-                'product_id' => $product->id,
-                'quantity' => $this->faker->randomDigit,
-            ])->assertRedirect(route('orders.show', $order))
+            ->post(route('carts.store'), $cart)
+            ->assertRedirect(route('orders.show', $cart['order_id']))
             ->assertSessionHas('status', 'Product was attached successfully!');
 
-        $id = $order->fresh()->products()->find($product->id)->pivot->id;
-
-        $this->assertDatabaseHas('order_product', ['id' => $id]);
+        $this->assertDatabaseHas('order_product', $cart);
     }
 
     /** @test */
     public function user_cant_create_cart_without_order()
     {
         $user = factory(User::class)->create();
-
-        $product = factory(Product::class)->create();
+        $cart = factory(Cart::class)->raw(['order_id' => null]);
 
         $this->actingAs($user)
-            ->post(route('carts.store'), [
-                'product_id' => $product->id,
-                'quantity' => $this->faker->randomDigit,
-            ])->assertSessionHasErrors('order_id');
+            ->post(route('carts.store'), $cart)
+            ->assertSessionHasErrors('order_id');
     }
 
     /** @test */
     public function user_cant_create_cart_with_string_order()
     {
         $user = factory(User::class)->create();
-
-        $product = factory(Product::class)->create();
+        $cart = factory(Cart::class)->raw(['order_id' => 'string']);
 
         $this->actingAs($user)
-            ->post(route('carts.store'), [
-                'order_id' => 'string',
-                'product_id' => $product->id,
-                'quantity' => $this->faker->randomDigit,
-            ])->assertSessionHasErrors('order_id');
+            ->post(route('carts.store'), $cart)
+            ->assertSessionHasErrors('order_id');
     }
 
     /** @test */
     public function user_cant_create_cart_with_nonexistent_order()
     {
         $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
+        $cart = factory(Cart::class)->raw(['order_id' => 10]);
 
         $this->actingAs($user)
-            ->post(route('carts.store'), [
-                'order_id' => 1,
-                'product_id' => $product->id,
-                'quantity' => $this->faker->randomDigit,
-            ])->assertSessionHasErrors('order_id');
+            ->post(route('carts.store'), $cart)
+            ->assertSessionHasErrors('order_id');
     }
 
     /** @test */
     public function user_cant_create_cart_without_product()
     {
         $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
+        $cart = factory(Cart::class)->raw(['product_id' => null]);
 
         $this->actingAs($user)
-            ->post(route('carts.store'), [
-                'order_id' => $order->id,
-                'quantity' => $this->faker->randomDigit,
-            ])->assertSessionHasErrors('product_id');
+            ->post(route('carts.store'), $cart)
+            ->assertSessionHasErrors('product_id');
     }
 
     /** @test */
     public function user_cant_create_cart_with_string_product()
     {
         $user = factory(User::class)->create();
-
-        $order = factory(Order::class)->create();
+        $cart = factory(Cart::class)->raw(['product_id' => 'string']);
 
         $this->actingAs($user)
-            ->post(route('carts.store'), [
-                'order_id' => $order->id,
-                'product_id' => 'string',
-                'quantity' => $this->faker->randomDigit,
-            ])->assertSessionHasErrors('product_id');
+            ->post(route('carts.store'), $cart)
+            ->assertSessionHasErrors('product_id');
     }
 
     /** @test */
     public function user_cant_create_cart_with_nonexistent_product()
     {
         $user = factory(User::class)->create();
-
-        $order = factory(Order::class)->create();
+        $cart = factory(Cart::class)->raw(['product_id' => 10]);
 
         $this->actingAs($user)
-            ->post(route('carts.store'), [
-                'order_id' => $order->id,
-                'product_id' => 1,
-                'quantity' => $this->faker->randomDigit,
-            ])->assertSessionHasErrors('product_id');
+            ->post(route('carts.store'), $cart)
+            ->assertSessionHasErrors('product_id');
     }
 
     /** @test */
     public function user_cant_create_existing_cart()
     {
         $user = factory(User::class)->create();
-
-        $order = factory(Order::class)->create();
-        $product = factory(Product::class)->create();
-
-        $order->products()->attach($product);
+        $cart = factory(Cart::class)->create();
 
         $this->actingAs($user)
-            ->post(route('carts.store'), [
-                'order_id' => $order->id,
-                'product_id' => $product->id,
-                'quantity' => $this->faker->randomDigit,
-            ])->assertSessionHasErrors('product_id');
+            ->post(route('carts.store'), $cart->toArray())
+            ->assertSessionHasErrors('product_id');
     }
 
     /** @test */
     public function user_cant_create_cart_without_quantity()
     {
         $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $product = factory(Product::class)->create();
+        $cart = factory(Cart::class)->raw(['quantity' => null]);
 
         $this->actingAs($user)
-            ->post(route('carts.store'), [
-                'order_id' => $order->id,
-                'product_id' => $product->id,
-            ])->assertSessionHasErrors('quantity');
+            ->post(route('carts.store'), $cart)
+            ->assertSessionHasErrors('quantity');
     }
 
     /** @test */
     public function user_cant_create_cart_with_string_quantity()
     {
         $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $product = factory(Product::class)->create();
+        $cart = factory(Cart::class)->raw(['quantity' => 'string']);
 
         $this->actingAs($user)
-            ->post(route('carts.store'), [
-                'order_id' => $order->id,
-                'product_id' => $product->id,
-                'quantity' => 'string',
-            ])->assertSessionHasErrors('quantity');
+            ->post(route('carts.store'), $cart)
+            ->assertSessionHasErrors('quantity');
     }
 
     /** @test */
     public function user_cant_create_cart_with_zero_quantity()
     {
         $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $product = factory(Product::class)->create();
+        $cart = factory(Cart::class)->raw(['quantity' => 0]);
 
         $this->actingAs($user)
-            ->post(route('carts.store'), [
-                'order_id' => $order->id,
-                'product_id' => $product->id,
-                'quantity' => 0,
-            ])->assertSessionHasErrors('quantity');
+            ->post(route('carts.store'), $cart)
+            ->assertSessionHasErrors('quantity');
     }
 }

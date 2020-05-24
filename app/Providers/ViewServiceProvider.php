@@ -45,7 +45,7 @@ class ViewServiceProvider extends ServiceProvider
         );
 
         View::composer(
-            ['carts.create'],
+            ['carts.create', 'carts.edit'],
             CartComposer::class
         );
 
