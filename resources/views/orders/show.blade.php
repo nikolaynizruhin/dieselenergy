@@ -13,7 +13,9 @@
             <div class="row">
                 <div class="col-md-3">{{ __('Status') }}</div>
                 <div class="col-md-6">
-                    @include('orders.partials.status')
+                    <h5 class="m-0 p-0">
+                        @include('orders.partials.status')
+                    </h5>
                 </div>
             </div>
 
