@@ -43,4 +43,6 @@
             </div>
         </div>
     </div>
+
+    @include('carts.index')
 @endsection

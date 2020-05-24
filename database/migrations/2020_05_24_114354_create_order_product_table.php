@@ -18,7 +18,7 @@ class CreateOrderProductTable extends Migration
             $table->unique(['product_id', 'order_id']);
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
-            $table->unsignedInteger('quantity');
+            $table->unsignedInteger('quantity')->default(1);
             $table->timestamps();
         });
     }

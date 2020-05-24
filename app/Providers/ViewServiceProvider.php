@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\CartComposer;
 use App\Http\View\Composers\OrderComposer;
 use App\Http\View\Composers\ProductComposer;
 use App\Http\View\Composers\ProductsComposer;
@@ -41,6 +42,11 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(
             ['orders.create', 'orders.edit'],
             OrderComposer::class
+        );
+
+        View::composer(
+            ['carts.create'],
+            CartComposer::class
         );
 
         View::composer(

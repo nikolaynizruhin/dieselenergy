@@ -26,7 +26,7 @@ class SearchSpecificationsTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('categories.show', [
-                'category' => $category->id,
+                'category' => $category,
                 'search' => $width->name,
             ]))->assertSuccessful()
             ->assertSee($width->name)

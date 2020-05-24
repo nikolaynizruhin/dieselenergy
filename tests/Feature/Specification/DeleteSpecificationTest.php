@@ -42,7 +42,7 @@ class DeleteSpecificationTest extends TestCase
             ->from(route('categories.show', $category))
             ->delete(route('specifications.destroy', $id))
             ->assertRedirect(route('categories.show', $category))
-            ->assertSessionHas('status', 'Category attribute was detached successfully!');
+            ->assertSessionHas('status', 'Attribute was detached successfully!');
 
         $this->assertDatabaseMissing('attributables', ['id' => $id]);
     }

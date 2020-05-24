@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Specification;
+use App\Cart;
+use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class SpecificationController extends Controller
+class CartController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -37,9 +37,9 @@ class SpecificationController extends Controller
      */
     public function create(Request $request)
     {
-        $category = Category::with('attributes')->findOrFail($request->category_id);
+        $order = Order::with('customer')->findOrFail($request->order_id);
 
-        return view('specifications.create', compact('category'));
+        return view('carts.create', compact('order'));
     }
 
     /**
@@ -50,28 +50,24 @@ class SpecificationController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'category_id' => 'required|numeric|exists:categories,id',
-            'attribute_id' => [
+        $validatedDate = $request->validate([
+            'order_id' => 'required|numeric|exists:orders,id',
+            'quantity' => 'required|numeric|min:1',
+            'product_id' => [
                 'required',
                 'numeric',
-                'exists:attributes,id',
-                Rule::unique('attributables')->where(fn ($query) => $query->where([
-                    'attributable_id' => $request->category_id,
-                    'attributable_type' => Category::class,
+                'exists:products,id',
+                Rule::unique('order_product')->where(fn ($query) => $query->where([
+                    'order_id' => $request->order_id,
                 ])),
             ],
         ]);
 
-        Specification::create([
-            'attribute_id' => $request->attribute_id,
-            'attributable_type' => Category::class,
-            'attributable_id' => $request->category_id,
-        ]);
+        Cart::create($validatedDate);
 
         return redirect()
-            ->route('categories.show', $request->category_id)
-            ->with('status', 'Attribute was attached successfully!');
+            ->route('orders.show', $request->order_id)
+            ->with('status', 'Product was attached successfully!');
     }
 
     /**
@@ -111,13 +107,13 @@ class SpecificationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Specification  $specification
+     * @param  \App\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Specification $specification)
+    public function destroy(Cart $cart)
     {
-        $specification->delete();
+        $cart->delete();
 
-        return back()->with('status', 'Attribute was detached successfully!');
+        return back()->with('status', 'Product was detached successfully!');
     }
 }

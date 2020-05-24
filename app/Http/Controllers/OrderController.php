@@ -69,11 +69,16 @@ class OrderController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Order  $order
+     * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Order $order, Request $request)
     {
-        return view('orders.show', compact('order'));
+        $products = $order->products()
+            ->where('name', 'like', '%'.$request->search.'%')
+            ->paginate(10);
+
+        return view('orders.show', compact('order', 'products'));
     }
 
     /**

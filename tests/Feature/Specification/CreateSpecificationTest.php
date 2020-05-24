@@ -45,8 +45,6 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_can_create_specification()
     {
-        $this->withoutExceptionHandling();
-
         $user = factory(User::class)->create();
 
         $category = factory(Category::class)->create();
@@ -57,7 +55,7 @@ class CreateSpecificationTest extends TestCase
                 'category_id' => $category->id,
                 'attribute_id' => $attribute->id,
             ])->assertRedirect(route('categories.show', $category))
-            ->assertSessionHas('status', 'Category attribute was attached successfully!');
+            ->assertSessionHas('status', 'Attribute was attached successfully!');
 
         $id = $category->fresh()->attributes()->find($attribute->id)->pivot->id;
 
