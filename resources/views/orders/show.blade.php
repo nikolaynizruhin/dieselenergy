@@ -34,7 +34,14 @@
 
             <div class="row">
                 <div class="col-md-3">{{ __('Total') }}</div>
-                <div class="col-md-6">{{ $order->total }}</div>
+                <div class="col-md-6">{{ $order->total / 100 }}</div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-3">{{ __('Date') }}</div>
+                <div class="col-md-6">{{ $order->created_at }}</div>
             </div>
 
             <hr>

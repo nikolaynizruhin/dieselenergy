@@ -5,7 +5,6 @@
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('Name') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('Email') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('Status') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('Total') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('Actions') }}</th>
@@ -21,12 +20,9 @@
                         </a>
                     </td>
                     <td>
-                        {{ $order->customer->email }}
-                    </td>
-                    <td>
                         @include('orders.partials.status')
                     </td>
-                    <td>{{ $order->total }}</td>
+                    <td>{{ $order->total / 100 }}</td>
                     <td>
                         <a href="{{ route('orders.show', $order) }}" class="mr-2">
                             <svg class="bi bi-eye" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
