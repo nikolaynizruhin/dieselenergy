@@ -11,6 +11,6 @@ $factory->define(Cart::class, function (Faker $faker) {
     return [
         'order_id' => factory(Order::class),
         'product_id' => factory(Product::class),
-        'quantity' => $faker->randomDigit,
+        'quantity' => $faker->randomDigitNot(0),
     ];
 });

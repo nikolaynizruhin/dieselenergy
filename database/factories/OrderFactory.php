@@ -10,7 +10,7 @@ $factory->define(Order::class, function (Faker $faker) {
     return [
         'customer_id' => factory(Customer::class),
         'status' => $faker->randomElement(Order::statuses()),
-        'total' => $faker->randomDigit,
+        'total' => $faker->randomNumber(5),
         'notes' => $faker->sentence,
     ];
 });
