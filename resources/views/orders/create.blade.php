@@ -43,7 +43,7 @@
                             <option value="">Select a customer...</option>
                             @foreach ($customers as $customer)
                                 <option value="{{ $customer->id }}" @if (old('customer_id') == $customer->id) selected @endif>
-                                    {{ $customer->name }} ({{ $customer->email }})
+                                    {{ $customer->email }}
                                 </option>
                             @endforeach
                         </select>
