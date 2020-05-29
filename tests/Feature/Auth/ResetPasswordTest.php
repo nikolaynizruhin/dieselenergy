@@ -55,7 +55,7 @@ class ResetPasswordTest extends TestCase
             'email' => $user->email,
             'password' => 'new-password',
             'password_confirmation' => 'new-password',
-        ])->assertRedirect(route('home'));
+        ])->assertRedirect(route('dashboard'));
 
         $this->assertEquals($user->email, $user->fresh()->email);
         $this->assertTrue(Hash::check('new-password', $user->fresh()->password));

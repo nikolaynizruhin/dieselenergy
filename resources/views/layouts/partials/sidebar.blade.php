@@ -1,6 +1,6 @@
 <ul class="nav flex-column d-none d-md-flex">
     <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="#">
+        <a class="nav-link d-flex align-items-center" href="{{ route('dashboard') }}">
             <svg class="bi bi-pie-chart mr-2" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
                 <path fill-rule="evenodd" d="M7.5 7.793V1h1v6.5H15v1H8.207l-4.853 4.854-.708-.708L7.5 7.793z" clip-rule="evenodd"/>

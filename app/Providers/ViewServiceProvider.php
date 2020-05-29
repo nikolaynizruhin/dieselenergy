@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\View\Composers\CartComposer;
+use App\Http\View\Composers\DashboardComposer;
 use App\Http\View\Composers\OrderComposer;
 use App\Http\View\Composers\ProductComposer;
 use App\Http\View\Composers\ProductsComposer;
@@ -29,6 +30,11 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer(
+            ['dashboard'],
+            DashboardComposer::class
+        );
+
         View::composer(
             ['products.index'],
             ProductsComposer::class

@@ -28,7 +28,7 @@ class LoginTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('login'))
-            ->assertRedirect(route('home'));
+            ->assertRedirect(route('dashboard'));
     }
 
     /** @test */
@@ -39,7 +39,7 @@ class LoginTest extends TestCase
         $this->post(route('login'), [
             'email' => $user->email,
             'password' => 'password',
-        ])->assertRedirect(route('home'));
+        ])->assertRedirect(route('dashboard'));
 
         $this->assertAuthenticatedAs($user);
     }
@@ -53,7 +53,7 @@ class LoginTest extends TestCase
             'email' => $user->email,
             'password' => 'password',
             'remember' => 'on',
-        ])->assertRedirect(route('home'))
+        ])->assertRedirect(route('dashboard'))
             ->assertCookie(
                 Auth::guard()->getRecallerName(),
                 $user->id.'|'.$user->getRememberToken().'|'.$user->password
