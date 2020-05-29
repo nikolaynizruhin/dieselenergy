@@ -31,6 +31,6 @@ class ReadOrderTest extends TestCase
             ->assertSuccessful()
             ->assertViewIs('orders.show')
             ->assertViewHas('order')
-            ->assertSee($order->total);
+            ->assertSee($order->status);
     }
 }

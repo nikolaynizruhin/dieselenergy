@@ -30,7 +30,7 @@ class ReadOrdersTest extends TestCase
             ->assertSuccessful()
             ->assertViewIs('orders.index')
             ->assertViewHas('orders')
-            ->assertSee($orderA->total)
-            ->assertSee($orderB->total);
+            ->assertSee($orderA->status)
+            ->assertSee($orderB->status);
     }
 }
