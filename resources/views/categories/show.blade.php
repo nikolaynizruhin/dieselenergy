@@ -11,7 +11,7 @@
 
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3">{{ __('Name') }}</div>
+                <div class="col-md-3 text-muted">{{ __('Name') }}</div>
                 <div class="col-md-6">{{ $category->name }}</div>
             </div>
         </div>

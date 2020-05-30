@@ -11,7 +11,7 @@
 
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3">{{ __('Status') }}</div>
+                <div class="col-md-3 text-muted">{{ __('Status') }}</div>
                 <div class="col-md-6">
                     <h5 class="m-0 p-0">
                         @include('orders.partials.status')
@@ -22,7 +22,7 @@
             <hr>
 
             <div class="row">
-                <div class="col-md-3">{{ __('Customer') }}</div>
+                <div class="col-md-3 text-muted">{{ __('Customer') }}</div>
                 <div class="col-md-6">
                     <a href="{{ route('customers.edit', $order->customer) }}">
                         {{ $order->customer->name }}
@@ -33,21 +33,21 @@
             <hr>
 
             <div class="row">
-                <div class="col-md-3">{{ __('Total') }}</div>
+                <div class="col-md-3 text-muted">{{ __('Total') }}</div>
                 <div class="col-md-6">{{ $order->total / 100 }}</div>
             </div>
 
             <hr>
 
             <div class="row">
-                <div class="col-md-3">{{ __('Date') }}</div>
+                <div class="col-md-3 text-muted">{{ __('Date') }}</div>
                 <div class="col-md-6">{{ $order->created_at }}</div>
             </div>
 
             <hr>
 
             <div class="row">
-                <div class="col-md-3">{{ __('Notes') }}</div>
+                <div class="col-md-3 text-muted">{{ __('Notes') }}</div>
                 <div class="col-md-6">{{ $order->notes }}</div>
             </div>
         </div>
