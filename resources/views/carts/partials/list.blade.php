@@ -16,7 +16,7 @@
                     <th scope="row" class="font-weight-normal">{{ $products->firstItem() + $key }}</th>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->pivot->quantity }}</td>
-                    <td>{{ $product->pivot->quantity * $product->price / 100 }}</td>
+                    <td>${{ $product->pivot->quantity * $product->price / 100 }}</td>
                     <td>
                         <a href="{{ route('carts.edit', $product->pivot->id) }}" class="mr-2">
                             <svg class="bi bi-pencil-square" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
