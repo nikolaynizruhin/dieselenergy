@@ -37,13 +37,18 @@
                 <div class="form-group row">
                     <label for="inputTotal" class="col-md-3 col-form-label">{{ __('Total') }}</label>
                     <div class="col-md-6">
-                        <input type="number" id="inputTotal" class="form-control @error('total') is-invalid @enderror" value="{{ old('total', $order->total) }}" name="total" min="0" required>
-
-                        @error('total')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="addon">$</span>
                             </div>
-                        @enderror
+                            <input type="number" id="inputTotal" class="form-control rounded-right @error('total') is-invalid @enderror" value="{{ old('total', $order->total) }}" name="total" min="0" aria-label="Total" aria-describedby="addon" required>
+
+                            @error('total')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
                     </div>
                 </div>
 

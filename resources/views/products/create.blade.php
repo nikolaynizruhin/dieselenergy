@@ -86,13 +86,18 @@
                 <div class="form-group row">
                     <label for="inputPrice" class="col-md-3 col-form-label">{{ __('Price') }}</label>
                     <div class="col-md-6">
-                        <input type="number" id="inputPrice" class="form-control @error('price') is-invalid @enderror"  value="{{ old('price') }}"  name="price" min="1" required>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="addon">$</span>
+                            </div>
+                            <input type="number" id="inputPrice" class="form-control rounded-right @error('price') is-invalid @enderror" value="{{ old('price') }}" name="price" min="1" aria-label="Price" aria-describedby="addon" required>
 
-                        @error('price')
-                        <div class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            @error('price')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
                         </div>
-                        @enderror
                     </div>
                 </div>
 
