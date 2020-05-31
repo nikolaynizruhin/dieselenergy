@@ -6,9 +6,26 @@
             {{ __('Add Product') }}
         </div>
 
-        <form action="{{ route('products.store') }}" method="POST">
+        <form action="{{ route('products.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
             <div class="card-body">
+
+                <!-- Images -->
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">{{ __('Images') }}</label>
+                    <div class="col-md-6">
+                        <div class="custom-file">
+                            <input type="file" multiple id="inputImages" class="custom-file-input @error('images.*') is-invalid @enderror" name="images[]" accept="image/*">
+                            <label class="custom-file-label" for="inputImages">Choose images</label>
+
+                            @error('images.*')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Name -->
                 <div class="form-group row">

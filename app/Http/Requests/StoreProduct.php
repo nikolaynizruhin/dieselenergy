@@ -32,6 +32,7 @@ class StoreProduct extends FormRequest
             'is_active' => 'boolean',
             'brand_id' => 'required|numeric|exists:brands,id',
             'category_id' => 'required|numeric|exists:categories,id',
+            'images.*' => 'image',
         ] + $this->getAttributeRules('required|max:255');
     }
 
@@ -48,13 +49,25 @@ class StoreProduct extends FormRequest
     }
 
     /**
-     * Get validated data without attributes.
+     * Get validated product attributes.
      *
      * @return array
      */
-    public function withoutAttributes()
+    public function getProductAttributes()
     {
         return Arr::except($this->validated(), 'attributes');
+    }
+
+    /**
+     * Get images.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getImages()
+    {
+        return collect($this->file('images'))->map(fn ($image) => [
+            'path' => $image->store('images'),
+        ]);
     }
 
     /**

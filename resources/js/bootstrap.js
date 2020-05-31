@@ -9,9 +9,14 @@ window._ = require('lodash');
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
+    window.bsCustomFileInput = require('bs-custom-file-input');
 
     require('bootstrap');
 } catch (e) {}
+
+$(document).ready(function () {
+    bsCustomFileInput.init();
+});
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

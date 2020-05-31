@@ -52,4 +52,12 @@ class Product extends Model
             ->withPivot('id', 'quantity')
             ->withTimestamps();
     }
+
+    /**
+     * The images that belong to the product.
+     */
+    public function images()
+    {
+        return $this->belongsToMany(Image::class);
+    }
 }

@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Attribute;
 use App\Brand;
 use App\Category;
+use App\Image;
 use App\Order;
 use App\Product;
 use Illuminate\Database\Eloquent\Collection;
@@ -61,5 +62,17 @@ class ProductTest extends TestCase
         $this->assertTrue($product->orders->contains($order));
         $this->assertInstanceOf(Collection::class, $product->orders);
         $this->assertEquals($quantity, $product->orders->first()->pivot->quantity);
+    }
+
+    /** @test */
+    public function it_has_many_images()
+    {
+        $product = factory(Product::class)->create();
+        $image = factory(Image::class)->create();
+
+        $product->images()->attach($image);
+
+        $this->assertTrue($product->images->contains($image));
+        $this->assertInstanceOf(Collection::class, $product->images);
     }
 }

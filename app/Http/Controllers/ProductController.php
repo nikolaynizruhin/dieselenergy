@@ -54,9 +54,11 @@ class ProductController extends Controller
      */
     public function store(StoreProduct $request)
     {
-        $product = Product::create($request->withoutAttributes());
+        $product = Product::create($request->getProductAttributes());
 
         $product->attributes()->attach($request->getAttributeValues());
+
+        $product->images()->createMany($request->getImages());
 
         return redirect()
             ->route('products.index')
@@ -98,9 +100,11 @@ class ProductController extends Controller
      */
     public function update(UpdateProduct $request, Product $product)
     {
-        $product->update($request->withoutAttributes());
+        $product->update($request->getProductAttributes());
 
         $product->attributes()->sync($request->getAttributeValues());
+
+        $product->images()->createMany($request->getImages());
 
         return redirect()
             ->route('products.index')

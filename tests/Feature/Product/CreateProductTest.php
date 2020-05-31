@@ -4,10 +4,13 @@ namespace Tests\Feature\Product;
 
 use App\Attribute;
 use App\Category;
+use App\Image;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class CreateProductTest extends TestCase
@@ -46,6 +49,20 @@ class CreateProductTest extends TestCase
     public function user_can_create_product()
     {
         $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw();
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product)
+            ->assertRedirect(route('products.index'))
+            ->assertSessionHas('status', 'Product was created successfully!');
+
+        $this->assertDatabaseHas('products', $product);
+    }
+
+    /** @test */
+    public function user_can_create_product_with_attributes()
+    {
+        $user = factory(User::class)->create();
         $category = factory(Category::class)->create();
         $attribute = factory(Attribute::class)->create();
 
@@ -65,6 +82,32 @@ class CreateProductTest extends TestCase
         $this->assertDatabaseHas('attributables', [
             'attributable_type' => Product::class,
             'value' => $value,
+        ]);
+    }
+
+    /** @test */
+    public function user_can_create_product_with_images()
+    {
+        Storage::fake();
+
+        $image = UploadedFile::fake()->image('product.jpg');
+
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw();
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product + [
+                'images' => [$image],
+            ])->assertRedirect(route('products.index'))
+            ->assertSessionHas('status', 'Product was created successfully!');
+
+        Storage::assertExists($path = 'images/'.$image->hashName());
+
+        $this->assertDatabaseHas('products', $product);
+        $this->assertDatabaseHas('images', ['path' => $path]);
+        $this->assertDatabaseHas('image_product', [
+            'image_id' => Image::firstWhere('path', $path)->id,
+            'product_id' => Product::firstWhere('name', $product['name'])->id,
         ]);
     }
 
@@ -247,6 +290,44 @@ class CreateProductTest extends TestCase
         $this->actingAs($user)
             ->post(route('products.store'), $product)
             ->assertSessionHasErrors('is_active');
+    }
+
+    /** @test */
+    public function user_cant_create_product_with_string_image()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw();
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product + [
+                'images' => ['string'],
+            ])->assertSessionHasErrors('images.*');
+    }
+
+    /** @test */
+    public function user_cant_create_product_with_integer_image()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw();
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product + [
+                'images' => [1],
+            ])->assertSessionHasErrors('images.*');
+    }
+
+    /** @test */
+    public function user_cant_create_product_with_pdf_image()
+    {
+        $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
+
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->raw();
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $product + [
+                'images' => [$pdf],
+            ])->assertSessionHasErrors('images.*');
     }
 
     /** @test */

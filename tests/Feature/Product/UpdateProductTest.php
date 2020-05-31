@@ -4,10 +4,13 @@ namespace Tests\Feature\Product;
 
 use App\Attribute;
 use App\Category;
+use App\Image;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UpdateProductTest extends TestCase
@@ -60,6 +63,61 @@ class UpdateProductTest extends TestCase
             ->assertSessionHas('status', 'Product was updated successfully!');
 
         $this->assertDatabaseHas('products', $stub);
+    }
+
+    /** @test */
+    public function user_can_update_product_with_attributes()
+    {
+        $user = factory(User::class)->create();
+        $category = factory(Category::class)->create();
+        $product = factory(Product::class)->create();
+        $attribute = factory(Attribute::class)->create();
+
+        $category->attributes()->attach($attribute);
+
+        $stub = factory(Product::class)->raw(['category_id' => $category->id]);
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub + [
+                'attributes' => [
+                    $attribute->id => $value = $this->faker->randomDigit,
+                ],
+            ])->assertRedirect(route('products.index'))
+            ->assertSessionHas('status', 'Product was updated successfully!');
+
+        $this->assertDatabaseHas('products', $stub);
+        $this->assertDatabaseHas('attributables', [
+            'attributable_id' => $product->id,
+            'attributable_type' => Product::class,
+            'value' => $value,
+        ]);
+    }
+
+    /** @test */
+    public function user_can_update_product_with_images()
+    {
+        Storage::fake();
+
+        $image = UploadedFile::fake()->image('product.jpg');
+
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+        $stub = factory(Product::class)->raw();
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub + [
+                'images' => [$image],
+            ])->assertRedirect(route('products.index'))
+            ->assertSessionHas('status', 'Product was updated successfully!');
+
+        Storage::assertExists($path = 'images/'.$image->hashName());
+
+        $this->assertDatabaseHas('products', $stub);
+        $this->assertDatabaseHas('images', ['path' => $path]);
+        $this->assertDatabaseHas('image_product', [
+            'image_id' => Image::firstWhere('path', $path)->id,
+            'product_id' => $product->id,
+        ]);
     }
 
     /** @test */
@@ -245,6 +303,47 @@ class UpdateProductTest extends TestCase
         $this->actingAs($user)
             ->put(route('products.update', $product), $stub)
             ->assertSessionHasErrors('is_active');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_string_image()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+        $stub = factory(Product::class)->raw();
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub + [
+                'images' => ['string'],
+            ])->assertSessionHasErrors('images.*');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_integer_image()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+        $stub = factory(Product::class)->raw();
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub + [
+                'images' => [1],
+            ])->assertSessionHasErrors('images.*');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_pdf_image()
+    {
+        $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
+
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+        $stub = factory(Product::class)->raw();
+
+        $this->actingAs($user)
+            ->put(route('products.update', $product), $stub + [
+                'images' => [$pdf],
+            ])->assertSessionHasErrors('images.*');
     }
 
     /** @test */
