@@ -105,7 +105,7 @@ class OrderController extends Controller
             'customer_id' => 'required|numeric|exists:customers,id',
             'status' => ['required', 'string', Rule::in(Order::statuses())],
             'notes' => 'nullable|string',
-            'total' => 'required|numeric',
+            'total' => 'required|numeric|min:0',
         ]);
 
         $order->update($validatedData);

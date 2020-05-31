@@ -130,4 +130,40 @@ class UpdateOrderTest extends TestCase
             ->put(route('orders.update', $order), $stub)
             ->assertSessionHasErrors('status');
     }
+
+    /** @test */
+    public function user_cant_update_product_without_total()
+    {
+        $user = factory(User::class)->create();
+        $order = factory(Order::class)->create();
+        $stub = factory(Order::class)->raw(['total' => null]);
+
+        $this->actingAs($user)
+            ->put(route('orders.update', $order), $stub)
+            ->assertSessionHasErrors('total');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_string_total()
+    {
+        $user = factory(User::class)->create();
+        $order = factory(Order::class)->create();
+        $stub = factory(Order::class)->raw(['total' => 'string']);
+
+        $this->actingAs($user)
+            ->put(route('orders.update', $order), $stub)
+            ->assertSessionHasErrors('total');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_negative_total()
+    {
+        $user = factory(User::class)->create();
+        $order = factory(Order::class)->create();
+        $stub = factory(Order::class)->raw(['total' => -1]);
+
+        $this->actingAs($user)
+            ->put(route('orders.update', $order), $stub)
+            ->assertSessionHasErrors('total');
+    }
 }
