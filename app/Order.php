@@ -6,9 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    const NEW = 'New';
-    const PENDING = 'Pending';
-    const DONE = 'Done';
+    /**
+     * The new order status.
+     *
+     * @var string
+     */
+    const STATUS_NEW = 'New';
+
+    /**
+     * The pending order status.
+     *
+     * @var string
+     */
+    const STATUS_PENDING = 'Pending';
+
+    /**
+     * The done order status.
+     *
+     * @var string
+     */
+    const STATUS_DONE = 'Done';
 
     /**
      * The attributes that are mass assignable.
@@ -46,9 +63,9 @@ class Order extends Model
     public static function statuses()
     {
         return [
-            self::NEW,
-            self::PENDING,
-            self::DONE,
+            self::STATUS_NEW,
+            self::STATUS_PENDING,
+            self::STATUS_DONE,
         ];
     }
 }

@@ -1,17 +1,17 @@
 @switch($order->status)
-    @case($order::NEW)
+    @case($order::STATUS_NEW)
         <span class="badge badge-pill badge-primary">
             {{ $order->status }}
         </span>
     @break
 
-    @case($order::PENDING)
+    @case($order::STATUS_PENDING)
         <span class="badge badge-pill badge-warning">
             {{ $order->status }}
         </span>
     @break
 
-    @case($order::DONE)
+    @case($order::STATUS_DONE)
         <span class="badge badge-pill badge-success">
             {{ $order->status }}
         </span>
