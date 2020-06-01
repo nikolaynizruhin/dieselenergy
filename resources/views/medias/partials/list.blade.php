@@ -5,7 +5,7 @@
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('Image') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('Path') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('Name') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('Actions') }}</th>
             </tr>
             </thead>
@@ -16,7 +16,7 @@
                     <td>
                         <img src="{{ asset($image->path) }}" class="img-thumbnail" alt="{{ $image->path }}" width="64" height="64">
                     </td>
-                    <td>{{ $image->path }}</td>
+                    <td>{{ basename($image->path) }}</td>
                     <td>
                         <a href="#" data-toggle="modal" data-target="#deleteImageModal{{ $image->id }}">
                             <svg class="bi bi-trash" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
