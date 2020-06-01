@@ -317,7 +317,7 @@ class CreateProductTest extends TestCase
     }
 
     /** @test */
-    public function user_cant_create_product_with_pdf_image()
+    public function user_cant_create_product_with_pdf_file()
     {
         $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
 

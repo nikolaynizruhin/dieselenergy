@@ -27,6 +27,7 @@ Route::resource('customers', 'CustomerController');
 Route::resource('orders', 'OrderController');
 Route::resource('carts', 'CartController');
 Route::resource('medias', 'MediaController');
+Route::resource('images', 'ImageController');
 Route::resource('brands', 'BrandController');
 Route::resource('categories', 'CategoryController');
 Route::resource('attributes', 'AttributeController');

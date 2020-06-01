@@ -5,7 +5,7 @@
         <path fill-rule="evenodd" d="M13 12.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
     </svg>
     {{ __('No images matched the given criteria.') }}
-    <a class="btn btn-outline-primary d-block d-md-inline-block mt-3" href="{{ route('medias.create', ['product_id' => $product->id]) }}" role="button">
-        {{ __('Attach Image') }}
+    <a class="btn btn-outline-primary d-block d-md-inline-block mt-3" href="{{ route('images.create') }}" role="button">
+        {{ __('Add Image') }}
     </a>
 </div>

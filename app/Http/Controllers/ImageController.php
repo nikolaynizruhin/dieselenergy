@@ -2,19 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreImage;
 use App\Image;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $images = Image::search('path', $request->search)->paginate(10);
+
+        return view('images.index', compact('images'));
     }
 
     /**
@@ -24,18 +38,22 @@ class ImageController extends Controller
      */
     public function create()
     {
-        //
+        return view('images.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreImage  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreImage $request)
     {
-        //
+        Image::insert($request->getImages());
+
+        return redirect()
+            ->route('images.index')
+            ->with('status', 'Images was created successfully!');
     }
 
     /**
@@ -80,6 +98,8 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        //
+        $image->delete();
+
+        return back()->with('status', 'Image was deleted successfully!');
     }
 }
