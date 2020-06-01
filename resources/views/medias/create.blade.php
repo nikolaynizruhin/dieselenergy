@@ -43,7 +43,7 @@
                             @foreach ($images as $image)
                                 @unless ($product->images->contains($image))
                                     <option value="{{ $image->id }}" @if (old('image_id') == $image->id) selected @endif>
-                                        {{ basename($image->path) }}
+                                        {{ $image->name }}
                                     </option>
                                 @endunless
                             @endforeach

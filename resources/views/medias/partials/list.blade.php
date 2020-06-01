@@ -15,10 +15,10 @@
                     <th scope="row" class="font-weight-normal">{{ $images->firstItem() + $key }}</th>
                     <td>
                         <a href="{{ asset($image->path) }}" target="_blank" class="mr-2">
-                            <img src="{{ asset($image->path) }}" class="img-thumbnail" alt="{{ basename($image->path) }}" width="64" height="64">
+                            <img src="{{ asset($image->path) }}" class="img-thumbnail" alt="{{ $image->name }}" width="64" height="64">
                         </a>
                     </td>
-                    <td>{{ basename($image->path) }}</td>
+                    <td>{{ $image->name }}</td>
                     <td>
                         <a href="#" data-toggle="modal" data-target="#showImageModal{{ $image->id }}" class="mr-2">
                             <svg class="bi bi-eye" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

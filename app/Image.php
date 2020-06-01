@@ -28,6 +28,16 @@ class Image extends Model
     }
 
     /**
+     * Get the name of the image file.
+     *
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return basename($this->path);
+    }
+
+    /**
      * The "booted" method of the model.
      *
      * @return void
