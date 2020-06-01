@@ -60,6 +60,7 @@ class Product extends Model
     {
         return $this->belongsToMany(Image::class)
             ->using(Media::class)
-            ->withPivot('id');
+            ->withPivot('id')
+            ->withTimestamps();
     }
 }
