@@ -69,11 +69,16 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Product  $product
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Product $product, Request $request)
     {
-        return view('products.show', compact('product'));
+        $images = $product->images()
+            ->where('path', 'like', '%'.$request->search.'%')
+            ->paginate(10);
+
+        return view('products.show', compact('product', 'images'));
     }
 
     /**

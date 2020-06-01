@@ -20,6 +20,8 @@ class Image extends Model
      */
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)
+            ->using(Media::class)
+            ->withPivot('id');
     }
 }

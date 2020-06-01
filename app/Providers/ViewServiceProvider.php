@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\View\Composers\CartComposer;
 use App\Http\View\Composers\DashboardComposer;
+use App\Http\View\Composers\MediaComposer;
 use App\Http\View\Composers\OrderComposer;
 use App\Http\View\Composers\ProductComposer;
 use App\Http\View\Composers\ProductsComposer;
@@ -53,6 +54,11 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(
             ['carts.create', 'carts.edit'],
             CartComposer::class
+        );
+
+        View::composer(
+            ['medias.create'],
+            MediaComposer::class
         );
 
         View::composer(

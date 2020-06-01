@@ -20,12 +20,13 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
-Route::get('/dashboard', 'DashboardController')->name('dashboard');
+Route::get('dashboard', 'DashboardController')->name('dashboard');
 
 Route::resource('products', 'ProductController');
 Route::resource('customers', 'CustomerController');
 Route::resource('orders', 'OrderController');
 Route::resource('carts', 'CartController');
+Route::resource('medias', 'MediaController');
 Route::resource('brands', 'BrandController');
 Route::resource('categories', 'CategoryController');
 Route::resource('attributes', 'AttributeController');

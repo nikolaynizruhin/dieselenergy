@@ -76,4 +76,6 @@
             @endforeach
         </div>
     </div>
+
+    @include('medias.index')
 @endsection
