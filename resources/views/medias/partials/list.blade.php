@@ -14,7 +14,7 @@
                 <tr>
                     <th scope="row" class="font-weight-normal">{{ $images->firstItem() + $key }}</th>
                     <td>
-                        <a href="{{ asset($image->path) }}" target="_blank" class="mr-2">
+                        <a href="{{ asset($image->path) }}" class="mr-2">
                             <img src="{{ asset($image->path) }}" class="img-thumbnail" alt="{{ $image->name }}" width="64" height="64">
                         </a>
                     </td>
