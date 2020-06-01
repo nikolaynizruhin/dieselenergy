@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
 {
@@ -23,5 +24,15 @@ class Image extends Model
         return $this->belongsToMany(Product::class)
             ->using(Media::class)
             ->withPivot('id');
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::deleted(fn ($image) => Storage::delete($image->path));
     }
 }
