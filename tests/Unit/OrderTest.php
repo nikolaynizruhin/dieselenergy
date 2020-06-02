@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Cart;
 use App\Customer;
 use App\Order;
 use App\Product;
@@ -35,5 +36,28 @@ class OrderTest extends TestCase
         $this->assertTrue($order->products->contains($product));
         $this->assertInstanceOf(Collection::class, $order->products);
         $this->assertEquals($quantity, $order->products->first()->pivot->quantity);
+    }
+
+    /** @test */
+    public function it_calculates_total_after_adding_product()
+    {
+        $order = factory(Order::class)->create(['total' => 0]);
+        $product = factory(Product::class)->create(['price' => 100]);
+
+        $order->products()->attach($product, ['quantity' => 3]);
+
+        $this->assertEquals(300, $order->fresh()->total);
+    }
+
+    /** @test */
+    public function it_calculates_total_after_removing_product()
+    {
+        $cart = factory(Cart::class)->create();
+
+        $this->assertGreaterThan(0, $cart->order->total);
+
+        $cart->order->products()->detach($cart->product);
+
+        $this->assertEquals(0, $cart->order->fresh()->total);
     }
 }

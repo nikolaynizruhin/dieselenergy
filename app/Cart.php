@@ -35,4 +35,15 @@ class Cart extends Pivot
     {
         return $this->belongsTo(Product::class);
     }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::saved(fn ($cart) => $cart->order->calculateTotal());
+        static::deleted(fn ($cart) => $cart->order->calculateTotal());
+    }
 }

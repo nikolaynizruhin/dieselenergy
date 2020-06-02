@@ -68,4 +68,14 @@ class Order extends Model
             self::STATUS_DONE,
         ];
     }
+
+    /**
+     * Calculate order total.
+     */
+    public function calculateTotal()
+    {
+        $total = $this->products->sum(fn ($product) => $product->price * $product->pivot->quantity);
+
+        $this->update(['total' => $total]);
+    }
 }
