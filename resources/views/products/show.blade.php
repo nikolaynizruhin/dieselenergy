@@ -56,7 +56,7 @@
 
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('Price') }}</div>
-                <div class="col-md-6">${{ $product->price / 100 }}</div>
+                <div class="col-md-6">@usd($product->price)</div>
             </div>
 
             <hr>

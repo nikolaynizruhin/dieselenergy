@@ -22,7 +22,7 @@
                     <td>
                         @include('orders.partials.status')
                     </td>
-                    <td>${{ $order->total / 100 }}</td>
+                    <td>@usd($order->total)</td>
                     <td>
                         <a href="{{ route('orders.show', $order) }}" class="mr-2">
                             <svg class="bi bi-eye" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

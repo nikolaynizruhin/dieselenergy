@@ -34,7 +34,7 @@
 
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('Total') }}</div>
-                <div class="col-md-6">${{ $order->total / 100 }}</div>
+                <div class="col-md-6">@usd($order->total)</div>
             </div>
 
             <hr>

@@ -20,7 +20,7 @@
                                 {{ $product->is_active ? __('Active') : __('Inactive') }}
                             </span>
                         </td>
-                        <td>${{ $product->price / 100 }}</td>
+                        <td>@usd($product->price)</td>
                         <td>
                             <a href="{{ route('products.show', $product) }}" class="mr-2">
                                 <svg class="bi bi-eye" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
