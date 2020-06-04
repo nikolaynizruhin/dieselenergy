@@ -4,6 +4,7 @@ namespace Tests\Feature\Specification;
 
 use App\Attribute;
 use App\Category;
+use App\Specification;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -57,9 +58,13 @@ class CreateSpecificationTest extends TestCase
             ])->assertRedirect(route('categories.show', $category))
             ->assertSessionHas('status', 'Attribute was attached successfully!');
 
-        $id = $category->fresh()->attributes()->find($attribute->id)->pivot->id;
+        $specification = Specification::firstWhere([
+            'attributable_id' => $category->id,
+            'attributable_type' => Category::class,
+            'attribute_id' => $attribute->id,
+        ]);
 
-        $this->assertDatabaseHas('attributables', ['id' => $id]);
+        $this->assertDatabaseHas('attributables', ['id' => $specification->id]);
     }
 
     /** @test */
@@ -148,16 +153,12 @@ class CreateSpecificationTest extends TestCase
     public function user_cant_create_existing_specification()
     {
         $user = factory(User::class)->create();
-
-        $category = factory(Category::class)->create();
-        $attribute = factory(Attribute::class)->create();
-
-        $category->attributes()->attach($attribute);
+        $specification = factory(Specification::class)->create();
 
         $this->actingAs($user)
             ->post(route('specifications.store'), [
-                'category_id' => $category->id,
-                'attribute_id' => $attribute->id,
+                'category_id' => $specification->attributable_id,
+                'attribute_id' => $specification->attribute_id,
             ])->assertSessionHasErrors('attribute_id');
     }
 }

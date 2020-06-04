@@ -4,6 +4,7 @@ namespace Tests\Feature\Specification;
 
 use App\Attribute;
 use App\Category;
+use App\Specification;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -15,14 +16,9 @@ class DeleteSpecificationTest extends TestCase
     /** @test */
     public function guest_cant_delete_specification()
     {
-        $attribute = factory(Attribute::class)->create();
-        $category = factory(Category::class)->create();
+        $specification = factory(Specification::class)->create();
 
-        $category->attributes()->attach($attribute);
-
-        $id = $category->attributes()->find($attribute->id)->pivot->id;
-
-        $this->delete(route('specifications.destroy', $id))
+        $this->delete(route('specifications.destroy', $specification))
             ->assertRedirect(route('login'));
     }
 
@@ -30,20 +26,14 @@ class DeleteSpecificationTest extends TestCase
     public function user_can_delete_specification()
     {
         $user = factory(User::class)->create();
-
-        $attribute = factory(Attribute::class)->create();
-        $category = factory(Category::class)->create();
-
-        $category->attributes()->attach($attribute);
-
-        $id = $category->attributes()->find($attribute->id)->pivot->id;
+        $specification = factory(Specification::class)->create();
 
         $this->actingAs($user)
-            ->from(route('categories.show', $category))
-            ->delete(route('specifications.destroy', $id))
-            ->assertRedirect(route('categories.show', $category))
+            ->from(route('categories.show', $specification->attributable_id))
+            ->delete(route('specifications.destroy', $specification->id))
+            ->assertRedirect(route('categories.show', $specification->attributable_id))
             ->assertSessionHas('status', 'Attribute was detached successfully!');
 
-        $this->assertDatabaseMissing('attributables', ['id' => $id]);
+        $this->assertDatabaseMissing('attributables', ['id' => $specification->id]);
     }
 }

@@ -21,6 +21,14 @@ class Specification extends MorphPivot
     protected $table = 'attributables';
 
     /**
+     * Get the attribute that owns the specification.
+     */
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
+
+    /**
      * Get validation rules for category.
      *
      * @param  int  $categoryId

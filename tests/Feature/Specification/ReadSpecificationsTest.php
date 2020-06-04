@@ -4,6 +4,7 @@ namespace Tests\Feature\Specification;
 
 use App\Attribute;
 use App\Category;
+use App\Specification;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -16,17 +17,13 @@ class ReadSpecificationsTest extends TestCase
     public function user_can_read_specifications()
     {
         $user = factory(User::class)->create();
-
-        $attribute = factory(Attribute::class)->create();
-        $category = factory(Category::class)->create();
-
-        $category->attributes()->attach($attribute);
+        $specification = factory(Specification::class)->create();
 
         $this->actingAs($user)
-            ->get(route('categories.show', $category))
+            ->get(route('categories.show', $specification->attributable_id))
             ->assertSuccessful()
             ->assertViewIs('categories.show')
             ->assertViewHas('attributes')
-            ->assertSee($attribute->name);
+            ->assertSee($specification->attribute->name);
     }
 }
