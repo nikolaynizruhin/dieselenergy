@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrder;
+use App\Http\Requests\UpdateOrder;
 use App\Order;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -47,18 +49,12 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreOrder  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOrder $request)
     {
-        $validatedData = $request->validate([
-            'customer_id' => 'required|numeric|exists:customers,id',
-            'status' => ['required', 'string', Rule::in(Order::statuses())],
-            'notes' => 'nullable|string',
-        ]);
-
-        Order::create($validatedData);
+        Order::create($request->validated());
 
         return redirect()
             ->route('orders.index')
@@ -95,20 +91,13 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateOrder  $request
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(UpdateOrder $request, Order $order)
     {
-        $validatedData = $request->validate([
-            'customer_id' => 'required|numeric|exists:customers,id',
-            'status' => ['required', 'string', Rule::in(Order::statuses())],
-            'notes' => 'nullable|string',
-            'total' => 'required|numeric|min:0',
-        ]);
-
-        $order->update($validatedData);
+        $order->update($request->validated());
 
         return redirect()
             ->route('orders.index')
