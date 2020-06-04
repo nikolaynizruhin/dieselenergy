@@ -6,7 +6,6 @@ use App\Http\Requests\StoreMedia;
 use App\Media;
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class MediaController extends Controller
 {

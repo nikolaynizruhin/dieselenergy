@@ -7,7 +7,6 @@ use App\Http\Requests\UpdateOrder;
 use App\Order;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {

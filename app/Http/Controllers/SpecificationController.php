@@ -6,7 +6,6 @@ use App\Category;
 use App\Http\Requests\StoreSpecification;
 use App\Specification;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class SpecificationController extends Controller
 {
