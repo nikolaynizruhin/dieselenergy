@@ -49,11 +49,11 @@ class AttributeController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255|unique:attributes',
         ]);
 
-        Attribute::create($validatedData);
+        Attribute::create($validated);
 
         return redirect()
             ->route('attributes.index')
@@ -91,7 +91,7 @@ class AttributeController extends Controller
      */
     public function update(Request $request, Attribute $attribute)
     {
-        $validatedData = $request->validate([
+        $validated = $request->validate([
             'name' => [
                 'required',
                 'string',
@@ -100,7 +100,7 @@ class AttributeController extends Controller
             ],
         ]);
 
-        $attribute->update($validatedData);
+        $attribute->update($validated);
 
         return redirect()
             ->route('attributes.index')

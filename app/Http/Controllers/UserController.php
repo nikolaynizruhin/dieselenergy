@@ -97,7 +97,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validatedData = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => [
                 'required',
@@ -108,7 +108,7 @@ class UserController extends Controller
             ],
         ]);
 
-        $user->update($validatedData);
+        $user->update($validated);
 
         return redirect()
             ->route('users.index')
