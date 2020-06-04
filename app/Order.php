@@ -74,8 +74,8 @@ class Order extends Model
      */
     public function calculateTotal()
     {
-        $total = $this->products->sum(fn ($product) => $product->price * $product->pivot->quantity);
-
-        $this->update(['total' => $total]);
+        $this->update([
+            'total' => $this->products->sum(fn ($product) => $product->price * $product->pivot->quantity),
+        ]);
     }
 }
