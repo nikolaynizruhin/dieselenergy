@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMedia;
 use App\Media;
 use App\Product;
 use Illuminate\Http\Request;
@@ -45,24 +46,12 @@ class MediaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreMedia  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMedia $request)
     {
-        $validatedDate = $request->validate([
-            'image_id' => 'required|numeric|exists:images,id',
-            'product_id' => [
-                'required',
-                'numeric',
-                'exists:products,id',
-                Rule::unique('image_product')->where(fn ($query) => $query->where([
-                    'image_id' => $request->image_id,
-                ])),
-            ],
-        ]);
-
-        Media::create($validatedDate);
+        Media::create($request->validated());
 
         return redirect()
             ->route('products.show', $request->product_id)
