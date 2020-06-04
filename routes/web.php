@@ -18,7 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['register' => false]);
+Auth::routes([
+    'register' => false,
+    'verify' => false,
+    'confirm' => false,
+]);
 
 Route::get('dashboard', 'DashboardController')->name('dashboard');
 
