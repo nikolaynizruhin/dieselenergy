@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Http\Requests\StoreCustomer;
+use App\Http\Requests\UpdateCustomer;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -44,19 +46,12 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCustomer  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCustomer $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:customers',
-            'phone' => 'required|string|max:255',
-            'notes' => 'nullable|string',
-        ]);
-
-        Customer::create($validatedData);
+        Customer::create($request->validated());
 
         return redirect()
             ->route('customers.index')
@@ -88,26 +83,13 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateCustomer  $request
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(UpdateCustomer $request, Customer $customer)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
-            'notes' => 'nullable|string',
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('customers')->ignore($customer),
-            ],
-        ]);
-
-        $customer->update($validatedData);
+        $customer->update($request->validated());
 
         return redirect()
             ->route('customers.index')
