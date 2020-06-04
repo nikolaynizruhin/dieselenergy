@@ -7,7 +7,6 @@ use App\Http\Requests\StoreCart;
 use App\Http\Requests\UpdateCart;
 use App\Order;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class CartController extends Controller
 {

@@ -6,7 +6,6 @@ use App\Customer;
 use App\Http\Requests\StoreCustomer;
 use App\Http\Requests\UpdateCustomer;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class CustomerController extends Controller
 {
