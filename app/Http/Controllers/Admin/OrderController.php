@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreOrder;
 use App\Http\Requests\Admin\UpdateOrder;
 use App\Order;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
