@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -67,6 +68,22 @@ class Order extends Model
             self::STATUS_PENDING,
             self::STATUS_DONE,
         ];
+    }
+
+    /**
+     * Scope a query to search by customer attribute.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  string  $attribute
+     * @param  string  $search
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSearchByCustomer($query, $attribute, $search)
+    {
+        return $query->whereHas(
+            'customer',
+            fn (Builder $query) => $query->where($attribute, 'like', '%'.$search.'%')
+        );
     }
 
     /**

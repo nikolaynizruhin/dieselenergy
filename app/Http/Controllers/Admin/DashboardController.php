@@ -17,9 +17,7 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $orders = Order::whereHas('customer', function (Builder $query) use ($request) {
-            $query->where('name', 'like', '%'.$request->search.'%');
-        })->latest()->paginate(10);
+        $orders = Order::searchByCustomer('name', $request->search)->latest()->paginate(10);
 
         return view('admin.dashboard', compact('orders'));
     }

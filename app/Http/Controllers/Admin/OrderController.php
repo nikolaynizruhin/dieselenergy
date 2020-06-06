@@ -19,9 +19,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = Order::whereHas('customer', function (Builder $query) use ($request) {
-            $query->where('name', 'like', '%'.$request->search.'%');
-        })->paginate(10);
+        $orders = Order::searchByCustomer('name', $request->search)->paginate(10);
 
         return view('admin.orders.index', compact('orders'));
     }
