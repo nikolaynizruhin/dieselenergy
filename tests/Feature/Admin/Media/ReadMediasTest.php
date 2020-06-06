@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Media;
 
 use App\Image;
-use App\Media;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
