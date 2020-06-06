@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::search('name', $request->search)->orderBy('name', 'asc')->paginate(10);
+        $categories = Category::search('name', $request->search)->orderBy('name')->paginate(10);
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -60,7 +60,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category, Request $request)
     {
-        $attributes = $category->attributes()->search('name', $request->search)->orderBy('name', 'asc')->paginate(10);
+        $attributes = $category->attributes()->search('name', $request->search)->orderBy('name')->paginate(10);
 
         return view('admin.categories.show', compact('category', 'attributes'));
     }

@@ -17,7 +17,7 @@ class AttributeController extends Controller
      */
     public function index(Request $request)
     {
-        $attributes = Attribute::search('name', $request->search)->orderBy('name', 'asc')->paginate(10);
+        $attributes = Attribute::search('name', $request->search)->orderBy('name')->paginate(10);
 
         return view('admin.attributes.index', compact('attributes'));
     }
