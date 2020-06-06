@@ -50,17 +50,6 @@ class AttributeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Attribute  $attribute
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Attribute $attribute)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Attribute  $attribute

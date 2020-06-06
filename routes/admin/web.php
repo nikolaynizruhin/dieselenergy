@@ -28,15 +28,16 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->withoutMidd
 Route::get('/', 'DashboardController')->name('dashboard');
 
 Route::resource('products', 'ProductController');
-Route::resource('customers', 'CustomerController');
+Route::resource('customers', 'CustomerController')->except('show');
 Route::resource('orders', 'OrderController');
-Route::resource('carts', 'CartController');
-Route::resource('medias', 'MediaController');
-Route::resource('images', 'ImageController');
-Route::resource('brands', 'BrandController');
+Route::resource('carts', 'CartController')->except(['index', 'show']);
+Route::resource('medias', 'MediaController')->only(['create', 'store', 'destroy']);
+Route::resource('images', 'ImageController')->except(['show', 'edit', 'update']);
+Route::resource('brands', 'BrandController')->except('show');
 Route::resource('categories', 'CategoryController');
-Route::resource('attributes', 'AttributeController');
-Route::resource('specifications', 'SpecificationController');
+Route::resource('attributes', 'AttributeController')->except('show');
+Route::resource('specifications', 'SpecificationController')->only(['create', 'store', 'destroy']);
 
-Route::resource('users', 'UserController');
+// User Routes...
+Route::resource('users', 'UserController')->except('show');
 Route::put('users/{user}/password', 'UserPasswordController@update')->name('users.password.update');

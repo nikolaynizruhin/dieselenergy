@@ -12,16 +12,6 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,17 +37,6 @@ class CartController extends Controller
         return redirect()
             ->route('admin.orders.show', $request->order_id)
             ->with('status', 'Product was attached successfully!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
