@@ -60,7 +60,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category, Request $request)
     {
-        $attributes = $category->attributes()->search('name', $request->search)->paginate(10);
+        $attributes = $category->attributes()->search('name', $request->search)->orderBy('name', 'asc')->paginate(10);
 
         return view('admin.categories.show', compact('category', 'attributes'));
     }

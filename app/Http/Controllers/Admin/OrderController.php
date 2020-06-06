@@ -57,7 +57,7 @@ class OrderController extends Controller
      */
     public function show(Order $order, Request $request)
     {
-        $products = $order->products()->search('name', $request->search)->paginate(10);
+        $products = $order->products()->search('name', $request->search)->orderBy('name', 'asc')->paginate(10);
 
         return view('admin.orders.show', compact('order', 'products'));
     }

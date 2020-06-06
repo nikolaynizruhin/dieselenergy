@@ -17,19 +17,20 @@ class SearchCartsTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $diesel = factory(Product::class)->create(['name' => 'Diesel']);
-        $patrol = factory(Product::class)->create(['name' => 'Patrol']);
+        $patrol = factory(Product::class)->create(['name' => 'Patrol Generator']);
+        $diesel = factory(Product::class)->create(['name' => 'Diesel Generator']);
+        $waterPump = factory(Product::class)->create(['name' => 'Water Pump']);
 
         $order = factory(Order::class)->create();
 
-        $order->products()->attach([$diesel->id, $patrol->id]);
+        $order->products()->attach([$diesel->id, $patrol->id, $waterPump->id]);
 
         $this->actingAs($user)
             ->get(route('admin.orders.show', [
                 'order' => $order,
-                'search' => $diesel->name,
+                'search' => 'Generator',
             ]))->assertSuccessful()
-            ->assertSee($diesel->name)
-            ->assertDontSee($patrol->name);
+            ->assertSeeInOrder([$diesel->name, $patrol->name])
+            ->assertDontSee($waterPump->name);
     }
 }

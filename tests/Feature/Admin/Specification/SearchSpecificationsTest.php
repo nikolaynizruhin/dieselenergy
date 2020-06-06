@@ -19,17 +19,18 @@ class SearchSpecificationsTest extends TestCase
 
         $width = factory(Attribute::class)->create(['name' => 'width attribute']);
         $height = factory(Attribute::class)->create(['name' => 'height attribute']);
+        $weight = factory(Attribute::class)->create(['name' => 'weight property']);
 
         $category = factory(Category::class)->create();
 
-        $category->attributes()->attach([$width->id, $height->id]);
+        $category->attributes()->attach([$width->id, $height->id, $weight->id]);
 
         $this->actingAs($user)
             ->get(route('admin.categories.show', [
                 'category' => $category,
-                'search' => $width->name,
+                'search' => 'attribute',
             ]))->assertSuccessful()
-            ->assertSee($width->name)
-            ->assertDontSee($height->name);
+            ->assertSeeInOrder([$height->name, $width->name])
+            ->assertDontSee($weight->name);
     }
 }

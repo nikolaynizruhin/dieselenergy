@@ -18,16 +18,21 @@ class ReadCartsTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $product = factory(Product::class)->create();
+        $patrol = factory(Product::class)->create(['name' => 'Patrol']);
+        $diesel = factory(Product::class)->create(['name' => 'Diesel']);
+
         $order = factory(Order::class)->create();
 
-        $order->products()->attach($product, ['quantity' => $quantity = $this->faker->randomDigit]);
+        $order->products()->attach([
+            $patrol->id => ['quantity' => $this->faker->randomDigit],
+            $diesel->id => ['quantity' => $this->faker->randomDigit],
+        ]);
 
         $this->actingAs($user)
             ->get(route('admin.orders.show', $order))
             ->assertSuccessful()
             ->assertViewIs('admin.orders.show')
             ->assertViewHas('products')
-            ->assertSee($product->name);
+            ->assertSeeInOrder([$diesel->name, $patrol->name]);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Admin\Specification;
 
+use App\Attribute;
+use App\Category;
 use App\Specification;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,13 +17,19 @@ class ReadSpecificationsTest extends TestCase
     public function user_can_read_specifications()
     {
         $user = factory(User::class)->create();
-        $specification = factory(Specification::class)->create();
+
+        $width = factory(Attribute::class)->create(['name' => 'width attribute']);
+        $height = factory(Attribute::class)->create(['name' => 'height attribute']);
+
+        $category = factory(Category::class)->create();
+
+        $category->attributes()->attach([$width->id, $height->id]);
 
         $this->actingAs($user)
-            ->get(route('admin.categories.show', $specification->attributable_id))
+            ->get(route('admin.categories.show', $category))
             ->assertSuccessful()
             ->assertViewIs('admin.categories.show')
             ->assertViewHas('attributes')
-            ->assertSee($specification->attribute->name);
+            ->assertSeeInOrder([$height->name, $width->name]);
     }
 }

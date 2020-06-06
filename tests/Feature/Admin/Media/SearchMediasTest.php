@@ -17,8 +17,9 @@ class SearchMediasTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $diesel = factory(Image::class)->create();
-        $patrol = factory(Image::class)->create();
+        $diesel = factory(Image::class)->create(['path' => 'images/dieselpath.jpg', 'created_at' => now()->subDay()]);
+        $patrol = factory(Image::class)->create(['path' => 'images/patrolpath.jpg', 'created_at' => now()]);
+        $waterPump = factory(Image::class)->create(['path' => 'images/waterpump.jpg']);
 
         $product = factory(Product::class)->create();
 
@@ -27,9 +28,9 @@ class SearchMediasTest extends TestCase
         $this->actingAs($user)
             ->get(route('admin.products.show', [
                 'product' => $product,
-                'search' => $diesel->path,
+                'search' => 'path',
             ]))->assertSuccessful()
-            ->assertSee($diesel->path)
-            ->assertDontSee($patrol->path);
+            ->assertSeeInOrder([$patrol->path, $diesel->path])
+            ->assertDontSee($waterPump->path);
     }
 }
