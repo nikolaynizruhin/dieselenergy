@@ -23,14 +23,14 @@ class ReadCustomersTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        [$john, $jane] = factory(Customer::class, 2)->create();
+        $jane = factory(Customer::class)->create(['created_at' => now()->subDay()]);
+        $john = factory(Customer::class)->create(['created_at' => now()]);
 
         $this->actingAs($user)
             ->get(route('admin.customers.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.customers.index')
             ->assertViewHas('customers')
-            ->assertSee($john->email)
-            ->assertSee($jane->email);
+            ->assertSeeInOrder([$john->email, $jane->email]);
     }
 }

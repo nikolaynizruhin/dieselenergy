@@ -23,14 +23,14 @@ class ReadBrandsTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        [$sdmo, $hyundai] = factory(Brand::class, 2)->create();
+        $sdmo = factory(Brand::class)->create(['name' => 'SDMO']);
+        $hyundai = factory(Brand::class)->create(['name' => 'Hyundai']);
 
         $this->actingAs($user)
             ->get(route('admin.brands.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.brands.index')
             ->assertViewHas('brands')
-            ->assertSee($sdmo->name)
-            ->assertSee($hyundai->name);
+            ->assertSeeInOrder([$hyundai->name, $sdmo->name]);
     }
 }

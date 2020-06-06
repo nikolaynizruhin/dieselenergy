@@ -25,12 +25,13 @@ class SearchCategoriesTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $generators = factory(Category::class)->create(['name' => 'Generators']);
-        $ats = factory(Category::class)->create(['name' => 'ATS']);
+        $patrol = factory(Category::class)->create(['name' => 'Patrol Generators']);
+        $diesel = factory(Category::class)->create(['name' => 'Diesel Generators']);
+        $waterPumps = factory(Category::class)->create(['name' => 'Water Pumps']);
 
         $this->actingAs($user)
-            ->get(route('admin.categories.index', ['search' => $generators->name]))
-            ->assertSee($generators->name)
-            ->assertDontSee($ats->name);
+            ->get(route('admin.categories.index', ['search' => 'Generators']))
+            ->assertSeeInOrder([$diesel->name, $patrol->name])
+            ->assertDontSee($waterPumps->name);
     }
 }

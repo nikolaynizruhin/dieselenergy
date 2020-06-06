@@ -23,14 +23,14 @@ class ReadCategoriesTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        [$generators, $ats] = factory(Category::class, 2)->create();
+        $generators = factory(Category::class)->create(['name' => 'Generators']);
+        $ats = factory(Category::class)->create(['name' => 'ATS']);
 
         $this->actingAs($user)
             ->get(route('admin.categories.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.categories.index')
             ->assertViewHas('categories')
-            ->assertSee($generators->name)
-            ->assertSee($ats->name);
+            ->assertSeeInOrder([$ats->name, $generators->name]);
     }
 }

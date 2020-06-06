@@ -25,12 +25,13 @@ class SearchImagesTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $diesel = factory(Image::class)->create();
-        $patrol = factory(Image::class)->create();
+        $diesel = factory(Image::class)->create(['path' => 'images/abcpath.jpg', 'created_at' => now()->subDay()]);
+        $patrol = factory(Image::class)->create(['path' => 'images/bcapath.jpg', 'created_at' => now()]);
+        $waterPump = factory(Image::class)->create(['path' => 'images/token.jpg']);
 
         $this->actingAs($user)
-            ->get(route('admin.images.index', ['search' => $diesel->path]))
-            ->assertSee($diesel->path)
-            ->assertDontSee($patrol->path);
+            ->get(route('admin.images.index', ['search' => 'path']))
+            ->assertSeeInOrder([$patrol->name, $diesel->path])
+            ->assertDontSee($waterPump->path);
     }
 }

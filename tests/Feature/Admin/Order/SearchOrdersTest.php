@@ -26,15 +26,18 @@ class SearchOrdersTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $john = factory(Customer::class)->create(['name' => 'John Doe']);
-        factory(Order::class)->create(['customer_id' => $john->id]);
-
         $jane = factory(Customer::class)->create(['name' => 'Jane Doe']);
+        factory(Order::class)->create(['customer_id' => $jane->id, 'created_at' => now()->subDay()]);
+
+        $john = factory(Customer::class)->create(['name' => 'John Doe']);
+        factory(Order::class)->create(['customer_id' => $john->id, 'created_at' => now()]);
+
+        $tom = factory(Customer::class)->create(['name' => 'Tom Jo']);
         factory(Order::class)->create(['customer_id' => $jane->id]);
 
         $this->actingAs($user)
-            ->get(route('admin.orders.index', ['search' => $john->name]))
-            ->assertSee($john->name)
-            ->assertDontSee($jane->name);
+            ->get(route('admin.orders.index', ['search' => 'Doe']))
+            ->assertSeeInOrder([$john->name, $jane->name])
+            ->assertDontSee($tom->name);
     }
 }

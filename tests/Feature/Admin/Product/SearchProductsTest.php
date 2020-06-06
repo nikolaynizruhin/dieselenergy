@@ -25,12 +25,13 @@ class SearchProductsTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $diesel = factory(Product::class)->create(['name' => 'Diesel']);
-        $patrol = factory(Product::class)->create(['name' => 'Patrol']);
+        $diesel = factory(Product::class)->create(['name' => 'Diesel Generator']);
+        $patrol = factory(Product::class)->create(['name' => 'Patrol Generator']);
+        $waterPump = factory(Product::class)->create(['name' => 'Water Pump']);
 
         $this->actingAs($user)
-            ->get(route('admin.products.index', ['search' => $diesel->name]))
-            ->assertSee($diesel->name)
-            ->assertDontSee($patrol->name);
+            ->get(route('admin.products.index', ['search' => 'Generator']))
+            ->assertSeeInOrder([$diesel->name, $patrol->name])
+            ->assertDontSee($waterPump->name);
     }
 }

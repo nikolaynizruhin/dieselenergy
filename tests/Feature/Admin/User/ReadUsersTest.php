@@ -20,14 +20,15 @@ class ReadUsersTest extends TestCase
     /** @test */
     public function user_can_read_users()
     {
-        [$admin, $user] = factory(User::class, 2)->create();
+        $admin = factory(User::class)->create();
+        $john = factory(User::class)->create(['name' => 'John Doe']);
+        $jane = factory(User::class)->create(['name' => 'Jane Doe']);
 
         $this->actingAs($admin)
             ->get(route('admin.users.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.users.index')
             ->assertViewHas('users')
-            ->assertSee($admin->email)
-            ->assertSee($user->email);
+            ->assertSeeInOrder([$jane->name, $john->name]);
     }
 }

@@ -23,14 +23,14 @@ class ReadAttributesTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        [$power, $weight] = factory(Attribute::class, 2)->create();
+        $weight = factory(Attribute::class)->create(['name' => 'Weight']);
+        $power = factory(Attribute::class)->create(['name' => 'Power']);
 
         $this->actingAs($user)
             ->get(route('admin.attributes.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.attributes.index')
             ->assertViewHas('attributes')
-            ->assertSee($power->name)
-            ->assertSee($weight->name);
+            ->assertSeeInOrder([$power->name, $weight->name]);
     }
 }

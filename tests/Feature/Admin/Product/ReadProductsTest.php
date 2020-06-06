@@ -23,14 +23,14 @@ class ReadProductsTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        [$petrol, $diesel] = factory(Product::class, 2)->create();
+        $petrol = factory(Product::class)->create(['name' => 'Petrol']);
+        $diesel = factory(Product::class)->create(['name' => 'Diesel']);
 
         $this->actingAs($user)
             ->get(route('admin.products.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.products.index')
             ->assertViewHas('products')
-            ->assertSee($diesel->name)
-            ->assertSee($petrol->name);
+            ->assertSeeInOrder([$diesel->name, $petrol->name]);
     }
 }

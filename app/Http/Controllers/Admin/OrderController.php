@@ -18,7 +18,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = Order::searchByCustomer('name', $request->search)->paginate(10);
+        $orders = Order::searchByCustomer('name', $request->search)->latest()->paginate(10);
 
         return view('admin.orders.index', compact('orders'));
     }

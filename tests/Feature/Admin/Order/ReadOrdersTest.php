@@ -23,14 +23,14 @@ class ReadOrdersTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        [$orderA, $orderB] = factory(Order::class, 2)->create();
+        $orderB = factory(Order::class)->create(['created_at' => now()->subDay()]);
+        $orderA = factory(Order::class)->create(['created_at' => now()]);
 
         $this->actingAs($user)
             ->get(route('admin.orders.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.orders.index')
             ->assertViewHas('orders')
-            ->assertSee($orderA->status)
-            ->assertSee($orderB->status);
+            ->assertSeeInOrder([$orderA->status, $orderB->status]);
     }
 }

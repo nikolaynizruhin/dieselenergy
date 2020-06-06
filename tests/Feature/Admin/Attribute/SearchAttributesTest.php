@@ -26,11 +26,12 @@ class SearchAttributesTest extends TestCase
         $user = factory(User::class)->create();
 
         $power = factory(Attribute::class)->create(['name' => 'power']);
-        $battery = factory(Attribute::class)->create(['name' => 'battery']);
+        $width = factory(Attribute::class)->create(['name' => 'width attribute']);
+        $height = factory(Attribute::class)->create(['name' => 'height attribute']);
 
         $this->actingAs($user)
-            ->get(route('admin.attributes.index', ['search' => $power->name]))
-            ->assertSee($power->name)
-            ->assertDontSee($battery->name);
+            ->get(route('admin.attributes.index', ['search' => 'attribute']))
+            ->assertSeeInOrder([$height->name, $width->name])
+            ->assertDontSee($power->name);
     }
 }

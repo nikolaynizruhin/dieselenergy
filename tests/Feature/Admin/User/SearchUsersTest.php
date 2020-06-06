@@ -22,12 +22,15 @@ class SearchUsersTest extends TestCase
     /** @test */
     public function user_can_search_users()
     {
+        $admin = factory(User::class)->create();
+
         $john = factory(User::class)->create(['name' => 'John Doe']);
         $jane = factory(User::class)->create(['name' => 'Jane Doe']);
+        $tom = factory(User::class)->create(['name' => 'Tom Jo']);
 
-        $this->actingAs($john)
-            ->get(route('admin.users.index', ['search' => $jane->name]))
-            ->assertSee($jane->email)
-            ->assertDontSee($john->email);
+        $this->actingAs($admin)
+            ->get(route('admin.users.index', ['search' => 'Doe']))
+            ->assertSeeInOrder([$jane->email, $john->email])
+            ->assertDontSee($tom->email);
     }
 }

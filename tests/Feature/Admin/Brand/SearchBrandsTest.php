@@ -25,12 +25,13 @@ class SearchBrandsTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $sdmo = factory(Brand::class)->create(['name' => 'SDMO']);
-        $hyundai = factory(Brand::class)->create(['name' => 'Hyundai']);
+        $sdmo = factory(Brand::class)->create(['name' => 'SDMO Brand']);
+        $hyundai = factory(Brand::class)->create(['name' => 'Hyundai Brand']);
+        $bosch = factory(Brand::class)->create(['name' => 'Bosch']);
 
         $this->actingAs($user)
-            ->get(route('admin.brands.index', ['search' => $sdmo->name]))
-            ->assertSee($sdmo->name)
-            ->assertDontSee($hyundai->name);
+            ->get(route('admin.brands.index', ['search' => 'Brand']))
+            ->assertSeeInOrder([$hyundai->name, $sdmo->name])
+            ->assertDontSee($bosch->name);
     }
 }

@@ -23,14 +23,14 @@ class ReadImagesTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        [$diesel, $patrol] = factory(Image::class, 2)->create();
+        $diesel = factory(Image::class)->create(['created_at' => now()->subDay()]);
+        $patrol = factory(Image::class)->create(['created_at' => now()]);
 
         $this->actingAs($user)
             ->get(route('admin.images.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.images.index')
             ->assertViewHas('images')
-            ->assertSee($diesel->path)
-            ->assertSee($patrol->path);
+            ->assertSeeInOrder([$patrol->path, $diesel->path]);
     }
 }
