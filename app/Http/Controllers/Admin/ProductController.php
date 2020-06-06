@@ -65,9 +65,7 @@ class ProductController extends Controller
      */
     public function show(Product $product, Request $request)
     {
-        $images = $product->images()
-            ->where('path', 'like', '%'.$request->search.'%')
-            ->paginate(10);
+        $images = $product->images()->search('path', $request->search)->paginate(10);
 
         return view('admin.products.show', compact('product', 'images'));
     }

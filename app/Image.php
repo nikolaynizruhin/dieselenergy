@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
 {
+    use HasSearch;
+
     /**
      * The attributes that are mass assignable.
      *

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
+    use HasSearch;
+
     /**
      * The attributes that are mass assignable.
      *

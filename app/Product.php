@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use Attributable;
+    use Attributable, HasSearch;
 
     /**
      * The attributes that are mass assignable.
