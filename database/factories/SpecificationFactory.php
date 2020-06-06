@@ -11,6 +11,6 @@ $factory->define(Specification::class, function (Faker $faker) {
     return [
         'attributable_id' => factory(Category::class),
         'attributable_type' => Category::class,
-        'attribute_id' => factory(Attribute::class)
+        'attribute_id' => factory(Attribute::class),
     ];
 });
