@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
-use App\Http\View\Composers\CartComposer;
-use App\Http\View\Composers\DashboardComposer;
-use App\Http\View\Composers\MediaComposer;
-use App\Http\View\Composers\OrderComposer;
-use App\Http\View\Composers\ProductComposer;
-use App\Http\View\Composers\ProductsComposer;
-use App\Http\View\Composers\SpecificationComposer;
+use App\Http\View\Composers\Admin\CartComposer;
+use App\Http\View\Composers\Admin\DashboardComposer;
+use App\Http\View\Composers\Admin\MediaComposer;
+use App\Http\View\Composers\Admin\OrderComposer;
+use App\Http\View\Composers\Admin\ProductComposer;
+use App\Http\View\Composers\Admin\ProductsComposer;
+use App\Http\View\Composers\Admin\SpecificationComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,37 +32,37 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(
-            ['dashboard'],
+            ['admin.dashboard'],
             DashboardComposer::class
         );
 
         View::composer(
-            ['products.index'],
+            ['admin.products.index'],
             ProductsComposer::class
         );
 
         View::composer(
-            ['products.create', 'products.edit'],
+            ['admin.products.create', 'admin.products.edit'],
             ProductComposer::class
         );
 
         View::composer(
-            ['orders.create', 'orders.edit'],
+            ['admin.orders.create', 'admin.orders.edit'],
             OrderComposer::class
         );
 
         View::composer(
-            ['carts.create', 'carts.edit'],
+            ['admin.carts.create', 'admin.carts.edit'],
             CartComposer::class
         );
 
         View::composer(
-            ['medias.create'],
+            ['admin.medias.create'],
             MediaComposer::class
         );
 
         View::composer(
-            ['specifications.create'],
+            ['admin.specifications.create'],
             SpecificationComposer::class
         );
     }

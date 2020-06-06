@@ -65,12 +65,12 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+            @if (Route::has('admin.login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/dashboard') }}">Dashboard</a>
+                        <a href="{{ url('/admin/dashboard') }}">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('admin.login') }}">Login</a>
                     @endauth
                 </div>
             @endif
