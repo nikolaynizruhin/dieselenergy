@@ -16,7 +16,10 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $orders = Order::with('customer')->searchByCustomer('name', $request->search)->latest()->paginate(10);
+        $orders = Order::with('customer')
+            ->searchByCustomer('name', $request->search)
+            ->latest()
+            ->paginate(10);
 
         return view('admin.dashboard', compact('orders'));
     }

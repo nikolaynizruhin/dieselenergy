@@ -18,7 +18,10 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = Order::with('customer')->searchByCustomer('name', $request->search)->latest()->paginate(10);
+        $orders = Order::with('customer')
+            ->searchByCustomer('name', $request->search)
+            ->latest()
+            ->paginate(10);
 
         return view('admin.orders.index', compact('orders'));
     }
