@@ -30,7 +30,7 @@ class DeleteAttributeTest extends TestCase
             ->from(route('admin.attributes.index'))
             ->delete(route('admin.attributes.destroy', $attribute))
             ->assertRedirect(route('admin.attributes.index'))
-            ->assertSessionHas('status', 'Attribute was deleted successfully!');
+            ->assertSessionHas('status', trans('attribute.deleted'));
 
         $this->assertDatabaseMissing('attributes', ['id' => $attribute->id]);
     }

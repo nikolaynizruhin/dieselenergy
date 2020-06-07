@@ -4,7 +4,7 @@
             <thead class="thead-light">
                 <tr>
                     <th scope="col" class="bg-light text-muted border-0">#</th>
-                    <th scope="col" class="bg-light text-muted border-0">{{ __('Image') }}</th>
+                    <th scope="col" class="bg-light text-muted border-0">{{ __('image.title') }}</th>
                     <th scope="col" class="bg-light text-muted border-0">{{ __('Name') }}</th>
                     <th scope="col" class="bg-light text-muted border-0">{{ __('Actions') }}</th>
                 </tr>

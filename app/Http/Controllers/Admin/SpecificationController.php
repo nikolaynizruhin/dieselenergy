@@ -39,7 +39,7 @@ class SpecificationController extends Controller
 
         return redirect()
             ->route('admin.categories.show', $request->category_id)
-            ->with('status', 'Attribute was attached successfully!');
+            ->with('status', trans('specification.created'));
     }
 
     /**
@@ -52,6 +52,6 @@ class SpecificationController extends Controller
     {
         $specification->delete();
 
-        return back()->with('status', 'Attribute was detached successfully!');
+        return back()->with('status', trans('specification.deleted'));
     }
 }

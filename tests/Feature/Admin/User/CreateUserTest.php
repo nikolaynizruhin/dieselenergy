@@ -53,7 +53,7 @@ class CreateUserTest extends TestCase
                 'password' => 'password',
                 'password_confirmation' => 'password',
             ])->assertRedirect(route('admin.users.index'))
-            ->assertSessionHas('status', 'User was created successfully!');
+            ->assertSessionHas('status', trans('user.created'));
 
         $user = User::firstWhere('email', $stub->email);
 

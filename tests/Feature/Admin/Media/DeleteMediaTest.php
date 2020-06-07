@@ -30,7 +30,7 @@ class DeleteMediaTest extends TestCase
             ->from(route('admin.products.show', $media->product))
             ->delete(route('admin.medias.destroy', $media))
             ->assertRedirect(route('admin.products.show', $media->product))
-            ->assertSessionHas('status', 'Image was detached successfully!');
+            ->assertSessionHas('status', trans('media.deleted'));
 
         $this->assertDatabaseMissing('image_product', ['id' => $media->id]);
     }

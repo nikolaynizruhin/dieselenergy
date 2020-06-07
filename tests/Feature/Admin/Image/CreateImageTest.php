@@ -55,7 +55,7 @@ class CreateImageTest extends TestCase
             ->post(route('admin.images.store'), [
                 'images' => [$image],
             ])->assertRedirect(route('admin.images.index'))
-            ->assertSessionHas('status', 'Images was created successfully!');
+            ->assertSessionHas('status', trans('image.created'));
 
         Storage::assertExists($path = 'images/'.$image->hashName());
 

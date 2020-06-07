@@ -30,7 +30,7 @@ class DeleteCustomerTest extends TestCase
             ->from(route('admin.customers.index'))
             ->delete(route('admin.customers.destroy', $customer))
             ->assertRedirect(route('admin.customers.index'))
-            ->assertSessionHas('status', 'Customer was deleted successfully!');
+            ->assertSessionHas('status', trans('customer.deleted'));
 
         $this->assertDatabaseMissing('customers', ['id' => $customer->id]);
     }

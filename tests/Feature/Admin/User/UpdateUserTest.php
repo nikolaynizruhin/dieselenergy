@@ -53,7 +53,7 @@ class UpdateUserTest extends TestCase
                 'name' => $user->name,
                 'email' => $user->email,
             ])->assertRedirect(route('admin.users.index'))
-            ->assertSessionHas('status', 'User was updated successfully!');
+            ->assertSessionHas('status', trans('user.updated'));
 
         $this->assertDatabaseHas('users', [
             'name' => $user->name,

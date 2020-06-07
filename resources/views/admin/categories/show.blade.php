@@ -5,7 +5,7 @@
 
     <div class="card shadow-sm mb-4">
         <div class="card-header border-0 bg-white lead">
-            {{ __('Category Details') }}
+            {{ __('category.details') }}
         </div>
 
 

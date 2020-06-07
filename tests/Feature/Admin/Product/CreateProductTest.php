@@ -76,7 +76,7 @@ class CreateProductTest extends TestCase
                     $attribute->id => $value = $this->faker->randomDigit,
                 ],
             ])->assertRedirect(route('admin.products.index'))
-            ->assertSessionHas('status', 'Product was created successfully!');
+            ->assertSessionHas('status', trans('product.created'));
 
         $this->assertDatabaseHas('products', $product);
         $this->assertDatabaseHas('attributables', [

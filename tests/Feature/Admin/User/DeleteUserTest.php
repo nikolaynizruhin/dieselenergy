@@ -28,7 +28,7 @@ class DeleteUserTest extends TestCase
             ->from(route('admin.users.index'))
             ->delete(route('admin.users.destroy', $user))
             ->assertRedirect(route('admin.users.index'))
-            ->assertSessionHas('status', 'User was deleted successfully!');
+            ->assertSessionHas('status', trans('user.deleted'));
 
         $this->assertDatabaseMissing('users', ['id' => $user->id]);
     }

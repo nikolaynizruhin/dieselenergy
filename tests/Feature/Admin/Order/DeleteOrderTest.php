@@ -30,7 +30,7 @@ class DeleteOrderTest extends TestCase
             ->from(route('admin.orders.index'))
             ->delete(route('admin.orders.destroy', $order))
             ->assertRedirect(route('admin.orders.index'))
-            ->assertSessionHas('status', 'Order was deleted successfully!');
+            ->assertSessionHas('status', trans('order.deleted'));
 
         $this->assertDatabaseMissing('orders', ['id' => $order->id]);
     }

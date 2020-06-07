@@ -60,7 +60,7 @@ class UpdateProductTest extends TestCase
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
             ->assertRedirect(route('admin.products.index'))
-            ->assertSessionHas('status', 'Product was updated successfully!');
+            ->assertSessionHas('status', trans('product.updated'));
 
         $this->assertDatabaseHas('products', $stub);
     }

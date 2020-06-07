@@ -47,7 +47,7 @@ class CreateCustomerTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)
             ->assertRedirect(route('admin.customers.index'))
-            ->assertSessionHas('status', 'Customer was created successfully!');
+            ->assertSessionHas('status', trans('customer.created'));
 
         $this->assertDatabaseHas('customers', $customer);
     }

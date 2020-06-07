@@ -3,7 +3,7 @@
 @section('content')
     <div class="card shadow-sm mb-4">
         <div class="card-header border-0 bg-white lead">
-            {{ __('Update Profile') }}
+            {{ __('user.update') }}
         </div>
 
         <form action="{{ route('admin.users.update', $user) }}" method="POST">
@@ -48,7 +48,7 @@
 
     <div class="card shadow-sm">
         <div class="card-header border-0 bg-white lead">
-            {{ __('Update Password') }}
+            {{ __('user.update.password') }}
         </div>
 
         <form action="{{ route('admin.users.password.update', $user) }}" method="POST">

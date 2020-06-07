@@ -42,7 +42,7 @@ class DeleteCartTest extends TestCase
             ->from(route('admin.orders.show', $order))
             ->delete(route('admin.carts.destroy', $id))
             ->assertRedirect(route('admin.orders.show', $order))
-            ->assertSessionHas('status', 'Product was detached successfully!');
+            ->assertSessionHas('status', trans('cart.deleted'));
 
         $this->assertDatabaseMissing('order_product', ['id' => $id]);
     }

@@ -3,7 +3,7 @@
 @section('content')
     <div class="card shadow-sm">
         <div class="card-header border-0 bg-white lead">
-            {{ __('Add User') }}
+            {{ __('user.add') }}
         </div>
 
         <form action="{{ route('admin.users.store') }}" method="POST">

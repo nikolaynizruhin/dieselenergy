@@ -4,6 +4,6 @@
         <path fill-rule="evenodd" d="M13.5 10a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13v-1.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
         <path fill-rule="evenodd" d="M13 12.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
     </svg>
-    {{ __('No products matched the given criteria.') }}
+    {{ __('product.missing') }}
     @include('admin.products.partials.add', ['classes' => 'btn-outline-primary mt-3'])
 </div>

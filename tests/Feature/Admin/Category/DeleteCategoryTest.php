@@ -30,7 +30,7 @@ class DeleteCategoryTest extends TestCase
             ->from(route('admin.categories.index'))
             ->delete(route('admin.categories.destroy', $category))
             ->assertRedirect(route('admin.categories.index'))
-            ->assertSessionHas('status', 'Category was deleted successfully!');
+            ->assertSessionHas('status', trans('category.deleted'));
 
         $this->assertDatabaseMissing('categories', ['id' => $category->id]);
     }

@@ -30,7 +30,7 @@ class DeleteProductTest extends TestCase
             ->from(route('admin.products.index'))
             ->delete(route('admin.products.destroy', $product))
             ->assertRedirect(route('admin.products.index'))
-            ->assertSessionHas('status', 'Product was deleted successfully!');
+            ->assertSessionHas('status', trans('product.deleted'));
 
         $this->assertDatabaseMissing('products', ['id' => $product->id]);
     }

@@ -44,7 +44,7 @@ class ImageController extends Controller
 
         return redirect()
             ->route('admin.images.index')
-            ->with('status', 'Images was created successfully!');
+            ->with('status', trans('image.created'));
     }
 
     /**
@@ -57,6 +57,6 @@ class ImageController extends Controller
     {
         $image->delete();
 
-        return back()->with('status', 'Image was deleted successfully!');
+        return back()->with('status', trans('image.deleted'));
     }
 }

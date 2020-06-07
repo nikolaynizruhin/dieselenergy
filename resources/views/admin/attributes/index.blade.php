@@ -9,7 +9,7 @@
             @include('admin.layouts.partials.search', ['url' => route('admin.attributes.index')])
         </div>
         <div class="col text-right">
-            <a class="btn btn-primary d-block d-md-inline-block shadow-sm mb-3" href="{{ route('admin.attributes.create') }}" role="button">{{ __('Add Attribute') }}</a>
+            <a class="btn btn-primary d-block d-md-inline-block shadow-sm mb-3" href="{{ route('admin.attributes.create') }}" role="button">{{ __('attribute.add') }}</a>
         </div>
     </div>
 

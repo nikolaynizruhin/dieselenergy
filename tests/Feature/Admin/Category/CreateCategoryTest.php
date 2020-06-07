@@ -47,7 +47,7 @@ class CreateCategoryTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.categories.store'), $category)
             ->assertRedirect(route('admin.categories.index'))
-            ->assertSessionHas('status', 'Category was created successfully!');
+            ->assertSessionHas('status', trans('category.created'));
 
         $this->assertDatabaseHas('categories', $category);
     }

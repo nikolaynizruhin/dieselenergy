@@ -53,7 +53,7 @@ class UpdateCategoryTest extends TestCase
         $this->actingAs($user)
             ->put(route('admin.categories.update', $category), $stub)
             ->assertRedirect(route('admin.categories.index'))
-            ->assertSessionHas('status', 'Category was updated successfully!');
+            ->assertSessionHas('status', trans('category.updated'));
 
         $this->assertDatabaseHas('categories', $stub);
     }

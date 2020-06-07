@@ -53,7 +53,7 @@ class UpdateBrandTest extends TestCase
         $this->actingAs($user)
             ->put(route('admin.brands.update', $brand), $stub)
             ->assertRedirect(route('admin.brands.index'))
-            ->assertSessionHas('status', 'Brand was updated successfully!');
+            ->assertSessionHas('status', trans('brand.updated'));
 
         $this->assertDatabaseHas('brands', $stub);
     }

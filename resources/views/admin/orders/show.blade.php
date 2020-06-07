@@ -5,7 +5,7 @@
 
     <div class="card shadow-sm mb-4">
         <div class="card-header border-0 bg-white lead">
-            {{ __('Order Details') }}
+            {{ __('order.details') }}
         </div>
 
 
@@ -22,7 +22,7 @@
             <hr>
 
             <div class="row">
-                <div class="col-md-3 text-muted">{{ __('Customer') }}</div>
+                <div class="col-md-3 text-muted">{{ __('customer.title') }}</div>
                 <div class="col-md-6">
                     <a href="{{ route('admin.customers.edit', $order->customer) }}">
                         {{ $order->customer->name }}

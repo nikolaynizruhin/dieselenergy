@@ -33,7 +33,7 @@ class UpdateUserPasswordTest extends TestCase
                 'password' => 'new-password',
                 'password_confirmation' => 'new-password',
             ])->assertRedirect(route('admin.users.index'))
-            ->assertSessionHas('status', 'User password was updated successfully!');
+            ->assertSessionHas('status', trans('user.password.updated'));
 
         $this->assertTrue(Hash::check('new-password', $admin->fresh()->password));
     }

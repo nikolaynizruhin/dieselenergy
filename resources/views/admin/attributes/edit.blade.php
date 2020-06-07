@@ -3,7 +3,7 @@
 @section('content')
     <div class="card shadow-sm">
         <div class="card-header border-0 bg-white lead">
-            {{ __('Update Attribute') }}
+            {{ __('attribute.update') }}
         </div>
 
         <form action="{{ route('admin.attributes.update', $attribute) }}" method="POST">

@@ -47,7 +47,7 @@ class CreateAttributeTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.attributes.store'), $attribute)
             ->assertRedirect(route('admin.attributes.index'))
-            ->assertSessionHas('status', 'Attribute was created successfully!');
+            ->assertSessionHas('status', trans('attribute.created'));
 
         $this->assertDatabaseHas('attributes', $attribute);
     }

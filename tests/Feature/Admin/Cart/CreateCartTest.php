@@ -49,7 +49,7 @@ class CreateCartTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.carts.store'), $cart)
             ->assertRedirect(route('admin.orders.show', $cart['order_id']))
-            ->assertSessionHas('status', 'Product was attached successfully!');
+            ->assertSessionHas('status', trans('cart.created'));
 
         $this->assertDatabaseHas('order_product', $cart);
     }

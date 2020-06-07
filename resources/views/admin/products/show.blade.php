@@ -5,7 +5,7 @@
 
     <div class="card shadow-sm mb-4">
         <div class="card-header border-0 bg-white lead">
-            {{ __('Product Details') }}
+            {{ __('product.details') }}
         </div>
 
 
@@ -33,7 +33,7 @@
             <hr>
 
             <div class="row">
-                <div class="col-md-3 text-muted">{{ __('Brand') }}</div>
+                <div class="col-md-3 text-muted">{{ __('brand.title') }}</div>
                 <div class="col-md-6">
                     <a href="{{ route('admin.brands.edit', $product->brand) }}">
                         {{ $product->brand->name }}
@@ -44,7 +44,7 @@
             <hr>
 
             <div class="row">
-                <div class="col-md-3 text-muted">{{ __('Category') }}</div>
+                <div class="col-md-3 text-muted">{{ __('category.title') }}</div>
                 <div class="col-md-6">
                     <a href="{{ route('admin.categories.edit', $product->category) }}">
                         {{ $product->category->name }}

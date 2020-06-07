@@ -30,7 +30,7 @@ class DeleteImageTest extends TestCase
             ->from(route('admin.images.index'))
             ->delete(route('admin.images.destroy', $image))
             ->assertRedirect(route('admin.images.index'))
-            ->assertSessionHas('status', 'Image was deleted successfully!');
+            ->assertSessionHas('status', trans('image.deleted'));
 
         $this->assertDatabaseMissing('images', ['id' => $image->id]);
     }

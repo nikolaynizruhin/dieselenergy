@@ -47,7 +47,7 @@ class CreateBrandTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.brands.store'), $brand)
             ->assertRedirect(route('admin.brands.index'))
-            ->assertSessionHas('status', 'Brand was created successfully!');
+            ->assertSessionHas('status', trans('brand.created'));
 
         $this->assertDatabaseHas('brands', $brand);
     }

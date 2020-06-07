@@ -53,7 +53,7 @@ class ProductController extends Controller
 
         return redirect()
             ->route('admin.products.index')
-            ->with('status', 'Product was created successfully!');
+            ->with('status', trans('product.created'));
     }
 
     /**
@@ -102,7 +102,7 @@ class ProductController extends Controller
 
         return redirect()
             ->route('admin.products.index')
-            ->with('status', 'Product was updated successfully!');
+            ->with('status', trans('product.updated'));
     }
 
     /**
@@ -115,6 +115,6 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return back()->with('status', 'Product was deleted successfully!');
+        return back()->with('status', trans('product.deleted'));
     }
 }

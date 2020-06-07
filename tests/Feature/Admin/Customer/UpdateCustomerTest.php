@@ -52,7 +52,7 @@ class UpdateCustomerTest extends TestCase
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
             ->assertRedirect(route('admin.customers.index'))
-            ->assertSessionHas('status', 'Customer was updated successfully!');
+            ->assertSessionHas('status', trans('customer.updated'));
 
         $this->assertDatabaseHas('customers', $stub);
     }

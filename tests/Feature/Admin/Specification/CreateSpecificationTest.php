@@ -56,7 +56,7 @@ class CreateSpecificationTest extends TestCase
                 'category_id' => $category->id,
                 'attribute_id' => $attribute->id,
             ])->assertRedirect(route('admin.categories.show', $category))
-            ->assertSessionHas('status', 'Attribute was attached successfully!');
+            ->assertSessionHas('status', trans('specification.created'));
 
         $specification = Specification::firstWhere([
             'attributable_id' => $category->id,

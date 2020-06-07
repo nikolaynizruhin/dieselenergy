@@ -3,7 +3,7 @@
 @section('content')
     <div class="card shadow-sm">
         <div class="card-header border-0 bg-white lead">
-            {{ __('Update Cart') }}
+            {{ __('cart.update') }}
         </div>
 
         <form action="{{ route('admin.carts.update', $cart) }}" method="POST">
@@ -34,7 +34,7 @@
 
                 <!-- Product -->
                 <div class="form-group row">
-                    <label for="selectProduct" class="col-md-3 col-form-label">{{ __('Product') }}</label>
+                    <label for="selectProduct" class="col-md-3 col-form-label">{{ __('product.title') }}</label>
                     <div class="col-md-6">
                         <select id="selectProduct"
                                 class="form-control @error('product_id') is-invalid @enderror"

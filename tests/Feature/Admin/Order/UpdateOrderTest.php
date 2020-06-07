@@ -54,7 +54,7 @@ class UpdateOrderTest extends TestCase
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
             ->assertRedirect(route('admin.orders.index'))
-            ->assertSessionHas('status', 'Order was updated successfully!');
+            ->assertSessionHas('status', trans('order.updated'));
 
         $this->assertDatabaseHas('orders', $stub);
     }

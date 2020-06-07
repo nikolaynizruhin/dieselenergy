@@ -47,7 +47,7 @@ class CreateOrderTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
             ->assertRedirect(route('admin.orders.index'))
-            ->assertSessionHas('status', 'Order was created successfully!');
+            ->assertSessionHas('status', trans('order.created'));
 
         $this->assertDatabaseHas('orders', $order);
     }

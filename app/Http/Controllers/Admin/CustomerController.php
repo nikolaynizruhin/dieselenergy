@@ -45,7 +45,7 @@ class CustomerController extends Controller
 
         return redirect()
             ->route('admin.customers.index')
-            ->with('status', 'Customer was created successfully!');
+            ->with('status', trans('customer.created'));
     }
 
     /**
@@ -72,7 +72,7 @@ class CustomerController extends Controller
 
         return redirect()
             ->route('admin.customers.index')
-            ->with('status', 'Customer was updated successfully!');
+            ->with('status', trans('customer.updated'));
     }
 
     /**
@@ -85,6 +85,6 @@ class CustomerController extends Controller
     {
         $customer->delete();
 
-        return back()->with('status', 'Customer was deleted successfully!');
+        return back()->with('status', trans('customer.deleted'));
     }
 }

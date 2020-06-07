@@ -3,7 +3,7 @@
 @section('content')
     <div class="card shadow-sm">
         <div class="card-header border-0 bg-white lead">
-            {{ __('Add Images') }}
+            {{ __('image.add') }}
         </div>
 
         <form action="{{ route('admin.images.store') }}" enctype="multipart/form-data" method="POST">

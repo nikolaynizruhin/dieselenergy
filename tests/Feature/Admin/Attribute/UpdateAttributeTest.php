@@ -53,7 +53,7 @@ class UpdateAttributeTest extends TestCase
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)
             ->assertRedirect(route('admin.attributes.index'))
-            ->assertSessionHas('status', 'Attribute was updated successfully!');
+            ->assertSessionHas('status', trans('attribute.updated'));
 
         $this->assertDatabaseHas('attributes', $stub);
     }

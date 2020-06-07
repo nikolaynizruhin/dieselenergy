@@ -49,7 +49,7 @@ class CreateMediaTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.medias.store'), $media)
             ->assertRedirect(route('admin.products.show', $media['product_id']))
-            ->assertSessionHas('status', 'Image was attached successfully!');
+            ->assertSessionHas('status', trans('media.created'));
 
         $this->assertDatabaseHas('image_product', $media);
     }

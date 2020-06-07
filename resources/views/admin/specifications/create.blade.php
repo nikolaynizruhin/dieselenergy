@@ -3,7 +3,7 @@
 @section('content')
     <div class="card shadow-sm">
         <div class="card-header border-0 bg-white lead">
-            {{ __('Add Specification') }}
+            {{ __('specification.add') }}
         </div>
 
         <form action="{{ route('admin.specifications.store') }}" method="POST">
@@ -12,7 +12,7 @@
 
                 <!-- Category -->
                 <div class="form-group row">
-                    <label for="selectCategory" class="col-md-3 col-form-label">{{ __('Category') }}</label>
+                    <label for="selectCategory" class="col-md-3 col-form-label">{{ __('category.title') }}</label>
                     <div class="col-md-6">
                         <select id="selectCategory"
                                 class="form-control @error('category_id') is-invalid @enderror"
@@ -33,7 +33,7 @@
 
                 <!-- Attribute -->
                 <div class="form-group row">
-                    <label for="selectAttribute" class="col-md-3 col-form-label">{{ __('Attribute') }}</label>
+                    <label for="selectAttribute" class="col-md-3 col-form-label">{{ __('attribute.title') }}</label>
                     <div class="col-md-6">
                         <select id="selectAttribute"
                                 class="form-control @error('attribute_id') is-invalid @enderror"

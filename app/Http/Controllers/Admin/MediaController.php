@@ -35,7 +35,7 @@ class MediaController extends Controller
 
         return redirect()
             ->route('admin.products.show', $request->product_id)
-            ->with('status', 'Image was attached successfully!');
+            ->with('status', trans('media.created'));
     }
 
     /**
@@ -48,6 +48,6 @@ class MediaController extends Controller
     {
         $media->delete();
 
-        return back()->with('status', 'Image was detached successfully!');
+        return back()->with('status', trans('media.deleted'));
     }
 }

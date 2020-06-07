@@ -3,7 +3,7 @@
 @section('content')
     <div class="card shadow-sm">
         <div class="card-header border-0 bg-white lead">
-            {{ __('Add Media') }}
+            {{ __('media.add') }}
         </div>
 
         <form action="{{ route('admin.medias.store') }}" method="POST">
@@ -12,7 +12,7 @@
 
                 <!-- Product -->
                 <div class="form-group row">
-                    <label for="selectProduct" class="col-md-3 col-form-label">{{ __('Product') }}</label>
+                    <label for="selectProduct" class="col-md-3 col-form-label">{{ __('product.title') }}</label>
                     <div class="col-md-6">
                         <select id="selectProduct"
                                 class="form-control @error('product_id') is-invalid @enderror"
@@ -33,7 +33,7 @@
 
                 <!-- Image -->
                 <div class="form-group row">
-                    <label for="selectImage" class="col-md-3 col-form-label">{{ __('Image') }}</label>
+                    <label for="selectImage" class="col-md-3 col-form-label">{{ __('image.title') }}</label>
                     <div class="col-md-6">
                         <select id="selectImage"
                                 class="form-control @error('image_id') is-invalid @enderror"

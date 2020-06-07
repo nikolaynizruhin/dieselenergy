@@ -55,7 +55,7 @@ class UpdateCartTest extends TestCase
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
             ->assertRedirect(route('admin.orders.show', $stub['order_id']))
-            ->assertSessionHas('status', 'Cart was updated successfully!');
+            ->assertSessionHas('status', trans('cart.updated'));
 
         $this->assertDatabaseHas('order_product', $stub);
     }

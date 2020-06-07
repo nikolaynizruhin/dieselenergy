@@ -3,7 +3,7 @@
 @section('content')
     <div class="card shadow-sm">
         <div class="card-header border-0 bg-white lead">
-            {{ __('Update Product') }}
+            {{ __('product.update') }}
         </div>
 
         <form action="{{ route('admin.products.update', $product) }}" enctype="multipart/form-data" method="POST">
@@ -64,7 +64,7 @@
 
                 <!-- Brand -->
                 <div class="form-group row">
-                    <label for="inputBrand" class="col-md-3 col-form-label">{{ __('Brand') }}</label>
+                    <label for="inputBrand" class="col-md-3 col-form-label">{{ __('brand.title') }}</label>
                     <div class="col-md-6">
                         <select class="form-control @error('brand_id') is-invalid @enderror" name="brand_id" id="inputBrand" required>
                             <option value="">Select a brand</option>
@@ -85,7 +85,7 @@
 
                 <!-- Category -->
                 <div class="form-group row">
-                    <label for="inputCategory" class="col-md-3 col-form-label">{{ __('Category') }}</label>
+                    <label for="inputCategory" class="col-md-3 col-form-label">{{ __('category.title') }}</label>
                     <div class="col-md-6">
                         <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="inputCategory" required>
                             <option value="{{ $product->category->id }}" selected>
