@@ -18,8 +18,8 @@ class OrderComposer
     public function compose(View $view)
     {
         $view->with([
-            'customers' => Customer::all(),
-            'products' => Product::all(),
+            'customers' => Customer::orderBy('name')->get(),
+            'products' => Product::orderBy('name')->get(),
             'statuses' => Order::statuses(),
         ]);
     }

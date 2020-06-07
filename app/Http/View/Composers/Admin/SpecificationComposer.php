@@ -17,8 +17,8 @@ class SpecificationComposer
     public function compose(View $view)
     {
         $view->with([
-            'attributes' => Attribute::all(),
-            'categories' => Category::all(),
+            'attributes' => Attribute::orderBy('name')->get(),
+            'categories' => Category::orderBy('name')->get(),
         ]);
     }
 }

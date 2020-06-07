@@ -15,6 +15,6 @@ class CartComposer
      */
     public function compose(View $view)
     {
-        $view->with(['products' => Product::all()]);
+        $view->with(['products' => Product::orderBy('name')->get()]);
     }
 }

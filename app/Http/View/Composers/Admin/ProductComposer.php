@@ -15,6 +15,6 @@ class ProductComposer
      */
     public function compose(View $view)
     {
-        $view->with(['brands' => Brand::all()]);
+        $view->with(['brands' => Brand::orderBy('name')->get()]);
     }
 }
