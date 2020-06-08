@@ -17,6 +17,8 @@ return [
     'delete' => 'Delete',
     'detach' => 'Detach',
     'quantity' => 'Quantity',
+    'settings' => 'Settings',
+    'search' => 'Search',
     'email' => 'Email',
     'password' => 'Password',
     'price' => 'Price',

@@ -19,6 +19,7 @@ return [
     'update' => 'Update Category',
     'delete' => 'Delete Category',
     'missing' => 'No brands matched the given criteria.',
+    'plural' => 'Categories',
     'created' => 'Category was created successfully!',
     'updated' => 'Category was updated successfully!',
     'deleted' => 'Category was deleted successfully!',

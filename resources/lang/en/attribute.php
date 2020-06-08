@@ -18,6 +18,7 @@ return [
     'delete' => 'Delete Attribute',
     'deleted' => 'Attribute was deleted successfully!',
     'missing' => 'No attributes matched the given criteria.',
+    'plural' => 'Attributes',
     'title' => 'Attribute',
     'update' => 'Update Attribute',
     'updated' => 'Attribute was updated successfully!',

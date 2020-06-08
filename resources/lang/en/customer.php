@@ -12,12 +12,13 @@ return [
     |
     */
 
-    'title' => 'Customer',
     'add' => 'Add Customer',
-    'update' => 'Update Customer',
-    'delete' => 'Delete Customer',
     'created' => 'Customer was created successfully!',
-    'updated' => 'Customer was updated successfully!',
     'deleted' => 'Customer was deleted successfully!',
+    'delete' => 'Delete Customer',
+    'title' => 'Customer',
+    'plural' => 'Customers',
+    'update' => 'Update Customer',
+    'updated' => 'Customer was updated successfully!',
 
 ];

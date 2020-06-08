@@ -18,6 +18,7 @@ return [
     'delete' => 'Delete Image',
     'deleted' => 'Image was deleted successfully!',
     'missing' => 'No images matched the given criteria.',
+    'plural' => 'Images',
     'title' => 'Image',
     'update' => 'Update Image',
 

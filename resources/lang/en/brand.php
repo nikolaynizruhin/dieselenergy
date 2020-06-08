@@ -12,12 +12,13 @@ return [
     |
     */
 
-    'title' => 'Brand',
     'add' => 'Add Brand',
-    'update' => 'Update Brand',
-    'delete' => 'Delete Brand',
-    'missing' => 'No brands matched the given criteria.',
     'created' => 'Brand was created successfully!',
+    'delete' => 'Delete Brand',
+    'title' => 'Brand',
+    'update' => 'Update Brand',
+    'missing' => 'No brands matched the given criteria.',
+    'plural' => 'Brands',
     'updated' => 'Brand was updated successfully!',
     'deleted' => 'Brand was deleted successfully!',
 

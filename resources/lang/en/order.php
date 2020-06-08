@@ -17,6 +17,7 @@ return [
     'details' => 'Order Details',
     'update' => 'Update Order',
     'delete' => 'Delete Order',
+    'plural' => 'Orders',
     'created' => 'Order was created successfully!',
     'updated' => 'Order was updated successfully!',
     'deleted' => 'Order was deleted successfully!',

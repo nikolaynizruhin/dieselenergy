@@ -15,6 +15,7 @@ return [
     'add' => 'Add User',
     'details' => 'User Details',
     'update' => 'Update User',
+    'plural' => 'Users',
     'update.password' => 'Update Password',
     'delete' => 'Delete User',
     'created' => 'User was created successfully!',

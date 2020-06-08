@@ -13,6 +13,7 @@ return [
     */
 
     'add' => 'Add Product',
+    'plural' => 'Products',
     'attach' => 'Attach Product',
     'created' => 'Product was created successfully!',
     'details' => 'Product Details',
