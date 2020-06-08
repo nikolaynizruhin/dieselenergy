@@ -41,7 +41,7 @@
             {{ __('auth.login') }}
         </button>
 
-        @if (Route::has('password.request'))
+        @if (Route::has('admin.password.request'))
             <a class="btn btn-link" href="{{ route('admin.password.request') }}">
                 {{ __('auth.forgot') }}
             </a>
