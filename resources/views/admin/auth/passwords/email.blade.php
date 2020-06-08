@@ -12,7 +12,7 @@
     @csrf
 
     <div class="form-group">
-        <label for="email">{{ __('E-Mail Address') }}</label>
+        <label for="email">{{ __('common.email') }}</label>
 
         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
@@ -24,7 +24,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">
-        {{ __('Send Password Reset Link') }}
+        {{ __('auth.reset_link') }}
     </button>
 </form>
 @endsection

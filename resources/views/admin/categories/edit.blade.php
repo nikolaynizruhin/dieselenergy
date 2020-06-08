@@ -11,7 +11,7 @@
             @method('PUT')
             <div class="card-body">
                 <div class="form-group row">
-                    <label for="inputName" class="col-md-3 col-form-label">{{ __('Name') }}</label>
+                    <label for="inputName" class="col-md-3 col-form-label">{{ __('common.name') }}</label>
                     <div class="col-md-6">
                         <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $category->name) }}" required autocomplete="name" autofocus>
 
@@ -25,7 +25,7 @@
             </div>
 
             <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('common.update') }}</button>
             </div>
         </form>
     </div>

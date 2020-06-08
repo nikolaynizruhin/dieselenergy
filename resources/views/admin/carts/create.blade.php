@@ -59,7 +59,7 @@
 
                 <!-- Quantity -->
                 <div class="form-group row">
-                    <label for="inputQuantity" class="col-md-3 col-form-label">{{ __('Quantity') }}</label>
+                    <label for="inputQuantity" class="col-md-3 col-form-label">{{ __('common.quantity') }}</label>
                     <div class="col-md-6">
                         <input type="number" id="inputQuantity" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity', 1) }}" required min="1">
 
@@ -73,7 +73,7 @@
             </div>
 
             <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('common.create') }}</button>
             </div>
         </form>
     </div>

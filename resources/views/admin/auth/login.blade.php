@@ -5,7 +5,7 @@
     @csrf
 
     <div class="form-group">
-        <label for="email">{{ __('E-Mail Address') }}</label>
+        <label for="email">{{ __('common.email') }}</label>
 
         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-group">
-        <label for="password">{{ __('Password') }}</label>
+        <label for="password">{{ __('common.password') }}</label>
 
         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
@@ -32,18 +32,18 @@
         <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
         <label class="form-check-label" for="remember">
-            {{ __('Remember Me') }}
+            {{ __('auth.remember') }}
         </label>
     </div>
 
     <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-primary">
-            {{ __('Login') }}
+            {{ __('auth.login') }}
         </button>
 
         @if (Route::has('password.request'))
             <a class="btn btn-link" href="{{ route('admin.password.request') }}">
-                {{ __('Forgot Your Password?') }}
+                {{ __('auth.forgot') }}
             </a>
         @endif
     </div>

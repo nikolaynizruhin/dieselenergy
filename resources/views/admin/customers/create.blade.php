@@ -12,7 +12,7 @@
 
                 <!-- Name -->
                 <div class="form-group row">
-                    <label for="inputName" class="col-md-3 col-form-label">{{ __('Name') }}</label>
+                    <label for="inputName" class="col-md-3 col-form-label">{{ __('common.name') }}</label>
                     <div class="col-md-6">
                         <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -26,7 +26,7 @@
 
                 <!-- Email -->
                 <div class="form-group row">
-                    <label for="inputEmail" class="col-md-3 col-form-label">{{ __('Email') }}</label>
+                    <label for="inputEmail" class="col-md-3 col-form-label">{{ __('common.email') }}</label>
                     <div class="col-md-6">
                         <input type="email" id="inputEmail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
@@ -54,7 +54,7 @@
 
                 <!-- Notes -->
                 <div class="form-group row">
-                    <label for="inputNotes" class="col-md-3 col-form-label">{{ __('Notes') }}</label>
+                    <label for="inputNotes" class="col-md-3 col-form-label">{{ __('common.notes') }}</label>
                     <div class="col-md-6">
                         <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" id="inputNotes" rows="3">{{ old('notes') }}</textarea>
 
@@ -68,7 +68,7 @@
             </div>
 
             <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('common.create') }}</button>
             </div>
         </form>
     </div>

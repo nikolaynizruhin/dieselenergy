@@ -12,13 +12,14 @@ return [
     |
     */
 
-    'title' => 'Attribute',
     'add' => 'Add Attribute',
-    'update' => 'Update Attribute',
-    'delete' => 'Delete Attribute',
-    'missing' => 'No attributes matched the given criteria.',
+    'attach' => 'Attach Attribute',
     'created' => 'Attribute was created successfully!',
-    'updated' => 'Attribute was updated successfully!',
+    'delete' => 'Delete Attribute',
     'deleted' => 'Attribute was deleted successfully!',
+    'missing' => 'No attributes matched the given criteria.',
+    'title' => 'Attribute',
+    'update' => 'Update Attribute',
+    'updated' => 'Attribute was updated successfully!',
 
 ];

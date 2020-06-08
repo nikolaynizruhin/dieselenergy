@@ -4,9 +4,9 @@
             <thead class="thead-light">
                 <tr>
                     <th scope="col" class="bg-light text-muted border-0">#</th>
-                    <th scope="col" class="bg-light text-muted border-0">{{ __('Name') }}</th>
-                    <th scope="col" class="bg-light text-muted border-0">{{ __('Email') }}</th>
-                    <th scope="col" class="bg-light text-muted border-0">{{ __('Actions') }}</th>
+                    <th scope="col" class="bg-light text-muted border-0">{{ __('common.name') }}</th>
+                    <th scope="col" class="bg-light text-muted border-0">{{ __('common.email') }}</th>
+                    <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
                 </tr>
             </thead>
             <tbody class="text-muted">

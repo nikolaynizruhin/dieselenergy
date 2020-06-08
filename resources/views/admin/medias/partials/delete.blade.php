@@ -8,14 +8,14 @@
                 </button>
             </div>
             <div class="modal-body text-muted">
-                {{ __('Are you sure you want to detach') }} {{ $image->name }}?
+                {{ __('common.detach.alert') }} {{ $image->name }}?
             </div>
             <div class="modal-footer border-0 bg-light">
-                <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('Close') }}</button>
+                <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('common.close') }}</button>
                 <form action="{{ route('admin.medias.destroy', $image->pivot->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">{{ __('Detach') }}</button>
+                    <button type="submit" class="btn btn-danger">{{ __('common.detach') }}</button>
                 </form>
             </div>
         </div>

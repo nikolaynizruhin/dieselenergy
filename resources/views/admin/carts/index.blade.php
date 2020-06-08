@@ -3,7 +3,7 @@
         @include('admin.layouts.partials.search', ['url' => route('admin.orders.show', $order)])
     </div>
     <div class="col text-right">
-        <a class="btn btn-primary d-block d-md-inline-block shadow-sm mb-3" href="{{ route('admin.carts.create', ['order_id' => $order->id]) }}" role="button">{{ __('Attach Product') }}</a>
+        <a class="btn btn-primary d-block d-md-inline-block shadow-sm mb-3" href="{{ route('admin.carts.create', ['order_id' => $order->id]) }}" role="button">{{ __('product.attach') }}</a>
     </div>
 </div>
 

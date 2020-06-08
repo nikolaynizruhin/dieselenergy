@@ -5,9 +5,9 @@
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('customer.title') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('Status') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('Total') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('Actions') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('common.status') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('common.total') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
             <tbody class="text-muted">

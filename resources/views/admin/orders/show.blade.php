@@ -11,7 +11,7 @@
 
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3 text-muted">{{ __('Status') }}</div>
+                <div class="col-md-3 text-muted">{{ __('common.status') }}</div>
                 <div class="col-md-6">
                     <h5 class="m-0 p-0">
                         @include('admin.orders.partials.status')
@@ -33,7 +33,7 @@
             <hr>
 
             <div class="row">
-                <div class="col-md-3 text-muted">{{ __('Total') }}</div>
+                <div class="col-md-3 text-muted">{{ __('common.total') }}</div>
                 <div class="col-md-6">@usd($order->total)</div>
             </div>
 
@@ -47,7 +47,7 @@
             <hr>
 
             <div class="row">
-                <div class="col-md-3 text-muted">{{ __('Notes') }}</div>
+                <div class="col-md-3 text-muted">{{ __('common.notes') }}</div>
                 <div class="col-md-6">{{ $order->notes }}</div>
             </div>
         </div>

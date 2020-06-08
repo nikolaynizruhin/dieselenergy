@@ -66,7 +66,7 @@
             @include('admin.layouts.partials.search', ['url' => route('admin.dashboard')])
         </div>
         <div class="col text-right">
-            <a class="btn btn-primary d-block d-md-inline-block shadow-sm mb-3" href="{{ route('admin.orders.create') }}" role="button">{{ __('Add Order') }}</a>
+            <a class="btn btn-primary d-block d-md-inline-block shadow-sm mb-3" href="{{ route('admin.orders.create') }}" role="button">{{ __('order.add') }}</a>
         </div>
     </div>
 

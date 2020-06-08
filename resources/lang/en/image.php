@@ -12,12 +12,13 @@ return [
     |
     */
 
-    'title' => 'Image',
     'add' => 'Add Image',
-    'update' => 'Update Image',
-    'delete' => 'Delete Image',
-    'missing' => 'No images matched the given criteria.',
+    'attach' => 'Attach Image',
     'created' => 'Image was created successfully!',
+    'delete' => 'Delete Image',
     'deleted' => 'Image was deleted successfully!',
+    'missing' => 'No images matched the given criteria.',
+    'title' => 'Image',
+    'update' => 'Update Image',
 
 ];

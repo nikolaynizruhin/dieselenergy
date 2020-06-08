@@ -59,7 +59,7 @@
             </div>
 
             <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('common.create') }}</button>
             </div>
         </form>
     </div>

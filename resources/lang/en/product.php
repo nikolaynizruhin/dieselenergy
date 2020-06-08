@@ -12,13 +12,14 @@ return [
     |
     */
 
-    'title' => 'Product',
     'add' => 'Add Product',
-    'details' => 'Product Details',
-    'update' => 'Update Product',
-    'delete' => 'Delete Product',
+    'attach' => 'Attach Product',
     'created' => 'Product was created successfully!',
-    'updated' => 'Product was updated successfully!',
+    'details' => 'Product Details',
     'deleted' => 'Product was deleted successfully!',
+    'delete' => 'Delete Product',
+    'title' => 'Product',
+    'update' => 'Update Product',
+    'updated' => 'Product was updated successfully!',
 
 ];

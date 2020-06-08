@@ -11,7 +11,7 @@
 
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3 text-muted">{{ __('Name') }}</div>
+                <div class="col-md-3 text-muted">{{ __('common.name') }}</div>
                 <div class="col-md-6">
                     {{ $product->name }}
                 </div>
@@ -20,11 +20,11 @@
             <hr>
 
             <div class="row">
-                <div class="col-md-3 text-muted">{{ __('Status') }}</div>
+                <div class="col-md-3 text-muted">{{ __('common.status') }}</div>
                 <div class="col-md-6">
                     <h5 class="m-0 p-0">
                         <span class="badge badge-pill badge-{{ $product->is_active ? 'success' : 'danger' }}">
-                            {{ $product->is_active ? __('Active') : __('Inactive') }}
+                            {{ $product->is_active ? __('common.active') : __('Inactive') }}
                         </span>
                     </h5>
                 </div>
@@ -55,14 +55,14 @@
             <hr>
 
             <div class="row">
-                <div class="col-md-3 text-muted">{{ __('Price') }}</div>
+                <div class="col-md-3 text-muted">{{ __('common.price') }}</div>
                 <div class="col-md-6">@usd($product->price)</div>
             </div>
 
             <hr>
 
             <div class="row">
-                <div class="col-md-3 text-muted">{{ __('Description') }}</div>
+                <div class="col-md-3 text-muted">{{ __('common.description') }}</div>
                 <div class="col-md-6">{{ Markdown::parse($product->description) }}</div>
             </div>
 

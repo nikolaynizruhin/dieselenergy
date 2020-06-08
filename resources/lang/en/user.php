@@ -21,5 +21,6 @@ return [
     'updated' => 'User was updated successfully!',
     'deleted' => 'User was deleted successfully!',
     'password.updated' => 'User password was updated successfully!',
+    'password.confirm' => 'Password Confirmation',
 
 ];

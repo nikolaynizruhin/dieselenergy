@@ -12,7 +12,7 @@
 
                 <!-- Images -->
                 <div class="form-group row">
-                    <label class="col-md-3 col-form-label">{{ __('Images') }}</label>
+                    <label class="col-md-3 col-form-label">{{ __('common.images') }}</label>
                     <div class="col-md-6">
                         <div class="custom-file">
                             <input type="file" multiple id="inputImages" class="custom-file-input @error('images.*') is-invalid @enderror" name="images[]" accept="image/*">
@@ -29,7 +29,7 @@
 
                 <!-- Name -->
                 <div class="form-group row">
-                    <label for="inputName" class="col-md-3 col-form-label">{{ __('Name') }}</label>
+                    <label for="inputName" class="col-md-3 col-form-label">{{ __('common.name') }}</label>
                     <div class="col-md-6">
                         <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -43,12 +43,12 @@
 
                 <!-- Status -->
                 <div class="form-group row">
-                    <div class="col-md-3">{{ __('Status') }}</div>
+                    <div class="col-md-3">{{ __('common.status') }}</div>
                     <div class="col-md-6">
                         <div class="form-check">
                             <input type="checkbox" id="inputStatus" class="form-check-input @error('is_active') is-invalid @enderror" value="1" name="is_active" @if (old('is_active')) checked @endif>
                             <label class="form-check-label" for="inputStatus">
-                                {{ __('Active') }}
+                                {{ __('common.active') }}
                             </label>
 
                             @error('is_active')
@@ -101,7 +101,7 @@
 
                 <!-- Price -->
                 <div class="form-group row">
-                    <label for="inputPrice" class="col-md-3 col-form-label">{{ __('Price') }}</label>
+                    <label for="inputPrice" class="col-md-3 col-form-label">{{ __('common.price') }}</label>
                     <div class="col-md-6">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -121,7 +121,7 @@
                 <!-- Description -->
                 <div class="form-group row">
                     <label for="inputDescription" class="col-md-3 col-form-label">
-                        {{ __('Description') }}
+                        {{ __('common.description') }}
                         <br>
                         <small class="text-muted">Supports Markdown</small>
                     </label>
@@ -154,7 +154,7 @@
             </div>
 
             <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('common.create') }}</button>
             </div>
         </form>
     </div>

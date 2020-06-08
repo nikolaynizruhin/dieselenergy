@@ -8,14 +8,14 @@
                 </button>
             </div>
             <div class="modal-body text-muted">
-                {{ __('Are you sure you want to delete') }} {{ $image->name }}?
+                {{ __('common.delete.alert') }} {{ $image->name }}?
             </div>
             <div class="modal-footer border-0 bg-light">
-                <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('Close') }}</button>
+                <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('common.close') }}</button>
                 <form action="{{ route('admin.images.destroy', $image) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+                    <button type="submit" class="btn btn-danger">{{ __('common.remove') }}</button>
                 </form>
             </div>
         </div>

@@ -12,7 +12,7 @@
 
                 <!-- Images -->
                 <div class="form-group row">
-                    <label class="col-md-3 col-form-label">{{ __('Images') }}</label>
+                    <label class="col-md-3 col-form-label">{{ __('common.images') }}</label>
                     <div class="col-md-6">
                         <div class="custom-file">
                             <input type="file" multiple id="inputImages" class="custom-file-input @error('images.*') is-invalid @enderror" name="images[]" accept="image/*">
@@ -29,7 +29,7 @@
             </div>
 
             <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('common.create') }}</button>
             </div>
         </form>
     </div>

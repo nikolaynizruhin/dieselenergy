@@ -4,10 +4,10 @@
             <thead class="thead-light">
                 <tr>
                     <th scope="col" class="bg-light text-muted border-0">#</th>
-                    <th scope="col" class="bg-light text-muted border-0">{{ __('Name') }}</th>
-                    <th scope="col" class="bg-light text-muted border-0">{{ __('Status') }}</th>
-                    <th scope="col" class="bg-light text-muted border-0">{{ __('Price') }}</th>
-                    <th scope="col" class="bg-light text-muted border-0">{{ __('Actions') }}</th>
+                    <th scope="col" class="bg-light text-muted border-0">{{ __('common.name') }}</th>
+                    <th scope="col" class="bg-light text-muted border-0">{{ __('common.status') }}</th>
+                    <th scope="col" class="bg-light text-muted border-0">{{ __('common.price') }}</th>
+                    <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
                 </tr>
             </thead>
             <tbody class="text-muted">
@@ -17,7 +17,7 @@
                         <td>{{ $product->name }}</td>
                         <td>
                             <span class="badge badge-pill badge-{{ $product->is_active ? 'success' : 'danger' }}">
-                                {{ $product->is_active ? __('Active') : __('Inactive') }}
+                                {{ $product->is_active ? __('common.active') : __('Inactive') }}
                             </span>
                         </td>
                         <td>@usd($product->price)</td>

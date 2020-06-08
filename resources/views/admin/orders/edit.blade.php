@@ -12,7 +12,7 @@
             <div class="card-body">
                 <!-- Status -->
                 <div class="form-group row">
-                    <label for="selectStatus" class="col-md-3 col-form-label">{{ __('Status') }}</label>
+                    <label for="selectStatus" class="col-md-3 col-form-label">{{ __('common.status') }}</label>
                     <div class="col-md-6">
                         <select id="selectStatus"
                                 class="form-control @error('status') is-invalid @enderror"
@@ -35,7 +35,7 @@
 
                 <!-- Total -->
                 <div class="form-group row">
-                    <label for="inputTotal" class="col-md-3 col-form-label">{{ __('Total') }}</label>
+                    <label for="inputTotal" class="col-md-3 col-form-label">{{ __('common.total') }}</label>
                     <div class="col-md-6">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -78,7 +78,7 @@
 
                 <!-- Notes -->
                 <div class="form-group row">
-                    <label for="inputNotes" class="col-md-3 col-form-label">{{ __('Notes') }}</label>
+                    <label for="inputNotes" class="col-md-3 col-form-label">{{ __('common.notes') }}</label>
                     <div class="col-md-6">
                         <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" id="inputNotes" rows="3">{{ old('notes', $order->notes) }}</textarea>
 
@@ -92,7 +92,7 @@
             </div>
 
             <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('common.update') }}</button>
             </div>
         </form>
     </div>

@@ -20,5 +20,6 @@ return [
     'created' => 'Order was created successfully!',
     'updated' => 'Order was updated successfully!',
     'deleted' => 'Order was deleted successfully!',
+    'delete.confirm' => 'Are you sure you want to delete an order?'
 
 ];
