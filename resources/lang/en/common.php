@@ -38,6 +38,6 @@ return [
     'alert' => [
         'delete' => 'Are you sure you want to delete',
         'detach' => 'Are you sure you want to detach',
-    ]
+    ],
 
 ];
