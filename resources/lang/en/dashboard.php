@@ -16,7 +16,7 @@ return [
     'sold_product' => 'Sold Products',
     'total' => [
         'order' => 'Total Orders',
-        'customer' => 'Total Customers'
-    ]
+        'customer' => 'Total Customers',
+    ],
 
 ];

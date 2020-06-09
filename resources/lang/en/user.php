@@ -24,6 +24,6 @@ return [
         'updated' => 'User password was updated successfully!',
         'update' => 'Update Password',
         'confirm' => 'Password Confirmation',
-    ]
+    ],
 
 ];
