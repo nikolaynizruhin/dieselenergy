@@ -16,12 +16,14 @@ return [
     'details' => 'User Details',
     'update' => 'Update User',
     'plural' => 'Users',
-    'update.password' => 'Update Password',
     'delete' => 'Delete User',
     'created' => 'User was created successfully!',
     'updated' => 'User was updated successfully!',
     'deleted' => 'User was deleted successfully!',
-    'password.updated' => 'User password was updated successfully!',
-    'password.confirm' => 'Password Confirmation',
+    'password' => [
+        'updated' => 'User password was updated successfully!',
+        'update' => 'Update Password',
+        'confirm' => 'Password Confirmation',
+    ]
 
 ];

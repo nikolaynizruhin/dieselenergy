@@ -48,7 +48,7 @@
 
     <div class="card shadow-sm">
         <div class="card-header border-0 bg-white lead">
-            {{ __('user.update.password') }}
+            {{ __('user.password.update') }}
         </div>
 
         <form action="{{ route('admin.users.password.update', $user) }}" method="POST">

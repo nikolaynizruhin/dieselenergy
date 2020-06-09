@@ -6,7 +6,7 @@
         <div class="col-md-4 mb-3">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.order.total') }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.total.order') }}</h6>
                     <div class="row">
                         <div class="col">
                             <h2>{{ $totalOrders }}</h2>
@@ -27,7 +27,7 @@
         <div class="col-md-4 mb-3">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.customer.total') }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.total.customer') }}</h6>
                     <div class="row">
                         <div class="col">
                             <h2>{{ $totalCustomers }}</h2>
@@ -45,7 +45,7 @@
         <div class="col-md-4 mb-3">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.product.sold') }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.sold_product') }}</h6>
                     <div class="row">
                         <div class="col">
                             <h2>{{ $soldProducts }}</h2>

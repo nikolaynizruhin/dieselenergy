@@ -13,8 +13,10 @@ return [
     */
 
     'title' => 'Dashboard',
-    'order.total' => 'Total Orders',
-    'customer.total' => 'Total Customers',
-    'product.sold' => 'Sold Products',
+    'sold_product' => 'Sold Products',
+    'total' => [
+        'order' => 'Total Orders',
+        'customer' => 'Total Customers'
+    ]
 
 ];

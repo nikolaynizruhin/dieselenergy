@@ -16,7 +16,7 @@
                     <div class="col-md-6">
                         <div class="custom-file">
                             <input type="file" multiple id="inputImages" class="custom-file-input @error('images.*') is-invalid @enderror" name="images[]" accept="image/*">
-                            <label class="custom-file-label" for="inputImages">{{ __('common.images.choose') }}</label>
+                            <label class="custom-file-label" for="inputImages">{{ __('common.choose_images') }}</label>
 
                             @error('images.*')
                                 <div class="invalid-feedback" role="alert">

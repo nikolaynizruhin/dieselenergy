@@ -30,12 +30,14 @@ return [
     'phone' => 'Phone',
     'inactive' => 'Inactive',
     'images' => 'Images',
-    'images.choose' => 'Choose images',
+    'choose_images' => 'Choose images',
     'status' => 'Status',
     'description' => 'Description',
     'notes' => 'Notes',
     'total' => 'Total',
-    'delete.alert' => 'Are you sure you want to delete',
-    'detach.alert' => 'Are you sure you want to detach',
+    'alert' => [
+        'delete' => 'Are you sure you want to delete',
+        'detach' => 'Are you sure you want to detach',
+    ]
 
 ];

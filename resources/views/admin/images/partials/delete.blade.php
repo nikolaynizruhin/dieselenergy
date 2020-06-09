@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body text-muted">
-                {{ __('common.delete.alert') }} {{ $image->name }}?
+                {{ __('common.alert.delete') }} {{ $image->name }}?
             </div>
             <div class="modal-footer border-0 bg-light">
                 <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('common.close') }}</button>
