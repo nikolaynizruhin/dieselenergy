@@ -2,11 +2,7 @@
 
 @section('content')
 
-@if (session('status'))
-    <div class="alert alert-success" role="alert">
-        {{ session('status') }}
-    </div>
-@endif
+@include('admin.layouts.partials.alert')
 
 <form method="POST" action="{{ route('admin.password.email') }}">
     @csrf
