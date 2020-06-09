@@ -39,7 +39,7 @@
                                 class="form-control @error('attribute_id') is-invalid @enderror"
                                 name="attribute_id"
                                 required>
-                            <option value="">Select an attribute...</option>
+                            <option value="">{{ __('attribute.select') }}</option>
                             @foreach ($attributes as $attribute)
                                 @unless ($category->attributes->contains($attribute))
                                     <option value="{{ $attribute->id }}" @if (old('attribute_id') == $attribute->id) selected @endif>

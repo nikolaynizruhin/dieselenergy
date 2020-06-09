@@ -16,7 +16,7 @@
                     <div class="col-md-6">
                         <div class="custom-file">
                             <input type="file" multiple id="inputImages" class="custom-file-input @error('images.*') is-invalid @enderror" name="images[]" accept="image/*">
-                            <label class="custom-file-label" for="inputImages">Choose images</label>
+                            <label class="custom-file-label" for="inputImages">{{ __('common.images.choose') }}</label>
 
                             @error('images.*')
                                 <div class="invalid-feedback" role="alert">
@@ -65,7 +65,7 @@
                     <label for="inputBrand" class="col-md-3 col-form-label">{{ __('brand.title') }}</label>
                     <div class="col-md-6">
                         <select class="form-control @error('brand_id') is-invalid @enderror" name="brand_id" id="inputBrand" required>
-                            <option value="">Select a brand</option>
+                            <option value="">{{ __('brand.select') }}</option>
                             @foreach ($brands as $brand)
                                 <option value="{{ $brand->id }}" @if (old('brand_id') == $brand->id) selected @endif>
                                     {{ $brand->name }}

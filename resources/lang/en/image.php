@@ -20,6 +20,7 @@ return [
     'missing' => 'No images matched the given criteria.',
     'plural' => 'Images',
     'title' => 'Image',
+    'select' => 'Select an image',
     'update' => 'Update Image',
 
 ];

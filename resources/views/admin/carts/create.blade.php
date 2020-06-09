@@ -39,7 +39,7 @@
                                 class="form-control @error('product_id') is-invalid @enderror"
                                 name="product_id"
                                 required>
-                            <option value="">Select a product...</option>
+                            <option value="">{{ __('product.select') }}</option>
                             @foreach ($products as $product)
                                 @unless ($order->products->contains($product))
                                     <option value="{{ $product->id }}" @if (old('product_id') == $product->id) selected @endif>

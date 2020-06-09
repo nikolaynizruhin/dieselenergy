@@ -19,6 +19,7 @@ return [
     'update' => 'Update Brand',
     'missing' => 'No brands matched the given criteria.',
     'plural' => 'Brands',
+    'select' => 'Select a brand',
     'updated' => 'Brand was updated successfully!',
     'deleted' => 'Brand was deleted successfully!',
 

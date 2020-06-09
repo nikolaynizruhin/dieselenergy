@@ -20,6 +20,7 @@ return [
     'missing' => 'No attributes matched the given criteria.',
     'plural' => 'Attributes',
     'title' => 'Attribute',
+    'select' => 'Select an attribute',
     'update' => 'Update Attribute',
     'updated' => 'Attribute was updated successfully!',
 

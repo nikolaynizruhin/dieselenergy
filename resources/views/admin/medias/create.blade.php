@@ -39,7 +39,7 @@
                                 class="form-control @error('image_id') is-invalid @enderror"
                                 name="image_id"
                                 required>
-                            <option value="">Select an image...</option>
+                            <option value="">{{ __('image.select') }}</option>
                             @foreach ($images as $image)
                                 @unless ($product->images->contains($image))
                                     <option value="{{ $image->id }}" @if (old('image_id') == $image->id) selected @endif>

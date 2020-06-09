@@ -40,7 +40,7 @@
 
                 <!-- Phone -->
                 <div class="form-group row">
-                    <label for="inputPhone" class="col-md-3 col-form-label">{{ __('Phone') }}</label>
+                    <label for="inputPhone" class="col-md-3 col-form-label">{{ __('common.phone') }}</label>
                     <div class="col-md-6">
                         <input type="tel" id="inputPhone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
 

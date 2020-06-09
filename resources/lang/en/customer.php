@@ -18,6 +18,7 @@ return [
     'delete' => 'Delete Customer',
     'title' => 'Customer',
     'plural' => 'Customers',
+    'select' => 'Select a customer',
     'update' => 'Update Customer',
     'updated' => 'Customer was updated successfully!',
 

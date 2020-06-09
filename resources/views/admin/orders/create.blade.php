@@ -40,7 +40,7 @@
                                 class="form-control @error('customer_id') is-invalid @enderror"
                                 name="customer_id"
                                 required>
-                            <option value="">Select a customer...</option>
+                            <option value="">{{ __('customer.select') }}</option>
                             @foreach ($customers as $customer)
                                 <option value="{{ $customer->id }}" @if (old('customer_id') == $customer->id) selected @endif>
                                     {{ $customer->email }}

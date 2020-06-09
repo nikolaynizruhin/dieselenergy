@@ -20,6 +20,7 @@ return [
     'deleted' => 'Product was deleted successfully!',
     'delete' => 'Delete Product',
     'title' => 'Product',
+    'select' => 'Select a product',
     'update' => 'Update Product',
     'updated' => 'Product was updated successfully!',
 
