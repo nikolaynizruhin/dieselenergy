@@ -15,6 +15,6 @@ class MediaComposer
      */
     public function compose(View $view)
     {
-        $view->with(['images' => Image::orderBy('name')->get()]);
+        $view->with(['images' => Image::latest()->get()]);
     }
 }

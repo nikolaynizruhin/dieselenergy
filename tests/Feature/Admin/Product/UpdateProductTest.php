@@ -83,7 +83,7 @@ class UpdateProductTest extends TestCase
                     $attribute->id => $value = $this->faker->randomDigit,
                 ],
             ])->assertRedirect(route('admin.products.index'))
-            ->assertSessionHas('status', 'Product was updated successfully!');
+            ->assertSessionHas('status', trans('product.updated'));
 
         $this->assertDatabaseHas('products', $stub);
         $this->assertDatabaseHas('attributables', [
@@ -108,7 +108,7 @@ class UpdateProductTest extends TestCase
             ->put(route('admin.products.update', $product), $stub + [
                 'images' => [$image],
             ])->assertRedirect(route('admin.products.index'))
-            ->assertSessionHas('status', 'Product was updated successfully!');
+            ->assertSessionHas('status', trans('product.updated'));
 
         Storage::assertExists($path = 'images/'.$image->hashName());
 

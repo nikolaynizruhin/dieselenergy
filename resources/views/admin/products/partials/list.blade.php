@@ -17,7 +17,7 @@
                         <td>{{ $product->name }}</td>
                         <td>
                             <span class="badge badge-pill badge-{{ $product->is_active ? 'success' : 'danger' }}">
-                                {{ $product->is_active ? __('common.active') : __('Inactive') }}
+                                {{ $product->is_active ? __('common.active') : __('common.inactive') }}
                             </span>
                         </td>
                         <td>@usd($product->price)</td>

@@ -54,7 +54,7 @@ class CreateProductTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
             ->assertRedirect(route('admin.products.index'))
-            ->assertSessionHas('status', 'Product was created successfully!');
+            ->assertSessionHas('status', trans('product.created'));
 
         $this->assertDatabaseHas('products', $product);
     }
@@ -99,7 +99,7 @@ class CreateProductTest extends TestCase
             ->post(route('admin.products.store'), $product + [
                 'images' => [$image],
             ])->assertRedirect(route('admin.products.index'))
-            ->assertSessionHas('status', 'Product was created successfully!');
+            ->assertSessionHas('status', trans('product.created'));
 
         Storage::assertExists($path = 'images/'.$image->hashName());
 

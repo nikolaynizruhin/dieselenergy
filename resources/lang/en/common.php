@@ -27,6 +27,7 @@ return [
     'actions' => 'Actions',
     'name' => 'Name',
     'active' => 'Active',
+    'inactive' => 'Inactive',
     'images' => 'Images',
     'status' => 'Status',
     'description' => 'Description',
