@@ -9,7 +9,7 @@
             @include('admin.layouts.partials.search', ['url' => route('admin.users.index')])
         </div>
         <div class="col text-right">
-            <a class="btn btn-primary d-block d-md-inline-block shadow-sm mb-3" href="{{ route('admin.users.create') }}" role="button">{{ __('Add User') }}</a>
+            <a class="btn btn-primary d-block d-md-inline-block shadow-sm mb-3" href="{{ route('admin.users.create') }}" role="button">{{ __('user.add') }}</a>
         </div>
     </div>
 
