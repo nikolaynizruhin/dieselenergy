@@ -14,6 +14,7 @@ return [
 
     'create' => 'Create',
     'update' => 'Update',
+    'date' => 'Date',
     'delete' => 'Delete',
     'detach' => 'Detach',
     'quantity' => 'Quantity',

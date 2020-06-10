@@ -13,7 +13,7 @@
 
                 <!-- Order -->
                 <div class="form-group row">
-                    <label for="selectOrder" class="col-md-3 col-form-label">{{ __('Order By') }}</label>
+                    <label for="selectOrder" class="col-md-3 col-form-label">{{ __('cart.ordered_by') }}</label>
                     <div class="col-md-6">
                         <select id="selectOrder"
                                 class="form-control @error('order_id') is-invalid @enderror"

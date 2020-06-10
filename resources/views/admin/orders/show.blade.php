@@ -40,7 +40,7 @@
             <hr>
 
             <div class="row">
-                <div class="col-md-3 text-muted">{{ __('Date') }}</div>
+                <div class="col-md-3 text-muted">{{ __('common.date') }}</div>
                 <div class="col-md-6">{{ $order->created_at }}</div>
             </div>
 

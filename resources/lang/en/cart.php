@@ -16,6 +16,7 @@ return [
     'add' => 'Attach Product',
     'update' => 'Update Cart',
     'delete' => 'Detach Product',
+    'ordered_by' => 'Ordered By',
     'missing' => 'No products matched the given criteria.',
     'created' => 'Product was attached successfully!',
     'updated' => 'Cart was updated successfully!',
