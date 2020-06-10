@@ -52,7 +52,7 @@
 </div>
 <div class="card-footer bg-white text-muted">
     <div class="d-flex justify-content-between align-items-center">
-        About {{ $orders->total() }} results
+        {{ __('common.total') }} {{ $orders->total() }} {{ __('common.records') }}
         {{ $orders->withQueryString()->links() }}
     </div>
 </div>

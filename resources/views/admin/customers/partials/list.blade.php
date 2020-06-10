@@ -40,7 +40,7 @@
 </div>
 <div class="card-footer bg-white text-muted">
     <div class="d-flex justify-content-between align-items-center">
-        About {{ $customers->total() }} results
+        {{ __('common.total') }} {{ $customers->total() }} {{ __('common.records') }}
         {{ $customers->withQueryString()->links() }}
     </div>
 </div>

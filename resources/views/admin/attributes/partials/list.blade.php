@@ -36,7 +36,7 @@
 </div>
 <div class="card-footer bg-white text-muted">
     <div class="d-flex justify-content-between align-items-center">
-        About {{ $attributes->total() }} results
+        {{ __('common.total') }} {{ $attributes->total() }} {{ __('common.records') }}
         {{ $attributes->withQueryString()->links() }}
     </div>
 </div>

@@ -33,6 +33,7 @@ return [
     'choose_images' => 'Виберіть картинки',
     'status' => 'Статус',
     'description' => 'Опис',
+    'records' => 'записів',
     'notes' => 'Примітки',
     'total' => 'Всього',
     'alert' => [
