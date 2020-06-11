@@ -18,7 +18,7 @@
                         <div class="custom-file">
                             <input type="file" multiple id="inputImages" class="custom-file-input @error('images.*') is-invalid @enderror" name="images[]" accept="image/*" aria-describedby="imagesHelp">
                             <label class="custom-file-label" for="inputImages">{{ __('common.choose_images') }}</label>
-                            <small id="imagesHelp" class="form-text text-muted">The product already has {{ $product->images()->count() }} images.</small>
+                            <small id="imagesHelp" class="form-text text-muted">{{ __('product.images', ['count' => $product->images()->count()]) }}</small>
 
                             @error('images.*')
                                 <div class="invalid-feedback" role="alert">
@@ -125,7 +125,7 @@
                     <label for="inputDescription" class="col-md-3 col-form-label">
                         {{ __('common.description') }}
                         <br>
-                        <small class="text-muted">Supports Markdown</small>
+                        <small class="text-muted">{{ __('common.support') }} Markdown</small>
                     </label>
                     <div class="col-md-6">
                         <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="3">{{ old('description', $product->description) }}</textarea>

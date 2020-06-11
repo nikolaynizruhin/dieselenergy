@@ -123,7 +123,7 @@
                     <label for="inputDescription" class="col-md-3 col-form-label">
                         {{ __('common.description') }}
                         <br>
-                        <small class="text-muted">Supports Markdown</small>
+                        <small class="text-muted">{{ __('common.support') }} Markdown</small>
                     </label>
                     <div class="col-md-6">
                         <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="3">{{ old('description') }}</textarea>

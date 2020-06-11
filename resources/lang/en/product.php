@@ -21,6 +21,7 @@ return [
     'delete' => 'Delete Product',
     'title' => 'Product',
     'select' => 'Select a product',
+    'images' => 'The product already has :count images.',
     'update' => 'Update Product',
     'updated' => 'Product was updated successfully!',
 

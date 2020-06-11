@@ -24,6 +24,7 @@ return [
     'password' => 'Password',
     'price' => 'Price',
     'close' => 'Close',
+    'support' => 'Support',
     'remove' => 'Remove',
     'actions' => 'Actions',
     'name' => 'Name',
