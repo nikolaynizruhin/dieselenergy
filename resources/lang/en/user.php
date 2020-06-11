@@ -16,6 +16,7 @@ return [
     'details' => 'User Details',
     'update' => 'Update User',
     'plural' => 'Users',
+    'name' => 'Name',
     'delete' => 'Delete User',
     'created' => 'User was created successfully!',
     'updated' => 'User was updated successfully!',

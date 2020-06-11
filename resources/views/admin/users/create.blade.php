@@ -12,7 +12,7 @@
 
                 <!-- Name -->
                 <div class="form-group row">
-                    <label for="inputName" class="col-md-3 col-form-label">{{ __('common.name') }}</label>
+                    <label for="inputName" class="col-md-3 col-form-label">{{ __('user.name') }}</label>
                     <div class="col-md-6">
                         <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 

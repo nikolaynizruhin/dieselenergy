@@ -16,6 +16,7 @@ return [
     'created' => 'Customer was created successfully!',
     'deleted' => 'Customer was deleted successfully!',
     'delete' => 'Delete Customer',
+    'name' => 'Name',
     'title' => 'Customer',
     'plural' => 'Customers',
     'select' => 'Select a customer',
