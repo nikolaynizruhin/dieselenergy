@@ -4,11 +4,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Товар Language Lines
+    | Мовни ресурси Товарів
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used for user resource. You are free to
-    | modify these language lines according to your application's requirements.
+    | Наступні мовні ресурси використовуються для товарів.
+    | Ви можете вільно змінювати ці мовні ресурси відповідно до вимог
+    | вашої програми.
     |
     */
 

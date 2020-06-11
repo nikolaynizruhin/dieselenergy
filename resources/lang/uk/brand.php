@@ -4,11 +4,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Бренд Language Lines
+    | Мовни ресурси Бренду
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used for brand resource. You are free to
-    | modify these language lines according to your application's requirements.
+    | Наступні мовні ресурси використовуються для брендів.
+    | Ви можете вільно змінювати ці мовні ресурси відповідно до вимог
+    | вашої програми.
     |
     */
 

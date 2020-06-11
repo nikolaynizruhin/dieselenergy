@@ -4,11 +4,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Common Language Lines
+    | Поширені мовні ресурси
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used for common cases. You are free to
-    | modify these language lines according to your application's requirements.
+    | Наступні мовні ресурси використовуються поширених випадків.
+    | Ви можете вільно змінювати ці мовні ресурси відповідно до вимог
+    | вашої програми.
     |
     */
 
