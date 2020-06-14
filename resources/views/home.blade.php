@@ -32,21 +32,17 @@
                 </div>
                 <br>
                 <div class="card border-0">
-                    <div class="card-body p-0 d-flex justify-content-around shadow-sm">
-                        <div class="d-flex p-4 justify-content-center border-right" style="flex-grow: 1">
-                            <div class="text-center">
+                    <div class="card-body p-0 shadow-sm">
+                        <div class="row">
+                            <div class="col-12 col-md p-4 text-center border-right">
                                 <h1 class="text-primary font-weight-bold">15</h1>
                                 <h5 class="text-muted">Companies</h5>
                             </div>
-                        </div>
-                        <div class="d-flex p-4 justify-content-center" style="flex-grow: 1">
-                            <div class="text-center">
+                            <div class="col-12 col-md p-4 text-center">
                                 <h1 class="text-primary font-weight-bold">5</h1>
                                 <h5 class="text-muted">Years</h5>
                             </div>
-                        </div>
-                        <div class="d-flex p-4 justify-content-center border-left" style="flex-grow: 1">
-                            <div class="text-center">
+                            <div class="col-12 col-md p-4 text-center border-left">
                                 <h1 class="text-primary font-weight-bold">10</h1>
                                 <h5 class="text-muted">Employees</h5>
                             </div>
