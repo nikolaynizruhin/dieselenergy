@@ -43,7 +43,7 @@ class Cart extends Pivot
      */
     protected static function booted()
     {
-        static::saved(fn ($cart) => $cart->order->calculateTotal());
-        static::deleted(fn ($cart) => $cart->order->calculateTotal());
+        static::saved(fn ($cart) => $cart->order->updateTotal());
+        static::deleted(fn ($cart) => $cart->order->updateTotal());
     }
 }
