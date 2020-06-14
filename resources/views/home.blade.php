@@ -230,21 +230,22 @@
 </section>
 
 <section style="padding: 70px 0" class="position-relative">
+    <div class="position-absolute d-none d-sm-block" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; top: 60px; left: 0"></div>
+    <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; top: 450px; right: 0"></div>
+
     <div class="container">
-        <div class="row mb-4">
-            <div class="col text-center">
+        <div class="row mb-4 justify-content-center">
+            <div class="col col-md-8 col-lg-6 text-center">
                 <h2>Contact Us</h2>
                 <h5 class="text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Ab ad aperiam architecto aspernatur aut culpa.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Ab ad aperiam architecto aspernatur aut culpa.
                 </h5>
             </div>
         </div>
 
-        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; top: 60px; left: 0"></div>
-        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; top: 450px; right: 0"></div>
-
         <div class="row justify-content-center">
-            <div class="col-6">
+            <div class="col col-md-8 col-lg-6">
                 <form>
                     <div class="form-group">
                         <label for="exampleInputEmail1" class="font-weight-bold">Name</label>
