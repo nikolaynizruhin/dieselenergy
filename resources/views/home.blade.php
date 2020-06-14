@@ -194,10 +194,7 @@
     </div>
 </section>
 
-<section style="padding: 70px 0" class="bg-light position-relative">
-    <div class="position-absolute d-none d-sm-block" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 20px; left: 0"></div>
-    <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 250px; height: 250px; top: 240px; right: 0"></div>
-
+<section style="padding: 70px 0" class="bg-light">
     <div class="container">
         <h2>Frequently Asked Questions</h2>
         <hr class="pb-2 pb-md-4">
