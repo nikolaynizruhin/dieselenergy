@@ -59,22 +59,22 @@
 </section>
 
 <section style="padding: 70px 0" class="position-relative">
+    <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 80px; left: 0"></div>
+    <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 290px; right: 0"></div>
     <div class="container">
-        <div class="row mb-5">
-            <div class="col text-center">
+        <div class="row justify-content-center mb-5">
+            <div class="col col-md-8 text-center">
                 <h6 style="letter-spacing: 1px;" class="text-primary font-weight-bold">SERVICES</h6>
                 <h2>We can help you to build a better future</h2>
                 <h5 class="text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Ab ad aperiam architecto aspernatur aut culpa.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad aperiam architecto aspernatur aut culpa.
                 </h5>
             </div>
         </div>
-        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 80px; left: 0"></div>
-        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 290px; right: 0"></div>
-        <div class="row mb-4">
-            <div class="col">
+        <div class="row text-center text-md-left mb-md-4">
+            <div class="col-12 col-md mb-md-0 mb-3">
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-12 col-md-2 mb-3">
                         <svg class="bi bi-basket text-primary" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M10.243 1.071a.5.5 0 0 1 .686.172l3 5a.5.5 0 1 1-.858.514l-3-5a.5.5 0 0 1 .172-.686zm-4.486 0a.5.5 0 0 0-.686.172l-3 5a.5.5 0 1 0 .858.514l3-5a.5.5 0 0 0-.172-.686z"/>
                             <path fill-rule="evenodd" d="M1 7v1h14V7H1zM.5 6a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5H.5z"/>
@@ -88,9 +88,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-md mb-md-0 mb-3">
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-12 col-md-2 mb-3">
                         <svg class="bi bi-tools text-primary" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M0 1l1-1 3.081 2.2a1 1 0 0 1 .419.815v.07a1 1 0 0 0 .293.708L10.5 9.5l.914-.305a1 1 0 0 1 1.023.242l3.356 3.356a1 1 0 0 1 0 1.414l-1.586 1.586a1 1 0 0 1-1.414 0l-3.356-3.356a1 1 0 0 1-.242-1.023L9.5 10.5 3.793 4.793a1 1 0 0 0-.707-.293h-.071a1 1 0 0 1-.814-.419L0 1zm11.354 9.646a.5.5 0 0 0-.708.708l3 3a.5.5 0 0 0 .708-.708l-3-3z"/>
                             <path fill-rule="evenodd" d="M15.898 2.223a3.003 3.003 0 0 1-3.679 3.674L5.878 12.15a3 3 0 1 1-2.027-2.027l6.252-6.341A3 3 0 0 1 13.778.1l-2.142 2.142L12 4l1.757.364 2.141-2.141zm-13.37 9.019L3.001 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z"/>
@@ -103,10 +103,10 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
+        <div class="row text-center text-md-left">
+            <div class="col-12 col-md mb-md-0 mb-3">
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-12 col-md-2 mb-3">
                         <svg class="bi bi-award text-primary" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M9.669.864L8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193l-1.51-.229L8 1.126l-1.355.702-1.51.229-.684 1.365-1.086 1.072L3.614 6l-.25 1.506 1.087 1.072.684 1.365 1.51.229L8 10.874l1.356-.702 1.509-.229.684-1.365 1.086-1.072L12.387 6l.248-1.506-1.086-1.072-.684-1.365z"/>
                             <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
@@ -118,9 +118,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-md mb-md-0 mb-3">
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-12 col-md-2 mb-3">
                         <svg class="bi bi-info-circle text-primary" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
