@@ -3,8 +3,8 @@
 @section('content')
 <section style="padding: 150px 0" class="position-relative">
     <div class="container">
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; position: absolute; top: 20px; left: 70px"></div>
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; position: absolute; top: 250px; right: 70px"></div>
+        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; top: 20px; left: 70px"></div>
+        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; top: 250px; right: 70px"></div>
         <div class="row">
             <div class="col d-flex justify-content-center">
                 <div>
@@ -69,8 +69,8 @@
                 </h5>
             </div>
         </div>
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 80px; left: 0"></div>
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 290px; right: 0"></div>
+        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 80px; left: 0"></div>
+        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 290px; right: 0"></div>
         <div class="row mb-4">
             <div class="col">
                 <div class="row">
@@ -203,8 +203,8 @@
     <div class="container">
         <h2>Frequently Asked Questions</h2>
         <hr class="pb-4">
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 20px; left: 0"></div>
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 250px; height: 250px; position: absolute; top: 240px; right: 0"></div>
+        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 20px; left: 0"></div>
+        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 250px; height: 250px; top: 240px; right: 0"></div>
         <div class="row mb-4">
             <div class="col">
                 <h4>Dolor hic laboriosam voluptate?</h4>
@@ -240,8 +240,8 @@
             </div>
         </div>
 
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; position: absolute; top: 60px; left: 0"></div>
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; position: absolute; top: 450px; right: 0"></div>
+        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; top: 60px; left: 0"></div>
+        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; top: 450px; right: 0"></div>
 
         <div class="row justify-content-center">
             <div class="col-6">
