@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<section style="padding: 150px 0">
+<section style="padding: 150px 0" class="position-relative">
     <div class="container">
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; position: absolute; top: 70px; left: 70px"></div>
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; position: absolute; top: 300px; right: 70px"></div>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; position: absolute; top: 20px; left: 70px"></div>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; position: absolute; top: 250px; right: 70px"></div>
         <div class="row">
             <div class="col d-flex justify-content-center">
                 <div>
@@ -58,7 +58,7 @@
     </div>
 </section>
 
-<section style="padding: 70px 0">
+<section style="padding: 70px 0" class="position-relative">
     <div class="container">
         <div class="row mb-5">
             <div class="col text-center">
@@ -69,8 +69,8 @@
                 </h5>
             </div>
         </div>
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 1150px; left: 0"></div>
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 1350px; right: 0"></div>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 80px; left: 0"></div>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 290px; right: 0"></div>
         <div class="row mb-4">
             <div class="col">
                 <div class="row">
@@ -199,12 +199,12 @@
     </div>
 </section>
 
-<section style="padding: 70px 0" class="bg-light">
+<section style="padding: 70px 0" class="bg-light position-relative">
     <div class="container">
         <h2>Frequently Asked Questions</h2>
         <hr class="pb-4">
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 2150px; left: 0"></div>
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 250px; height: 250px; position: absolute; top: 2350px; right: 0"></div>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 20px; left: 0"></div>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 250px; height: 250px; position: absolute; top: 240px; right: 0"></div>
         <div class="row mb-4">
             <div class="col">
                 <h4>Dolor hic laboriosam voluptate?</h4>
@@ -229,7 +229,7 @@
     </div>
 </section>
 
-<section style="padding: 70px 0">
+<section style="padding: 70px 0" class="position-relative">
     <div class="container">
         <div class="row mb-4">
             <div class="col text-center">
@@ -240,8 +240,8 @@
             </div>
         </div>
 
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; position: absolute; top: 2700px; left: 0"></div>
-        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; position: absolute; top: 3050px; right: 0"></div>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; position: absolute; top: 60px; left: 0"></div>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; position: absolute; top: 450px; right: 0"></div>
 
         <div class="row justify-content-center">
             <div class="col-6">
