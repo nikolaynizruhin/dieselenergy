@@ -2,20 +2,19 @@
 
 @section('content')
 <section style="padding: 150px 0" class="position-relative">
+    <div class="position-absolute d-none d-sm-block" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; top: 20px; left: 70px"></div>
+    <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; top: 250px; right: 70px"></div>
+
     <div class="container">
-        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; top: 20px; left: 70px"></div>
-        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; top: 250px; right: 70px"></div>
         <div class="row">
-            <div class="col d-flex justify-content-center">
-                <div>
-                    <h1 class="font-weight-bold">Energy Power</h1>
-                    <h5 class="text-primary">the energy everywhere</h5>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, doloremque eius enim fugit possimus soluta unde ut voluptas? Aperiam beatae debitis distinctio, dolorem error facere inventore itaque neque sit tempora.</p>
-                    <button type="button" class="btn btn-primary btn-lg mr-2">Contact Us</button>
-                    <button type="button" class="btn btn-outline-secondary btn-lg">Shop</button>
-                </div>
+            <div class="col-12 col-md">
+                <h1 class="font-weight-bold">Energy Power</h1>
+                <h5 class="text-primary">the energy everywhere</h5>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, doloremque eius enim fugit possimus soluta unde ut voluptas? Aperiam beatae debitis distinctio, dolorem error facere inventore itaque neque sit tempora.</p>
+                <button type="button" class="btn btn-primary btn-lg mr-2">Contact Us</button>
+                <button type="button" class="btn btn-outline-secondary btn-lg">Shop</button>
             </div>
-            <div class="col">
+            <div class="col-12 col-md d-none d-md-block">
                 <img src="{{ asset('images/wind-turbine.svg') }}" alt="" width="100%">
             </div>
         </div>
@@ -55,7 +54,7 @@
 </section>
 
 <section style="padding: 70px 0" class="position-relative">
-    <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 80px; left: 0"></div>
+    <div class="position-absolute d-none d-sm-block" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 80px; left: 0"></div>
     <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 290px; right: 0"></div>
     <div class="container">
         <div class="row justify-content-center mb-5">
