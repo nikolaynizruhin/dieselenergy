@@ -60,18 +60,18 @@
 
 <section style="padding: 70px 0">
     <div class="container">
-        <div class="text-center">
-            <h6 style="letter-spacing: 1px;" class="text-primary font-weight-bold">SERVICES</h6>
-            <h2>We can help you to build a better future</h2>
-            <h5 class="text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Ab ad aperiam architecto aspernatur aut culpa.
-            </h5>
+        <div class="row mb-5">
+            <div class="col text-center">
+                <h6 style="letter-spacing: 1px;" class="text-primary font-weight-bold">SERVICES</h6>
+                <h2>We can help you to build a better future</h2>
+                <h5 class="text-muted">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Ab ad aperiam architecto aspernatur aut culpa.
+                </h5>
+            </div>
         </div>
-        <br>
-        <br>
         <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 1150px; left: 0"></div>
         <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 1350px; right: 0"></div>
-        <div class="row">
+        <div class="row mb-4">
             <div class="col">
                 <div class="row">
                     <div class="col-2">
@@ -103,7 +103,6 @@
                 </div>
             </div>
         </div>
-        <br>
         <div class="row">
             <div class="col">
                 <div class="row">
@@ -139,16 +138,13 @@
 </section>
 
 
-<div>
+<section style="padding: 70px 0">
     <div class="container">
-        <br>
-        <br>
-        <br>
-        <div class="text-center">
-            <h5 class="text-uppercase text-muted font-weight-bold" style="letter-spacing: 1px">Trusted by companies</h5>
+        <div class="row mb-4">
+            <div class="col text-center">
+                <h5 class="text-uppercase text-muted font-weight-bold" style="letter-spacing: 1px">Trusted by companies</h5>
+            </div>
         </div>
-
-        <br>
 
         <div class="row">
             <div class="col d-flex align-items-center bg-light p-5 justify-content-center" style="margin: 0.1rem">
@@ -177,7 +173,6 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="col d-flex align-items-center bg-light p-5 justify-content-center" style="margin: 0.1rem">
                 <svg class="bi bi-hand-index text-muted" style="opacity: 0.6" width="2.5em" height="2.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -201,25 +196,16 @@
                 <h3 class="mb-0 ml-3 text-muted" style="opacity: 0.6">Calendly</h3>
             </div>
         </div>
-
-        <br>
-        <br>
-        <br>
     </div>
-</div>
+</section>
 
-<div class="bg-light">
+<section style="padding: 70px 0" class="bg-light">
     <div class="container">
-        <br>
-        <br>
-        <br>
         <h2>Frequently Asked Questions</h2>
-        <hr>
-        <br>
-
+        <hr class="pb-4">
         <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 2150px; left: 0"></div>
         <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 250px; height: 250px; position: absolute; top: 2350px; right: 0"></div>
-        <div class="row">
+        <div class="row mb-4">
             <div class="col">
                 <h4>Dolor hic laboriosam voluptate?</h4>
                 <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, aperiam eos facilis libero porro saepe. Aliquam consectetur doloribus ducimus eos harum temporibus unde.</p>
@@ -229,7 +215,7 @@
                 <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, aperiam eos facilis libero porro saepe. Aliquam consectetur doloribus ducimus eos harum temporibus unde.</p>
             </div>
         </div>
-        <br>
+
         <div class="row">
             <div class="col">
                 <h4>Iusto, nobis perspiciatis porro quae saepe ullam?</h4>
@@ -240,67 +226,55 @@
                 <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, aperiam eos facilis libero porro saepe. Aliquam consectetur doloribus ducimus eos harum temporibus unde.</p>
             </div>
         </div>
-
-        <br>
-
-        <br>
-        <br>
-        <br>
     </div>
-</div>
+</section>
 
-<div class="container">
-    <br>
-    <br>
-    <br>
-    <div class="text-center">
-        <h2>Contact Us</h2>
-        <h5 class="text-muted">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            <br>
-            Ab ad aperiam architecto aspernatur aut culpa.
-        </h5>
-    </div>
+<section style="padding: 70px 0">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col text-center">
+                <h2>Contact Us</h2>
+                <h5 class="text-muted">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Ab ad aperiam architecto aspernatur aut culpa.
+                </h5>
+            </div>
+        </div>
 
-    <br>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; position: absolute; top: 2700px; left: 0"></div>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; position: absolute; top: 3050px; right: 0"></div>
 
-    <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; position: absolute; top: 2700px; left: 0"></div>
-    <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; position: absolute; top: 3050px; right: 0"></div>
-
-    <div class="row justify-content-center">
-        <div class="col-6">
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputEmail1" class="font-weight-bold">Name</label>
-                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1" class="font-weight-bold">Company</label>
-                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1" class="font-weight-bold">Email address</label>
-                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1" class="font-weight-bold">Phone Number</label>
-                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1" class="font-weight-bold">Message</label>
-                    <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="4"></textarea>
-                </div>
-                <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                    <label class="custom-control-label text-muted" for="customSwitch1">By selecting this, you agree to the Privacy Policy</label>
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Let's Talk</button>
-            </form>
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="font-weight-bold">Name</label>
+                        <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="font-weight-bold">Company</label>
+                        <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="font-weight-bold">Email address</label>
+                        <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="font-weight-bold">Phone Number</label>
+                        <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1" class="font-weight-bold">Message</label>
+                        <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="4"></textarea>
+                    </div>
+                    <div class="custom-control custom-switch mb-3">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                        <label class="custom-control-label text-muted" for="customSwitch1">By selecting this, you agree to the Privacy Policy</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Let's Talk</button>
+                </form>
+            </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-</div>
+</section>
 @endsection
