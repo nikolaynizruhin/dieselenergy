@@ -1,41 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; position: absolute; top: 70px; left: 70px"></div>
-    <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; position: absolute; top: 300px; right: 70px"></div>
-    <div class="row">
-        <div class="col d-flex justify-content-center">
-            <div>
-                <h1 class="font-weight-bold">Energy Power</h1>
-                <h5 class="text-primary">the energy everywhere</h5>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, doloremque eius enim fugit possimus soluta unde ut voluptas? Aperiam beatae debitis distinctio, dolorem error facere inventore itaque neque sit tempora.</p>
-                <button type="button" class="btn btn-primary btn-lg">Contact Us</button>
-                &nbsp;
-                <button type="button" class="btn btn-outline-secondary btn-lg">Shop</button>
+<section style="padding: 150px 0">
+    <div class="container">
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; position: absolute; top: 70px; left: 70px"></div>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 300px; position: absolute; top: 300px; right: 70px"></div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <div>
+                    <h1 class="font-weight-bold">Energy Power</h1>
+                    <h5 class="text-primary">the energy everywhere</h5>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, doloremque eius enim fugit possimus soluta unde ut voluptas? Aperiam beatae debitis distinctio, dolorem error facere inventore itaque neque sit tempora.</p>
+                    <button type="button" class="btn btn-primary btn-lg mr-2">Contact Us</button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg">Shop</button>
+                </div>
+            </div>
+            <div class="col">
+                <img src="{{ asset('images/wind-turbine.svg') }}" alt="" width="100%">
             </div>
         </div>
-        <div class="col">
-            <img src="{{ asset('images/hero_orange.svg') }}" alt="" width="100%">
-        </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-</div>
+</section>
 
-<div class="bg-light">
+<section class="bg-light" style="padding: 70px 0">
     <div class="container">
-        <br>
-        <br>
-        <br>
         <div class="row">
             <div class="col d-flex justify-content-center flex-column">
                 <div class="text-center">
@@ -67,97 +55,89 @@
                 </div>
             </div>
         </div>
-        <br>
-        <br>
-        <br>
     </div>
-</div>
+</section>
 
-<div class="container">
-    <br>
-    <br>
-    <br>
-    <div class="text-center">
-        <h6  style="letter-spacing: 1px;" class="text-primary font-weight-bold">SERVICES</h6>
-        <h2>We can help you to build a better future</h2>
-        <h5 class="text-muted">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            <br>
-            Ab ad aperiam architecto aspernatur aut culpa.
-        </h5>
-    </div>
-    <br>
-    <br>
-    <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 1150px; left: 0"></div>
-    <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 1350px; right: 0"></div>
-    <div class="row">
-        <div class="col">
-            <div class="row">
-                <div class="col-2">
-                    <svg class="bi bi-basket text-primary" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10.243 1.071a.5.5 0 0 1 .686.172l3 5a.5.5 0 1 1-.858.514l-3-5a.5.5 0 0 1 .172-.686zm-4.486 0a.5.5 0 0 0-.686.172l-3 5a.5.5 0 1 0 .858.514l3-5a.5.5 0 0 0-.172-.686z"/>
-                        <path fill-rule="evenodd" d="M1 7v1h14V7H1zM.5 6a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5H.5z"/>
-                        <path fill-rule="evenodd" d="M14 9H2v5a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V9zM2 8a1 1 0 0 0-1 1v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1H2z"/>
-                        <path fill-rule="evenodd" d="M4 10a.5.5 0 0 1 .5.5v3a.5.5 0 1 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 1 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 1 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 1 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 1 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
-                    </svg>
+<section style="padding: 70px 0">
+    <div class="container">
+        <div class="text-center">
+            <h6 style="letter-spacing: 1px;" class="text-primary font-weight-bold">SERVICES</h6>
+            <h2>We can help you to build a better future</h2>
+            <h5 class="text-muted">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Ab ad aperiam architecto aspernatur aut culpa.
+            </h5>
+        </div>
+        <br>
+        <br>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 1150px; left: 0"></div>
+        <div style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; position: absolute; top: 1350px; right: 0"></div>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col-2">
+                        <svg class="bi bi-basket text-primary" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10.243 1.071a.5.5 0 0 1 .686.172l3 5a.5.5 0 1 1-.858.514l-3-5a.5.5 0 0 1 .172-.686zm-4.486 0a.5.5 0 0 0-.686.172l-3 5a.5.5 0 1 0 .858.514l3-5a.5.5 0 0 0-.172-.686z"/>
+                            <path fill-rule="evenodd" d="M1 7v1h14V7H1zM.5 6a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5H.5z"/>
+                            <path fill-rule="evenodd" d="M14 9H2v5a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V9zM2 8a1 1 0 0 0-1 1v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1H2z"/>
+                            <path fill-rule="evenodd" d="M4 10a.5.5 0 0 1 .5.5v3a.5.5 0 1 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 1 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 1 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 1 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 1 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
+                        </svg>
+                    </div>
+                    <div class="col">
+                        <h5>Shop</h5>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores iste non praesentium quod. Aliquam animi deleniti esse necessitatibus numquam pariatur quis.</p>
+                    </div>
                 </div>
-                <div class="col">
-                    <h5>Shop</h5>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores iste non praesentium quod. Aliquam animi deleniti esse necessitatibus numquam pariatur quis.</p>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-2">
+                        <svg class="bi bi-tools text-primary" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M0 1l1-1 3.081 2.2a1 1 0 0 1 .419.815v.07a1 1 0 0 0 .293.708L10.5 9.5l.914-.305a1 1 0 0 1 1.023.242l3.356 3.356a1 1 0 0 1 0 1.414l-1.586 1.586a1 1 0 0 1-1.414 0l-3.356-3.356a1 1 0 0 1-.242-1.023L9.5 10.5 3.793 4.793a1 1 0 0 0-.707-.293h-.071a1 1 0 0 1-.814-.419L0 1zm11.354 9.646a.5.5 0 0 0-.708.708l3 3a.5.5 0 0 0 .708-.708l-3-3z"/>
+                            <path fill-rule="evenodd" d="M15.898 2.223a3.003 3.003 0 0 1-3.679 3.674L5.878 12.15a3 3 0 1 1-2.027-2.027l6.252-6.341A3 3 0 0 1 13.778.1l-2.142 2.142L12 4l1.757.364 2.141-2.141zm-13.37 9.019L3.001 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z"/>
+                        </svg>
+                    </div>
+                    <div class="col">
+                        <h5>Installation</h5>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores iste non praesentium quod. Aliquam animi deleniti esse necessitatibus numquam pariatur quis.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="row">
-                <div class="col-2">
-                    <svg class="bi bi-tools text-primary" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M0 1l1-1 3.081 2.2a1 1 0 0 1 .419.815v.07a1 1 0 0 0 .293.708L10.5 9.5l.914-.305a1 1 0 0 1 1.023.242l3.356 3.356a1 1 0 0 1 0 1.414l-1.586 1.586a1 1 0 0 1-1.414 0l-3.356-3.356a1 1 0 0 1-.242-1.023L9.5 10.5 3.793 4.793a1 1 0 0 0-.707-.293h-.071a1 1 0 0 1-.814-.419L0 1zm11.354 9.646a.5.5 0 0 0-.708.708l3 3a.5.5 0 0 0 .708-.708l-3-3z"/>
-                        <path fill-rule="evenodd" d="M15.898 2.223a3.003 3.003 0 0 1-3.679 3.674L5.878 12.15a3 3 0 1 1-2.027-2.027l6.252-6.341A3 3 0 0 1 13.778.1l-2.142 2.142L12 4l1.757.364 2.141-2.141zm-13.37 9.019L3.001 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z"/>
-                    </svg>
-                </div>
-                <div class="col">
-                    <h5>Installation</h5>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores iste non praesentium quod. Aliquam animi deleniti esse necessitatibus numquam pariatur quis.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col">
-            <div class="row">
-                <div class="col-2">
-                    <svg class="bi bi-award text-primary" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M9.669.864L8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193l-1.51-.229L8 1.126l-1.355.702-1.51.229-.684 1.365-1.086 1.072L3.614 6l-.25 1.506 1.087 1.072.684 1.365 1.51.229L8 10.874l1.356-.702 1.509-.229.684-1.365 1.086-1.072L12.387 6l.248-1.506-1.086-1.072-.684-1.365z"/>
-                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
-                    </svg>
-                </div>
-                <div class="col">
-                    <h5>Support</h5>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores iste non praesentium quod. Aliquam animi deleniti esse necessitatibus numquam pariatur quis.</p>
+        <br>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col-2">
+                        <svg class="bi bi-award text-primary" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M9.669.864L8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193l-1.51-.229L8 1.126l-1.355.702-1.51.229-.684 1.365-1.086 1.072L3.614 6l-.25 1.506 1.087 1.072.684 1.365 1.51.229L8 10.874l1.356-.702 1.509-.229.684-1.365 1.086-1.072L12.387 6l.248-1.506-1.086-1.072-.684-1.365z"/>
+                            <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+                        </svg>
+                    </div>
+                    <div class="col">
+                        <h5>Support</h5>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores iste non praesentium quod. Aliquam animi deleniti esse necessitatibus numquam pariatur quis.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="row">
-                <div class="col-2">
-                    <svg class="bi bi-info-circle text-primary" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                        <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-                        <circle cx="8" cy="4.5" r="1"/>
-                    </svg>
-                </div>
-                <div class="col">
-                    <h5>Consulting</h5>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores iste non praesentium quod. Aliquam animi deleniti esse necessitatibus numquam pariatur quis.</p>
+            <div class="col">
+                <div class="row">
+                    <div class="col-2">
+                        <svg class="bi bi-info-circle text-primary" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                            <circle cx="8" cy="4.5" r="1"/>
+                        </svg>
+                    </div>
+                    <div class="col">
+                        <h5>Consulting</h5>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores iste non praesentium quod. Aliquam animi deleniti esse necessitatibus numquam pariatur quis.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-</div>
+</section>
+
 
 <div>
     <div class="container">
@@ -173,8 +153,7 @@
         <div class="row">
             <div class="col d-flex align-items-center bg-light p-5 justify-content-center" style="margin: 0.1rem">
                 <svg class="bi bi-bootstrap text-muted" style="opacity: 0.6" width="2.5em" height="2.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M12 1H4a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V4a3 3 0 0 0-3-3zM4 0a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V4a4 4 0 0 0-4-4H4z"/>
-                    <path fill-rule="evenodd" d="M8.537 12H5.062V3.545h3.399c1.587 0 2.543.809 2.543 2.11 0 .884-.65 1.675-1.483 1.816v.1c1.143.117 1.904.931 1.904 2.033 0 1.488-1.084 2.396-2.888 2.396zM6.375 4.658v2.467h1.558c1.16 0 1.764-.428 1.764-1.23 0-.78-.569-1.237-1.541-1.237H6.375zm1.898 6.229H6.375V8.162h1.822c1.236 0 1.887.463 1.887 1.348 0 .896-.627 1.377-1.811 1.377z"/>
+                    <path fill-rule="evenodd" d="M12 1H4a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V4a3 3 0 0 0-3-3zM4 0a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V4a4 4 0 0 0-4-4H4z"/><path fill-rule="evenodd" d="M8.537 12H5.062V3.545h3.399c1.587 0 2.543.809 2.543 2.11 0 .884-.65 1.675-1.483 1.816v.1c1.143.117 1.904.931 1.904 2.033 0 1.488-1.084 2.396-2.888 2.396zM6.375 4.658v2.467h1.558c1.16 0 1.764-.428 1.764-1.23 0-.78-.569-1.237-1.541-1.237H6.375zm1.898 6.229H6.375V8.162h1.822c1.236 0 1.887.463 1.887 1.348 0 .896-.627 1.377-1.811 1.377z"/>
                 </svg>
                 <h3 class="mb-0 ml-3 text-muted" style="opacity: 0.6">Bootstrap</h3>
             </div>
