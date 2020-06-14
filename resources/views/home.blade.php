@@ -200,28 +200,29 @@
 </section>
 
 <section style="padding: 70px 0" class="bg-light position-relative">
+    <div class="position-absolute d-none d-sm-block" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 20px; left: 0"></div>
+    <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 250px; height: 250px; top: 240px; right: 0"></div>
+
     <div class="container">
         <h2>Frequently Asked Questions</h2>
-        <hr class="pb-4">
-        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 150px; height: 250px; top: 20px; left: 0"></div>
-        <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 250px; height: 250px; top: 240px; right: 0"></div>
-        <div class="row mb-4">
-            <div class="col">
+        <hr class="pb-2 pb-md-4">
+        <div class="row mb-md-4">
+            <div class="col-12 col-md-6">
                 <h4>Dolor hic laboriosam voluptate?</h4>
                 <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, aperiam eos facilis libero porro saepe. Aliquam consectetur doloribus ducimus eos harum temporibus unde.</p>
             </div>
-            <div class="col">
+            <div class="col-12 col-md-6">
                 <h4>What ist hic laboriosam voluptate?</h4>
                 <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, aperiam eos facilis libero porro saepe. Aliquam consectetur doloribus ducimus eos harum temporibus unde.</p>
             </div>
         </div>
 
         <div class="row">
-            <div class="col">
+            <div class="col-12 col-md-6">
                 <h4>Iusto, nobis perspiciatis porro quae saepe ullam?</h4>
                 <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, aperiam eos facilis libero porro saepe. Aliquam consectetur doloribus ducimus eos harum temporibus unde.</p>
             </div>
-            <div class="col">
+            <div class="col-12 col-md-6">
                 <h4>What is the best country to live?</h4>
                 <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, aperiam eos facilis libero porro saepe. Aliquam consectetur doloribus ducimus eos harum temporibus unde.</p>
             </div>
@@ -234,18 +235,16 @@
     <div class="position-absolute" style="background-image: radial-gradient(#ededee 2px, transparent 2px); background-size: 20px 20px; width: 200px; height: 400px; top: 450px; right: 0"></div>
 
     <div class="container">
-        <div class="row mb-4 justify-content-center">
-            <div class="col col-md-8 col-lg-6 text-center">
-                <h2>Contact Us</h2>
-                <h5 class="text-muted">
+        <div class="row justify-content-center">
+            <div class="col col-md-8 col-lg-6">
+                <h2 class="text-center">Contact Us</h2>
+                <h5 class="text-muted text-center">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Ab ad aperiam architecto aspernatur aut culpa.
                 </h5>
-            </div>
-        </div>
 
-        <div class="row justify-content-center">
-            <div class="col col-md-8 col-lg-6">
+                <br>
+
                 <form>
                     <div class="form-group">
                         <label for="exampleInputEmail1" class="font-weight-bold">Name</label>
