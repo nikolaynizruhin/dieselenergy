@@ -23,6 +23,6 @@ return [
         'line_2' => 'This password reset link will expire in :count minutes.',
         'line_3' => 'If you did not request a password reset, no further action is required.',
         'footer' => "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".'into your web browser:',
-    ]
+    ],
 
 ];
