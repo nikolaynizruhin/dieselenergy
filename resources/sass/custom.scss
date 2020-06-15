@@ -1,0 +1,94 @@
+// Sections
+#hero {
+    @media (min-width: 768px) {
+        padding: 150px 0;
+    }
+
+    .dots-left {
+        width: 200px;
+        height: 300px;
+        top: 20px;
+        left: 70px;
+    }
+
+    .dots-right {
+        @media (max-width: 768px) {
+            top: 250px;
+            height: 120px;
+            right: 0;
+        }
+
+        width: 200px;
+        height: 300px;
+        top: 250px;
+        right: 70px;
+    }
+}
+
+#services {
+    .dots-left {
+        width: 150px;
+        height: 250px;
+        top: 80px;
+        left: 0;
+    }
+
+    .dots-right {
+        width: 150px;
+        height: 250px;
+        top: 290px;
+        right: 0;
+    }
+}
+
+#contact {
+    .dots-left {
+        width: 200px;
+        height: 400px;
+        top: 60px;
+        left: 0;
+    }
+
+    .dots-right {
+        width: 200px;
+        height: 400px;
+        top: 450px;
+        right: 0;
+    }
+}
+
+#companies {
+    .box {
+        margin: 0.1rem;
+    }
+}
+
+#numbers {
+    .box {
+        @media (max-width: 768px) {
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        @media (min-width: 768px) {
+            border-right: 1px solid #dee2e6;
+        }
+    }
+}
+
+section {
+    padding: 70px 0;
+}
+
+.dots {
+    background-image: radial-gradient(#e9ecef 2px, transparent 2px);
+    background-size: 20px 20px;
+}
+
+// Utilities
+.letter-spacing {
+    letter-spacing: 1px;
+}
+
+.opacity-60 {
+    opacity: 0.6;
+}

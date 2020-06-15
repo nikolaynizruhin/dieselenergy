@@ -1,5 +1,94 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito&display=swap);@charset "UTF-8";
 
+@media (min-width: 768px) {
+  #hero {
+    padding: 150px 0;
+  }
+}
+
+#hero .dots-left {
+  width: 200px;
+  height: 300px;
+  top: 20px;
+  left: 70px;
+}
+
+#hero .dots-right {
+  width: 200px;
+  height: 300px;
+  top: 250px;
+  right: 70px;
+}
+
+@media (max-width: 768px) {
+  #hero .dots-right {
+    top: 250px;
+    height: 120px;
+    right: 0;
+  }
+}
+
+#services .dots-left {
+  width: 150px;
+  height: 250px;
+  top: 80px;
+  left: 0;
+}
+
+#services .dots-right {
+  width: 150px;
+  height: 250px;
+  top: 290px;
+  right: 0;
+}
+
+#contact .dots-left {
+  width: 200px;
+  height: 400px;
+  top: 60px;
+  left: 0;
+}
+
+#contact .dots-right {
+  width: 200px;
+  height: 400px;
+  top: 450px;
+  right: 0;
+}
+
+#companies .box {
+  margin: 0.1rem;
+}
+
+@media (max-width: 768px) {
+  #numbers .box {
+    border-bottom: 1px solid #dee2e6;
+  }
+}
+
+@media (min-width: 768px) {
+  #numbers .box {
+    border-right: 1px solid #dee2e6;
+  }
+}
+
+section {
+  padding: 70px 0;
+}
+
+.dots {
+  background-image: radial-gradient(#e9ecef 2px, transparent 2px);
+  background-size: 20px 20px;
+}
+
+.letter-spacing {
+  letter-spacing: 1px;
+}
+
+.opacity-60 {
+  opacity: 0.6;
+}
+
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
