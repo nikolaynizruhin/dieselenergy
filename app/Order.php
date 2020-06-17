@@ -91,8 +91,16 @@ class Order extends Model
      */
     public function updateTotal()
     {
-        $this->update([
-            'total' => $this->products->sum(fn ($product) => $product->price * $product->pivot->quantity),
-        ]);
+        $this->update(['total' => $this->total()]);
+    }
+
+    /**
+     * Get order total.
+     *
+     * @return int
+     */
+    public function total()
+    {
+        return $this->products->sum(fn ($product) => $product->price * $product->pivot->quantity);
     }
 }
