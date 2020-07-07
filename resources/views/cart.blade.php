@@ -17,7 +17,7 @@
             <br>
             <div class="row">
                 <div class="col-8">
-                    <table class="table">
+                    <table class="table" style="border: 1px solid #dee2e6">
                         <thead class="d-none">
                         <tr>
                             <th scope="col" class="text-center">Item</th>
@@ -29,7 +29,7 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="border-top-0">
+                            <td>
                                 <div class="row">
                                     <div class="col-4">
                                         <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" width="100" alt="...">
