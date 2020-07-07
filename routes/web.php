@@ -14,3 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'home');
+Route::view('/shop', 'shop');
+Route::view('/product', 'product');
+Route::view('/cart', 'cart');
