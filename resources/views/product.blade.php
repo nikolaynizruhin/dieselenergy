@@ -26,13 +26,13 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" class="d-block w-100" alt="...">
+                                <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="d-block w-100" alt="...">
                             </div>
                             <div class="carousel-item">
-                                <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" class="d-block w-100" alt="...">
+                                <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="d-block w-100" alt="...">
                             </div>
                             <div class="carousel-item">
-                                <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" class="d-block w-100" alt="...">
+                                <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="d-block w-100" alt="...">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

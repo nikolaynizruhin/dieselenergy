@@ -1,0 +1,155 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container py-5">
+        <div class="row mt-n3 mb-4 text-gray-500">
+            <div class="col letter-spacing d-flex align-items-center">
+                Shop
+                <svg class="bi bi-chevron-right mx-2" width="0.9em" height="0.9em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+                {{ $category->name }}
+            </div>
+            <div class="col text-right">
+                Total Products: {{ $products->total() }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2">
+                <form>
+                    <p class="mb-1 font-weight-bold text-uppercase letter-spacing text-gray-500">
+                        <small>Search</small>
+                    </p>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="sr-only">Search</label>
+                        <input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter...">
+                    </div>
+
+                    <p class="mb-1 font-weight-bold text-uppercase letter-spacing text-gray-500">
+                        <small>Sort</small>
+                    </p>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1" class="sr-only">Example select</label>
+                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                            <option>A - Z</option>
+                            <option>Z - A</option>
+                        </select>
+                    </div>
+
+                    <p class="mb-1 font-weight-bold text-uppercase letter-spacing text-gray-500">
+                        <small>Power</small>
+                    </p>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label text-secondary" for="defaultCheck1">
+                            <small>30W</small>
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                        <label class="form-check-label text-secondary" for="defaultCheck2">
+                            <small>40W</small>
+                        </label>
+                    </div>
+
+                    <p class="mb-1 mt-3 font-weight-bold text-uppercase letter-spacing text-gray-500">
+                        <small>Voltage</small>
+                    </p>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label text-secondary" for="defaultCheck1">
+                            <small>100V</small>
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                        <label class="form-check-label text-secondary" for="defaultCheck2">
+                            <small>200V</small>
+                        </label>
+                    </div>
+
+                    <p class="mt-3 mb-1 font-weight-bold text-uppercase letter-spacing text-gray-500">
+                        <small>Type</small>
+                    </p>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label text-secondary" for="defaultCheck1">
+                            <small>Diesel</small>
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                        <label class="form-check-label text-secondary" for="defaultCheck2">
+                            <small>Patrol</small>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn mt-3 btn-outline-secondary d-none btn-block">
+                        Filter
+                    </button>
+                </form>
+            </div>
+            <div class="col-12 col-md-9 col-lg-10">
+                @forelse($products->chunk(3) as $chunkedProducts)
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                        @foreach($chunkedProducts as $product)
+                            <div class="col mb-4">
+                                <div class="card">
+                                    <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="card-img-top" alt="...">
+                                    <div class="card-body mb-n3">
+                                        <h6 class="card-title">{{ $product->name }}</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ $product->category->name }}</h6>
+                                        <h5 class="card-title">@usd($product->price)</h5>
+                                    </div>
+                                    <div class="card-body bg-light text-muted">
+                                        <div class="row mb-1">
+                                            <div class="col letter-spacing text-gray-500">
+                                                <small>POWER</small>
+                                            </div>
+                                            <div class="col text-secondary">
+                                                <small>125W</small>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <div class="col letter-spacing text-gray-500">
+                                                <small>WEIGHT</small>
+                                            </div>
+                                            <div class="col text-secondary">
+                                                <small>98kg</small>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col letter-spacing text-gray-500">
+                                                <small>VOLTAGE</small>
+                                            </div>
+                                            <div class="col text-secondary">
+                                                <small>300V</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <a href="#" class="btn btn-outline-secondary btn-block">
+                                            Add to Cart
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @empty
+                    <p>No products matched the given criteria.</p>
+                @endforelse
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col offset-md-3 offset-lg-2">
+                {{ $products->withQueryString()->links('layouts.partials.pagination') }}
+            </div>
+        </div>
+    </div>
+@endsection

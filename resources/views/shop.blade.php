@@ -92,7 +92,7 @@
 
                         <div class="col">
                             <div class="card">
-                                <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" class="card-img-top" alt="...">
+                                <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="card-img-top" alt="...">
                                 <div class="card-body mb-n3">
                                     <h6 class="card-title">SDMO H-3100</h6>
                                     <h6 class="card-subtitle mb-2 text-muted">Diesel Generator</h6>
@@ -122,7 +122,7 @@
 
                         <div class="col">
                             <div class="card">
-                                <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" class="card-img-top" alt="...">
+                                <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="card-img-top" alt="...">
                                 <div class="card-body mb-n3">
                                     <h6 class="card-title">SDMO H-3100</h6>
                                     <h6 class="card-subtitle mb-2 text-muted">Diesel Generator</h6>
@@ -151,7 +151,7 @@
                         </div>
                         <div class="col">
                             <div class="card">
-                                <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" class="card-img-top" alt="...">
+                                <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="card-img-top" alt="...">
                                 <div class="card-body mb-n3">
                                     <h6 class="card-title">SDMO H-3100</h6>
                                     <h6 class="card-subtitle mb-2 text-muted">Diesel Generator</h6>
@@ -190,7 +190,7 @@
 
                         <div class="col">
                             <div class="card">
-                                <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" class="card-img-top" alt="...">
+                                <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="card-img-top" alt="...">
                                 <div class="card-body mb-n3">
                                     <h6 class="card-title">SDMO H-3100</h6>
                                     <h6 class="card-subtitle mb-2 text-muted">Diesel Generator</h6>
@@ -220,7 +220,7 @@
 
                         <div class="col">
                             <div class="card">
-                                <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" class="card-img-top" alt="...">
+                                <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="card-img-top" alt="...">
                                 <div class="card-body mb-n3">
                                     <h6 class="card-title">SDMO H-3100</h6>
                                     <h6 class="card-subtitle mb-2 text-muted">Diesel Generator</h6>
@@ -249,7 +249,7 @@
                         </div>
                         <div class="col">
                             <div class="card">
-                                <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" class="card-img-top" alt="...">
+                                <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="card-img-top" alt="...">
                                 <div class="card-body mb-n3">
                                     <h6 class="card-title">SDMO H-3100</h6>
                                     <h6 class="card-subtitle mb-2 text-muted">Diesel Generator</h6>

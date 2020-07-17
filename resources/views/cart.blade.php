@@ -32,7 +32,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-4">
-                                        <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" width="100" alt="...">
+                                        <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" width="100" alt="...">
                                     </div>
                                     <div class="col d-flex align-items-center">
                                         <div class="d-flex flex-column">
@@ -61,7 +61,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-4">
-                                        <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" width="100" alt="...">
+                                        <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" width="100" alt="...">
                                     </div>
                                     <div class="col d-flex align-items-center">
                                         <div class="d-flex flex-column">
@@ -90,7 +90,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-4">
-                                        <img src="{{ asset('/images/CD3AwJycwk7rROV0EHdFF3GSLrAoMOAjOeF0JuLU.jpeg') }}" width="100" alt="...">
+                                        <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" width="100" alt="...">
                                     </div>
                                     <div class="col d-flex align-items-center">
                                         <div class="d-flex flex-column">

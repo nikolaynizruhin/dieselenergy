@@ -22,19 +22,22 @@ class SearchOrdersTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_orders()
+    public function user_can_search_dashboard_orders()
     {
         $user = factory(User::class)->create();
 
-        $john = factory(Customer::class)->create(['name' => 'John Doe']);
-        factory(Order::class)->create(['customer_id' => $john->id]);
-
         $jane = factory(Customer::class)->create(['name' => 'Jane Doe']);
+        factory(Order::class)->create(['customer_id' => $jane->id, 'created_at' => now()->subDay()]);
+
+        $john = factory(Customer::class)->create(['name' => 'John Doe']);
+        factory(Order::class)->create(['customer_id' => $john->id, 'created_at' => now()]);
+
+        $tom = factory(Customer::class)->create(['name' => 'Tom Jo']);
         factory(Order::class)->create(['customer_id' => $jane->id]);
 
         $this->actingAs($user)
-            ->get(route('admin.dashboard', ['search' => $john->name]))
-            ->assertSee($john->name)
-            ->assertDontSee($jane->name);
+            ->get(route('admin.dashboard', ['search' => 'Doe']))
+            ->assertSeeInOrder([$john->name, $jane->name])
+            ->assertDontSee($tom->name);
     }
 }
