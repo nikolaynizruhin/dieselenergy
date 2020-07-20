@@ -41,7 +41,7 @@
                                 name="attribute_id"
                                 required>
                             <option value="">{{ __('attribute.select') }}</option>
-                            @foreach (\App\Attribute::all() as $attribute)
+                            @foreach ($attributes as $attribute)
                                 @unless ($specification->category->attributes->contains($attribute) && $specification->attribute_id != $attribute->id)
                                     <option value="{{ $attribute->id }}" @if (old('attribute_id', $specification->attribute_id) == $attribute->id) selected @endif>
                                         {{ $attribute->name }}

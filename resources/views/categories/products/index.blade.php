@@ -112,7 +112,7 @@
                                                     <small>{{ $attribute->name }}</small>
                                                 </div>
                                                 <div class="col text-secondary">
-                                                    <small>{{ $attribute->pivot->value }}</small>
+                                                    <small>{{ $attribute->pivot->value }} {{ $attribute->measure }}</small>
                                                 </div>
                                             </div>
                                         @endforeach

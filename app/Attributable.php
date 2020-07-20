@@ -9,7 +9,7 @@ trait Attributable
      */
     public function attributes()
     {
-        return $this->morphToMany(Attribute::class, 'attributable')
+        return $this->belongsToMany(Attribute::class)
             ->withPivot('id', 'value')
             ->withTimestamps();
     }

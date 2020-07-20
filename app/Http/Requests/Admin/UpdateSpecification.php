@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Category;
 use Illuminate\Validation\Rule;
 
 class UpdateSpecification extends StoreSpecification
@@ -19,11 +18,10 @@ class UpdateSpecification extends StoreSpecification
                 'required',
                 'numeric',
                 'exists:attributes,id',
-                Rule::unique('attributables')
+                Rule::unique('attribute_category')
                     ->ignore($this->specification)
                     ->where(fn ($query) => $query->where([
-                        'attributable_id' => $this->category_id,
-                        'attributable_type' => Category::class,
+                        'category_id' => $this->category_id,
                     ])),
             ],
         ]);

@@ -38,9 +38,10 @@ class UpdateAttributeTest extends TestCase
     {
         $attribute = factory(Attribute::class)->create();
 
-        $this->put(route('admin.attributes.update', $attribute), [
-            'name' => $this->faker->word,
-        ])->assertRedirect(route('admin.login'));
+        $stub = factory(Attribute::class)->raw();
+
+        $this->put(route('admin.attributes.update', $attribute), $stub)
+            ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
@@ -63,11 +64,11 @@ class UpdateAttributeTest extends TestCase
     {
         $user = factory(User::class)->create();
         $attribute = factory(Attribute::class)->create();
+        $stub = factory(Attribute::class)->raw(['name' => null]);
 
         $this->actingAs($user)
-            ->put(route('admin.attributes.update', $attribute), [
-                'name' => null,
-            ])->assertSessionHasErrors('name');
+            ->put(route('admin.attributes.update', $attribute), $stub)
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -75,11 +76,11 @@ class UpdateAttributeTest extends TestCase
     {
         $user = factory(User::class)->create();
         $attribute = factory(Attribute::class)->create();
+        $stub = factory(Attribute::class)->raw(['name' => 1]);
 
         $this->actingAs($user)
-            ->put(route('admin.attributes.update', $attribute), [
-                'name' => 1,
-            ])->assertSessionHasErrors('name');
+            ->put(route('admin.attributes.update', $attribute), $stub)
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -87,11 +88,11 @@ class UpdateAttributeTest extends TestCase
     {
         $user = factory(User::class)->create();
         $attribute = factory(Attribute::class)->create();
+        $stub = factory(Attribute::class)->raw(['name' => str_repeat('a', 256)]);
 
         $this->actingAs($user)
-            ->put(route('admin.attributes.update', $attribute), [
-                'name' => str_repeat('a', 256),
-            ])->assertSessionHasErrors('name');
+            ->put(route('admin.attributes.update', $attribute), $stub)
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -105,5 +106,29 @@ class UpdateAttributeTest extends TestCase
             ->put(route('admin.attributes.update', $attribute), [
                 'name' => $existing->name,
             ])->assertSessionHasErrors('name');
+    }
+
+    /** @test */
+    public function user_cant_update_attribute_with_integer_measure()
+    {
+        $user = factory(User::class)->create();
+        $attribute = factory(Attribute::class)->create();
+        $stub = factory(Attribute::class)->raw(['measure' => 1]);
+
+        $this->actingAs($user)
+            ->put(route('admin.attributes.update', $attribute), $stub)
+            ->assertSessionHasErrors('measure');
+    }
+
+    /** @test */
+    public function user_cant_update_attribute_with_measure_more_than_255_chars()
+    {
+        $user = factory(User::class)->create();
+        $attribute = factory(Attribute::class)->create();
+        $stub = factory(Attribute::class)->raw(['measure' => str_repeat('a', 256)]);
+
+        $this->actingAs($user)
+            ->put(route('admin.attributes.update', $attribute), $stub)
+            ->assertSessionHasErrors('measure');
     }
 }

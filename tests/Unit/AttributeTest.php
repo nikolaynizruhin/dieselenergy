@@ -20,12 +20,10 @@ class AttributeTest extends TestCase
         $attribute = factory(Attribute::class)->create();
         $category = factory(Category::class)->create();
 
-        $attribute->categories()
-            ->attach($category, ['value' => $value = $this->faker->randomDigit]);
+        $attribute->categories()->attach($category);
 
         $this->assertTrue($attribute->categories->contains($category));
         $this->assertInstanceOf(Collection::class, $attribute->categories);
-        $this->assertEquals($value, $attribute->categories->first()->pivot->value);
     }
 
     /** @test */
@@ -34,8 +32,9 @@ class AttributeTest extends TestCase
         $attribute = factory(Attribute::class)->create();
         $product = factory(Product::class)->create();
 
-        $attribute->products()
-            ->attach($product, ['value' => $value = $this->faker->randomDigit]);
+        $attribute->products()->attach($product, [
+            'value' => $value = $this->faker->randomDigit,
+        ]);
 
         $this->assertTrue($attribute->products->contains($product));
         $this->assertInstanceOf(Collection::class, $attribute->products);

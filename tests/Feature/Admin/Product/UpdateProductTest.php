@@ -86,9 +86,8 @@ class UpdateProductTest extends TestCase
             ->assertSessionHas('status', trans('product.updated'));
 
         $this->assertDatabaseHas('products', $stub);
-        $this->assertDatabaseHas('attributables', [
-            'attributable_id' => $product->id,
-            'attributable_type' => Product::class,
+        $this->assertDatabaseHas('attribute_product', [
+            'product_id' => $product->id,
             'value' => $value,
         ]);
     }

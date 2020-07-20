@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttributablesTable extends Migration
+class CreateAttributeCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateAttributablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attributables', function (Blueprint $table) {
+        Schema::create('attribute_category', function (Blueprint $table) {
             $table->id();
-            $table->unique(['attribute_id', 'attributable_id', 'attributable_type'], 'attributables_primary');
+            $table->unique(['attribute_id', 'category_id']);
             $table->foreignId('attribute_id')->constrained()->cascadeOnDelete();
-            $table->morphs('attributable');
-            $table->string('value')->nullable();
-            $table->boolean('is_featured')->default(0);
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            $table->unsignedInteger('is_featured')->default(0);
             $table->timestamps();
         });
     }
@@ -31,10 +30,11 @@ class CreateAttributablesTable extends Migration
      */
     public function down()
     {
-        Schema::table('attributables', function (Blueprint $table) {
+        Schema::table('attribute_category', function (Blueprint $table) {
             $table->dropForeign(['attribute_id']);
+            $table->dropForeign(['category_id']);
         });
 
-        Schema::dropIfExists('attributables');
+        Schema::dropIfExists('attribute_category');
     }
 }

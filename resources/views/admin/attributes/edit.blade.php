@@ -22,6 +22,19 @@
                         @enderror
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label for="inputMeasure" class="col-md-3 col-form-label">{{ __('common.measure') }}</label>
+                    <div class="col-md-6">
+                        <input type="text" id="inputMeasure" class="form-control @error('measure') is-invalid @enderror" name="name" value="{{ old('measure', $attribute->measure) }}" required autocomplete="measure">
+
+                        @error('measure')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
+                    </div>
+                </div>
             </div>
 
             <div class="card-footer bg-light text-right border-0">

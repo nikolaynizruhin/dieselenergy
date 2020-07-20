@@ -40,7 +40,10 @@ class AttributeController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(['name' => 'required|string|max:255|unique:attributes']);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:attributes',
+            'measure' => 'nullable|string|max:255',
+        ]);
 
         Attribute::create($validated);
 
@@ -76,6 +79,7 @@ class AttributeController extends Controller
                 'max:255',
                 Rule::unique('attributes')->ignore($attribute),
             ],
+            'measure' => 'nullable|string|max:255',
         ]);
 
         $attribute->update($validated);

@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Relations\MorphPivot;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Specification extends MorphPivot
+class Specification extends Pivot
 {
     /**
      * Indicates if the IDs are auto-incrementing.
@@ -18,7 +18,7 @@ class Specification extends MorphPivot
      *
      * @var string
      */
-    protected $table = 'attributables';
+    protected $table = 'attribute_category';
 
     /**
      * The attributes that should be cast to native types.
@@ -38,8 +38,7 @@ class Specification extends MorphPivot
     public static function featuredAttributes($category)
     {
         return self::where([
-            'attributable_id' => $category->id,
-            'attributable_type' => Category::class,
+            'category_id' => $category->id,
             'is_featured' => 1,
         ])->pluck('attribute_id');
     }
@@ -53,11 +52,11 @@ class Specification extends MorphPivot
     }
 
     /**
-     * Get the attribute that owns the specification.
+     * Get the category that owns the specification.
      */
     public function category()
     {
-        return $this->belongsTo(Category::class, 'attributable_id');
+        return $this->belongsTo(Category::class);
     }
 
     /**
@@ -69,10 +68,8 @@ class Specification extends MorphPivot
      */
     public static function getValidationRules($categoryId, $rules)
     {
-        return self::where([
-            'attributable_id' => $categoryId,
-            'attributable_type' => Category::class,
-        ])->pluck('attribute_id')
+        return self::where('category_id', $categoryId)
+            ->pluck('attribute_id')
             ->mapWithKeys(fn ($id) => [
                 'attributes.'.$id => $rules,
             ])->all();

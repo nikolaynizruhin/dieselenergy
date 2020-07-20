@@ -95,4 +95,28 @@ class CreateAttributeTest extends TestCase
                 'name' => $attribute->name,
             ])->assertSessionHasErrors('name');
     }
+
+    /** @test */
+    public function user_cant_create_attribute_with_integer_measure()
+    {
+        $user = factory(User::class)->create();
+
+        $attribute = factory(Attribute::class)->raw(['measure' => 1]);
+
+        $this->actingAs($user)
+            ->post(route('admin.attributes.store'), $attribute)
+            ->assertSessionHasErrors('measure');
+    }
+
+    /** @test */
+    public function user_cant_create_attribute_with_measure_more_than_255_chars()
+    {
+        $user = factory(User::class)->create();
+
+        $attribute = factory(Attribute::class)->raw(['measure' => str_repeat('a', 256)]);
+
+        $this->actingAs($user)
+            ->post(route('admin.attributes.store'), $attribute)
+            ->assertSessionHasErrors('measure');
+    }
 }

@@ -30,11 +30,9 @@ class CategoryTest extends TestCase
         $category = factory(Category::class)->create();
         $attribute = factory(Attribute::class)->create();
 
-        $category->attributes()
-            ->attach($attribute, ['value' => $value = $this->faker->randomDigit]);
+        $category->attributes()->attach($attribute);
 
         $this->assertTrue($category->attributes->contains($attribute));
         $this->assertInstanceOf(Collection::class, $category->attributes);
-        $this->assertEquals($value, $category->attributes->first()->pivot->value);
     }
 }

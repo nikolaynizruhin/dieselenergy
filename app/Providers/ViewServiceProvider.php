@@ -62,7 +62,7 @@ class ViewServiceProvider extends ServiceProvider
         );
 
         View::composer(
-            ['admin.specifications.create'],
+            ['admin.specifications.create', 'admin.specifications.edit'],
             SpecificationComposer::class
         );
     }

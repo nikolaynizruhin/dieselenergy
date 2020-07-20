@@ -28,9 +28,9 @@ class Category extends Model
      */
     public function attributes()
     {
-        return $this->morphToMany(Attribute::class, 'attributable')
+        return $this->belongsToMany(Attribute::class)
             ->using(Specification::class)
-            ->withPivot('id', 'value')
+            ->withPivot('id')
             ->withTimestamps();
     }
 }

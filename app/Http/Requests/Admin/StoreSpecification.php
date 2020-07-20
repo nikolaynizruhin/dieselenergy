@@ -31,12 +31,21 @@ class StoreSpecification extends FormRequest
                 'required',
                 'numeric',
                 'exists:attributes,id',
-                Rule::unique('attributables')->where(fn ($query) => $query->where([
-                    'attributable_id' => $this->category_id,
-                    'attributable_type' => Category::class,
+                Rule::unique('attribute_category')->where(fn ($query) => $query->where([
+                    'category_id' => $this->category_id,
                 ])),
             ],
             'is_featured' => 'boolean',
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge(['is_featured' => $this->boolean('is_featured')]);
     }
 }

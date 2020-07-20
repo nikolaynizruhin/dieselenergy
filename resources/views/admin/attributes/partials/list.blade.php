@@ -5,6 +5,7 @@
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.name') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('common.measure') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
@@ -13,6 +14,7 @@
                 <tr>
                     <th scope="row" class="font-weight-normal">{{ $attributes->firstItem() + $key }}</th>
                     <td>{{ $attribute->name }}</td>
+                    <td>{{ $attribute->measure }}</td>
                     <td>
                         <a href="{{ route('admin.attributes.edit', $attribute) }}" class="mr-2">
                             <svg class="bi bi-pencil-square" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

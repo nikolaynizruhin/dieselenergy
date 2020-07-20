@@ -49,14 +49,11 @@ class UpdateSpecificationTest extends TestCase
         $stub = factory(Specification::class)->raw();
 
         $this->actingAs($user)
-            ->put(route('admin.specifications.update', $specification), [
-                'category_id' => $stub['attributable_id'],
-                'attribute_id' => $stub['attribute_id'],
-                'is_featured' => $stub['is_featured'],
-            ])->assertRedirect(route('admin.categories.show', $stub['attributable_id']))
+            ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertRedirect(route('admin.categories.show', $stub['category_id']))
             ->assertSessionHas('status', trans('specification.updated'));
 
-        $this->assertDatabaseHas('attributables', $stub);
+        $this->assertDatabaseHas('attribute_category', $stub);
     }
 
     /** @test */
@@ -65,14 +62,11 @@ class UpdateSpecificationTest extends TestCase
         $user = factory(User::class)->create();
 
         $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw();
+        $stub = factory(Specification::class)->raw(['category_id' => null]);
 
         $this->actingAs($user)
-            ->put(route('admin.specifications.update', $specification), [
-                'attribute_id' => $stub['attribute_id'],
-                'is_featured' => $stub['is_featured'],
-                'category_id' => null,
-            ])->assertSessionHasErrors('category_id');
+            ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertSessionHasErrors('category_id');
     }
 
     /** @test */
@@ -81,14 +75,11 @@ class UpdateSpecificationTest extends TestCase
         $user = factory(User::class)->create();
 
         $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw();
+        $stub = factory(Specification::class)->raw(['category_id' => 'string']);
 
         $this->actingAs($user)
-            ->put(route('admin.specifications.update', $specification), [
-                'attribute_id' => $stub['attribute_id'],
-                'is_featured' => $stub['is_featured'],
-                'category_id' => 'string',
-            ])->assertSessionHasErrors('category_id');
+            ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertSessionHasErrors('category_id');
     }
 
     /** @test */
@@ -97,14 +88,11 @@ class UpdateSpecificationTest extends TestCase
         $user = factory(User::class)->create();
 
         $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw();
+        $stub = factory(Specification::class)->raw(['category_id' => 10]);
 
         $this->actingAs($user)
-            ->put(route('admin.specifications.update', $specification), [
-                'attribute_id' => $stub['attribute_id'],
-                'is_featured' => $stub['is_featured'],
-                'category_id' => 10,
-            ])->assertSessionHasErrors('category_id');
+            ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertSessionHasErrors('category_id');
     }
 
     /** @test */
@@ -113,14 +101,11 @@ class UpdateSpecificationTest extends TestCase
         $user = factory(User::class)->create();
 
         $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw();
+        $stub = factory(Specification::class)->raw(['attribute_id' => null]);
 
         $this->actingAs($user)
-            ->put(route('admin.specifications.update', $specification), [
-                'attribute_id' => null,
-                'is_featured' => $stub['is_featured'],
-                'category_id' => $stub['attributable_id'],
-            ])->assertSessionHasErrors('attribute_id');
+            ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertSessionHasErrors('attribute_id');
     }
 
     /** @test */
@@ -129,14 +114,11 @@ class UpdateSpecificationTest extends TestCase
         $user = factory(User::class)->create();
 
         $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw();
+        $stub = factory(Specification::class)->raw(['attribute_id' => 'string']);
 
         $this->actingAs($user)
-            ->put(route('admin.specifications.update', $specification), [
-                'attribute_id' => 'string',
-                'is_featured' => $stub['is_featured'],
-                'category_id' => $stub['attributable_id'],
-            ])->assertSessionHasErrors('attribute_id');
+            ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertSessionHasErrors('attribute_id');
     }
 
     /** @test */
@@ -145,13 +127,10 @@ class UpdateSpecificationTest extends TestCase
         $user = factory(User::class)->create();
 
         $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw();
+        $stub = factory(Specification::class)->raw(['attribute_id' => 10]);
 
         $this->actingAs($user)
-            ->put(route('admin.specifications.update', $specification), [
-                'attribute_id' => 10,
-                'is_featured' => $stub['is_featured'],
-                'category_id' => $stub['attributable_id'],
-            ])->assertSessionHasErrors('attribute_id');
+            ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertSessionHasErrors('attribute_id');
     }
 }

@@ -32,12 +32,7 @@ class SpecificationController extends Controller
      */
     public function store(StoreSpecification $request)
     {
-        Specification::create([
-            'attribute_id' => $request->attribute_id,
-            'attributable_type' => Category::class,
-            'attributable_id' => $request->category_id,
-            'is_featured' => $request->boolean('is_featured'),
-        ]);
+        Specification::create($request->validated());
 
         return redirect()
             ->route('admin.categories.show', $request->category_id)
@@ -64,12 +59,7 @@ class SpecificationController extends Controller
      */
     public function update(UpdateSpecification $request, Specification $specification)
     {
-        $specification->update([
-            'attribute_id' => $request->attribute_id,
-            'attributable_type' => Category::class,
-            'attributable_id' => $request->category_id,
-            'is_featured' => $request->boolean('is_featured'),
-        ]);
+        $specification->update($request->validated());
 
         return redirect()
             ->route('admin.categories.show', $request->category_id)

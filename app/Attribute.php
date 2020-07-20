@@ -13,16 +13,16 @@ class Attribute extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'measure'];
 
     /**
      * The categories that belong to the attribute.
      */
     public function categories()
     {
-        return $this->morphedByMany(Category::class, 'attributable')
+        return $this->belongsToMany(Category::class)
             ->using(Specification::class)
-            ->withPivot('id', 'value')
+            ->withPivot('id')
             ->withTimestamps();
     }
 
@@ -31,7 +31,7 @@ class Attribute extends Model
      */
     public function products()
     {
-        return $this->morphedByMany(Product::class, 'attributable')
+        return $this->belongsToMany(Product::class)
             ->withPivot('id', 'value')
             ->withTimestamps();
     }

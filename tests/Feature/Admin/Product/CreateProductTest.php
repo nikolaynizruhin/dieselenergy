@@ -79,10 +79,7 @@ class CreateProductTest extends TestCase
             ->assertSessionHas('status', trans('product.created'));
 
         $this->assertDatabaseHas('products', $product);
-        $this->assertDatabaseHas('attributables', [
-            'attributable_type' => Product::class,
-            'value' => $value,
-        ]);
+        $this->assertDatabaseHas('attribute_product', ['value' => $value]);
     }
 
     /** @test */
