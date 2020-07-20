@@ -3,7 +3,6 @@
 namespace App\Http\View\Composers\Admin;
 
 use App\Attribute;
-use App\Category;
 use Illuminate\View\View;
 
 class SpecificationComposer
