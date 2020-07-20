@@ -36,7 +36,7 @@ Route::resource('images', 'ImageController')->except(['show', 'edit', 'update'])
 Route::resource('brands', 'BrandController')->except('show');
 Route::resource('categories', 'CategoryController');
 Route::resource('attributes', 'AttributeController')->except('show');
-Route::resource('specifications', 'SpecificationController')->only(['create', 'store', 'destroy']);
+Route::resource('specifications', 'SpecificationController')->except('index');
 
 // User Routes...
 Route::resource('users', 'UserController')->except('show');

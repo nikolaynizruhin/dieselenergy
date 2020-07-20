@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Category;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Specification;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,7 +16,12 @@ class ProductController extends Controller
      */
     public function index(Category $category)
     {
-        $products = $category->products()->paginate(9);
+        $featured = Specification::featuredAttributes($category);
+
+        $products = $category
+            ->products()
+            ->with(['attributes' => fn ($query) => $query->wherePivotIn('attribute_id', $featured)])
+            ->paginate(9);
 
         return view('categories.products.index', compact('products', 'category'));
     }

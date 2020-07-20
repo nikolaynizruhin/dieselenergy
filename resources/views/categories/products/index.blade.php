@@ -94,9 +94,9 @@
                 </form>
             </div>
             <div class="col-12 col-md-9 col-lg-10">
-                @forelse($products->chunk(3) as $chunkedProducts)
+                @forelse ($products->chunk(3) as $chunkedProducts)
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-                        @foreach($chunkedProducts as $product)
+                        @foreach ($chunkedProducts as $product)
                             <div class="col mb-4">
                                 <div class="card">
                                     <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="card-img-top" alt="...">
@@ -106,30 +106,16 @@
                                         <h5 class="card-title">@usd($product->price)</h5>
                                     </div>
                                     <div class="card-body bg-light text-muted">
-                                        <div class="row mb-1">
-                                            <div class="col letter-spacing text-gray-500">
-                                                <small>POWER</small>
+                                        @foreach ($product->attributes as $attribute)
+                                            <div class="row mb-1">
+                                                <div class="col letter-spacing text-gray-500 text-uppercase">
+                                                    <small>{{ $attribute->name }}</small>
+                                                </div>
+                                                <div class="col text-secondary">
+                                                    <small>{{ $attribute->pivot->value }}</small>
+                                                </div>
                                             </div>
-                                            <div class="col text-secondary">
-                                                <small>125W</small>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-1">
-                                            <div class="col letter-spacing text-gray-500">
-                                                <small>WEIGHT</small>
-                                            </div>
-                                            <div class="col text-secondary">
-                                                <small>98kg</small>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col letter-spacing text-gray-500">
-                                                <small>VOLTAGE</small>
-                                            </div>
-                                            <div class="col text-secondary">
-                                                <small>300V</small>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                     <div class="card-body">
                                         <a href="#" class="btn btn-outline-secondary btn-block">

@@ -18,6 +18,8 @@ return [
     'date' => 'Дата',
     'delete' => 'Видалити',
     'detach' => 'Прибрати',
+    'feature' => 'Особливості',
+    'is_featured' => 'Особливий',
     'quantity' => 'Кількість',
     'settings' => 'Налаштування',
     'search' => 'Пошук',

@@ -36,6 +36,7 @@ class StoreSpecification extends FormRequest
                     'attributable_type' => Category::class,
                 ])),
             ],
+            'is_featured' => 'boolean',
         ];
     }
 }

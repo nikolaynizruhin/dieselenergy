@@ -17,6 +17,7 @@ return [
     'update' => 'Update Attribute',
     'delete' => 'Detach Attribute',
     'created' => 'Attribute was attached successfully!',
+    'updated' => 'Specification was updated successfully!',
     'deleted' => 'Attribute was detached successfully!',
 
 ];

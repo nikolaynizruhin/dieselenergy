@@ -3,11 +3,12 @@
 @section('content')
     <div class="card shadow-sm">
         <div class="card-header border-0 bg-white lead">
-            {{ __('specification.add') }}
+            {{ __('specification.update') }}
         </div>
 
-        <form action="{{ route('admin.specifications.store') }}" method="POST">
+        <form action="{{ route('admin.specifications.update', $specification) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="card-body">
 
                 <!-- Category -->
@@ -18,8 +19,8 @@
                                 class="form-control @error('category_id') is-invalid @enderror"
                                 name="category_id"
                                 required>
-                            <option value="{{ $category->id }}" selected>
-                                {{ $category->name }}
+                            <option value="{{ $specification->category->id }}" selected>
+                                {{ $specification->category->name }}
                             </option>
                         </select>
 
@@ -40,9 +41,9 @@
                                 name="attribute_id"
                                 required>
                             <option value="">{{ __('attribute.select') }}</option>
-                            @foreach ($attributes as $attribute)
-                                @unless ($category->attributes->contains($attribute))
-                                    <option value="{{ $attribute->id }}" @if (old('attribute_id') == $attribute->id) selected @endif>
+                            @foreach (\App\Attribute::all() as $attribute)
+                                @unless ($specification->category->attributes->contains($attribute) && $specification->attribute_id != $attribute->id)
+                                    <option value="{{ $attribute->id }}" @if (old('attribute_id', $specification->attribute_id) == $attribute->id) selected @endif>
                                         {{ $attribute->name }}
                                     </option>
                                 @endunless
@@ -62,7 +63,7 @@
                     <div class="col-md-3">{{ __('common.feature') }}</div>
                     <div class="col-md-6">
                         <div class="form-check">
-                            <input type="checkbox" id="inputFeatured" class="form-check-input @error('is_featured') is-invalid @enderror" value="1" name="is_featured" @if (old('is_featured')) checked @endif>
+                            <input type="checkbox" id="inputFeatured" class="form-check-input @error('is_featured') is-invalid @enderror" value="1" name="is_featured" @if (old('is_featured', $specification->is_featured)) checked @endif>
                             <label class="form-check-label" for="inputFeatured">
                                 {{ __('common.is_featured') }}
                             </label>
@@ -78,7 +79,7 @@
             </div>
 
             <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('common.create') }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('common.update') }}</button>
             </div>
         </form>
     </div>

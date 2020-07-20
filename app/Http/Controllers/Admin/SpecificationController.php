@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreSpecification;
+use App\Http\Requests\Admin\UpdateSpecification;
 use App\Specification;
 use Illuminate\Http\Request;
 
@@ -35,11 +36,44 @@ class SpecificationController extends Controller
             'attribute_id' => $request->attribute_id,
             'attributable_type' => Category::class,
             'attributable_id' => $request->category_id,
+            'is_featured' => $request->boolean('is_featured'),
         ]);
 
         return redirect()
             ->route('admin.categories.show', $request->category_id)
             ->with('status', trans('specification.created'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Specification  $specification
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Specification $specification)
+    {
+        return view('admin.specifications.edit', compact('specification'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Admin\UpdateSpecification  $request
+     * @param  \App\Specification  $specification
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateSpecification $request, Specification $specification)
+    {
+        $specification->update([
+            'attribute_id' => $request->attribute_id,
+            'attributable_type' => Category::class,
+            'attributable_id' => $request->category_id,
+            'is_featured' => $request->boolean('is_featured'),
+        ]);
+
+        return redirect()
+            ->route('admin.categories.show', $request->category_id)
+            ->with('status', trans('specification.updated'));
     }
 
     /**

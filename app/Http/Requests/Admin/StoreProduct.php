@@ -77,7 +77,7 @@ class StoreProduct extends FormRequest
      */
     protected function prepareForValidation()
     {
-        $this->merge(['is_active' => $this->get('is_active', false)]);
+        $this->merge(['is_active' => $this->boolean('is_active')]);
     }
 
     /**

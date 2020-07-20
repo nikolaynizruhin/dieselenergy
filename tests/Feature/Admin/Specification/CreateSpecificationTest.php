@@ -7,11 +7,12 @@ use App\Category;
 use App\Specification;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CreateSpecificationTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     /** @test */
     public function guest_cant_visit_create_specification_page()
@@ -40,6 +41,7 @@ class CreateSpecificationTest extends TestCase
         $this->post(route('admin.specifications.store'), [
             'category_id' => $category->id,
             'attribute_id' => $attribute->id,
+            'is_featured' => $this->faker->boolean,
         ])->assertRedirect(route('admin.login'));
     }
 
@@ -55,6 +57,7 @@ class CreateSpecificationTest extends TestCase
             ->post(route('admin.specifications.store'), [
                 'category_id' => $category->id,
                 'attribute_id' => $attribute->id,
+                'is_featured' => $isFeatured = $this->faker->boolean,
             ])->assertRedirect(route('admin.categories.show', $category))
             ->assertSessionHas('status', trans('specification.created'));
 
@@ -62,6 +65,7 @@ class CreateSpecificationTest extends TestCase
             'attributable_id' => $category->id,
             'attributable_type' => Category::class,
             'attribute_id' => $attribute->id,
+            'is_featured' => $isFeatured,
         ]);
 
         $this->assertDatabaseHas('attributables', ['id' => $specification->id]);
@@ -77,6 +81,7 @@ class CreateSpecificationTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), [
                 'attribute_id' => $attribute->id,
+                'is_featured' => $this->faker->boolean,
             ])->assertSessionHasErrors('category_id');
     }
 
@@ -91,6 +96,7 @@ class CreateSpecificationTest extends TestCase
             ->post(route('admin.specifications.store'), [
                 'category_id' => 'string',
                 'attribute_id' => $attribute->id,
+                'is_featured' => $this->faker->boolean,
             ])->assertSessionHasErrors('category_id');
     }
 
@@ -105,6 +111,7 @@ class CreateSpecificationTest extends TestCase
             ->post(route('admin.specifications.store'), [
                 'category_id' => 1,
                 'attribute_id' => $attribute->id,
+                'is_featured' => $this->faker->boolean,
             ])->assertSessionHasErrors('category_id');
     }
 
@@ -118,6 +125,7 @@ class CreateSpecificationTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), [
                 'category_id' => $category->id,
+                'is_featured' => $this->faker->boolean,
             ])->assertSessionHasErrors('attribute_id');
     }
 
@@ -132,6 +140,7 @@ class CreateSpecificationTest extends TestCase
             ->post(route('admin.specifications.store'), [
                 'category_id' => $category->id,
                 'attribute_id' => 'string',
+                'is_featured' => $this->faker->boolean,
             ])->assertSessionHasErrors('attribute_id');
     }
 
@@ -146,6 +155,7 @@ class CreateSpecificationTest extends TestCase
             ->post(route('admin.specifications.store'), [
                 'category_id' => $category->id,
                 'attribute_id' => 1,
+                'is_featured' => $this->faker->boolean,
             ])->assertSessionHasErrors('attribute_id');
     }
 
@@ -159,6 +169,7 @@ class CreateSpecificationTest extends TestCase
             ->post(route('admin.specifications.store'), [
                 'category_id' => $specification->attributable_id,
                 'attribute_id' => $specification->attribute_id,
+                'is_featured' => $specification->is_featured,
             ])->assertSessionHasErrors('attribute_id');
     }
 }

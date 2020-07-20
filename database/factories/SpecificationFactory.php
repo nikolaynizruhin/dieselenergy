@@ -12,5 +12,6 @@ $factory->define(Specification::class, function (Faker $faker) {
         'attributable_id' => factory(Category::class),
         'attributable_type' => Category::class,
         'attribute_id' => factory(Attribute::class),
+        'is_featured' => $faker->boolean,
     ];
 });

@@ -19,6 +19,7 @@ class CreateAttributablesTable extends Migration
             $table->foreignId('attribute_id')->constrained()->cascadeOnDelete();
             $table->morphs('attributable');
             $table->string('value')->nullable();
+            $table->boolean('is_featured')->default(0);
             $table->timestamps();
         });
     }
