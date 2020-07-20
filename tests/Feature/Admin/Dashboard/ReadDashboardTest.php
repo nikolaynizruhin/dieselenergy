@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Admin\Dashboard;
 
-use App\Customer;
 use App\Order;
 use App\Product;
 use App\User;

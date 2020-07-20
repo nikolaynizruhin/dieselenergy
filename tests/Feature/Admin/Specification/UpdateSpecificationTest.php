@@ -2,12 +2,9 @@
 
 namespace Tests\Feature\Admin\Specification;
 
-use App\Attribute;
-use App\Category;
 use App\Specification;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UpdateSpecificationTest extends TestCase
