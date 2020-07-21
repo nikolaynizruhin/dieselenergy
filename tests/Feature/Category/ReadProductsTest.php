@@ -19,7 +19,7 @@ class ReadProductsTest extends TestCase
         $generator = factory(Product::class)->create(['category_id' => $generators->id]);
         $waterPump = factory(Product::class)->create(['category_id' => $waterPumps->id]);
 
-        $this->get(route('categories.products.index', $generator))
+        $this->get(route('categories.products.index', $generators))
             ->assertSuccessful()
             ->assertViewIs('categories.products.index')
             ->assertViewHas('products')

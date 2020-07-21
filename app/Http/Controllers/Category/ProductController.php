@@ -21,6 +21,9 @@ class ProductController extends Controller
         $products = $category
             ->products()
             ->with(['attributes' => fn ($query) => $query->wherePivotIn('attribute_id', $featured)])
+            ->filter(request('filter'))
+            ->search('name', request('search'))
+            ->orderBy('name', request('sort', 'asc'))
             ->paginate(9);
 
         return view('categories.products.index', compact('products', 'category'));

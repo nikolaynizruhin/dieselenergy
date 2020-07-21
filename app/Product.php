@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -25,6 +26,23 @@ class Product extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    /**
+     * Scope a query to a filter term.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  null|array  $filter
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFilter($query, $filter)
+    {
+        collect($filter)->each(fn ($values, $id) => $query
+            ->whereHas('attributes', fn (Builder $query) => $query
+                ->where('attribute_id', $id)
+                ->whereIn('value', $values)
+            )
+        );
+    }
 
     /**
      * Get the brand of the product.

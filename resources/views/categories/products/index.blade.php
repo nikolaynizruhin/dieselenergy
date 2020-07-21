@@ -23,7 +23,7 @@
 
                     <div class="form-group">
                         <label for="exampleInputEmail1" class="sr-only">Search</label>
-                        <input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter...">
+                        <input type="text" name="search" value="{{ request('search') }}" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter...">
                     </div>
 
                     <p class="mb-1 font-weight-bold text-uppercase letter-spacing text-gray-500">
@@ -31,10 +31,10 @@
                     </p>
 
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1" class="sr-only">Example select</label>
-                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
-                            <option>A - Z</option>
-                            <option>Z - A</option>
+                        <label for="exampleFormControlSelect" class="sr-only">Sort</label>
+                        <select class="form-control form-control-sm" name="sort" id="exampleFormControlSelect">
+                            <option value="asc" @if (request('sort') == 'asc') selected @endif>A - Z</option>
+                            <option value="desc" @if (request('sort') == 'desc') selected @endif>Z - A</option>
                         </select>
                     </div>
 
@@ -43,32 +43,32 @@
                     </p>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <input name="filter[11][]" value="20" class="form-check-input" type="checkbox" id="defaultCheck1">
                         <label class="form-check-label text-secondary" for="defaultCheck1">
-                            <small>30W</small>
+                            <small>20W</small>
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                        <input name="filter[11][]" value="30" class="form-check-input" type="checkbox" id="defaultCheck2">
                         <label class="form-check-label text-secondary" for="defaultCheck2">
-                            <small>40W</small>
+                            <small>30W</small>
                         </label>
                     </div>
 
                     <p class="mb-1 mt-3 font-weight-bold text-uppercase letter-spacing text-gray-500">
-                        <small>Voltage</small>
+                        <small>Weight</small>
                     </p>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <input name="filter[3][]" class="form-check-input" type="checkbox" value="100" id="defaultCheck1">
                         <label class="form-check-label text-secondary" for="defaultCheck1">
-                            <small>100V</small>
+                            <small>100Kg</small>
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                        <input name="filter[3][]" class="form-check-input" type="checkbox" value="200" id="defaultCheck2">
                         <label class="form-check-label text-secondary" for="defaultCheck2">
-                            <small>200V</small>
+                            <small>200Kg</small>
                         </label>
                     </div>
 
@@ -88,7 +88,7 @@
                             <small>Patrol</small>
                         </label>
                     </div>
-                    <button type="submit" class="btn mt-3 btn-outline-secondary d-none btn-block">
+                    <button type="submit" class="btn mt-3 btn-outline-primary btn-block">
                         Filter
                     </button>
                 </form>
@@ -112,7 +112,7 @@
                                                     <small>{{ $attribute->name }}</small>
                                                 </div>
                                                 <div class="col text-secondary">
-                                                    <small>{{ $attribute->pivot->value }} {{ $attribute->measure }}</small>
+                                                    <small>{{ $attribute->pivot->value . $attribute->measure }}</small>
                                                 </div>
                                             </div>
                                         @endforeach
