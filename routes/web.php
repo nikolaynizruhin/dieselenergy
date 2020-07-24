@@ -17,4 +17,4 @@ Route::view('/', 'home');
 Route::view('/shop', 'shop');
 Route::view('/product', 'product');
 Route::view('/cart', 'cart');
-Route::resource('categories.products', 'Category\ProductController')->shallow()->only(['index']);
+Route::resource('categories.products', 'Category\ProductController')->shallow()->only(['index', 'show']);

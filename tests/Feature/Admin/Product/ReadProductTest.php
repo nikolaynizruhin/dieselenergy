@@ -21,7 +21,7 @@ class ReadProductTest extends TestCase
     }
 
     /** @test */
-    public function user_can_read_category()
+    public function user_can_read_product()
     {
         $user = factory(User::class)->create();
 

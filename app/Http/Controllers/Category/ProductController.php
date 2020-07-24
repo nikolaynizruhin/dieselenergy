@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Category;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Product;
 use App\Specification;
 use Illuminate\Http\Request;
 
@@ -53,12 +54,12 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        return view('products.show', compact('product'));
     }
 
     /**
