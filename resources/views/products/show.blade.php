@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-12 col-md">
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -45,7 +45,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md">
                     <h5 class="font-weight-bold mb-3">
                         {{ $product->name }}
                         <br>
@@ -56,11 +56,11 @@
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda consectetur, debitis dicta dolorum earum eius eos inventore libero maxime molestiae nostrum obcaecati odit possimus quo recusandae sed totam.
                     </p>
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-2 col-md-3 col-lg-2">
                             <form>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1" class="sr-only">Amount</label>
-                                    <input type="number" value="1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <input type="number" value="1" min="1" max="99" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                                 </div>
                             </form>
                         </div>
