@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Facades\App\Cart\Cart;
 use App\Product;
+use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
