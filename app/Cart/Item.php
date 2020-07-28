@@ -9,35 +9,35 @@ class Item
      *
      * @var int
      */
-    private $id;
+    public $id;
 
     /**
      * Item name.
      *
      * @var int
      */
-    private $name;
+    public $name;
 
     /**
      * Item category.
      *
      * @var int
      */
-    private $category;
+    public $category;
 
     /**
      * Item Price.
      *
      * @var int
      */
-    private $price;
+    public $price;
 
     /**
      * Item quantity.
      *
      * @var int
      */
-    private $quantity;
+    public $quantity;
 
     /**
      * Item constructor.
@@ -55,11 +55,13 @@ class Item
     }
 
     /**
-     * Increment quantity.
+     * Get item total price.
+     *
+     * @return int
      */
-    public function incrementQuantity()
+    public function total()
     {
-        $this->quantity++;
+        return $this->quantity * $this->price;
     }
 
     /**

@@ -28,20 +28,21 @@ class Cart
      * Add product to cart.
      *
      * @param  \App\Product  $product
-     * @return Item
+     * @param  int  $quantity
+     * @return \App\Cart\Item
      */
-    public function add($product)
+    public function add($product, $quantity = 1)
     {
         $items = $this->items();
 
         $key = $items->search(fn ($item) => $item->id == $product->id);
 
         if ($key === false) {
-            $item = new Item($product);
+            $item = new Item($product, $quantity);
             $items->push($item);
         } else {
             $item = $items->get($key);
-            $item->incrementQuantity();
+            $item->quantity += $quantity;
             $items->put($key, $item);
         }
 
@@ -58,6 +59,16 @@ class Cart
     public function items()
     {
         return $this->session->get('cart', new Collection());
+    }
+
+    /**
+     * Get cart total.
+     *
+     * @return int
+     */
+    public function total()
+    {
+        return $this->items()->sum(fn ($item) => $item->price * $item->quantity);
     }
 
     /**

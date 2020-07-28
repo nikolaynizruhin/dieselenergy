@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Cart;
 
 use App\Product;
 use Facades\App\Cart\Cart;
@@ -61,5 +61,17 @@ class CartTest extends TestCase
         $item = Cart::add($product);
 
         $this->assertTrue(Cart::items()->contains($item));
+    }
+
+    /** @test */
+    public function it_can_get_total()
+    {
+        $generator = factory(Product::class)->create(['price' => 100]);
+        $waterPump = factory(Product::class)->create(['price' => 100]);
+
+        Cart::add($generator, 2);
+        Cart::add($waterPump);
+
+        $this->assertEquals(300, Cart::total());
     }
 }
