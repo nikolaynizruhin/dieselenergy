@@ -14,6 +14,7 @@ return [
 
     'title' => 'Cart',
     'add' => 'Attach Product',
+    'added' => 'Product was added to cart successfully!',
     'update' => 'Update Cart',
     'delete' => 'Detach Product',
     'ordered_by' => 'Ordered By',

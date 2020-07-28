@@ -118,9 +118,13 @@
                                         @endforeach
                                     </div>
                                     <div class="card-body">
-                                        <a href="#" class="btn btn-outline-secondary btn-block">
-                                            Add to Cart
-                                        </a>
+                                        <form action="{{ route('carts.store') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <button type="submit" class="btn btn-outline-secondary btn-block">
+                                                Add to Cart
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
