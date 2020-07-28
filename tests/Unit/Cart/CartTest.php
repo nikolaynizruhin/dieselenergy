@@ -5,6 +5,7 @@ namespace Tests\Unit\Cart;
 use App\Product;
 use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
 use Tests\TestCase;
 
 class CartTest extends TestCase
@@ -60,7 +61,10 @@ class CartTest extends TestCase
 
         $item = Cart::add($product);
 
-        $this->assertTrue(Cart::items()->contains($item));
+        $items = Cart::items();
+
+        $this->assertTrue($items->contains($item));
+        $this->assertInstanceOf(Collection::class, $items);
     }
 
     /** @test */
