@@ -31,13 +31,13 @@ class CartTest extends TestCase
     {
         $product = factory(Product::class)->create();
 
-        $item = Cart::add($product);
-
-        $this->assertEquals(1, $item->quantity);
-
-        $item = Cart::add($product);
+        $item = Cart::add($product, 2);
 
         $this->assertEquals(2, $item->quantity);
+
+        $item = Cart::add($product, 2);
+
+        $this->assertEquals(4, $item->quantity);
     }
 
     /** @test */
