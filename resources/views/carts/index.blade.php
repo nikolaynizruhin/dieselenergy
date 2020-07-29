@@ -3,8 +3,8 @@
 @section('content')
     <div>
         <div class="container py-5">
-            <div class="row mt-n3 mb-4">
-                <div class="col letter-spacing d-flex align-items-center" style="color: #adb5bd; font-size: 16px">
+            <div class="row mt-n3 mb-4 text-gray-500">
+                <div class="col letter-spacing d-flex align-items-center">
                     Shop
                     <svg class="bi bi-chevron-right mx-2" width="0.8em" height="0.8em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
@@ -18,15 +18,6 @@
             <div class="row">
                 <div class="col-8">
                     <table class="table" style="border: 1px solid #dee2e6">
-                        <thead class="d-none">
-                        <tr>
-                            <th scope="col" class="text-center">Item</th>
-                            <th scope="col" class="text-center">Price</th>
-                            <th scope="col" style="width: 12%" class="text-center">Quantity</th>
-                            <th scope="col" class="text-center">Total</th>
-                            <th scope="col"></th>
-                        </tr>
-                        </thead>
                         <tbody>
                         @foreach($items as $key => $item)
                             <tr>
