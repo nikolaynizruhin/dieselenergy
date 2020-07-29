@@ -22,7 +22,6 @@ class CreateCartTest extends TestCase
             ->assertSessionHas('cart')
             ->assertSessionHas('status', trans('cart.added'));
 
-
         $this->assertCount(1, $items = Cart::items());
         $this->assertEquals($product->id, $items->first()->id);
         $this->assertEquals(2, $items->first()->quantity);
