@@ -17,76 +17,82 @@
             <br>
             <div class="row">
                 <div class="col-8">
-                    <table class="table" style="border: 1px solid #dee2e6">
-                        <tbody>
-                        @foreach($items as $key => $item)
-                            <tr>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" width="100" alt="...">
-                                        </div>
-                                        <div class="col d-flex align-items-center">
-                                            <div class="d-flex flex-column">
-                                                <span class="font-weight-bold">{{ $item->name }}</span>
-                                                <span class="text-muted">{{ $item->category }}</span>
+                    @if ($items->isEmpty())
+                        <p>Cart is empty</p>
+                    @else
+                        <table class="table border">
+                            <tbody>
+                            @foreach($items as $key => $item)
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" width="100" alt="...">
+                                            </div>
+                                            <div class="col d-flex align-items-center">
+                                                <div class="d-flex flex-column">
+                                                    <span class="font-weight-bold">{{ $item->name }}</span>
+                                                    <span class="text-muted">{{ $item->category }}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle @if ($loop->first) border-top-0 @endif">@usd($item->price)</td>
-                                <td style="width: 12%" class="align-middle @if ($loop->first) border-top-0 @endif">
-                                    <div class="form-group mb-0">
-                                        <label for="exampleInputEmail1" class="sr-only">Amount</label>
-                                        <input type="number" value="{{ $item->quantity }}" min="1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    </div>
-                                </td>
-                                <td class="align-middle @if ($loop->first) border-top-0 @endif">@usd($item->total())</td>
-                                <td class="align-middle @if ($loop->first) border-top-0 @endif">
-                                    <form action="{{ route('carts.destroy', $key) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-link">
-                                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                                                <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                                            </svg>
-                                        </button>
-                                    </form>
-                                </td>
+                                    </td>
+                                    <td class="align-middle @if ($loop->first) border-top-0 @endif">@usd($item->price)</td>
+                                    <td style="width: 12%" class="align-middle @if ($loop->first) border-top-0 @endif">
+                                        <div class="form-group mb-0">
+                                            <label for="exampleInputEmail1" class="sr-only">Amount</label>
+                                            <input type="number" value="{{ $item->quantity }}" min="1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+                                    </td>
+                                    <td class="align-middle @if ($loop->first) border-top-0 @endif">@usd($item->total())</td>
+                                    <td class="align-middle @if ($loop->first) border-top-0 @endif">
+                                        <form action="{{ route('carts.destroy', $key) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-link">
+                                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                                                    <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td colspan="3">Total:</td>
+                                <td colspan="2">@usd($total)</td>
                             </tr>
-                        @endforeach
-                        <tr>
-                            <td colspan="3">Total:</td>
-                            <td colspan="2">$8 350</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    @endif
                 </div>
                 <div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Name</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Phone</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Notes</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block">Order for $1500</button>
-                            </form>
+                    @if ($items->isNotEmpty())
+                        <div class="card">
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Name</label>
+                                        <input type="text" class="form-control" id="exampleInputPassword1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Phone</label>
+                                        <input type="text" class="form-control" id="exampleInputPassword1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Notes</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-block">Order for $1500</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>

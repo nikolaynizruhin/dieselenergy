@@ -2,13 +2,14 @@
 
 namespace App\Providers;
 
-use App\Http\View\Composers\Admin\CartComposer;
+use App\Http\View\Composers\Admin\CartComposer as AdminCartComposer;
 use App\Http\View\Composers\Admin\DashboardComposer;
 use App\Http\View\Composers\Admin\MediaComposer;
 use App\Http\View\Composers\Admin\OrderComposer;
 use App\Http\View\Composers\Admin\ProductComposer;
 use App\Http\View\Composers\Admin\ProductsComposer;
 use App\Http\View\Composers\Admin\SpecificationComposer;
+use App\Http\View\Composers\CartComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,6 +33,12 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(
+            ['carts.index'],
+            CartComposer::class
+        );
+
+        // Admin
+        View::composer(
             ['admin.dashboard'],
             DashboardComposer::class
         );
@@ -53,7 +60,7 @@ class ViewServiceProvider extends ServiceProvider
 
         View::composer(
             ['admin.carts.create', 'admin.carts.edit'],
-            CartComposer::class
+            AdminCartComposer::class
         );
 
         View::composer(
