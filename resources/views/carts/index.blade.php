@@ -47,7 +47,7 @@
                                 <td style="width: 12%" class="align-middle @if ($loop->first) border-top-0 @endif">
                                     <div class="form-group mb-0">
                                         <label for="exampleInputEmail1" class="sr-only">Amount</label>
-                                        <input type="number" value="{{ $item->quantity }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        <input type="number" value="{{ $item->quantity }}" min="1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                                     </div>
                                 </td>
                                 <td class="align-middle @if ($loop->first) border-top-0 @endif">@usd($item->total())</td>
