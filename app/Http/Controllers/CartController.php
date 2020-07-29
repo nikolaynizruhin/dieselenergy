@@ -85,6 +85,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cart::delete($id);
+
+        return back()->with('status', trans('cart.deleted'));
     }
 }
