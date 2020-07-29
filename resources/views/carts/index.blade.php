@@ -57,8 +57,8 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td class="align-middle" colspan="3">Total:</td>
-                            <td class="align-middle" colspan="2">$8 350</td>
+                            <td colspan="3">Total:</td>
+                            <td colspan="2">$8 350</td>
                         </tr>
                         </tbody>
                     </table>
