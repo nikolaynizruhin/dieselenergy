@@ -63,15 +63,4 @@ class Item
     {
         return $this->quantity * $this->price;
     }
-
-    /**
-     * Get item attribute.
-     *
-     * @param  string  $attribute
-     * @return mixed
-     */
-    public function __get($attribute)
-    {
-        return $this->{$attribute};
-    }
 }
