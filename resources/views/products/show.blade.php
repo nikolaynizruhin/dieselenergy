@@ -55,19 +55,21 @@
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda consectetur, debitis dicta dolorum earum eius eos inventore libero maxime molestiae nostrum obcaecati odit possimus quo recusandae sed totam.
                     </p>
-                    <div class="row">
-                        <div class="col-2 col-md-3 col-lg-2">
-                            <form>
+                    <form action="{{ route('carts.store') }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-2 col-md-3 col-lg-2">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1" class="sr-only">Amount</label>
-                                    <input type="number" value="1" min="1" max="99" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <input type="number" name="quantity" value="1" min="1" max="99" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 </div>
-                            </form>
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                            </div>
                         </div>
-                        <div class="col">
-                            <button type="submit" class="btn btn-primary">Add to Cart</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="row">
