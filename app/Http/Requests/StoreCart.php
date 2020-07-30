@@ -25,7 +25,7 @@ class StoreCart extends FormRequest
     public function rules()
     {
         return [
-            'quantity' => 'nullable|numeric|min:1',
+            'quantity' => 'required|numeric|min:1',
             'product_id' => 'required|numeric|exists:products,id',
         ];
     }
@@ -37,9 +37,6 @@ class StoreCart extends FormRequest
      */
     protected function passedValidation()
     {
-        $this->merge([
-            'quantity' => $this->get('quantity', 1),
-            'product' => Product::find($this->product_id),
-        ]);
+        $this->merge(['product' => Product::find($this->product_id)]);
     }
 }

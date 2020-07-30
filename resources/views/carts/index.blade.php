@@ -17,9 +17,7 @@
             <br>
             <div class="row">
                 <div class="col-8">
-                    @if ($items->isEmpty())
-                        <p>Cart is empty</p>
-                    @else
+                    @if ($items->isNotEmpty())
                         <table class="table border">
                             <tbody>
                             @foreach($items as $key => $item)
@@ -65,6 +63,8 @@
                             </tr>
                             </tbody>
                         </table>
+                    @else
+                        <p>Cart is empty</p>
                     @endif
                 </div>
                 <div class="col-4">

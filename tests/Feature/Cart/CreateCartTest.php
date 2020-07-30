@@ -49,6 +49,15 @@ class CreateCartTest extends TestCase
     }
 
     /** @test */
+    public function guest_cant_create_cart_without_quantity()
+    {
+        $product = factory(Product::class)->create();
+
+        $this->post(route('carts.store', ['product_id' => $product->id]))
+            ->assertSessionHasErrors('quantity');
+    }
+
+    /** @test */
     public function user_cant_create_cart_with_string_quantity()
     {
         $product = factory(Product::class)->create();

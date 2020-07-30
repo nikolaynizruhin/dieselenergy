@@ -121,6 +121,7 @@
                                         <form action="{{ route('carts.store') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input type="hidden" name="quantity" value="1">
                                             <button type="submit" class="btn btn-outline-secondary btn-block">
                                                 Add to Cart
                                             </button>
