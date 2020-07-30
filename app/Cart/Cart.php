@@ -61,6 +61,21 @@ class Cart
         return $this->session->get('cart', new Collection());
     }
 
+    public function update($key, $quantity)
+    {
+        $items = $this->items();
+
+        $item = $items->get($key);
+
+        $item->quantity = $quantity;
+
+        $items->put($key, $item);
+
+        $this->session->put('cart', $items);
+
+        return $item;
+    }
+
     /**
      * Get cart total.
      *

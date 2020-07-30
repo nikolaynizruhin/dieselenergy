@@ -68,6 +68,19 @@ class CartTest extends TestCase
     }
 
     /** @test */
+    public function it_can_update_cart_item()
+    {
+        $product = factory(Product::class)->create();
+
+        Cart::add($product);
+
+        $item = Cart::update(0, 5);
+
+        $this->assertEquals($product->id, $item->id);
+        $this->assertEquals(5, $item->quantity);
+    }
+
+    /** @test */
     public function it_can_get_total()
     {
         $generator = factory(Product::class)->create(['price' => 100]);

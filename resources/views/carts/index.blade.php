@@ -37,10 +37,14 @@
                                     </td>
                                     <td class="align-middle @if ($loop->first) border-top-0 @endif">@usd($item->price)</td>
                                     <td style="width: 12%" class="align-middle @if ($loop->first) border-top-0 @endif">
-                                        <div class="form-group mb-0">
-                                            <label for="exampleInputEmail1" class="sr-only">Amount</label>
-                                            <input type="number" value="{{ $item->quantity }}" min="1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                        </div>
+                                        <form action="{{ route('carts.update', $key) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="form-group mb-0">
+                                                <label for="exampleInputEmail1" class="sr-only">Amount</label>
+                                                <input type="number" name="quantity" onchange="this.form.submit()" value="{{ $item->quantity }}" min="1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            </div>
+                                        </form>
                                     </td>
                                     <td class="align-middle @if ($loop->first) border-top-0 @endif">@usd($item->total())</td>
                                     <td class="align-middle @if ($loop->first) border-top-0 @endif">

@@ -74,7 +74,13 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(['quantity' => 'required|numeric|min:1']);
+
+        Cart::update($id, $request->quantity);
+
+        return redirect()
+            ->route('carts.index')
+            ->with('status', trans('carts.updated'));
     }
 
     /**
