@@ -31,7 +31,7 @@ Route::resource('products', 'ProductController');
 Route::resource('customers', 'CustomerController')->except('show');
 Route::resource('orders', 'OrderController');
 Route::resource('carts', 'CartController')->except(['index', 'show']);
-Route::resource('medias', 'MediaController')->only(['create', 'store', 'destroy']);
+Route::resource('medias', 'MediaController')->except(['index', 'show']);
 Route::resource('images', 'ImageController')->except(['show', 'edit', 'update']);
 Route::resource('brands', 'BrandController')->except('show');
 Route::resource('categories', 'CategoryController');

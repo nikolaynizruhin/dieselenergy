@@ -17,6 +17,7 @@ return [
     'update' => 'Update Media',
     'delete' => 'Detach Image',
     'created' => 'Image was attached successfully!',
+    'updated' => 'Media was updated successfully!',
     'deleted' => 'Image was detached successfully!',
 
 ];

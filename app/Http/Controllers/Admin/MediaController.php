@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreMedia;
+use App\Http\Requests\Admin\UpdateMedia;
 use App\Media;
 use App\Product;
 use Illuminate\Http\Request;
@@ -36,6 +37,33 @@ class MediaController extends Controller
         return redirect()
             ->route('admin.products.show', $request->product_id)
             ->with('status', trans('media.created'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Media  $media
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Media $media)
+    {
+        return view('admin.medias.edit', compact('media'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Admin\UpdateMedia  $request
+     * @param  \App\Media  $media
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateMedia $request, Media $media)
+    {
+        $media->update($request->validated());
+
+        return redirect()
+            ->route('admin.products.show', $request->product_id)
+            ->with('status', trans('media.updated'));
     }
 
     /**
