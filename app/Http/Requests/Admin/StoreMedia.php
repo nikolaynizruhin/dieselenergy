@@ -25,6 +25,7 @@ class StoreMedia extends FormRequest
     public function rules()
     {
         return [
+            'is_default' => 'boolean',
             'image_id' => 'required|numeric|exists:images,id',
             'product_id' => [
                 'required',
@@ -35,5 +36,15 @@ class StoreMedia extends FormRequest
                 ])),
             ],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge(['is_default' => $this->boolean('is_default')]);
     }
 }

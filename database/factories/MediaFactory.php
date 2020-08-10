@@ -11,5 +11,6 @@ $factory->define(Media::class, function (Faker $faker) {
     return [
         'image_id' => factory(Image::class),
         'product_id' => factory(Product::class),
+        'is_default' => $faker->boolean,
     ];
 });

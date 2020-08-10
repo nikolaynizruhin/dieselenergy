@@ -25,7 +25,7 @@ class Image extends Model
     {
         return $this->belongsToMany(Product::class)
             ->using(Media::class)
-            ->withPivot('id')
+            ->withPivot('id', 'is_default')
             ->withTimestamps();
     }
 

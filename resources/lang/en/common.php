@@ -17,6 +17,7 @@ return [
     'date' => 'Date',
     'delete' => 'Delete',
     'detach' => 'Detach',
+    'default' => 'Default',
     'feature' => 'Feature',
     'is_featured' => 'Featured',
     'quantity' => 'Quantity',

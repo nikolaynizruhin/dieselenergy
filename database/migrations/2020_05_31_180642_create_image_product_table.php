@@ -18,6 +18,7 @@ class CreateImageProductTable extends Migration
             $table->unique(['product_id', 'image_id']);
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->foreignId('image_id')->constrained()->cascadeOnDelete();
+            $table->boolean('is_default')->default(0);
             $table->timestamps();
         });
     }

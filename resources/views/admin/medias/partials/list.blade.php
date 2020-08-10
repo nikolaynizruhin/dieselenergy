@@ -6,6 +6,7 @@
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('image.title') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.name') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('common.status') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
@@ -19,6 +20,13 @@
                         </a>
                     </td>
                     <td>{{ $image->name }}</td>
+                    <td>
+                        @if ($image->pivot->is_default)
+                            <span class="badge badge-pill badge-success">
+                                {{ __('common.default') }}
+                            </span>
+                        @endif
+                    </td>
                     <td>
                         <a href="#" data-toggle="modal" data-target="#showImageModal{{ $image->id }}" class="mr-2">
                             <svg class="bi bi-eye" width="1.1em" height="1.1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
