@@ -57,6 +57,31 @@ class UpdateMediaTest extends TestCase
     }
 
     /** @test */
+    public function it_should_unmark_other_default_medias()
+    {
+        $user = factory(User::class)->create();
+
+        $defaultMedia = factory(Media::class)
+            ->states('default')
+            ->create();
+
+        $media = factory(Media::class)->create([
+            'is_default' => 0,
+            'product_id' => $defaultMedia->product_id,
+        ]);
+
+        $stub = factory(Media::class)
+            ->states('default')
+            ->raw(['product_id' => $defaultMedia->product_id]);
+
+        $this->actingAs($user)
+            ->put(route('admin.medias.update', $media), $stub)
+            ->assertRedirect();
+
+        $this->assertFalse($defaultMedia->fresh()->is_default);
+    }
+
+    /** @test */
     public function user_cant_update_media_without_product()
     {
         $user = factory(User::class)->create();

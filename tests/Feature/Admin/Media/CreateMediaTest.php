@@ -55,6 +55,22 @@ class CreateMediaTest extends TestCase
     }
 
     /** @test */
+    public function it_should_unmark_other_default_medias()
+    {
+        $user = factory(User::class)->create();
+        $media = factory(Media::class)->states('default')->create();
+        $stub = factory(Media::class)->states('default')->raw([
+            'product_id' => $media->product_id,
+        ]);
+
+        $this->actingAs($user)
+            ->post(route('admin.medias.store'), $stub)
+            ->assertRedirect();
+
+        $this->assertFalse($media->fresh()->is_default);
+    }
+
+    /** @test */
     public function user_cant_create_media_without_product()
     {
         $user = factory(User::class)->create();

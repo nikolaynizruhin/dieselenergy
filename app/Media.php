@@ -21,6 +21,15 @@ class Media extends Pivot
     protected $table = 'image_product';
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_default' => 'boolean',
+    ];
+
+    /**
      * Get the product that owns the media.
      */
     public function product()
@@ -34,5 +43,18 @@ class Media extends Pivot
     public function image()
     {
         return $this->belongsTo(Image::class);
+    }
+
+    /**
+     * Unmark others media as default.
+     */
+    public function unmarkOthersAsDefault()
+    {
+        if ($this->is_default) {
+            self::where([
+                ['product_id', '=', $this->product_id],
+                ['image_id', '<>', $this->image_id],
+            ])->update(['is_default' => 0]);
+        }
     }
 }

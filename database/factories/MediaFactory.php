@@ -14,3 +14,5 @@ $factory->define(Media::class, function (Faker $faker) {
         'is_default' => $faker->boolean,
     ];
 });
+
+$factory->state(Media::class, 'default', ['is_default' => 1]);

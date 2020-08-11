@@ -32,7 +32,9 @@ class MediaController extends Controller
      */
     public function store(StoreMedia $request)
     {
-        Media::create($request->validated());
+        $media = Media::create($request->validated());
+
+        $media->unmarkOthersAsDefault();
 
         return redirect()
             ->route('admin.products.show', $request->product_id)
@@ -60,6 +62,8 @@ class MediaController extends Controller
     public function update(UpdateMedia $request, Media $media)
     {
         $media->update($request->validated());
+
+        $media->unmarkOthersAsDefault();
 
         return redirect()
             ->route('admin.products.show', $request->product_id)
