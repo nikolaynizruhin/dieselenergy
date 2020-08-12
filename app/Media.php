@@ -54,6 +54,7 @@ class Media extends Pivot
             self::where([
                 ['product_id', '=', $this->product_id],
                 ['image_id', '<>', $this->image_id],
+                ['is_default', '=', 1],
             ])->update(['is_default' => 0]);
         }
     }
