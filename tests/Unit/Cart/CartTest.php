@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Cart;
 
+use App\Image;
 use App\Product;
 use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,7 +16,10 @@ class CartTest extends TestCase
     /** @test */
     public function it_can_add()
     {
+        $image = factory(Image::class)->create();
         $product = factory(Product::class)->create();
+
+        $product->images()->attach($image, ['is_default' => 1]);
 
         $item = Cart::add($product);
 
@@ -23,13 +27,17 @@ class CartTest extends TestCase
         $this->assertEquals($item->name, $product->name);
         $this->assertEquals($item->category, $product->category->name);
         $this->assertEquals($item->price, $product->price);
+        $this->assertEquals($item->image, $product->defaultImage()->path);
         $this->assertEquals(1, $item->quantity);
     }
 
     /** @test */
     public function it_can_add_existing_product()
     {
+        $image = factory(Image::class)->create();
         $product = factory(Product::class)->create();
+
+        $product->images()->attach($image, ['is_default' => 1]);
 
         $item = Cart::add($product, 2);
 
@@ -43,7 +51,10 @@ class CartTest extends TestCase
     /** @test */
     public function it_can_remove()
     {
+        $image = factory(Image::class)->create();
         $product = factory(Product::class)->create();
+
+        $product->images()->attach($image, ['is_default' => 1]);
 
         Cart::add($product);
 
@@ -57,7 +68,10 @@ class CartTest extends TestCase
     /** @test */
     public function it_can_get_items()
     {
+        $image = factory(Image::class)->create();
         $product = factory(Product::class)->create();
+
+        $product->images()->attach($image, ['is_default' => 1]);
 
         $item = Cart::add($product);
 
@@ -70,7 +84,10 @@ class CartTest extends TestCase
     /** @test */
     public function it_can_update_cart_item()
     {
+        $image = factory(Image::class)->create();
         $product = factory(Product::class)->create();
+
+        $product->images()->attach($image, ['is_default' => 1]);
 
         Cart::add($product);
 
@@ -83,8 +100,13 @@ class CartTest extends TestCase
     /** @test */
     public function it_can_get_total()
     {
+        $image = factory(Image::class)->create();
+
         $generator = factory(Product::class)->create(['price' => 100]);
         $waterPump = factory(Product::class)->create(['price' => 100]);
+
+        $generator->images()->attach($image, ['is_default' => 1]);
+        $waterPump->images()->attach($image, ['is_default' => 1]);
 
         Cart::add($generator, 2);
         Cart::add($waterPump);

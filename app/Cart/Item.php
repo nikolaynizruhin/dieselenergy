@@ -14,14 +14,14 @@ class Item
     /**
      * Item name.
      *
-     * @var int
+     * @var string
      */
     public $name;
 
     /**
      * Item category.
      *
-     * @var int
+     * @var string
      */
     public $category;
 
@@ -40,6 +40,13 @@ class Item
     public $quantity;
 
     /**
+     * Item image.
+     *
+     * @var int
+     */
+    public $image;
+
+    /**
      * Item constructor.
      *
      * @param  \App\Product  $product
@@ -52,6 +59,7 @@ class Item
         $this->category = $product->category->name;
         $this->price = $product->price;
         $this->quantity = $quantity;
+        $this->image = $product->defaultImage()->path;
     }
 
     /**

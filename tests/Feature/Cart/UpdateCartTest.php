@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Cart;
 
+use App\Image;
 use App\Product;
 use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,7 +15,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function guest_can_update_cart()
     {
+        $image = factory(Image::class)->create();
         $product = factory(Product::class)->create();
+
+        $product->images()->attach($image, ['is_default' => 1]);
 
         Cart::add($product, 1);
 
@@ -31,7 +35,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function guest_cant_create_cart_without_quantity()
     {
+        $image = factory(Image::class)->create();
         $product = factory(Product::class)->create();
+
+        $product->images()->attach($image, ['is_default' => 1]);
 
         Cart::add($product, 1);
 
@@ -42,7 +49,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_cant_update_cart_with_string_quantity()
     {
+        $image = factory(Image::class)->create();
         $product = factory(Product::class)->create();
+
+        $product->images()->attach($image, ['is_default' => 1]);
 
         Cart::add($product, 1);
 
@@ -53,7 +63,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function guest_cant_update_cart_with_zero_quantity()
     {
+        $image = factory(Image::class)->create();
         $product = factory(Product::class)->create();
+
+        $product->images()->attach($image, ['is_default' => 1]);
 
         Cart::add($product, 1);
 
