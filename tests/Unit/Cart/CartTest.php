@@ -13,37 +13,48 @@ class CartTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * Product.
+     *
+     * @var \App\Product
+     */
+    private $product;
+
+    /**
+     * Setup
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->product = factory(Product::class)->create();
+
+        $image = factory(Image::class)->create();
+
+        $this->product->images()->attach($image, ['is_default' => 1]);
+    }
+
     /** @test */
     public function it_can_add()
     {
-        $image = factory(Image::class)->create();
-        $product = factory(Product::class)->create();
+        $item = Cart::add($this->product);
 
-        $product->images()->attach($image, ['is_default' => 1]);
-
-        $item = Cart::add($product);
-
-        $this->assertEquals($item->id, $product->id);
-        $this->assertEquals($item->name, $product->name);
-        $this->assertEquals($item->category, $product->category->name);
-        $this->assertEquals($item->price, $product->price);
-        $this->assertEquals($item->image, $product->defaultImage()->path);
+        $this->assertEquals($item->id, $this->product->id);
+        $this->assertEquals($item->name, $this->product->name);
+        $this->assertEquals($item->category, $this->product->category->name);
+        $this->assertEquals($item->price, $this->product->price);
+        $this->assertEquals($item->image, $this->product->defaultImage()->path);
         $this->assertEquals(1, $item->quantity);
     }
 
     /** @test */
     public function it_can_add_existing_product()
     {
-        $image = factory(Image::class)->create();
-        $product = factory(Product::class)->create();
-
-        $product->images()->attach($image, ['is_default' => 1]);
-
-        $item = Cart::add($product, 2);
+        $item = Cart::add($this->product, 2);
 
         $this->assertEquals(2, $item->quantity);
 
-        $item = Cart::add($product, 2);
+        $item = Cart::add($this->product, 2);
 
         $this->assertEquals(4, $item->quantity);
     }
@@ -51,12 +62,7 @@ class CartTest extends TestCase
     /** @test */
     public function it_can_remove()
     {
-        $image = factory(Image::class)->create();
-        $product = factory(Product::class)->create();
-
-        $product->images()->attach($image, ['is_default' => 1]);
-
-        Cart::add($product);
+        Cart::add($this->product);
 
         $this->assertCount(1, Cart::items());
 
@@ -68,12 +74,7 @@ class CartTest extends TestCase
     /** @test */
     public function it_can_get_items()
     {
-        $image = factory(Image::class)->create();
-        $product = factory(Product::class)->create();
-
-        $product->images()->attach($image, ['is_default' => 1]);
-
-        $item = Cart::add($product);
+        $item = Cart::add($this->product);
 
         $items = Cart::items();
 
@@ -84,16 +85,11 @@ class CartTest extends TestCase
     /** @test */
     public function it_can_update_cart_item()
     {
-        $image = factory(Image::class)->create();
-        $product = factory(Product::class)->create();
-
-        $product->images()->attach($image, ['is_default' => 1]);
-
-        Cart::add($product);
+        Cart::add($this->product);
 
         $item = Cart::update(0, 5);
 
-        $this->assertEquals($product->id, $item->id);
+        $this->assertEquals($this->product->id, $item->id);
         $this->assertEquals(5, $item->quantity);
     }
 
