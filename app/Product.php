@@ -45,6 +45,16 @@ class Product extends Model
     }
 
     /**
+     * Get product default image.
+     *
+     * @return \App\Image|null
+     */
+    public function defaultImage()
+    {
+       return $this->images()->wherePivot('is_default', 1)->first();
+    }
+
+    /**
      * Get the brand of the product.
      */
     public function brand()

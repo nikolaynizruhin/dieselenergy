@@ -75,4 +75,15 @@ class ProductTest extends TestCase
         $this->assertTrue($product->images->contains($image));
         $this->assertInstanceOf(Collection::class, $product->images);
     }
+
+    /** @test */
+    public function it_has_default_image()
+    {
+        $product = factory(Product::class)->create();
+        $image = factory(Image::class)->create();
+
+        $product->images()->attach($image, ['is_default' => 1]);
+
+        $this->assertTrue($product->defaultImage()->is($image));
+    }
 }
