@@ -21,7 +21,7 @@ class CartTest extends TestCase
     private $product;
 
     /**
-     * Setup
+     * Setup.
      */
     protected function setUp(): void
     {

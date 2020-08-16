@@ -20,7 +20,7 @@ class UpdateCartTest extends TestCase
     private $product;
 
     /**
-     * Setup
+     * Setup.
      */
     protected function setUp(): void
     {
