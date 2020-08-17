@@ -51,7 +51,9 @@ class Product extends Model
      */
     public function defaultImage()
     {
-        return $this->images()->wherePivot('is_default', 1)->first();
+        return $this->images()
+            ->wherePivot('is_default', 1)
+            ->first();
     }
 
     /**
