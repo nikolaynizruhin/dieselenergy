@@ -105,18 +105,20 @@
                                         <h6 class="card-subtitle mb-2 text-muted">{{ $product->category->name }}</h6>
                                         <h5 class="card-title">@usd($product->price)</h5>
                                     </div>
-                                    <div class="card-body bg-light text-muted">
-                                        @foreach ($product->attributes as $attribute)
-                                            <div class="row mb-1">
-                                                <div class="col letter-spacing text-gray-500 text-uppercase">
-                                                    <small>{{ $attribute->name }}</small>
+                                    @if ($product->attributes->isNotEmpty())
+                                        <div class="card-body bg-light text-muted">
+                                            @foreach ($product->attributes as $attribute)
+                                                <div class="row mb-1">
+                                                    <div class="col letter-spacing text-gray-500 text-uppercase">
+                                                        <small>{{ $attribute->name }}</small>
+                                                    </div>
+                                                    <div class="col text-secondary">
+                                                        <small>{{ $attribute->pivot->value . $attribute->measure }}</small>
+                                                    </div>
                                                 </div>
-                                                <div class="col text-secondary">
-                                                    <small>{{ $attribute->pivot->value . $attribute->measure }}</small>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                     <div class="card-body">
                                         <form action="{{ route('carts.store') }}" method="POST">
                                             @csrf
