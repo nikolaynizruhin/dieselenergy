@@ -87,6 +87,14 @@ class Cart
     }
 
     /**
+     * Clear a cart.
+     */
+    public function clear()
+    {
+        $this->session->put('cart', new Collection());
+    }
+
+    /**
      * Delete item.
      *
      * @param int $key

@@ -109,4 +109,16 @@ class CartTest extends TestCase
 
         $this->assertEquals(300, Cart::total());
     }
+
+    /** @test */
+    public function it_can_be_cleared()
+    {
+        Cart::add($this->product);
+
+        $this->assertCount(1, Cart::items());
+
+        Cart::clear();
+
+        $this->assertCount(0, Cart::items());
+    }
 }

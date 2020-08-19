@@ -12,21 +12,21 @@ class Order extends Model
      *
      * @var string
      */
-    const STATUS_NEW = 'New';
+    const NEW = 'New';
 
     /**
      * The pending order status.
      *
      * @var string
      */
-    const STATUS_PENDING = 'Pending';
+    const PENDING = 'Pending';
 
     /**
      * The done order status.
      *
      * @var string
      */
-    const STATUS_DONE = 'Done';
+    const DONE = 'Done';
 
     /**
      * The attributes that are mass assignable.
@@ -64,9 +64,9 @@ class Order extends Model
     public static function statuses()
     {
         return [
-            self::STATUS_NEW,
-            self::STATUS_PENDING,
-            self::STATUS_DONE,
+            self::NEW,
+            self::PENDING,
+            self::DONE,
         ];
     }
 
