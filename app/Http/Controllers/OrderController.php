@@ -39,11 +39,10 @@ class OrderController extends Controller
      */
     public function store(StoreOrder $request)
     {
-        $customer = Customer::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-        ]);
+        $customer = Customer::updateOrCreate(
+            ['email' => $request->email],
+            ['name' => $request->name, 'phone' => $request->phone],
+        );
 
         $order = $customer->orders()->create([
             'status' => Order::NEW,
