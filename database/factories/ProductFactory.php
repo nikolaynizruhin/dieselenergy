@@ -17,3 +17,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'category_id' => factory(Category::class),
     ];
 });
+
+$factory->state(Product::class, 'active', ['is_active' => true]);
+
+$factory->state(Product::class, 'inactive', ['is_active' => false]);

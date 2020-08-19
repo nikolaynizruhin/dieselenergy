@@ -13,18 +13,21 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $category)
+    public function index(Request $request, Category $category)
     {
         $featured = Specification::featuredAttributes($category);
 
         $products = $category
             ->products()
+            ->active()
             ->with(['attributes' => fn ($query) => $query->wherePivotIn('attribute_id', $featured)])
-            ->filter(request('filter'))
-            ->search('name', request('search'))
-            ->orderBy('name', request('sort', 'asc'))
+            ->filter($request->query('filter'))
+            ->search('name', $request->query('search'))
+            ->orderBy('name', $request->query('sort', 'asc'))
             ->paginate(9);
 
         return view('categories.products.index', compact('products', 'category'));

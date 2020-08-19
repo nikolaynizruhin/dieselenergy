@@ -16,9 +16,17 @@ class SearchProductsTest extends TestCase
     {
         $generators = factory(Category::class)->create();
 
-        $patrol = factory(Product::class)->create(['name' => 'Patrol Generator', 'category_id' => $generators->id]);
-        $diesel = factory(Product::class)->create(['name' => 'Diesel Generator', 'category_id' => $generators->id]);
-        $waterPump = factory(Product::class)->create(['name' => 'Water Pump', 'category_id' => $generators->id]);
+        $patrol = factory(Product::class)
+            ->states('active')
+            ->create(['name' => 'Patrol Generator', 'category_id' => $generators->id]);
+
+        $diesel = factory(Product::class)
+            ->states('active')
+            ->create(['name' => 'Diesel Generator', 'category_id' => $generators->id]);
+
+        $waterPump = factory(Product::class)
+            ->states('active')
+            ->create(['name' => 'Water Pump', 'category_id' => $generators->id]);
 
         $this->get(route('categories.products.index', [
             'category' => $generators,

@@ -18,13 +18,31 @@ class FilterProductsTest extends TestCase
         $generators = factory(Category::class)->create();
         $attribute = factory(Attribute::class)->create();
 
-        $patrol = factory(Product::class)->create(['name' => 'Patrol Generator', 'category_id' => $generators->id]);
+        $patrol = factory(Product::class)
+            ->states('active')
+            ->create([
+                'name' => 'Patrol Generator',
+                'category_id' => $generators->id,
+            ]);
+
         $patrol->attributes()->attach($attribute, ['value' => 10]);
 
-        $diesel = factory(Product::class)->create(['name' => 'Diesel Generator', 'category_id' => $generators->id]);
+        $diesel = factory(Product::class)
+            ->states('active')
+            ->create([
+                'name' => 'Diesel Generator',
+                'category_id' => $generators->id,
+            ]);
+
         $diesel->attributes()->attach($attribute, ['value' => 20]);
 
-        $waterPump = factory(Product::class)->create(['name' => 'Water Pump', 'category_id' => $generators->id]);
+        $waterPump = factory(Product::class)
+            ->states('active')
+            ->create([
+                'name' => 'Water Pump',
+                'category_id' => $generators->id,
+            ]);
+
         $waterPump->attributes()->attach($attribute, ['value' => 30]);
 
         $this->get(route('categories.products.index', [
