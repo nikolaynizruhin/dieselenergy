@@ -39,7 +39,9 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_can_create_order()
     {
-        $customer = factory(Customer::class)->make()->makeHidden('notes');
+        $customer = factory(Customer::class)
+            ->make()
+            ->makeHidden('notes');
 
         Cart::add($this->product, $quantity = $this->faker->randomDigitNotNull);
 
@@ -68,127 +70,154 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_without_customer_name()
     {
-        $customer = factory(Customer::class)->raw(['name' => null]);
+        $customer = factory(Customer::class)
+            ->make(['name' => null])
+            ->makeHidden('notes');
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer)
+        $this->post(route('orders.store'), $customer->toArray())
             ->assertSessionHasErrors('name');
     }
 
     /** @test */
     public function guest_cant_create_order_with_integer_customer_name()
     {
-        $customer = factory(Customer::class)->raw(['name' => 1]);
+        $customer = factory(Customer::class)
+            ->make(['name' => 1])
+            ->makeHidden('notes');
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer)
+        $this->post(route('orders.store'), $customer->toArray())
             ->assertSessionHasErrors('name');
     }
 
     /** @test */
     public function guest_cant_create_order_with_customer_name_more_than_255_chars()
     {
-        $customer = factory(Customer::class)->raw([
-            'name' => str_repeat('a', 256),
-        ]);
+        $customer = factory(Customer::class)
+            ->make(['name' => str_repeat('a', 256)])
+            ->makeHidden('notes');
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer)
+        $this->post(route('orders.store'), $customer->toArray())
             ->assertSessionHasErrors('name');
     }
 
     /** @test */
     public function guest_cant_create_order_without_customer_email()
     {
-        $customer = factory(Customer::class)->raw(['email' => null]);
+        $customer = factory(Customer::class)
+            ->make(['email' => null])
+            ->makeHidden('notes');
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer)
+        $this->post(route('orders.store'), $customer->toArray())
             ->assertSessionHasErrors('email');
     }
 
     /** @test */
     public function guest_cant_create_order_with_integer_customer_email()
     {
-        $customer = factory(Customer::class)->raw(['email' => 1]);
+        $customer = factory(Customer::class)
+            ->make(['email' => 1])
+            ->makeHidden('notes');
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer)
+        $this->post(route('orders.store'), $customer->toArray())
             ->assertSessionHasErrors('email');
     }
 
     /** @test */
     public function guest_cant_create_order_with_customer_email_more_than_255_chars()
     {
-        $customer = factory(Customer::class)->raw([
-            'email' => str_repeat('a', 256),
-        ]);
+        $customer = factory(Customer::class)
+            ->make(['email' => str_repeat('a', 256)])
+            ->makeHidden('notes');
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer)
+        $this->post(route('orders.store'), $customer->toArray())
             ->assertSessionHasErrors('email');
     }
 
     /** @test */
     public function guest_cant_create_order_with_invalid_customer_email()
     {
-        $customer = factory(Customer::class)->raw(['email' => 'invalid']);
+        $customer = factory(Customer::class)
+            ->make(['email' => 'invalid'])
+            ->makeHidden('notes');
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer)
+        $this->post(route('orders.store'), $customer->toArray())
             ->assertSessionHasErrors('email');
     }
 
     /** @test */
     public function guest_cant_create_order_without_customer_phone()
     {
-        $customer = factory(Customer::class)->raw(['phone' => null]);
+        $customer = factory(Customer::class)
+            ->make(['phone' => null])
+            ->makeHidden('notes');
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer)
+        $this->post(route('orders.store'), $customer->toArray())
             ->assertSessionHasErrors('phone');
     }
 
     /** @test */
     public function guest_cant_create_order_with_integer_customer_phone()
     {
-        $customer = factory(Customer::class)->raw(['phone' => 1]);
+        $customer = factory(Customer::class)
+            ->make(['phone' => 1])
+            ->makeHidden('notes');
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer)
+        $this->post(route('orders.store'), $customer->toArray())
             ->assertSessionHasErrors('phone');
     }
 
     /** @test */
     public function guest_cant_create_order_with_customer_phone_more_than_255_chars()
     {
-        $customer = factory(Customer::class)->raw([
-            'phone' => str_repeat('a', 256),
-        ]);
+        $customer = factory(Customer::class)
+            ->make(['phone' => str_repeat('a', 256)])
+            ->makeHidden('notes');
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer)
+        $this->post(route('orders.store'), $customer->toArray())
             ->assertSessionHasErrors('phone');
     }
 
     /** @test */
     public function guest_cant_create_order_with_integer_notes()
     {
-        $customer = factory(Customer::class)->raw(['notes' => 1]);
+        $customer = factory(Customer::class)
+            ->make()
+            ->makeHidden('notes');
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer)
+        $this->post(route('orders.store'), $customer->toArray() + ['notes' => 1])
             ->assertSessionHasErrors('notes');
+    }
+
+    /** @test */
+    public function guest_cant_create_order_with_empty_cart()
+    {
+        $customer = factory(Customer::class)
+            ->make()
+            ->makeHidden('notes');
+
+        $this->post(route('orders.store'), $customer->toArray())
+            ->assertSessionHasErrors('cart');
     }
 }

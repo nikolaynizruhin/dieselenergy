@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreOrder extends FormRequest
@@ -29,5 +30,20 @@ class StoreOrder extends FormRequest
             'phone' => 'required|string|max:255',
             'notes' => 'nullable|string',
         ];
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if (Cart::items()->isEmpty()) {
+                $validator->errors()->add('cart', "Cart can't be empty!");
+            }
+        });
     }
 }
