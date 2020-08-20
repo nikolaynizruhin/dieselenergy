@@ -48,14 +48,14 @@ class CreateOrderTest extends TestCase
         $total = Cart::total();
 
         $this->post(route('orders.store'), $customer->toArray() + [
-                'notes' => $notes = $this->faker->paragraph,
-            ])->assertRedirect();
+            'notes' => $notes = $this->faker->paragraph,
+        ])->assertRedirect();
 
         $this->assertDatabaseHas('customers', $customer->toArray());
 
         $this->assertDatabaseHas('order_product', [
             'product_id' => $this->product->id,
-            'quantity' => $quantity
+            'quantity' => $quantity,
         ]);
 
         $this->assertDatabaseHas('orders', [

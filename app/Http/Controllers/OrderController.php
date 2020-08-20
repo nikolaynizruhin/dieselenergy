@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Cart as CartModel;
-use App\Http\Requests\StoreOrder;
-use Facades\App\Cart\Cart;
 use App\Customer;
+use App\Http\Requests\StoreOrder;
 use App\Order;
+use Facades\App\Cart\Cart;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
