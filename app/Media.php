@@ -46,9 +46,9 @@ class Media extends Pivot
     }
 
     /**
-     * Unmark others media as default.
+     * Unmark others default medias.
      */
-    public function unmarkOthersAsDefault()
+    public function unmarkOtherDefaults()
     {
         if ($this->is_default) {
             self::where([
