@@ -68,6 +68,23 @@ class CreateOrderTest extends TestCase
     }
 
     /** @test */
+    public function it_should_update_existing_customer()
+    {
+        $customer = factory(Customer::class)->create();
+        $stub = factory(Customer::class)
+            ->make(['email' => $customer->email])
+            ->makeHidden('notes');
+
+        Cart::add($this->product);
+
+        $this->post(route('orders.store'), $stub->toArray())
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('customers', $stub->toArray());
+        $this->assertDatabaseCount('customers', 1);
+    }
+
+    /** @test */
     public function guest_cant_create_order_without_customer_name()
     {
         $customer = factory(Customer::class)
