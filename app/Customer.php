@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Cart as CartModel;
 use Facades\App\Cart\Cart;
 use Illuminate\Database\Eloquent\Model;
 
