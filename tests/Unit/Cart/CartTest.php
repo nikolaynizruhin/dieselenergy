@@ -3,15 +3,17 @@
 namespace Tests\Unit\Cart;
 
 use App\Image;
+use App\Order;
 use App\Product;
 use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
 
 class CartTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     /**
      * Product.
@@ -120,5 +122,23 @@ class CartTest extends TestCase
         Cart::clear();
 
         $this->assertCount(0, Cart::items());
+    }
+
+    /** @test */
+    public function it_can_be_stored()
+    {
+        $order = factory(Order::class)->create();
+
+        Cart::add($this->product, $quantity = $this->faker->randomDigitNotNull);
+
+        $this->assertDatabaseCount('order_product', 0);
+
+        Cart::store($order);
+
+        $this->assertDatabaseHas('order_product', [
+            'product_id' => $this->product->id,
+            'order_id' => $order->id,
+            'quantity' => $quantity,
+        ]);
     }
 }
