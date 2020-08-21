@@ -40,8 +40,8 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="form-group mb-0">
-                                            <label for="exampleInputEmail1" class="sr-only">Amount</label>
-                                            <input type="number" name="quantity" onchange="this.form.submit()" value="{{ $item->quantity }}" min="1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            <label for="quantity" class="sr-only">Amount</label>
+                                            <input type="number" name="quantity" onchange="this.form.submit()" value="{{ $item->quantity }}" min="1" class="form-control" id="quantity" aria-describedby="quantityHelp">
                                         </div>
                                     </form>
                                 </td>
@@ -74,24 +74,49 @@
                 @if ($items->isNotEmpty())
                     <div class="card">
                         <div class="card-body">
-                            <form>
+                            <form action="{{ route('orders.store') }}" method="POST">
+                                @csrf
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Name</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <label for="inputName">Name</label>
+                                    <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="inputName" required autocomplete="name" autofocus>
+
+                                    @error('name')
+                                        <div class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <label for="inputEmail">Email address</label>
+                                    <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" id="inputEmail" aria-describedby="emailHelp" required autocomplete="email">
+
+                                    @error('email')
+                                        <div class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Phone</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <label for="inputPhone">Phone</label>
+                                    <input name="phone" type="text" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" id="inputPhone" required autocomplete="phone">
+
+                                    @error('phone')
+                                        <div class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Notes</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <label for="inputNotes">Notes</label>
+                                    <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" id="inputNotes" rows="3">{{ old('notes') }}</textarea>
+
+                                    @error('notes')
+                                        <div class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </div>
+                                    @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">Order for $1500</button>
+                                <button type="submit" class="btn btn-primary btn-block">Order for @usd($total)</button>
                             </form>
                         </div>
                     </div>
