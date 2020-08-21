@@ -43,6 +43,8 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_can_create_media()
     {
+        $this->withoutExceptionHandling();
+
         $user = factory(User::class)->create();
         $media = factory(Media::class)->raw();
 

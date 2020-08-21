@@ -34,7 +34,7 @@ class MediaController extends Controller
     {
         $media = Media::create($request->validated());
 
-        $media->unmarkOthersAsDefault();
+        $media->unmarkOtherDefaults();
 
         return redirect()
             ->route('admin.products.show', $request->product_id)
