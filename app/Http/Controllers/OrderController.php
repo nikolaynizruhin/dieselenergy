@@ -41,22 +41,10 @@ class OrderController extends Controller
     {
         $customer = Customer::updateOrCreate(
             ['email' => $request->email],
-            ['name' => $request->name, 'phone' => $request->phone],
+            $request->getCustomerAttributes(),
         );
 
-        $order = $customer->orders()->create([
-            'status' => Order::NEW,
-            'total' => Cart::total(),
-            'notes' => $request->notes,
-        ]);
-
-        Cart::items()->each(fn ($item) => CartModel::create([
-            'product_id' => $item->id,
-            'order_id' => $order->id,
-            'quantity' => $item->quantity,
-        ]));
-
-        Cart::clear();
+        $customer->createNewOrder($request->notes);
 
         return redirect()->back();
     }
