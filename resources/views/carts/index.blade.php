@@ -22,21 +22,16 @@
                             <tbody>
                             @foreach($items as $key => $item)
                                 <tr>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" width="100" alt="...">
-                                            </div>
-                                            <div class="col d-flex align-items-center">
-                                                <div class="d-flex flex-column">
-                                                    <span class="font-weight-bold">{{ $item->name }}</span>
-                                                    <span class="text-muted">{{ $item->category }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <td class="align-middle @if ($loop->first) border-top-0 @endif">
+                                        <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" width="100" alt="...">
+                                    </td>
+                                    <td class="align-middle @if ($loop->first) border-top-0 @endif">
+                                        <span class="font-weight-bold">{{ $item->name }}</span>
+                                        <br>
+                                        <span class="text-muted">{{ $item->category }}</span>
                                     </td>
                                     <td class="align-middle @if ($loop->first) border-top-0 @endif">@usd($item->price)</td>
-                                    <td style="width: 12%" class="align-middle @if ($loop->first) border-top-0 @endif">
+                                    <td class="align-middle @if ($loop->first) border-top-0 @endif">
                                         <form action="{{ route('carts.update', $key) }}" method="POST">
                                             @csrf
                                             @method('PUT')
@@ -62,7 +57,7 @@
                                 </tr>
                             @endforeach
                             <tr>
-                                <td colspan="3">Total:</td>
+                                <td colspan="4">Total:</td>
                                 <td colspan="2">@usd($total)</td>
                             </tr>
                             </tbody>
