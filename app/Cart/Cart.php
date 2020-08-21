@@ -2,6 +2,7 @@
 
 namespace App\Cart;
 
+use App\Order;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
 
@@ -92,6 +93,20 @@ class Cart
     public function clear()
     {
         $this->session->put('cart', new Collection());
+    }
+
+    /**
+     * Store a cart.
+     *
+     * @param  \App\Order  $order
+     */
+    public function store(Order $order)
+    {
+        $products = $this->items()->mapWithKeys(fn ($item) => [
+            $item->id => ['quantity' => $item->quantity],
+        ]);
+
+        $order->products()->attach($products->all());
     }
 
     /**

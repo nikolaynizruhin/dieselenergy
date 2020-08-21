@@ -38,11 +38,7 @@ class Customer extends Model
             'notes' => $notes,
         ]);
 
-        $products = Cart::items()->mapWithKeys(fn ($item) => [
-            $item->id => ['quantity' => $item->quantity],
-        ]);
-
-        $order->products()->attach($products->all());
+        Cart::store($order);
 
         Cart::clear();
     }
