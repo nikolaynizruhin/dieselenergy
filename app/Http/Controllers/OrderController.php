@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Http\Requests\StoreOrder;
+use App\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -41,20 +42,20 @@ class OrderController extends Controller
             $request->getCustomerAttributes(),
         );
 
-        $customer->createNewOrder($request->notes);
+        $order = $customer->createNewOrder($request->notes);
 
-        return redirect()->back();
+        return redirect()->route('orders.show', [$order]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        //
+        return view('orders.show', compact('order'));
     }
 
     /**

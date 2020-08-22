@@ -30,6 +30,7 @@ class Customer extends Model
      * Create a new order.
      *
      * @param string $notes
+     * @return \App\Order
      */
     public function createNewOrder($notes = '')
     {
@@ -41,5 +42,7 @@ class Customer extends Model
         Cart::store($order);
 
         Cart::clear();
+
+        return $order;
     }
 }
