@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'home');
-Route::view('/shop', 'shop');
-Route::view('/product', 'product');
-Route::view('/cart', 'cart');
 Route::resource('carts', 'CartController');
 Route::resource('orders', 'OrderController')->only(['store', 'show']);
 Route::resource('categories.products', 'Category\ProductController')->shallow()->only(['index', 'show']);
