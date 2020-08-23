@@ -49,6 +49,8 @@ class OrderController extends Controller
 
         Cart::clear();
 
+        $customer->sendOrderConfirmationNotification($order);
+
         return redirect()->route('orders.show', [$order]);
     }
 

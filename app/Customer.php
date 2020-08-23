@@ -2,11 +2,13 @@
 
 namespace App;
 
+use App\Notifications\OrderConfirmed;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Customer extends Model
 {
-    use HasSearch;
+    use HasSearch, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -37,5 +39,16 @@ class Customer extends Model
             'status' => Order::NEW,
             'notes' => $notes,
         ]);
+    }
+
+    /**
+     * Send the order confirmation notification.
+     *
+     * @param  \App\Order  $order
+     * @return void
+     */
+    public function sendOrderConfirmationNotification($order)
+    {
+        $this->notify(new OrderConfirmed($order));
     }
 }

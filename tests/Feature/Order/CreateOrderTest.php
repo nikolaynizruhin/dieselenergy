@@ -4,11 +4,13 @@ namespace Tests\Feature\Order;
 
 use App\Customer;
 use App\Image;
+use App\Notifications\OrderConfirmed;
 use App\Order;
 use App\Product;
 use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class CreateOrderTest extends TestCase
@@ -84,6 +86,27 @@ class CreateOrderTest extends TestCase
 
         $this->assertDatabaseHas('customers', $stub->toArray());
         $this->assertDatabaseCount('customers', 1);
+    }
+
+    /** @test */
+    public function it_should_send_order_confirmation_email_to_customer()
+    {
+        Notification::fake();
+
+        $stub = factory(Customer::class)->make()->makeHidden('notes');
+
+        Cart::add($this->product);
+
+        $this->post(route('orders.store'), $stub->toArray());
+
+        $customer = Customer::firstWhere('email', $stub->email);
+
+        $order = $customer->orders()->first();
+
+        Notification::assertSentTo(
+            $customer,
+            fn (OrderConfirmed $notification) => $notification->order->id === $order->id
+        );
     }
 
     /** @test */
