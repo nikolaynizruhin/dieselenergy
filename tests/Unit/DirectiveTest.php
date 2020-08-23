@@ -18,6 +18,12 @@ class DirectiveTest extends TestCase
         $this->assertDirectiveOutput('₴25 000.00', '@uah(100000)');
     }
 
+    /** @test */
+    public function it_compiles_markdown_directive()
+    {
+        $this->assertDirectiveOutput("<h1>Markdown</h1>\n", '@markdown("# Markdown")');
+    }
+
     /**
      * Assert directive output.
      *

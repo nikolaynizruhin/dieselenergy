@@ -24,12 +24,10 @@ class DirectiveServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::directive('usd', function ($cents) {
-            return "<?php echo '$'.number_format(($cents / 100), 2, '.', ' '); ?>";
-        });
+        Blade::directive('usd', fn ($cents) => "<?php echo '$'.number_format(($cents / 100), 2, '.', ' '); ?>");
 
-        Blade::directive('uah', function ($cents) {
-            return "<?php echo '₴'.number_format(($cents * 25 / 100), 2, '.', ' '); ?>";
-        });
+        Blade::directive('uah', fn ($cents) => "<?php echo '₴'.number_format(($cents * 25 / 100), 2, '.', ' '); ?>");
+
+        Blade::directive('markdown', fn ($content) => "<?php echo Markdown::parse($content); ?>");
     }
 }

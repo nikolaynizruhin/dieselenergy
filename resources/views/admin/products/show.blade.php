@@ -63,7 +63,7 @@
 
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('common.description') }}</div>
-                <div class="col-md-6">{{ Markdown::parse($product->description) }}</div>
+                <div class="col-md-6">@markdown($product->description)</div>
             </div>
 
             @foreach($product->attributes as $attribute)
