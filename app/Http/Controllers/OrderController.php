@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Http\Requests\StoreOrder;
 use App\Order;
+use Facades\App\Cart\Cart;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -43,6 +44,10 @@ class OrderController extends Controller
         );
 
         $order = $customer->createNewOrder($request->notes);
+
+        Cart::store($order);
+
+        Cart::clear();
 
         return redirect()->route('orders.show', [$order]);
     }

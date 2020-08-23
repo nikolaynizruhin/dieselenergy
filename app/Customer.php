@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Facades\App\Cart\Cart;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
@@ -34,15 +33,9 @@ class Customer extends Model
      */
     public function createNewOrder($notes = '')
     {
-        $order = $this->orders()->create([
+        return $this->orders()->create([
             'status' => Order::NEW,
             'notes' => $notes,
         ]);
-
-        Cart::store($order);
-
-        Cart::clear();
-
-        return $order;
     }
 }
