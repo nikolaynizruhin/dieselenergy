@@ -239,29 +239,29 @@
 
                 <form>
                     <div class="form-group">
-                        <label for="exampleInputEmail1" class="font-weight-bold">Name</label>
-                        <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="inputName" class="font-weight-bold">Name</label>
+                        <input type="email" class="form-control form-control-lg" id="inputName" aria-describedby="emailHelp">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1" class="font-weight-bold">Company</label>
-                        <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1" class="font-weight-bold">Email address</label>
-                        <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="inputEmail" class="font-weight-bold">Email address</label>
+                        <input type="email" class="form-control form-control-lg" id="inputEmail" aria-describedby="emailHelp">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1" class="font-weight-bold">Phone Number</label>
-                        <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="inputPhone" class="font-weight-bold">Phone Number</label>
+                        <input type="email" class="form-control form-control-lg" id="inputPhone" aria-describedby="emailHelp">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1" class="font-weight-bold">Message</label>
-                        <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="4"></textarea>
+                        <label for="inputSubject" class="font-weight-bold">Subject</label>
+                        <input type="email" class="form-control form-control-lg" id="inputSubject" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputMessage" class="font-weight-bold">Message</label>
+                        <textarea class="form-control form-control-lg" id="inputMessage" rows="4"></textarea>
                     </div>
                     <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                        <label class="custom-control-label text-muted" for="customSwitch1">By selecting this, you agree to the Privacy Policy</label>
+                        <input type="checkbox" class="custom-control-input" id="accept">
+                        <label class="custom-control-label text-muted" for="accept">By selecting this, you agree to the Privacy Policy</label>
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Let's Talk</button>
                 </form>
