@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'home');
+Route::view('/', 'home')->name('home');
+Route::resource('contacts', 'ContactController')->only('store');
 Route::resource('carts', 'CartController');
 Route::resource('orders', 'OrderController')->only(['store', 'show']);
 Route::resource('categories.products', 'Category\ProductController')->shallow()->only(['index', 'show']);

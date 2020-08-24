@@ -237,31 +237,69 @@
 
                 <br>
 
-                <form>
+                <form action="{{ route('contacts.store') }}" method="POST">
+                    @csrf
+
                     <div class="form-group">
                         <label for="inputName" class="font-weight-bold">Name</label>
-                        <input type="email" class="form-control form-control-lg" id="inputName" aria-describedby="emailHelp">
+                        <input name="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" id="inputName" value="{{ old('name') }}" aria-describedby="nameHelp" autocomplete="name" required>
+
+                        @error('name')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="inputEmail" class="font-weight-bold">Email address</label>
-                        <input type="email" class="form-control form-control-lg" id="inputEmail" aria-describedby="emailHelp">
+                        <input name="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" id="inputEmail" value="{{ old('email') }}" aria-describedby="emailHelp" autocomplete="email" required>
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+
+                        @error('email')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="inputPhone" class="font-weight-bold">Phone Number</label>
-                        <input type="email" class="form-control form-control-lg" id="inputPhone" aria-describedby="emailHelp">
+                        <input name="phone" type="text" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone') }}" aria-describedby="phoneHelp" autocomplete="phone" required>
+
+                        @error('phone')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="inputSubject" class="font-weight-bold">Subject</label>
-                        <input type="email" class="form-control form-control-lg" id="inputSubject" aria-describedby="emailHelp">
+                        <input name="subject" type="text" class="form-control form-control-lg @error('subject') is-invalid @enderror" id="inputSubject" value="{{ old('subject') }}" aria-describedby="subjectHelp" autocomplete="subject" required>
+
+                        @error('subject')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="inputMessage" class="font-weight-bold">Message</label>
-                        <textarea class="form-control form-control-lg" id="inputMessage" rows="4"></textarea>
+                        <textarea name="message" class="form-control form-control-lg @error('message') is-invalid @enderror" id="inputMessage" rows="4" required>{{ old('message') }}</textarea>
+
+                        @error('message')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
                     </div>
                     <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input" id="accept">
+                        <input name="terms" value="1" type="checkbox" class="custom-control-input @error('terms') is-invalid @enderror" id="accept">
                         <label class="custom-control-label text-muted" for="accept">By selecting this, you agree to the Privacy Policy</label>
+
+                        @error('terms')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Let's Talk</button>
                 </form>
