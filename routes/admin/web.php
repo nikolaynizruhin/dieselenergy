@@ -30,6 +30,7 @@ Route::get('/', 'DashboardController')->name('dashboard');
 Route::resource('products', 'ProductController');
 Route::resource('customers', 'CustomerController')->except('show');
 Route::resource('orders', 'OrderController');
+Route::resource('contacts', 'ContactController');
 Route::resource('carts', 'CartController')->except(['index', 'show']);
 Route::resource('medias', 'MediaController')->except(['index', 'show']);
 Route::resource('images', 'ImageController')->except(['show', 'edit', 'update']);

@@ -28,6 +28,14 @@ class Customer extends Model
     }
 
     /**
+     * Get the contacts for the customer.
+     */
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
+    /**
      * Create a new order.
      *
      * @param string $notes

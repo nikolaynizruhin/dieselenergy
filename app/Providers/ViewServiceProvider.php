@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\View\Composers\Admin\CartComposer as AdminCartComposer;
+use App\Http\View\Composers\Admin\ContactComposer;
 use App\Http\View\Composers\Admin\DashboardComposer;
 use App\Http\View\Composers\Admin\MediaComposer;
 use App\Http\View\Composers\Admin\OrderComposer;
@@ -56,6 +57,11 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(
             ['admin.orders.create', 'admin.orders.edit'],
             OrderComposer::class
+        );
+
+        View::composer(
+            ['admin.contacts.create', 'admin.contacts.edit'],
+            ContactComposer::class
         );
 
         View::composer(
