@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Http\Requests\StoreContact;
+use App\Notifications\ContactCreated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class ContactController extends Controller
 {
@@ -41,10 +43,13 @@ class ContactController extends Controller
             $request->getCustomerAttributes(),
         );
 
-        $customer->contacts()->create([
+        $contact = $customer->contacts()->create([
             'subject' => $request->subject,
             'message' => $request->message,
         ]);
+
+        Notification::route('mail', config('mail.to.address'))
+            ->notify(new ContactCreated($contact));
 
         return redirect()->back()->with('status', trans('contact.created'));
     }

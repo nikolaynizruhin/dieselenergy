@@ -3,7 +3,10 @@
 namespace Tests\Feature\Contact;
 
 use App\Contact;
+use App\Notifications\ContactCreated;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Notifications\AnonymousNotifiable;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class CreateContactTest extends TestCase
@@ -36,6 +39,30 @@ class CreateContactTest extends TestCase
             'subject' => $contact->subject,
             'message' => $contact->message,
         ]);
+    }
+
+    /** @test */
+    public function admin_should_receive_an_email_when_contact_created()
+    {
+        Notification::fake();
+
+        $contact = factory(Contact::class)->make();
+
+        $this->from(route('home'))
+            ->post(route('contacts.store'), [
+                'terms' => 1,
+                'name' => $contact->customer->name,
+                'email' => $contact->customer->email,
+                'phone' => $contact->customer->phone,
+                'subject' => $contact->subject,
+                'message' => $contact->message,
+            ])->assertRedirect(route('home'));
+
+        Notification::assertSentTo(
+            new AnonymousNotifiable,
+            ContactCreated::class,
+            fn ($notification, $channels) => $notification->contact->customer->email === $contact->customer->email,
+        );
     }
 
     /** @test */
