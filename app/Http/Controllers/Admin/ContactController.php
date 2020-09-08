@@ -55,7 +55,7 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        return view('admin.contacts.show', compact('contact'));
     }
 
     /**

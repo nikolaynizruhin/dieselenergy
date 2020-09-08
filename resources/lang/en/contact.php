@@ -15,6 +15,7 @@ return [
     'add' => 'Add Contact',
     'created' => 'Contact was created successfully!',
     'subject' => 'Subject',
+    'details' => 'Contact Details',
     'message' => 'Message',
     'delete' => 'Delete Contact',
     'title' => 'Contact',
