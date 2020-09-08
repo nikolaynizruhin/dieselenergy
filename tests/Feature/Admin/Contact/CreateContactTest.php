@@ -95,7 +95,6 @@ class CreateContactTest extends TestCase
             ->assertSessionHasErrors('message');
     }
 
-
     /** @test */
     public function user_cant_create_contact_with_subject_more_than_255_chars()
     {

@@ -5,7 +5,6 @@ namespace Tests\Feature\Admin\Contact;
 use App\Contact;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class SearchContactsTest extends TestCase
