@@ -2,11 +2,9 @@
 
 namespace Tests\Feature\Admin\Contact;
 
-use App\Brand;
 use App\Contact;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ReadContactsTest extends TestCase

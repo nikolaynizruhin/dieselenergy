@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Http\View\Composers\Admin;
-
 
 use App\Customer;
 use Illuminate\View\View;

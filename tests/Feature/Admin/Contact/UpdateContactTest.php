@@ -5,7 +5,6 @@ namespace Tests\Feature\Admin\Contact;
 use App\Contact;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UpdateContactTest extends TestCase
@@ -104,7 +103,6 @@ class UpdateContactTest extends TestCase
             ->put(route('admin.contacts.update', $contact), $stub)
             ->assertSessionHasErrors('message');
     }
-
 
     /** @test */
     public function user_cant_update_contact_with_subject_more_than_255_chars()
