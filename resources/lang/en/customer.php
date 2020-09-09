@@ -13,6 +13,7 @@ return [
     */
 
     'add' => 'Add Customer',
+    'details' => 'Customer Details',
     'created' => 'Customer was created successfully!',
     'deleted' => 'Customer was deleted successfully!',
     'delete' => 'Delete Customer',

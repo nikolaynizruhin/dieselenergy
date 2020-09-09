@@ -28,7 +28,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->withoutMidd
 Route::get('/', 'DashboardController')->name('dashboard');
 
 Route::resource('products', 'ProductController');
-Route::resource('customers', 'CustomerController')->except('show');
+Route::resource('customers', 'CustomerController');
 Route::resource('orders', 'OrderController');
 Route::resource('contacts', 'ContactController');
 Route::resource('carts', 'CartController')->except(['index', 'show']);
