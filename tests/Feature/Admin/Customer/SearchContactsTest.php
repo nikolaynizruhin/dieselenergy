@@ -32,7 +32,7 @@ class SearchContactsTest extends TestCase
 
         $sale = factory(Contact::class)->create([
             'customer_id' => $customer->id,
-            'subject' => 'Sale'
+            'subject' => 'Sale',
         ]);
 
         $this->actingAs($user)
