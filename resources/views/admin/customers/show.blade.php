@@ -12,9 +12,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('customer.title') }}</div>
-                <div class="col-md-6">
-                    {{ $customer->name }}
-                </div>
+                <div class="col-md-6">{{ $customer->name }}</div>
             </div>
 
             <hr>

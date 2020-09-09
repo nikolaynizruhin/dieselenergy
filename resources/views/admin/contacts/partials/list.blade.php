@@ -14,7 +14,7 @@
                 <tr>
                     <th scope="row" class="font-weight-normal">{{ $contacts->firstItem() + $key }}</th>
                     <td>
-                        <a href="{{ route('admin.customers.edit', $contact->customer) }}">
+                        <a href="{{ route('admin.customers.show', $contact->customer) }}">
                             {{ $contact->customer->name }}
                         </a>
                     </td>

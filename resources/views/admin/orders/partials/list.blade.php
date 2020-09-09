@@ -15,7 +15,7 @@
                 <tr>
                     <th scope="row" class="font-weight-normal">{{ $orders->firstItem() + $key }}</th>
                     <td>
-                        <a href="{{ route('admin.customers.edit', $order->customer) }}">
+                        <a href="{{ route('admin.customers.show', $order->customer) }}">
                             {{ $order->customer->name }}
                         </a>
                     </td>
