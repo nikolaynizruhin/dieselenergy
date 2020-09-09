@@ -21,6 +21,7 @@ return [
     'created' => 'Order was created successfully!',
     'updated' => 'Order was updated successfully!',
     'deleted' => 'Order was deleted successfully!',
+    'missing' => 'No orders matched the given criteria.',
     'confirm_delete' => 'Are you sure you want to delete an order?',
 
 ];

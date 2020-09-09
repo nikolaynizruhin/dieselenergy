@@ -26,6 +26,7 @@ return [
     'email' => 'Email',
     'password' => 'Password',
     'price' => 'Price',
+    'number' => 'Number',
     'measure' => 'Measure',
     'close' => 'Close',
     'support' => 'Support',

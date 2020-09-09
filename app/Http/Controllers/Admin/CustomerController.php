@@ -52,11 +52,15 @@ class CustomerController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Customer  $customer
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(Customer $customer, Request $request)
     {
-        return view('admin.customers.show', compact('customer'));
+        $contacts = $customer->contacts()->search('subject', request('search.contact'))->latest()->paginate(10);
+        $orders = $customer->orders()->search('id', request('search.order'))->latest()->paginate(10);
+
+        return view('admin.customers.show', compact('customer', 'contacts', 'orders'));
     }
 
     /**

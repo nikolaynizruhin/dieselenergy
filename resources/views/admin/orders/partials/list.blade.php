@@ -5,6 +5,7 @@
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('customer.title') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('common.number') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.status') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.total') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
@@ -19,6 +20,7 @@
                             {{ $order->customer->name }}
                         </a>
                     </td>
+                    <td>{{ $order->id }}</td>
                     <td>
                         @include('admin.orders.partials.status')
                     </td>

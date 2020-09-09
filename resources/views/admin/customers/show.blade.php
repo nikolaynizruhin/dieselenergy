@@ -37,4 +37,7 @@
             </div>
         </div>
     </div>
+
+    @include('admin.customers.orders.index')
+    @include('admin.customers.contacts.index')
 @endsection
