@@ -1,3 +1,6 @@
+<div class="card-header text-muted bg-white lead">
+    {{ __('user.plural') }}
+</div>
 <div class="card-body p-0">
     <div class="table-responsive">
         <table class="table mb-0">
