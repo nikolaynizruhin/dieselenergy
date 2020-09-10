@@ -35,7 +35,7 @@ class Specification extends Pivot
      * @param  \App\Category  $category
      * @return array
      */
-    public static function featuredAttributes($category)
+    public static function featured($category)
     {
         return self::where([
             'category_id' => $category->id,

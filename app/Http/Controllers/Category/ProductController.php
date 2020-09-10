@@ -19,12 +19,10 @@ class ProductController extends Controller
      */
     public function index(Request $request, Category $category)
     {
-        $featured = Specification::featuredAttributes($category);
-
         $products = $category
             ->products()
             ->active()
-            ->with(['attributes' => fn ($query) => $query->wherePivotIn('attribute_id', $featured)])
+            ->withFeatured($category)
             ->filter($request->query('filter'))
             ->search('name', $request->query('search'))
             ->orderBy('name', $request->query('sort', 'asc'))
