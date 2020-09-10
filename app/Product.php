@@ -64,9 +64,12 @@ class Product extends Model
      */
     public function scopeWithFeatured($query, $category)
     {
-        $featured = Specification::featured($category);
-
-        return $query->with(['attributes' => fn ($query) => $query->wherePivotIn('attribute_id', $featured)]);
+        return $query->with([
+            'attributes' => fn ($query) => $query->wherePivotIn(
+                'attribute_id',
+                Specification::featured($category),
+            ),
+        ]);
     }
 
     /**
