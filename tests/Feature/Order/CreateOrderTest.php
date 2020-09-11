@@ -31,11 +31,9 @@ class CreateOrderTest extends TestCase
     {
         parent::setUp();
 
-        $this->product = Product::factory()->create();
-
-        $image = Image::factory()->create();
-
-        $this->product->images()->attach($image, ['is_default' => 1]);
+        $this->product = Product::factory()
+            ->hasAttached(Image::factory(), ['is_default' => 1])
+            ->create();
     }
 
     /** @test */
