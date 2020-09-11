@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Auth;
 
-use App\Notifications\ResetPassword;
 use App\Models\User;
+use App\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;

@@ -4,9 +4,9 @@ namespace Tests\Feature\Order;
 
 use App\Models\Customer;
 use App\Models\Image;
-use App\Notifications\OrderConfirmed;
 use App\Models\Order;
 use App\Models\Product;
+use App\Notifications\OrderConfirmed;
 use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;

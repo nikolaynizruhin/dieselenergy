@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreSpecification;
 use App\Http\Requests\Admin\UpdateSpecification;
+use App\Models\Category;
 use App\Models\Specification;
 use Illuminate\Http\Request;
 

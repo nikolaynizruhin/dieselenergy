@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
 use App\Http\Requests\StoreOrder;
+use App\Models\Customer;
 use App\Models\Order;
 use Facades\App\Cart\Cart;
 use Illuminate\Http\Request;
