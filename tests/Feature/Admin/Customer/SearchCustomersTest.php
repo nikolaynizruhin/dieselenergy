@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Customer;
 
 use App\Models\Customer;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -25,9 +26,13 @@ class SearchCustomersTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $john = Customer::factory()->create(['name' => 'John Doe', 'created_at' => now()->subDay()]);
-        $jane = Customer::factory()->create(['name' => 'Jane Doe', 'created_at' => now()]);
-        $tom = Customer::factory()->create(['name' => 'Tom Jo']);
+        [$john, $jane, $tom] = Customer::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['name' => 'John Doe', 'created_at' => now()->subDay()],
+                ['name' => 'Jane Doe'],
+                ['name' => 'Tom Jo'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.customers.index', ['search' => 'Doe']))

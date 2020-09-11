@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Product;
 
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -25,9 +26,13 @@ class SearchProductsTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $diesel = Product::factory()->create(['name' => 'Diesel Generator']);
-        $patrol = Product::factory()->create(['name' => 'Patrol Generator']);
-        $waterPump = Product::factory()->create(['name' => 'Water Pump']);
+        [$diesel, $patrol, $waterPump] = Product::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['name' => 'Diesel Generator'],
+                ['name' => 'Patrol Generator'],
+                ['name' => 'Water Pump'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.products.index', ['search' => 'Generator']))

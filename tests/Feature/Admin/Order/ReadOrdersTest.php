@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Order;
 
 use App\Models\Order;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,8 +24,12 @@ class ReadOrdersTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $orderB = Order::factory()->create(['created_at' => now()->subDay()]);
-        $orderA = Order::factory()->create(['created_at' => now()]);
+        [$orderB, $orderA] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['created_at' => now()->subDay()],
+                ['created_at' => now()],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.orders.index'))

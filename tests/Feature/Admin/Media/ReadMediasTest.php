@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin\Media;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -17,8 +18,12 @@ class ReadMediasTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $diesel = Image::factory()->create(['created_at' => now()->subDay()]);
-        $patrol = Image::factory()->create(['created_at' => now()]);
+        [$diesel, $patrol] = Image::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['created_at' => now()->subDay()],
+                ['created_at' => now()],
+            ))->create();
 
         $product = Product::factory()->create();
 

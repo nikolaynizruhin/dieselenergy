@@ -3,6 +3,7 @@
 namespace Tests\Feature\Admin\User;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -20,9 +21,13 @@ class ReadUsersTest extends TestCase
     /** @test */
     public function user_can_read_users()
     {
-        $admin = User::factory()->create();
-        $john = User::factory()->create(['name' => 'John Doe']);
-        $jane = User::factory()->create(['name' => 'Jane Doe']);
+        [$admin, $john, $jane] = User::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['name' => 'Admin'],
+                ['name' => 'John Doe'],
+                ['name' => 'Jane Doe'],
+            ))->create();
 
         $this->actingAs($admin)
             ->get(route('admin.users.index'))

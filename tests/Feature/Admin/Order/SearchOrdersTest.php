@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin\Order;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -26,14 +27,21 @@ class SearchOrdersTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $jane = Customer::factory()->create(['name' => 'Jane Doe']);
-        Order::factory()->create(['customer_id' => $jane->id, 'created_at' => now()->subDay()]);
+        [$jane, $john, $tom] = Customer::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['name' => 'Jane Doe'],
+                ['name' => 'John Doe'],
+                ['name' => 'Tom Jo'],
+            ))->create();
 
-        $john = Customer::factory()->create(['name' => 'John Doe']);
-        Order::factory()->create(['customer_id' => $john->id, 'created_at' => now()]);
-
-        $tom = Customer::factory()->create(['name' => 'Tom Jo']);
-        Order::factory()->create(['customer_id' => $jane->id]);
+        Order::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['customer_id' => $jane->id, 'created_at' => now()->subDay()],
+                ['customer_id' => $john->id],
+                ['customer_id' => $tom->id],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.orders.index', ['search' => 'Doe']))

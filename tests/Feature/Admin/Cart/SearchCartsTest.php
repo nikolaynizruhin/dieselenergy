@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -17,9 +18,13 @@ class SearchCartsTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $patrol = Product::factory()->create(['name' => 'Patrol Generator']);
-        $diesel = Product::factory()->create(['name' => 'Diesel Generator']);
-        $waterPump = Product::factory()->create(['name' => 'Water Pump']);
+        [$patrol, $diesel, $waterPump] = Product::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['name' => 'Patrol Generator'],
+                ['name' => 'Diesel Generator'],
+                ['name' => 'Water Pump'],
+            ))->create();
 
         $order = Order::factory()->create();
 

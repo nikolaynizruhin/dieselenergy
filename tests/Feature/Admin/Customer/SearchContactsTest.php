@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin\Customer;
 use App\Models\Contact;
 use App\Models\Customer;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,22 +19,13 @@ class SearchContactsTest extends TestCase
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
 
-        $support = Contact::factory()->create([
-            'customer_id' => $customer->id,
-            'subject' => 'Support Subject',
-            'created_at' => now()->subDay(),
-        ]);
-
-        $faq = Contact::factory()->create([
-            'customer_id' => $customer->id,
-            'subject' => 'FAQ Subject',
-            'created_at' => now(),
-        ]);
-
-        $sale = Contact::factory()->create([
-            'customer_id' => $customer->id,
-            'subject' => 'Sale',
-        ]);
+        [$support, $faq, $sale] = Contact::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['subject' => 'Support Subject', 'created_at' => now()->subDay()],
+                ['subject' => 'FAQ Subject'],
+                ['subject' => 'Sale'],
+            ))->create(['customer_id' => $customer->id]);
 
         $this->actingAs($user)
             ->get(route('admin.customers.show', [

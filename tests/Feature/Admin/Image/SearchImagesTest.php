@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Image;
 
 use App\Models\Image;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -25,9 +26,13 @@ class SearchImagesTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $diesel = Image::factory()->create(['path' => 'images/abcpath.jpg', 'created_at' => now()->subDay()]);
-        $patrol = Image::factory()->create(['path' => 'images/bcapath.jpg', 'created_at' => now()]);
-        $waterPump = Image::factory()->create(['path' => 'images/token.jpg']);
+        [$diesel, $patrol, $waterPump] = Image::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['path' => 'images/abcpath.jpg', 'created_at' => now()->subDay()],
+                ['path' => 'images/bcapath.jpg'],
+                ['path' => 'images/token.jpg'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.images.index', ['search' => 'path']))

@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -18,8 +19,12 @@ class ReadCartsTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $patrol = Product::factory()->create(['name' => 'Patrol']);
-        $diesel = Product::factory()->create(['name' => 'Diesel']);
+        [$patrol, $diesel] = Product::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'Patrol'],
+                ['name' => 'Diesel']
+            ))->create();
 
         $order = Order::factory()->create();
 

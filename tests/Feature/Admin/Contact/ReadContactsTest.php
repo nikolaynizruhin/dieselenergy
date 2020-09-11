@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Contact;
 
 use App\Models\Contact;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,8 +24,12 @@ class ReadContactsTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $contactSale = Contact::factory()->create(['subject' => 'Sale']);
-        $contactSupport = Contact::factory()->create(['subject' => 'Support']);
+        [$contactSale, $contactSupport] = Contact::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['subject' => 'Support'],
+                ['subject' => 'Sale'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.contacts.index'))

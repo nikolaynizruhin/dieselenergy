@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Brand;
 
 use App\Models\Brand;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -25,9 +26,13 @@ class SearchBrandsTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $sdmo = Brand::factory()->create(['name' => 'SDMO Brand']);
-        $hyundai = Brand::factory()->create(['name' => 'Hyundai Brand']);
-        $bosch = Brand::factory()->create(['name' => 'Bosch']);
+        [$sdmo, $hyundai, $bosch] = Brand::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['name' => 'SDMO Brand'],
+                ['name' => 'Hyundai Brand'],
+                ['name' => 'Bosch'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.brands.index', ['search' => 'Brand']))

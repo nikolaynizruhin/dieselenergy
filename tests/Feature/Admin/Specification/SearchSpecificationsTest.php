@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin\Specification;
 use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -17,9 +18,13 @@ class SearchSpecificationsTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $width = Attribute::factory()->create(['name' => 'width attribute']);
-        $height = Attribute::factory()->create(['name' => 'height attribute']);
-        $weight = Attribute::factory()->create(['name' => 'weight property']);
+        [$width, $height, $weight] = Attribute::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['name' => 'width attribute'],
+                ['name' => 'height attribute'],
+                ['name' => 'weight property'],
+            ))->create();
 
         $category = Category::factory()->create();
 

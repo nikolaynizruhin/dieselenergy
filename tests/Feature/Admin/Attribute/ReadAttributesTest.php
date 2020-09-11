@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Attribute;
 
 use App\Models\Attribute;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,8 +24,12 @@ class ReadAttributesTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $weight = Attribute::factory()->create(['name' => 'Weight']);
-        $power = Attribute::factory()->create(['name' => 'Power']);
+        [$weight, $power] = Attribute::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'Weight'],
+                ['name' => 'Power'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.attributes.index'))

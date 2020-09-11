@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Product;
 
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,8 +24,12 @@ class ReadProductsTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $petrol = Product::factory()->create(['name' => 'Petrol']);
-        $diesel = Product::factory()->create(['name' => 'Diesel']);
+        [$petrol, $diesel] = Product::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'Petrol'],
+                ['name' => 'Diesel'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.products.index'))

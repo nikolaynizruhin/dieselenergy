@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin\Media;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -17,9 +18,13 @@ class SearchMediasTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $diesel = Image::factory()->create(['path' => 'images/dieselpath.jpg', 'created_at' => now()->subDay()]);
-        $patrol = Image::factory()->create(['path' => 'images/patrolpath.jpg', 'created_at' => now()]);
-        $waterPump = Image::factory()->create(['path' => 'images/waterpump.jpg']);
+        [$diesel, $patrol, $waterPump] = Image::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['path' => 'images/dieselpath.jpg', 'created_at' => now()->subDay()],
+                ['path' => 'images/patrolpath.jpg'],
+                ['path' => 'images/waterpump.jpg'],
+            ))->create();
 
         $product = Product::factory()->create();
 

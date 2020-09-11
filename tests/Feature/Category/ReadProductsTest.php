@@ -4,6 +4,7 @@ namespace Tests\Feature\Category;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,13 +17,13 @@ class ReadProductsTest extends TestCase
     {
         [$generators, $waterPumps] = Category::factory()->count(2)->create();
 
-        $generator = Product::factory()
+        [$generator, $waterPump] = Product::factory()
+            ->count(2)
             ->active()
-            ->create(['category_id' => $generators->id]);
-
-        $waterPump = Product::factory()
-            ->active()
-            ->create(['category_id' => $waterPumps->id]);
+            ->state(new Sequence(
+                ['category_id' => $generators->id],
+                ['category_id' => $waterPumps->id],
+            ))->create();
 
         $this->get(route('categories.products.index', $generators))
             ->assertSuccessful()
@@ -37,13 +38,12 @@ class ReadProductsTest extends TestCase
     {
         $generators = Category::factory()->create();
 
-        $generator = Product::factory()
-            ->active()
-            ->create(['category_id' => $generators->id]);
-
-        $waterPump = Product::factory()
-            ->inactive()
-            ->create(['category_id' => $generators->id]);
+        [$generator, $waterPump] = Product::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['is_active' => true],
+                ['is_active' => false],
+            ))->create(['category_id' => $generators->id]);
 
         $this->get(route('categories.products.index', $generators))
             ->assertSuccessful()

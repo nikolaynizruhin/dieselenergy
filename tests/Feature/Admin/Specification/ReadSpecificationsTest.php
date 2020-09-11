@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin\Specification;
 use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -17,8 +18,12 @@ class ReadSpecificationsTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $width = Attribute::factory()->create(['name' => 'width attribute']);
-        $height = Attribute::factory()->create(['name' => 'height attribute']);
+        [$width, $height] = Attribute::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'width attribute'],
+                ['name' => 'height attribute'],
+            ))->create();
 
         $category = Category::factory()->create();
 

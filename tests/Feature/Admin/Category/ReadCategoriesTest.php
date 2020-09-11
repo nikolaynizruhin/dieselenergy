@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Category;
 
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,8 +24,12 @@ class ReadCategoriesTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $generators = Category::factory()->create(['name' => 'Generators']);
-        $ats = Category::factory()->create(['name' => 'ATS']);
+        [$generators, $ats] = Category::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'Generators'],
+                ['name' => 'ATS'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.categories.index'))

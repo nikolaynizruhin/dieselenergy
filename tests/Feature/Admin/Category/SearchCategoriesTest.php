@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Category;
 
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -25,9 +26,13 @@ class SearchCategoriesTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $patrol = Category::factory()->create(['name' => 'Patrol Generators']);
-        $diesel = Category::factory()->create(['name' => 'Diesel Generators']);
-        $waterPumps = Category::factory()->create(['name' => 'Water Pumps']);
+        [$patrol, $diesel, $waterPumps] = Category::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['name' => 'Patrol Generators'],
+                ['name' => 'Diesel Generators'],
+                ['name' => 'Water Pumps'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.categories.index', ['search' => 'Generators']))

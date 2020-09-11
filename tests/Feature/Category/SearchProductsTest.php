@@ -4,6 +4,7 @@ namespace Tests\Feature\Category;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,17 +17,15 @@ class SearchProductsTest extends TestCase
     {
         $generators = Category::factory()->create();
 
-        $patrol = Product::factory()
+        [$patrol, $diesel, $waterPump] = Product::factory()
+            ->count(3)
             ->active()
-            ->create(['name' => 'Patrol Generator', 'category_id' => $generators->id]);
-
-        $diesel = Product::factory()
-            ->active()
-            ->create(['name' => 'Diesel Generator', 'category_id' => $generators->id]);
-
-        $waterPump = Product::factory()
-            ->active()
-            ->create(['name' => 'Water Pump', 'category_id' => $generators->id]);
+            ->state(new Sequence(
+                ['name' => 'Patrol Generator'],
+                ['name' => 'Diesel Generator'],
+                ['name' => 'Water Pump'],
+            ))
+            ->create(['category_id' => $generators->id]);
 
         $this->get(route('categories.products.index', [
             'category' => $generators,

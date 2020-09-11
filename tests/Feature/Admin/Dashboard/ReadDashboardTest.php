@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin\Dashboard;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -25,8 +26,12 @@ class ReadDashboardTest extends TestCase
         $user = User::factory()->create();
         $product = Product::factory()->create();
 
-        $orderA = Order::factory()->create(['created_at' => now()]);
-        $orderB = Order::factory()->create(['created_at' => now()->subDay()]);
+        [$orderA, $orderB] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['created_at' => now()],
+                ['created_at' => now()->subDay()],
+            ))->create();
 
         $orderA->products()->attach($product, ['quantity' => 2]);
 

@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Attribute;
 
 use App\Models\Attribute;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -25,9 +26,13 @@ class SearchAttributesTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $power = Attribute::factory()->create(['name' => 'power']);
-        $width = Attribute::factory()->create(['name' => 'width attribute']);
-        $height = Attribute::factory()->create(['name' => 'height attribute']);
+        [$power, $width, $height] = Attribute::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['name' => 'power'],
+                ['name' => 'width attribute'],
+                ['name' => 'height attribute'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.attributes.index', ['search' => 'attribute']))

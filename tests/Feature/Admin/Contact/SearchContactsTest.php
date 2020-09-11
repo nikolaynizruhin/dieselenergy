@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Contact;
 
 use App\Models\Contact;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -25,9 +26,13 @@ class SearchContactsTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $contactSale = Contact::factory()->create(['subject' => 'Sale Contact']);
-        $contactSupport = Contact::factory()->create(['subject' => 'Support Contact']);
-        $contactOther = Contact::factory()->create(['subject' => 'Other']);
+        [$contactSale, $contactSupport, $contactOther] = Contact::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['subject' => 'Sale Contact'],
+                ['subject' => 'Support Contact'],
+                ['subject' => 'Other'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.contacts.index', ['search' => 'Contact']))

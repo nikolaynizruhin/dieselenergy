@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Image;
 
 use App\Models\Image;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,8 +24,12 @@ class ReadImagesTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $diesel = Image::factory()->create(['created_at' => now()->subDay()]);
-        $patrol = Image::factory()->create(['created_at' => now()]);
+        [$diesel, $patrol] = Image::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['created_at' => now()->subDay()],
+                ['created_at' => now()],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.images.index'))

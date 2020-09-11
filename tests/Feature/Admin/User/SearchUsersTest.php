@@ -3,6 +3,7 @@
 namespace Tests\Feature\Admin\User;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -22,11 +23,14 @@ class SearchUsersTest extends TestCase
     /** @test */
     public function user_can_search_users()
     {
-        $admin = User::factory()->create();
-
-        $john = User::factory()->create(['name' => 'John Doe']);
-        $jane = User::factory()->create(['name' => 'Jane Doe']);
-        $tom = User::factory()->create(['name' => 'Tom Jo']);
+        [$admin, $john, $jane, $tom] = User::factory()
+            ->count(4)
+            ->state(new Sequence(
+                ['name' => 'Admin'],
+                ['name' => 'John Doe'],
+                ['name' => 'Jane Doe'],
+                ['name' => 'Tom Jo'],
+            ))->create();
 
         $this->actingAs($admin)
             ->get(route('admin.users.index', ['search' => 'Doe']))
