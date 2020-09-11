@@ -1,23 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\Admin\CartController;
-use App\Http\Controllers\Admin\MediaController;
-use App\Http\Controllers\Admin\ImageController;
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AttributeController;
-use App\Http\Controllers\Admin\SpecificationController;
-use App\Http\Controllers\Admin\ContactController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\UserPasswordController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
+use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SpecificationController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserPasswordController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
