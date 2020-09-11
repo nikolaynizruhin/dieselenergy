@@ -2,7 +2,7 @@
 
 namespace App\Http\View\Composers\Admin;
 
-use App\Image;
+use App\Models\Image;
 use Illuminate\View\View;
 
 class MediaComposer

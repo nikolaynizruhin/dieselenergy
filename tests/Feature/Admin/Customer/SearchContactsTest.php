@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Customer;
 
-use App\Contact;
-use App\Customer;
-use App\User;
+use App\Models\Contact;
+use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,22 +15,22 @@ class SearchContactsTest extends TestCase
     /** @test */
     public function user_can_search_customer_contacts()
     {
-        $user = factory(User::class)->create();
-        $customer = factory(Customer::class)->create();
+        $user = User::factory()->create();
+        $customer = Customer::factory()->create();
 
-        $support = factory(Contact::class)->create([
+        $support = Contact::factory()->create([
             'customer_id' => $customer->id,
             'subject' => 'Support Subject',
             'created_at' => now()->subDay(),
         ]);
 
-        $faq = factory(Contact::class)->create([
+        $faq = Contact::factory()->create([
             'customer_id' => $customer->id,
             'subject' => 'FAQ Subject',
             'created_at' => now(),
         ]);
 
-        $sale = factory(Contact::class)->create([
+        $sale = Contact::factory()->create([
             'customer_id' => $customer->id,
             'subject' => 'Sale',
         ]);

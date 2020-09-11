@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreOrder;
 use App\Http\Requests\Admin\UpdateOrder;
-use App\Order;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -54,7 +54,7 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -68,7 +68,7 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function edit(Order $order)
@@ -80,7 +80,7 @@ class OrderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Admin\UpdateOrder  $request
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateOrder $request, Order $order)
@@ -95,7 +95,7 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function destroy(Order $order)

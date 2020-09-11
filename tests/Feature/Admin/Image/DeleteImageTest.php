@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Image;
 
-use App\Image;
-use App\User;
+use App\Models\Image;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class DeleteImageTest extends TestCase
     /** @test */
     public function guest_cant_delete_image()
     {
-        $image = factory(Image::class)->create();
+        $image = Image::factory()->create();
 
         $this->delete(route('admin.images.destroy', $image))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class DeleteImageTest extends TestCase
     /** @test */
     public function user_can_delete_image()
     {
-        $user = factory(User::class)->create();
-        $image = factory(Image::class)->create();
+        $user = User::factory()->create();
+        $image = Image::factory()->create();
 
         $this->actingAs($user)
             ->from(route('admin.images.index'))

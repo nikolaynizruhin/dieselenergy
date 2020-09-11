@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Order;
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -14,7 +14,7 @@ class OrderConfirmed extends Notification
     /**
      * An order.
      *
-     * @var \App\Order
+     * @var \App\Models\Order
      */
     public $order;
 

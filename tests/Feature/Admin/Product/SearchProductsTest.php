@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Product;
 
-use App\Product;
-use App\User;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class SearchProductsTest extends TestCase
     /** @test */
     public function guest_cant_search_products()
     {
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $this->get(route('admin.products.index', ['search' => $product->name]))
             ->assertRedirect(route('admin.login'));
@@ -23,11 +23,11 @@ class SearchProductsTest extends TestCase
     /** @test */
     public function user_can_search_products()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $diesel = factory(Product::class)->create(['name' => 'Diesel Generator']);
-        $patrol = factory(Product::class)->create(['name' => 'Patrol Generator']);
-        $waterPump = factory(Product::class)->create(['name' => 'Water Pump']);
+        $diesel = Product::factory()->create(['name' => 'Diesel Generator']);
+        $patrol = Product::factory()->create(['name' => 'Patrol Generator']);
+        $waterPump = Product::factory()->create(['name' => 'Water Pump']);
 
         $this->actingAs($user)
             ->get(route('admin.products.index', ['search' => 'Generator']))

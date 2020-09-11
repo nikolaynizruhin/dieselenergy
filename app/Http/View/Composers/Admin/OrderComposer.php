@@ -2,9 +2,9 @@
 
 namespace App\Http\View\Composers\Admin;
 
-use App\Customer;
-use App\Order;
-use App\Product;
+use App\Models\Customer;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\View\View;
 
 class OrderComposer

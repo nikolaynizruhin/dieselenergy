@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
-use App\Attribute;
-use App\Brand;
-use App\Category;
-use App\Image;
-use App\Order;
-use App\Product;
+use App\Models\Attribute;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Image;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -20,8 +20,8 @@ class ProductTest extends TestCase
     /** @test */
     public function it_has_brand()
     {
-        $brand = factory(Brand::class)->create();
-        $product = factory(Product::class)->create(['brand_id' => $brand->id]);
+        $brand = Brand::factory()->create();
+        $product = Product::factory()->create(['brand_id' => $brand->id]);
 
         $this->assertInstanceOf(Brand::class, $product->brand);
         $this->assertTrue($product->brand->is($brand));
@@ -30,8 +30,8 @@ class ProductTest extends TestCase
     /** @test */
     public function it_has_category()
     {
-        $category = factory(Category::class)->create();
-        $product = factory(Product::class)->create(['category_id' => $category->id]);
+        $category = Category::factory()->create();
+        $product = Product::factory()->create(['category_id' => $category->id]);
 
         $this->assertInstanceOf(Category::class, $product->category);
         $this->assertTrue($product->category->is($category));
@@ -40,8 +40,8 @@ class ProductTest extends TestCase
     /** @test */
     public function it_has_many_attributes()
     {
-        $product = factory(Product::class)->create();
-        $attribute = factory(Attribute::class)->create();
+        $product = Product::factory()->create();
+        $attribute = Attribute::factory()->create();
 
         $product->attributes()
             ->attach($attribute, ['value' => $value = $this->faker->randomDigit]);
@@ -54,8 +54,8 @@ class ProductTest extends TestCase
     /** @test */
     public function it_has_many_orders()
     {
-        $product = factory(Product::class)->create();
-        $order = factory(Order::class)->create();
+        $product = Product::factory()->create();
+        $order = Order::factory()->create();
 
         $product->orders()->attach($order, ['quantity' => $quantity = $this->faker->randomDigit]);
 
@@ -67,8 +67,8 @@ class ProductTest extends TestCase
     /** @test */
     public function it_has_many_images()
     {
-        $product = factory(Product::class)->create();
-        $image = factory(Image::class)->create();
+        $product = Product::factory()->create();
+        $image = Image::factory()->create();
 
         $product->images()->attach($image);
 
@@ -79,8 +79,8 @@ class ProductTest extends TestCase
     /** @test */
     public function it_has_default_image()
     {
-        $product = factory(Product::class)->create();
-        $image = factory(Image::class)->create();
+        $product = Product::factory()->create();
+        $image = Image::factory()->create();
 
         $product->images()->attach($image, ['is_default' => 1]);
 

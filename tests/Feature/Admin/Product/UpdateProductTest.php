@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Admin\Product;
 
-use App\Attribute;
-use App\Category;
-use App\Image;
-use App\Product;
-use App\User;
+use App\Models\Attribute;
+use App\Models\Category;
+use App\Models\Image;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -20,7 +20,7 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function guest_cant_visit_update_product_page()
     {
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $this->get(route('admin.products.edit', $product))
             ->assertRedirect(route('admin.login'));
@@ -29,8 +29,8 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_can_visit_update_product_page()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.products.edit', $product))
@@ -42,7 +42,7 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function guest_cant_update_product()
     {
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $this->put(route('admin.products.update', $product), [
             'name' => $this->faker->sentence,
@@ -53,9 +53,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_can_update_product()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw();
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -68,14 +68,14 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_can_update_product_with_attributes()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create();
-        $product = factory(Product::class)->create();
-        $attribute = factory(Attribute::class)->create();
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+        $product = Product::factory()->create();
+        $attribute = Attribute::factory()->create();
 
         $category->attributes()->attach($attribute);
 
-        $stub = factory(Product::class)->raw(['category_id' => $category->id]);
+        $stub = Product::factory()->make(['category_id' => $category->id])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub + [
@@ -99,9 +99,9 @@ class UpdateProductTest extends TestCase
 
         $image = UploadedFile::fake()->image('product.jpg');
 
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw();
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub + [
@@ -122,9 +122,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_name()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw(['name' => null]);
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make(['name' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -134,9 +134,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_integer_name()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw(['name' => 1]);
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make(['name' => 1])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -146,11 +146,11 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_name_more_than_255_chars()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw([
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make([
             'name' => str_repeat('a', 256),
-        ]);
+        ])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -160,12 +160,12 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_existing_name()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $existing = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw([
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $existing = Product::factory()->create();
+        $stub = Product::factory()->make([
             'name' => $existing->name,
-        ]);
+        ])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -175,9 +175,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_price()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw(['price' => null]);
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make(['price' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -187,9 +187,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_string_price()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw(['price' => 'string']);
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make(['price' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -199,9 +199,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_zero_price()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw(['price' => 0]);
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make(['price' => 0])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -211,9 +211,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_brand()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw(['brand_id' => null]);
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make(['brand_id' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -223,9 +223,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_string_brand()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw(['brand_id' => 'string']);
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make(['brand_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -235,9 +235,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_nonexistent_brand()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw(['brand_id' => 100]);
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make(['brand_id' => 100])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -247,9 +247,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_category()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw(['category_id' => null]);
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make(['category_id' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -259,9 +259,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_string_category()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw(['category_id' => 'string']);
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make(['category_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -271,9 +271,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_nonexistent_category()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw(['category_id' => 100]);
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make(['category_id' => 100])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -283,9 +283,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_string_image()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw();
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub + [
@@ -296,9 +296,9 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_integer_image()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw();
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub + [
@@ -311,9 +311,9 @@ class UpdateProductTest extends TestCase
     {
         $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
 
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-        $stub = factory(Product::class)->raw();
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub + [
@@ -324,18 +324,18 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_attributes()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create();
-        $attribute = factory(Attribute::class)->create();
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+        $attribute = Attribute::factory()->create();
 
         $category->attributes()->attach($attribute);
 
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
-        $stub = factory(Product::class)->raw([
+        $stub = Product::factory()->make([
             'category_id' => $category->id,
             'attributes' => [$attribute->id => null],
-        ]);
+        ])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -345,18 +345,18 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_attribute_more_than_255_chars()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create();
-        $attribute = factory(Attribute::class)->create();
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+        $attribute = Attribute::factory()->create();
 
         $category->attributes()->attach($attribute);
 
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
-        $stub = factory(Product::class)->raw([
+        $stub = Product::factory()->make([
             'category_id' => $category->id,
             'attributes' => [$attribute->id => str_repeat('a', 256)],
-        ]);
+        ])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -366,15 +366,15 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function unrelated_attribute_should_not_be_attached_to_product()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create();
-        $unrelated = factory(Attribute::class)->create();
-        $product = factory(Product::class)->create();
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+        $unrelated = Attribute::factory()->create();
+        $product = Product::factory()->create();
 
-        $stub = factory(Product::class)->raw([
+        $stub = Product::factory()->make([
             'category_id' => $category->id,
             'attributes' => [$unrelated->id => $this->faker->randomDigit],
-        ]);
+        ])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)

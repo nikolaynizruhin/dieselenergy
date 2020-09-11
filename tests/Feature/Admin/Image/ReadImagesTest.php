@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Image;
 
-use App\Image;
-use App\User;
+use App\Models\Image;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -21,10 +21,10 @@ class ReadImagesTest extends TestCase
     /** @test */
     public function user_can_read_images()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $diesel = factory(Image::class)->create(['created_at' => now()->subDay()]);
-        $patrol = factory(Image::class)->create(['created_at' => now()]);
+        $diesel = Image::factory()->create(['created_at' => now()->subDay()]);
+        $patrol = Image::factory()->create(['created_at' => now()]);
 
         $this->actingAs($user)
             ->get(route('admin.images.index'))

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Category;
 
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class DeleteCategoryTest extends TestCase
     /** @test */
     public function guest_cant_delete_category()
     {
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $this->delete(route('admin.categories.destroy', $category))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class DeleteCategoryTest extends TestCase
     /** @test */
     public function user_can_delete_category()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create();
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
 
         $this->actingAs($user)
             ->from(route('admin.categories.index'))

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Attribute;
 
-use App\Attribute;
-use App\User;
+use App\Models\Attribute;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class DeleteAttributeTest extends TestCase
     /** @test */
     public function guest_cant_delete_attribute()
     {
-        $attribute = factory(Attribute::class)->create();
+        $attribute = Attribute::factory()->create();
 
         $this->delete(route('admin.attributes.destroy', $attribute))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class DeleteAttributeTest extends TestCase
     /** @test */
     public function user_can_delete_attribute()
     {
-        $user = factory(User::class)->create();
-        $attribute = factory(Attribute::class)->create();
+        $user = User::factory()->create();
+        $attribute = Attribute::factory()->create();
 
         $this->actingAs($user)
             ->from(route('admin.attributes.index'))

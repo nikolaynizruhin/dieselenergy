@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin\Image;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -23,7 +23,7 @@ class CreateImageTest extends TestCase
     /** @test */
     public function user_can_visit_create_image_page()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.images.create'))
@@ -49,7 +49,7 @@ class CreateImageTest extends TestCase
 
         $image = UploadedFile::fake()->image('product.jpg');
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.images.store'), [
@@ -65,7 +65,7 @@ class CreateImageTest extends TestCase
     /** @test */
     public function user_cant_create_image_without_image()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.images.store'), [
@@ -76,7 +76,7 @@ class CreateImageTest extends TestCase
     /** @test */
     public function user_cant_create_image_with_integer_image()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.images.store'), [
@@ -89,7 +89,7 @@ class CreateImageTest extends TestCase
     {
         $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), [

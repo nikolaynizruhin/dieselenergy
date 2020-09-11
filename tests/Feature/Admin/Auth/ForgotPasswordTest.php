@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Auth;
 
+use App\Models\User;
 use App\Notifications\ResetPassword;
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +25,7 @@ class ForgotPasswordTest extends TestCase
     /** @test */
     public function user_can_visit_forgot_password_page()
     {
-        $user = factory(User::class)->make();
+        $user = User::factory()->make();
 
         $this->actingAs($user)
             ->get(route('admin.password.request'))
@@ -38,7 +38,7 @@ class ForgotPasswordTest extends TestCase
     {
         Notification::fake();
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->post(route('admin.password.email'), ['email' => $user->email]);
 
@@ -58,7 +58,7 @@ class ForgotPasswordTest extends TestCase
     {
         Notification::fake();
 
-        $user = factory(User::class)->make();
+        $user = User::factory()->make();
 
         $this->from(route('admin.password.request'))
             ->post(route('admin.password.email'), [

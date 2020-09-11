@@ -2,7 +2,7 @@
 
 namespace App\Http\View\Composers\Admin;
 
-use App\Customer;
+use App\Models\Customer;
 use Illuminate\View\View;
 
 class ContactComposer

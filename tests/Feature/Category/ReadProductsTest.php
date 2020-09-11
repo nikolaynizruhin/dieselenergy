@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Category;
 
-use App\Category;
-use App\Product;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,14 +14,14 @@ class ReadProductsTest extends TestCase
     /** @test */
     public function guest_can_read_category_products()
     {
-        [$generators, $waterPumps] = factory(Category::class, 2)->create();
+        [$generators, $waterPumps] = Category::factory()->count(2)->create();
 
-        $generator = factory(Product::class)
-            ->states('active')
+        $generator = Product::factory()
+            ->active()
             ->create(['category_id' => $generators->id]);
 
-        $waterPump = factory(Product::class)
-            ->states('active')
+        $waterPump = Product::factory()
+            ->active()
             ->create(['category_id' => $waterPumps->id]);
 
         $this->get(route('categories.products.index', $generators))
@@ -35,14 +35,14 @@ class ReadProductsTest extends TestCase
     /** @test */
     public function guest_can_read_only_category_active_products()
     {
-        $generators = factory(Category::class)->create();
+        $generators = Category::factory()->create();
 
-        $generator = factory(Product::class)
-            ->states('active')
+        $generator = Product::factory()
+            ->active()
             ->create(['category_id' => $generators->id]);
 
-        $waterPump = factory(Product::class)
-            ->states('inactive')
+        $waterPump = Product::factory()
+            ->inactive()
             ->create(['category_id' => $generators->id]);
 
         $this->get(route('categories.products.index', $generators))

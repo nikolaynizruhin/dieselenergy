@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Specification;
 
-use App\Specification;
-use App\User;
+use App\Models\Specification;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function guest_cant_visit_update_specification_page()
     {
-        $specification = factory(Specification::class)->create();
+        $specification = Specification::factory()->create();
 
         $this->get(route('admin.specifications.edit', $specification))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_can_visit_update_specification_page()
     {
-        $user = factory(User::class)->create();
-        $specification = factory(Specification::class)->create();
+        $user = User::factory()->create();
+        $specification = Specification::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.specifications.edit', $specification))
@@ -34,7 +34,7 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function guest_cant_update_specification()
     {
-        $specification = factory(Specification::class)->create();
+        $specification = Specification::factory()->create();
 
         $this->put(route('admin.specifications.update', $specification))
             ->assertRedirect(route('admin.login'));
@@ -43,10 +43,10 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_can_update_specification()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw();
+        $specification = Specification::factory()->create();
+        $stub = Specification::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)
@@ -59,10 +59,10 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_without_category()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw(['category_id' => null]);
+        $specification = Specification::factory()->create();
+        $stub = Specification::factory()->make(['category_id' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)
@@ -72,10 +72,10 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_with_string_category()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw(['category_id' => 'string']);
+        $specification = Specification::factory()->create();
+        $stub = Specification::factory()->make(['category_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)
@@ -85,10 +85,10 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_with_nonexistent_category()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw(['category_id' => 10]);
+        $specification = Specification::factory()->create();
+        $stub = Specification::factory()->make(['category_id' => 10])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)
@@ -98,10 +98,10 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_without_attribute()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw(['attribute_id' => null]);
+        $specification = Specification::factory()->create();
+        $stub = Specification::factory()->make(['attribute_id' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)
@@ -111,10 +111,10 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_with_string_attribute()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw(['attribute_id' => 'string']);
+        $specification = Specification::factory()->create();
+        $stub = Specification::factory()->make(['attribute_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)
@@ -124,10 +124,10 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_with_nonexistent_attribute()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $specification = factory(Specification::class)->create();
-        $stub = factory(Specification::class)->raw(['attribute_id' => 10]);
+        $specification = Specification::factory()->create();
+        $stub = Specification::factory()->make(['attribute_id' => 10])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)

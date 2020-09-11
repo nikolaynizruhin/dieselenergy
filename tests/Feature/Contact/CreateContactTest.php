@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Contact;
 
-use App\Contact;
+use App\Models\Contact;
 use App\Notifications\ContactCreated;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\AnonymousNotifiable;
@@ -16,7 +16,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_can_create_contact()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -46,7 +46,7 @@ class CreateContactTest extends TestCase
     {
         Notification::fake();
 
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -68,7 +68,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_without_accept_terms()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -84,7 +84,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_without_name()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -100,7 +100,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_integer_name()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -117,7 +117,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_name_more_than_255_chars()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -134,7 +134,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_without_email()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -150,7 +150,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_integer_email()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -167,7 +167,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_email_more_than_255_chars()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -184,7 +184,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_invalid_email()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -201,7 +201,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_without_phone()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -217,7 +217,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_integer_phone()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -233,7 +233,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_phone_more_than_255_chars()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -250,7 +250,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_without_subject()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -266,7 +266,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_integer_subject()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -282,7 +282,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_subject_more_than_255_chars()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -299,7 +299,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_without_message()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
@@ -315,7 +315,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_integer_message()
     {
-        $contact = factory(Contact::class)->make();
+        $contact = Contact::factory()->make();
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [

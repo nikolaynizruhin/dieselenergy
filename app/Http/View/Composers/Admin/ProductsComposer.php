@@ -2,7 +2,7 @@
 
 namespace App\Http\View\Composers\Admin;
 
-use App\Category;
+use App\Models\Category;
 use Illuminate\View\View;
 
 class ProductsComposer

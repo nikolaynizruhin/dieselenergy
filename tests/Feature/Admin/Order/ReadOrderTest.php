@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Order;
 
-use App\Order;
-use App\User;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class ReadOrderTest extends TestCase
     /** @test */
     public function guest_cant_read_order()
     {
-        $order = factory(Order::class)->create();
+        $order = Order::factory()->create();
 
         $this->get(route('admin.orders.show', $order))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class ReadOrderTest extends TestCase
     /** @test */
     public function user_can_read_order()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.orders.show', $order))

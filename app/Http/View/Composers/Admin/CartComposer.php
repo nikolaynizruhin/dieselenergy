@@ -2,7 +2,7 @@
 
 namespace App\Http\View\Composers\Admin;
 
-use App\Product;
+use App\Models\Product;
 use Illuminate\View\View;
 
 class CartComposer

@@ -2,10 +2,10 @@
 
 namespace Tests\Unit;
 
-use App\Cart;
-use App\Customer;
-use App\Order;
-use App\Product;
+use App\Models\Cart;
+use App\Models\Customer;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -18,8 +18,8 @@ class OrderTest extends TestCase
     /** @test */
     public function it_has_customer()
     {
-        $customer = factory(Customer::class)->create();
-        $order = factory(Order::class)->create(['customer_id' => $customer->id]);
+        $customer = Customer::factory()->create();
+        $order = Order::factory()->create(['customer_id' => $customer->id]);
 
         $this->assertInstanceOf(Customer::class, $order->customer);
         $this->assertTrue($order->customer->is($customer));
@@ -28,8 +28,8 @@ class OrderTest extends TestCase
     /** @test */
     public function it_has_many_products()
     {
-        $product = factory(Product::class)->create();
-        $order = factory(Order::class)->create();
+        $product = Product::factory()->create();
+        $order = Order::factory()->create();
 
         $order->products()->attach($product, ['quantity' => $quantity = $this->faker->randomDigit]);
 
@@ -41,8 +41,8 @@ class OrderTest extends TestCase
     /** @test */
     public function it_calculates_total_after_adding_product()
     {
-        $order = factory(Order::class)->create(['total' => 0]);
-        $product = factory(Product::class)->create(['price' => 100]);
+        $order = Order::factory()->create(['total' => 0]);
+        $product = Product::factory()->create(['price' => 100]);
 
         $order->products()->attach($product, ['quantity' => 3]);
 
@@ -52,7 +52,7 @@ class OrderTest extends TestCase
     /** @test */
     public function it_calculates_total_after_removing_product()
     {
-        $cart = factory(Cart::class)->create();
+        $cart = Cart::factory()->create();
 
         $this->assertGreaterThan(0, $cart->order->total);
 

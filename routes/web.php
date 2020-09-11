@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\Category\ProductController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'home')->name('home');
-Route::resource('contacts', 'ContactController')->only('store');
-Route::resource('carts', 'CartController');
-Route::resource('orders', 'OrderController')->only(['store', 'show']);
-Route::resource('categories.products', 'Category\ProductController')->shallow()->only(['index', 'show']);
+Route::resource('contacts', ContactController::class)->only('store');
+Route::resource('carts', CartController::class);
+Route::resource('orders', OrderController::class)->only(['store', 'show']);
+Route::resource('categories.products', ProductController::class)->shallow()->only(['index', 'show']);

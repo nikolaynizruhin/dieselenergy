@@ -1,23 +1,55 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Brand;
-use App\Category;
-use App\Product;
-use Faker\Generator as Faker;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Product::class, function (Faker $faker) {
-    return [
-        'name' => $faker->unique()->sentence,
-        'description' => $faker->paragraph,
-        'price' => $faker->randomNumber(5),
-        'is_active' => $faker->boolean,
-        'brand_id' => factory(Brand::class),
-        'category_id' => factory(Category::class),
-    ];
-});
+class ProductFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Product::class;
 
-$factory->state(Product::class, 'active', ['is_active' => true]);
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->unique()->sentence,
+            'description' => $this->faker->paragraph,
+            'price' => $this->faker->randomNumber(5),
+            'is_active' => $this->faker->boolean,
+            'brand_id' => Brand::factory(),
+            'category_id' => Category::factory(),
+        ];
+    }
 
-$factory->state(Product::class, 'inactive', ['is_active' => false]);
+    /**
+     * Indicate that the product is active.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function active()
+    {
+        return $this->state(['is_active' => true]);
+    }
+
+    /**
+     * Indicate that the product is inactive.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function inactive()
+    {
+        return $this->state(['is_active' => false]);
+    }
+}

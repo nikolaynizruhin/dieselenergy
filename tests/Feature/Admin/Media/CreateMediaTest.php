@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Media;
 
-use App\Media;
-use App\Product;
-use App\User;
+use App\Models\Media;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -23,8 +23,8 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_can_visit_create_media_page()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.medias.create', ['product_id' => $product->id]))
@@ -34,7 +34,7 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function guest_cant_create_media()
     {
-        $media = factory(Media::class)->raw();
+        $media = Media::factory()->make()->toArray();
 
         $this->post(route('admin.medias.store'), $media)
             ->assertRedirect(route('admin.login'));
@@ -43,8 +43,8 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_can_create_media()
     {
-        $user = factory(User::class)->create();
-        $media = factory(Media::class)->raw();
+        $user = User::factory()->create();
+        $media = Media::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.medias.store'), $media)
@@ -57,11 +57,11 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function it_should_unmark_other_default_medias()
     {
-        $user = factory(User::class)->create();
-        $media = factory(Media::class)->states('default')->create();
-        $stub = factory(Media::class)->states('default')->raw([
+        $user = User::factory()->create();
+        $media = Media::factory()->default()->create();
+        $stub = Media::factory()->default()->make([
             'product_id' => $media->product_id,
-        ]);
+        ])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.medias.store'), $stub)
@@ -73,8 +73,8 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_media_without_product()
     {
-        $user = factory(User::class)->create();
-        $media = factory(Media::class)->raw(['product_id' => null]);
+        $user = User::factory()->create();
+        $media = Media::factory()->make(['product_id' => null])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.medias.store'), $media)
@@ -84,8 +84,8 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_media_with_string_product()
     {
-        $user = factory(User::class)->create();
-        $media = factory(Media::class)->raw(['product_id' => 'string']);
+        $user = User::factory()->create();
+        $media = Media::factory()->make(['product_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.medias.store'), $media)
@@ -95,8 +95,8 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_media_with_nonexistent_product()
     {
-        $user = factory(User::class)->create();
-        $media = factory(Media::class)->raw(['product_id' => 10]);
+        $user = User::factory()->create();
+        $media = Media::factory()->make(['product_id' => 10])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.medias.store'), $media)
@@ -106,8 +106,8 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_media_without_image()
     {
-        $user = factory(User::class)->create();
-        $media = factory(Media::class)->raw(['image_id' => null]);
+        $user = User::factory()->create();
+        $media = Media::factory()->make(['image_id' => null])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.medias.store'), $media)
@@ -117,8 +117,8 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_media_with_string_image()
     {
-        $user = factory(User::class)->create();
-        $media = factory(Media::class)->raw(['image_id' => 'string']);
+        $user = User::factory()->create();
+        $media = Media::factory()->make(['image_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.medias.store'), $media)
@@ -128,8 +128,8 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_media_with_nonexistent_image()
     {
-        $user = factory(User::class)->create();
-        $media = factory(Media::class)->raw(['image_id' => 10]);
+        $user = User::factory()->create();
+        $media = Media::factory()->make(['image_id' => 10])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.medias.store'), $media)
@@ -139,8 +139,8 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_existing_media()
     {
-        $user = factory(User::class)->create();
-        $media = factory(Media::class)->create();
+        $user = User::factory()->create();
+        $media = Media::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.medias.store'), $media->toArray())

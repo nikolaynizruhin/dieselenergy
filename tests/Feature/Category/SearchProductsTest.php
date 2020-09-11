@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Category;
 
-use App\Category;
-use App\Product;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,18 +14,18 @@ class SearchProductsTest extends TestCase
     /** @test */
     public function guest_can_search_products()
     {
-        $generators = factory(Category::class)->create();
+        $generators = Category::factory()->create();
 
-        $patrol = factory(Product::class)
-            ->states('active')
+        $patrol = Product::factory()
+            ->active()
             ->create(['name' => 'Patrol Generator', 'category_id' => $generators->id]);
 
-        $diesel = factory(Product::class)
-            ->states('active')
+        $diesel = Product::factory()
+            ->active()
             ->create(['name' => 'Diesel Generator', 'category_id' => $generators->id]);
 
-        $waterPump = factory(Product::class)
-            ->states('active')
+        $waterPump = Product::factory()
+            ->active()
             ->create(['name' => 'Water Pump', 'category_id' => $generators->id]);
 
         $this->get(route('categories.products.index', [

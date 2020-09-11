@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Product;
 
-use App\Product;
-use App\User;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class ReadProductTest extends TestCase
     /** @test */
     public function guest_cant_read_product()
     {
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $this->get(route('admin.products.show', $product))
             ->assertRedirect(route('admin.login'));
@@ -23,9 +23,9 @@ class ReadProductTest extends TestCase
     /** @test */
     public function user_can_read_product()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.products.show', $product))

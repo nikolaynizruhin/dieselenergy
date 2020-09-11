@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Category;
 
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class ReadCategoryTest extends TestCase
     /** @test */
     public function guest_cant_read_category()
     {
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $this->get(route('admin.categories.show', $category))
             ->assertRedirect(route('admin.login'));
@@ -23,9 +23,9 @@ class ReadCategoryTest extends TestCase
     /** @test */
     public function user_can_read_category()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.categories.show', $category))

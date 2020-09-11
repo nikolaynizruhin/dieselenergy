@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Cart;
 
-use App\Image;
-use App\Product;
+use App\Models\Image;
+use App\Models\Product;
 use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -15,8 +15,8 @@ class DeleteCartTest extends TestCase
     /** @test */
     public function guest_can_delete_cart_item()
     {
-        $image = factory(Image::class)->create();
-        $product = factory(Product::class)->create();
+        $image = Image::factory()->create();
+        $product = Product::factory()->create();
 
         $product->images()->attach($image, ['is_default' => 1]);
 

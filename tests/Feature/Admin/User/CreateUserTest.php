@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin\User;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +22,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_can_visit_create_user_page()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.users.create'))
@@ -43,8 +43,8 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_can_create_user()
     {
-        $admin = factory(User::class)->create();
-        $stub = factory(User::class)->make();
+        $admin = User::factory()->create();
+        $stub = User::factory()->make();
 
         $this->actingAs($admin)
             ->post(route('admin.users.store'), [
@@ -65,7 +65,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_without_name()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.users.store'), [
@@ -78,7 +78,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_integer_name()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.users.store'), [
@@ -92,7 +92,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_name_more_than_255_chars()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.users.store'), [
@@ -106,7 +106,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_without_email()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.users.store'), [
@@ -119,7 +119,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_integer_email()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.users.store'), [
@@ -133,7 +133,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_email_more_than_255_chars()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.users.store'), [
@@ -147,7 +147,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_invalid_email()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.users.store'), [
@@ -161,7 +161,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_duplicated_email()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.users.store'), [
@@ -175,7 +175,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_without_password()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.users.store'), [
@@ -188,7 +188,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_integer_password()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.users.store'), [
@@ -202,7 +202,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_password_less_than_8_chars()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.users.store'), [
@@ -216,7 +216,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_without_password_confirmation()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.users.store'), [

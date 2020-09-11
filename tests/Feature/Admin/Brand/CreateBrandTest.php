@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Brand;
 
-use App\Brand;
-use App\User;
+use App\Models\Brand;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -22,7 +22,7 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_can_visit_create_brand_page()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.brands.create'))
@@ -32,7 +32,7 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function guest_cant_create_brand()
     {
-        $brand = factory(Brand::class)->raw();
+        $brand = Brand::factory()->make()->toArray();
 
         $this->post(route('admin.brands.store'), $brand)
             ->assertRedirect(route('admin.login'));
@@ -41,8 +41,8 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_can_create_brand()
     {
-        $user = factory(User::class)->create();
-        $brand = factory(Brand::class)->raw();
+        $user = User::factory()->create();
+        $brand = Brand::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.brands.store'), $brand)
@@ -55,7 +55,7 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_cant_create_brand_without_name()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.brands.store'))
@@ -65,7 +65,7 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_cant_create_brand_with_integer_name()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.brands.store'), [
@@ -76,7 +76,7 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_cant_create_brand_with_name_more_than_255_chars()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.brands.store'), [
@@ -87,8 +87,8 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_cant_create_brand_with_existing_name()
     {
-        $user = factory(User::class)->create();
-        $brand = factory(Brand::class)->create();
+        $user = User::factory()->create();
+        $brand = Brand::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.brands.store'), [

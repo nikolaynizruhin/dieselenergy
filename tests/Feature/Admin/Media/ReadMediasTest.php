@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Media;
 
-use App\Image;
-use App\Product;
-use App\User;
+use App\Models\Image;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,12 +15,12 @@ class ReadMediasTest extends TestCase
     /** @test */
     public function user_can_read_medias()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $diesel = factory(Image::class)->create(['created_at' => now()->subDay()]);
-        $patrol = factory(Image::class)->create(['created_at' => now()]);
+        $diesel = Image::factory()->create(['created_at' => now()->subDay()]);
+        $patrol = Image::factory()->create(['created_at' => now()]);
 
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $product->images()->attach([$diesel->id, $patrol->id]);
 

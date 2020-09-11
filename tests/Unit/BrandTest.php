@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Brand;
-use App\Product;
+use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -15,8 +15,8 @@ class BrandTest extends TestCase
     /** @test */
     public function it_has_many_products()
     {
-        $brand = factory(Brand::class)->create();
-        $product = factory(Product::class)->create(['brand_id' => $brand->id]);
+        $brand = Brand::factory()->create();
+        $product = Product::factory()->create(['brand_id' => $brand->id]);
 
         $this->assertTrue($brand->products->contains($product));
         $this->assertInstanceOf(Collection::class, $brand->products);

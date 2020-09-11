@@ -2,7 +2,7 @@
 
 namespace App\Http\View\Composers\Admin;
 
-use App\Attribute;
+use App\Models\Attribute;
 use Illuminate\View\View;
 
 class SpecificationComposer

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Attribute;
 
-use App\Attribute;
-use App\User;
+use App\Models\Attribute;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -15,7 +15,7 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function guest_cant_visit_update_attribute_page()
     {
-        $attribute = factory(Attribute::class)->create();
+        $attribute = Attribute::factory()->create();
 
         $this->get(route('admin.attributes.edit', $attribute))
             ->assertRedirect(route('admin.login'));
@@ -24,8 +24,8 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_can_visit_update_attribute_page()
     {
-        $user = factory(User::class)->create();
-        $attribute = factory(Attribute::class)->create();
+        $user = User::factory()->create();
+        $attribute = Attribute::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.attributes.edit', $attribute))
@@ -36,9 +36,9 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function guest_cant_update_attribute()
     {
-        $attribute = factory(Attribute::class)->create();
+        $attribute = Attribute::factory()->create();
 
-        $stub = factory(Attribute::class)->raw();
+        $stub = Attribute::factory()->make()->toArray();
 
         $this->put(route('admin.attributes.update', $attribute), $stub)
             ->assertRedirect(route('admin.login'));
@@ -47,9 +47,9 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_can_update_attribute()
     {
-        $user = factory(User::class)->create();
-        $attribute = factory(Attribute::class)->create();
-        $stub = factory(Attribute::class)->raw();
+        $user = User::factory()->create();
+        $attribute = Attribute::factory()->create();
+        $stub = Attribute::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)
@@ -62,9 +62,9 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_cant_update_attribute_without_name()
     {
-        $user = factory(User::class)->create();
-        $attribute = factory(Attribute::class)->create();
-        $stub = factory(Attribute::class)->raw(['name' => null]);
+        $user = User::factory()->create();
+        $attribute = Attribute::factory()->create();
+        $stub = Attribute::factory()->make(['name' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)
@@ -74,9 +74,9 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_cant_update_attribute_with_integer_name()
     {
-        $user = factory(User::class)->create();
-        $attribute = factory(Attribute::class)->create();
-        $stub = factory(Attribute::class)->raw(['name' => 1]);
+        $user = User::factory()->create();
+        $attribute = Attribute::factory()->create();
+        $stub = Attribute::factory()->make(['name' => 1])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)
@@ -86,9 +86,9 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_cant_update_attribute_with_name_more_than_255_chars()
     {
-        $user = factory(User::class)->create();
-        $attribute = factory(Attribute::class)->create();
-        $stub = factory(Attribute::class)->raw(['name' => str_repeat('a', 256)]);
+        $user = User::factory()->create();
+        $attribute = Attribute::factory()->create();
+        $stub = Attribute::factory()->make(['name' => str_repeat('a', 256)])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)
@@ -98,9 +98,9 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_cant_update_attribute_with_existing_name()
     {
-        $user = factory(User::class)->create();
-        $attribute = factory(Attribute::class)->create();
-        $existing = factory(Attribute::class)->create();
+        $user = User::factory()->create();
+        $attribute = Attribute::factory()->create();
+        $existing = Attribute::factory()->create();
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), [
@@ -111,9 +111,9 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_cant_update_attribute_with_integer_measure()
     {
-        $user = factory(User::class)->create();
-        $attribute = factory(Attribute::class)->create();
-        $stub = factory(Attribute::class)->raw(['measure' => 1]);
+        $user = User::factory()->create();
+        $attribute = Attribute::factory()->create();
+        $stub = Attribute::factory()->make(['measure' => 1])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)
@@ -123,9 +123,9 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_cant_update_attribute_with_measure_more_than_255_chars()
     {
-        $user = factory(User::class)->create();
-        $attribute = factory(Attribute::class)->create();
-        $stub = factory(Attribute::class)->raw(['measure' => str_repeat('a', 256)]);
+        $user = User::factory()->create();
+        $attribute = Attribute::factory()->create();
+        $stub = Attribute::factory()->make(['measure' => str_repeat('a', 256)])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)

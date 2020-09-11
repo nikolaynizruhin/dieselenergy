@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Category;
 
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -22,7 +22,7 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_can_visit_create_category_page()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.categories.create'))
@@ -32,7 +32,7 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function guest_cant_create_category()
     {
-        $category = factory(Category::class)->raw();
+        $category = Category::factory()->make()->toArray();
 
         $this->post(route('admin.categories.store'), $category)
             ->assertRedirect(route('admin.login'));
@@ -41,8 +41,8 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_can_create_category()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->raw();
+        $user = User::factory()->create();
+        $category = Category::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.categories.store'), $category)
@@ -55,7 +55,7 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_cant_create_category_without_name()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.categories.store'))
@@ -65,7 +65,7 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_cant_create_category_with_integer_name()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.categories.store'), [
@@ -76,7 +76,7 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_cant_create_category_with_name_more_than_255_chars()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), [
@@ -87,8 +87,8 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_cant_create_category_with_existing_name()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create();
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.categories.store'), [

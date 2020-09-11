@@ -1,13 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use App\Attributable;
+use App\HasSearch;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use Attributable, HasSearch;
+    use Attributable, HasFactory, HasSearch;
 
     /**
      * The attributes that are mass assignable.
@@ -59,7 +62,7 @@ class Product extends Model
      * Scope a query with featured attributes.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \App\Category  $category
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeWithFeatured($query, $category)
@@ -75,7 +78,7 @@ class Product extends Model
     /**
      * Get product default image.
      *
-     * @return \App\Image|null
+     * @return \App\Models\Image|null
      */
     public function defaultImage()
     {

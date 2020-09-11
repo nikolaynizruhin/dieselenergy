@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Product;
 
-use App\Product;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,7 +13,7 @@ class ReadProductTest extends TestCase
     /** @test */
     public function user_can_read_product()
     {
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $this->get(route('products.show', $product))
             ->assertSuccessful()

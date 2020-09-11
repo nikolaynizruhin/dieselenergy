@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Brand;
 
-use App\Brand;
-use App\User;
+use App\Models\Brand;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -15,7 +15,7 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function guest_cant_visit_update_brand_page()
     {
-        $brand = factory(Brand::class)->create();
+        $brand = Brand::factory()->create();
 
         $this->get(route('admin.brands.edit', $brand))
             ->assertRedirect(route('admin.login'));
@@ -24,8 +24,8 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_can_visit_update_brand_page()
     {
-        $user = factory(User::class)->create();
-        $brand = factory(Brand::class)->create();
+        $user = User::factory()->create();
+        $brand = Brand::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.brands.edit', $brand))
@@ -36,7 +36,7 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function guest_cant_update_brand()
     {
-        $brand = factory(Brand::class)->create();
+        $brand = Brand::factory()->create();
 
         $this->put(route('admin.brands.update', $brand), [
             'name' => $this->faker->word,
@@ -46,9 +46,9 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_can_update_brand()
     {
-        $user = factory(User::class)->create();
-        $brand = factory(Brand::class)->create();
-        $stub = factory(Brand::class)->raw();
+        $user = User::factory()->create();
+        $brand = Brand::factory()->create();
+        $stub = Brand::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.brands.update', $brand), $stub)
@@ -61,8 +61,8 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_cant_update_brand_without_name()
     {
-        $user = factory(User::class)->create();
-        $brand = factory(Brand::class)->create();
+        $user = User::factory()->create();
+        $brand = Brand::factory()->create();
 
         $this->actingAs($user)
             ->put(route('admin.brands.update', $brand), [
@@ -73,8 +73,8 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_cant_update_brand_with_integer_name()
     {
-        $user = factory(User::class)->create();
-        $brand = factory(Brand::class)->create();
+        $user = User::factory()->create();
+        $brand = Brand::factory()->create();
 
         $this->actingAs($user)
             ->put(route('admin.brands.update', $brand), [
@@ -85,8 +85,8 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_cant_update_brand_with_name_more_than_255_chars()
     {
-        $user = factory(User::class)->create();
-        $brand = factory(Brand::class)->create();
+        $user = User::factory()->create();
+        $brand = Brand::factory()->create();
 
         $this->actingAs($user)
             ->put(route('admin.brands.update', $brand), [
@@ -97,9 +97,9 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_cant_update_brand_with_existing_name()
     {
-        $user = factory(User::class)->create();
-        $brand = factory(Brand::class)->create();
-        $existing = factory(Brand::class)->create();
+        $user = User::factory()->create();
+        $brand = Brand::factory()->create();
+        $existing = Brand::factory()->create();
 
         $this->actingAs($user)
             ->put(route('admin.brands.update', $brand), [

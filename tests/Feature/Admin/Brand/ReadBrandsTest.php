@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Brand;
 
-use App\Brand;
-use App\User;
+use App\Models\Brand;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -21,10 +21,10 @@ class ReadBrandsTest extends TestCase
     /** @test */
     public function user_can_read_brands()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $sdmo = factory(Brand::class)->create(['name' => 'SDMO']);
-        $hyundai = factory(Brand::class)->create(['name' => 'Hyundai']);
+        $sdmo = Brand::factory()->create(['name' => 'SDMO']);
+        $hyundai = Brand::factory()->create(['name' => 'Hyundai']);
 
         $this->actingAs($user)
             ->get(route('admin.brands.index'))

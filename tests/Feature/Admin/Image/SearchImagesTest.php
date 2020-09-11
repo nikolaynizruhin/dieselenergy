@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Image;
 
-use App\Image;
-use App\User;
+use App\Models\Image;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class SearchImagesTest extends TestCase
     /** @test */
     public function guest_cant_search_images()
     {
-        $image = factory(Image::class)->create();
+        $image = Image::factory()->create();
 
         $this->get(route('admin.images.index', ['search' => $image->path]))
             ->assertRedirect(route('admin.login'));
@@ -23,11 +23,11 @@ class SearchImagesTest extends TestCase
     /** @test */
     public function user_can_search_images()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $diesel = factory(Image::class)->create(['path' => 'images/abcpath.jpg', 'created_at' => now()->subDay()]);
-        $patrol = factory(Image::class)->create(['path' => 'images/bcapath.jpg', 'created_at' => now()]);
-        $waterPump = factory(Image::class)->create(['path' => 'images/token.jpg']);
+        $diesel = Image::factory()->create(['path' => 'images/abcpath.jpg', 'created_at' => now()->subDay()]);
+        $patrol = Image::factory()->create(['path' => 'images/bcapath.jpg', 'created_at' => now()]);
+        $waterPump = Image::factory()->create(['path' => 'images/token.jpg']);
 
         $this->actingAs($user)
             ->get(route('admin.images.index', ['search' => 'path']))

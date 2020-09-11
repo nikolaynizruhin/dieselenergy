@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin\User;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,7 +13,7 @@ class DeleteUserTest extends TestCase
     /** @test */
     public function guest_cant_delete_user()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->delete(route('admin.users.destroy', $user))
             ->assertRedirect(route('admin.login'));
@@ -22,7 +22,7 @@ class DeleteUserTest extends TestCase
     /** @test */
     public function user_can_delete_user()
     {
-        [$admin, $user] = factory(User::class, 2)->create();
+        [$admin, $user] = User::factory()->count(2)->create();
 
         $this->actingAs($admin)
             ->from(route('admin.users.index'))

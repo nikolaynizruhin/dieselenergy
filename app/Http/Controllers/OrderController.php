@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
 use App\Http\Requests\StoreOrder;
-use App\Order;
+use App\Models\Customer;
+use App\Models\Order;
 use Facades\App\Cart\Cart;
 use Illuminate\Http\Request;
 
@@ -57,7 +57,7 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)

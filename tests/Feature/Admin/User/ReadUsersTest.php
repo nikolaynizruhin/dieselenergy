@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin\User;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -20,9 +20,9 @@ class ReadUsersTest extends TestCase
     /** @test */
     public function user_can_read_users()
     {
-        $admin = factory(User::class)->create();
-        $john = factory(User::class)->create(['name' => 'John Doe']);
-        $jane = factory(User::class)->create(['name' => 'Jane Doe']);
+        $admin = User::factory()->create();
+        $john = User::factory()->create(['name' => 'John Doe']);
+        $jane = User::factory()->create(['name' => 'Jane Doe']);
 
         $this->actingAs($admin)
             ->get(route('admin.users.index'))

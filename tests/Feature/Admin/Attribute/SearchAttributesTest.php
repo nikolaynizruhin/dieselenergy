@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Attribute;
 
-use App\Attribute;
-use App\User;
+use App\Models\Attribute;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class SearchAttributesTest extends TestCase
     /** @test */
     public function guest_cant_search_attributes()
     {
-        $attribute = factory(Attribute::class)->create();
+        $attribute = Attribute::factory()->create();
 
         $this->get(route('admin.attributes.index', ['search' => $attribute->name]))
             ->assertRedirect(route('admin.login'));
@@ -23,11 +23,11 @@ class SearchAttributesTest extends TestCase
     /** @test */
     public function user_can_search_attributes()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $power = factory(Attribute::class)->create(['name' => 'power']);
-        $width = factory(Attribute::class)->create(['name' => 'width attribute']);
-        $height = factory(Attribute::class)->create(['name' => 'height attribute']);
+        $power = Attribute::factory()->create(['name' => 'power']);
+        $width = Attribute::factory()->create(['name' => 'width attribute']);
+        $height = Attribute::factory()->create(['name' => 'height attribute']);
 
         $this->actingAs($user)
             ->get(route('admin.attributes.index', ['search' => 'attribute']))

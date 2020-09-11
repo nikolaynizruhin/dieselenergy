@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Category;
 
-use App\Attribute;
-use App\Category;
-use App\Product;
+use App\Models\Attribute;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,11 +15,11 @@ class FilterProductsTest extends TestCase
     /** @test */
     public function guest_can_filter_products()
     {
-        $generators = factory(Category::class)->create();
-        $attribute = factory(Attribute::class)->create();
+        $generators = Category::factory()->create();
+        $attribute = Attribute::factory()->create();
 
-        $patrol = factory(Product::class)
-            ->states('active')
+        $patrol = Product::factory()
+            ->active()
             ->create([
                 'name' => 'Patrol Generator',
                 'category_id' => $generators->id,
@@ -27,8 +27,8 @@ class FilterProductsTest extends TestCase
 
         $patrol->attributes()->attach($attribute, ['value' => 10]);
 
-        $diesel = factory(Product::class)
-            ->states('active')
+        $diesel = Product::factory()
+            ->active()
             ->create([
                 'name' => 'Diesel Generator',
                 'category_id' => $generators->id,
@@ -36,8 +36,8 @@ class FilterProductsTest extends TestCase
 
         $diesel->attributes()->attach($attribute, ['value' => 20]);
 
-        $waterPump = factory(Product::class)
-            ->states('active')
+        $waterPump = Product::factory()
+            ->active()
             ->create([
                 'name' => 'Water Pump',
                 'category_id' => $generators->id,

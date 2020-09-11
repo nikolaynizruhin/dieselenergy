@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Brand;
 
-use App\Brand;
-use App\User;
+use App\Models\Brand;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class SearchBrandsTest extends TestCase
     /** @test */
     public function guest_cant_search_brands()
     {
-        $brand = factory(Brand::class)->create();
+        $brand = Brand::factory()->create();
 
         $this->get(route('admin.brands.index', ['search' => $brand->name]))
             ->assertRedirect(route('admin.login'));
@@ -23,11 +23,11 @@ class SearchBrandsTest extends TestCase
     /** @test */
     public function user_can_search_brands()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $sdmo = factory(Brand::class)->create(['name' => 'SDMO Brand']);
-        $hyundai = factory(Brand::class)->create(['name' => 'Hyundai Brand']);
-        $bosch = factory(Brand::class)->create(['name' => 'Bosch']);
+        $sdmo = Brand::factory()->create(['name' => 'SDMO Brand']);
+        $hyundai = Brand::factory()->create(['name' => 'Hyundai Brand']);
+        $bosch = Brand::factory()->create(['name' => 'Bosch']);
 
         $this->actingAs($user)
             ->get(route('admin.brands.index', ['search' => 'Brand']))

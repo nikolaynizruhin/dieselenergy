@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Order;
 
-use App\Order;
-use App\User;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -21,10 +21,10 @@ class ReadOrdersTest extends TestCase
     /** @test */
     public function user_can_read_orders()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $orderB = factory(Order::class)->create(['created_at' => now()->subDay()]);
-        $orderA = factory(Order::class)->create(['created_at' => now()]);
+        $orderB = Order::factory()->create(['created_at' => now()->subDay()]);
+        $orderA = Order::factory()->create(['created_at' => now()]);
 
         $this->actingAs($user)
             ->get(route('admin.orders.index'))

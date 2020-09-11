@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Dashboard;
 
-use App\Order;
-use App\Product;
-use App\User;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -22,11 +22,11 @@ class ReadDashboardTest extends TestCase
     /** @test */
     public function user_can_read_dashboard()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
 
-        $orderA = factory(Order::class)->create(['created_at' => now()]);
-        $orderB = factory(Order::class)->create(['created_at' => now()->subDay()]);
+        $orderA = Order::factory()->create(['created_at' => now()]);
+        $orderB = Order::factory()->create(['created_at' => now()->subDay()]);
 
         $orderA->products()->attach($product, ['quantity' => 2]);
 

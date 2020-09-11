@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin\Auth;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
@@ -17,7 +17,7 @@ class ResetPasswordTest extends TestCase
     /** @test */
     public function user_can_view_password_reset_page()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $token = Password::broker()->createToken($user);
 
@@ -30,7 +30,7 @@ class ResetPasswordTest extends TestCase
     /** @test */
     public function authenticated_user_can_view_password_reset_page()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $token = Password::broker()->createToken($user);
 
@@ -46,7 +46,7 @@ class ResetPasswordTest extends TestCase
     {
         Event::fake();
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $token = Password::broker()->createToken($user);
 
@@ -70,7 +70,7 @@ class ResetPasswordTest extends TestCase
     /** @test */
     public function user_cannot_reset_password_with_invalid_token()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->from(route('admin.password.reset', 'invalid'))
             ->post('/admin/password/reset', [
@@ -88,7 +88,7 @@ class ResetPasswordTest extends TestCase
     /** @test */
     public function user_cannot_reset_password_without_providing_new_password()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $token = Password::broker()->createToken($user);
 
@@ -111,7 +111,7 @@ class ResetPasswordTest extends TestCase
     /** @test */
     public function user_cannot_reset_password_without_providing_email()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $token = Password::broker()->createToken($user);
 

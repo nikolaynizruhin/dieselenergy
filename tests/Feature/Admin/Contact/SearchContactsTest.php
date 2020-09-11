@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Contact;
 
-use App\Contact;
-use App\User;
+use App\Models\Contact;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class SearchContactsTest extends TestCase
     /** @test */
     public function guest_cant_search_contacts()
     {
-        $contact = factory(Contact::class)->create();
+        $contact = Contact::factory()->create();
 
         $this->get(route('admin.contacts.index', ['search' => $contact->name]))
             ->assertRedirect(route('admin.login'));
@@ -23,11 +23,11 @@ class SearchContactsTest extends TestCase
     /** @test */
     public function user_can_search_contacts()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $contactSale = factory(Contact::class)->create(['subject' => 'Sale Contact']);
-        $contactSupport = factory(Contact::class)->create(['subject' => 'Support Contact']);
-        $contactOther = factory(Contact::class)->create(['subject' => 'Other']);
+        $contactSale = Contact::factory()->create(['subject' => 'Sale Contact']);
+        $contactSupport = Contact::factory()->create(['subject' => 'Support Contact']);
+        $contactOther = Contact::factory()->create(['subject' => 'Other']);
 
         $this->actingAs($user)
             ->get(route('admin.contacts.index', ['search' => 'Contact']))

@@ -1,15 +1,31 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Contact;
-use App\Customer;
-use Faker\Generator as Faker;
+use App\Models\Contact;
+use App\Models\Customer;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Contact::class, function (Faker $faker) {
-    return [
-        'customer_id' => factory(Customer::class),
-        'subject' => $faker->sentence,
-        'message' => $faker->paragraph,
-    ];
-});
+class ContactFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Contact::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'customer_id' => Customer::factory(),
+            'subject' => $this->faker->sentence,
+            'message' => $this->faker->paragraph,
+        ];
+    }
+}
