@@ -32,7 +32,7 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function guest_cant_create_category()
     {
-        $category = Category::factory()->make()->toArray();
+        $category = Category::factory()->raw();
 
         $this->post(route('admin.categories.store'), $category)
             ->assertRedirect(route('admin.login'));
@@ -42,7 +42,7 @@ class CreateCategoryTest extends TestCase
     public function user_can_create_category()
     {
         $user = User::factory()->create();
-        $category = Category::factory()->make()->toArray();
+        $category = Category::factory()->raw();
 
         $this->actingAs($user)
             ->post(route('admin.categories.store'), $category)

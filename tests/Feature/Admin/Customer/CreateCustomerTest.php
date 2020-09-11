@@ -32,7 +32,7 @@ class CreateCustomerTest extends TestCase
     /** @test */
     public function guest_cant_create_customer()
     {
-        $customer = Customer::factory()->make()->toArray();
+        $customer = Customer::factory()->raw();
 
         $this->post(route('admin.customers.store'), $customer)
             ->assertRedirect(route('admin.login'));
@@ -42,7 +42,7 @@ class CreateCustomerTest extends TestCase
     public function user_can_create_customer()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->make()->toArray();
+        $customer = Customer::factory()->raw();
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)
@@ -56,7 +56,7 @@ class CreateCustomerTest extends TestCase
     public function user_cant_create_customer_without_name()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->make(['name' => null])->toArray();
+        $customer = Customer::factory()->raw(['name' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)
@@ -67,7 +67,7 @@ class CreateCustomerTest extends TestCase
     public function user_cant_create_customer_with_integer_name()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->make(['name' => 1])->toArray();
+        $customer = Customer::factory()->raw(['name' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)
@@ -78,7 +78,7 @@ class CreateCustomerTest extends TestCase
     public function user_cant_create_customer_with_name_more_than_255_chars()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->make(['name' => str_repeat('a', 256)])->toArray();
+        $customer = Customer::factory()->raw(['name' => str_repeat('a', 256)]);
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)
@@ -89,7 +89,7 @@ class CreateCustomerTest extends TestCase
     public function user_cant_create_customer_without_email()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->make(['email' => null])->toArray();
+        $customer = Customer::factory()->raw(['email' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)
@@ -100,7 +100,7 @@ class CreateCustomerTest extends TestCase
     public function user_cant_create_user_with_integer_email()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->make(['email' => 1])->toArray();
+        $customer = Customer::factory()->raw(['email' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)
@@ -111,7 +111,7 @@ class CreateCustomerTest extends TestCase
     public function user_cant_create_user_with_email_more_than_255_chars()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->make(['email' => str_repeat('a', 256)])->toArray();
+        $customer = Customer::factory()->raw(['email' => str_repeat('a', 256)]);
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)
@@ -122,7 +122,7 @@ class CreateCustomerTest extends TestCase
     public function user_cant_create_customer_with_invalid_email()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->make(['email' => 'invalid'])->toArray();
+        $customer = Customer::factory()->raw(['email' => 'invalid']);
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)
@@ -144,7 +144,7 @@ class CreateCustomerTest extends TestCase
     public function user_cant_create_customer_without_phone()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->make(['phone' => null])->toArray();
+        $customer = Customer::factory()->raw(['phone' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)
@@ -155,7 +155,7 @@ class CreateCustomerTest extends TestCase
     public function user_cant_create_customer_with_integer_phone()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->make(['phone' => 1])->toArray();
+        $customer = Customer::factory()->raw(['phone' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)
@@ -166,7 +166,7 @@ class CreateCustomerTest extends TestCase
     public function user_cant_create_customer_with_phone_more_than_255_chars()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->make(['phone' => str_repeat('a', 256)])->toArray();
+        $customer = Customer::factory()->raw(['phone' => str_repeat('a', 256)]);
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)
@@ -177,7 +177,7 @@ class CreateCustomerTest extends TestCase
     public function user_cant_create_customer_with_integer_notes()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->make(['notes' => 1])->toArray();
+        $customer = Customer::factory()->raw(['notes' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)

@@ -32,7 +32,7 @@ class CreateAttributeTest extends TestCase
     /** @test */
     public function guest_cant_create_attribute()
     {
-        $attribute = Attribute::factory()->make()->toArray();
+        $attribute = Attribute::factory()->raw();
 
         $this->post(route('admin.attributes.store'), $attribute)
             ->assertRedirect(route('admin.login'));
@@ -42,7 +42,7 @@ class CreateAttributeTest extends TestCase
     public function user_can_create_attribute()
     {
         $user = User::factory()->create();
-        $attribute = Attribute::factory()->make()->toArray();
+        $attribute = Attribute::factory()->raw();
 
         $this->actingAs($user)
             ->post(route('admin.attributes.store'), $attribute)
@@ -101,7 +101,7 @@ class CreateAttributeTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $attribute = Attribute::factory()->make(['measure' => 1])->toArray();
+        $attribute = Attribute::factory()->raw(['measure' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.attributes.store'), $attribute)
@@ -113,7 +113,7 @@ class CreateAttributeTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $attribute = Attribute::factory()->make(['measure' => str_repeat('a', 256)])->toArray();
+        $attribute = Attribute::factory()->raw(['measure' => str_repeat('a', 256)]);
 
         $this->actingAs($user)
             ->post(route('admin.attributes.store'), $attribute)

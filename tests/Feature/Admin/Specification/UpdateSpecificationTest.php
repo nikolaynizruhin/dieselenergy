@@ -46,7 +46,7 @@ class UpdateSpecificationTest extends TestCase
         $user = User::factory()->create();
 
         $specification = Specification::factory()->create();
-        $stub = Specification::factory()->make()->toArray();
+        $stub = Specification::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)
@@ -62,7 +62,7 @@ class UpdateSpecificationTest extends TestCase
         $user = User::factory()->create();
 
         $specification = Specification::factory()->create();
-        $stub = Specification::factory()->make(['category_id' => null])->toArray();
+        $stub = Specification::factory()->raw(['category_id' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)
@@ -75,7 +75,7 @@ class UpdateSpecificationTest extends TestCase
         $user = User::factory()->create();
 
         $specification = Specification::factory()->create();
-        $stub = Specification::factory()->make(['category_id' => 'string'])->toArray();
+        $stub = Specification::factory()->raw(['category_id' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)
@@ -88,7 +88,7 @@ class UpdateSpecificationTest extends TestCase
         $user = User::factory()->create();
 
         $specification = Specification::factory()->create();
-        $stub = Specification::factory()->make(['category_id' => 10])->toArray();
+        $stub = Specification::factory()->raw(['category_id' => 10]);
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)
@@ -101,7 +101,7 @@ class UpdateSpecificationTest extends TestCase
         $user = User::factory()->create();
 
         $specification = Specification::factory()->create();
-        $stub = Specification::factory()->make(['attribute_id' => null])->toArray();
+        $stub = Specification::factory()->raw(['attribute_id' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)
@@ -114,7 +114,7 @@ class UpdateSpecificationTest extends TestCase
         $user = User::factory()->create();
 
         $specification = Specification::factory()->create();
-        $stub = Specification::factory()->make(['attribute_id' => 'string'])->toArray();
+        $stub = Specification::factory()->raw(['attribute_id' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)
@@ -127,7 +127,7 @@ class UpdateSpecificationTest extends TestCase
         $user = User::factory()->create();
 
         $specification = Specification::factory()->create();
-        $stub = Specification::factory()->make(['attribute_id' => 10])->toArray();
+        $stub = Specification::factory()->raw(['attribute_id' => 10]);
 
         $this->actingAs($user)
             ->put(route('admin.specifications.update', $specification), $stub)

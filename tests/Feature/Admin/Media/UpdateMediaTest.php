@@ -35,7 +35,7 @@ class UpdateMediaTest extends TestCase
     public function guest_cant_update_media()
     {
         $media = Media::factory()->create();
-        $stub = Media::factory()->make()->toArray();
+        $stub = Media::factory()->raw();
 
         $this->put(route('admin.medias.update', $media), $stub)
             ->assertRedirect(route('admin.login'));
@@ -46,7 +46,7 @@ class UpdateMediaTest extends TestCase
     {
         $user = User::factory()->create();
         $media = Media::factory()->create();
-        $stub = Media::factory()->make()->toArray();
+        $stub = Media::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.medias.update', $media), $stub)
@@ -72,8 +72,7 @@ class UpdateMediaTest extends TestCase
 
         $stub = Media::factory()
             ->default()
-            ->make(['product_id' => $defaultMedia->product_id])
-            ->toArray();
+            ->raw(['product_id' => $defaultMedia->product_id]);
 
         $this->actingAs($user)
             ->put(route('admin.medias.update', $media), $stub)
@@ -87,7 +86,7 @@ class UpdateMediaTest extends TestCase
     {
         $user = User::factory()->create();
         $media = Media::factory()->create();
-        $stub = Media::factory()->make(['product_id' => null])->toArray();
+        $stub = Media::factory()->raw(['product_id' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.medias.update', $media), $stub)
@@ -99,7 +98,7 @@ class UpdateMediaTest extends TestCase
     {
         $user = User::factory()->create();
         $media = Media::factory()->create();
-        $stub = Media::factory()->make(['product_id' => 'string'])->toArray();
+        $stub = Media::factory()->raw(['product_id' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.medias.update', $media), $stub)
@@ -111,7 +110,7 @@ class UpdateMediaTest extends TestCase
     {
         $user = User::factory()->create();
         $media = Media::factory()->create();
-        $stub = Media::factory()->make(['product_id' => 10])->toArray();
+        $stub = Media::factory()->raw(['product_id' => 10]);
 
         $this->actingAs($user)
             ->put(route('admin.medias.update', $media), $stub)
@@ -123,7 +122,7 @@ class UpdateMediaTest extends TestCase
     {
         $user = User::factory()->create();
         $media = Media::factory()->create();
-        $stub = Media::factory()->make(['image_id' => null])->toArray();
+        $stub = Media::factory()->raw(['image_id' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.medias.update', $media), $stub)
@@ -135,7 +134,7 @@ class UpdateMediaTest extends TestCase
     {
         $user = User::factory()->create();
         $media = Media::factory()->create();
-        $stub = Media::factory()->make(['image_id' => 'string'])->toArray();
+        $stub = Media::factory()->raw(['image_id' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.medias.update', $media), $stub)
@@ -147,7 +146,7 @@ class UpdateMediaTest extends TestCase
     {
         $user = User::factory()->create();
         $media = Media::factory()->create();
-        $stub = Media::factory()->make(['image_id' => 10])->toArray();
+        $stub = Media::factory()->raw(['image_id' => 10]);
 
         $this->actingAs($user)
             ->put(route('admin.medias.update', $media), $stub)

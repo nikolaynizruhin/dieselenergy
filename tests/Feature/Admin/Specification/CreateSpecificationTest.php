@@ -34,7 +34,7 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function guest_cant_create_specification()
     {
-        $stub = Specification::factory()->make()->toArray();
+        $stub = Specification::factory()->raw();
 
         $this->post(route('admin.specifications.store'), $stub)
             ->assertRedirect(route('admin.login'));
@@ -45,7 +45,7 @@ class CreateSpecificationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $stub = Specification::factory()->make()->toArray();
+        $stub = Specification::factory()->raw();
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -62,7 +62,7 @@ class CreateSpecificationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $stub = Specification::factory()->make(['category_id' => null])->toArray();
+        $stub = Specification::factory()->raw(['category_id' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -74,7 +74,7 @@ class CreateSpecificationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $stub = Specification::factory()->make(['category_id' => 'string'])->toArray();
+        $stub = Specification::factory()->raw(['category_id' => 'string']);
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -86,7 +86,7 @@ class CreateSpecificationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $stub = Specification::factory()->make(['category_id' => 10])->toArray();
+        $stub = Specification::factory()->raw(['category_id' => 10]);
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -98,7 +98,7 @@ class CreateSpecificationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $stub = Specification::factory()->make(['attribute_id' => null])->toArray();
+        $stub = Specification::factory()->raw(['attribute_id' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -110,7 +110,7 @@ class CreateSpecificationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $stub = Specification::factory()->make(['attribute_id' => 'string'])->toArray();
+        $stub = Specification::factory()->raw(['attribute_id' => 'string']);
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -122,7 +122,7 @@ class CreateSpecificationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $stub = Specification::factory()->make(['attribute_id' => 10])->toArray();
+        $stub = Specification::factory()->raw(['attribute_id' => 10]);
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)

@@ -38,7 +38,7 @@ class UpdateCartTest extends TestCase
     public function guest_cant_update_cart()
     {
         $cart = Cart::factory()->create();
-        $stub = Cart::factory()->make()->toArray();
+        $stub = Cart::factory()->raw();
 
         $this->put(route('admin.carts.update', $cart), $stub)
             ->assertRedirect(route('admin.login'));
@@ -50,7 +50,7 @@ class UpdateCartTest extends TestCase
         $user = User::factory()->create();
 
         $cart = Cart::factory()->create();
-        $stub = Cart::factory()->make()->toArray();
+        $stub = Cart::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -66,7 +66,7 @@ class UpdateCartTest extends TestCase
         $user = User::factory()->create();
 
         $cart = Cart::factory()->create();
-        $stub = Cart::factory()->make(['order_id' => null])->toArray();
+        $stub = Cart::factory()->raw(['order_id' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -79,7 +79,7 @@ class UpdateCartTest extends TestCase
         $user = User::factory()->create();
 
         $cart = Cart::factory()->create();
-        $stub = Cart::factory()->make(['order_id' => 'string'])->toArray();
+        $stub = Cart::factory()->raw(['order_id' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -92,7 +92,7 @@ class UpdateCartTest extends TestCase
         $user = User::factory()->create();
 
         $cart = Cart::factory()->create();
-        $stub = Cart::factory()->make(['order_id' => 10])->toArray();
+        $stub = Cart::factory()->raw(['order_id' => 10]);
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -105,7 +105,7 @@ class UpdateCartTest extends TestCase
         $user = User::factory()->create();
 
         $cart = Cart::factory()->create();
-        $stub = Cart::factory()->make(['product_id' => null])->toArray();
+        $stub = Cart::factory()->raw(['product_id' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -118,7 +118,7 @@ class UpdateCartTest extends TestCase
         $user = User::factory()->create();
 
         $cart = Cart::factory()->create();
-        $stub = Cart::factory()->make(['product_id' => 'string'])->toArray();
+        $stub = Cart::factory()->raw(['product_id' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -131,7 +131,7 @@ class UpdateCartTest extends TestCase
         $user = User::factory()->create();
 
         $cart = Cart::factory()->create();
-        $stub = Cart::factory()->make(['product_id' => 10])->toArray();
+        $stub = Cart::factory()->raw(['product_id' => 10]);
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -157,7 +157,7 @@ class UpdateCartTest extends TestCase
         $user = User::factory()->create();
 
         $cart = Cart::factory()->create();
-        $stub = Cart::factory()->make(['quantity' => null])->toArray();
+        $stub = Cart::factory()->raw(['quantity' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -170,7 +170,7 @@ class UpdateCartTest extends TestCase
         $user = User::factory()->create();
 
         $cart = Cart::factory()->create();
-        $stub = Cart::factory()->make(['quantity' => 'string'])->toArray();
+        $stub = Cart::factory()->raw(['quantity' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -183,7 +183,7 @@ class UpdateCartTest extends TestCase
         $user = User::factory()->create();
 
         $cart = Cart::factory()->create();
-        $stub = Cart::factory()->make(['quantity' => 0])->toArray();
+        $stub = Cart::factory()->raw(['quantity' => 0]);
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)

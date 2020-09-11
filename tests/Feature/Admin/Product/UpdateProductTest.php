@@ -55,7 +55,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make()->toArray();
+        $stub = Product::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -75,7 +75,7 @@ class UpdateProductTest extends TestCase
 
         $category->attributes()->attach($attribute);
 
-        $stub = Product::factory()->make(['category_id' => $category->id])->toArray();
+        $stub = Product::factory()->raw(['category_id' => $category->id]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub + [
@@ -101,7 +101,7 @@ class UpdateProductTest extends TestCase
 
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make()->toArray();
+        $stub = Product::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub + [
@@ -124,7 +124,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make(['name' => null])->toArray();
+        $stub = Product::factory()->raw(['name' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -136,7 +136,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make(['name' => 1])->toArray();
+        $stub = Product::factory()->raw(['name' => 1]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -148,9 +148,9 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make([
+        $stub = Product::factory()->raw([
             'name' => str_repeat('a', 256),
-        ])->toArray();
+        ]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -163,9 +163,9 @@ class UpdateProductTest extends TestCase
         $user = User::factory()->create();
         $product = Product::factory()->create();
         $existing = Product::factory()->create();
-        $stub = Product::factory()->make([
+        $stub = Product::factory()->raw([
             'name' => $existing->name,
-        ])->toArray();
+        ]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -177,7 +177,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make(['price' => null])->toArray();
+        $stub = Product::factory()->raw(['price' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -189,7 +189,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make(['price' => 'string'])->toArray();
+        $stub = Product::factory()->raw(['price' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -201,7 +201,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make(['price' => 0])->toArray();
+        $stub = Product::factory()->raw(['price' => 0]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -213,7 +213,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make(['brand_id' => null])->toArray();
+        $stub = Product::factory()->raw(['brand_id' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -225,7 +225,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make(['brand_id' => 'string'])->toArray();
+        $stub = Product::factory()->raw(['brand_id' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -237,7 +237,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make(['brand_id' => 100])->toArray();
+        $stub = Product::factory()->raw(['brand_id' => 100]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -249,7 +249,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make(['category_id' => null])->toArray();
+        $stub = Product::factory()->raw(['category_id' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -261,7 +261,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make(['category_id' => 'string'])->toArray();
+        $stub = Product::factory()->raw(['category_id' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -273,7 +273,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make(['category_id' => 100])->toArray();
+        $stub = Product::factory()->raw(['category_id' => 100]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -285,7 +285,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make()->toArray();
+        $stub = Product::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub + [
@@ -298,7 +298,7 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make()->toArray();
+        $stub = Product::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub + [
@@ -313,7 +313,7 @@ class UpdateProductTest extends TestCase
 
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make()->toArray();
+        $stub = Product::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub + [
@@ -332,10 +332,10 @@ class UpdateProductTest extends TestCase
 
         $product = Product::factory()->create();
 
-        $stub = Product::factory()->make([
+        $stub = Product::factory()->raw([
             'category_id' => $category->id,
             'attributes' => [$attribute->id => null],
-        ])->toArray();
+        ]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -353,10 +353,10 @@ class UpdateProductTest extends TestCase
 
         $product = Product::factory()->create();
 
-        $stub = Product::factory()->make([
+        $stub = Product::factory()->raw([
             'category_id' => $category->id,
             'attributes' => [$attribute->id => str_repeat('a', 256)],
-        ])->toArray();
+        ]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)
@@ -371,10 +371,10 @@ class UpdateProductTest extends TestCase
         $unrelated = Attribute::factory()->create();
         $product = Product::factory()->create();
 
-        $stub = Product::factory()->make([
+        $stub = Product::factory()->raw([
             'category_id' => $category->id,
             'attributes' => [$unrelated->id => $this->faker->randomDigit],
-        ])->toArray();
+        ]);
 
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub)

@@ -38,7 +38,7 @@ class UpdateOrderTest extends TestCase
     public function guest_cant_update_order()
     {
         $order = Order::factory()->create();
-        $stub = Order::factory()->make()->toArray();
+        $stub = Order::factory()->raw();
 
         $this->put(route('admin.orders.update', $order), $stub)
             ->assertRedirect(route('admin.login'));
@@ -49,7 +49,7 @@ class UpdateOrderTest extends TestCase
     {
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        $stub = Order::factory()->make()->toArray();
+        $stub = Order::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -64,7 +64,7 @@ class UpdateOrderTest extends TestCase
     {
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        $stub = Order::factory()->make(['notes' => 1])->toArray();
+        $stub = Order::factory()->raw(['notes' => 1]);
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -76,7 +76,7 @@ class UpdateOrderTest extends TestCase
     {
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        $stub = Order::factory()->make(['customer_id' => null])->toArray();
+        $stub = Order::factory()->raw(['customer_id' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -88,7 +88,7 @@ class UpdateOrderTest extends TestCase
     {
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        $stub = Order::factory()->make(['customer_id' => 'string'])->toArray();
+        $stub = Order::factory()->raw(['customer_id' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -100,7 +100,7 @@ class UpdateOrderTest extends TestCase
     {
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        $stub = Order::factory()->make(['customer_id' => 10])->toArray();
+        $stub = Order::factory()->raw(['customer_id' => 10]);
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -112,7 +112,7 @@ class UpdateOrderTest extends TestCase
     {
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        $stub = Order::factory()->make(['status' => null])->toArray();
+        $stub = Order::factory()->raw(['status' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -124,7 +124,7 @@ class UpdateOrderTest extends TestCase
     {
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        $stub = Order::factory()->make(['status' => 1])->toArray();
+        $stub = Order::factory()->raw(['status' => 1]);
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -136,7 +136,7 @@ class UpdateOrderTest extends TestCase
     {
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        $stub = Order::factory()->make(['total' => null])->toArray();
+        $stub = Order::factory()->raw(['total' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -148,7 +148,7 @@ class UpdateOrderTest extends TestCase
     {
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        $stub = Order::factory()->make(['total' => 'string'])->toArray();
+        $stub = Order::factory()->raw(['total' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -160,7 +160,7 @@ class UpdateOrderTest extends TestCase
     {
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        $stub = Order::factory()->make(['total' => -1])->toArray();
+        $stub = Order::factory()->raw(['total' => -1]);
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)

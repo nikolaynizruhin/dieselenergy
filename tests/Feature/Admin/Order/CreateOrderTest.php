@@ -32,7 +32,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_product()
     {
-        $order = Order::factory()->make()->toArray();
+        $order = Order::factory()->raw();
 
         $this->post(route('admin.orders.store'), $order)
             ->assertRedirect(route('admin.login'));
@@ -42,7 +42,7 @@ class CreateOrderTest extends TestCase
     public function user_can_create_order()
     {
         $user = User::factory()->create();
-        $order = Order::factory()->make(['total' => 0])->toArray();
+        $order = Order::factory()->raw(['total' => 0]);
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
@@ -56,7 +56,7 @@ class CreateOrderTest extends TestCase
     public function user_cant_create_order_with_integer_notes()
     {
         $user = User::factory()->create();
-        $order = Order::factory()->make(['notes' => 1])->toArray();
+        $order = Order::factory()->raw(['notes' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
@@ -67,7 +67,7 @@ class CreateOrderTest extends TestCase
     public function user_cant_create_order_without_customer()
     {
         $user = User::factory()->create();
-        $order = Order::factory()->make(['customer_id' => null])->toArray();
+        $order = Order::factory()->raw(['customer_id' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
@@ -78,7 +78,7 @@ class CreateOrderTest extends TestCase
     public function user_cant_create_order_with_string_customer()
     {
         $user = User::factory()->create();
-        $order = Order::factory()->make(['customer_id' => 'string'])->toArray();
+        $order = Order::factory()->raw(['customer_id' => 'string']);
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
@@ -89,7 +89,7 @@ class CreateOrderTest extends TestCase
     public function user_cant_create_order_with_nonexistent_customer()
     {
         $user = User::factory()->create();
-        $order = Order::factory()->make(['customer_id' => 1])->toArray();
+        $order = Order::factory()->raw(['customer_id' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
@@ -100,7 +100,7 @@ class CreateOrderTest extends TestCase
     public function user_cant_create_order_without_status()
     {
         $user = User::factory()->create();
-        $order = Order::factory()->make(['status' => null])->toArray();
+        $order = Order::factory()->raw(['status' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
@@ -111,7 +111,7 @@ class CreateOrderTest extends TestCase
     public function user_cant_create_order_with_integer_status()
     {
         $user = User::factory()->create();
-        $order = Order::factory()->make(['status' => 1])->toArray();
+        $order = Order::factory()->raw(['status' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)

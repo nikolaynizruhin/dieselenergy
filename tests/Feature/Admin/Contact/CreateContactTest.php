@@ -31,7 +31,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact()
     {
-        $contact = Contact::factory()->make()->toArray();
+        $contact = Contact::factory()->raw();
 
         $this->post(route('admin.contacts.store'), $contact)
             ->assertRedirect(route('admin.login'));
@@ -41,7 +41,7 @@ class CreateContactTest extends TestCase
     public function user_can_create_contact()
     {
         $user = User::factory()->create();
-        $contact = Contact::factory()->make()->toArray();
+        $contact = Contact::factory()->raw();
 
         $this->actingAs($user)
             ->post(route('admin.contacts.store'), $contact)
@@ -55,7 +55,7 @@ class CreateContactTest extends TestCase
     public function user_cant_create_contact_without_subject()
     {
         $user = User::factory()->create();
-        $contact = Contact::factory()->make(['subject' => null])->toArray();
+        $contact = Contact::factory()->raw(['subject' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.contacts.store'), $contact)
@@ -66,7 +66,7 @@ class CreateContactTest extends TestCase
     public function user_cant_create_contact_with_integer_subject()
     {
         $user = User::factory()->create();
-        $contact = Contact::factory()->make(['subject' => 1])->toArray();
+        $contact = Contact::factory()->raw(['subject' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.contacts.store'), $contact)
@@ -77,7 +77,7 @@ class CreateContactTest extends TestCase
     public function user_cant_create_contact_without_message()
     {
         $user = User::factory()->create();
-        $contact = Contact::factory()->make(['message' => null])->toArray();
+        $contact = Contact::factory()->raw(['message' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.contacts.store'), $contact)
@@ -88,7 +88,7 @@ class CreateContactTest extends TestCase
     public function user_cant_create_contact_with_integer_message()
     {
         $user = User::factory()->create();
-        $contact = Contact::factory()->make(['message' => 1])->toArray();
+        $contact = Contact::factory()->raw(['message' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.contacts.store'), $contact)
@@ -99,9 +99,9 @@ class CreateContactTest extends TestCase
     public function user_cant_create_contact_with_subject_more_than_255_chars()
     {
         $user = User::factory()->create();
-        $contact = Contact::factory()->make([
+        $contact = Contact::factory()->raw([
             'subject' => str_repeat('a', 256),
-        ])->toArray();
+        ]);
 
         $this->actingAs($user)
             ->post(route('admin.contacts.store'), $contact)
@@ -112,7 +112,7 @@ class CreateContactTest extends TestCase
     public function user_cant_create_contact_without_customer()
     {
         $user = User::factory()->create();
-        $contact = Contact::factory()->make(['customer_id' => null])->toArray();
+        $contact = Contact::factory()->raw(['customer_id' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.contacts.store'), $contact)
@@ -123,7 +123,7 @@ class CreateContactTest extends TestCase
     public function user_cant_create_contact_with_string_customer()
     {
         $user = User::factory()->create();
-        $contact = Contact::factory()->make(['customer_id' => 'string'])->toArray();
+        $contact = Contact::factory()->raw(['customer_id' => 'string']);
 
         $this->actingAs($user)
             ->post(route('admin.contacts.store'), $contact)
@@ -134,7 +134,7 @@ class CreateContactTest extends TestCase
     public function user_cant_create_contact_with_nonexistent_customer()
     {
         $user = User::factory()->create();
-        $contact = Contact::factory()->make(['customer_id' => 1])->toArray();
+        $contact = Contact::factory()->raw(['customer_id' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.contacts.store'), $contact)

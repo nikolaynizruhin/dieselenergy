@@ -48,7 +48,7 @@ class UpdateBrandTest extends TestCase
     {
         $user = User::factory()->create();
         $brand = Brand::factory()->create();
-        $stub = Brand::factory()->make()->toArray();
+        $stub = Brand::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.brands.update', $brand), $stub)

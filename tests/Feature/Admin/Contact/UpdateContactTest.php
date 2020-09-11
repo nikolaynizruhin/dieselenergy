@@ -35,7 +35,7 @@ class UpdateContactTest extends TestCase
     public function guest_cant_update_contact()
     {
         $contact = Contact::factory()->create();
-        $stub = Contact::factory()->make()->toArray();
+        $stub = Contact::factory()->raw();
 
         $this->put(route('admin.contacts.update', $contact), $stub)
             ->assertRedirect(route('admin.login'));
@@ -46,7 +46,7 @@ class UpdateContactTest extends TestCase
     {
         $user = User::factory()->create();
         $contact = Contact::factory()->create();
-        $stub = Contact::factory()->make()->toArray();
+        $stub = Contact::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -61,7 +61,7 @@ class UpdateContactTest extends TestCase
     {
         $user = User::factory()->create();
         $contact = Contact::factory()->create();
-        $stub = Contact::factory()->make(['subject' => null])->toArray();
+        $stub = Contact::factory()->raw(['subject' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -73,7 +73,7 @@ class UpdateContactTest extends TestCase
     {
         $user = User::factory()->create();
         $contact = Contact::factory()->create();
-        $stub = Contact::factory()->make(['subject' => 1])->toArray();
+        $stub = Contact::factory()->raw(['subject' => 1]);
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -85,7 +85,7 @@ class UpdateContactTest extends TestCase
     {
         $user = User::factory()->create();
         $contact = Contact::factory()->create();
-        $stub = Contact::factory()->make(['message' => null])->toArray();
+        $stub = Contact::factory()->raw(['message' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -97,7 +97,7 @@ class UpdateContactTest extends TestCase
     {
         $user = User::factory()->create();
         $contact = Contact::factory()->create();
-        $stub = Contact::factory()->make(['message' => 1])->toArray();
+        $stub = Contact::factory()->raw(['message' => 1]);
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -109,9 +109,9 @@ class UpdateContactTest extends TestCase
     {
         $user = User::factory()->create();
         $contact = Contact::factory()->create();
-        $stub = Contact::factory()->make([
+        $stub = Contact::factory()->raw([
             'subject' => str_repeat('a', 256),
-        ])->toArray();
+        ]);
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -123,7 +123,7 @@ class UpdateContactTest extends TestCase
     {
         $user = User::factory()->create();
         $contact = Contact::factory()->create();
-        $stub = Contact::factory()->make(['customer_id' => null])->toArray();
+        $stub = Contact::factory()->raw(['customer_id' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -135,7 +135,7 @@ class UpdateContactTest extends TestCase
     {
         $user = User::factory()->create();
         $contact = Contact::factory()->create();
-        $stub = Contact::factory()->make(['customer_id' => 'string'])->toArray();
+        $stub = Contact::factory()->raw(['customer_id' => 'string']);
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -147,7 +147,7 @@ class UpdateContactTest extends TestCase
     {
         $user = User::factory()->create();
         $contact = Contact::factory()->create();
-        $stub = Contact::factory()->make(['customer_id' => 10])->toArray();
+        $stub = Contact::factory()->raw(['customer_id' => 10]);
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)

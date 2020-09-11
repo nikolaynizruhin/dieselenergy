@@ -39,7 +39,7 @@ class CreateProductTest extends TestCase
     /** @test */
     public function guest_cant_create_product()
     {
-        $product = Product::factory()->make()->toArray();
+        $product = Product::factory()->raw();
 
         $this->post(route('admin.products.store'), $product)
             ->assertRedirect(route('admin.login'));
@@ -49,7 +49,7 @@ class CreateProductTest extends TestCase
     public function user_can_create_product()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make()->toArray();
+        $product = Product::factory()->raw();
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -68,7 +68,7 @@ class CreateProductTest extends TestCase
 
         $category->attributes()->attach($attribute);
 
-        $product = Product::factory()->make(['category_id' => $category->id])->toArray();
+        $product = Product::factory()->raw(['category_id' => $category->id]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product + [
@@ -90,7 +90,7 @@ class CreateProductTest extends TestCase
         $image = UploadedFile::fake()->image('product.jpg');
 
         $user = User::factory()->create();
-        $product = Product::factory()->make()->toArray();
+        $product = Product::factory()->raw();
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product + [
@@ -112,7 +112,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_without_name()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make(['name' => null])->toArray();
+        $product = Product::factory()->raw(['name' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -123,7 +123,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_with_integer_name()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make(['name' => 1])->toArray();
+        $product = Product::factory()->raw(['name' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -134,9 +134,9 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_with_name_more_than_255_chars()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make([
+        $product = Product::factory()->raw([
             'name' => str_repeat('a', 256),
-        ])->toArray();
+        ]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -148,9 +148,9 @@ class CreateProductTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        $stub = Product::factory()->make([
+        $stub = Product::factory()->raw([
             'name' => $product->name,
-        ])->toArray();
+        ]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $stub)
@@ -161,7 +161,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_with_integer_description()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make(['description' => 1])->toArray();
+        $product = Product::factory()->raw(['description' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -172,7 +172,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_without_price()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make(['price' => null])->toArray();
+        $product = Product::factory()->raw(['price' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -183,7 +183,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_with_string_price()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make(['price' => 'string'])->toArray();
+        $product = Product::factory()->raw(['price' => 'string']);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -194,7 +194,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_with_zero_price()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make(['price' => 0])->toArray();
+        $product = Product::factory()->raw(['price' => 0]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -205,7 +205,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_without_brand()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make(['brand_id' => null])->toArray();
+        $product = Product::factory()->raw(['brand_id' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -216,7 +216,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_with_string_brand()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make(['brand_id' => 'string'])->toArray();
+        $product = Product::factory()->raw(['brand_id' => 'string']);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -227,7 +227,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_with_nonexistent_brand()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make(['brand_id' => 1])->toArray();
+        $product = Product::factory()->raw(['brand_id' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -238,7 +238,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_without_category()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make(['category_id' => null])->toArray();
+        $product = Product::factory()->raw(['category_id' => null]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -249,7 +249,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_with_string_category()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make(['category_id' => 'string'])->toArray();
+        $product = Product::factory()->raw(['category_id' => 'string']);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -260,7 +260,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_with_nonexistent_category()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make(['category_id' => 1])->toArray();
+        $product = Product::factory()->raw(['category_id' => 1]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -271,7 +271,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_with_string_image()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make()->toArray();
+        $product = Product::factory()->raw();
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product + [
@@ -283,7 +283,7 @@ class CreateProductTest extends TestCase
     public function user_cant_create_product_with_integer_image()
     {
         $user = User::factory()->create();
-        $product = Product::factory()->make()->toArray();
+        $product = Product::factory()->raw();
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product + [
@@ -297,7 +297,7 @@ class CreateProductTest extends TestCase
         $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
 
         $user = User::factory()->create();
-        $product = Product::factory()->make()->toArray();
+        $product = Product::factory()->raw();
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product + [
@@ -327,10 +327,10 @@ class CreateProductTest extends TestCase
 
         $category->attributes()->attach($attribute);
 
-        $product = Product::factory()->make([
+        $product = Product::factory()->raw([
             'category_id' => $category->id,
             'attributes' => [$attribute->id => null],
-        ])->toArray();
+        ]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -346,10 +346,10 @@ class CreateProductTest extends TestCase
 
         $category->attributes()->attach($attribute);
 
-        $product = Product::factory()->make([
+        $product = Product::factory()->raw([
             'category_id' => $category->id,
             'attributes' => [$attribute->id => str_repeat('a', 256)],
-        ])->toArray();
+        ]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $product)
@@ -363,10 +363,10 @@ class CreateProductTest extends TestCase
         $category = Category::factory()->create();
         $unrelated = Attribute::factory()->create();
 
-        $stub = Product::factory()->make([
+        $stub = Product::factory()->raw([
             'category_id' => $category->id,
             'attributes' => [$unrelated->id => $this->faker->randomDigit],
-        ])->toArray();
+        ]);
 
         $this->actingAs($user)
             ->post(route('admin.products.store'), $stub)

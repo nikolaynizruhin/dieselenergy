@@ -48,7 +48,7 @@ class UpdateCategoryTest extends TestCase
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
-        $stub = Category::factory()->make()->toArray();
+        $stub = Category::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.categories.update', $category), $stub)

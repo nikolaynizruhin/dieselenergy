@@ -32,7 +32,7 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function guest_cant_create_brand()
     {
-        $brand = Brand::factory()->make()->toArray();
+        $brand = Brand::factory()->raw();
 
         $this->post(route('admin.brands.store'), $brand)
             ->assertRedirect(route('admin.login'));
@@ -42,7 +42,7 @@ class CreateBrandTest extends TestCase
     public function user_can_create_brand()
     {
         $user = User::factory()->create();
-        $brand = Brand::factory()->make()->toArray();
+        $brand = Brand::factory()->raw();
 
         $this->actingAs($user)
             ->post(route('admin.brands.store'), $brand)

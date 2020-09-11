@@ -38,7 +38,7 @@ class UpdateAttributeTest extends TestCase
     {
         $attribute = Attribute::factory()->create();
 
-        $stub = Attribute::factory()->make()->toArray();
+        $stub = Attribute::factory()->raw();
 
         $this->put(route('admin.attributes.update', $attribute), $stub)
             ->assertRedirect(route('admin.login'));
@@ -49,7 +49,7 @@ class UpdateAttributeTest extends TestCase
     {
         $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->make()->toArray();
+        $stub = Attribute::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)
@@ -64,7 +64,7 @@ class UpdateAttributeTest extends TestCase
     {
         $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->make(['name' => null])->toArray();
+        $stub = Attribute::factory()->raw(['name' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)
@@ -76,7 +76,7 @@ class UpdateAttributeTest extends TestCase
     {
         $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->make(['name' => 1])->toArray();
+        $stub = Attribute::factory()->raw(['name' => 1]);
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)
@@ -88,7 +88,7 @@ class UpdateAttributeTest extends TestCase
     {
         $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->make(['name' => str_repeat('a', 256)])->toArray();
+        $stub = Attribute::factory()->raw(['name' => str_repeat('a', 256)]);
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)
@@ -113,7 +113,7 @@ class UpdateAttributeTest extends TestCase
     {
         $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->make(['measure' => 1])->toArray();
+        $stub = Attribute::factory()->raw(['measure' => 1]);
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)
@@ -125,7 +125,7 @@ class UpdateAttributeTest extends TestCase
     {
         $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->make(['measure' => str_repeat('a', 256)])->toArray();
+        $stub = Attribute::factory()->raw(['measure' => str_repeat('a', 256)]);
 
         $this->actingAs($user)
             ->put(route('admin.attributes.update', $attribute), $stub)

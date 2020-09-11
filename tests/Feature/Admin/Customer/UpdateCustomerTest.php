@@ -36,7 +36,7 @@ class UpdateCustomerTest extends TestCase
     public function guest_cant_update_customer()
     {
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make()->toArray();
+        $stub = Customer::factory()->raw();
 
         $this->put(route('admin.customers.update', $customer), $stub)
             ->assertRedirect(route('admin.login'));
@@ -47,7 +47,7 @@ class UpdateCustomerTest extends TestCase
     {
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make()->toArray();
+        $stub = Customer::factory()->raw();
 
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
@@ -62,7 +62,7 @@ class UpdateCustomerTest extends TestCase
     {
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make(['name' => null])->toArray();
+        $stub = Customer::factory()->raw(['name' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
@@ -74,7 +74,7 @@ class UpdateCustomerTest extends TestCase
     {
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make(['name' => 1])->toArray();
+        $stub = Customer::factory()->raw(['name' => 1]);
 
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
@@ -86,7 +86,7 @@ class UpdateCustomerTest extends TestCase
     {
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make(['name' => str_repeat('a', 256)])->toArray();
+        $stub = Customer::factory()->raw(['name' => str_repeat('a', 256)]);
 
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
@@ -98,7 +98,7 @@ class UpdateCustomerTest extends TestCase
     {
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make(['email' => null])->toArray();
+        $stub = Customer::factory()->raw(['email' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
@@ -110,7 +110,7 @@ class UpdateCustomerTest extends TestCase
     {
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make(['email' => 1])->toArray();
+        $stub = Customer::factory()->raw(['email' => 1]);
 
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
@@ -122,7 +122,7 @@ class UpdateCustomerTest extends TestCase
     {
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make(['email' => str_repeat('a', 256)])->toArray();
+        $stub = Customer::factory()->raw(['email' => str_repeat('a', 256)]);
 
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
@@ -134,7 +134,7 @@ class UpdateCustomerTest extends TestCase
     {
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make(['email' => 'invalid'])->toArray();
+        $stub = Customer::factory()->raw(['email' => 'invalid']);
 
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
@@ -158,7 +158,7 @@ class UpdateCustomerTest extends TestCase
     {
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make(['phone' => null])->toArray();
+        $stub = Customer::factory()->raw(['phone' => null]);
 
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
@@ -170,7 +170,7 @@ class UpdateCustomerTest extends TestCase
     {
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make(['phone' => 1])->toArray();
+        $stub = Customer::factory()->raw(['phone' => 1]);
 
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
@@ -182,7 +182,7 @@ class UpdateCustomerTest extends TestCase
     {
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make(['phone' => str_repeat('a', 256)])->toArray();
+        $stub = Customer::factory()->raw(['phone' => str_repeat('a', 256)]);
 
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
@@ -194,7 +194,7 @@ class UpdateCustomerTest extends TestCase
     {
         $user = User::factory()->create();
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()->make(['notes' => 1])->toArray();
+        $stub = Customer::factory()->raw(['notes' => 1]);
 
         $this->actingAs($user)
             ->put(route('admin.customers.update', $customer), $stub)
