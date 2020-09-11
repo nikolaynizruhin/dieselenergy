@@ -15,10 +15,9 @@ class ItemTest extends TestCase
     /** @test */
     public function it_can_get_total()
     {
-        $image = Image::factory()->create();
-        $product = Product::factory()->create(['price' => 100]);
-
-        $product->images()->attach($image, ['is_default' => 1]);
+        $product = Product::factory()
+            ->hasAttached(Image::factory(), ['is_default' => 1])
+            ->create(['price' => 100]);
 
         $item = new Item($product, 2);
 

@@ -29,11 +29,9 @@ class CartTest extends TestCase
     {
         parent::setUp();
 
-        $this->product = Product::factory()->create();
-
-        $image = Image::factory()->create();
-
-        $this->product->images()->attach($image, ['is_default' => 1]);
+        $this->product = Product::factory()
+            ->hasAttached(Image::factory(), ['is_default' => 1])
+            ->create();
     }
 
     /** @test */
@@ -98,13 +96,13 @@ class CartTest extends TestCase
     /** @test */
     public function it_can_get_total()
     {
-        $image = Image::factory()->create();
+        $generator = Product::factory()
+            ->hasAttached(Image::factory(), ['is_default' => 1])
+            ->create(['price' => 100]);
 
-        $generator = Product::factory()->create(['price' => 100]);
-        $waterPump = Product::factory()->create(['price' => 100]);
-
-        $generator->images()->attach($image, ['is_default' => 1]);
-        $waterPump->images()->attach($image, ['is_default' => 1]);
+        $waterPump = Product::factory()
+            ->hasAttached(Image::factory(), ['is_default' => 1])
+            ->create(['price' => 100]);
 
         Cart::add($generator, 2);
         Cart::add($waterPump);
