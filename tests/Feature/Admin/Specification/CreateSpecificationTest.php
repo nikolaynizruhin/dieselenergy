@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Specification;
 
-use App\Category;
-use App\Specification;
-use App\User;
+use App\Models\Category;
+use App\Models\Specification;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -23,8 +23,8 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_can_visit_create_specification_page()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create();
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.specifications.create', ['category_id' => $category->id]))
@@ -34,7 +34,7 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function guest_cant_create_specification()
     {
-        $stub = factory(Specification::class)->raw();
+        $stub = Specification::factory()->make()->toArray();
 
         $this->post(route('admin.specifications.store'), $stub)
             ->assertRedirect(route('admin.login'));
@@ -43,9 +43,9 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_can_create_specification()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $stub = factory(Specification::class)->raw();
+        $stub = Specification::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -60,9 +60,9 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_without_category()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $stub = factory(Specification::class)->raw(['category_id' => null]);
+        $stub = Specification::factory()->make(['category_id' => null])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -72,9 +72,9 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_with_string_category()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $stub = factory(Specification::class)->raw(['category_id' => 'string']);
+        $stub = Specification::factory()->make(['category_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -84,9 +84,9 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_with_nonexistent_category()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $stub = factory(Specification::class)->raw(['category_id' => 10]);
+        $stub = Specification::factory()->make(['category_id' => 10])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -96,9 +96,9 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_without_attribute()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $stub = factory(Specification::class)->raw(['attribute_id' => null]);
+        $stub = Specification::factory()->make(['attribute_id' => null])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -108,9 +108,9 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_with_string_attribute()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $stub = factory(Specification::class)->raw(['attribute_id' => 'string']);
+        $stub = Specification::factory()->make(['attribute_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -120,9 +120,9 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_with_nonexistent_attribute()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $stub = factory(Specification::class)->raw(['attribute_id' => 10]);
+        $stub = Specification::factory()->make(['attribute_id' => 10])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $stub)
@@ -132,8 +132,8 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_existing_specification()
     {
-        $user = factory(User::class)->create();
-        $specification = factory(Specification::class)->create();
+        $user = User::factory()->create();
+        $specification = Specification::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.specifications.store'), $specification->toArray())

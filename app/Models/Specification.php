@@ -1,11 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Specification extends Pivot
 {
+    use HasFactory;
+
     /**
      * Indicates if the IDs are auto-incrementing.
      *
@@ -32,7 +35,7 @@ class Specification extends Pivot
     /**
      * Get featured attribute ids by category.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Models\Category  $category
      * @return array
      */
     public static function featured($category)

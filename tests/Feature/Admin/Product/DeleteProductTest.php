@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Product;
 
-use App\Product;
-use App\User;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class DeleteProductTest extends TestCase
     /** @test */
     public function guest_cant_delete_product()
     {
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $this->delete(route('admin.products.destroy', $product))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class DeleteProductTest extends TestCase
     /** @test */
     public function user_can_delete_product()
     {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
 
         $this->actingAs($user)
             ->from(route('admin.products.index'))

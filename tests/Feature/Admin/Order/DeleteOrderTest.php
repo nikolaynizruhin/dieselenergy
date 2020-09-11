@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Order;
 
-use App\Order;
-use App\User;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class DeleteOrderTest extends TestCase
     /** @test */
     public function guest_cant_delete_order()
     {
-        $order = factory(Order::class)->create();
+        $order = Order::factory()->create();
 
         $this->delete(route('admin.orders.destroy', $order))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class DeleteOrderTest extends TestCase
     /** @test */
     public function user_can_delete_order()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
 
         $this->actingAs($user)
             ->from(route('admin.orders.index'))

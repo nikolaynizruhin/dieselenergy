@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Order;
 
-use App\Order;
-use App\User;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -15,7 +15,7 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function guest_cant_visit_update_order_page()
     {
-        $order = factory(Order::class)->create();
+        $order = Order::factory()->create();
 
         $this->get(route('admin.orders.edit', $order))
             ->assertRedirect(route('admin.login'));
@@ -24,8 +24,8 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_can_visit_update_order_page()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.orders.edit', $order))
@@ -37,8 +37,8 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function guest_cant_update_order()
     {
-        $order = factory(Order::class)->create();
-        $stub = factory(Order::class)->raw();
+        $order = Order::factory()->create();
+        $stub = Order::factory()->make()->toArray();
 
         $this->put(route('admin.orders.update', $order), $stub)
             ->assertRedirect(route('admin.login'));
@@ -47,9 +47,9 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_can_update_order()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $stub = factory(Order::class)->raw();
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
+        $stub = Order::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -62,9 +62,9 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_order_with_integer_notes()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $stub = factory(Order::class)->raw(['notes' => 1]);
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
+        $stub = Order::factory()->make(['notes' => 1])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -74,9 +74,9 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_order_without_customer()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $stub = factory(Order::class)->raw(['customer_id' => null]);
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
+        $stub = Order::factory()->make(['customer_id' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -86,9 +86,9 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_order_with_string_customer()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $stub = factory(Order::class)->raw(['customer_id' => 'string']);
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
+        $stub = Order::factory()->make(['customer_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -98,9 +98,9 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_order_with_nonexistent_customer()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $stub = factory(Order::class)->raw(['customer_id' => 10]);
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
+        $stub = Order::factory()->make(['customer_id' => 10])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -110,9 +110,9 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_order_without_status()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $stub = factory(Order::class)->raw(['status' => null]);
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
+        $stub = Order::factory()->make(['status' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -122,9 +122,9 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_order_with_integer_status()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $stub = factory(Order::class)->raw(['status' => 1]);
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
+        $stub = Order::factory()->make(['status' => 1])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -134,9 +134,9 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_total()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $stub = factory(Order::class)->raw(['total' => null]);
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
+        $stub = Order::factory()->make(['total' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -146,9 +146,9 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_string_total()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $stub = factory(Order::class)->raw(['total' => 'string']);
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
+        $stub = Order::factory()->make(['total' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)
@@ -158,9 +158,9 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_negative_total()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
-        $stub = factory(Order::class)->raw(['total' => -1]);
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
+        $stub = Order::factory()->make(['total' => -1])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.orders.update', $order), $stub)

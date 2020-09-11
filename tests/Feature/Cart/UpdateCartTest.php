@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Cart;
 
-use App\Image;
-use App\Product;
+use App\Models\Image;
+use App\Models\Product;
 use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -15,7 +15,7 @@ class UpdateCartTest extends TestCase
     /**
      * Product.
      *
-     * @var \App\Product
+     * @var \App\Models\Product
      */
     private $product;
 
@@ -26,9 +26,9 @@ class UpdateCartTest extends TestCase
     {
         parent::setUp();
 
-        $this->product = factory(Product::class)->create();
+        $this->product = Product::factory()->create();
 
-        $image = factory(Image::class)->create();
+        $image = Image::factory()->create();
 
         $this->product->images()->attach($image, ['is_default' => 1]);
     }

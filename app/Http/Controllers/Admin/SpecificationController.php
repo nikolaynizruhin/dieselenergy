@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreSpecification;
 use App\Http\Requests\Admin\UpdateSpecification;
-use App\Specification;
+use App\Models\Specification;
 use Illuminate\Http\Request;
 
 class SpecificationController extends Controller
@@ -42,7 +42,7 @@ class SpecificationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Specification  $specification
+     * @param  \App\Models\Specification  $specification
      * @return \Illuminate\Http\Response
      */
     public function edit(Specification $specification)
@@ -54,7 +54,7 @@ class SpecificationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Admin\UpdateSpecification  $request
-     * @param  \App\Specification  $specification
+     * @param  \App\Models\Specification  $specification
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateSpecification $request, Specification $specification)
@@ -69,7 +69,7 @@ class SpecificationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Specification  $specification
+     * @param  \App\Models\Specification  $specification
      * @return \Illuminate\Http\Response
      */
     public function destroy(Specification $specification)

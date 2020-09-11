@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\Attribute;
-use App\Category;
-use App\Product;
+use App\Models\Attribute;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -17,8 +17,8 @@ class AttributeTest extends TestCase
     /** @test */
     public function it_has_many_categories()
     {
-        $attribute = factory(Attribute::class)->create();
-        $category = factory(Category::class)->create();
+        $attribute = Attribute::factory()->create();
+        $category = Category::factory()->create();
 
         $attribute->categories()->attach($category);
 
@@ -29,8 +29,8 @@ class AttributeTest extends TestCase
     /** @test */
     public function it_has_many_products()
     {
-        $attribute = factory(Attribute::class)->create();
-        $product = factory(Product::class)->create();
+        $attribute = Attribute::factory()->create();
+        $product = Product::factory()->create();
 
         $attribute->products()->attach($product, [
             'value' => $value = $this->faker->randomDigit,

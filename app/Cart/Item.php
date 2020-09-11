@@ -49,7 +49,7 @@ class Item
     /**
      * Item constructor.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Models\Product  $product
      * @param  int  $quantity
      */
     public function __construct($product, $quantity = 1)

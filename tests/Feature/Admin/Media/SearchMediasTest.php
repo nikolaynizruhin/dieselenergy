@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Media;
 
-use App\Image;
-use App\Product;
-use App\User;
+use App\Models\Image;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,13 +15,13 @@ class SearchMediasTest extends TestCase
     /** @test */
     public function user_can_search_media()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $diesel = factory(Image::class)->create(['path' => 'images/dieselpath.jpg', 'created_at' => now()->subDay()]);
-        $patrol = factory(Image::class)->create(['path' => 'images/patrolpath.jpg', 'created_at' => now()]);
-        $waterPump = factory(Image::class)->create(['path' => 'images/waterpump.jpg']);
+        $diesel = Image::factory()->create(['path' => 'images/dieselpath.jpg', 'created_at' => now()->subDay()]);
+        $patrol = Image::factory()->create(['path' => 'images/patrolpath.jpg', 'created_at' => now()]);
+        $waterPump = Image::factory()->create(['path' => 'images/waterpump.jpg']);
 
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $product->images()->attach([$diesel->id, $patrol->id]);
 

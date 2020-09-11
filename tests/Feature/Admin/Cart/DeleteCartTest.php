@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Cart;
 
-use App\Order;
-use App\Product;
-use App\User;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,8 +15,8 @@ class DeleteCartTest extends TestCase
     /** @test */
     public function guest_cant_delete_cart()
     {
-        $product = factory(Product::class)->create();
-        $order = factory(Order::class)->create();
+        $product = Product::factory()->create();
+        $order = Order::factory()->create();
 
         $order->products()->attach($product);
 
@@ -29,10 +29,10 @@ class DeleteCartTest extends TestCase
     /** @test */
     public function user_can_delete_cart()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $product = factory(Product::class)->create();
-        $order = factory(Order::class)->create();
+        $product = Product::factory()->create();
+        $order = Order::factory()->create();
 
         $order->products()->attach($product);
 

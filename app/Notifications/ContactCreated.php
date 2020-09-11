@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Contact;
+use App\Models\Contact;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -14,7 +14,7 @@ class ContactCreated extends Notification
     /**
      * A contact.
      *
-     * @var \App\Contact
+     * @var \App\Models\Contact
      */
     public $contact;
 

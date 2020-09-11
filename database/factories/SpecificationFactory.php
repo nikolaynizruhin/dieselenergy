@@ -1,16 +1,32 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Attribute;
-use App\Category;
-use App\Specification;
-use Faker\Generator as Faker;
+use App\Models\Attribute;
+use App\Models\Category;
+use App\Models\Specification;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Specification::class, function (Faker $faker) {
-    return [
-        'category_id' => factory(Category::class),
-        'attribute_id' => factory(Attribute::class),
-        'is_featured' => $faker->boolean,
-    ];
-});
+class SpecificationFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Specification::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'category_id' => Category::factory(),
+            'attribute_id' => Attribute::factory(),
+            'is_featured' => $this->faker->boolean,
+        ];
+    }
+}

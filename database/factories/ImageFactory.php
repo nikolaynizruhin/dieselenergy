@@ -1,12 +1,28 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Image;
-use Faker\Generator as Faker;
+use App\Models\Image;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Image::class, function (Faker $faker) {
-    return [
-        'path' => 'images/'.$faker->md5.'.jpg',
-    ];
-});
+class ImageFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Image::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'path' => 'images/'.$this->faker->md5.'.jpg',
+        ];
+    }
+}

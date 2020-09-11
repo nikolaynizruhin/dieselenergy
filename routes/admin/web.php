@@ -1,7 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\SpecificationController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\UserPasswordController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
+use App\Http\Controllers\Admin\Auth\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,30 +31,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Authentication Routes...
-Route::get('login', 'Auth\LoginController@showLoginForm')->withoutMiddleware('auth')->name('login');
-Route::post('login', 'Auth\LoginController@login')->withoutMiddleware('auth');
-Route::post('logout', 'Auth\LoginController@logout')->withoutMiddleware('auth')->name('logout');
+Route::get('login', [LoginController::class, 'showLoginForm'])->withoutMiddleware('auth')->name('login');
+Route::post('login', [LoginController::class, 'login'])->withoutMiddleware('auth');
+Route::post('logout', [LoginController::class, 'logout'])->withoutMiddleware('auth')->name('logout');
 
 // Password Reset Routes...
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->withoutMiddleware('auth')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->withoutMiddleware('auth')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->withoutMiddleware('auth')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset')->withoutMiddleware('auth')->name('password.update');
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->withoutMiddleware('auth')->name('password.request');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->withoutMiddleware('auth')->name('password.email');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->withoutMiddleware('auth')->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->withoutMiddleware('auth')->name('password.update');
 
-Route::get('/', 'DashboardController')->name('dashboard');
+Route::get('/', DashboardController::class)->name('dashboard');
 
-Route::resource('products', 'ProductController');
-Route::resource('customers', 'CustomerController');
-Route::resource('orders', 'OrderController');
-Route::resource('contacts', 'ContactController');
-Route::resource('carts', 'CartController')->except(['index', 'show']);
-Route::resource('medias', 'MediaController')->except(['index', 'show']);
-Route::resource('images', 'ImageController')->except(['show', 'edit', 'update']);
-Route::resource('brands', 'BrandController')->except('show');
-Route::resource('categories', 'CategoryController');
-Route::resource('attributes', 'AttributeController')->except('show');
-Route::resource('specifications', 'SpecificationController')->except('index');
+Route::resource('products', ProductController::class);
+Route::resource('customers', CustomerController::class);
+Route::resource('orders', OrderController::class);
+Route::resource('contacts', ContactController::class);
+Route::resource('carts', CartController::class)->except(['index', 'show']);
+Route::resource('medias', MediaController::class)->except(['index', 'show']);
+Route::resource('images', ImageController::class)->except(['show', 'edit', 'update']);
+Route::resource('brands', BrandController::class)->except('show');
+Route::resource('categories', CategoryController::class);
+Route::resource('attributes', AttributeController::class)->except('show');
+Route::resource('specifications', SpecificationController::class)->except('index');
 
 // User Routes...
-Route::resource('users', 'UserController')->except('show');
-Route::put('users/{user}/password', 'UserPasswordController@update')->name('users.password.update');
+Route::resource('users', UserController::class)->except('show');
+Route::put('users/{user}/password', [UserPasswordController::class, 'update'])->name('users.password.update');

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Category;
 
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class SearchCategoriesTest extends TestCase
     /** @test */
     public function guest_cant_search_categories()
     {
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $this->get(route('admin.categories.index', ['search' => $category->name]))
             ->assertRedirect(route('admin.login'));
@@ -23,11 +23,11 @@ class SearchCategoriesTest extends TestCase
     /** @test */
     public function user_can_search_categories()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $patrol = factory(Category::class)->create(['name' => 'Patrol Generators']);
-        $diesel = factory(Category::class)->create(['name' => 'Diesel Generators']);
-        $waterPumps = factory(Category::class)->create(['name' => 'Water Pumps']);
+        $patrol = Category::factory()->create(['name' => 'Patrol Generators']);
+        $diesel = Category::factory()->create(['name' => 'Diesel Generators']);
+        $waterPumps = Category::factory()->create(['name' => 'Water Pumps']);
 
         $this->actingAs($user)
             ->get(route('admin.categories.index', ['search' => 'Generators']))

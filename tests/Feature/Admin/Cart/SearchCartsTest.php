@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Cart;
 
-use App\Order;
-use App\Product;
-use App\User;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,13 +15,13 @@ class SearchCartsTest extends TestCase
     /** @test */
     public function user_can_search_cart()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $patrol = factory(Product::class)->create(['name' => 'Patrol Generator']);
-        $diesel = factory(Product::class)->create(['name' => 'Diesel Generator']);
-        $waterPump = factory(Product::class)->create(['name' => 'Water Pump']);
+        $patrol = Product::factory()->create(['name' => 'Patrol Generator']);
+        $diesel = Product::factory()->create(['name' => 'Diesel Generator']);
+        $waterPump = Product::factory()->create(['name' => 'Water Pump']);
 
-        $order = factory(Order::class)->create();
+        $order = Order::factory()->create();
 
         $order->products()->attach([$diesel->id, $patrol->id, $waterPump->id]);
 

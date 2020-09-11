@@ -2,7 +2,7 @@
 
 namespace App\Cart;
 
-use App\Order;
+use App\Models\Order;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
 
@@ -28,7 +28,7 @@ class Cart
     /**
      * Add product to cart.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Models\Product  $product
      * @param  int  $quantity
      * @return \App\Cart\Item
      */
@@ -98,7 +98,7 @@ class Cart
     /**
      * Store a cart.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      */
     public function store(Order $order)
     {

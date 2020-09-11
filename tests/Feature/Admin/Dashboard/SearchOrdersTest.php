@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Dashboard;
 
-use App\Customer;
-use App\Order;
-use App\User;
+use App\Models\Customer;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,7 +15,7 @@ class SearchOrdersTest extends TestCase
     /** @test */
     public function guest_cant_search_orders()
     {
-        $order = factory(Order::class)->create();
+        $order = Order::factory()->create();
 
         $this->get(route('admin.dashboard', ['search' => $order->customer->name]))
             ->assertRedirect(route('admin.login'));
@@ -24,16 +24,16 @@ class SearchOrdersTest extends TestCase
     /** @test */
     public function user_can_search_dashboard_orders()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $jane = factory(Customer::class)->create(['name' => 'Jane Doe']);
-        factory(Order::class)->create(['customer_id' => $jane->id, 'created_at' => now()->subDay()]);
+        $jane = Customer::factory()->create(['name' => 'Jane Doe']);
+        Order::factory()->create(['customer_id' => $jane->id, 'created_at' => now()->subDay()]);
 
-        $john = factory(Customer::class)->create(['name' => 'John Doe']);
-        factory(Order::class)->create(['customer_id' => $john->id, 'created_at' => now()]);
+        $john = Customer::factory()->create(['name' => 'John Doe']);
+        Order::factory()->create(['customer_id' => $john->id, 'created_at' => now()]);
 
-        $tom = factory(Customer::class)->create(['name' => 'Tom Jo']);
-        factory(Order::class)->create(['customer_id' => $jane->id]);
+        $tom = Customer::factory()->create(['name' => 'Tom Jo']);
+        Order::factory()->create(['customer_id' => $jane->id]);
 
         $this->actingAs($user)
             ->get(route('admin.dashboard', ['search' => 'Doe']))

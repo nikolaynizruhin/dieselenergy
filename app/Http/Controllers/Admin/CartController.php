@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCart;
 use App\Http\Requests\Admin\UpdateCart;
-use App\Order;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -42,7 +42,7 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Cart  $cart
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
     public function edit(Cart $cart)
@@ -54,7 +54,7 @@ class CartController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Admin\UpdateCart  $request
-     * @param  \App\Cart  $cart
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCart $request, Cart $cart)
@@ -69,7 +69,7 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Cart  $cart
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
     public function destroy(Cart $cart)

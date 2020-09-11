@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Image;
-use App\Product;
+use App\Models\Image;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -17,8 +17,8 @@ class ImageTest extends TestCase
     /** @test */
     public function it_has_many_products()
     {
-        $image = factory(Image::class)->create();
-        $product = factory(Product::class)->create();
+        $image = Image::factory()->create();
+        $product = Product::factory()->create();
 
         $image->products()->attach($product);
 

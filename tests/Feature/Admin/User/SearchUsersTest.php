@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin\User;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,7 +13,7 @@ class SearchUsersTest extends TestCase
     /** @test */
     public function guest_cant_search_users()
     {
-        factory(User::class)->create(['name' => 'John Doe']);
+        User::factory()->create(['name' => 'John Doe']);
 
         $this->get(route('admin.users.index', ['search' => 'john']))
             ->assertRedirect(route('admin.login'));
@@ -22,11 +22,11 @@ class SearchUsersTest extends TestCase
     /** @test */
     public function user_can_search_users()
     {
-        $admin = factory(User::class)->create();
+        $admin = User::factory()->create();
 
-        $john = factory(User::class)->create(['name' => 'John Doe']);
-        $jane = factory(User::class)->create(['name' => 'Jane Doe']);
-        $tom = factory(User::class)->create(['name' => 'Tom Jo']);
+        $john = User::factory()->create(['name' => 'John Doe']);
+        $jane = User::factory()->create(['name' => 'Jane Doe']);
+        $tom = User::factory()->create(['name' => 'Tom Jo']);
 
         $this->actingAs($admin)
             ->get(route('admin.users.index', ['search' => 'Doe']))

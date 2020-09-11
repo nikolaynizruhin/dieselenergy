@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Category;
 
-use App\Category;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
-use App\Product;
-use App\Specification;
+use App\Models\Product;
+use App\Models\Specification;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +14,7 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, Category $category)
@@ -55,7 +55,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)

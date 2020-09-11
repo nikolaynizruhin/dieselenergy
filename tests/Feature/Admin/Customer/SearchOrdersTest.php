@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Customer;
 
-use App\Customer;
-use App\Order;
-use App\User;
+use App\Models\Customer;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,22 +15,22 @@ class SearchOrdersTest extends TestCase
     /** @test */
     public function user_can_search_customer_orders()
     {
-        $user = factory(User::class)->create();
-        $customer = factory(Customer::class)->create();
+        $user = User::factory()->create();
+        $customer = Customer::factory()->create();
 
-        $orderOne = factory(Order::class)->create([
+        $orderOne = Order::factory()->create([
             'id' => 7883,
             'customer_id' => $customer->id,
             'created_at' => now()->subDay(),
         ]);
 
-        $orderTwo = factory(Order::class)->create([
+        $orderTwo = Order::factory()->create([
             'id' => 7882,
             'customer_id' => $customer->id,
             'created_at' => now(),
         ]);
 
-        $orderThree = factory(Order::class)->create([
+        $orderThree = Order::factory()->create([
             'id' => 2992,
             'customer_id' => $customer->id,
         ]);

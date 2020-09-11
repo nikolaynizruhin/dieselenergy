@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
+use App\Models\Customer;
 use App\Http\Requests\StoreContact;
 use App\Notifications\ContactCreated;
 use Illuminate\Http\Request;

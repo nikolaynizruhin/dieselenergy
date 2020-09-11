@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Cart;
 
-use App\Order;
-use App\Product;
-use App\User;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -16,12 +16,12 @@ class ReadCartsTest extends TestCase
     /** @test */
     public function user_can_read_carts()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $patrol = factory(Product::class)->create(['name' => 'Patrol']);
-        $diesel = factory(Product::class)->create(['name' => 'Diesel']);
+        $patrol = Product::factory()->create(['name' => 'Patrol']);
+        $diesel = Product::factory()->create(['name' => 'Diesel']);
 
-        $order = factory(Order::class)->create();
+        $order = Order::factory()->create();
 
         $order->products()->attach([
             $patrol->id => ['quantity' => $this->faker->randomDigit],

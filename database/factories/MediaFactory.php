@@ -1,18 +1,42 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Image;
-use App\Media;
-use App\Product;
-use Faker\Generator as Faker;
+use App\Models\Image;
+use App\Models\Media;
+use App\Models\Product;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Media::class, function (Faker $faker) {
-    return [
-        'image_id' => factory(Image::class),
-        'product_id' => factory(Product::class),
-        'is_default' => $faker->boolean,
-    ];
-});
+class MediaFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Media::class;
 
-$factory->state(Media::class, 'default', ['is_default' => 1]);
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'image_id' => Image::factory(),
+            'product_id' => Product::factory(),
+            'is_default' => $this->faker->boolean,
+        ];
+    }
+
+    /**
+     * Indicate that the media is default.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function default()
+    {
+        return $this->state(['is_default' => 1]);
+    }
+}

@@ -1,12 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use App\HasSearch;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasSearch;
+    use HasFactory, HasSearch;
 
     /**
      * The attributes that are mass assignable.

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Contact;
 
-use App\Contact;
-use App\User;
+use App\Models\Contact;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class ReadContactTest extends TestCase
     /** @test */
     public function guest_cant_read_contact()
     {
-        $contact = factory(Contact::class)->create();
+        $contact = Contact::factory()->create();
 
         $this->get(route('admin.contacts.show', $contact))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class ReadContactTest extends TestCase
     /** @test */
     public function user_can_read_contact()
     {
-        $user = factory(User::class)->create();
-        $contact = factory(Contact::class)->create();
+        $user = User::factory()->create();
+        $contact = Contact::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.contacts.show', $contact))

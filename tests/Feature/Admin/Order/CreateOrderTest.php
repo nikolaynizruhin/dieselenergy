@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Order;
 
-use App\Order;
-use App\User;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -21,7 +21,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function user_can_visit_create_order_page()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.orders.create'))
@@ -32,7 +32,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_product()
     {
-        $order = factory(Order::class)->raw();
+        $order = Order::factory()->make()->toArray();
 
         $this->post(route('admin.orders.store'), $order)
             ->assertRedirect(route('admin.login'));
@@ -41,8 +41,8 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function user_can_create_order()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->raw(['total' => 0]);
+        $user = User::factory()->create();
+        $order = Order::factory()->make(['total' => 0])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
@@ -55,8 +55,8 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function user_cant_create_order_with_integer_notes()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->raw(['notes' => 1]);
+        $user = User::factory()->create();
+        $order = Order::factory()->make(['notes' => 1])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
@@ -66,8 +66,8 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function user_cant_create_order_without_customer()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->raw(['customer_id' => null]);
+        $user = User::factory()->create();
+        $order = Order::factory()->make(['customer_id' => null])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
@@ -77,8 +77,8 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function user_cant_create_order_with_string_customer()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->raw(['customer_id' => 'string']);
+        $user = User::factory()->create();
+        $order = Order::factory()->make(['customer_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
@@ -88,8 +88,8 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function user_cant_create_order_with_nonexistent_customer()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->raw(['customer_id' => 1]);
+        $user = User::factory()->create();
+        $order = Order::factory()->make(['customer_id' => 1])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
@@ -99,8 +99,8 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function user_cant_create_order_without_status()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->raw(['status' => null]);
+        $user = User::factory()->create();
+        $order = Order::factory()->make(['status' => null])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)
@@ -110,8 +110,8 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function user_cant_create_order_with_integer_status()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->raw(['status' => 1]);
+        $user = User::factory()->create();
+        $order = Order::factory()->make(['status' => 1])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.orders.store'), $order)

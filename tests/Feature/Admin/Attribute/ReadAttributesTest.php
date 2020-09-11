@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Attribute;
 
-use App\Attribute;
-use App\User;
+use App\Models\Attribute;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -21,10 +21,10 @@ class ReadAttributesTest extends TestCase
     /** @test */
     public function user_can_read_attributes()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $weight = factory(Attribute::class)->create(['name' => 'Weight']);
-        $power = factory(Attribute::class)->create(['name' => 'Power']);
+        $weight = Attribute::factory()->create(['name' => 'Weight']);
+        $power = Attribute::factory()->create(['name' => 'Power']);
 
         $this->actingAs($user)
             ->get(route('admin.attributes.index'))

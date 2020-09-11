@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Media;
 
-use App\Media;
-use App\User;
+use App\Models\Media;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class DeleteMediaTest extends TestCase
     /** @test */
     public function guest_cant_delete_media()
     {
-        $media = factory(Media::class)->create();
+        $media = Media::factory()->create();
 
         $this->delete(route('admin.medias.destroy', $media))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class DeleteMediaTest extends TestCase
     /** @test */
     public function user_can_delete_media()
     {
-        $user = factory(User::class)->create();
-        $media = factory(Media::class)->create();
+        $user = User::factory()->create();
+        $media = Media::factory()->create();
 
         $this->actingAs($user)
             ->from(route('admin.products.show', $media->product))

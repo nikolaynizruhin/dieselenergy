@@ -2,7 +2,7 @@
 
 namespace App\Http\View\Composers\Admin;
 
-use App\Brand;
+use App\Models\Brand;
 use Illuminate\View\View;
 
 class ProductComposer

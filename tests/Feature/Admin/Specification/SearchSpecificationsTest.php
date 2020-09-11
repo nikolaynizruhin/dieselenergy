@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Specification;
 
-use App\Attribute;
-use App\Category;
-use App\User;
+use App\Models\Attribute;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,13 +15,13 @@ class SearchSpecificationsTest extends TestCase
     /** @test */
     public function user_can_search_specifications()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $width = factory(Attribute::class)->create(['name' => 'width attribute']);
-        $height = factory(Attribute::class)->create(['name' => 'height attribute']);
-        $weight = factory(Attribute::class)->create(['name' => 'weight property']);
+        $width = Attribute::factory()->create(['name' => 'width attribute']);
+        $height = Attribute::factory()->create(['name' => 'height attribute']);
+        $weight = Attribute::factory()->create(['name' => 'weight property']);
 
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $category->attributes()->attach([$width->id, $height->id, $weight->id]);
 

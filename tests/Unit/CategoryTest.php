@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\Attribute;
-use App\Category;
-use App\Product;
+use App\Models\Attribute;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -17,8 +17,8 @@ class CategoryTest extends TestCase
     /** @test */
     public function it_has_many_products()
     {
-        $category = factory(Category::class)->create();
-        $product = factory(Product::class)->create(['category_id' => $category->id]);
+        $category = Category::factory()->create();
+        $product = Product::factory()->create(['category_id' => $category->id]);
 
         $this->assertTrue($category->products->contains($product));
         $this->assertInstanceOf(Collection::class, $category->products);
@@ -27,8 +27,8 @@ class CategoryTest extends TestCase
     /** @test */
     public function it_has_many_attributes()
     {
-        $category = factory(Category::class)->create();
-        $attribute = factory(Attribute::class)->create();
+        $category = Category::factory()->create();
+        $attribute = Attribute::factory()->create();
 
         $category->attributes()->attach($attribute);
 

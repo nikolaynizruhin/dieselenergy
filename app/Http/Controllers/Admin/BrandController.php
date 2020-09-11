@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Brand;
+use App\Models\Brand;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -52,7 +52,7 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Brand  $brand
+     * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
     public function edit(Brand $brand)
@@ -64,7 +64,7 @@ class BrandController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Brand  $brand
+     * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Brand $brand)
@@ -88,7 +88,7 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Brand  $brand
+     * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
     public function destroy(Brand $brand)

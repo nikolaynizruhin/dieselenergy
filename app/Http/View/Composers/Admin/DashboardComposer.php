@@ -2,8 +2,8 @@
 
 namespace App\Http\View\Composers\Admin;
 
-use App\Customer;
-use App\Order;
+use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 

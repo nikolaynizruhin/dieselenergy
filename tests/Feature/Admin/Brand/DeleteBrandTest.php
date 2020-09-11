@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Brand;
 
-use App\Brand;
-use App\User;
+use App\Models\Brand;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class DeleteBrandTest extends TestCase
     /** @test */
     public function guest_cant_delete_brand()
     {
-        $brand = factory(Brand::class)->create();
+        $brand = Brand::factory()->create();
 
         $this->delete(route('admin.brands.destroy', $brand))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class DeleteBrandTest extends TestCase
     /** @test */
     public function user_can_delete_brand()
     {
-        $user = factory(User::class)->create();
-        $brand = factory(Brand::class)->create();
+        $user = User::factory()->create();
+        $brand = Brand::factory()->create();
 
         $this->actingAs($user)
             ->from(route('admin.brands.index'))

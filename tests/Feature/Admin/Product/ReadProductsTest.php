@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Product;
 
-use App\Product;
-use App\User;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -21,10 +21,10 @@ class ReadProductsTest extends TestCase
     /** @test */
     public function user_can_read_products()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $petrol = factory(Product::class)->create(['name' => 'Petrol']);
-        $diesel = factory(Product::class)->create(['name' => 'Diesel']);
+        $petrol = Product::factory()->create(['name' => 'Petrol']);
+        $diesel = Product::factory()->create(['name' => 'Diesel']);
 
         $this->actingAs($user)
             ->get(route('admin.products.index'))

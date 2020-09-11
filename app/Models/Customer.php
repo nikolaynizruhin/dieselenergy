@@ -1,14 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use App\HasSearch;
 use App\Notifications\OrderConfirmed;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
 class Customer extends Model
 {
-    use HasSearch, Notifiable;
+    use HasFactory, HasSearch, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -39,7 +41,7 @@ class Customer extends Model
      * Create a new order.
      *
      * @param string $notes
-     * @return \App\Order
+     * @return \App\Models\Order
      */
     public function createNewOrder($notes = '')
     {
@@ -52,7 +54,7 @@ class Customer extends Model
     /**
      * Send the order confirmation notification.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return void
      */
     public function sendOrderConfirmationNotification($order)

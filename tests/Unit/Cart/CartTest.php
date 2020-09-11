@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Cart;
 
-use App\Image;
-use App\Order;
-use App\Product;
+use App\Models\Image;
+use App\Models\Order;
+use App\Models\Product;
 use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -18,7 +18,7 @@ class CartTest extends TestCase
     /**
      * Product.
      *
-     * @var \App\Product
+     * @var \App\Models\Product
      */
     private $product;
 
@@ -29,9 +29,9 @@ class CartTest extends TestCase
     {
         parent::setUp();
 
-        $this->product = factory(Product::class)->create();
+        $this->product = Product::factory()->create();
 
-        $image = factory(Image::class)->create();
+        $image = Image::factory()->create();
 
         $this->product->images()->attach($image, ['is_default' => 1]);
     }
@@ -98,10 +98,10 @@ class CartTest extends TestCase
     /** @test */
     public function it_can_get_total()
     {
-        $image = factory(Image::class)->create();
+        $image = Image::factory()->create();
 
-        $generator = factory(Product::class)->create(['price' => 100]);
-        $waterPump = factory(Product::class)->create(['price' => 100]);
+        $generator = Product::factory()->create(['price' => 100]);
+        $waterPump = Product::factory()->create(['price' => 100]);
 
         $generator->images()->attach($image, ['is_default' => 1]);
         $waterPump->images()->attach($image, ['is_default' => 1]);
@@ -127,7 +127,7 @@ class CartTest extends TestCase
     /** @test */
     public function it_can_be_stored()
     {
-        $order = factory(Order::class)->create();
+        $order = Order::factory()->create();
 
         Cart::add($this->product, $quantity = $this->faker->randomDigitNotNull);
 

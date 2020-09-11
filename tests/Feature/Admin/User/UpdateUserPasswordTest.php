@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin\User;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +15,7 @@ class UpdateUserPasswordTest extends TestCase
     /** @test */
     public function guest_cant_update_user_password()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->put(route('admin.users.password.update', $user), [
             'password' => 'password',
@@ -26,7 +26,7 @@ class UpdateUserPasswordTest extends TestCase
     /** @test */
     public function user_can_update_user_password()
     {
-        $admin = factory(User::class)->create();
+        $admin = User::factory()->create();
 
         $this->actingAs($admin)
             ->put(route('admin.users.password.update', $admin), [
@@ -41,7 +41,7 @@ class UpdateUserPasswordTest extends TestCase
     /** @test */
     public function user_cant_update_user_without_password()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->put(route('admin.users.password.update', $user), [
@@ -52,7 +52,7 @@ class UpdateUserPasswordTest extends TestCase
     /** @test */
     public function user_cant_update_user_with_integer_password()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->put(route('admin.users.password.update', $user), [
@@ -64,7 +64,7 @@ class UpdateUserPasswordTest extends TestCase
     /** @test */
     public function user_cant_update_user_with_password_less_than_8_chars()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->put(route('admin.users.password.update', $user), [
@@ -76,7 +76,7 @@ class UpdateUserPasswordTest extends TestCase
     /** @test */
     public function user_cant_update_user_without_password_confirmation()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->put(route('admin.users.password.update', $user), [

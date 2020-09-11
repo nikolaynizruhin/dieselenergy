@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin\Auth;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class LoginTest extends TestCase
     /** @test */
     public function authenticated_user_cant_view_login_page()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.login'))
@@ -34,7 +34,7 @@ class LoginTest extends TestCase
     /** @test */
     public function user_can_login_with_correct_credentials()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->post(route('admin.login'), [
             'email' => $user->email,
@@ -47,7 +47,7 @@ class LoginTest extends TestCase
     /** @test */
     public function user_can_login_with_remember_me()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->post(route('admin.login'), [
             'email' => $user->email,
@@ -65,7 +65,7 @@ class LoginTest extends TestCase
     /** @test */
     public function user_cant_login_with_incorrect_password()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->from(route('admin.login'))
             ->post(route('admin.login'), [
@@ -99,7 +99,7 @@ class LoginTest extends TestCase
     /** @test */
     public function user_can_logout()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.logout'))
@@ -122,7 +122,7 @@ class LoginTest extends TestCase
     {
         Carbon::setTestNow(now()->startOfDay());
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         foreach (range(0, 5) as $attempt) {
             $response = $this->from(route('admin.login'))

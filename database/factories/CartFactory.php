@@ -1,16 +1,32 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Cart;
-use App\Order;
-use App\Product;
-use Faker\Generator as Faker;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Cart;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Cart::class, function (Faker $faker) {
-    return [
-        'order_id' => factory(Order::class),
-        'product_id' => factory(Product::class),
-        'quantity' => $faker->randomDigitNot(0),
-    ];
-});
+class CartFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Cart::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'order_id' => Order::factory(),
+            'product_id' => Product::factory(),
+            'quantity' => $this->faker->randomDigitNot(0),
+        ];
+    }
+}

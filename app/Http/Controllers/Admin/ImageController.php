@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreImage;
-use App\Image;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -50,7 +50,7 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Image  $image
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
     public function destroy(Image $image)

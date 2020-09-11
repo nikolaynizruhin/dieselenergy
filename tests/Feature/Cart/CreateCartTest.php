@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Cart;
 
-use App\Image;
-use App\Product;
+use App\Models\Image;
+use App\Models\Product;
 use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -15,8 +15,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function guest_can_add_product_to_cart()
     {
-        $image = factory(Image::class)->create();
-        $product = factory(Product::class)->create();
+        $image = Image::factory()->create();
+        $product = Product::factory()->create();
 
         $product->images()->attach($image, ['is_default' => 1]);
 
@@ -55,7 +55,7 @@ class CreateCartTest extends TestCase
     /** @test */
     public function guest_cant_create_cart_without_quantity()
     {
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $this->post(route('carts.store', ['product_id' => $product->id]))
             ->assertSessionHasErrors('quantity');
@@ -64,7 +64,7 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_cant_create_cart_with_string_quantity()
     {
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $this->post(route('carts.store', ['product_id' => $product->id, 'quantity' => 'string']))
             ->assertSessionHasErrors('quantity');
@@ -73,7 +73,7 @@ class CreateCartTest extends TestCase
     /** @test */
     public function guest_cant_create_cart_with_zero_quantity()
     {
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $this->post(route('carts.store', ['product_id' => $product->id, 'quantity' => 0]))
             ->assertSessionHasErrors('quantity');

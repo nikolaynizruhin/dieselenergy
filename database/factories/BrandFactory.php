@@ -1,12 +1,28 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Brand;
-use Faker\Generator as Faker;
+use App\Models\Brand;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Brand::class, function (Faker $faker) {
-    return [
-        'name' => $faker->unique()->word,
-    ];
-});
+class BrandFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Brand::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->unique()->word,
+        ];
+    }
+}

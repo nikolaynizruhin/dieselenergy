@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Specification;
 
-use App\Specification;
-use App\User;
+use App\Models\Specification;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class DeleteSpecificationTest extends TestCase
     /** @test */
     public function guest_cant_delete_specification()
     {
-        $specification = factory(Specification::class)->create();
+        $specification = Specification::factory()->create();
 
         $this->delete(route('admin.specifications.destroy', $specification))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class DeleteSpecificationTest extends TestCase
     /** @test */
     public function user_can_delete_specification()
     {
-        $user = factory(User::class)->create();
-        $specification = factory(Specification::class)->create();
+        $user = User::factory()->create();
+        $specification = Specification::factory()->create();
 
         $this->actingAs($user)
             ->from(route('admin.categories.show', $specification->category_id))

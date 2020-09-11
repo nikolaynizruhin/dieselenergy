@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Contact;
 
-use App\Contact;
-use App\User;
+use App\Models\Contact;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -21,10 +21,10 @@ class ReadContactsTest extends TestCase
     /** @test */
     public function user_can_read_contacts()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $contactSale = factory(Contact::class)->create(['subject' => 'Sale']);
-        $contactSupport = factory(Contact::class)->create(['subject' => 'Support']);
+        $contactSale = Contact::factory()->create(['subject' => 'Sale']);
+        $contactSupport = Contact::factory()->create(['subject' => 'Support']);
 
         $this->actingAs($user)
             ->get(route('admin.contacts.index'))

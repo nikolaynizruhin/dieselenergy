@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Order;
 
-use App\Customer;
-use App\Image;
+use App\Models\Customer;
+use App\Models\Image;
 use App\Notifications\OrderConfirmed;
-use App\Order;
-use App\Product;
+use App\Models\Order;
+use App\Models\Product;
 use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -20,7 +20,7 @@ class CreateOrderTest extends TestCase
     /**
      * Product.
      *
-     * @var \App\Product
+     * @var \App\Models\Product
      */
     private $product;
 
@@ -31,9 +31,9 @@ class CreateOrderTest extends TestCase
     {
         parent::setUp();
 
-        $this->product = factory(Product::class)->create();
+        $this->product = Product::factory()->create();
 
-        $image = factory(Image::class)->create();
+        $image = Image::factory()->create();
 
         $this->product->images()->attach($image, ['is_default' => 1]);
     }
@@ -41,7 +41,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_can_create_order()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make()
             ->makeHidden('notes');
 
@@ -74,8 +74,8 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function it_should_update_existing_customer()
     {
-        $customer = factory(Customer::class)->create();
-        $stub = factory(Customer::class)
+        $customer = Customer::factory()->create();
+        $stub = Customer::factory()
             ->make(['email' => $customer->email])
             ->makeHidden('notes');
 
@@ -93,7 +93,7 @@ class CreateOrderTest extends TestCase
     {
         Notification::fake();
 
-        $stub = factory(Customer::class)->make()->makeHidden('notes');
+        $stub = Customer::factory()->make()->makeHidden('notes');
 
         Cart::add($this->product);
 
@@ -112,7 +112,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_without_customer_name()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make(['name' => null])
             ->makeHidden('notes');
 
@@ -125,7 +125,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_integer_customer_name()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make(['name' => 1])
             ->makeHidden('notes');
 
@@ -138,7 +138,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_customer_name_more_than_255_chars()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make(['name' => str_repeat('a', 256)])
             ->makeHidden('notes');
 
@@ -151,7 +151,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_without_customer_email()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make(['email' => null])
             ->makeHidden('notes');
 
@@ -164,7 +164,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_integer_customer_email()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make(['email' => 1])
             ->makeHidden('notes');
 
@@ -177,7 +177,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_customer_email_more_than_255_chars()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make(['email' => str_repeat('a', 256)])
             ->makeHidden('notes');
 
@@ -190,7 +190,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_invalid_customer_email()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make(['email' => 'invalid'])
             ->makeHidden('notes');
 
@@ -203,7 +203,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_without_customer_phone()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make(['phone' => null])
             ->makeHidden('notes');
 
@@ -216,7 +216,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_integer_customer_phone()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make(['phone' => 1])
             ->makeHidden('notes');
 
@@ -229,7 +229,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_customer_phone_more_than_255_chars()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make(['phone' => str_repeat('a', 256)])
             ->makeHidden('notes');
 
@@ -242,7 +242,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_integer_notes()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make()
             ->makeHidden('notes');
 
@@ -255,7 +255,7 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_empty_cart()
     {
-        $customer = factory(Customer::class)
+        $customer = Customer::factory()
             ->make()
             ->makeHidden('notes');
 

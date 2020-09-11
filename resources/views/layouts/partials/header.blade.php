@@ -19,7 +19,7 @@
                         Shop
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @foreach(\App\Category::all() as $category)
+                        @foreach(\App\Models\Category::all() as $category)
                             <a class="dropdown-item" href="{{ route('categories.products.index', $category) }}">{{ $category->name }}</a>
                         @endforeach
                     </div>

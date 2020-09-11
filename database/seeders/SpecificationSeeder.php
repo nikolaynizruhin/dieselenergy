@@ -1,8 +1,11 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\Specification;
 use Illuminate\Database\Seeder;
 
-class CartSeeder extends Seeder
+class SpecificationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +14,6 @@ class CartSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Cart::class, 10)->create();
+        Specification::factory()->count(10)->create();
     }
 }

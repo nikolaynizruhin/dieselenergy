@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Contact;
 
-use App\Contact;
-use App\User;
+use App\Models\Contact;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function guest_cant_visit_edit_contact_page()
     {
-        $contact = factory(Contact::class)->create();
+        $contact = Contact::factory()->create();
 
         $this->get(route('admin.contacts.edit', $contact))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_can_visit_update_contact_page()
     {
-        $user = factory(User::class)->create();
-        $contact = factory(Contact::class)->create();
+        $user = User::factory()->create();
+        $contact = Contact::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.contacts.edit', $contact))
@@ -34,8 +34,8 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function guest_cant_update_contact()
     {
-        $contact = factory(Contact::class)->create();
-        $stub = factory(Contact::class)->raw();
+        $contact = Contact::factory()->create();
+        $stub = Contact::factory()->make()->toArray();
 
         $this->put(route('admin.contacts.update', $contact), $stub)
             ->assertRedirect(route('admin.login'));
@@ -44,9 +44,9 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_can_update_contact()
     {
-        $user = factory(User::class)->create();
-        $contact = factory(Contact::class)->create();
-        $stub = factory(Contact::class)->raw();
+        $user = User::factory()->create();
+        $contact = Contact::factory()->create();
+        $stub = Contact::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -59,9 +59,9 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_cant_update_contact_without_subject()
     {
-        $user = factory(User::class)->create();
-        $contact = factory(Contact::class)->create();
-        $stub = factory(Contact::class)->raw(['subject' => null]);
+        $user = User::factory()->create();
+        $contact = Contact::factory()->create();
+        $stub = Contact::factory()->make(['subject' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -71,9 +71,9 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_cant_update_contact_with_integer_subject()
     {
-        $user = factory(User::class)->create();
-        $contact = factory(Contact::class)->create();
-        $stub = factory(Contact::class)->raw(['subject' => 1]);
+        $user = User::factory()->create();
+        $contact = Contact::factory()->create();
+        $stub = Contact::factory()->make(['subject' => 1])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -83,9 +83,9 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_cant_update_contact_without_message()
     {
-        $user = factory(User::class)->create();
-        $contact = factory(Contact::class)->create();
-        $stub = factory(Contact::class)->raw(['message' => null]);
+        $user = User::factory()->create();
+        $contact = Contact::factory()->create();
+        $stub = Contact::factory()->make(['message' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -95,9 +95,9 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_cant_update_contact_with_integer_message()
     {
-        $user = factory(User::class)->create();
-        $contact = factory(Contact::class)->create();
-        $stub = factory(Contact::class)->raw(['message' => 1]);
+        $user = User::factory()->create();
+        $contact = Contact::factory()->create();
+        $stub = Contact::factory()->make(['message' => 1])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -107,11 +107,11 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_cant_update_contact_with_subject_more_than_255_chars()
     {
-        $user = factory(User::class)->create();
-        $contact = factory(Contact::class)->create();
-        $stub = factory(Contact::class)->raw([
+        $user = User::factory()->create();
+        $contact = Contact::factory()->create();
+        $stub = Contact::factory()->make([
             'subject' => str_repeat('a', 256),
-        ]);
+        ])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -121,9 +121,9 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_cant_update_contact_without_customer()
     {
-        $user = factory(User::class)->create();
-        $contact = factory(Contact::class)->create();
-        $stub = factory(Contact::class)->raw(['customer_id' => null]);
+        $user = User::factory()->create();
+        $contact = Contact::factory()->create();
+        $stub = Contact::factory()->make(['customer_id' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -133,9 +133,9 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_cant_update_contact_with_string_customer()
     {
-        $user = factory(User::class)->create();
-        $contact = factory(Contact::class)->create();
-        $stub = factory(Contact::class)->raw(['customer_id' => 'string']);
+        $user = User::factory()->create();
+        $contact = Contact::factory()->create();
+        $stub = Contact::factory()->make(['customer_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
@@ -145,9 +145,9 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_cant_update_contact_with_nonexistent_customer()
     {
-        $user = factory(User::class)->create();
-        $contact = factory(Contact::class)->create();
-        $stub = factory(Contact::class)->raw(['customer_id' => 10]);
+        $user = User::factory()->create();
+        $contact = Contact::factory()->create();
+        $stub = Contact::factory()->make(['customer_id' => 10])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)

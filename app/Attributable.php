@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Attribute;
+
 trait Attributable
 {
     /**

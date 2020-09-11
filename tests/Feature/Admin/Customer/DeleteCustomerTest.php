@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Customer;
 
-use App\Customer;
-use App\User;
+use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class DeleteCustomerTest extends TestCase
     /** @test */
     public function guest_cant_delete_customer()
     {
-        $customer = factory(Customer::class)->create();
+        $customer = Customer::factory()->create();
 
         $this->delete(route('admin.customers.destroy', $customer))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class DeleteCustomerTest extends TestCase
     /** @test */
     public function user_can_delete_customer()
     {
-        $user = factory(User::class)->create();
-        $customer = factory(Customer::class)->create();
+        $user = User::factory()->create();
+        $customer = Customer::factory()->create();
 
         $this->actingAs($user)
             ->from(route('admin.customers.index'))

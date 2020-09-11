@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Customer;
 
-use App\Customer;
-use App\User;
+use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class ReadCustomerTest extends TestCase
     /** @test */
     public function guest_cant_read_customer()
     {
-        $customer = factory(Customer::class)->create();
+        $customer = Customer::factory()->create();
 
         $this->get(route('admin.customers.show', $customer))
             ->assertRedirect(route('admin.login'));
@@ -23,8 +23,8 @@ class ReadCustomerTest extends TestCase
     /** @test */
     public function user_can_read_customer()
     {
-        $user = factory(User::class)->create();
-        $customer = factory(Customer::class)->create();
+        $user = User::factory()->create();
+        $customer = Customer::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.customers.show', $customer))

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Cart;
 
-use App\Cart;
-use App\User;
+use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -15,7 +15,7 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function guest_cant_visit_update_cart_page()
     {
-        $cart = factory(Cart::class)->create();
+        $cart = Cart::factory()->create();
 
         $this->get(route('admin.carts.edit', $cart))
             ->assertRedirect(route('admin.login'));
@@ -24,8 +24,8 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_can_visit_update_cart_page()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.carts.edit', $cart))
@@ -37,8 +37,8 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function guest_cant_update_cart()
     {
-        $cart = factory(Cart::class)->create();
-        $stub = factory(Cart::class)->raw();
+        $cart = Cart::factory()->create();
+        $stub = Cart::factory()->make()->toArray();
 
         $this->put(route('admin.carts.update', $cart), $stub)
             ->assertRedirect(route('admin.login'));
@@ -47,10 +47,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_can_update_cart()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $cart = factory(Cart::class)->create();
-        $stub = factory(Cart::class)->raw();
+        $cart = Cart::factory()->create();
+        $stub = Cart::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -63,10 +63,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_cant_update_cart_without_order()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $cart = factory(Cart::class)->create();
-        $stub = factory(Cart::class)->raw(['order_id' => null]);
+        $cart = Cart::factory()->create();
+        $stub = Cart::factory()->make(['order_id' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -76,10 +76,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_cant_update_cart_with_string_order()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $cart = factory(Cart::class)->create();
-        $stub = factory(Cart::class)->raw(['order_id' => 'string']);
+        $cart = Cart::factory()->create();
+        $stub = Cart::factory()->make(['order_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -89,10 +89,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_cant_update_cart_with_nonexistent_order()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $cart = factory(Cart::class)->create();
-        $stub = factory(Cart::class)->raw(['order_id' => 10]);
+        $cart = Cart::factory()->create();
+        $stub = Cart::factory()->make(['order_id' => 10])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -102,10 +102,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_cant_update_cart_without_product()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $cart = factory(Cart::class)->create();
-        $stub = factory(Cart::class)->raw(['product_id' => null]);
+        $cart = Cart::factory()->create();
+        $stub = Cart::factory()->make(['product_id' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -115,10 +115,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_cant_update_cart_with_string_product()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $cart = factory(Cart::class)->create();
-        $stub = factory(Cart::class)->raw(['product_id' => 'string']);
+        $cart = Cart::factory()->create();
+        $stub = Cart::factory()->make(['product_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -128,10 +128,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_cant_update_cart_with_nonexistent_product()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $cart = factory(Cart::class)->create();
-        $stub = factory(Cart::class)->raw(['product_id' => 10]);
+        $cart = Cart::factory()->create();
+        $stub = Cart::factory()->make(['product_id' => 10])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -141,10 +141,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_cant_update_existing_cart()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $cart = factory(Cart::class)->create();
-        $existed = factory(Cart::class)->create();
+        $cart = Cart::factory()->create();
+        $existed = Cart::factory()->create();
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $existed->toArray())
@@ -154,10 +154,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_cant_update_cart_without_quantity()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $cart = factory(Cart::class)->create();
-        $stub = factory(Cart::class)->raw(['quantity' => null]);
+        $cart = Cart::factory()->create();
+        $stub = Cart::factory()->make(['quantity' => null])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -167,10 +167,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_cant_update_cart_with_string_quantity()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $cart = factory(Cart::class)->create();
-        $stub = factory(Cart::class)->raw(['quantity' => 'string']);
+        $cart = Cart::factory()->create();
+        $stub = Cart::factory()->make(['quantity' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)
@@ -180,10 +180,10 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_cant_update_cart_with_zero_quantity()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $cart = factory(Cart::class)->create();
-        $stub = factory(Cart::class)->raw(['quantity' => 0]);
+        $cart = Cart::factory()->create();
+        $stub = Cart::factory()->make(['quantity' => 0])->toArray();
 
         $this->actingAs($user)
             ->put(route('admin.carts.update', $cart), $stub)

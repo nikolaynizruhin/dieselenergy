@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Category;
 
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -21,10 +21,10 @@ class ReadCategoriesTest extends TestCase
     /** @test */
     public function user_can_read_categories()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $generators = factory(Category::class)->create(['name' => 'Generators']);
-        $ats = factory(Category::class)->create(['name' => 'ATS']);
+        $generators = Category::factory()->create(['name' => 'Generators']);
+        $ats = Category::factory()->create(['name' => 'ATS']);
 
         $this->actingAs($user)
             ->get(route('admin.categories.index'))

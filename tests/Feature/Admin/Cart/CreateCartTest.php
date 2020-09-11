@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Cart;
 
-use App\Cart;
-use App\Order;
-use App\User;
+use App\Models\Cart;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -23,8 +23,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_can_visit_create_cart_page()
     {
-        $user = factory(User::class)->create();
-        $order = factory(Order::class)->create();
+        $user = User::factory()->create();
+        $order = Order::factory()->create();
 
         $this->actingAs($user)
             ->get(route('admin.carts.create', ['order_id' => $order->id]))
@@ -34,7 +34,7 @@ class CreateCartTest extends TestCase
     /** @test */
     public function guest_cant_create_cart()
     {
-        $cart = factory(Cart::class)->raw();
+        $cart = Cart::factory()->make()->toArray();
 
         $this->post(route('admin.carts.store'), $cart)
             ->assertRedirect(route('admin.login'));
@@ -43,8 +43,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_can_create_cart()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->raw();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->make()->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.carts.store'), $cart)
@@ -57,8 +57,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_cant_create_cart_without_order()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->raw(['order_id' => null]);
+        $user = User::factory()->create();
+        $cart = Cart::factory()->make(['order_id' => null])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.carts.store'), $cart)
@@ -68,8 +68,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_cant_create_cart_with_string_order()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->raw(['order_id' => 'string']);
+        $user = User::factory()->create();
+        $cart = Cart::factory()->make(['order_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.carts.store'), $cart)
@@ -79,8 +79,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_cant_create_cart_with_nonexistent_order()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->raw(['order_id' => 10]);
+        $user = User::factory()->create();
+        $cart = Cart::factory()->make(['order_id' => 10])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.carts.store'), $cart)
@@ -90,8 +90,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_cant_create_cart_without_product()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->raw(['product_id' => null]);
+        $user = User::factory()->create();
+        $cart = Cart::factory()->make(['product_id' => null])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.carts.store'), $cart)
@@ -101,8 +101,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_cant_create_cart_with_string_product()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->raw(['product_id' => 'string']);
+        $user = User::factory()->create();
+        $cart = Cart::factory()->make(['product_id' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.carts.store'), $cart)
@@ -112,8 +112,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_cant_create_cart_with_nonexistent_product()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->raw(['product_id' => 10]);
+        $user = User::factory()->create();
+        $cart = Cart::factory()->make(['product_id' => 10])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.carts.store'), $cart)
@@ -123,8 +123,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_cant_create_existing_cart()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
 
         $this->actingAs($user)
             ->post(route('admin.carts.store'), $cart->toArray())
@@ -134,8 +134,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_cant_create_cart_without_quantity()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->raw(['quantity' => null]);
+        $user = User::factory()->create();
+        $cart = Cart::factory()->make(['quantity' => null])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.carts.store'), $cart)
@@ -145,8 +145,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_cant_create_cart_with_string_quantity()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->raw(['quantity' => 'string']);
+        $user = User::factory()->create();
+        $cart = Cart::factory()->make(['quantity' => 'string'])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.carts.store'), $cart)
@@ -156,8 +156,8 @@ class CreateCartTest extends TestCase
     /** @test */
     public function user_cant_create_cart_with_zero_quantity()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->raw(['quantity' => 0]);
+        $user = User::factory()->create();
+        $cart = Cart::factory()->make(['quantity' => 0])->toArray();
 
         $this->actingAs($user)
             ->post(route('admin.carts.store'), $cart)
