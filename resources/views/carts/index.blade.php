@@ -5,9 +5,7 @@
         <div class="row mt-n3 mb-4 text-gray-500">
             <div class="col letter-spacing d-flex align-items-center">
                 Shop
-                <svg class="bi bi-chevron-right mx-2" width="0.8em" height="0.8em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                </svg>
+                @include('layouts.partials.icon', ['name' => 'chevron-right', 'classes' => 'mx-2', 'width' => '0.9em', 'height' => '0.9em'])
                 Cart
             </div>
         </div>
@@ -47,10 +45,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-link">
-                                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                                                    <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                                                </svg>
+                                                @include('layouts.partials.icon', ['name' => 'x', 'width' => '1.5em', 'height' => '1.5em'])
                                             </button>
                                         </form>
                                     </td>
