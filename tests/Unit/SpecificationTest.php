@@ -14,10 +14,10 @@ class SpecificationTest extends TestCase
     /** @test */
     public function it_has_attribute()
     {
-        $attribute = Attribute::factory()->create();
-        $specification = Specification::factory()->create(['attribute_id' => $attribute->id]);
+        $specification = Specification::factory()
+            ->for(Attribute::factory())
+            ->create();
 
         $this->assertInstanceOf(Attribute::class, $specification->attribute);
-        $this->assertTrue($specification->attribute->is($attribute));
     }
 }

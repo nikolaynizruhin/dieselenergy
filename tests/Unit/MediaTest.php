@@ -15,20 +15,20 @@ class MediaTest extends TestCase
     /** @test */
     public function it_has_product()
     {
-        $product = Product::factory()->create();
-        $media = Media::factory()->create(['product_id' => $product->id]);
+        $media = Media::factory()
+            ->for(Product::factory())
+            ->create();
 
         $this->assertInstanceOf(Product::class, $media->product);
-        $this->assertTrue($media->product->is($product));
     }
 
     /** @test */
     public function it_has_image()
     {
-        $image = Image::factory()->create();
-        $media = Media::factory()->create(['image_id' => $image->id]);
+        $media = Media::factory()
+            ->for(Image::factory())
+            ->create();
 
         $this->assertInstanceOf(Image::class, $media->image);
-        $this->assertTrue($media->image->is($image));
     }
 }

@@ -15,10 +15,10 @@ class BrandTest extends TestCase
     /** @test */
     public function it_has_many_products()
     {
-        $brand = Brand::factory()->create();
-        $product = Product::factory()->create(['brand_id' => $brand->id]);
+        $brand = Brand::factory()
+            ->hasProducts(1)
+            ->create();
 
-        $this->assertTrue($brand->products->contains($product));
         $this->assertInstanceOf(Collection::class, $brand->products);
     }
 }

@@ -20,33 +20,31 @@ class ProductTest extends TestCase
     /** @test */
     public function it_has_brand()
     {
-        $brand = Brand::factory()->create();
-        $product = Product::factory()->create(['brand_id' => $brand->id]);
+        $product = Product::factory()
+            ->for(Brand::factory())
+            ->create();
 
         $this->assertInstanceOf(Brand::class, $product->brand);
-        $this->assertTrue($product->brand->is($brand));
     }
 
     /** @test */
     public function it_has_category()
     {
-        $category = Category::factory()->create();
-        $product = Product::factory()->create(['category_id' => $category->id]);
+        $product = Product::factory()
+            ->for(Category::factory())
+            ->create();
 
         $this->assertInstanceOf(Category::class, $product->category);
-        $this->assertTrue($product->category->is($category));
     }
 
     /** @test */
     public function it_has_many_attributes()
     {
-        $product = Product::factory()->create();
-        $attribute = Attribute::factory()->create();
+        $product = Product::factory()
+            ->hasAttached(Attribute::factory(), [
+                'value' => $value = $this->faker->randomDigit,
+            ])->create();
 
-        $product->attributes()
-            ->attach($attribute, ['value' => $value = $this->faker->randomDigit]);
-
-        $this->assertTrue($product->attributes->contains($attribute));
         $this->assertInstanceOf(Collection::class, $product->attributes);
         $this->assertEquals($value, $product->attributes->first()->pivot->value);
     }
@@ -54,12 +52,11 @@ class ProductTest extends TestCase
     /** @test */
     public function it_has_many_orders()
     {
-        $product = Product::factory()->create();
-        $order = Order::factory()->create();
+        $product = Product::factory()
+            ->hasAttached(Order::factory(), [
+                'quantity' => $quantity = $this->faker->randomDigit,
+            ])->create();
 
-        $product->orders()->attach($order, ['quantity' => $quantity = $this->faker->randomDigit]);
-
-        $this->assertTrue($product->orders->contains($order));
         $this->assertInstanceOf(Collection::class, $product->orders);
         $this->assertEquals($quantity, $product->orders->first()->pivot->quantity);
     }
@@ -67,12 +64,10 @@ class ProductTest extends TestCase
     /** @test */
     public function it_has_many_images()
     {
-        $product = Product::factory()->create();
-        $image = Image::factory()->create();
+        $product = Product::factory()
+            ->hasAttached(Image::factory())
+            ->create();
 
-        $product->images()->attach($image);
-
-        $this->assertTrue($product->images->contains($image));
         $this->assertInstanceOf(Collection::class, $product->images);
     }
 

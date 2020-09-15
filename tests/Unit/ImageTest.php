@@ -17,12 +17,10 @@ class ImageTest extends TestCase
     /** @test */
     public function it_has_many_products()
     {
-        $image = Image::factory()->create();
-        $product = Product::factory()->create();
+        $image = Image::factory()
+            ->hasAttached(Product::factory())
+            ->create();
 
-        $image->products()->attach($product);
-
-        $this->assertTrue($image->products->contains($product));
         $this->assertInstanceOf(Collection::class, $image->products);
     }
 

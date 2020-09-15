@@ -18,22 +18,21 @@ class OrderTest extends TestCase
     /** @test */
     public function it_has_customer()
     {
-        $customer = Customer::factory()->create();
-        $order = Order::factory()->create(['customer_id' => $customer->id]);
+        $order = Order::factory()
+            ->for(Customer::factory())
+            ->create();
 
         $this->assertInstanceOf(Customer::class, $order->customer);
-        $this->assertTrue($order->customer->is($customer));
     }
 
     /** @test */
     public function it_has_many_products()
     {
-        $product = Product::factory()->create();
-        $order = Order::factory()->create();
+        $order = Order::factory()
+            ->hasAttached(Product::factory(), [
+                'quantity' => $quantity = $this->faker->randomDigit,
+            ])->create();
 
-        $order->products()->attach($product, ['quantity' => $quantity = $this->faker->randomDigit]);
-
-        $this->assertTrue($order->products->contains($product));
         $this->assertInstanceOf(Collection::class, $order->products);
         $this->assertEquals($quantity, $order->products->first()->pivot->quantity);
     }
@@ -41,10 +40,12 @@ class OrderTest extends TestCase
     /** @test */
     public function it_calculates_total_after_adding_product()
     {
-        $order = Order::factory()->create(['total' => 0]);
-        $product = Product::factory()->create(['price' => 100]);
-
-        $order->products()->attach($product, ['quantity' => 3]);
+        $order = Order::factory()
+            ->hasAttached(
+                Product::factory()
+                    ->state(fn (array $attributes, Order $order) => ['price' => 100]),
+                ['quantity' => 3],
+            )->create(['total' => 0]);
 
         $this->assertEquals(300, $order->fresh()->total);
     }

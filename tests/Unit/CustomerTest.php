@@ -15,10 +15,10 @@ class CustomerTest extends TestCase
     /** @test */
     public function it_has_many_orders()
     {
-        $customer = Customer::factory()->create();
-        $order = Order::factory()->create(['customer_id' => $customer->id]);
+        $customer = Customer::factory()
+            ->hasOrders(1)
+            ->create();
 
-        $this->assertTrue($customer->orders->contains($order));
         $this->assertInstanceOf(Collection::class, $customer->orders);
     }
 }
