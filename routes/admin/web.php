@@ -43,15 +43,18 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset'])->withou
 
 Route::get('/', DashboardController::class)->name('dashboard');
 
-Route::resource('products', ProductController::class);
-Route::resource('customers', CustomerController::class);
-Route::resource('orders', OrderController::class);
-Route::resource('contacts', ContactController::class);
+Route::resources([
+    'products' => ProductController::class,
+    'customers' => CustomerController::class,
+    'orders' => OrderController::class,
+    'contacts' => ContactController::class,
+    'categories' => CategoryController::class,
+]);
+
 Route::resource('carts', CartController::class)->except(['index', 'show']);
 Route::resource('medias', MediaController::class)->except(['index', 'show']);
 Route::resource('images', ImageController::class)->except(['show', 'edit', 'update']);
 Route::resource('brands', BrandController::class)->except('show');
-Route::resource('categories', CategoryController::class);
 Route::resource('attributes', AttributeController::class)->except('show');
 Route::resource('specifications', SpecificationController::class)->except('index');
 
