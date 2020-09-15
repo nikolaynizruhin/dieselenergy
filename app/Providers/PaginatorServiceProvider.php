@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Cart\Cart;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
-class CartServiceProvider extends ServiceProvider
+class PaginatorServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -14,7 +14,7 @@ class CartServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('basket', Cart::class);
+        //
     }
 
     /**
@@ -24,6 +24,6 @@ class CartServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Paginator::useBootstrap();
     }
 }
