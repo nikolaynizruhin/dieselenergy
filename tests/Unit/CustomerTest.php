@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use App\Models\Customer;
-use App\Models\Order;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
