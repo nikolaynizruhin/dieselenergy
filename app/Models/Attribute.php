@@ -18,6 +18,18 @@ class Attribute extends Model
     protected $fillable = ['name', 'measure'];
 
     /**
+     * Get the attribute's field.
+     *
+     * @return string
+     */
+    public function getFieldAttribute()
+    {
+        return $this->measure
+            ? $this->name.', '.$this->measure
+            : $this->name;
+    }
+
+    /**
      * The categories that belong to the attribute.
      */
     public function categories()

@@ -22,6 +22,7 @@ return [
     'title' => 'Product',
     'select' => 'Select a product',
     'images' => 'The product already has :count images.',
+    'missing' => 'No products matched the given criteria.',
     'update' => 'Update Product',
     'updated' => 'Product was updated successfully!',
 

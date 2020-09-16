@@ -87,14 +87,14 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">Attribute</th>
-                                    <th scope="col">Value</th>
+                                    <th scope="col">Назва</th>
+                                    <th scope="col">Значення</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($product->attributes as $attribute)
                                     <tr>
-                                        <th scope="row">{{ $attribute->name }}</th>
+                                        <th scope="row">{{ $attribute->field }}</th>
                                         <td>{{ $attribute->pivot->value }}</td>
                                     </tr>
                                 @endforeach

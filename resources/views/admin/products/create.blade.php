@@ -46,7 +46,7 @@
                     <div class="col-md-3">{{ __('common.status') }}</div>
                     <div class="col-md-6">
                         <div class="form-check">
-                            <input type="checkbox" id="inputStatus" class="form-check-input @error('is_active') is-invalid @enderror" value="1" name="is_active" @if (old('is_active')) checked @endif>
+                            <input type="checkbox" id="inputStatus" class="form-check-input @error('is_active') is-invalid @enderror" value="1" name="is_active" @if (old('is_active', true)) checked @endif>
                             <label class="form-check-label" for="inputStatus">
                                 {{ __('common.active') }}
                             </label>
@@ -139,7 +139,7 @@
                 <!-- Attributes -->
                 @foreach($category->attributes as $attribute)
                     <div class="form-group row">
-                        <label for="inputAttribute{{ $attribute->id }}" class="col-md-3 col-form-label">{{ $attribute->name }}</label>
+                        <label for="inputAttribute{{ $attribute->id }}" class="col-md-3 col-form-label">{{ $attribute->field }}</label>
                         <div class="col-md-6">
                             <input type="text" id="inputAttribute{{ $attribute->id }}" class="form-control @error('attributes.'.$attribute->id) is-invalid @enderror" name="attributes[{{ $attribute->id }}]" value="{{ old('attributes.'.$attribute->id) }}">
 

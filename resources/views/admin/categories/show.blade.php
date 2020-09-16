@@ -12,7 +12,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('common.name') }}</div>
-                <div class="col-md-6">{{ $category->name }}</div>
+                <div class="col-md-9">{{ $category->name }}</div>
             </div>
         </div>
     </div>

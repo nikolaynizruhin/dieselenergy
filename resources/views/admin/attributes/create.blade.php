@@ -25,7 +25,7 @@
                 <div class="form-group row">
                     <label for="inputMeasure" class="col-md-3 col-form-label">{{ __('common.measure') }}</label>
                     <div class="col-md-6">
-                        <input type="text" id="inputMeasure" class="form-control @error('measure') is-invalid @enderror" name="measure" value="{{ old('measure') }}" required autocomplete="measure">
+                        <input type="text" id="inputMeasure" class="form-control @error('measure') is-invalid @enderror" name="measure" value="{{ old('measure') }}" autocomplete="measure">
 
                         @error('measure')
                             <div class="invalid-feedback" role="alert">

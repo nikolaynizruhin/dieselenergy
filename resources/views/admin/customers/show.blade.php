@@ -12,28 +12,28 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('customer.title') }}</div>
-                <div class="col-md-6">{{ $customer->name }}</div>
+                <div class="col-md-9">{{ $customer->name }}</div>
             </div>
 
             <hr>
 
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('common.email') }}</div>
-                <div class="col-md-6">{{ $customer->email }}</div>
+                <div class="col-md-9">{{ $customer->email }}</div>
             </div>
 
             <hr>
 
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('common.phone') }}</div>
-                <div class="col-md-6">{{ $customer->phone }}</div>
+                <div class="col-md-9">{{ $customer->phone }}</div>
             </div>
 
             <hr>
 
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('common.notes') }}</div>
-                <div class="col-md-6">{{ $customer->notes }}</div>
+                <div class="col-md-9">{{ $customer->notes }}</div>
             </div>
         </div>
     </div>
