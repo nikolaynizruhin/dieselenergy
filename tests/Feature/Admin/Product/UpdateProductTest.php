@@ -80,7 +80,7 @@ class UpdateProductTest extends TestCase
         $this->actingAs($user)
             ->put(route('admin.products.update', $product), $stub + [
                 'attributes' => [
-                    $attribute->id => $value = $this->faker->randomDigit,
+                    $attribute->id => $value = $this->faker->word,
                 ],
             ])->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.updated'));
