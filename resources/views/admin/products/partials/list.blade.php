@@ -8,6 +8,7 @@
                 <tr>
                     <th scope="col" class="bg-light text-muted border-0">#</th>
                     <th scope="col" class="bg-light text-muted border-0">{{ __('common.name') }}</th>
+                    <th scope="col" class="bg-light text-muted border-0">{{ __('category.title') }}</th>
                     <th scope="col" class="bg-light text-muted border-0">{{ __('common.status') }}</th>
                     <th scope="col" class="bg-light text-muted border-0">{{ __('common.price') }}</th>
                     <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
@@ -18,6 +19,7 @@
                     <tr>
                         <th scope="row" class="font-weight-normal">{{ $products->firstItem() + $key }}</th>
                         <td>{{ $product->name }}</td>
+                        <td>{{ $product->category->name }}</td>
                         <td>
                             <span class="badge badge-pill badge-{{ $product->is_active ? 'success' : 'danger' }}">
                                 {{ $product->is_active ? __('common.active') : __('common.inactive') }}

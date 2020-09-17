@@ -8,6 +8,7 @@
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.name') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('common.measure') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
@@ -16,6 +17,7 @@
                 <tr>
                     <th scope="row" class="font-weight-normal">{{ $attributes->firstItem() + $key }}</th>
                     <td>{{ $attribute->name }}</td>
+                    <td>{{ $attribute->measure }}</td>
                     <td>
                         <a href="{{ route('admin.specifications.edit', $attribute->pivot->id) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])

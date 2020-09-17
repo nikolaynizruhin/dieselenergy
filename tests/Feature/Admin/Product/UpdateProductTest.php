@@ -322,7 +322,7 @@ class UpdateProductTest extends TestCase
     }
 
     /** @test */
-    public function user_cant_update_product_without_attributes()
+    public function user_cant_update_product_with_integer_attributes()
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
@@ -334,7 +334,7 @@ class UpdateProductTest extends TestCase
 
         $stub = Product::factory()->raw([
             'category_id' => $category->id,
-            'attributes' => [$attribute->id => null],
+            'attributes' => [$attribute->id => 1],
         ]);
 
         $this->actingAs($user)

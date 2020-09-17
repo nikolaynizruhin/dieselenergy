@@ -33,7 +33,7 @@ class StoreProduct extends FormRequest
             'brand_id' => 'required|numeric|exists:brands,id',
             'category_id' => 'required|numeric|exists:categories,id',
             'images.*' => 'image',
-        ] + $this->getAttributeRules('required|max:255');
+        ] + $this->getAttributeRules('nullable|string|max:255');
     }
 
     /**

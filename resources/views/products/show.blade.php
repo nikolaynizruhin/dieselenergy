@@ -4,11 +4,11 @@
     <div class="container py-5">
         <div class="row mt-n3 mb-4">
             <div class="col letter-spacing d-flex align-items-center" style="color: #adb5bd; font-size: 16px">
-                Shop
+                Магазин
                 @include('layouts.partials.icon', ['name' => 'chevron-right', 'classes' => 'mx-2', 'width' => '0.9em', 'height' => '0.9em'])
-                Generators
+                {{ $product->category->name }}
                 @include('layouts.partials.icon', ['name' => 'chevron-right', 'classes' => 'mx-2', 'width' => '0.9em', 'height' => '0.9em'])
-                SDMO H-3100
+                {{ $product->name }}
             </div>
         </div>
         <div class="row">
@@ -71,10 +71,10 @@
             <div class="col">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Description</a>
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Опис</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Specification</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Характеристики</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
