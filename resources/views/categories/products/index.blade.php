@@ -36,7 +36,7 @@
                         </select>
                     </div>
 
-                    @include('categories.products.partials.filters.'.$category->slug)
+                    @includeIf('categories.products.partials.filters.'.$category->slug)
 
                     <button type="submit" class="btn mt-3 btn-outline-primary btn-block">
                         Filter
