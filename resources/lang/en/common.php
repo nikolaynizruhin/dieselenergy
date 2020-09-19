@@ -23,6 +23,7 @@ return [
     'quantity' => 'Quantity',
     'settings' => 'Settings',
     'search' => 'Search',
+    'slug' => 'Slug',
     'email' => 'Email',
     'password' => 'Password',
     'price' => 'Price',

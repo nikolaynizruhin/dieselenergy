@@ -37,10 +37,10 @@ class UpdateCategoryTest extends TestCase
     public function guest_cant_update_category()
     {
         $category = Category::factory()->create();
+        $stub = Category::factory()->raw();
 
-        $this->put(route('admin.categories.update', $category), [
-            'name' => $this->faker->word,
-        ])->assertRedirect(route('admin.login'));
+        $this->put(route('admin.categories.update', $category), $stub)
+            ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
@@ -63,11 +63,11 @@ class UpdateCategoryTest extends TestCase
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
+        $stub = Category::factory()->raw(['name' => null]);
 
         $this->actingAs($user)
-            ->put(route('admin.categories.update', $category), [
-                'name' => null,
-            ])->assertSessionHasErrors('name');
+            ->put(route('admin.categories.update', $category), $stub)
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -75,11 +75,11 @@ class UpdateCategoryTest extends TestCase
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
+        $stub = Category::factory()->raw(['name' => 1]);
 
         $this->actingAs($user)
-            ->put(route('admin.categories.update', $category), [
-                'name' => 1,
-            ])->assertSessionHasErrors('name');
+            ->put(route('admin.categories.update', $category), $stub)
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -87,11 +87,11 @@ class UpdateCategoryTest extends TestCase
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
+        $stub = Category::factory()->raw(['name' => str_repeat('a', 256)]);
 
         $this->actingAs($user)
-            ->put(route('admin.categories.update', $category), [
-                'name' => str_repeat('a', 256),
-            ])->assertSessionHasErrors('name');
+            ->put(route('admin.categories.update', $category), $stub)
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -100,10 +100,59 @@ class UpdateCategoryTest extends TestCase
         $user = User::factory()->create();
         $category = Category::factory()->create();
         $existing = Category::factory()->create();
+        $stub = Category::factory()->raw(['name' => $existing]);
 
         $this->actingAs($user)
-            ->put(route('admin.categories.update', $category), [
-                'name' => $existing,
-            ])->assertSessionHasErrors('name');
+            ->put(route('admin.categories.update', $category), $stub)
+            ->assertSessionHasErrors('name');
+    }
+
+    /** @test */
+    public function user_cant_update_category_with_existing_slug()
+    {
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+        $existing = Category::factory()->create();
+        $stub = Category::factory()->raw(['slug' => $existing]);
+
+        $this->actingAs($user)
+            ->put(route('admin.categories.update', $category), $stub)
+            ->assertSessionHasErrors('slug');
+    }
+
+    /** @test */
+    public function user_cant_update_category_without_slug()
+    {
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+        $stub = Category::factory()->raw(['slug' => null]);
+
+        $this->actingAs($user)
+            ->put(route('admin.categories.update', $category), $stub)
+            ->assertSessionHasErrors('slug');
+    }
+
+    /** @test */
+    public function user_cant_update_category_with_integer_slug()
+    {
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+        $stub = Category::factory()->raw(['slug' => 1]);
+
+        $this->actingAs($user)
+            ->put(route('admin.categories.update', $category), $stub)
+            ->assertSessionHasErrors('slug');
+    }
+
+    /** @test */
+    public function user_cant_update_category_with_slug_more_than_255_chars()
+    {
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+        $stub = Category::factory()->raw(['slug' => str_repeat('a', 256)]);
+
+        $this->actingAs($user)
+            ->put(route('admin.categories.update', $category), $stub)
+            ->assertSessionHasErrors('slug');
     }
 }

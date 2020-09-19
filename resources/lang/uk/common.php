@@ -24,6 +24,7 @@ return [
     'quantity' => 'Кількість',
     'settings' => 'Налаштування',
     'search' => 'Пошук',
+    'slug' => 'Слаг',
     'email' => 'Електронна Пошта',
     'password' => 'Пароль',
     'measure' => 'Міра',

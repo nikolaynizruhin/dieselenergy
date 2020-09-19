@@ -42,6 +42,7 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:categories',
+            'slug' => 'required|string|max:255|alpha_dash|unique:categories',
         ]);
 
         Category::create($validated);
@@ -89,6 +90,13 @@ class CategoryController extends Controller
             'name' => [
                 'required',
                 'string',
+                'max:255',
+                Rule::unique('categories')->ignore($category),
+            ],
+            'slug' => [
+                'required',
+                'string',
+                'alpha_dash',
                 'max:255',
                 Rule::unique('categories')->ignore($category),
             ],

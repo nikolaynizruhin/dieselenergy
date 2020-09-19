@@ -56,9 +56,10 @@ class CreateCategoryTest extends TestCase
     public function user_cant_create_category_without_name()
     {
         $user = User::factory()->create();
+        $category = Category::factory()->raw(['name' => null]);
 
         $this->actingAs($user)
-            ->post(route('admin.categories.store'))
+            ->post(route('admin.categories.store'), $category)
             ->assertSessionHasErrors('name');
     }
 
@@ -66,22 +67,22 @@ class CreateCategoryTest extends TestCase
     public function user_cant_create_category_with_integer_name()
     {
         $user = User::factory()->create();
+        $category = User::factory()->raw(['name' => 1]);
 
         $this->actingAs($user)
-            ->post(route('admin.categories.store'), [
-                'name' => 1,
-            ])->assertSessionHasErrors('name');
+            ->post(route('admin.categories.store'), $category)
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
     public function user_cant_create_category_with_name_more_than_255_chars()
     {
         $user = User::factory()->create();
+        $category = Category::factory()->raw(['name' => str_repeat('a', 256)]);
 
         $this->actingAs($user)
-            ->post(route('admin.products.store'), [
-                'name' => str_repeat('a', 256),
-            ])->assertSessionHasErrors('name');
+            ->post(route('admin.categories.store'), $category)
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -89,10 +90,55 @@ class CreateCategoryTest extends TestCase
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
+        $stub = Category::factory()->raw(['name' => $category->name]);
 
         $this->actingAs($user)
-            ->post(route('admin.categories.store'), [
-                'name' => $category->name,
-            ])->assertSessionHasErrors('name');
+            ->post(route('admin.categories.store'), $stub)
+            ->assertSessionHasErrors('name');
+    }
+
+    /** @test */
+    public function user_cant_create_category_with_existing_slug()
+    {
+        $user = User::factory()->create();
+        $category = Category::factory()->create();
+        $stub = Category::factory()->raw(['slug' => $category->slug]);
+
+        $this->actingAs($user)
+            ->post(route('admin.categories.store'), $stub)
+            ->assertSessionHasErrors('slug');
+    }
+
+    /** @test */
+    public function user_cant_create_category_without_slug()
+    {
+        $user = User::factory()->create();
+        $category = Category::factory()->raw(['slug' => null]);
+
+        $this->actingAs($user)
+            ->post(route('admin.categories.store'), $category)
+            ->assertSessionHasErrors('slug');
+    }
+
+    /** @test */
+    public function user_cant_create_category_with_integer_slug()
+    {
+        $user = User::factory()->create();
+        $category = Category::factory()->raw(['slug' => 1]);
+
+        $this->actingAs($user)
+            ->post(route('admin.categories.store'), $category)
+            ->assertSessionHasErrors('slug');
+    }
+
+    /** @test */
+    public function user_cant_create_category_with_slug_more_than_255_chars()
+    {
+        $user = User::factory()->create();
+        $category = Category::factory()->raw(['slug' => str_repeat('a', 256)]);
+
+        $this->actingAs($user)
+            ->post(route('admin.categories.store'), $category)
+            ->assertSessionHasErrors('slug');
     }
 }
