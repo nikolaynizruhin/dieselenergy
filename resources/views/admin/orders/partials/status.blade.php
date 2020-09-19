@@ -1,19 +1,13 @@
 @switch($order->status)
     @case($order::NEW)
-        <span class="badge badge-pill badge-primary">
-            {{ $order->status }}
-        </span>
-    @break
+        @include('admin.layouts.partials.status', ['status' => $order->status, 'type' => 'primary'])
+        @break
 
     @case($order::PENDING)
-        <span class="badge badge-pill badge-warning">
-            {{ $order->status }}
-        </span>
-    @break
+        @include('admin.layouts.partials.status', ['status' => $order->status, 'type' => 'warning'])
+        @break
 
     @case($order::DONE)
-        <span class="badge badge-pill badge-success">
-            {{ $order->status }}
-        </span>
-    @break
+        @include('admin.layouts.partials.status', ['status' => $order->status, 'type' => 'success'])
+        @break
 @endswitch

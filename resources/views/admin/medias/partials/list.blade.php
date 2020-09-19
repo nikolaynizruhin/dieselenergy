@@ -25,9 +25,7 @@
                     <td>{{ $image->name }}</td>
                     <td>
                         @if ($image->pivot->is_default)
-                            <span class="badge badge-pill badge-success">
-                                {{ __('common.default') }}
-                            </span>
+                            @include('admin.layouts.partials.status', ['status' => __('common.default'), 'type' => 'success'])
                         @endif
                     </td>
                     <td>

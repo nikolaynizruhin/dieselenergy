@@ -23,9 +23,10 @@
                 <div class="col-md-3 text-muted">{{ __('common.status') }}</div>
                 <div class="col-md-9">
                     <h5 class="m-0 p-0">
-                        <span class="badge badge-pill badge-{{ $product->is_active ? 'success' : 'danger' }}">
-                            {{ $product->is_active ? __('common.active') : __('Inactive') }}
-                        </span>
+                        @include('admin.layouts.partials.status', [
+                            'status' => $product->is_active ? __('common.active') : __('Inactive'),
+                            'type' => $product->is_active ? 'success' : 'danger',
+                        ])
                     </h5>
                 </div>
             </div>

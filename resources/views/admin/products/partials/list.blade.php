@@ -21,9 +21,10 @@
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->category->name }}</td>
                         <td>
-                            <span class="badge badge-pill badge-{{ $product->is_active ? 'success' : 'danger' }}">
-                                {{ $product->is_active ? __('common.active') : __('common.inactive') }}
-                            </span>
+                            @include('admin.layouts.partials.status', [
+                                'status' => $product->is_active ? __('common.active') : __('Inactive'),
+                                'type' => $product->is_active ? 'success' : 'danger',
+                            ])
                         </td>
                         <td>@usd($product->price)</td>
                         <td>
