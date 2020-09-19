@@ -8,6 +8,7 @@
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.name') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('common.slug') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
@@ -16,6 +17,7 @@
                 <tr>
                     <th scope="row" class="font-weight-normal">{{ $categories->firstItem() + $key }}</th>
                     <td>{{ $category->name }}</td>
+                    <td>{{ $category->slug }}</td>
                     <td>
                         <a href="{{ route('admin.categories.show', $category) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
