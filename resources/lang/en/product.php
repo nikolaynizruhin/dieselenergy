@@ -20,6 +20,7 @@ return [
     'deleted' => 'Product was deleted successfully!',
     'delete' => 'Delete Product',
     'title' => 'Product',
+    'model' => 'Model',
     'select' => 'Select a product',
     'images' => 'The product already has :count images.',
     'missing' => 'No products matched the given criteria.',
