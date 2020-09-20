@@ -22,4 +22,4 @@ Route::resource('contacts', ContactController::class)->only('store');
 Route::resource('carts', CartController::class);
 Route::resource('orders', OrderController::class)->only(['store', 'show']);
 Route::get('categories/{category:slug}/products', [ProductController::class, 'index'])->name('categories.products.index');
-Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
