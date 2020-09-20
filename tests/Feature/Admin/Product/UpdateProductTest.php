@@ -173,6 +173,112 @@ class UpdateProductTest extends TestCase
     }
 
     /** @test */
+    public function user_cant_update_product_without_model()
+    {
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->raw(['model' => null]);
+
+        $this->actingAs($user)
+            ->put(route('admin.products.update', $product), $stub)
+            ->assertSessionHasErrors('model');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_integer_model()
+    {
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->raw(['model' => 1]);
+
+        $this->actingAs($user)
+            ->put(route('admin.products.update', $product), $stub)
+            ->assertSessionHasErrors('model');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_model_more_than_255_chars()
+    {
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->raw([
+            'model' => str_repeat('a', 256),
+        ]);
+
+        $this->actingAs($user)
+            ->put(route('admin.products.update', $product), $stub)
+            ->assertSessionHasErrors('model');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_existing_model()
+    {
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $existing = Product::factory()->create();
+        $stub = Product::factory()->raw([
+            'model' => $existing->model,
+        ]);
+
+        $this->actingAs($user)
+            ->put(route('admin.products.update', $product), $stub)
+            ->assertSessionHasErrors('model');
+    }
+
+    /** @test */
+    public function user_cant_update_product_without_slug()
+    {
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->raw(['slug' => null]);
+
+        $this->actingAs($user)
+            ->put(route('admin.products.update', $product), $stub)
+            ->assertSessionHasErrors('slug');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_integer_slug()
+    {
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->raw(['slug' => 1]);
+
+        $this->actingAs($user)
+            ->put(route('admin.products.update', $product), $stub)
+            ->assertSessionHasErrors('slug');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_slug_more_than_255_chars()
+    {
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $stub = Product::factory()->raw([
+            'slug' => str_repeat('a', 256),
+        ]);
+
+        $this->actingAs($user)
+            ->put(route('admin.products.update', $product), $stub)
+            ->assertSessionHasErrors('slug');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_existing_slug()
+    {
+        $user = User::factory()->create();
+        $product = Product::factory()->create();
+        $existing = Product::factory()->create();
+        $stub = Product::factory()->raw([
+            'slug' => $existing->slug,
+        ]);
+
+        $this->actingAs($user)
+            ->put(route('admin.products.update', $product), $stub)
+            ->assertSessionHasErrors('slug');
+    }
+
+    /** @test */
     public function user_cant_update_product_without_price()
     {
         $user = User::factory()->create();

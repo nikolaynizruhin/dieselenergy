@@ -25,6 +25,8 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->sentence,
+            'model' => $this->faker->unique()->word,
+            'slug' => $this->faker->unique()->slug,
             'description' => $this->faker->paragraph,
             'price' => $this->faker->randomNumber(5),
             'is_active' => $this->faker->boolean,

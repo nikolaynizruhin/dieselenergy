@@ -43,6 +43,34 @@
                     </div>
                 </div>
 
+                <!-- Model -->
+                <div class="form-group row">
+                    <label for="inputModel" class="col-md-3 col-form-label">{{ __('product.model') }}</label>
+                    <div class="col-md-6">
+                        <input type="text" id="inputModel" class="form-control @error('model') is-invalid @enderror" name="model" value="{{ old('model', $product->model) }}" required autocomplete="model">
+
+                        @error('model')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Slug -->
+                <div class="form-group row">
+                    <label for="inputSlug" class="col-md-3 col-form-label">{{ __('common.slug') }}</label>
+                    <div class="col-md-6">
+                        <input type="text" id="inputSlug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug', $product->slug) }}" required autocomplete="slug">
+
+                        @error('slug')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
                 <!-- Status -->
                 <div class="form-group row">
                     <div class="col-md-3">{{ __('common.status') }}</div>

@@ -20,6 +20,19 @@ class UpdateProduct extends StoreProduct
                 'max:255',
                 Rule::unique('products')->ignore($this->product),
             ],
+            'model' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('products')->ignore($this->product),
+            ],
+            'slug' => [
+                'required',
+                'string',
+                'alpha_dash',
+                'max:255',
+                Rule::unique('products')->ignore($this->product),
+            ],
         ]);
     }
 }

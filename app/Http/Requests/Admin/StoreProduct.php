@@ -27,6 +27,8 @@ class StoreProduct extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|unique:products',
+            'model' => 'required|string|max:255|unique:products',
+            'slug' => 'required|string|alpha_dash|max:255|unique:products',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:1',
             'is_active' => 'boolean',
