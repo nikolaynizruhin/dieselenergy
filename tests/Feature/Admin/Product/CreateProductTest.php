@@ -204,7 +204,6 @@ class CreateProductTest extends TestCase
             ->assertSessionHasErrors('model');
     }
 
-
     /** @test */
     public function user_cant_create_product_without_slug()
     {
