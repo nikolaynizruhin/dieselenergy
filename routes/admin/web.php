@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SpecificationController;
 use App\Http\Controllers\Admin\UserController;
@@ -49,6 +50,7 @@ Route::resources([
     'orders' => OrderController::class,
     'contacts' => ContactController::class,
     'categories' => CategoryController::class,
+    'posts' => PostController::class,
 ]);
 
 Route::resource('carts', CartController::class)->except(['index', 'show']);
