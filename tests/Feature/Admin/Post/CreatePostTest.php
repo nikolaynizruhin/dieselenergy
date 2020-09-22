@@ -62,6 +62,7 @@ class CreatePostTest extends TestCase
 
         Storage::assertExists($path = 'images/'.$image->hashName());
 
+        $this->assertDatabaseHas('images', ['path' => $path]);
         $this->assertDatabaseHas('posts', $post + [
             'image_id' => Image::firstWhere('path', $path)->id,
         ]);
@@ -199,6 +200,17 @@ class CreatePostTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.posts.store'), $post)
             ->assertSessionHasErrors('body');
+    }
+
+    /** @test */
+    public function user_cant_create_post_without_image()
+    {
+        $user = User::factory()->create();
+        $post = Post::factory()->raw(['image' => null]);
+
+        $this->actingAs($user)
+            ->post(route('admin.posts.store'), $post)
+            ->assertSessionHasErrors('image');
     }
 
     /** @test */

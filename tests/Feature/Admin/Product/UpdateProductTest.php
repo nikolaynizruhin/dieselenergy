@@ -43,11 +43,10 @@ class UpdateProductTest extends TestCase
     public function guest_cant_update_product()
     {
         $product = Product::factory()->create();
+        $stub = Product::factory()->raw();
 
-        $this->put(route('admin.products.update', $product), [
-            'name' => $this->faker->sentence,
-            'description' => $this->faker->paragraph,
-        ])->assertRedirect(route('admin.login'));
+        $this->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.login'));
     }
 
     /** @test */

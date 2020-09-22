@@ -35,11 +35,11 @@ class StorePost extends FormRequest
     }
 
     /**
-     * Get image.
+     * Create an image.
      *
      * @return \App\Models\Image
      */
-    public function getImage()
+    public function createImage()
     {
         return Image::create([
             'path' => $this->file('image')->store('images'),
@@ -51,10 +51,10 @@ class StorePost extends FormRequest
      *
      * @return array
      */
-    public function getPostAttributes()
+    public function getAttributes()
     {
         return Arr::except($this->validated(), 'image') + [
-            'image_id' => $this->getImage()->id,
+            'image_id' => $this->createImage()->id,
         ];
     }
 }

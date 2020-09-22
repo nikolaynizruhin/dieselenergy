@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePost;
+use App\Http\Requests\Admin\UpdatePost;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,7 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
-        Post::create($request->getPostAttributes());
+        Post::create($request->getAttributes());
 
         return redirect()
             ->route('admin.posts.index')
@@ -66,19 +67,23 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\UpdatePost  $request
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(UpdatePost $request, Post $post)
     {
-        //
+        $post->update($request->getAttributes());
+
+        return redirect()
+            ->route('admin.posts.index')
+            ->with('status', trans('post.updated'));
     }
 
     /**
