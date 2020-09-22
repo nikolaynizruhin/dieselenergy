@@ -56,7 +56,7 @@ class CreatePostTest extends TestCase
 
         $this->actingAs($user)
             ->post(route('admin.posts.store'), $post + [
-                'image' => $image
+                'image' => $image,
             ])->assertRedirect(route('admin.posts.index'))
             ->assertSessionHas('status', trans('post.created'));
 
@@ -178,7 +178,6 @@ class CreatePostTest extends TestCase
             ->post(route('admin.posts.store'), $stub)
             ->assertSessionHasErrors('slug');
     }
-
 
     /** @test */
     public function user_cant_create_post_without_body()
