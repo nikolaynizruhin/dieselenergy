@@ -19,6 +19,7 @@ return [
     'detach' => 'Detach',
     'default' => 'Default',
     'feature' => 'Feature',
+    'title' => 'Title',
     'is_featured' => 'Featured',
     'quantity' => 'Quantity',
     'settings' => 'Settings',
