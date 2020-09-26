@@ -59,4 +59,10 @@
             {{ __('contact.plural') }}
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link @if (request()->is('admin/posts')) text-dark @endif d-flex align-items-center" href="{{ route('admin.posts.index') }}">
+            @include('layouts.partials.icon', ['name' => 'file-text', 'classes' => 'mr-2', 'width' => '1.1em', 'height' => '1.1em'])
+            {{ __('post.plural') }}
+        </a>
+    </li>
 </ul>

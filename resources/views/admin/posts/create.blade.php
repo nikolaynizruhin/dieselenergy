@@ -6,7 +6,7 @@
             {{ __('post.add') }}
         </div>
 
-        <form action="{{ route('admin.posts.store') }}" method="POST">
+        <form action="{{ route('admin.posts.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
             <div class="card-body">
 
@@ -31,16 +31,16 @@
                         <input type="text" id="inputSlug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') }}" required autocomplete="slug">
 
                         @error('slug')
-                        <div class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </div>
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
                         @enderror
                     </div>
                 </div>
 
                 <!-- Image -->
                 <div class="form-group row">
-                    <label class="col-md-3 col-form-label">{{ __('common.image') }}</label>
+                    <label class="col-md-3 col-form-label">{{ __('image.title') }}</label>
                     <div class="col-md-6">
                         <div class="custom-file">
                             <input type="file" id="inputImage" class="custom-file-input @error('image') is-invalid @enderror" name="image" accept="image/*" required>

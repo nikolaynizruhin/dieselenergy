@@ -18,6 +18,7 @@ return [
     'body' => 'Body',
     'delete' => 'Delete Post',
     'title' => 'Post',
+    'excerpt' => 'Excerpt',
     'update' => 'Update Post',
     'missing' => 'No posts matched the given criteria.',
     'plural' => 'Posts',
