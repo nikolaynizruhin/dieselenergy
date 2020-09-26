@@ -6,7 +6,7 @@
             <div class="card-deck">
                 @foreach ($chunkedPosts as $post)
                     <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="{{ asset('storage/'.$post->image->path) }}" class="card-img-top" alt="{{ $post->title }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <p class="card-text">{{ $post->excerpt }}</p>

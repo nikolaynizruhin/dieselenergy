@@ -25,6 +25,16 @@ class ImageTest extends TestCase
     }
 
     /** @test */
+    public function it_has_many_posts()
+    {
+        $image = Image::factory()
+            ->hasPosts()
+            ->create();
+
+        $this->assertInstanceOf(Collection::class, $image->posts);
+    }
+
+    /** @test */
     public function it_should_remove_file_after_image_deleted()
     {
         Storage::fake();

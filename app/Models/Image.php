@@ -32,6 +32,14 @@ class Image extends Model
     }
 
     /**
+     * Get the posts for the image.
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
      * Get the name of the image file.
      *
      * @return string
