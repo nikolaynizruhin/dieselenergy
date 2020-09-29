@@ -11,11 +11,11 @@
                 <h1 class="font-weight-bold">Energy Power</h1>
                 <h5 class="text-primary">the energy everywhere</h5>
                 <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, doloremque eius enim fugit possimus soluta unde ut voluptas? Aperiam beatae debitis distinctio, dolorem error facere inventore itaque neque sit tempora.</p>
-                <button type="button" class="btn btn-primary btn-lg mr-2">Contact Us</button>
+                <a href="#contact" role="button" class="btn btn-primary btn-lg mr-2">Contact Us</a>
                 <button type="button" class="btn btn-outline-secondary btn-lg">Shop</button>
             </div>
             <div class="col-12 col-md d-none d-md-block">
-                <img src="{{ asset('images/wind-turbine.svg') }}" alt="" width="100%">
+                <img src="{{ asset('images/wind-turbine.svg') }}" alt="Wind turbine" width="100%">
             </div>
         </div>
     </div>
@@ -158,7 +158,7 @@
     </div>
 </section>
 
-<section class="bg-light">
+<section id="faq" class="bg-light">
     <div class="container">
         <h2>Frequently Asked Questions</h2>
         <hr class="pb-2 pb-md-4">

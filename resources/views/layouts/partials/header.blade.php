@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white">
     <div class="container-lg">
-        <a class="navbar-brand d-flex" href="{{ url('/') }}">
+        <a class="navbar-brand d-flex" href="{{ route('home') }}">
             @include('layouts.partials.icon', ['name' => 'intersect', 'classes' => 'mr-3 text-primary', 'width' => '1.5em', 'height' => '1.5em'])
             {{ config('app.name') }}
         </a>
@@ -21,19 +21,19 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+                    <a class="nav-link" href="{{ route('home').'#services' }}">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Blog</a>
+                    <a class="nav-link" href="{{ route('posts.index') }}">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contacts</a>
+                    <a class="nav-link" href="{{ route('home').'#contact' }}">Contacts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
+                    <a class="nav-link" href="{{ route('home').'#numbers' }}">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">FAQ</a>
+                    <a class="nav-link" href="{{ route('home').'#faq' }}">FAQ</a>
                 </li>
             </ul>
         </div>
