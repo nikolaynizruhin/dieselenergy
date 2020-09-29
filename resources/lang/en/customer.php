@@ -18,6 +18,7 @@ return [
     'deleted' => 'Customer was deleted successfully!',
     'delete' => 'Delete Customer',
     'name' => 'Name',
+    'missing' => 'No customers matched the given criteria.',
     'title' => 'Customer',
     'plural' => 'Customers',
     'select' => 'Select a customer',
