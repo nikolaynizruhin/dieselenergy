@@ -12,15 +12,15 @@ return [
     |
     */
 
-    'title' => 'Cart',
     'add' => 'Attach Product',
     'added' => 'Product was added to cart successfully!',
-    'update' => 'Update Cart',
-    'delete' => 'Detach Product',
-    'ordered_by' => 'Ordered By',
-    'missing' => 'No products matched the given criteria.',
     'created' => 'Product was attached successfully!',
-    'updated' => 'Cart was updated successfully!',
+    'delete' => 'Detach Product',
     'deleted' => 'Product was detached successfully!',
+    'missing' => 'No products matched the given criteria.',
+    'ordered_by' => 'Ordered By',
+    'title' => 'Cart',
+    'update' => 'Update Cart',
+    'updated' => 'Cart was updated successfully!',
 
 ];

@@ -12,12 +12,12 @@ return [
     |
     */
 
-    'title' => 'Specification',
     'add' => 'Attach Attribute',
-    'update' => 'Update Attribute',
-    'delete' => 'Detach Attribute',
     'created' => 'Attribute was attached successfully!',
-    'updated' => 'Specification was updated successfully!',
+    'delete' => 'Detach Attribute',
     'deleted' => 'Attribute was detached successfully!',
+    'title' => 'Specification',
+    'update' => 'Update Attribute',
+    'updated' => 'Specification was updated successfully!',
 
 ];

@@ -13,15 +13,15 @@ return [
     */
 
     'add' => 'Add Customer',
-    'details' => 'Customer Details',
     'created' => 'Customer was created successfully!',
-    'deleted' => 'Customer was deleted successfully!',
     'delete' => 'Delete Customer',
-    'name' => 'Name',
+    'deleted' => 'Customer was deleted successfully!',
+    'details' => 'Customer Details',
     'missing' => 'No customers matched the given criteria.',
-    'title' => 'Customer',
+    'name' => 'Name',
     'plural' => 'Customers',
     'select' => 'Select a customer',
+    'title' => 'Customer',
     'update' => 'Update Customer',
     'updated' => 'Customer was updated successfully!',
 

@@ -12,16 +12,16 @@ return [
     |
     */
 
-    'title' => 'Order',
     'add' => 'Add Order',
-    'details' => 'Order Details',
-    'update' => 'Update Order',
-    'delete' => 'Delete Order',
-    'plural' => 'Orders',
-    'created' => 'Order was created successfully!',
-    'updated' => 'Order was updated successfully!',
-    'deleted' => 'Order was deleted successfully!',
-    'missing' => 'No orders matched the given criteria.',
     'confirm_delete' => 'Are you sure you want to delete an order?',
+    'created' => 'Order was created successfully!',
+    'delete' => 'Delete Order',
+    'deleted' => 'Order was deleted successfully!',
+    'details' => 'Order Details',
+    'missing' => 'No orders matched the given criteria.',
+    'plural' => 'Orders',
+    'title' => 'Order',
+    'update' => 'Update Order',
+    'updated' => 'Order was updated successfully!',
 
 ];

@@ -12,8 +12,8 @@ return [
     |
     */
 
-    'title' => 'Dashboard',
     'sold_product' => 'Sold Products',
+    'title' => 'Dashboard',
     'total' => [
         'order' => 'Total Orders',
         'customer' => 'Total Customers',

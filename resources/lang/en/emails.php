@@ -13,8 +13,8 @@ return [
     */
 
     'hello' => 'Hello!',
-    'whoops' => 'Whoops!',
     'regards' => 'Regards',
+    'whoops' => 'Whoops!',
 
     'reset_password' => [
         'subject' => 'Reset Password Notification',

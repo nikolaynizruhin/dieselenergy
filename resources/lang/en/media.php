@@ -12,12 +12,12 @@ return [
     |
     */
 
-    'title' => 'Media',
     'add' => 'Attach Image',
-    'update' => 'Update Media',
-    'delete' => 'Detach Image',
     'created' => 'Image was attached successfully!',
-    'updated' => 'Media was updated successfully!',
+    'delete' => 'Detach Image',
     'deleted' => 'Image was detached successfully!',
+    'title' => 'Media',
+    'update' => 'Update Media',
+    'updated' => 'Media was updated successfully!',
 
 ];

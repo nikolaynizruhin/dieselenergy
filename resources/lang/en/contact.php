@@ -13,18 +13,18 @@ return [
     */
 
     'add' => 'Add Contact',
+    'confirm_delete' => 'Are you sure you want to delete a contact?',
     'created' => 'Contact was created successfully!',
-    'subject' => 'Subject',
+    'delete' => 'Delete Contact',
+    'deleted' => 'Contact was deleted successfully!',
     'details' => 'Contact Details',
     'message' => 'Message',
-    'delete' => 'Delete Contact',
-    'title' => 'Contact',
-    'update' => 'Update Contact',
     'missing' => 'No contacts matched the given criteria.',
     'plural' => 'Contacts',
     'select' => 'Select a contact',
+    'subject' => 'Subject',
+    'title' => 'Contact',
+    'update' => 'Update Contact',
     'updated' => 'Contact was updated successfully!',
-    'deleted' => 'Contact was deleted successfully!',
-    'confirm_delete' => 'Are you sure you want to delete a contact?',
 
 ];

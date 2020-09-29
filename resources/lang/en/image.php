@@ -19,8 +19,8 @@ return [
     'deleted' => 'Image was deleted successfully!',
     'missing' => 'No images matched the given criteria.',
     'plural' => 'Images',
-    'title' => 'Image',
     'select' => 'Select an image',
+    'title' => 'Image',
     'update' => 'Update Image',
 
 ];

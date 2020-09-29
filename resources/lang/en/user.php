@@ -13,18 +13,18 @@ return [
     */
 
     'add' => 'Add User',
-    'details' => 'User Details',
-    'update' => 'Update User',
-    'plural' => 'Users',
-    'name' => 'Name',
-    'delete' => 'Delete User',
     'created' => 'User was created successfully!',
-    'updated' => 'User was updated successfully!',
+    'delete' => 'Delete User',
     'deleted' => 'User was deleted successfully!',
+    'details' => 'User Details',
+    'name' => 'Name',
     'password' => [
         'updated' => 'User password was updated successfully!',
         'update' => 'Update Password',
         'confirm' => 'Password Confirmation',
     ],
+    'plural' => 'Users',
+    'update' => 'Update User',
+    'updated' => 'User was updated successfully!',
 
 ];

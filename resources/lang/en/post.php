@@ -13,17 +13,17 @@ return [
     */
 
     'add' => 'Add Post',
-    'created' => 'Post was created successfully!',
-    'details' => 'Post Details',
     'body' => 'Body',
+    'confirm_delete' => 'Are you sure you want to delete a contact?',
+    'created' => 'Post was created successfully!',
     'delete' => 'Delete Post',
-    'title' => 'Post',
+    'deleted' => 'Post was deleted successfully!',
+    'details' => 'Post Details',
     'excerpt' => 'Excerpt',
-    'update' => 'Update Post',
     'missing' => 'No posts matched the given criteria.',
     'plural' => 'Posts',
+    'title' => 'Post',
+    'update' => 'Update Post',
     'updated' => 'Post was updated successfully!',
-    'deleted' => 'Post was deleted successfully!',
-    'confirm_delete' => 'Are you sure you want to delete a contact?',
 
 ];

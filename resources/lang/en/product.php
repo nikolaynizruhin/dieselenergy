@@ -13,17 +13,17 @@ return [
     */
 
     'add' => 'Add Product',
-    'plural' => 'Products',
     'attach' => 'Attach Product',
     'created' => 'Product was created successfully!',
-    'details' => 'Product Details',
-    'deleted' => 'Product was deleted successfully!',
     'delete' => 'Delete Product',
-    'title' => 'Product',
-    'model' => 'Model',
-    'select' => 'Select a product',
+    'deleted' => 'Product was deleted successfully!',
+    'details' => 'Product Details',
     'images' => 'The product already has :count images.',
     'missing' => 'No products matched the given criteria.',
+    'model' => 'Model',
+    'plural' => 'Products',
+    'select' => 'Select a product',
+    'title' => 'Product',
     'update' => 'Update Product',
     'updated' => 'Product was updated successfully!',
 

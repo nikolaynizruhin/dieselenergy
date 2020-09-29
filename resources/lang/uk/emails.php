@@ -14,8 +14,8 @@ return [
     */
 
     'hello' => 'Вітаю!',
-    'whoops' => 'Упс!',
     'regards' => 'З повагою',
+    'whoops' => 'Упс!',
 
     'reset_password' => [
         'subject' => 'Повідомлення Про Скидання Пароля',

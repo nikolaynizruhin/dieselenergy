@@ -12,16 +12,16 @@ return [
     |
     */
 
-    'title' => 'Category',
     'add' => 'Add Category',
+    'created' => 'Category was created successfully!',
+    'delete' => 'Delete Category',
+    'deleted' => 'Category was deleted successfully!',
     'details' => 'Category Details',
     'empty' => 'No Categories',
-    'update' => 'Update Category',
-    'delete' => 'Delete Category',
     'missing' => 'No brands matched the given criteria.',
     'plural' => 'Categories',
-    'created' => 'Category was created successfully!',
+    'title' => 'Category',
+    'update' => 'Update Category',
     'updated' => 'Category was updated successfully!',
-    'deleted' => 'Category was deleted successfully!',
 
 ];

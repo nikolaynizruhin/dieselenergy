@@ -15,12 +15,12 @@ return [
     'add' => 'Add Brand',
     'created' => 'Brand was created successfully!',
     'delete' => 'Delete Brand',
-    'title' => 'Brand',
-    'update' => 'Update Brand',
+    'deleted' => 'Brand was deleted successfully!',
     'missing' => 'No brands matched the given criteria.',
     'plural' => 'Brands',
     'select' => 'Select a brand',
+    'title' => 'Brand',
+    'update' => 'Update Brand',
     'updated' => 'Brand was updated successfully!',
-    'deleted' => 'Brand was deleted successfully!',
 
 ];
