@@ -20,8 +20,8 @@
                     </p>
 
                     <div class="form-group">
-                        <label for="exampleInputEmail1" class="sr-only">Пошук</label>
-                        <input type="text" name="search" value="{{ request('search') }}" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Введіть...">
+                        <label for="inputSearch" class="sr-only">Пошук</label>
+                        <input type="text" name="search" value="{{ request('search') }}" class="form-control form-control-sm" id="inputSearch" aria-describedby="emailHelp" placeholder="Введіть...">
                     </div>
 
                     <p class="mb-1 font-weight-bold text-uppercase letter-spacing text-gray-500">
@@ -29,8 +29,8 @@
                     </p>
 
                     <div class="form-group">
-                        <label for="exampleFormControlSelect" class="sr-only">Sort</label>
-                        <select class="form-control form-control-sm" name="sort" id="exampleFormControlSelect">
+                        <label for="selectSort" class="sr-only">Sort</label>
+                        <select class="form-control form-control-sm" name="sort" id="selectSort">
                             <option value="asc" @if (request('sort') == 'asc') selected @endif>Назва (А - Я)</option>
                             <option value="desc" @if (request('sort') == 'desc') selected @endif>Назва (Я - А)</option>
                         </select>
