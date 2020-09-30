@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container py-5">
-        <div class="row mt-n3 mb-4">
-            <div class="col letter-spacing d-flex align-items-center" style="color: #adb5bd; font-size: 16px">
+        <div class="row mt-n3 mb-4 text-gray-500">
+            <div class="col letter-spacing d-flex align-items-center">
                 Магазин
                 @include('layouts.partials.icon', ['name' => 'chevron-right', 'classes' => 'mx-2', 'width' => '0.9em', 'height' => '0.9em'])
                 {{ $product->category->name }}
