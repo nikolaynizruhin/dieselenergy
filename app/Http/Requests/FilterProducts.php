@@ -30,10 +30,10 @@ class FilterProducts extends FormRequest
     /**
      * Get sort column.
      *
-     * @param  string|null  $default
-     * @return string|null
+     * @param  string  $default
+     * @return string
      */
-    public function column($default = null)
+    public function column($default = 'name')
     {
         return $this->has('sort')
             ? ltrim($this->sort, '-')

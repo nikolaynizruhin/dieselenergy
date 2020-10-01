@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FilterProducts;
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -25,7 +24,7 @@ class ProductController extends Controller
             ->withFeatured($category)
             ->filter($request->query('filter'))
             ->search('name', $request->query('search'))
-            ->orderBy($request->column('name'), $request->direction('asc'))
+            ->orderBy($request->column(), $request->direction())
             ->paginate(9);
 
         return view('categories.products.index', compact('products', 'category'));
