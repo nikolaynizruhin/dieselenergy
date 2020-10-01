@@ -17,23 +17,21 @@ class SearchProductsTest extends TestCase
     {
         $generators = Category::factory()->create();
 
-        [$patrol, $diesel, $waterPump] = Product::factory()
-            ->count(3)
+        [$patrol, $diesel] = Product::factory()
+            ->count(2)
             ->active()
             ->state(new Sequence(
                 ['name' => 'Patrol Generator'],
                 ['name' => 'Diesel Generator'],
-                ['name' => 'Water Pump'],
-            ))
-            ->create(['category_id' => $generators->id]);
+            ))->create(['category_id' => $generators->id]);
 
         $this->get(route('categories.products.index', [
             'category' => $generators,
-            'search' => 'generator',
+            'search' => 'patrol',
         ]))->assertSuccessful()
             ->assertViewIs('categories.products.index')
             ->assertViewHas('products')
-            ->assertSeeInOrder([$diesel->name, $patrol->name])
-            ->assertDontSee($waterPump->name);
+            ->assertSee($patrol->name)
+            ->assertDontSee($diesel->name);
     }
 }

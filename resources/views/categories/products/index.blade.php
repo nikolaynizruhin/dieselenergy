@@ -31,8 +31,8 @@
                     <div class="form-group">
                         <label for="selectSort" class="sr-only">Sort</label>
                         <select class="form-control form-control-sm" name="sort" id="selectSort">
-                            <option value="asc" @if (request('sort') == 'asc') selected @endif>Назва (А - Я)</option>
-                            <option value="desc" @if (request('sort') == 'desc') selected @endif>Назва (Я - А)</option>
+                            <option value="name" @if (request('sort') === 'name') selected @endif>Назва (А - Я)</option>
+                            <option value="-name" @if (request('sort') === '-name') selected @endif>Назва (Я - А)</option>
                         </select>
                     </div>
 

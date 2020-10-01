@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FilterProducts;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -12,11 +13,11 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\FilterProducts  $request
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Category $category)
+    public function index(FilterProducts $request, Category $category)
     {
         $products = $category
             ->products()
@@ -24,7 +25,7 @@ class ProductController extends Controller
             ->withFeatured($category)
             ->filter($request->query('filter'))
             ->search('name', $request->query('search'))
-            ->orderBy('name', $request->query('sort', 'asc'))
+            ->orderBy($request->column('name'), $request->direction('asc'))
             ->paginate(9);
 
         return view('categories.products.index', compact('products', 'category'));
