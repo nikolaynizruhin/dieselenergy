@@ -14,7 +14,11 @@
                     <div class="card shadow">
                         <img src="{{ asset('storage/'.$post->image->path) }}" class="card-img-top" alt="{{ $post->title }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $post->title }}</h5>
+                            <h5 class="card-title">
+                                <a href="{{ route('posts.show', $post) }}" class="text-decoration-none stretched-link">
+                                    {{ $post->title }}
+                                </a>
+                            </h5>
                             <p class="card-text">{{ $post->excerpt }}</p>
                         </div>
                         <div class="card-footer bg-white border-top-0">
