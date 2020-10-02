@@ -34,12 +34,12 @@ class Product extends Model
      * Scope a query to a filter term.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  null|array  $filter
+     * @param  \Illuminate\Support\Collection  $filters
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeFilter($query, $filter)
+    public function scopeFilter($query, $filters)
     {
-        collect($filter)->each(fn ($values, $id) => $query
+        $filters->each(fn ($values, $id) => $query
             ->whereHas('attributes', fn (Builder $query) => $query
                 ->where('attribute_id', $id)
                 ->whereIn('value', $values)

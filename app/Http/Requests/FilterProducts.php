@@ -28,6 +28,16 @@ class FilterProducts extends FormRequest
     }
 
     /**
+     * Get product filters.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function filters()
+    {
+        return collect($this->filter);
+    }
+
+    /**
      * Get sort column.
      *
      * @param  string  $default
