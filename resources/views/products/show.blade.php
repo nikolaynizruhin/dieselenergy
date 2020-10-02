@@ -20,15 +20,11 @@
                         <li data-target="#carouselIndicators" data-slide-to="2"></li>
                     </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="d-block w-100" alt="...">
-                        </div>
+                        @foreach($product->images as $image)
+                            <div class="carousel-item active">
+                                <img src="{{ asset('/storage/'.$image->path) }}" class="d-block w-100" alt="{{ $product->name }}">
+                            </div>
+                        @endforeach
                     </div>
                     <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
