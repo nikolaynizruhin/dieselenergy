@@ -22,8 +22,8 @@ class ProductController extends Controller
             ->products()
             ->active()
             ->withFeatured($category)
-            ->filter($request->query('filter'))
-            ->search('name', $request->query('search'))
+            ->filter($request->filter)
+            ->search('name', $request->search)
             ->orderBy($request->column(), $request->direction())
             ->paginate(9);
 
