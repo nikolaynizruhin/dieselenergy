@@ -2,10 +2,12 @@
 
 @section('content')
     <div class="container py-5">
-        <div class="col d-flex justify-content-center flex-column mb-5">
-            <div class="text-center">
-                <h2>From The Blog</h2>
-                <h5 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+        <div class="row">
+            <div class="col d-flex justify-content-center flex-column mb-5">
+                <div class="text-center">
+                    <h2>From The Blog</h2>
+                    <h5 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+                </div>
             </div>
         </div>
         @forelse ($posts->chunk(3) as $chunkedPosts)
