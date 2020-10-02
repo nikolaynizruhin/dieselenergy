@@ -21,7 +21,7 @@
                             @foreach($items as $key => $item)
                                 <tr>
                                     <td class="align-middle @if ($loop->first) border-top-0 @endif">
-                                        <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" width="100" alt="...">
+                                        <img src="{{ asset('storage/'.$item->image) }}" width="100" alt="...">
                                     </td>
                                     <td class="align-middle @if ($loop->first) border-top-0 @endif">
                                         <span class="font-weight-bold">{{ $item->name }}</span>

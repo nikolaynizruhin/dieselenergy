@@ -49,7 +49,7 @@
                         @foreach ($chunkedProducts as $product)
                             <div class="col mb-4">
                                 <div class="card">
-                                    <img src="{{ asset('/storage/images/cXeaYwhazLxNFIyz7dqcCzrXNuaGrbSYKYpPbavq.jpeg') }}" class="card-img-top" alt="...">
+                                    <img src="{{ asset('storage/'.$product->defaultImage()->path) }}" class="card-img-top" alt="...">
                                     <div class="card-body mb-n3">
                                         <h6 class="card-title">
                                             <a href="{{ route('products.show', $product) }}" class="text-decoration-none text-body">
