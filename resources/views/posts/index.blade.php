@@ -30,8 +30,9 @@
         @empty
             <p>No posts matched the given criteria.</p>
         @endforelse
+        <br>
         <div class="row">
-            <div class="col offset-md-3 offset-lg-2">
+            <div class="col">
                 {{ $posts->links('layouts.partials.pagination') }}
             </div>
         </div>
