@@ -16,21 +16,19 @@
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        @include('admin.layouts.partials.header')
+    @include('admin.layouts.partials.header')
 
-        <main class="py-4">
-            <div class="container-lg">
-                <div class="row">
-                    <div class="col-md-2">
-                        @include('admin.layouts.partials.sidebar')
-                    </div>
-                    <div class="col-md-10">
-                        @yield('content')
-                    </div>
+    <main class="py-4">
+        <div class="container-lg">
+            <div class="row">
+                <div class="col-md-2">
+                    @include('admin.layouts.partials.sidebar')
+                </div>
+                <div class="col-md-10">
+                    @yield('content')
                 </div>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
 </body>
 </html>

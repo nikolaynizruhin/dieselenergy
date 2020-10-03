@@ -1,4 +1,4 @@
-<footer class="bg-dark" style="padding: 50px 0">
+<footer class="bg-dark mt-auto" style="padding: 50px 0">
     <div class="container">
         <div class="row mb-4 justify-content-center">
             <div class="col-12 col-lg-8">

@@ -16,26 +16,24 @@
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <main class="py-5">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-5">
+    <main class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
 
-                        <h3 class="text-center my-5">
-                            @include('layouts.partials.icon', ['name' => 'intersect', 'classes' => 'mr-3 text-primary', 'width' => '1.5em', 'height' => '1.5em'])
-                            {{ config('app.name') }}
-                        </h3>
+                    <h3 class="text-center my-5">
+                        @include('layouts.partials.icon', ['name' => 'intersect', 'classes' => 'mr-3 text-primary', 'width' => '1.5em', 'height' => '1.5em'])
+                        {{ config('app.name') }}
+                    </h3>
 
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                @yield('content')
-                            </div>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            @yield('content')
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
 </body>
 </html>
