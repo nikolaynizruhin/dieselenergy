@@ -3,6 +3,7 @@
 namespace Tests\Feature\Category;
 
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -42,6 +43,7 @@ class OrderProductsTest extends TestCase
         [$this->patrol, $this->diesel] = Product::factory()
             ->count(2)
             ->active()
+            ->hasAttached(Image::factory(), ['is_default' => 1])
             ->state(new Sequence(
                 ['name' => 'Patrol Generator'],
                 ['name' => 'Diesel Generator'],

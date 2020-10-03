@@ -4,6 +4,7 @@ namespace Tests\Feature\Category;
 
 use App\Models\Attribute;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,6 +23,7 @@ class FilterProductsTest extends TestCase
         [$patrol, $diesel, $waterPump] = Product::factory()
             ->count(3)
             ->active()
+            ->hasAttached(Image::factory(), ['is_default' => 1])
             ->state(new Sequence(
                 ['name' => 'Patrol Generator'],
                 ['name' => 'Diesel Generator'],

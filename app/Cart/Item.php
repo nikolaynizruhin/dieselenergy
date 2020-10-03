@@ -42,7 +42,7 @@ class Item
     /**
      * Item image.
      *
-     * @var int
+     * @var string
      */
     public $image;
 

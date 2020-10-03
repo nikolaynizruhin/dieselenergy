@@ -3,6 +3,7 @@
 namespace Tests\Feature\Category;
 
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,6 +21,7 @@ class ReadProductsTest extends TestCase
         [$generator, $waterPump] = Product::factory()
             ->count(2)
             ->active()
+            ->hasAttached(Image::factory(), ['is_default' => 1])
             ->state(new Sequence(
                 ['category_id' => $generators->id],
                 ['category_id' => $waterPumps->id],
@@ -40,6 +42,7 @@ class ReadProductsTest extends TestCase
 
         [$generator, $waterPump] = Product::factory()
             ->count(2)
+            ->hasAttached(Image::factory(), ['is_default' => 1])
             ->state(new Sequence(
                 ['is_active' => true],
                 ['is_active' => false],
