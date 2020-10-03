@@ -1,7 +1,7 @@
 <footer class="bg-dark" style="padding: 50px 0">
     <div class="container">
         <div class="row mb-4 justify-content-center">
-            <div class="col-12 col-md-10 col-lg-7">
+            <div class="col-12 col-lg-8">
                 <div class="row text-center">
                     <div class="col-12 col-md mb-2 mb-md-0"><a href="#" class="text-gray-400">Shop</a></div>
                     <div class="col-12 col-md mb-2 mb-md-0"><a href="{{ route('home').'#services' }}" class="text-gray-400">Services</a></div>
@@ -9,6 +9,7 @@
                     <div class="col-12 col-md mb-2 mb-md-0"><a href="{{ route('home').'#contact' }}" class="text-gray-400">Contacts</a></div>
                     <div class="col-12 col-md mb-2 mb-md-0"><a href="{{ route('home').'#numbers' }}" class="text-gray-400">About Us</a></div>
                     <div class="col-12 col-md mb-2 mb-md-0"><a href="{{ route('home').'#faq' }}" class="text-gray-400">FAQ</a></div>
+                    <div class="col-12 col-md mb-2 mb-md-0"><a href="{{ route('carts.index') }}" class="text-gray-400">Cart</a></div>
                 </div>
             </div>
         </div>
