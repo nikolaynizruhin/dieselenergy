@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section id="hero" class="position-relative">
+<section id="hero" class="position-relative py-7">
     <div class="dots dots-left position-absolute d-none d-sm-block"></div>
     <div class="dots dots-right position-absolute"></div>
 
@@ -21,7 +21,7 @@
     </div>
 </section>
 
-<section id="numbers" class="bg-light">
+<section id="numbers" class="bg-light py-6">
     <div class="container">
         <div class="row">
             <div class="col d-flex justify-content-center flex-column">
@@ -53,7 +53,7 @@
     </div>
 </section>
 
-<section id="services" class="position-relative">
+<section id="services" class="position-relative py-6">
     <div class="dots dots-left position-absolute d-none d-sm-block"></div>
     <div class="dots dots-right position-absolute"></div>
 
@@ -118,7 +118,7 @@
     </div>
 </section>
 
-<section id="companies">
+<section id="companies" class="py-6">
     <div class="container">
         <div class="row mb-4">
             <div class="col text-center">
@@ -158,7 +158,7 @@
     </div>
 </section>
 
-<section id="faq" class="bg-light">
+<section id="faq" class="bg-light py-6">
     <div class="container">
         <h2>Frequently Asked Questions</h2>
         <hr class="pb-2 pb-md-4">
@@ -186,7 +186,7 @@
     </div>
 </section>
 
-<section id="contact" class="position-relative">
+<section id="contact" class="position-relative py-6">
     <div class="dots dots-left position-absolute d-none d-sm-block"></div>
     <div class="dots dots-right position-absolute"></div>
 
