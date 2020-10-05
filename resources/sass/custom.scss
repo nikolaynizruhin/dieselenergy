@@ -1,84 +1,74 @@
-// Sections
-#hero {
-    .dots-left {
-        width: 200px;
-        height: 300px;
-        top: 20px;
-        left: 70px;
-    }
-
-    .dots-right {
-        @media (max-width: 768px) {
-            top: 250px;
-            height: 120px;
-            right: 0;
-        }
-
-        width: 200px;
-        height: 300px;
-        top: 250px;
-        right: 70px;
-    }
-}
-
-#services {
-    .dots-left {
-        width: 150px;
-        height: 250px;
-        top: 80px;
-        left: 0;
-    }
-
-    .dots-right {
-        width: 150px;
-        height: 250px;
-        top: 290px;
-        right: 0;
-    }
-}
-
-#contact {
-    .dots-left {
-        width: 200px;
-        height: 400px;
-        top: 60px;
-        left: 0;
-    }
-
-    .dots-right {
-        width: 200px;
-        height: 400px;
-        top: 450px;
-        right: 0;
-    }
-}
-
-#companies {
-    .box {
-        margin: 0.1rem;
-    }
-}
-
-#numbers {
-    .box {
-        @media (max-width: 768px) {
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        @media (min-width: 768px) {
-            border-right: 1px solid #dee2e6;
-        }
-    }
-}
-
 .dots {
     background-image: radial-gradient(#e9ecef 2px, transparent 2px);
     background-size: 20px 20px;
 }
 
-// Utilities
+.divide-x > * + * {
+    border-top: 1px solid #dee2e6;
+}
+
+.divide-x-md-0 > * + * {
+    @media (min-width: 768px) {
+        border-top: none;
+    }
+}
+
+.divide-y-md > * + * {
+    @media (min-width: 768px) {
+        border-left: 1px solid #dee2e6;
+    }
+}
+
+.height-64 {
+    height: 16rem;
+}
+
+.height-72 {
+    height: 18rem;
+}
+
+.height-80 {
+    height: 22rem;
+}
+
+.width-40 {
+    width: 10rem;
+}
+
+.width-48 {
+    width: 12rem;
+}
+
+.top-0	{
+    top: 0;
+}
+
+.right-0 {
+    right: 0;
+}
+
+.bottom-0 {
+    bottom: 0;
+}
+
+.left-0	{
+    left: 0;
+}
+
 .letter-spacing {
     letter-spacing: 1px;
+}
+
+.mb-6 {
+    margin-bottom: 5rem !important;
+}
+
+.mt-6 {
+    margin-top: 5rem !important;
+}
+
+.mt-7 {
+    margin-top: 10rem !important;
 }
 
 .py-6 {

@@ -2,8 +2,8 @@
 
 @section('content')
 <section id="hero" class="position-relative py-7">
-    <div class="dots dots-left position-absolute d-none d-sm-block"></div>
-    <div class="dots dots-right position-absolute"></div>
+    <div class="dots ml-sm-5 mt-5 top-0 left-0 height-72 width-48 position-absolute"></div>
+    <div class="dots mr-sm-5 mb-5 bottom-0 right-0 height-72 width-48 position-absolute"></div>
 
     <div class="container">
         <div class="row">
@@ -32,12 +32,12 @@
                 <br>
                 <div class="card border-0">
                     <div class="card-body p-0 shadow-sm">
-                        <div class="row m-0">
-                            <div class="col-12 col-md p-4 text-center box">
+                        <div class="row m-0 divide-x divide-x-md-0 divide-y-md">
+                            <div class="col-12 col-md p-4 text-center">
                                 <h1 class="text-primary font-weight-bold">15</h1>
                                 <h5 class="text-muted">Companies</h5>
                             </div>
-                            <div class="col-12 col-md p-4 text-center box">
+                            <div class="col-12 col-md p-4 text-center">
                                 <h1 class="text-primary font-weight-bold">5</h1>
                                 <h5 class="text-muted">Years</h5>
                             </div>
@@ -54,8 +54,8 @@
 </section>
 
 <section id="services" class="position-relative py-6">
-    <div class="dots dots-left position-absolute d-none d-sm-block"></div>
-    <div class="dots dots-right position-absolute"></div>
+    <div class="dots mt-7 top-0 left-0 width-40 height-64 position-absolute"></div>
+    <div class="dots bottom-0 right-0 width-40 height-64 position-absolute"></div>
 
     <div class="container">
         <div class="row justify-content-center mb-5">
@@ -127,30 +127,30 @@
         </div>
 
         <div class="row">
-            <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center box">
+            <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
                 @include('layouts.partials.icon', ['name' => 'bootstrap', 'classes' => 'text-gray-500', 'width' => '2.5em', 'height' => '2.5em'])
                 <h3 class="mb-0 ml-3 text-gray-500">Bootstrap</h3>
             </div>
-            <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center box">
+            <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
                 @include('layouts.partials.icon', ['name' => 'shop', 'classes' => 'text-gray-500', 'width' => '2.5em', 'height' => '2.5em'])
                 <h3 class="mb-0 ml-3 text-gray-500">Stripe</h3>
             </div>
-            <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center box">
+            <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
                 @include('layouts.partials.icon', ['name' => 'kanban', 'classes' => 'text-gray-500', 'width' => '2.5em', 'height' => '2.5em'])
                 <h3 class="mb-0 ml-3 text-gray-500">Trello</h3>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center box">
+            <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
                 @include('layouts.partials.icon', ['name' => 'hand-index', 'classes' => 'text-gray-500', 'width' => '2.5em', 'height' => '2.5em'])
                 <h3 class="mb-0 ml-3 text-gray-500">Hand</h3>
             </div>
-            <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center box">
+            <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
                 @include('layouts.partials.icon', ['name' => 'bootstrap-reboot', 'classes' => 'text-gray-500', 'width' => '2.5em', 'height' => '2.5em'])
                 <h3 class="mb-0 ml-3 text-gray-500">Rollback</h3>
             </div>
-            <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center box">
+            <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
                 @include('layouts.partials.icon', ['name' => 'calendar2-check', 'classes' => 'text-gray-500', 'width' => '2.5em', 'height' => '2.5em'])
                 <h3 class="mb-0 ml-3 text-gray-500">Calendly</h3>
             </div>
@@ -187,8 +187,8 @@
 </section>
 
 <section id="contact" class="position-relative py-6">
-    <div class="dots dots-left position-absolute d-none d-sm-block"></div>
-    <div class="dots dots-right position-absolute"></div>
+    <div class="dots mt-5 top-0 left-0 height-80 width-48 position-absolute"></div>
+    <div class="dots mb-6 bottom-0 right-0 height-80 width-48 position-absolute"></div>
 
     <div class="container">
         <div class="row justify-content-center">
