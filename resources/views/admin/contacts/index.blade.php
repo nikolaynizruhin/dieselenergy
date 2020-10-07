@@ -14,6 +14,6 @@
     </div>
 
     <div class="card shadow-sm">
-        @include('admin.contacts.partials.'.($contacts->total() ? 'list' : 'empty'))
+        @include('admin.contacts.partials.'.($contacts->isEmpty() ? 'empty' : 'list'))
     </div>
 @endsection

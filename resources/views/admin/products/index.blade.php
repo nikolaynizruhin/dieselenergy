@@ -14,6 +14,6 @@
     </div>
 
     <div class="card shadow-sm">
-        @include('admin.products.partials.'.($products->total() ? 'list' : 'empty'))
+        @include('admin.products.partials.'.($products->isEmpty() ? 'empty' : 'list'))
     </div>
 @endsection

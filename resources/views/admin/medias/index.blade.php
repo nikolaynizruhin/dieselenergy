@@ -8,5 +8,5 @@
 </div>
 
 <div class="card shadow-sm">
-    @include('admin.medias.partials.'.($images->total() ? 'list' : 'empty'))
+    @include('admin.medias.partials.'.($images->isEmpty() ? 'empty' : 'list'))
 </div>

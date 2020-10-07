@@ -8,5 +8,5 @@
 </div>
 
 <div class="card shadow-sm">
-    @include('admin.specifications.partials.'.($attributes->total() ? 'list' : 'empty'))
+    @include('admin.specifications.partials.'.($attributes->isEmpty() ? 'empty' : 'list'))
 </div>

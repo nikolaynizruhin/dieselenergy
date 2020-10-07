@@ -8,5 +8,5 @@
 </div>
 
 <div class="card shadow-sm">
-    @include('admin.carts.partials.'.($products->total() ? 'list' : 'empty'))
+    @include('admin.carts.partials.'.($products->isEmpty() ? 'empty' : 'list'))
 </div>
