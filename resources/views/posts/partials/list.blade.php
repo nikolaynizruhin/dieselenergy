@@ -18,3 +18,9 @@
         @endforeach
     </div>
 @endforeach
+<br>
+<div class="row">
+    <div class="col">
+        {{ $posts->links('layouts.partials.pagination') }}
+    </div>
+</div>

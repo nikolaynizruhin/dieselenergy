@@ -14,17 +14,7 @@
                     </div>
                 </div>
             </div>
-            @if($posts->isNotEmpty())
-                @include('posts.partials.list')
-                <br>
-                <div class="row">
-                    <div class="col">
-                        {{ $posts->links('layouts.partials.pagination') }}
-                    </div>
-                </div>
-            @else
-                @include('posts.partials.empty')
-            @endif
+            @include('posts.partials.'.($posts->isEmpty() ? 'empty' : 'list'))
         </div>
     </section>
 @endsection

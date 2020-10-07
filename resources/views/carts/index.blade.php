@@ -24,9 +24,9 @@
                         @include('carts.partials.order')
                     </div>
                 </div>
-            @else
-                @include('carts.partials.empty')
             @endif
+
+            @includeWhen($items->isEmpty(), 'carts.partials.empty')
         </div>
     </section>
 @endsection
