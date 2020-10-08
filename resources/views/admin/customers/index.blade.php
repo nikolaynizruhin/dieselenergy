@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('admin.layouts.partials.alert')
+    @include('layouts.partials.alert')
 
     <div class="row">
         <div class="col-md-4">

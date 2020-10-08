@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    @include('admin.layouts.partials.alert')
+    @include('layouts.partials.alert')
 
     <div class="card shadow-sm mb-4">
         <div class="card-header border-0 bg-white lead">

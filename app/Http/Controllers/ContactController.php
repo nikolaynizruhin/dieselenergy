@@ -30,6 +30,6 @@ class ContactController extends Controller
         Notification::route('mail', config('mail.to.address'))
             ->notify(new ContactCreated($contact));
 
-        return redirect()->back()->with('status', trans('contact.created'));
+        return redirect(route('home').'#contact')->with('status', trans('contact.created'));
     }
 }

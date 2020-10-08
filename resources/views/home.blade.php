@@ -194,12 +194,12 @@
         <div class="row justify-content-center">
             <div class="col col-md-8 col-lg-6">
                 <h2 class="text-center">Contact Us</h2>
-                <h5 class="text-muted text-center">
+                <h5 class="text-muted text-center {{ session('status') ? 'mb-3' : 'mb-5' }}">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Ab ad aperiam architecto aspernatur aut culpa.
                 </h5>
 
-                <br>
+                @include('layouts.partials.alert')
 
                 <form action="{{ route('contacts.store') }}" method="POST">
                     @csrf

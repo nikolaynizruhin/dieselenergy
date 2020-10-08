@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('admin.layouts.partials.alert')
+    @include('layouts.partials.alert')
 
     <form method="POST" action="{{ route('admin.password.email') }}">
         @csrf
