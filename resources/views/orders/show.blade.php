@@ -12,9 +12,9 @@
         <div class="row justify-content-center">
             <div class="col-6 py-5 text-center">
                 @include('layouts.partials.icon', ['name' => 'check-circle', 'classes' => 'text-success mb-3', 'width' => '4em', 'height' => '4em'])
-                <h1>Congratulations.<br>Your order is accepted.</h1>
+                <h2>Congratulations.<br>Your order is accepted.</h2>
                 <p class="text-muted">Thank you for your order! Your order is being processed and will be completed within 3-6 hours. You will receive an email confirmation when your order is completed.</p>
-                <p class="text-muted">Your order number: QW341JK</p>
+                <p class="text-muted">Your order number: <strong>{{ $order->id }}</strong></p>
             </div>
         </div>
     </div>
