@@ -22,10 +22,7 @@ class ContactController extends Controller
             $request->getCustomerAttributes(),
         );
 
-        $contact = $customer->contacts()->create([
-            'subject' => $request->subject,
-            'message' => $request->message,
-        ]);
+        $contact = $customer->createContact($request->subject, $request->message);
 
         Notification::route('mail', config('mail.to.address'))
             ->notify(new ContactCreated($contact));

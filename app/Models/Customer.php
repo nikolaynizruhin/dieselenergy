@@ -43,11 +43,26 @@ class Customer extends Model
      * @param string $notes
      * @return \App\Models\Order
      */
-    public function createNewOrder($notes = '')
+    public function createOrder($notes = '')
     {
         return $this->orders()->create([
             'status' => Order::NEW,
             'notes' => $notes,
+        ]);
+    }
+
+    /**
+     * Create contact.
+     *
+     * @param  string  $subject
+     * @param  string  $message
+     * @return \App\Models\Customer
+     */
+    public function createContact($subject, $message)
+    {
+        return $this->contacts()->create([
+            'subject' => $subject,
+            'message' => $message,
         ]);
     }
 

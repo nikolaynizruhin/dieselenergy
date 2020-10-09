@@ -22,7 +22,7 @@ class OrderController extends Controller
             $request->getCustomerAttributes(),
         );
 
-        $order = $customer->createNewOrder($request->notes);
+        $order = $customer->createOrder($request->notes);
 
         Cart::store($order);
 
