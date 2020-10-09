@@ -12,7 +12,7 @@
 
                 <!-- Title -->
                 <div class="form-group row">
-                    <label for="inputTitle" class="col-md-3 col-form-label">{{ __('post.title') }}</label>
+                    <label for="inputTitle" class="col-md-3 col-form-label">{{ __('common.title') }}</label>
                     <div class="col-md-6">
                         <input type="text" id="inputTitle" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
 

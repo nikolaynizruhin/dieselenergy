@@ -13,7 +13,7 @@
 
                 <!-- Title -->
                 <div class="form-group row">
-                    <label for="inputTitle" class="col-md-3 col-form-label">{{ __('post.title') }}</label>
+                    <label for="inputTitle" class="col-md-3 col-form-label">{{ __('common.title') }}</label>
                     <div class="col-md-6">
                         <input type="text" id="inputTitle" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $post->title) }}" required autocomplete="title" autofocus>
 
@@ -43,6 +43,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">{{ __('image.title') }}</label>
                     <div class="col-md-6">
+                        <img src="{{ asset('storage/'.$post->image->path) }}" class="img-fluid img-thumbnail mb-3" alt="Responsive image">
                         <div class="custom-file">
                             <input type="file" id="inputImage" class="custom-file-input @error('image') is-invalid @enderror" name="image" accept="image/*">
                             <label class="custom-file-label" for="inputImage">{{ __('common.choose_images') }}</label>
