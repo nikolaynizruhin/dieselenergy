@@ -41,7 +41,7 @@
 
                 <!-- Image -->
                 <div class="form-group row">
-                    <label class="col-md-3 col-form-label">{{ __('common.image') }}</label>
+                    <label class="col-md-3 col-form-label">{{ __('image.title') }}</label>
                     <div class="col-md-6">
                         <div class="custom-file">
                             <input type="file" id="inputImage" class="custom-file-input @error('image') is-invalid @enderror" name="image" accept="image/*">
