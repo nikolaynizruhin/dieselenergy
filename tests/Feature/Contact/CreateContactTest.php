@@ -26,7 +26,7 @@ class CreateContactTest extends TestCase
                 'phone' => $contact->customer->phone,
                 'subject' => $contact->subject,
                 'message' => $contact->message,
-            ])->assertRedirect(route('home'))
+            ])->assertRedirect(route('home').'#contact')
                 ->assertSessionHas('status', trans('contact.created'));
 
         $this->assertDatabaseHas('customers', [
@@ -56,7 +56,7 @@ class CreateContactTest extends TestCase
                 'phone' => $contact->customer->phone,
                 'subject' => $contact->subject,
                 'message' => $contact->message,
-            ])->assertRedirect(route('home'));
+            ])->assertRedirect(route('home').'#contact');
 
         Notification::assertSentTo(
             new AnonymousNotifiable,
