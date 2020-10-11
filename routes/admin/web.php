@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ImageController;
@@ -50,6 +51,7 @@ Route::resources([
     'orders' => OrderController::class,
     'contacts' => ContactController::class,
     'categories' => CategoryController::class,
+    'currencies' => CurrencyController::class,
     'posts' => PostController::class,
 ]);
 
