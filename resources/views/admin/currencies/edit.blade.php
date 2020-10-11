@@ -26,7 +26,7 @@
                 <div class="form-group row">
                     <label for="inputRate" class="col-md-3 col-form-label">{{ __('currency.rate') }}</label>
                     <div class="col-md-6">
-                        <input type="number" id="inputRate" class="form-control @error('rate') is-invalid @enderror" name="rate" value="{{ old('rate', $currency->rate) }}" required autocomplete="rate">
+                        <input type="number" step="any" id="inputRate" class="form-control @error('rate') is-invalid @enderror" name="rate" value="{{ old('rate', $currency->rate) }}" required autocomplete="rate">
 
                         @error('rate')
                             <div class="invalid-feedback" role="alert">

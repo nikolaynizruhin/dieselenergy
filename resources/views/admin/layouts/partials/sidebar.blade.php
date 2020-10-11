@@ -65,4 +65,10 @@
             {{ __('post.plural') }}
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link @if (request()->is('admin/currencies')) text-dark @endif d-flex align-items-center" href="{{ route('admin.currencies.index') }}">
+            @include('layouts.partials.icon', ['name' => 'cash-stack', 'classes' => 'mr-2', 'width' => '1.1em', 'height' => '1.1em'])
+            {{ __('currency.plural') }}
+        </a>
+    </li>
 </ul>

@@ -77,6 +77,12 @@
                         {{ __('post.plural') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.currencies.index') }}">
+                        @include('layouts.partials.icon', ['name' => 'cash-stack', 'classes' => 'mr-2', 'width' => '1.1em', 'height' => '1.1em'])
+                        {{ __('currency.plural') }}
+                    </a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
