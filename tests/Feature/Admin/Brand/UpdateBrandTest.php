@@ -106,4 +106,40 @@ class UpdateBrandTest extends TestCase
                 'name' => $existing->name,
             ])->assertSessionHasErrors('name');
     }
+
+    /** @test */
+    public function user_cant_update_product_without_brand()
+    {
+        $user = User::factory()->create();
+        $brand = Brand::factory()->create();
+        $stub = Brand::factory()->raw(['currency_id' => null]);
+
+        $this->actingAs($user)
+            ->put(route('admin.brands.update', $brand), $stub)
+            ->assertSessionHasErrors('currency_id');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_string_brand()
+    {
+        $user = User::factory()->create();
+        $brand = Brand::factory()->create();
+        $stub = Brand::factory()->raw(['currency_id' => 'string']);
+
+        $this->actingAs($user)
+            ->put(route('admin.brands.update', $brand), $stub)
+            ->assertSessionHasErrors('currency_id');
+    }
+
+    /** @test */
+    public function user_cant_update_product_with_nonexistent_brand()
+    {
+        $user = User::factory()->create();
+        $brand = Brand::factory()->create();
+        $stub = Brand::factory()->raw(['currency_id' => 100]);
+
+        $this->actingAs($user)
+            ->put(route('admin.brands.update', $brand), $stub)
+            ->assertSessionHasErrors('currency_id');
+    }
 }

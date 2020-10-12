@@ -27,4 +27,12 @@ class Currency extends Model
     protected $casts = [
         'rate' => 'float',
     ];
+
+    /**
+     * Get the brands for the currency.
+     */
+    public function brands()
+    {
+        return $this->hasMany(Brand::class);
+    }
 }

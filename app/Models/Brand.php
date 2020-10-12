@@ -15,7 +15,9 @@ class Brand extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name', 'currency_id',
+    ];
 
     /**
      * Get the products for the brand.
@@ -23,5 +25,13 @@ class Brand extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    /**
+     * Get the currency that owns the brand.
+     */
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 }

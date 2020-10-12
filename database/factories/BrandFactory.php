@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Brand;
+use App\Models\Currency;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BrandFactory extends Factory
@@ -23,6 +24,7 @@ class BrandFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->word,
+            'currency_id' => Currency::factory(),
         ];
     }
 }

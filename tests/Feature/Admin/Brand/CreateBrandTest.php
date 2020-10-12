@@ -95,4 +95,37 @@ class CreateBrandTest extends TestCase
                 'name' => $brand->name,
             ])->assertSessionHasErrors('name');
     }
+
+    /** @test */
+    public function user_cant_create_brand_without_currency()
+    {
+        $user = User::factory()->create();
+        $brand = Brand::factory()->raw(['currency_id' => null]);
+
+        $this->actingAs($user)
+            ->post(route('admin.brands.store'), $brand)
+            ->assertSessionHasErrors('currency_id');
+    }
+
+    /** @test */
+    public function user_cant_create_brand_with_string_currency()
+    {
+        $user = User::factory()->create();
+        $brand = Brand::factory()->raw(['currency_id' => 'string']);
+
+        $this->actingAs($user)
+            ->post(route('admin.brands.store'), $brand)
+            ->assertSessionHasErrors('currency_id');
+    }
+
+    /** @test */
+    public function user_cant_create_brand_with_nonexistent_currency()
+    {
+        $user = User::factory()->create();
+        $brand = Brand::factory()->raw(['currency_id' => 1]);
+
+        $this->actingAs($user)
+            ->post(route('admin.brands.store'), $brand)
+            ->assertSessionHasErrors('currency_id');
+    }
 }

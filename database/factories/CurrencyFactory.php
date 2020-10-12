@@ -22,7 +22,7 @@ class CurrencyFactory extends Factory
     public function definition()
     {
         return [
-            'code' => $this->faker->currencyCode,
+            'code' => $this->faker->unique()->currencyCode,
             'rate' => $this->faker->randomFloat($nbMaxDecimals = 4, $min = 1, $max = 50),
         ];
     }

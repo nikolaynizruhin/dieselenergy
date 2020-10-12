@@ -17,7 +17,7 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
-        $brands = Brand::search('name', $request->search)->orderBy('name')->paginate(10);
+        $brands = Brand::with('currency')->search('name', $request->search)->orderBy('name')->paginate(10);
 
         return view('admin.brands.index', compact('brands'));
     }
@@ -40,7 +40,10 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(['name' => 'required|string|max:255|unique:brands']);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:brands',
+            'currency_id' => 'required|numeric|exists:currencies,id',
+        ]);
 
         Brand::create($validated);
 
@@ -76,6 +79,7 @@ class BrandController extends Controller
                 'max:255',
                 Rule::unique('brands')->ignore($brand),
             ],
+            'currency_id' => 'required|numeric|exists:currencies,id',
         ]);
 
         $brand->update($validated);

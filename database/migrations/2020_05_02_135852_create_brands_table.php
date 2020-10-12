@@ -16,6 +16,7 @@ class CreateBrandsTable extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->foreignId('currency_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -27,6 +28,10 @@ class CreateBrandsTable extends Migration
      */
     public function down()
     {
+        Schema::table('brands', function (Blueprint $table) {
+            $table->dropForeign(['currency_id']);
+        });
+
         Schema::dropIfExists('brands');
     }
 }

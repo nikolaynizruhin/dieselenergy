@@ -9,12 +9,35 @@
         <form action="{{ route('admin.brands.store') }}" method="POST">
             @csrf
             <div class="card-body">
+
+                <!-- Name -->
                 <div class="form-group row">
                     <label for="inputName" class="col-md-3 col-form-label">{{ __('common.name') }}</label>
                     <div class="col-md-6">
                         <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                         @error('name')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Currency -->
+                <div class="form-group row">
+                    <label for="inputCurrency" class="col-md-3 col-form-label">{{ __('currency.title') }}</label>
+                    <div class="col-md-6">
+                        <select class="form-control @error('currency_id') is-invalid @enderror" name="currency_id" id="inputCurrency" required>
+                            <option value="">{{ __('currency.select') }}</option>
+                            @foreach ($currencies as $currency)
+                                <option value="{{ $currency->id }}" @if (old('currency_id') == $currency->id) selected @endif>
+                                    {{ $currency->code }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        @error('currency_id')
                             <div class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </div>
