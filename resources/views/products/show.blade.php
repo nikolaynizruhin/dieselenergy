@@ -46,7 +46,7 @@
                         <br>
                         <small class="text-muted">{{ $product->category->name }}</small>
                     </h5>
-                    <h5 class="text-primary">@uah($product->price)</h5>
+                    <h5 class="text-primary">@uah($product->price_in_uah)</h5>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda consectetur, debitis dicta dolorum earum eius eos inventore libero maxime molestiae nostrum obcaecati odit possimus quo recusandae sed totam.
                     </p>

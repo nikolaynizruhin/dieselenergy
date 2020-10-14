@@ -2,7 +2,9 @@
 
 namespace Tests\Unit;
 
+use App\Models\Brand;
 use App\Models\Cart;
+use App\Models\Currency;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
@@ -40,14 +42,18 @@ class OrderTest extends TestCase
     /** @test */
     public function it_calculates_total_after_adding_product()
     {
+        $currency = Currency::factory()->state(['rate' => 30.0000]);
+        $brand = Brand::factory()->for($currency);
+
         $order = Order::factory()
             ->hasAttached(
                 Product::factory()
-                    ->state(fn (array $attributes, Order $order) => ['price' => 100]),
+                    ->for($brand)
+                    ->state(fn (array $attributes, Order $order) => ['price' => 10000]),
                 ['quantity' => 3],
             )->create(['total' => 0]);
 
-        $this->assertEquals(300, $order->fresh()->total);
+        $this->assertEquals(9000, $order->fresh()->total);
     }
 
     /** @test */

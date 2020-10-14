@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Order;
 
+use App\Models\Brand;
+use App\Models\Currency;
 use App\Models\Customer;
 use App\Models\Image;
 use App\Models\Order;
@@ -31,7 +33,10 @@ class CreateOrderTest extends TestCase
     {
         parent::setUp();
 
+        $currency = Currency::factory()->state(['rate' => 30.0000]);
+        $brand = Brand::factory()->for($currency);
         $this->product = Product::factory()
+            ->for($brand)
             ->hasAttached(Image::factory(), ['is_default' => 1])
             ->create();
     }

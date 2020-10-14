@@ -86,13 +86,9 @@ class ProductTest extends TestCase
     /** @test */
     public function it_has_price_in_uah()
     {
-        $currency = Currency::factory()->create(['rate' => 33.3057]);
-        $brand = Brand::factory()->create(['currency_id' => $currency->id]);
-
-        $product = Product::factory()->create([
-            'brand_id' => $brand->id,
-            'price' => 10000,
-        ]);
+        $currency = Currency::factory()->state(['rate' => 33.3057]);
+        $brand = Brand::factory()->for($currency);
+        $product = Product::factory()->for($brand)->create(['price' => 10000]);
 
         $this->assertEquals(3331, $product->price_in_uah);
     }

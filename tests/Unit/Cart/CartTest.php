@@ -2,6 +2,8 @@
 
 namespace Tests\Unit\Cart;
 
+use App\Models\Brand;
+use App\Models\Currency;
 use App\Models\Image;
 use App\Models\Order;
 use App\Models\Product;
@@ -42,7 +44,7 @@ class CartTest extends TestCase
         $this->assertEquals($item->id, $this->product->id);
         $this->assertEquals($item->name, $this->product->name);
         $this->assertEquals($item->category, $this->product->category->name);
-        $this->assertEquals($item->price, $this->product->price);
+        $this->assertEquals($item->price, $this->product->price_in_uah);
         $this->assertEquals($item->image, $this->product->defaultImage()->path);
         $this->assertEquals(1, $item->quantity);
     }
@@ -96,18 +98,23 @@ class CartTest extends TestCase
     /** @test */
     public function it_can_get_total()
     {
+        $currency = Currency::factory()->state(['rate' => 30.0000]);
+        $brand = Brand::factory()->for($currency);
+
         $generator = Product::factory()
+            ->for($brand)
             ->hasAttached(Image::factory(), ['is_default' => 1])
-            ->create(['price' => 100]);
+            ->create(['price' => 10000]);
 
         $waterPump = Product::factory()
+            ->for($brand)
             ->hasAttached(Image::factory(), ['is_default' => 1])
-            ->create(['price' => 100]);
+            ->create(['price' => 10000]);
 
         Cart::add($generator, 2);
         Cart::add($waterPump);
 
-        $this->assertEquals(300, Cart::total());
+        $this->assertEquals(9000, Cart::total());
     }
 
     /** @test */

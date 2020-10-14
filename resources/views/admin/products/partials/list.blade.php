@@ -26,7 +26,7 @@
                                 'type' => $product->is_active ? 'success' : 'danger',
                             ])
                         </td>
-                        <td>@uah($product->price)</td>
+                        <td>{{ $product->price }}</td>
                         <td>
                             <a href="{{ route('admin.products.show', $product) }}" class="mr-2">
                                 @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])

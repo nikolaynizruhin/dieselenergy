@@ -3,6 +3,8 @@
 namespace Tests\Unit\Cart;
 
 use App\Cart\Item;
+use App\Models\Brand;
+use App\Models\Currency;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,12 +17,15 @@ class ItemTest extends TestCase
     /** @test */
     public function it_can_get_total()
     {
+        $currency = Currency::factory()->state(['rate' => 30.0000]);
+        $brand = Brand::factory()->for($currency);
         $product = Product::factory()
+            ->for($brand)
             ->hasAttached(Image::factory(), ['is_default' => 1])
-            ->create(['price' => 100]);
+            ->create(['price' => 10000]);
 
         $item = new Item($product, 2);
 
-        $this->assertEquals(200, $item->total());
+        $this->assertEquals(6000, $item->total());
     }
 }
