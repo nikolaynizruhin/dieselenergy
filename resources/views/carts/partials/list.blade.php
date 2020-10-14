@@ -11,7 +11,7 @@
                     <br>
                     <span class="text-muted">{{ $item->category }}</span>
                 </td>
-                <td class="align-middle @if ($loop->first) border-top-0 @endif">@usd($item->price)</td>
+                <td class="align-middle @if ($loop->first) border-top-0 @endif">@uah($item->price)</td>
                 <td class="align-middle @if ($loop->first) border-top-0 @endif">
                     <form action="{{ route('carts.update', $key) }}" method="POST">
                         @csrf
@@ -22,7 +22,7 @@
                         </div>
                     </form>
                 </td>
-                <td class="align-middle @if ($loop->first) border-top-0 @endif">@usd($item->total())</td>
+                <td class="align-middle @if ($loop->first) border-top-0 @endif">@uah($item->total())</td>
                 <td class="align-middle @if ($loop->first) border-top-0 @endif">
                     <form action="{{ route('carts.destroy', $key) }}" method="POST">
                         @csrf
@@ -36,7 +36,7 @@
         @endforeach
         <tr>
             <td colspan="4">Total:</td>
-            <td colspan="2">@usd($total)</td>
+            <td colspan="2">@uah($total)</td>
         </tr>
         </tbody>
     </table>

@@ -34,7 +34,7 @@
 
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('common.total') }}</div>
-                <div class="col-md-9">@usd($order->total)</div>
+                <div class="col-md-9">@uah($order->total)</div>
             </div>
 
             <hr>

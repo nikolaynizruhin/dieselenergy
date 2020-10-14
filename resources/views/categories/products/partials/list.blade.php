@@ -13,7 +13,7 @@
                             </a>
                         </h6>
                         <h6 class="card-subtitle mb-2 text-muted">{{ $product->category->name }}</h6>
-                        <h5 class="card-title">@usd($product->price)</h5>
+                        <h5 class="card-title">@uah($product->price)</h5>
                     </div>
                     @if ($product->attributes->isNotEmpty())
                         <div class="card-body bg-light text-muted">

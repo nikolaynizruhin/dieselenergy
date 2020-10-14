@@ -7,15 +7,9 @@ use Tests\TestCase;
 class DirectiveTest extends TestCase
 {
     /** @test */
-    public function it_compiles_usd_directive()
-    {
-        $this->assertDirectiveOutput('$1 000.00', '@usd(100000)');
-    }
-
-    /** @test */
     public function it_compiles_uah_directive()
     {
-        $this->assertDirectiveOutput('₴25 000.00', '@uah(100000)');
+        $this->assertDirectiveOutput('10 000 ₴', '@uah(10000)');
     }
 
     /** @test */

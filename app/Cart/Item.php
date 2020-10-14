@@ -57,7 +57,7 @@ class Item
         $this->id = $product->id;
         $this->name = $product->name;
         $this->category = $product->category->name;
-        $this->price = $product->price;
+        $this->price = $product->price_in_uah;
         $this->quantity = $quantity;
         $this->image = $product->defaultImage()->path;
     }

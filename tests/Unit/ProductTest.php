@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Models\Attribute;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Currency;
 use App\Models\Image;
 use App\Models\Order;
 use App\Models\Product;
@@ -80,5 +81,19 @@ class ProductTest extends TestCase
 
         $this->assertNotNull($product->defaultImage());
         $this->assertInstanceOf(Image::class, $product->defaultImage());
+    }
+
+    /** @test */
+    public function it_has_price_in_uah()
+    {
+        $currency = Currency::factory()->create(['rate' => 33.3057]);
+        $brand = Brand::factory()->create(['currency_id' => $currency->id]);
+
+        $product = Product::factory()->create([
+            'brand_id' => $brand->id,
+            'price' => 10000,
+        ]);
+
+        $this->assertEquals(3331, $product->price_in_uah);
     }
 }

@@ -88,6 +88,16 @@ class Product extends Model
     }
 
     /**
+     * Price in UAH.
+     *
+     * @return float
+     */
+    public function getPriceInUahAttribute()
+    {
+        return round($this->price * $this->brand->currency->rate / 100);
+    }
+
+    /**
      * Get the brand of the product.
      */
     public function brand()

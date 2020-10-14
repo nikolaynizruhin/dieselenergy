@@ -42,7 +42,7 @@
                 </div>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Order for @usd($total)</button>
+            <button type="submit" class="btn btn-primary btn-block">Order for @uah($total)</button>
         </form>
     </div>
 </div>
