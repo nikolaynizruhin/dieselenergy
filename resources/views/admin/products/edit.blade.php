@@ -131,20 +131,15 @@
 
                 <!-- Price -->
                 <div class="form-group row">
-                    <label for="inputPrice" class="col-md-3 col-form-label">{{ __('common.price') }}</label>
+                    <label for="inputPrice" class="col-md-3 col-form-label">{{ __('common.price') }}, {{ $product->brand->currency->code }}</label>
                     <div class="col-md-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="addon">$</span>
-                            </div>
-                            <input type="number" id="inputPrice" class="form-control rounded-right @error('price') is-invalid @enderror" value="{{ old('price', $product->price) }}" name="price" min="1" aria-label="Price" aria-describedby="addon" required>
+                        <input type="number" id="inputPrice" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price', $product->price) }}" min="1" required autocomplete="price">
 
-                            @error('price')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
-                        </div>
+                        @error('price')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
                     </div>
                 </div>
 
