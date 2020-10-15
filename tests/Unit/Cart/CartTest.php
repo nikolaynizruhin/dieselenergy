@@ -44,7 +44,7 @@ class CartTest extends TestCase
         $this->assertEquals($item->id, $this->product->id);
         $this->assertEquals($item->name, $this->product->name);
         $this->assertEquals($item->category, $this->product->category->name);
-        $this->assertEquals($item->price, $this->product->price_in_uah);
+        $this->assertEquals($item->price, $this->product->uah_price);
         $this->assertEquals($item->image, $this->product->defaultImage()->path);
         $this->assertEquals(1, $item->quantity);
     }

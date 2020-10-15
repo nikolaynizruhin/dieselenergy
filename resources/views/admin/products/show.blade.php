@@ -75,7 +75,7 @@
 
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('common.price') }}</div>
-                <div class="col-md-9">@uah($product->price_in_uah)</div>
+                <div class="col-md-9">@uah($product->uah_price)</div>
             </div>
 
             <hr>

@@ -92,7 +92,7 @@ class Product extends Model
      *
      * @return float
      */
-    public function getPriceInUahAttribute()
+    public function getUahPriceAttribute()
     {
         return round($this->price * $this->brand->currency->rate / 100);
     }

@@ -105,6 +105,6 @@ class Order extends Model
      */
     public function total()
     {
-        return $this->products->sum(fn ($product) => $product->price_in_uah * $product->pivot->quantity);
+        return $this->products->sum(fn ($product) => $product->uah_price * $product->pivot->quantity);
     }
 }
