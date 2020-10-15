@@ -150,11 +150,12 @@
                 <div class="form-group row">
                     <label for="inputDescription" class="col-md-3 col-form-label">
                         {{ __('common.description') }}
-                        <br>
-                        <small class="text-muted">{{ __('common.support') }} Markdown</small>
+                        <small id="descriptionHelpBlock" class="form-text text-muted">
+                            {{ __('common.support') }} <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown</a>
+                        </small>
                     </label>
                     <div class="col-md-6">
-                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="3">{{ old('description') }}</textarea>
+                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="3" aria-describedby="descriptionHelpBlock">{{ old('description') }}</textarea>
 
                         @error('description')
                             <div class="invalid-feedback" role="alert">

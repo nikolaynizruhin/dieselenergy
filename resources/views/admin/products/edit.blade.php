@@ -153,7 +153,7 @@
                     <label for="inputDescription" class="col-md-3 col-form-label">
                         {{ __('common.description') }}
                         <small id="descriptionHelpBlock" class="form-text text-muted">
-                            {{ __('common.support') }} Markdown
+                            {{ __('common.support') }} <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown</a>
                         </small>
                     </label>
                     <div class="col-md-6">
