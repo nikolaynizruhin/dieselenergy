@@ -15,6 +15,11 @@
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">{{ __('common.images') }}</label>
                     <div class="col-md-6">
+                        @if ($product->images->isNotEmpty())
+                            @include('products.partials.carousel')
+                            <br>
+                        @endif
+
                         <div class="custom-file">
                             <input type="file" multiple id="inputImages" class="custom-file-input @error('images.*') is-invalid @enderror" name="images[]" accept="image/*" aria-describedby="imagesHelp">
                             <label class="custom-file-label" for="inputImages">{{ __('common.choose_images') }}</label>
