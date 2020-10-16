@@ -162,7 +162,7 @@
                         </small>
                     </label>
                     <div class="col-md-6">
-                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="3" aria-describedby="descriptionHelpBlock">{{ old('description', $product->description) }}</textarea>
+                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="5" aria-describedby="descriptionHelpBlock">{{ old('description', $product->description) }}</textarea>
 
                         @error('description')
                             <div class="invalid-feedback" role="alert">
