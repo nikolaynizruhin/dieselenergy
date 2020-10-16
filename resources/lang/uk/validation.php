@@ -90,6 +90,7 @@ return [
         'string'  => 'Текст у полі :attribute повинен містити не менше :min символів.',
         'array'   => 'Поле :attribute повинне містити не менше :min елементів.',
     ],
+    'multiple_of'          => 'Поле :attribute має бути кратним :value',
     'not_in'               => 'Вибране для :attribute значення не коректне.',
     'not_regex'            => 'Формат поля :attribute не вірний.',
     'numeric'              => 'Поле :attribute повинно містити число.',
