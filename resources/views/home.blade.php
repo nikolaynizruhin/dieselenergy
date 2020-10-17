@@ -194,69 +194,77 @@
         <div class="row justify-content-center">
             <div class="col col-md-8 col-lg-6">
                 <h2 class="text-center">Contact Us</h2>
-                <h5 class="text-muted text-center {{ session('status') ? 'mb-3' : 'mb-5' }}">
+                <h5 class="text-muted text-center mb-5">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Ab ad aperiam architecto aspernatur aut culpa.
                 </h5>
 
-                @include('layouts.partials.alert')
+                @if (session('status'))
+                    <div class="row">
+                        <div class="col text-center">
+                            @include('layouts.partials.icon', ['name' => 'check-circle', 'classes' => 'text-success mb-3', 'width' => '4em', 'height' => '4em'])
+                            <h3>Thank you!</h3>
+                            <p class="text-muted">Thank you for contacting us! Your contact is being processed and will be completed within 3-6 hours. You will receive an email confirmation when your order is completed.</p>
+                        </div>
+                    </div>
+                @else
+                    <form action="{{ route('contacts.store') }}" method="POST">
+                        @csrf
 
-                <form action="{{ route('contacts.store') }}" method="POST">
-                    @csrf
+                        <div class="form-group">
+                            <label for="inputName" class="font-weight-bold">Name</label>
+                            <input name="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" id="inputName" value="{{ old('name') }}" aria-describedby="nameHelp" autocomplete="name" required>
 
-                    <div class="form-group">
-                        <label for="inputName" class="font-weight-bold">Name</label>
-                        <input name="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" id="inputName" value="{{ old('name') }}" aria-describedby="nameHelp" autocomplete="name" required>
-
-                        @error('name')
+                            @error('name')
                             <div class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail" class="font-weight-bold">Email address</label>
-                        <input name="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" id="inputEmail" value="{{ old('email') }}" aria-describedby="emailHelp" autocomplete="email" required>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="font-weight-bold">Email address</label>
+                            <input name="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" id="inputEmail" value="{{ old('email') }}" aria-describedby="emailHelp" autocomplete="email" required>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 
-                        @error('email')
+                            @error('email')
                             <div class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPhone" class="font-weight-bold">Phone Number</label>
-                        <input name="phone" type="tel" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone') }}" aria-describedby="phoneHelp" autocomplete="phone" required>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPhone" class="font-weight-bold">Phone Number</label>
+                            <input name="phone" type="tel" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone') }}" aria-describedby="phoneHelp" autocomplete="phone" required>
 
-                        @error('phone')
+                            @error('phone')
                             <div class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="inputMessage" class="font-weight-bold">Message</label>
-                        <textarea name="message" class="form-control form-control-lg @error('message') is-invalid @enderror" id="inputMessage" rows="4" required>{{ old('message') }}</textarea>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="inputMessage" class="font-weight-bold">Message</label>
+                            <textarea name="message" class="form-control form-control-lg @error('message') is-invalid @enderror" id="inputMessage" rows="4" required>{{ old('message') }}</textarea>
 
-                        @error('message')
+                            @error('message')
                             <div class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </div>
-                        @enderror
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input name="terms" value="1" type="checkbox" class="custom-control-input @error('terms') is-invalid @enderror" id="accept">
-                        <label class="custom-control-label text-muted" for="accept">By selecting this, you agree to the Privacy Policy</label>
+                            @enderror
+                        </div>
+                        <div class="custom-control custom-switch mb-3">
+                            <input name="terms" value="1" type="checkbox" class="custom-control-input @error('terms') is-invalid @enderror" id="accept">
+                            <label class="custom-control-label text-muted" for="accept">By selecting this, you agree to the Privacy Policy</label>
 
-                        @error('terms')
+                            @error('terms')
                             <div class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </div>
-                        @enderror
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Let's Talk</button>
-                </form>
+                            @enderror
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Let's Talk</button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>
