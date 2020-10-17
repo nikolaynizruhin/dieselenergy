@@ -25,7 +25,7 @@
 
                 <!-- Slug -->
                 <div class="form-group row">
-                    <label for="inputSlug" class="col-md-3 col-form-label">{{ __('common.name') }}</label>
+                    <label for="inputSlug" class="col-md-3 col-form-label">{{ __('common.slug') }}</label>
                     <div class="col-md-6">
                         <input type="text" id="inputSlug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') }}" required autocomplete="slug">
 
