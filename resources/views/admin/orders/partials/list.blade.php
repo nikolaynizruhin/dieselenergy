@@ -28,7 +28,7 @@
                     <td>
                         @include('admin.orders.partials.status')
                     </td>
-                    <td>{{ $order->created_at }}</td>
+                    <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
                     <td>@uah($order->total)</td>
                     <td>
                         <a href="{{ route('admin.orders.show', $order) }}" class="mr-2">

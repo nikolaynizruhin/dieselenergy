@@ -41,7 +41,7 @@
 
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('common.date') }}</div>
-                <div class="col-md-9">{{ $order->created_at }}</div>
+                <div class="col-md-9">{{ $order->created_at->format('Y-m-d H:i') }}</div>
             </div>
 
             <hr>
