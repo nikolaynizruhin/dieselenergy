@@ -48,7 +48,7 @@ class CartController extends Controller
 
         return redirect()
             ->route('carts.index')
-            ->with('status', trans('carts.updated'));
+            ->with('status', trans('cart.updated'));
     }
 
     /**
