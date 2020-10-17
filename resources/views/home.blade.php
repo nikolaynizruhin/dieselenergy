@@ -227,7 +227,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputPhone" class="font-weight-bold">Phone Number</label>
-                        <input name="phone" type="text" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone') }}" aria-describedby="phoneHelp" autocomplete="phone" required>
+                        <input name="phone" type="tel" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone') }}" aria-describedby="phoneHelp" autocomplete="phone" required>
 
                         @error('phone')
                             <div class="invalid-feedback" role="alert">
