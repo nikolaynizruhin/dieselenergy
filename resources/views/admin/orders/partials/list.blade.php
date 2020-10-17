@@ -10,6 +10,7 @@
                 <th scope="col" class="bg-light text-muted border-0">{{ __('customer.title') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.number') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.status') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('common.date') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.total') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
@@ -27,6 +28,7 @@
                     <td>
                         @include('admin.orders.partials.status')
                     </td>
+                    <td>{{ $order->created_at }}</td>
                     <td>@uah($order->total)</td>
                     <td>
                         <a href="{{ route('admin.orders.show', $order) }}" class="mr-2">
