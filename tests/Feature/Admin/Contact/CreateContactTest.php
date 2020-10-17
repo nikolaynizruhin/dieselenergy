@@ -52,28 +52,6 @@ class CreateContactTest extends TestCase
     }
 
     /** @test */
-    public function user_cant_create_contact_without_subject()
-    {
-        $user = User::factory()->create();
-        $contact = Contact::factory()->raw(['subject' => null]);
-
-        $this->actingAs($user)
-            ->post(route('admin.contacts.store'), $contact)
-            ->assertSessionHasErrors('subject');
-    }
-
-    /** @test */
-    public function user_cant_create_contact_with_integer_subject()
-    {
-        $user = User::factory()->create();
-        $contact = Contact::factory()->raw(['subject' => 1]);
-
-        $this->actingAs($user)
-            ->post(route('admin.contacts.store'), $contact)
-            ->assertSessionHasErrors('subject');
-    }
-
-    /** @test */
     public function user_cant_create_contact_without_message()
     {
         $user = User::factory()->create();
@@ -93,19 +71,6 @@ class CreateContactTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.contacts.store'), $contact)
             ->assertSessionHasErrors('message');
-    }
-
-    /** @test */
-    public function user_cant_create_contact_with_subject_more_than_255_chars()
-    {
-        $user = User::factory()->create();
-        $contact = Contact::factory()->raw([
-            'subject' => str_repeat('a', 256),
-        ]);
-
-        $this->actingAs($user)
-            ->post(route('admin.contacts.store'), $contact)
-            ->assertSessionHasErrors('subject');
     }
 
     /** @test */

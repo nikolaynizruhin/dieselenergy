@@ -17,7 +17,7 @@ class SearchContactsTest extends TestCase
     {
         $contact = Contact::factory()->create();
 
-        $this->get(route('admin.contacts.index', ['search' => $contact->name]))
+        $this->get(route('admin.contacts.index', ['search' => $contact->message]))
             ->assertRedirect(route('admin.login'));
     }
 
@@ -29,14 +29,14 @@ class SearchContactsTest extends TestCase
         [$contactSale, $contactSupport, $contactOther] = Contact::factory()
             ->count(3)
             ->state(new Sequence(
-                ['subject' => 'Sale Contact'],
-                ['subject' => 'Support Contact'],
-                ['subject' => 'Other'],
+                ['message' => 'Sale Contact'],
+                ['message' => 'Support Contact'],
+                ['message' => 'Other'],
             ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.contacts.index', ['search' => 'Contact']))
-            ->assertSeeInOrder([$contactSale->subject, $contactSupport->subject])
-            ->assertDontSee($contactOther->subject);
+            ->assertSeeInOrder([$contactSale->message, $contactSupport->message])
+            ->assertDontSee($contactOther->message);
     }
 }

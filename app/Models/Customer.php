@@ -54,16 +54,12 @@ class Customer extends Model
     /**
      * Create contact.
      *
-     * @param  string  $subject
      * @param  string  $message
      * @return \App\Models\Customer
      */
-    public function createContact($subject, $message)
+    public function createContact($message)
     {
-        return $this->contacts()->create([
-            'subject' => $subject,
-            'message' => $message,
-        ]);
+        return $this->contacts()->create(['message' => $message]);
     }
 
     /**

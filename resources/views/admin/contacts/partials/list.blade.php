@@ -8,7 +8,7 @@
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('customer.title') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('contact.subject') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('contact.message') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
@@ -21,7 +21,7 @@
                             {{ $contact->customer->name }}
                         </a>
                     </td>
-                    <td>{{ $contact->subject }}</td>
+                    <td>{{ $contact->message }}</td>
                     <td>
                         <a href="{{ route('admin.contacts.show', $contact) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])

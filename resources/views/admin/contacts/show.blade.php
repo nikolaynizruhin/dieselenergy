@@ -22,13 +22,6 @@
             <hr>
 
             <div class="row">
-                <div class="col-md-3 text-muted">{{ __('contact.subject') }}</div>
-                <div class="col-md-9">{{ $contact->subject }}</div>
-            </div>
-
-            <hr>
-
-            <div class="row">
                 <div class="col-md-3 text-muted">{{ __('common.date') }}</div>
                 <div class="col-md-9">{{ $contact->created_at }}</div>
             </div>

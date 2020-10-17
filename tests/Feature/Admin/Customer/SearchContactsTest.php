@@ -22,17 +22,17 @@ class SearchContactsTest extends TestCase
         [$support, $faq, $sale] = Contact::factory()
             ->count(3)
             ->state(new Sequence(
-                ['subject' => 'Support Subject', 'created_at' => now()->subDay()],
-                ['subject' => 'FAQ Subject'],
-                ['subject' => 'Sale'],
+                ['message' => 'Support Message', 'created_at' => now()->subDay()],
+                ['message' => 'FAQ Message'],
+                ['message' => 'Sale'],
             ))->create(['customer_id' => $customer->id]);
 
         $this->actingAs($user)
             ->get(route('admin.customers.show', [
                 'customer' => $customer,
-                'search' => ['contact' => 'subject'],
+                'search' => ['contact' => 'message'],
             ]))->assertSuccessful()
-            ->assertSeeInOrder([$faq->subject, $support->subject])
-            ->assertDontSee($sale->subject);
+            ->assertSeeInOrder([$faq->message, $support->message])
+            ->assertDontSee($sale->message);
     }
 }

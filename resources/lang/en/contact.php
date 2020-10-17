@@ -22,7 +22,6 @@ return [
     'missing' => 'No contacts matched the given criteria.',
     'plural' => 'Contacts',
     'select' => 'Select a contact',
-    'subject' => 'Subject',
     'title' => 'Contact',
     'update' => 'Update Contact',
     'updated' => 'Contact was updated successfully!',

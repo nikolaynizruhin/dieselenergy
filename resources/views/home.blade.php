@@ -236,16 +236,6 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="inputSubject" class="font-weight-bold">Subject</label>
-                        <input name="subject" type="text" class="form-control form-control-lg @error('subject') is-invalid @enderror" id="inputSubject" value="{{ old('subject') }}" aria-describedby="subjectHelp" autocomplete="subject" required>
-
-                        @error('subject')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
                         <label for="inputMessage" class="font-weight-bold">Message</label>
                         <textarea name="message" class="form-control form-control-lg @error('message') is-invalid @enderror" id="inputMessage" rows="4" required>{{ old('message') }}</textarea>
 

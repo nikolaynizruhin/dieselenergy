@@ -27,8 +27,8 @@ class ReadContactsTest extends TestCase
         [$contactSale, $contactSupport] = Contact::factory()
             ->count(2)
             ->state(new Sequence(
-                ['subject' => 'Support'],
-                ['subject' => 'Sale'],
+                ['message' => 'Support'],
+                ['message' => 'Sale'],
             ))->create();
 
         $this->actingAs($user)
@@ -36,6 +36,6 @@ class ReadContactsTest extends TestCase
             ->assertSuccessful()
             ->assertViewIs('admin.contacts.index')
             ->assertViewHas('contacts')
-            ->assertSeeInOrder([$contactSale->name, $contactSupport->name]);
+            ->assertSeeInOrder([$contactSale->message, $contactSupport->message]);
     }
 }

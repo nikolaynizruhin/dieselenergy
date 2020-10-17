@@ -8,6 +8,7 @@
 
         <form action="{{ route('admin.contacts.update', $contact) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="card-body">
                 <!-- Customer -->
                 <div class="form-group row">
@@ -26,20 +27,6 @@
                         </select>
 
                         @error('customer_id')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-
-                <!-- Subject -->
-                <div class="form-group row">
-                    <label for="inputSubject" class="col-md-3 col-form-label">{{ __('contact.subject') }}</label>
-                    <div class="col-md-6">
-                        <input type="text" id="inputSubject" class="form-control @error('subject') is-invalid @enderror" name="subject" value="{{ old('subject', $contact->subject) }}" required autocomplete="subject" autofocus>
-
-                        @error('subject')
                             <div class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </div>

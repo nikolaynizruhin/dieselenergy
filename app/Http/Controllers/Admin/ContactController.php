@@ -17,7 +17,7 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
-        $contacts = Contact::search('subject', $request->search)->latest()->paginate(10);
+        $contacts = Contact::search('message', $request->search)->latest()->paginate(10);
 
         return view('admin.contacts.index', compact('contacts'));
     }

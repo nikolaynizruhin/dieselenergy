@@ -57,7 +57,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer, Request $request)
     {
-        $contacts = $customer->contacts()->search('subject', request('search.contact'))->latest()->paginate(10);
+        $contacts = $customer->contacts()->search('message', request('search.contact'))->latest()->paginate(10);
         $orders = $customer->orders()->search('id', request('search.order'))->latest()->paginate(10);
 
         return view('admin.customers.show', compact('customer', 'contacts', 'orders'));

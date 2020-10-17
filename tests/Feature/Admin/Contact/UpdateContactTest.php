@@ -57,30 +57,6 @@ class UpdateContactTest extends TestCase
     }
 
     /** @test */
-    public function user_cant_update_contact_without_subject()
-    {
-        $user = User::factory()->create();
-        $contact = Contact::factory()->create();
-        $stub = Contact::factory()->raw(['subject' => null]);
-
-        $this->actingAs($user)
-            ->put(route('admin.contacts.update', $contact), $stub)
-            ->assertSessionHasErrors('subject');
-    }
-
-    /** @test */
-    public function user_cant_update_contact_with_integer_subject()
-    {
-        $user = User::factory()->create();
-        $contact = Contact::factory()->create();
-        $stub = Contact::factory()->raw(['subject' => 1]);
-
-        $this->actingAs($user)
-            ->put(route('admin.contacts.update', $contact), $stub)
-            ->assertSessionHasErrors('subject');
-    }
-
-    /** @test */
     public function user_cant_update_contact_without_message()
     {
         $user = User::factory()->create();
@@ -102,20 +78,6 @@ class UpdateContactTest extends TestCase
         $this->actingAs($user)
             ->put(route('admin.contacts.update', $contact), $stub)
             ->assertSessionHasErrors('message');
-    }
-
-    /** @test */
-    public function user_cant_update_contact_with_subject_more_than_255_chars()
-    {
-        $user = User::factory()->create();
-        $contact = Contact::factory()->create();
-        $stub = Contact::factory()->raw([
-            'subject' => str_repeat('a', 256),
-        ]);
-
-        $this->actingAs($user)
-            ->put(route('admin.contacts.update', $contact), $stub)
-            ->assertSessionHasErrors('subject');
     }
 
     /** @test */

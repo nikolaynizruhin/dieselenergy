@@ -31,7 +31,6 @@ class ReadContactTest extends TestCase
             ->assertSuccessful()
             ->assertViewIs('admin.contacts.show')
             ->assertViewHas('contact')
-            ->assertSee($contact->subject)
             ->assertSee($contact->customer->name);
     }
 }

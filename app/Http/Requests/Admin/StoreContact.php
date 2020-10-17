@@ -25,7 +25,6 @@ class StoreContact extends FormRequest
     {
         return [
             'customer_id' => 'required|numeric|exists:customers,id',
-            'subject' => 'required|string|max:255',
             'message' => 'required|string',
         ];
     }

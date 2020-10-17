@@ -24,7 +24,6 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertRedirect(route('home').'#contact')
                 ->assertSessionHas('status', trans('contact.created'));
@@ -35,10 +34,7 @@ class CreateContactTest extends TestCase
             'phone' => $contact->customer->phone,
         ]);
 
-        $this->assertDatabaseHas('contacts', [
-            'subject' => $contact->subject,
-            'message' => $contact->message,
-        ]);
+        $this->assertDatabaseHas('contacts', ['message' => $contact->message]);
     }
 
     /** @test */
@@ -54,7 +50,6 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertRedirect(route('home').'#contact');
 
@@ -75,7 +70,6 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertRedirect(route('home'))
                 ->assertSessionHasErrors('terms');
@@ -92,7 +86,6 @@ class CreateContactTest extends TestCase
                 'name' => null,
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertSessionHasErrors('name');
     }
@@ -108,7 +101,6 @@ class CreateContactTest extends TestCase
                 'name' => 1,
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertRedirect(route('home'))
             ->assertSessionHasErrors('name');
@@ -125,7 +117,6 @@ class CreateContactTest extends TestCase
                 'name' => str_repeat('a', 256),
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertRedirect(route('home'))
             ->assertSessionHasErrors('name');
@@ -141,7 +132,6 @@ class CreateContactTest extends TestCase
                 'terms' => 1,
                 'name' => $contact->customer->name,
                 'phone' => $contact->customer->phone,
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertRedirect(route('home'))
             ->assertSessionHasErrors('email');
@@ -158,7 +148,6 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'email' => 1,
                 'phone' => $contact->customer->phone,
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertRedirect(route('home'))
             ->assertSessionHasErrors('email');
@@ -175,7 +164,6 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'email' => str_repeat('a', 256),
                 'phone' => $contact->customer->phone,
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertRedirect(route('home'))
             ->assertSessionHasErrors('email');
@@ -192,7 +180,6 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'email' => 'invalid',
                 'phone' => $contact->customer->phone,
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertRedirect(route('home'))
                 ->assertSessionHasErrors('email');
@@ -209,7 +196,6 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => null,
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertSessionHasErrors('phone');
     }
@@ -225,7 +211,6 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => 1,
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertSessionHasErrors('phone');
     }
@@ -241,59 +226,9 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => str_repeat('a', 256),
-                'subject' => $contact->subject,
                 'message' => $contact->message,
             ])->assertRedirect(route('home'))
             ->assertSessionHasErrors('phone');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_without_subject()
-    {
-        $contact = Contact::factory()->make();
-
-        $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'terms' => 1,
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'subject' => null,
-                'message' => $contact->message,
-            ])->assertSessionHasErrors('subject');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_with_integer_subject()
-    {
-        $contact = Contact::factory()->make();
-
-        $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'terms' => 1,
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'subject' => 1,
-                'message' => $contact->message,
-            ])->assertSessionHasErrors('subject');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_with_subject_more_than_255_chars()
-    {
-        $contact = Contact::factory()->make();
-
-        $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'terms' => 1,
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'subject' => str_repeat('a', 256),
-                'message' => $contact->message,
-            ])->assertRedirect(route('home'))
-            ->assertSessionHasErrors('subject');
     }
 
     /** @test */
@@ -307,7 +242,6 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
-                'subject' => $contact->subject,
                 'message' => null,
             ])->assertSessionHasErrors('message');
     }
@@ -323,7 +257,6 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
-                'subject' => $contact->subject,
                 'message' => 1,
             ])->assertSessionHasErrors('message');
     }
