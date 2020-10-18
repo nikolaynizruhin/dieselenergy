@@ -29,12 +29,12 @@ class UpdateRate extends Command
      */
     public function handle()
     {
-        $minfinCurrencies = Http::get('https://api.minfin.com.ua/mb/'.config('services.minfin.key'))->json();
+        $rates = Http::get('https://api.minfin.com.ua/mb/'.config('services.minfin.key'))->json();
 
-        Currency::each(function ($currency) use ($minfinCurrencies) {
-            $minfinCurrency = collect($minfinCurrencies)->firstWhere('currency', strtolower($currency->code));
+        Currency::each(function ($currency) use ($rates) {
+            $rate = collect($rates)->firstWhere('currency', strtolower($currency->code));
 
-            $currency->update(['rate' => (float) $minfinCurrency['ask']]);
+            $currency->update(['rate' => (float) $rate['ask']]);
         });
 
         $this->info('Currency rates updated successfully!');
