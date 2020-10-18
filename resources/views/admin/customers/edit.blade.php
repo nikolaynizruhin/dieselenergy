@@ -43,7 +43,8 @@
                 <div class="form-group row">
                     <label for="inputPhone" class="col-md-3 col-form-label">{{ __('common.phone') }}</label>
                     <div class="col-md-6">
-                        <input type="tel" id="inputPhone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $customer->phone) }}" required autocomplete="phone">
+                        <input type="tel" id="inputPhone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $customer->phone) }}" aria-describedby="phoneHelp" pattern="[+]{1}380[0-9]{9}" required autocomplete="phone">
+                        <small id="phoneHelp" class="form-text text-muted">Phone number format: +380631683321</small>
 
                         @error('phone')
                             <div class="invalid-feedback" role="alert">

@@ -213,12 +213,12 @@
 
                         <div class="form-group">
                             <label for="inputName" class="font-weight-bold">Name</label>
-                            <input name="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" id="inputName" value="{{ old('name') }}" aria-describedby="nameHelp" autocomplete="name" required>
+                            <input name="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" id="inputName" value="{{ old('name') }}" autocomplete="name" required>
 
                             @error('name')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </div>
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
                             @enderror
                         </div>
                         <div class="form-group">
@@ -227,19 +227,20 @@
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 
                             @error('email')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </div>
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="inputPhone" class="font-weight-bold">Phone Number</label>
-                            <input name="phone" type="tel" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone') }}" aria-describedby="phoneHelp" autocomplete="phone" required>
+                            <input name="phone" type="tel" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone') }}" aria-describedby="phoneHelp" pattern="[+]{1}380[0-9]{9}" autocomplete="phone" required>
+                            <small id="phoneHelp" class="form-text text-muted">Phone number format: +380631683321</small>
 
                             @error('phone')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </div>
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
                             @enderror
                         </div>
                         <div class="form-group">
@@ -247,9 +248,9 @@
                             <textarea name="message" class="form-control form-control-lg @error('message') is-invalid @enderror" id="inputMessage" rows="4" required>{{ old('message') }}</textarea>
 
                             @error('message')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </div>
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
                             @enderror
                         </div>
                         <div class="custom-control custom-switch mb-3">
@@ -257,9 +258,9 @@
                             <label class="custom-control-label text-muted" for="accept">By selecting this, you agree to the Privacy Policy</label>
 
                             @error('terms')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </div>
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
                             @enderror
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Let's Talk</button>
