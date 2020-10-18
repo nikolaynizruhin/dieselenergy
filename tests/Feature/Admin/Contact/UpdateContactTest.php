@@ -57,18 +57,6 @@ class UpdateContactTest extends TestCase
     }
 
     /** @test */
-    public function user_cant_update_contact_without_message()
-    {
-        $user = User::factory()->create();
-        $contact = Contact::factory()->create();
-        $stub = Contact::factory()->raw(['message' => null]);
-
-        $this->actingAs($user)
-            ->put(route('admin.contacts.update', $contact), $stub)
-            ->assertSessionHasErrors('message');
-    }
-
-    /** @test */
     public function user_cant_update_contact_with_integer_message()
     {
         $user = User::factory()->create();

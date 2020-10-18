@@ -52,17 +52,6 @@ class CreateContactTest extends TestCase
     }
 
     /** @test */
-    public function user_cant_create_contact_without_message()
-    {
-        $user = User::factory()->create();
-        $contact = Contact::factory()->raw(['message' => null]);
-
-        $this->actingAs($user)
-            ->post(route('admin.contacts.store'), $contact)
-            ->assertSessionHasErrors('message');
-    }
-
-    /** @test */
     public function user_cant_create_contact_with_integer_message()
     {
         $user = User::factory()->create();

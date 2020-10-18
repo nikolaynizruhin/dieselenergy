@@ -245,7 +245,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputMessage" class="font-weight-bold">Message</label>
-                            <textarea name="message" class="form-control form-control-lg @error('message') is-invalid @enderror" id="inputMessage" rows="4" required>{{ old('message') }}</textarea>
+                            <textarea name="message" class="form-control form-control-lg @error('message') is-invalid @enderror" id="inputMessage" rows="4">{{ old('message') }}</textarea>
 
                             @error('message')
                                 <div class="invalid-feedback" role="alert">

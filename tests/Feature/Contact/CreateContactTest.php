@@ -216,21 +216,6 @@ class CreateContactTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_contact_without_message()
-    {
-        $contact = Contact::factory()->make();
-
-        $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'terms' => 1,
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'message' => null,
-            ])->assertSessionHasErrors('message');
-    }
-
-    /** @test */
     public function guest_cant_create_contact_with_integer_message()
     {
         $contact = Contact::factory()->make();
