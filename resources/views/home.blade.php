@@ -192,22 +192,19 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col col-md-8 col-lg-6">
-                <h2 class="text-center">Contact Us</h2>
-                <h5 class="text-muted text-center mb-5">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Ab ad aperiam architecto aspernatur aut culpa.
-                </h5>
+            <div class="col col-md-8 col-lg-6 @if (session('status')) py-5 text-center @endif">
 
                 @if (session('status'))
-                    <div class="row">
-                        <div class="col text-center">
-                            @include('layouts.partials.icon', ['name' => 'check-circle', 'classes' => 'text-success mb-3', 'width' => '4em', 'height' => '4em'])
-                            <h3>Thank you!</h3>
-                            <p class="text-muted">Thank you for contacting us! Your contact is being processed and will be completed within 3-6 hours. You will receive an email confirmation when your order is completed.</p>
-                        </div>
-                    </div>
+                    @include('layouts.partials.icon', ['name' => 'check-circle', 'classes' => 'text-success mb-3', 'width' => '4em', 'height' => '4em'])
+                    <h3>Thank you!</h3>
+                    <p class="text-muted">Thank you for contacting us! Your contact is being processed and will be completed within 3-6 hours. You will receive an email confirmation when your order is completed.</p>
                 @else
+                    <h2 class="text-center">Contact Us</h2>
+                    <h5 class="text-muted text-center mb-5">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Ab ad aperiam architecto aspernatur aut culpa.
+                    </h5>
+
                     <form action="{{ route('contacts.store') }}" method="POST">
                         @csrf
 

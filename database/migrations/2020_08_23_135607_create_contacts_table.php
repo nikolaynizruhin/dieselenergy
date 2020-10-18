@@ -16,7 +16,7 @@ class CreateContactsTable extends Migration
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
-            $table->text('message');
+            $table->text('message')->nullable();
             $table->timestamps();
         });
     }
