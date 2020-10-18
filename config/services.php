@@ -31,7 +31,8 @@ return [
     ],
 
     'minfin' => [
-        'key' => env('MINFIN_API_KEY'),
+        'url' => env('MINFIN_URL'),
+        'key' => env('MINFIN_KEY'),
     ],
 
 ];

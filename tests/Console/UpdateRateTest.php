@@ -47,8 +47,10 @@ class UpdateRateTest extends TestCase
             ->assertExitCode(0);
 
         Http::assertSent(function ($request) {
-            return $request->url() == 'https://api.minfin.com.ua/mb/'.config('services.minfin.key');
+            return $request->url() == config('services.minfin.url').'/mb/'.config('services.minfin.key');
         });
+
+        Http::assertSentCount(1);
 
         $this->assertEquals(28.3650, $usd->fresh()->rate);
         $this->assertEquals(33.2636, $eur->fresh()->rate);

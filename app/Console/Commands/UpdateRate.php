@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Currency;
+use Facades\App\Services\Minfin;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
 
 class UpdateRate extends Command
 {
@@ -29,7 +29,7 @@ class UpdateRate extends Command
      */
     public function handle()
     {
-        $rates = Http::get('https://api.minfin.com.ua/mb/'.config('services.minfin.key'))->json();
+        $rates = Minfin::getRates();
 
         Currency::each(function ($currency) use ($rates) {
             $rate = collect($rates)->firstWhere('currency', strtolower($currency->code));
