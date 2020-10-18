@@ -21,6 +21,6 @@ return [
     'ordered_by' => 'Ordered By',
     'title' => 'Cart',
     'update' => 'Update Cart',
-    'updated' => 'Cart was updated successfully!',
+    'updated' => 'Cart updated successfully!',
 
 ];

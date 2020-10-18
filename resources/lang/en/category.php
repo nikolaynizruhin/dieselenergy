@@ -13,15 +13,15 @@ return [
     */
 
     'add' => 'Add Category',
-    'created' => 'Category was created successfully!',
+    'created' => 'Category created successfully!',
     'delete' => 'Delete Category',
-    'deleted' => 'Category was deleted successfully!',
+    'deleted' => 'Category deleted successfully!',
     'details' => 'Category Details',
     'empty' => 'No Categories',
     'missing' => 'No brands matched the given criteria.',
     'plural' => 'Categories',
     'title' => 'Category',
     'update' => 'Update Category',
-    'updated' => 'Category was updated successfully!',
+    'updated' => 'Category updated successfully!',
 
 ];

@@ -13,9 +13,9 @@ return [
     */
 
     'add' => 'Add Customer',
-    'created' => 'Customer was created successfully!',
+    'created' => 'Customer created successfully!',
     'delete' => 'Delete Customer',
-    'deleted' => 'Customer was deleted successfully!',
+    'deleted' => 'Customer deleted successfully!',
     'details' => 'Customer Details',
     'missing' => 'No customers matched the given criteria.',
     'name' => 'Name',
@@ -23,6 +23,6 @@ return [
     'select' => 'Select a customer',
     'title' => 'Customer',
     'update' => 'Update Customer',
-    'updated' => 'Customer was updated successfully!',
+    'updated' => 'Customer updated successfully!',
 
 ];

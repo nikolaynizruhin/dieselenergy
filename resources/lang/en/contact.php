@@ -14,9 +14,9 @@ return [
 
     'add' => 'Add Contact',
     'confirm_delete' => 'Are you sure you want to delete a contact?',
-    'created' => 'Contact was created successfully!',
+    'created' => 'Contact created successfully!',
     'delete' => 'Delete Contact',
-    'deleted' => 'Contact was deleted successfully!',
+    'deleted' => 'Contact deleted successfully!',
     'details' => 'Contact Details',
     'message' => 'Message',
     'missing' => 'No contacts matched the given criteria.',
@@ -24,6 +24,6 @@ return [
     'select' => 'Select a contact',
     'title' => 'Contact',
     'update' => 'Update Contact',
-    'updated' => 'Contact was updated successfully!',
+    'updated' => 'Contact updated successfully!',
 
 ];

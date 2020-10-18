@@ -14,9 +14,9 @@ return [
 
     'add' => 'Add Product',
     'attach' => 'Attach Product',
-    'created' => 'Product was created successfully!',
+    'created' => 'Product created successfully!',
     'delete' => 'Delete Product',
-    'deleted' => 'Product was deleted successfully!',
+    'deleted' => 'Product deleted successfully!',
     'details' => 'Product Details',
     'images' => 'The product already has :count images.',
     'missing' => 'No products matched the given criteria.',
@@ -26,6 +26,6 @@ return [
     'select' => 'Select a product',
     'title' => 'Product',
     'update' => 'Update Product',
-    'updated' => 'Product was updated successfully!',
+    'updated' => 'Product updated successfully!',
 
 ];

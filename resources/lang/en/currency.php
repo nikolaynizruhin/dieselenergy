@@ -14,9 +14,9 @@ return [
 
     'add' => 'Add Currency',
     'confirm_delete' => 'Are you sure you want to delete a currency?',
-    'created' => 'Currency was created successfully!',
+    'created' => 'Currency created successfully!',
     'delete' => 'Delete Currency',
-    'deleted' => 'Currency was deleted successfully!',
+    'deleted' => 'Currency deleted successfully!',
     'details' => 'Currency Details',
     'code' => 'Code',
     'rate' => 'Rate',
@@ -25,6 +25,6 @@ return [
     'select' => 'Select a currency',
     'title' => 'Currency',
     'update' => 'Update Currency',
-    'updated' => 'Currency was updated successfully!',
+    'updated' => 'Currency updated successfully!',
 
 ];

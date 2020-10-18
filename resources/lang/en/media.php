@@ -18,6 +18,6 @@ return [
     'deleted' => 'Image was detached successfully!',
     'title' => 'Media',
     'update' => 'Update Media',
-    'updated' => 'Media was updated successfully!',
+    'updated' => 'Media updated successfully!',
 
 ];

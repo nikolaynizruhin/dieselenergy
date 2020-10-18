@@ -15,15 +15,15 @@ return [
     'add' => 'Add Post',
     'body' => 'Body',
     'confirm_delete' => 'Are you sure you want to delete a contact?',
-    'created' => 'Post was created successfully!',
+    'created' => 'Post created successfully!',
     'delete' => 'Delete Post',
-    'deleted' => 'Post was deleted successfully!',
+    'deleted' => 'Post deleted successfully!',
     'details' => 'Post Details',
     'excerpt' => 'Excerpt',
     'missing' => 'No posts matched the given criteria.',
     'plural' => 'Posts',
     'title' => 'Post',
     'update' => 'Update Post',
-    'updated' => 'Post was updated successfully!',
+    'updated' => 'Post updated successfully!',
 
 ];

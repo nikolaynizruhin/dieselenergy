@@ -18,6 +18,6 @@ return [
     'deleted' => 'Attribute was detached successfully!',
     'title' => 'Specification',
     'update' => 'Update Attribute',
-    'updated' => 'Specification was updated successfully!',
+    'updated' => 'Specification updated successfully!',
 
 ];
