@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCustomer extends FormRequest
@@ -26,7 +27,7 @@ class StoreCustomer extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:customers',
-            'phone' => 'required|regex:/^\+380[0-9]{9}$/',
+            'phone' => 'required|regex:'.Customer::PHONE_REGEX,
             'notes' => 'nullable|string',
         ];
     }

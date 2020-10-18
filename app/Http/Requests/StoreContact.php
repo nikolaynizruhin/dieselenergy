@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreContact extends FormRequest
@@ -27,7 +28,7 @@ class StoreContact extends FormRequest
             'terms' => 'accepted',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'phone' => 'required|regex:/^\+380[0-9]{9}$/',
+            'phone' => 'required|regex:'.Customer::PHONE_REGEX,
             'message' => 'required|string',
         ];
     }

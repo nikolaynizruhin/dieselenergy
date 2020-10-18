@@ -13,6 +13,13 @@ class Customer extends Model
     use HasFactory, HasSearch, Notifiable;
 
     /**
+     * Phone number regex pattern.
+     *
+     * @var string
+     */
+    const PHONE_REGEX = '/^\+380[0-9]{9}$/';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

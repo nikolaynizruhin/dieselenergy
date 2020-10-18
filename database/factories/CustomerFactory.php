@@ -24,7 +24,7 @@ class CustomerFactory extends Factory
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'phone' => $this->faker->regexify('/^\+380[0-9]{9}$/'),
+            'phone' => $this->faker->regexify(Customer::PHONE_REGEX),
             'notes' => $this->faker->sentence,
         ];
     }
