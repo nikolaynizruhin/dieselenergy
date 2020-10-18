@@ -217,23 +217,10 @@ class CreateOrderTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_order_with_integer_customer_phone()
+    public function guest_cant_create_order_with_incorrect_customer_phone_format()
     {
         $customer = Customer::factory()
-            ->make(['phone' => 1])
-            ->makeHidden('notes');
-
-        Cart::add($this->product);
-
-        $this->post(route('orders.store'), $customer->toArray())
-            ->assertSessionHasErrors('phone');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_with_customer_phone_more_than_255_chars()
-    {
-        $customer = Customer::factory()
-            ->make(['phone' => str_repeat('a', 256)])
+            ->make(['phone' => 0631234567])
             ->makeHidden('notes');
 
         Cart::add($this->product);

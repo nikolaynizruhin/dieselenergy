@@ -234,7 +234,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputPhone" class="font-weight-bold">Phone Number</label>
-                            <input name="phone" type="tel" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone') }}" aria-describedby="phoneHelp" pattern="[+]{1}380[0-9]{9}" autocomplete="phone" required>
+                            <input name="phone" type="tel" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone') }}" aria-describedby="phoneHelp" autocomplete="phone" required>
                             <small id="phoneHelp" class="form-text text-muted">Phone number format: +380631683321</small>
 
                             @error('phone')
@@ -254,7 +254,7 @@
                             @enderror
                         </div>
                         <div class="custom-control custom-switch mb-3">
-                            <input name="terms" value="1" type="checkbox" class="custom-control-input @error('terms') is-invalid @enderror" id="accept">
+                            <input name="terms" value="1" type="checkbox" class="custom-control-input @error('terms') is-invalid @enderror" @if(old('terms')) checked @endif id="accept">
                             <label class="custom-control-label text-muted" for="accept">By selecting this, you agree to the Privacy Policy</label>
 
                             @error('terms')

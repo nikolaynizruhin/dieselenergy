@@ -152,21 +152,10 @@ class CreateCustomerTest extends TestCase
     }
 
     /** @test */
-    public function user_cant_create_customer_with_integer_phone()
+    public function user_cant_create_customer_with_incorrect_phone_format()
     {
         $user = User::factory()->create();
-        $customer = Customer::factory()->raw(['phone' => 1]);
-
-        $this->actingAs($user)
-            ->post(route('admin.customers.store'), $customer)
-            ->assertSessionHasErrors('phone');
-    }
-
-    /** @test */
-    public function user_cant_create_customer_with_phone_more_than_255_chars()
-    {
-        $user = User::factory()->create();
-        $customer = Customer::factory()->raw(['phone' => str_repeat('a', 256)]);
+        $customer = Customer::factory()->raw(['phone' => 80631234567]);
 
         $this->actingAs($user)
             ->post(route('admin.customers.store'), $customer)

@@ -201,7 +201,7 @@ class CreateContactTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_contact_with_integer_phone()
+    public function guest_cant_create_contact_with_incorrect_phone_format()
     {
         $contact = Contact::factory()->make();
 
@@ -210,25 +210,9 @@ class CreateContactTest extends TestCase
                 'terms' => 1,
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
-                'phone' => 1,
+                'phone' => 0631234567,
                 'message' => $contact->message,
             ])->assertSessionHasErrors('phone');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_with_phone_more_than_255_chars()
-    {
-        $contact = Contact::factory()->make();
-
-        $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'terms' => 1,
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => str_repeat('a', 256),
-                'message' => $contact->message,
-            ])->assertRedirect(route('home'))
-            ->assertSessionHasErrors('phone');
     }
 
     /** @test */

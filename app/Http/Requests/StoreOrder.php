@@ -27,7 +27,7 @@ class StoreOrder extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'phone' => 'required|string|max:255',
+            'phone' => 'required|regex:/^\+380[0-9]{9}$/',
             'notes' => 'nullable|string',
         ];
     }
