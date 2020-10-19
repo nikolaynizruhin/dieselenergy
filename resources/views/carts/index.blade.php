@@ -12,7 +12,7 @@
                     Cart
                 </div>
             </div>
-            <h2 class="text-center">Shipping Cart</h2>
+            <h2 class="text-center">Ваше замовлення</h2>
             <h5 class="text-center text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
             <br>
             @if($items->isNotEmpty())

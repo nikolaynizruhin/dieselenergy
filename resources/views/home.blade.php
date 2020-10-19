@@ -197,8 +197,8 @@
 
                 @if (session('status'))
                     @include('layouts.partials.icon', ['name' => 'check-circle', 'classes' => 'text-success mb-3', 'width' => '4em', 'height' => '4em'])
-                    <h3>Thank you!</h3>
-                    <p class="text-muted">Thank you for contacting us! Your contact is being processed and will be completed within 3-6 hours. You will receive an email confirmation when your order is completed.</p>
+                    <h3>Дякуємо!</h3>
+                    <h5 class="text-muted">Ми зв'яжемося з Вами найближчим часом.</h5>
                 @else
                     <h2 class="text-center">Зв'яжіться з нами</h2>
                     <h5 class="text-muted text-center mb-5">
