@@ -8,11 +8,11 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md">
-                <h1 class="font-weight-bold">Energy Power</h1>
-                <h5 class="text-primary">the energy everywhere</h5>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, doloremque eius enim fugit possimus soluta unde ut voluptas? Aperiam beatae debitis distinctio, dolorem error facere inventore itaque neque sit tempora.</p>
-                <button type="button" class="btn btn-primary btn-lg">Shop</button>
-                <a href="#contact" role="button" class="btn btn-outline-secondary btn-lg mr-2">Contact Us</a>
+                <h1 class="font-weight-bold">DIESEL ENERGY</h1>
+                <h5 class="text-primary">надійні рішення для постачання<br>електроенергії</h5>
+                <p class="text-muted">Технічно продумані рішення та розробки найкращих світових інженерів дозволили нам стати партнером в обслуговуванні професійних дизельних електростанцій.</p>
+                <button type="button" class="btn btn-primary btn-lg">Каталог товарів</button>
+                <a href="#contact" role="button" class="btn btn-outline-secondary btn-lg mr-2">Залишити заявку</a>
             </div>
             <div class="col-12 col-md d-none d-md-block">
                 <img src="{{ asset('images/wind-turbine.svg') }}" alt="Wind turbine" width="100%">
@@ -35,15 +35,15 @@
                         <div class="row m-0 divide-x divide-x-md-0 divide-y-md">
                             <div class="col-12 col-md p-4 text-center">
                                 <h1 class="text-primary font-weight-bold">15</h1>
-                                <h5 class="text-muted">Companies</h5>
+                                <h5 class="text-muted">Партнерів</h5>
                             </div>
                             <div class="col-12 col-md p-4 text-center">
-                                <h1 class="text-primary font-weight-bold">5</h1>
-                                <h5 class="text-muted">Years</h5>
+                                <h1 class="text-primary font-weight-bold">7</h1>
+                                <h5 class="text-muted">Років досвіду</h5>
                             </div>
                             <div class="col-12 col-md p-4 text-center">
-                                <h1 class="text-primary font-weight-bold">10</h1>
-                                <h5 class="text-muted">Employees</h5>
+                                <h1 class="text-primary font-weight-bold">12</h1>
+                                <h5 class="text-muted">Робітників</h5>
                             </div>
                         </div>
                     </div>
@@ -60,10 +60,10 @@
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col col-md-8 text-center">
-                <h6 class="text-primary letter-spacing font-weight-bold">SERVICES</h6>
+                <h6 class="text-primary letter-spacing font-weight-bold">НАШІ ПОСЛУГИ</h6>
                 <h2>We can help you to build a better future</h2>
                 <h5 class="text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad aperiam architecto aspernatur aut culpa.
+                    Наш сервісний центр займається технічним обслуговуванням устаткування, з розробкою проєктної документації будь-якого рівня складності.
                 </h5>
             </div>
         </div>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="col">
                         <h5>Shop</h5>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores iste non praesentium quod. Aliquam animi deleniti esse necessitatibus numquam pariatur quis.</p>
+                        <p class="text-muted">Бензинові, Дизельні, Газові генератори.</p>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="col">
                         <h5>Installation</h5>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores iste non praesentium quod. Aliquam animi deleniti esse necessitatibus numquam pariatur quis.</p>
+                        <p class="text-muted">Встановлення, пусконалагодження, гарантійне та післягарантійне обслуговування.</p>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="col">
                         <h5>Support</h5>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores iste non praesentium quod. Aliquam animi deleniti esse necessitatibus numquam pariatur quis.</p>
+                        <p class="text-muted">Професійна діагностика, кваліфікований ремонт та відновленя працездатності, заміна панелей управління.</p>
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@
                     </div>
                     <div class="col">
                         <h5>Consulting</h5>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores iste non praesentium quod. Aliquam animi deleniti esse necessitatibus numquam pariatur quis.</p>
+                        <p class="text-muted">Моніторинг, віддалений контроль та управління.</p>
                     </div>
                 </div>
             </div>
@@ -160,27 +160,28 @@
 
 <section id="faq" class="bg-light py-6">
     <div class="container">
-        <h2>Frequently Asked Questions</h2>
+        <h2>Питання - відповіді</h2>
         <hr class="pb-2 pb-md-4">
         <div class="row mb-md-4">
             <div class="col-12 col-md-6">
-                <h4>Dolor hic laboriosam voluptate?</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, aperiam eos facilis libero porro saepe. Aliquam consectetur doloribus ducimus eos harum temporibus unde.</p>
+                <h4>Який генератор краще — бензиновий або дизельний?</h4>
+                <p class="text-muted">Бензинові міні-електростанції працюють тихше, мають більш компактні розміри та малу вагу. Вони доступніше дизельних по вартості.
+                    Дизельні генератори мають більший моторесурс, ніж бензинові агрегати. В них не такі великі витрати палива.</p>
             </div>
             <div class="col-12 col-md-6">
-                <h4>What ist hic laboriosam voluptate?</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, aperiam eos facilis libero porro saepe. Aliquam consectetur doloribus ducimus eos harum temporibus unde.</p>
+                <h4>Як влаштований та працює бензиновий генератор?</h4>
+                <p class="text-muted">Всередині приладу знаходиться двигун внутрішнього згоряння. Його вал передає обертання котушці, яка знаходиться між магнітами. Коли котушка перетинає лінії магнітного поля, в ній виробляється електричний струм.</p>
             </div>
         </div>
 
         <div class="row">
             <div class="col-12 col-md-6">
-                <h4>Iusto, nobis perspiciatis porro quae saepe ullam?</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, aperiam eos facilis libero porro saepe. Aliquam consectetur doloribus ducimus eos harum temporibus unde.</p>
+                <h4>Скільки годин може безперервно працювати дизель генератор?</h4>
+                <p class="text-muted">Час безперервної роботи залежить від вимог по експлуатації. Наприклад, дизельний генератор з повітряним охолодженням може працювати не більше 8-10 годин. Потім його потрібно відключити, дати охолонути і заправити мастилом. При такому інтенсивному щоденному використанні його потрібно міняти кожні 50 годин. У разі менш інтенсивної експлуатації (запуск на короткий час 1-2 рази в тиждень) - вистачає на 100 годин.</p>
             </div>
             <div class="col-12 col-md-6">
-                <h4>What is the best country to live?</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, aperiam eos facilis libero porro saepe. Aliquam consectetur doloribus ducimus eos harum temporibus unde.</p>
+                <h4>В чому полягає техобслуговування дизель генератора?</h4>
+                <p class="text-muted">Перед кожним запуском необхідно постійно контролювати рівень палива, регулярно замінювати масло і чистити фільтри та перевіряти надійність електричних контактів. Особливу увагу варто приділити тим генераторам, які мало і рідко використовуються. Їх потрібно мінімум один раз на місяць запускати при зниженому навантаженні на потужності до 75%. Це потрібно для напрацювання необхідного моторесурсу і збільшення терміну служби.</p>
             </div>
         </div>
     </div>
@@ -199,17 +200,16 @@
                     <h3>Thank you!</h3>
                     <p class="text-muted">Thank you for contacting us! Your contact is being processed and will be completed within 3-6 hours. You will receive an email confirmation when your order is completed.</p>
                 @else
-                    <h2 class="text-center">Contact Us</h2>
+                    <h2 class="text-center">Зв'яжіться з нами</h2>
                     <h5 class="text-muted text-center mb-5">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Ab ad aperiam architecto aspernatur aut culpa.
+                        Якщо у Вас є питання про дизель генератори, ми з радістю надамо Вам відповідь.
                     </h5>
 
                     <form action="{{ route('contacts.store') }}" method="POST">
                         @csrf
 
                         <div class="form-group">
-                            <label for="inputName" class="font-weight-bold">Name</label>
+                            <label for="inputName" class="font-weight-bold">Ім'я</label>
                             <input name="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" id="inputName" value="{{ old('name') }}" autocomplete="name" required>
 
                             @error('name')
@@ -219,9 +219,9 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail" class="font-weight-bold">Email address</label>
+                            <label for="inputEmail" class="font-weight-bold">Email</label>
                             <input name="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" id="inputEmail" value="{{ old('email') }}" aria-describedby="emailHelp" autocomplete="email" required>
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <small id="emailHelp" class="form-text text-muted"></small>
 
                             @error('email')
                                 <div class="invalid-feedback" role="alert">
@@ -230,9 +230,9 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="inputPhone" class="font-weight-bold">Phone Number</label>
+                            <label for="inputPhone" class="font-weight-bold">Телефон</label>
                             <input name="phone" type="tel" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone') }}" aria-describedby="phoneHelp" autocomplete="phone" required>
-                            <small id="phoneHelp" class="form-text text-muted">Phone number format: +380631683321</small>
+                            <small id="phoneHelp" class="form-text text-muted">Формат номеру: +380631683321</small>
 
                             @error('phone')
                                 <div class="invalid-feedback" role="alert">
@@ -241,7 +241,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="inputMessage" class="font-weight-bold">Message</label>
+                            <label for="inputMessage" class="font-weight-bold">Ваше повідомлення</label>
                             <textarea name="message" class="form-control form-control-lg @error('message') is-invalid @enderror" id="inputMessage" rows="4">{{ old('message') }}</textarea>
 
                             @error('message')
@@ -252,7 +252,7 @@
                         </div>
                         <div class="custom-control custom-switch mb-3">
                             <input name="terms" value="1" type="checkbox" class="custom-control-input @error('terms') is-invalid @enderror" @if(old('terms')) checked @endif id="accept">
-                            <label class="custom-control-label text-muted" for="accept">By selecting this, you agree to the Privacy Policy</label>
+                            <label class="custom-control-label text-muted" for="accept">Згода на обробку персональних даних</label>
 
                             @error('terms')
                                 <div class="invalid-feedback" role="alert">
@@ -260,7 +260,7 @@
                                 </div>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Let's Talk</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Відправити</button>
                     </form>
                 @endif
             </div>
