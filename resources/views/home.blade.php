@@ -26,8 +26,8 @@
         <div class="row">
             <div class="col d-flex justify-content-center flex-column">
                 <div class="text-center">
-                    <h2>Trusted by companies all around the world</h2>
-                    <h5 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+                    <h2>Ми забезпечуємо стабільну роботу Вашого бізнесу</h2>
+                    <h5 class="text-muted">Будуючи сучасні інженерні системи електроживлення</h5>
                 </div>
                 <br>
                 <div class="card border-0">
@@ -61,7 +61,7 @@
         <div class="row justify-content-center mb-5">
             <div class="col col-md-8 text-center">
                 <h6 class="text-primary letter-spacing font-weight-bold">НАШІ ПОСЛУГИ</h6>
-                <h2>We can help you to build a better future</h2>
+                <h2>МИ ПРОПОНУЄМО</h2>
                 <h5 class="text-muted">
                     Наш сервісний центр займається технічним обслуговуванням устаткування, з розробкою проєктної документації будь-якого рівня складності.
                 </h5>
@@ -74,8 +74,8 @@
                         @include('layouts.partials.icon', ['name' => 'basket', 'classes' => 'text-primary', 'width' => '2em', 'height' => '2em'])
                     </div>
                     <div class="col">
-                        <h5>Shop</h5>
-                        <p class="text-muted">Бензинові, Дизельні, Газові генератори.</p>
+                        <h5>Продаж генераторів</h5>
+                        <p class="text-muted">Ми продаємо: бензинові, дизельні, газові генератори, мотопомпи та блоки автоматики.</p>
                     </div>
                 </div>
             </div>
@@ -85,8 +85,8 @@
                         @include('layouts.partials.icon', ['name' => 'tools', 'classes' => 'text-primary', 'width' => '2em', 'height' => '2em'])
                     </div>
                     <div class="col">
-                        <h5>Installation</h5>
-                        <p class="text-muted">Встановлення, пусконалагодження, гарантійне та післягарантійне обслуговування.</p>
+                        <h5>Сервісне обслуговування</h5>
+                        <p class="text-muted">Встановлення, пусконалагодження, гарантійне, післягарантійне обслуговування та віддалений контроль.</p>
                     </div>
                 </div>
             </div>
@@ -95,10 +95,10 @@
             <div class="col-12 col-md mb-md-0 mb-3">
                 <div class="row">
                     <div class="col-12 col-md-2 mb-3">
-                        @include('layouts.partials.icon', ['name' => 'award', 'classes' => 'text-primary', 'width' => '2em', 'height' => '2em'])
+                        @include('layouts.partials.icon', ['name' => 'people', 'classes' => 'text-primary', 'width' => '2em', 'height' => '2em'])
                     </div>
                     <div class="col">
-                        <h5>Support</h5>
+                        <h5>Технічна підтримка</h5>
                         <p class="text-muted">Професійна діагностика, кваліфікований ремонт та відновленя працездатності, заміна панелей управління.</p>
                     </div>
                 </div>
@@ -106,11 +106,11 @@
             <div class="col-12 col-md mb-md-0 mb-3">
                 <div class="row">
                     <div class="col-12 col-md-2 mb-3">
-                        @include('layouts.partials.icon', ['name' => 'info-circle', 'classes' => 'text-primary', 'width' => '2em', 'height' => '2em'])
+                        @include('layouts.partials.icon', ['name' => 'file-earmark-text', 'classes' => 'text-primary', 'width' => '2em', 'height' => '2em'])
                     </div>
                     <div class="col">
-                        <h5>Consulting</h5>
-                        <p class="text-muted">Моніторинг, віддалений контроль та управління.</p>
+                        <h5>Проєктні роботи</h5>
+                        <p class="text-muted">Схеми підключення обладнання, плани прокладення кабельних трас, розрахунки з вибору кабельної продукції</p>
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
     <div class="container">
         <div class="row mb-4">
             <div class="col text-center">
-                <h5 class="text-uppercase text-muted font-weight-bold letter-spacing">Trusted by companies</h5>
+                <h5 class="text-uppercase text-muted font-weight-bold letter-spacing">Нам довіряють</h5>
             </div>
         </div>
 

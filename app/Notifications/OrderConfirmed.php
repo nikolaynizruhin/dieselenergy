@@ -48,8 +48,10 @@ class OrderConfirmed extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
+                    ->line('Ваше замовлення прийнято.')
+                    ->line("Наш менеджер зв'яжеться з Вами найближчим часом для уточнення деталей")
+                    ->line('Номер Вашого замовлення: 12345')
                     ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Команда Diesel Energy');
     }
 }
