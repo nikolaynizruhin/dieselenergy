@@ -12,7 +12,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Shop
+                        Товари
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @foreach(\App\Models\Category::all() as $category)
@@ -21,22 +21,19 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home').'#services' }}">Services</a>
+                    <a class="nav-link" href="{{ route('home').'#services' }}">Послуги</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('posts.index') }}">Blog</a>
+                    <a class="nav-link" href="{{ route('posts.index') }}">Блог</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home').'#contact' }}">Contacts</a>
+                    <a class="nav-link" href="{{ route('home').'#contact' }}">Контакти</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home').'#numbers' }}">About Us</a>
+                    <a class="nav-link" href="{{ route('home').'#numbers' }}">Про нас</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home').'#faq' }}">FAQ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('carts.index') }}">Cart</a>
+                    <a class="nav-link" href="{{ route('carts.index') }}">Кошик</a>
                 </li>
             </ul>
         </div>
