@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
-use App\Attributable;
-use App\HasSearch;
+use App\Traits\HasSearch;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use Attributable, HasFactory, HasSearch;
+    use HasFactory, HasSearch;
 
     /**
      * The attributes that are mass assignable.
@@ -132,6 +131,16 @@ class Product extends Model
         return $this->belongsToMany(Image::class)
             ->using(Media::class)
             ->withPivot('id', 'is_default')
+            ->withTimestamps();
+    }
+
+    /**
+     * The attributes that belong to the model.
+     */
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class)
+            ->withPivot('id', 'value')
             ->withTimestamps();
     }
 }
