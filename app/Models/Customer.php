@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\HasSearch;
+use App\Models\Traits\HasSearch;
 use App\Notifications\OrderConfirmed;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
