@@ -30,4 +30,6 @@
             @includeWhen($items->isEmpty(), 'carts.partials.empty')
         </div>
     </section>
+
+    @includeWhen($items->isNotEmpty(), 'layouts.partials.services')
 @endsection

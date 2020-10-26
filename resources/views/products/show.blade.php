@@ -92,4 +92,6 @@
             </div>
         </div>
     </section>
+
+    @include('layouts.partials.services')
 @endsection
