@@ -1,28 +1,28 @@
 <footer class="bg-dark mt-auto py-5">
     <div class="container">
         <div class="row mb-5">
-            <div class="col-12 col-sm-3">
+            <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <a class="text-gray-400" href="{{ route('home') }}">
-                    <h5 class="d-flex align-items-center">
+                    <h5 class="d-flex align-items-center mb-3">
                         @include('layouts.partials.icon', ['name' => 'intersect', 'classes' => 'mr-3 text-primary', 'width' => '1.5em', 'height' => '1.5em'])
                         {{ config('app.name') }}
                     </h5>
                 </a>
                 <p class="text-gray-400">Надійні рішення для постачання<br>електроенергії</p>
             </div>
-            <div class="col-12 col-sm-3">
+            <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <span class="d-block text-gray-500 mb-3">ТОВАРИ</span>
                 @foreach(\App\Models\Category::all() as $category)
                     <a class="d-block text-gray-300 mb-2" href="{{ route('categories.products.index', $category) }}">{{ $category->name }}</a>
                 @endforeach
             </div>
-            <div class="col-12 col-sm-3">
+            <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <span class="d-block text-gray-500 mb-3">КОМПАНІЯ</span>
                 <a class="d-block text-gray-300 mb-2" href="{{ route('home').'#services' }}">Послуги</a>
                 <a class="d-block text-gray-300 mb-2" href="{{ route('posts.index') }}">Блог</a>
                 <a class="d-block text-gray-300 mb-2" href="{{ route('home').'#numbers' }}">Про нас</a>
             </div>
-            <div class="col-12 col-sm-3">
+            <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <span class="d-block text-gray-500 mb-3">КОНТАКТИ</span>
                 <a href="tel:+380977997542" class="d-block mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone text-gray-400 mr-2">
