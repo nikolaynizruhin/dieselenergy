@@ -200,7 +200,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray()  + ['terms' => 1])
+        $this->post(route('orders.store'), $customer->toArray() + ['terms' => 1])
             ->assertSessionHasErrors('email');
     }
 
