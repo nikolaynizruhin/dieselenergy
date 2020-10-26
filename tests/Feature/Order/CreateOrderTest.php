@@ -54,6 +54,7 @@ class CreateOrderTest extends TestCase
 
         $response = $this->post(route('orders.store'), $customer->toArray() + [
             'notes' => $notes = $this->faker->paragraph,
+            'terms' => 1,
         ]);
 
         $response->assertRedirect(route('orders.show', Order::first()));
@@ -84,7 +85,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $stub->toArray())
+        $this->post(route('orders.store'), $stub->toArray() + ['terms' => 1])
             ->assertRedirect();
 
         $this->assertDatabaseHas('customers', $stub->toArray());
@@ -100,7 +101,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $stub->toArray());
+        $this->post(route('orders.store'), $stub->toArray() + ['terms' => 1]);
 
         $customer = Customer::firstWhere('email', $stub->email);
 
@@ -121,7 +122,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray())
+        $this->post(route('orders.store'), $customer->toArray() + ['terms' => 1])
             ->assertSessionHasErrors('name');
     }
 
@@ -134,7 +135,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray())
+        $this->post(route('orders.store'), $customer->toArray() + ['terms' => 1])
             ->assertSessionHasErrors('name');
     }
 
@@ -147,7 +148,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray())
+        $this->post(route('orders.store'), $customer->toArray() + ['terms' => 1])
             ->assertSessionHasErrors('name');
     }
 
@@ -160,7 +161,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray())
+        $this->post(route('orders.store'), $customer->toArray() + ['terms' => 1])
             ->assertSessionHasErrors('email');
     }
 
@@ -173,7 +174,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray())
+        $this->post(route('orders.store'), $customer->toArray() + ['terms' => 1])
             ->assertSessionHasErrors('email');
     }
 
@@ -186,7 +187,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray())
+        $this->post(route('orders.store'), $customer->toArray() + ['terms' => 1])
             ->assertSessionHasErrors('email');
     }
 
@@ -199,7 +200,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray())
+        $this->post(route('orders.store'), $customer->toArray()  + ['terms' => 1])
             ->assertSessionHasErrors('email');
     }
 
@@ -212,7 +213,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray())
+        $this->post(route('orders.store'), $customer->toArray() + ['terms' => 1])
             ->assertSessionHasErrors('phone');
     }
 
@@ -225,7 +226,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray())
+        $this->post(route('orders.store'), $customer->toArray() + ['terms' => 1])
             ->assertSessionHasErrors('phone');
     }
 
@@ -238,8 +239,10 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + ['notes' => 1])
-            ->assertSessionHasErrors('notes');
+        $this->post(route('orders.store'), $customer->toArray() + [
+            'notes' => 1,
+            'terms' => 1,
+        ])->assertSessionHasErrors('notes');
     }
 
     /** @test */
@@ -249,7 +252,20 @@ class CreateOrderTest extends TestCase
             ->make()
             ->makeHidden('notes');
 
-        $this->post(route('orders.store'), $customer->toArray())
+        $this->post(route('orders.store'), $customer->toArray() + ['terms' => 1])
             ->assertSessionHasErrors('cart');
+    }
+
+    /** @test */
+    public function guest_cant_create_order_without_accepting_terms()
+    {
+        $customer = Customer::factory()
+            ->make()
+            ->makeHidden('notes');
+
+        Cart::add($this->product);
+
+        $this->post(route('orders.store'), $customer->toArray())
+            ->assertSessionHasErrors('terms');
     }
 }

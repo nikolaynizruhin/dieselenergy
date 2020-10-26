@@ -251,7 +251,7 @@
                             @enderror
                         </div>
                         <div class="custom-control custom-switch mb-3">
-                            <input name="terms" value="1" type="checkbox" class="custom-control-input @error('terms') is-invalid @enderror" @if(old('terms')) checked @endif id="accept">
+                            <input name="terms" value="1" type="checkbox" class="custom-control-input @error('terms') is-invalid @enderror" @if(old('terms')) checked @endif id="accept" required>
                             <label class="custom-control-label text-muted" for="accept">Згода на обробку персональних даних</label>
 
                             @error('terms')

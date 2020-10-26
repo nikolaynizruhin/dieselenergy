@@ -61,7 +61,7 @@ class CreateContactTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_contact_without_accept_terms()
+    public function guest_cant_create_contact_without_accepting_terms()
     {
         $contact = Contact::factory()->make();
 
