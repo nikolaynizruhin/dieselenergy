@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'home')->name('home');
+Route::view('/privacy', 'privacy')->name('privacy');
 Route::resource('contacts', ContactController::class)->only('store');
 Route::resource('carts', CartController::class);
 Route::resource('posts', PostController::class)->only('index');

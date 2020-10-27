@@ -20,7 +20,7 @@ class CreateContactTest extends TestCase
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
-                'terms' => 1,
+                'privacy' => 1,
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
@@ -46,7 +46,7 @@ class CreateContactTest extends TestCase
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
-                'terms' => 1,
+                'privacy' => 1,
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
@@ -61,7 +61,7 @@ class CreateContactTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_contact_without_accepting_terms()
+    public function guest_cant_create_contact_without_accepting_privacy()
     {
         $contact = Contact::factory()->make();
 
@@ -72,7 +72,7 @@ class CreateContactTest extends TestCase
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
             ])->assertRedirect(route('home'))
-                ->assertSessionHasErrors('terms');
+                ->assertSessionHasErrors('privacy');
     }
 
     /** @test */
@@ -82,7 +82,7 @@ class CreateContactTest extends TestCase
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
-                'terms' => 1,
+                'privacy' => 1,
                 'name' => null,
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
@@ -97,7 +97,7 @@ class CreateContactTest extends TestCase
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
-                'terms' => 1,
+                'privacy' => 1,
                 'name' => 1,
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
@@ -113,7 +113,7 @@ class CreateContactTest extends TestCase
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
-                'terms' => 1,
+                'privacy' => 1,
                 'name' => str_repeat('a', 256),
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
@@ -129,7 +129,7 @@ class CreateContactTest extends TestCase
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
-                'terms' => 1,
+                'privacy' => 1,
                 'name' => $contact->customer->name,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
@@ -144,7 +144,7 @@ class CreateContactTest extends TestCase
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
-                'terms' => 1,
+                'privacy' => 1,
                 'name' => $contact->customer->name,
                 'email' => 1,
                 'phone' => $contact->customer->phone,
@@ -160,7 +160,7 @@ class CreateContactTest extends TestCase
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
-                'terms' => 1,
+                'privacy' => 1,
                 'name' => $contact->customer->name,
                 'email' => str_repeat('a', 256),
                 'phone' => $contact->customer->phone,
@@ -176,7 +176,7 @@ class CreateContactTest extends TestCase
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
-                'terms' => 1,
+                'privacy' => 1,
                 'name' => $contact->customer->name,
                 'email' => 'invalid',
                 'phone' => $contact->customer->phone,
@@ -192,7 +192,7 @@ class CreateContactTest extends TestCase
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
-                'terms' => 1,
+                'privacy' => 1,
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => null,
@@ -207,7 +207,7 @@ class CreateContactTest extends TestCase
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
-                'terms' => 1,
+                'privacy' => 1,
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => 0631234567,
@@ -222,7 +222,7 @@ class CreateContactTest extends TestCase
 
         $this->from(route('home'))
             ->post(route('contacts.store'), [
-                'terms' => 1,
+                'privacy' => 1,
                 'name' => $contact->customer->name,
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,

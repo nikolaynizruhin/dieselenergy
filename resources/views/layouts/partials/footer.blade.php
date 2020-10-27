@@ -21,6 +21,7 @@
                 <a class="d-block text-gray-300 mb-2" href="{{ route('home').'#services' }}">Послуги</a>
                 <a class="d-block text-gray-300 mb-2" href="{{ route('posts.index') }}">Блог</a>
                 <a class="d-block text-gray-300 mb-2" href="{{ route('home').'#numbers' }}">Про нас</a>
+                <a class="d-block text-gray-300 mb-2" href="{{ route('privacy') }}">Політики</a>
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <span class="d-block text-gray-500 mb-3">КОНТАКТИ</span>
