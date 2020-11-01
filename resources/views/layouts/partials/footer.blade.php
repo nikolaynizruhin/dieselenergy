@@ -13,15 +13,25 @@
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <span class="d-block text-gray-500 mb-3">ТОВАРИ</span>
                 @foreach(\App\Models\Category::all() as $category)
-                    <a class="d-block text-gray-300 mb-2" href="{{ route('categories.products.index', $category) }}">{{ $category->name }}</a>
+                    <a class="d-block text-gray-300 mb-2" href="{{ route('categories.products.index', $category) }}">
+                        <span class="text-gray-300">{{ $category->name }}</span>
+                    </a>
                 @endforeach
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <span class="d-block text-gray-500 mb-3">КОМПАНІЯ</span>
-                <a class="d-block text-gray-300 mb-2" href="{{ route('home').'#services' }}">Послуги</a>
-                <a class="d-block text-gray-300 mb-2" href="{{ route('posts.index') }}">Блог</a>
-                <a class="d-block text-gray-300 mb-2" href="{{ route('home').'#numbers' }}">Про нас</a>
-                <a class="d-block text-gray-300 mb-2" href="{{ route('privacy') }}">Політики</a>
+                <a class="d-block mb-2" href="{{ route('home').'#services' }}">
+                    <span class="text-gray-300">Послуги</span>
+                </a>
+                <a class="d-block text-gray-300 mb-2" href="{{ route('posts.index') }}">
+                    <span class="text-gray-300">Блог</span>
+                </a>
+                <a class="d-block text-gray-300 mb-2" href="{{ route('home').'#numbers' }}">
+                    <span class="text-gray-300">Про нас</span>
+                </a>
+                <a class="d-block text-gray-300 mb-2" href="{{ route('privacy') }}">
+                    <span class="text-gray-300">Політики</span>
+                </a>
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <span class="d-block text-gray-500 mb-3">КОНТАКТИ</span>
