@@ -2,10 +2,10 @@
     <div class="container">
         <div class="row mb-5">
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
-                <a class="text-gray-400" href="{{ route('home') }}">
+                <a href="{{ route('home') }}">
                     <h5 class="d-flex align-items-center mb-3">
                         @include('layouts.partials.icon', ['name' => 'intersect', 'classes' => 'mr-3 text-primary', 'width' => '1.5em', 'height' => '1.5em'])
-                        {{ config('app.name') }}
+                        <span class="text-gray-400">{{ config('app.name') }}</span>
                     </h5>
                 </a>
                 <p class="text-gray-400">Надійні рішення для постачання<br>електроенергії</p>
