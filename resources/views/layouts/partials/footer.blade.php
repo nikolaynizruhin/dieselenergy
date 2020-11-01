@@ -49,7 +49,7 @@
         <hr class="border-top">
 
         <div class="row justify-content-center mt-5 mb-3">
-            <div class="col text-center" style="color: #9aa0a5">
+            <div class="col text-center text-gray-500">
                 &copy; 2020 Diesel Energy, Inc. All rights reserved.
             </div>
         </div>
