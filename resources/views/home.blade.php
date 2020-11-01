@@ -146,7 +146,7 @@
                 <img src="{{ asset('/images/logos/metro.svg') }}" alt="Metro" height="60">
             </div>
             <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
-                <img src="{{ asset('/images/logos/shop.png') }}" alt="Небесна криниця" height="60">
+                <img src="{{ asset('/images/logos/well.png') }}" alt="Небесна криниця" height="60">
             </div>
         </div>
     </div>
