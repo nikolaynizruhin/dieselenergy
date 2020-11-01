@@ -35,7 +35,7 @@
             </tr>
         @endforeach
         <tr>
-            <td colspan="4">Total:</td>
+            <td colspan="4">Всього:</td>
             <td colspan="2">@uah($total)</td>
         </tr>
         </tbody>

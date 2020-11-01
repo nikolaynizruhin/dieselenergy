@@ -7,13 +7,13 @@
         <div class="container">
             <div class="row mt-n3 mb-4 text-gray-500">
                 <div class="col letter-spacing d-flex align-items-center">
-                    Shop
+                    Товари
                     @include('layouts.partials.icon', ['name' => 'chevron-right', 'classes' => 'mx-2', 'width' => '0.9em', 'height' => '0.9em'])
-                    Cart
+                    Кошик
                 </div>
             </div>
             <h2 class="text-center">Ваше замовлення</h2>
-            <h5 class="text-center text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+            <h5 class="text-center text-muted">Наш консультант зв'яжеться з Вами для уточнення деталей замовлення</h5>
             <br>
             @if($items->isNotEmpty())
                 <div class="row">

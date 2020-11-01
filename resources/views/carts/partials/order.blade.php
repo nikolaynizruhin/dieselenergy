@@ -3,7 +3,7 @@
         <form action="{{ route('orders.store') }}" method="POST">
             @csrf
             <div class="form-group">
-                <label for="inputName">Name</label>
+                <label for="inputName">Ім'я</label>
                 <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="inputName" required autocomplete="name" autofocus>
 
                 @error('name')
@@ -13,7 +13,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="inputEmail">Email address</label>
+                <label for="inputEmail">Email</label>
                 <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" id="inputEmail" aria-describedby="emailHelp" required autocomplete="email">
 
                 @error('email')
@@ -23,9 +23,9 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="inputPhone">Phone</label>
+                <label for="inputPhone">Телефон</label>
                 <input name="phone" type="text" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" id="inputPhone" aria-describedby="phoneHelp" pattern="[+]{1}380[0-9]{9}" required autocomplete="phone">
-                <small id="phoneHelp" class="form-text text-muted">Phone number format: +380631683321</small>
+                <small id="phoneHelp" class="form-text text-muted">Формат номеру: +380631683321</small>
 
                 @error('phone')
                     <div class="invalid-feedback" role="alert">
@@ -34,7 +34,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="inputNotes">Notes</label>
+                <label for="inputNotes">Примітка</label>
                 <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" id="inputNotes" rows="3">{{ old('notes') }}</textarea>
 
                 @error('notes')
@@ -53,7 +53,7 @@
                     </div>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Order for @uah($total)</button>
+            <button type="submit" class="btn btn-primary btn-block">Замовити за @uah($total)</button>
         </form>
     </div>
 </div>
