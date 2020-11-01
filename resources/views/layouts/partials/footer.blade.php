@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <hr style="border-top: 1px solid gray">
+        <hr class="border-top">
 
         <div class="row justify-content-center mt-5 mb-3">
             <div class="col text-center" style="color: #9aa0a5">
