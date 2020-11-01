@@ -4,7 +4,7 @@
             <div class="col-12 col-md mb-5 mb-md-0">
                 <div class="row">
                     <div class="col-3">
-                        @include('layouts.partials.icon', ['name' => 'bag-check', 'width' => '3em', 'height' => '3em'])
+                        @include('layouts.partials.icon', ['name' => 'bag-check', 'width' => '3em', 'height' => '3em', 'classes' => 'text-secondary'])
                     </div>
                     <div class="col">
                         <h5>FREE SHIPPING</h5>
@@ -15,7 +15,7 @@
             <div class="col-12 col-md mb-5 mb-md-0">
                 <div class="row">
                     <div class="col-3">
-                        @include('layouts.partials.icon', ['name' => 'cash-stack', 'width' => '3em', 'height' => '3em'])
+                        @include('layouts.partials.icon', ['name' => 'cash-stack', 'width' => '3em', 'height' => '3em', 'classes' => 'text-secondary'])
                     </div>
                     <div class="col">
                         <h5>MONEY BACK</h5>
@@ -26,7 +26,7 @@
             <div class="col-12 col-md">
                 <div class="row">
                     <div class="col-3">
-                        @include('layouts.partials.icon', ['name' => 'headset', 'width' => '3em', 'height' => '3em'])
+                        @include('layouts.partials.icon', ['name' => 'headset', 'width' => '3em', 'height' => '3em', 'classes' => 'text-secondary'])
                     </div>
                     <div class="col">
                         <h5>SUPPORT</h5>
