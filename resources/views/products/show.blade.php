@@ -52,19 +52,19 @@
                         </div>
                     </form>
                     <p class="text-muted">
-                        @include('layouts.partials.icon', ['name' => 'shield-check', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'text-muted mr-2'])
+                        @include('layouts.partials.icon', ['name' => 'shield-check', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'mr-2'])
                         Гарантія протягом 1 року
                     </p>
                     <p class="text-muted">
-                        @include('layouts.partials.icon', ['name' => 'truck', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'text-muted mr-2'])
+                        @include('layouts.partials.icon', ['name' => 'truck', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'mr-2'])
                         Безкоштовна доставка по Києву та Київській області
                     </p>
                     <p class="text-muted">
-                        @include('layouts.partials.icon', ['name' => 'tools', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'text-muted mr-2'])
+                        @include('layouts.partials.icon', ['name' => 'tools', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'mr-2'])
                         Технічна підтримка протягом 1 року
                     </p>
                     <p class="text-muted">
-                        @include('layouts.partials.icon', ['name' => 'credit-card', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'text-muted mr-2'])
+                        @include('layouts.partials.icon', ['name' => 'credit-card', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'mr-2'])
                         Готівковий та безготівковий розрахунок
                     </p>
                 </div>
