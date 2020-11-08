@@ -50,8 +50,6 @@ class OrderConfirmed extends Notification
         return (new MailMessage)
                     ->line('Ваше замовлення прийнято.')
                     ->line("Наш менеджер зв'яжеться з Вами найближчим часом для уточнення деталей")
-                    ->line('Номер Вашого замовлення: 12345')
-                    ->action('Notification Action', url('/'))
-                    ->line('Команда Diesel Energy');
+                    ->line('Номер Вашого замовлення: #'.$this->order->id);
     }
 }
