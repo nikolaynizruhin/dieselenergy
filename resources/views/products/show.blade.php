@@ -36,7 +36,7 @@
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda consectetur, debitis dicta dolorum earum eius eos inventore libero maxime molestiae nostrum obcaecati odit possimus quo recusandae sed totam.
                     </p>
-                    <form action="{{ route('carts.store') }}" method="POST">
+                    <form class="mb-3" action="{{ route('carts.store') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-2 col-md-3 col-lg-2">
@@ -51,6 +51,22 @@
                             </div>
                         </div>
                     </form>
+                    <p class="text-muted">
+                        @include('layouts.partials.icon', ['name' => 'shield-check', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'text-muted mr-2'])
+                        Гарантія протягом 1 року
+                    </p>
+                    <p class="text-muted">
+                        @include('layouts.partials.icon', ['name' => 'truck', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'text-muted mr-2'])
+                        Безкоштовна доставка по Києву та Київській області
+                    </p>
+                    <p class="text-muted">
+                        @include('layouts.partials.icon', ['name' => 'tools', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'text-muted mr-2'])
+                        Технічна підтримка протягом 1 року
+                    </p>
+                    <p class="text-muted">
+                        @include('layouts.partials.icon', ['name' => 'credit-card', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'text-muted mr-2'])
+                        Готівковий та безготівковий розрахунок
+                    </p>
                 </div>
             </div>
             <div class="row">
