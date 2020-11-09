@@ -28,6 +28,7 @@ class OrderConfirmed extends Notification
         $this->order = $order;
     }
 
+
     /**
      * Get the notification's delivery channels.
      *
@@ -48,8 +49,20 @@ class OrderConfirmed extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Ваше замовлення прийнято.')
-                    ->line("Наш менеджер зв'яжеться з Вами найближчим часом для уточнення деталей")
-                    ->line('Номер Вашого замовлення: #'.$this->order->id);
+            ->subject('Підтвердження замовлення')
+            ->markdown('mail.order.confirmed', ['order' => $this->order]);
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
+    {
+        return [
+            //
+        ];
     }
 }
