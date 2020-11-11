@@ -1,7 +1,5 @@
 @component('mail::message')
-### Ваше замовлення прийнято.
-
-Номер Вашого замовлення: #{{ $order->id }}
+Номер Вашого замовлення: **{{ $order->id }}**
 
 @component('mail::table')
 | #                      | Назва                | Ціна                      | К-сть                           | Загалом                                               |
@@ -11,7 +9,7 @@
 @endforeach
 @endcomponent
 
-Всього: @uah($order->total())
+**Всього: @uah($order->total())**
 
 
 З повагою,<br>
