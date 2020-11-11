@@ -28,7 +28,6 @@ class OrderConfirmed extends Notification
         $this->order = $order;
     }
 
-
     /**
      * Get the notification's delivery channels.
      *
