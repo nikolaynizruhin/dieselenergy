@@ -8,7 +8,8 @@
                     </div>
                     <div class="col">
                         БЕЗКОШТОВНА ДОСТАВКА
-                        <p class="text-muted">Безкоштовна доставка по Києву та Київській області</p>
+                        <br>
+                        <span class="text-muted">Безкоштовна доставка по Києву та Київській області</span>
                     </div>
                 </div>
             </div>
@@ -19,7 +20,8 @@
                     </div>
                     <div class="col">
                         ГАРАНТІЯ
-                        <p class="text-muted">Гарантія протягом 1 року</p>
+                        <br>
+                        <span class="text-muted">Гарантія протягом 1 року</span>
                     </div>
                 </div>
             </div>
@@ -30,7 +32,8 @@
                     </div>
                     <div class="col">
                         ТЕХНІЧНА ПІДТРИМКА
-                        <p class="text-muted">Технічна підтримка протягом 1 року</p>
+                        <br>
+                        <span class="text-muted">Технічна підтримка протягом 1 року</span>
                     </div>
                 </div>
             </div>
