@@ -24,7 +24,7 @@ class ContactController extends Controller
 
         $contact = $customer->createContact($request->message);
 
-        Notification::route('mail', config('mail.to.address'))
+        Notification::route('mail', config('company.email'))
             ->notify(new ContactCreated($contact));
 
         return redirect(route('home').'#contact')->with('status', trans('contact.created'));
