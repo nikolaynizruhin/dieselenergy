@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->id()->startingValue(70613);
             $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
             $table->enum('status', Order::statuses());
             $table->unsignedInteger('total')->default(0);
