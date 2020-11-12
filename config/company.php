@@ -15,6 +15,6 @@ return [
 
     'email' => 'diesel.energy.llc@gmail.com',
 
-    'facebook' => 'https://www.facebook.com/Diesel-Energy-473907976127278/'
+    'facebook' => 'https://www.facebook.com/Diesel-Energy-473907976127278/',
 
 ];
