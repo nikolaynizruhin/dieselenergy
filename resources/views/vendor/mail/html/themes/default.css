@@ -107,6 +107,9 @@ img {
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Logo */
@@ -177,6 +180,13 @@ img {
 .footer a {
     color: #b0adc5;
     text-decoration: underline;
+}
+
+.footer .social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 /* Tables */
