@@ -16,21 +16,21 @@ class Order extends Model
      *
      * @var string
      */
-    const NEW = 'New';
+    const NEW = 'Новий';
 
     /**
      * The pending order status.
      *
      * @var string
      */
-    const PENDING = 'Pending';
+    const PENDING = 'В очікуванні';
 
     /**
      * The done order status.
      *
      * @var string
      */
-    const DONE = 'Done';
+    const DONE = 'Зроблено';
 
     /**
      * The attributes that are mass assignable.
