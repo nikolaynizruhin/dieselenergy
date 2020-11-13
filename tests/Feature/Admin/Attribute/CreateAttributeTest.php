@@ -57,8 +57,10 @@ class CreateAttributeTest extends TestCase
     {
         $user = User::factory()->create();
 
+        $attribute = Attribute::factory()->raw(['name' => null]);
+
         $this->actingAs($user)
-            ->post(route('admin.attributes.store'))
+            ->post(route('admin.attributes.store'), $attribute)
             ->assertSessionHasErrors('name');
     }
 
@@ -67,10 +69,11 @@ class CreateAttributeTest extends TestCase
     {
         $user = User::factory()->create();
 
+        $attribute = Attribute::factory()->raw(['name' => 1]);
+
         $this->actingAs($user)
-            ->post(route('admin.attributes.store'), [
-                'name' => 1,
-            ])->assertSessionHasErrors('name');
+            ->post(route('admin.attributes.store'), $attribute)
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -78,10 +81,11 @@ class CreateAttributeTest extends TestCase
     {
         $user = User::factory()->create();
 
+        $attribute = Attribute::factory()->raw(['name' => str_repeat('a', 256)]);
+
         $this->actingAs($user)
-            ->post(route('admin.products.store'), [
-                'name' => str_repeat('a', 256),
-            ])->assertSessionHasErrors('name');
+            ->post(route('admin.products.store'), $attribute)
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -89,11 +93,11 @@ class CreateAttributeTest extends TestCase
     {
         $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
+        $stub = Attribute::factory()->raw(['name' => $attribute->name]);
 
         $this->actingAs($user)
-            ->post(route('admin.attributes.store'), [
-                'name' => $attribute->name,
-            ])->assertSessionHasErrors('name');
+            ->post(route('admin.attributes.store'), $stub)
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
