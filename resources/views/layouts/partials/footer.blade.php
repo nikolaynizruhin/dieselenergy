@@ -3,10 +3,7 @@
         <div class="row mb-5">
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <a href="{{ route('home') }}">
-                    <h5 class="d-flex align-items-center mb-3">
-                        @include('layouts.partials.icon', ['name' => 'intersect', 'classes' => 'mr-3 text-primary', 'width' => '1.5em', 'height' => '1.5em'])
-                        <span class="text-gray-400">{{ config('app.name') }}</span>
-                    </h5>
+                    <img src="{{ asset('/images/logo-white.svg') }}" alt="{{ config('app.name') }}" width="150" class="mb-3">
                 </a>
                 <p class="text-gray-400">Надійні рішення для постачання<br>електроенергії</p>
             </div>

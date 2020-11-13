@@ -1,8 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white">
     <div class="container-lg">
         <a class="navbar-brand d-flex" href="{{ route('home') }}">
-            @include('layouts.partials.icon', ['name' => 'intersect', 'classes' => 'mr-3 text-primary', 'width' => '1.5em', 'height' => '1.5em'])
-            {{ config('app.name') }}
+            <img src="{{ asset('/images/logo.svg') }}" alt="{{ config('app.name') }}" width="130">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>

@@ -21,10 +21,9 @@
             <div class="row justify-content-center">
                 <div class="col-lg-5">
 
-                    <h3 class="text-center my-5">
-                        @include('layouts.partials.icon', ['name' => 'intersect', 'classes' => 'mr-3 text-primary', 'width' => '1.5em', 'height' => '1.5em'])
-                        {{ config('app.name') }}
-                    </h3>
+                    <div class="text-center my-5">
+                        <img src="{{ asset('/images/logo.svg') }}" alt="{{ config('app.name') }}" width="200">
+                    </div>
 
                     <div class="card shadow-sm">
                         <div class="card-body">
