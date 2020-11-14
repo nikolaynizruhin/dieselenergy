@@ -17,7 +17,6 @@
                 <div class="col">
                     <h3>{{ $post->title }}</h3>
                     @markdown($post->body)
-                    <small class="text-muted">{{ $post->created_at->format('Y-m-d H:i') }}</small>
                 </div>
             </div>
         </div>

@@ -11,9 +11,6 @@
                     </h5>
                     <p class="card-text">{{ $post->excerpt }}</p>
                 </div>
-                <div class="card-footer bg-white border-top-0">
-                    <small class="text-muted">{{ $post->created_at->format('Y-m-d H:i') }}</small>
-                </div>
             </div>
         @endforeach
     </div>

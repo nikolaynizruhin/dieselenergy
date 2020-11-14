@@ -9,8 +9,8 @@
             <div class="row">
                 <div class="col d-flex justify-content-center flex-column mb-5">
                     <div class="text-center">
-                        <h2>From The Blog</h2>
-                        <h5 class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+                        <h2>Блог</h2>
+                        <h5 class="text-muted">Добірка цікавої інформації та новин</h5>
                     </div>
                 </div>
             </div>
