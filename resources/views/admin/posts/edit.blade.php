@@ -6,7 +6,7 @@
             {{ __('post.update') }}
         </div>
 
-        <form action="{{ route('admin.posts.update', $post) }}" method="POST">
+        <form action="{{ route('admin.posts.update', $post) }}" enctype="multipart/form-data" method="POST">
             @csrf
             @method('PUT')
             <div class="card-body">
