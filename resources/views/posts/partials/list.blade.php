@@ -1,7 +1,7 @@
 @foreach ($posts->chunk(3) as $chunkedPosts)
     <div class="card-deck">
         @foreach ($chunkedPosts as $post)
-            <div class="card">
+            <div class="card shadow-sm">
                 <img src="{{ asset('storage/'.$post->image->path) }}" class="card-img-top" alt="{{ $post->title }}">
                 <div class="card-body">
                     <h5 class="card-title">
