@@ -6,14 +6,19 @@
         <div class="dots ml-sm-5 mb-3 bottom-0 left-0 height-72 width-48 position-absolute"></div>
 
         <div class="container">
-            <div class="row mt-n3 mb-4">
-                <div class="col">
-                    @include('layouts.partials.breadcrumb', ['links' => [$post->title => route('posts.index', $post)]])
+            <div class="row justify-content-center mt-n3 mb-4">
+                <div class="col col-md-10 col-lg-8">
+                    @include('layouts.partials.breadcrumb', ['links' => ['Блог' => route('posts.index'), $post->title => route('posts.index', $post)]])
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <h3>{{ $post->title }}</h3>
+            <div class="row justify-content-center mt-n3 mb-4">
+                <div class="col col-md-10 col-lg-8">
+                    <h2 class="my-3">{{ $post->title }}</h2>
+                    <img src="{{ asset('/storage/'.$post->image->path) }}" class="img-fluid" alt="{{ $post->title }}">
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col col-md-10 col-lg-8 text-justify">
                     @markdown($post->body)
                 </div>
             </div>

@@ -5,11 +5,11 @@
                 <img src="{{ asset('storage/'.$post->image->path) }}" class="card-img-top" alt="{{ $post->title }}">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{{ route('posts.show', $post) }}" class="text-decoration-none stretched-link">
+                        <a href="{{ route('posts.show', $post) }}" class="text-body text-decoration-none stretched-link">
                             {{ $post->title }}
                         </a>
                     </h5>
-                    <p class="card-text">{{ $post->excerpt }}</p>
+                    <p class="card-text text-muted">{{ $post->excerpt }}</p>
                 </div>
             </div>
         @endforeach
