@@ -10,7 +10,6 @@
                 <div class="col">
                     @include('layouts.partials.breadcrumb', [
                         'links' => [
-                            'Головна' => route('home'),
                             $product->category->name => route('categories.products.index', $product->category),
                             $product->name => route('products.show', $product)
                         ]

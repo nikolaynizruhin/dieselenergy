@@ -7,12 +7,7 @@
         <div class="container">
             <div class="row mt-n3 mb-4">
                 <div class="col">
-                    @include('layouts.partials.breadcrumb', [
-                        'links' => [
-                            'Головна' => route('home'),
-                            'Кошик' => route('carts.index'),
-                        ]
-                    ])
+                    @include('layouts.partials.breadcrumb', ['links' => ['Кошик' => route('carts.index')]])
                 </div>
             </div>
             <h2 class="text-center">Ваше замовлення</h2>

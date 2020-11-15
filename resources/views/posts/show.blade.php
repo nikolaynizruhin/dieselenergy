@@ -8,12 +8,7 @@
         <div class="container">
             <div class="row mt-n3 mb-4">
                 <div class="col">
-                    @include('layouts.partials.breadcrumb', [
-                        'links' => [
-                            'Головна' => route('home'),
-                            $post->title => route('posts.index', $post),
-                        ]
-                    ])
+                    @include('layouts.partials.breadcrumb', ['links' => [$post->title => route('posts.index', $post)]])
                 </div>
             </div>
             <div class="row">

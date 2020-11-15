@@ -7,12 +7,7 @@
         <div class="container">
             <div class="row mt-n3 mb-4">
                 <div class="col">
-                    @include('layouts.partials.breadcrumb', [
-                        'links' => [
-                            'Головна' => route('home'),
-                            $category->name => route('categories.products.index', $category),
-                        ]
-                    ])
+                    @include('layouts.partials.breadcrumb', ['links' => [$category->name => route('categories.products.index', $category)]])
                 </div>
                 <div class="col text-right text-gray-500">
                     Всього: {{ $products->total() }}
