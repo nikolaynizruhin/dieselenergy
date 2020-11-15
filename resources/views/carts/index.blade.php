@@ -6,7 +6,7 @@
 
         <div class="container">
             <h2 class="text-center">Ваше замовлення</h2>
-            <h5 class="text-center text-muted">Наш консультант зв'яжеться з Вами для уточнення деталей замовлення</h5>
+            <h5 class="text-center text-muted">Наш консультант зв'яжеться з Вами для уточнення деталей</h5>
             <br>
             @if($items->isNotEmpty())
                 <div class="row">
