@@ -5,11 +5,6 @@
         <div class="dots mr-sm-5 mt-6 top-0 right-0 height-72 width-48 position-absolute"></div>
 
         <div class="container">
-            <div class="row mt-n3 mb-4">
-                <div class="col">
-                    @include('layouts.partials.breadcrumb', ['links' => ['Кошик' => route('carts.index')]])
-                </div>
-            </div>
             <h2 class="text-center">Ваше замовлення</h2>
             <h5 class="text-center text-muted">Наш консультант зв'яжеться з Вами для уточнення деталей замовлення</h5>
             <br>
