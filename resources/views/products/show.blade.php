@@ -42,13 +42,13 @@
                         <div class="row">
                             <div class="col-2 col-md-3 col-lg-2">
                                 <div class="form-group">
-                                    <label for="inputAmount" class="sr-only">Amount</label>
+                                    <label for="inputAmount" class="sr-only">Кількість</label>
                                     <input type="number" name="quantity" value="1" min="1" max="99" class="form-control" id="inputAmount" aria-describedby="amountHelp">
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 </div>
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                <button type="submit" class="btn btn-primary">Додати в кошик</button>
                             </div>
                         </div>
                     </form>

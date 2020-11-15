@@ -11,7 +11,7 @@
                     @include('layouts.partials.breadcrumb', ['links' => ['Блог' => route('posts.index'), $post->title => route('posts.index', $post)]])
                 </div>
             </div>
-            <div class="row justify-content-center mt-n3 mb-4">
+            <div class="row justify-content-center">
                 <div class="col col-md-10 col-lg-8">
                     <h2 class="my-3">{{ $post->title }}</h2>
                     <img src="{{ asset('/storage/'.$post->image->path) }}" class="img-fluid" alt="{{ $post->title }}">

@@ -40,7 +40,7 @@
                         @includeIf('categories.products.partials.filters.'.$category->slug)
 
                         <button type="submit" class="btn mt-3 btn-outline-primary btn-block">
-                            Filter
+                            Застосувати
                         </button>
                     </form>
                 </div>

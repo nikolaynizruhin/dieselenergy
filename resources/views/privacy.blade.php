@@ -6,15 +6,13 @@
         <div class="dots ml-sm-5 mb-3 bottom-0 left-0 height-72 width-48 position-absolute"></div>
 
         <div class="container">
-            <div class="row mt-n3 mb-4 text-gray-500">
-                <div class="col letter-spacing d-flex align-items-center">
-                    Home
-                    @include('layouts.partials.icon', ['name' => 'chevron-right', 'classes' => 'mx-2', 'width' => '0.9em', 'height' => '0.9em'])
-                    Privacy
+            <div class="row justify-content-center mt-n3 mb-4">
+                <div class="col col-md-10 col-lg-8">
+                    @include('layouts.partials.breadcrumb', ['links' => ['Політика конфіденційності' => route('privacy')]])
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col col-md-10 col-lg-8 text-justify">
                     <h3>Політика обробки персональних даних ТОВ «ЕНЕРГІЯ ДИЗЕЛЬ»</h3>
                     <p>ТОВ «ЕНЕРГІЯ ДИЗЕЛЬ» (далі по тексту - Diesel Energy) бере на себе зобов'язання опублікувати Політику обробки персональних даних на сайті компанії з метою забезпечення необмеженого доступу до тексту Політики.</p>
                     <p>Відносно всієї особистої інформації, що нами одержується та зберігається, яка визначається як будь-яка інформація, що ідентифікує особу, до якої вона належить, або інформація, яка може бути використана для ідентифікації такої особи, зв'язку з нею або визначення ії місця розташування, діють умови Політики конфіденційності в наступній редакції.</p>

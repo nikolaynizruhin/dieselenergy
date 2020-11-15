@@ -36,7 +36,7 @@
         @endforeach
         <tr>
             <td colspan="4">Всього:</td>
-            <td colspan="2">@uah($total)</td>
+            <td colspan="2" class="font-weight-bold">@uah($total)</td>
         </tr>
         </tbody>
     </table>
