@@ -5,13 +5,16 @@
         <div class="dots mr-sm-5 mt-6 top-0 right-0 height-72 width-48 position-absolute"></div>
 
         <div class="container">
-            <div class="row mt-n3 mb-4 text-gray-500">
-                <div class="col letter-spacing d-flex align-items-center">
-                    Товари
-                    @include('layouts.partials.icon', ['name' => 'chevron-right', 'classes' => 'mx-2', 'width' => '0.9em', 'height' => '0.9em'])
-                    {{ $category->name }}
+            <div class="row mt-n3 mb-4">
+                <div class="col">
+                    @include('layouts.partials.breadcrumb', [
+                        'links' => [
+                            'Головна' => route('home'),
+                            $category->name => route('categories.products.index', $category),
+                        ]
+                    ])
                 </div>
-                <div class="col text-right">
+                <div class="col text-right text-gray-500">
                     Всього: {{ $products->total() }}
                 </div>
             </div>

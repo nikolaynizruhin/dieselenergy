@@ -5,11 +5,14 @@
         <div class="dots mr-sm-5 mt-6 top-0 right-0 height-72 width-48 position-absolute"></div>
 
         <div class="container">
-            <div class="row mt-n3 mb-4 text-gray-500">
-                <div class="col letter-spacing d-flex align-items-center">
-                    Товари
-                    @include('layouts.partials.icon', ['name' => 'chevron-right', 'classes' => 'mx-2', 'width' => '0.9em', 'height' => '0.9em'])
-                    Кошик
+            <div class="row mt-n3 mb-4">
+                <div class="col">
+                    @include('layouts.partials.breadcrumb', [
+                        'links' => [
+                            'Головна' => route('home'),
+                            'Кошик' => route('carts.index'),
+                        ]
+                    ])
                 </div>
             </div>
             <h2 class="text-center">Ваше замовлення</h2>
