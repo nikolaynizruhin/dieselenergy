@@ -151,11 +151,11 @@
                     <label for="inputDescription" class="col-md-3 col-form-label">
                         {{ __('common.description') }}
                         <small id="descriptionHelpBlock" class="form-text text-muted">
-                            {{ __('common.support') }} <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown</a>
+                            {{ __('common.support') }} <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank"><u>Markdown</u></a>
                         </small>
                     </label>
                     <div class="col-md-6">
-                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="5" aria-describedby="descriptionHelpBlock">{{ old('description') }}</textarea>
+                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="10" aria-describedby="descriptionHelpBlock">{{ old('description') }}</textarea>
 
                         @error('description')
                             <div class="invalid-feedback" role="alert">

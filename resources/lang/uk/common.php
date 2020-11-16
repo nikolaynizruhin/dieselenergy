@@ -44,7 +44,7 @@ return [
     'remove' => 'Видалити',
     'search' => 'Пошук',
     'settings' => 'Налаштування',
-    'slug' => 'Слаг',
+    'slug' => 'URL',
     'status' => 'Статус',
     'support' => 'Підтрімка',
     'title' => 'Назва',

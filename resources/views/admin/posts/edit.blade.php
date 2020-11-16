@@ -73,9 +73,14 @@
 
                 <!-- Body -->
                 <div class="form-group row">
-                    <label for="inputBody" class="col-md-3 col-form-label">{{ __('post.body') }}</label>
+                    <label for="inputBody" class="col-md-3 col-form-label">
+                        {{ __('post.body') }}
+                        <small id="bodyHelpBlock" class="form-text text-muted">
+                            {{ __('common.support') }} <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank"><u>Markdown</u></a>
+                        </small>
+                    </label>
                     <div class="col-md-6">
-                        <textarea name="body" class="form-control @error('body') is-invalid @enderror" id="inputBody" rows="5">{{ old('body', $post->body) }}</textarea>
+                        <textarea name="body" class="form-control @error('body') is-invalid @enderror" id="inputBody" rows="10" aria-describedby="bodyHelpBlock">{{ old('body', $post->body) }}</textarea>
 
                         @error('body')
                             <div class="invalid-feedback" role="alert">
