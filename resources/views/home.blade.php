@@ -246,7 +246,7 @@
                         </div>
                         <div class="custom-control custom-switch mb-3">
                             <input name="privacy" value="1" type="checkbox" class="custom-control-input @error('privacy') is-invalid @enderror" @if(old('privacy')) checked @endif id="accept" required>
-                            <label class="custom-control-label text-muted" for="accept">Згода на  <a href="{{ route('privacy') }}">обробку персональних даних</a></label>
+                            <label class="custom-control-label text-muted" for="accept">Згода на  <a href="{{ route('privacy') }}"><u>обробку персональних даних</u></a></label>
 
                             @error('privacy')
                                 <div class="invalid-feedback" role="alert">
