@@ -42,4 +42,14 @@ class StoreContact extends FormRequest
     {
         return $this->only(['name', 'phone']);
     }
+
+    /**
+     * Get the URL to redirect to on a validation error.
+     *
+     * @return string
+     */
+    protected function getRedirectUrl()
+    {
+        return parent::getRedirectUrl().'#contact';
+    }
 }

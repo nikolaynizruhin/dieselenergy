@@ -71,7 +71,7 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-            ])->assertRedirect(route('home'))
+            ])->assertRedirect(route('home').'#contact')
                 ->assertSessionHasErrors('privacy');
     }
 
@@ -87,7 +87,8 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-            ])->assertSessionHasErrors('name');
+            ])->assertRedirect(route('home').'#contact')
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -102,7 +103,7 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-            ])->assertRedirect(route('home'))
+            ])->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('name');
     }
 
@@ -118,7 +119,7 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-            ])->assertRedirect(route('home'))
+            ])->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('name');
     }
 
@@ -133,7 +134,7 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-            ])->assertRedirect(route('home'))
+            ])->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('email');
     }
 
@@ -149,7 +150,7 @@ class CreateContactTest extends TestCase
                 'email' => 1,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-            ])->assertRedirect(route('home'))
+            ])->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('email');
     }
 
@@ -165,7 +166,7 @@ class CreateContactTest extends TestCase
                 'email' => str_repeat('a', 256),
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-            ])->assertRedirect(route('home'))
+            ])->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('email');
     }
 
@@ -181,7 +182,7 @@ class CreateContactTest extends TestCase
                 'email' => 'invalid',
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-            ])->assertRedirect(route('home'))
+            ])->assertRedirect(route('home').'#contact')
                 ->assertSessionHasErrors('email');
     }
 
@@ -197,7 +198,8 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => null,
                 'message' => $contact->message,
-            ])->assertSessionHasErrors('phone');
+            ])->assertRedirect(route('home').'#contact')
+            ->assertSessionHasErrors('phone');
     }
 
     /** @test */
@@ -212,7 +214,8 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => 0631234567,
                 'message' => $contact->message,
-            ])->assertSessionHasErrors('phone');
+            ])->assertRedirect(route('home').'#contact')
+            ->assertSessionHasErrors('phone');
     }
 
     /** @test */
@@ -227,6 +230,7 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => 1,
-            ])->assertSessionHasErrors('message');
+            ])->assertRedirect(route('home').'#contact')
+            ->assertSessionHasErrors('message');
     }
 }
