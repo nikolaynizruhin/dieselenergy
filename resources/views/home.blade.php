@@ -225,8 +225,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputPhone" class="font-weight-bold">Телефон</label>
-                            <input name="phone" type="tel" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone') }}" aria-describedby="phoneHelp" autocomplete="phone" required>
-                            <small id="phoneHelp" class="form-text text-muted">Формат номеру: +380631683321</small>
+                            <input name="phone" type="tel" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone', '+380') }}" pattern="[+]{1}380[0-9]{9}" autocomplete="phone" required>
 
                             @error('phone')
                                 <div class="invalid-feedback" role="alert">

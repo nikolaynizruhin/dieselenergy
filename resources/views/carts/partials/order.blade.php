@@ -24,8 +24,7 @@
             </div>
             <div class="form-group">
                 <label for="inputPhone">Телефон</label>
-                <input name="phone" type="text" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" id="inputPhone" aria-describedby="phoneHelp" pattern="[+]{1}380[0-9]{9}" required autocomplete="phone">
-                <small id="phoneHelp" class="form-text text-muted">Формат номеру: +380631683321</small>
+                <input name="phone" type="text" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone', '+380') }}" id="inputPhone" pattern="[+]{1}380[0-9]{9}" required autocomplete="phone">
 
                 @error('phone')
                     <div class="invalid-feedback" role="alert">
