@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container-lg">
-        <a class="navbar-brand d-flex" href="{{ route('admin.dashboard') }}">
+        <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
             <img src="{{ asset('/images/logo.svg') }}" alt="{{ config('app.name') }}" width="130">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
