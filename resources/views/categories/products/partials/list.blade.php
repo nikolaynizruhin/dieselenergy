@@ -2,13 +2,13 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
         @foreach ($chunkedProducts as $product)
             <div class="col mb-4">
-                <div class="card">
+                <div class="card shadow-sm">
                     <a href="{{ route('products.show', $product) }}">
                         <img src="{{ asset('storage/'.$product->defaultImage()->path) }}" class="card-img-top" alt="{{ $product->name }}">
                     </a>
                     <div class="card-body mb-n3">
                         <h6 class="card-title">
-                            <a href="{{ route('products.show', $product) }}" class="text-decoration-none text-body">
+                            <a href="{{ route('products.show', $product) }}" class="text-body">
                                 {{ $product->name }}
                             </a>
                         </h6>
