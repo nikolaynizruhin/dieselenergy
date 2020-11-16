@@ -12,7 +12,7 @@
                 <h5 class="text-primary">надійні рішення для постачання<br>електроенергії</h5>
                 <p class="text-muted">Технічно продумані рішення та розробки найкращих світових інженерів дозволили нам стати партнером в обслуговуванні професійних дизельних електростанцій.</p>
                 <button type="button" class="btn btn-primary btn-lg">Каталог товарів</button>
-                <a href="#contact" role="button" class="btn btn-outline-secondary btn-lg mr-2">Залишити заявку</a>
+                <a href="#contact" role="button" class="btn btn-outline-secondary btn-lg">Залишити заявку</a>
             </div>
             <div class="col-12 col-md d-none d-md-block">
                 <img src="{{ asset('images/wind-turbine.svg') }}" alt="Wind turbine" width="100%">
