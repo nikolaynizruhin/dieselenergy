@@ -13,7 +13,7 @@
                             </a>
                         </h6>
                         <h6 class="card-subtitle mb-2 text-muted">{{ $product->category->name }}</h6>
-                        <h5 class="card-title">@uah($product->uah_price)</h5>
+                        <h5 class="card-title text-primary">@uah($product->uah_price)</h5>
                     </div>
                     @if ($product->attributes->isNotEmpty())
                         <div class="card-body bg-light text-muted">
@@ -35,7 +35,8 @@
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                             <input type="hidden" name="quantity" value="1">
                             <button type="submit" class="btn btn-outline-secondary btn-block">
-                                Додати в кошик
+                                @include('layouts.partials.icon', ['name' => 'cart2', 'classes' => 'pb-1', 'width' => '1.4em', 'height' => '1.4em'])
+                                Купити
                             </button>
                         </form>
                     </div>

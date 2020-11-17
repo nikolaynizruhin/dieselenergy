@@ -38,10 +38,6 @@
                         </div>
 
                         @includeIf('categories.products.partials.filters.'.$category->slug)
-
-                        <button type="submit" class="btn mt-3 btn-outline-primary btn-block">
-                            Застосувати
-                        </button>
                     </form>
                 </div>
                 <div class="col-12 col-md-9 col-lg-10">
