@@ -13,8 +13,8 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col col-md-10 col-lg-8">
-                    <h2 class="my-3">{{ $post->title }}</h2>
-                    <img src="{{ asset('/storage/'.$post->image->path) }}" class="img-fluid" alt="{{ $post->title }}">
+                    <h2 class="mb-3">{{ $post->title }}</h2>
+                    <img src="{{ asset('/storage/'.$post->image->path) }}" class="img-fluid mb-3" alt="{{ $post->title }}">
                 </div>
             </div>
             <div class="row justify-content-center">
