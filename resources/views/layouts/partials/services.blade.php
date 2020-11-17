@@ -7,9 +7,9 @@
                         @include('layouts.partials.icon', ['name' => 'truck', 'width' => '2.5em', 'height' => '2.5em', 'classes' => 'text-secondary'])
                     </div>
                     <div class="col">
-                        БЕЗКОШТОВНА ДОСТАВКА
+                        ДОСТАВКА
                         <br>
-                        <span class="text-muted">Безкоштовна доставка по Києву та Київській області</span>
+                        <span class="text-muted">Доставка продукції здійснюється по всій Україні</span>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                     <div class="col">
                         ГАРАНТІЯ
                         <br>
-                        <span class="text-muted">Гарантія протягом 1 року</span>
+                        <span class="text-muted">Гарантійне та післягарантійне обслуговування електростанцій</span>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     <div class="col">
                         ТЕХНІЧНА ПІДТРИМКА
                         <br>
-                        <span class="text-muted">Технічна підтримка протягом 1 року</span>
+                        <span class="text-muted">Cервісне технічне обслуговування нашими спеціалістами</span>
                     </div>
                 </div>
             </div>

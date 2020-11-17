@@ -33,10 +33,7 @@
                         <br>
                         <small class="text-muted">{{ $product->category->name }}</small>
                     </h5>
-                    <h5 class="text-primary">@uah($product->uah_price)</h5>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur assumenda consectetur, debitis dicta dolorum earum eius eos inventore libero maxime molestiae nostrum obcaecati odit possimus quo recusandae sed totam.
-                    </p>
+                    <h5 class="text-primary mb-3">@uah($product->uah_price)</h5>
                     <form class="mb-3" action="{{ route('carts.store') }}" method="POST">
                         @csrf
                         <div class="row">
@@ -48,25 +45,28 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-primary">Додати в кошик</button>
+                                <button type="submit" class="btn btn-primary">
+                                    @include('layouts.partials.icon', ['name' => 'cart2', 'classes' => 'pb-1', 'width' => '1.4em', 'height' => '1.4em'])
+                                    Купити
+                                </button>
                             </div>
                         </div>
                     </form>
                     <p class="text-muted">
                         @include('layouts.partials.icon', ['name' => 'shield-check', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'mr-2'])
-                        Гарантія протягом 1 року
+                        Гарантійне та післягарантійне обслуговування електростанцій
                     </p>
                     <p class="text-muted">
                         @include('layouts.partials.icon', ['name' => 'truck', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'mr-2'])
-                        Безкоштовна доставка по Києву та Київській області
+                        Доставка продукції здійснюється по всій Україні
                     </p>
                     <p class="text-muted">
                         @include('layouts.partials.icon', ['name' => 'tools', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'mr-2'])
-                        Технічна підтримка протягом 1 року
+                        Cервісне технічне обслуговування нашими спеціалістами
                     </p>
                     <p class="text-muted">
                         @include('layouts.partials.icon', ['name' => 'credit-card', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'mr-2'])
-                        Готівковий та безготівковий розрахунок
+                        Безготівковий розрахунок
                     </p>
                 </div>
             </div>
