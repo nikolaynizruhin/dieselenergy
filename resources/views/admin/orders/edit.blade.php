@@ -39,7 +39,7 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="addon">$</span>
+                                <span class="input-group-text" id="addon">₴</span>
                             </div>
                             <input type="number" id="inputTotal" class="form-control rounded-right @error('total') is-invalid @enderror" value="{{ old('total', $order->total) }}" name="total" min="0" aria-label="Total" aria-describedby="addon" required>
 
