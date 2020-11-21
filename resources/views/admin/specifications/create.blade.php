@@ -61,13 +61,11 @@
                 <div class="form-group row">
                     <div class="col-md-3">{{ __('common.feature') }}</div>
                     <div class="col-md-6">
-                        <div class="form-check">
-                            <input type="checkbox" id="inputFeatured" class="form-check-input @error('is_featured') is-invalid @enderror" value="1" name="is_featured" @if (old('is_featured')) checked @endif>
-                            <label class="form-check-label" for="inputFeatured">
-                                {{ __('common.is_featured') }}
-                            </label>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input @error('is_featured') is-invalid @enderror" value="1" name="is_featured" id="inputFeatured" @if (old('is_featured')) checked @endif>
+                            <label class="custom-control-label" for="inputFeatured">{{ __('common.is_featured') }}</label>
 
-                            @error('is_featured')
+                            @error('is_active')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>

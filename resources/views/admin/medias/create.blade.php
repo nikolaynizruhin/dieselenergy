@@ -61,11 +61,9 @@
                 <div class="form-group row">
                     <div class="col-md-3">{{ __('common.status') }}</div>
                     <div class="col-md-6">
-                        <div class="form-check">
-                            <input type="checkbox" id="inputDefault" class="form-check-input @error('is_default') is-invalid @enderror" value="1" name="is_default" @if (old('is_default')) checked @endif>
-                            <label class="form-check-label" for="inputDefault">
-                                {{ __('common.default') }}
-                            </label>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input @error('is_default') is-invalid @enderror" value="1" name="is_default" id="inputDefault" @if (old('is_default')) checked @endif>
+                            <label class="custom-control-label" for="inputDefault">{{ __('common.default') }}</label>
 
                             @error('is_default')
                                 <div class="invalid-feedback" role="alert">

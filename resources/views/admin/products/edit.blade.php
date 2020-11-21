@@ -80,11 +80,9 @@
                 <div class="form-group row">
                     <div class="col-md-3">{{ __('common.status') }}</div>
                     <div class="col-md-6">
-                        <div class="form-check">
-                            <input type="checkbox" id="inputStatus" class="form-check-input @error('is_active') is-invalid @enderror" value="1" name="is_active" @if (old('is_active', $product->is_active)) checked @endif>
-                            <label class="form-check-label" for="inputStatus">
-                                {{ __('common.active') }}
-                            </label>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input @error('is_active') is-invalid @enderror" value="1" name="is_active" id="inputStatus" @if (old('is_active', $product->is_active)) checked @endif>
+                            <label class="custom-control-label" for="inputStatus">{{ __('common.active') }}</label>
 
                             @error('is_active')
                                 <div class="invalid-feedback" role="alert">

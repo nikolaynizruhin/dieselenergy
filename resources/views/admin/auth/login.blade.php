@@ -28,12 +28,9 @@
             @enderror
         </div>
 
-        <div class="form-group form-check">
-            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-            <label class="form-check-label" for="remember">
-                {{ __('auth.remember') }}
-            </label>
+        <div class="custom-control custom-checkbox mb-3">
+            <input type="checkbox" class="custom-control-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+            <label class="custom-control-label" for="remember">{{ __('auth.remember') }}</label>
         </div>
 
         <div class="d-flex justify-content-between">
