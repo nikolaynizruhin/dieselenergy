@@ -18,7 +18,6 @@ return [
     'delete' => 'Delete Product',
     'deleted' => 'Product deleted successfully!',
     'details' => 'Product Details',
-    'images' => 'The product already has :count images.',
     'missing' => 'No products matched the given criteria.',
     'model' => 'Model',
     'plural' => 'Products',
