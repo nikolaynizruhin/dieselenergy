@@ -8,6 +8,16 @@
 
 
         <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-3 text-muted">{{ __('image.title') }}</div>
+                <div class="col-md-9">
+                    <img src="{{ asset('storage/'.$post->image->path) }}" class="img-fluid img-thumbnail mb-3" alt="Responsive image">
+                </div>
+            </div>
+
+            <hr>
+
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('common.title') }}</div>
                 <div class="col-md-9">
@@ -20,6 +30,13 @@
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('common.slug') }}</div>
                 <div class="col-md-9">{{ $post->slug }}</div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-3 text-muted">{{ __('post.excerpt') }}</div>
+                <div class="col-md-9">{{ $post->excerpt }}</div>
             </div>
 
             <hr>

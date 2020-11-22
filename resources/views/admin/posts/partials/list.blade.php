@@ -17,6 +17,9 @@
                     <th scope="row" class="font-weight-normal">{{ $posts->firstItem() + $key }}</th>
                     <td>{{ $post->title }}</td>
                     <td>
+                        <a href="{{ route('admin.posts.show', $post) }}" class="mr-2">
+                            @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
+                        </a>
                         <a href="{{ route('admin.posts.edit', $post) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
