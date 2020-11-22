@@ -56,7 +56,9 @@ class UpdateOrderTest extends TestCase
             ->assertRedirect(route('admin.orders.index'))
             ->assertSessionHas('status', trans('order.updated'));
 
-        $this->assertDatabaseHas('orders', $stub);
+        $this->assertDatabaseHas('orders', array_merge($stub, [
+            'total' => $stub['total'] * 100,
+        ]));
     }
 
     /** @test */

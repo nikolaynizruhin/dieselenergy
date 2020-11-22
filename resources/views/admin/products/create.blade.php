@@ -129,12 +129,9 @@
                 <div class="form-group row">
                     <label for="inputPrice" class="col-md-3 col-form-label">
                         {{ __('common.price') }}
-                        <small id="priceHelpBlock" class="form-text text-muted">
-                            {{ __('product.price_help') }}
-                        </small>
                     </label>
                     <div class="col-md-6">
-                        <input type="number" id="inputPrice" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" aria-describedby="priceHelpBlock" min="1" required autocomplete="price">
+                        <input type="number" min="0.01" step="0.01" id="inputPrice" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price">
 
                         @error('price')
                             <div class="invalid-feedback" role="alert">

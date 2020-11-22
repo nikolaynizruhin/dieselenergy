@@ -56,7 +56,9 @@ class CreateProductTest extends TestCase
             ->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.created'));
 
-        $this->assertDatabaseHas('products', $product);
+        $this->assertDatabaseHas('products', array_merge($product, [
+            'price' => $product['price'] * 100,
+        ]));
     }
 
     /** @test */
@@ -78,8 +80,10 @@ class CreateProductTest extends TestCase
             ])->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.created'));
 
-        $this->assertDatabaseHas('products', $product);
         $this->assertDatabaseHas('attribute_product', ['value' => $value]);
+        $this->assertDatabaseHas('products', array_merge($product, [
+            'price' => $product['price'] * 100,
+        ]));
     }
 
     /** @test */
@@ -100,12 +104,16 @@ class CreateProductTest extends TestCase
 
         Storage::assertExists($path = 'images/'.$image->hashName());
 
-        $this->assertDatabaseHas('products', $product);
         $this->assertDatabaseHas('images', ['path' => $path]);
+
         $this->assertDatabaseHas('image_product', [
             'image_id' => Image::firstWhere('path', $path)->id,
             'product_id' => Product::firstWhere('name', $product['name'])->id,
         ]);
+
+        $this->assertDatabaseHas('products', array_merge($product, [
+            'price' => $product['price'] * 100,
+        ]));
     }
 
     /** @test */

@@ -92,4 +92,12 @@ class ProductTest extends TestCase
 
         $this->assertEquals(3331, $product->uah_price);
     }
+
+    /** @test */
+    public function it_has_decimal_price()
+    {
+        $product = Product::factory()->create(['price' => 10000]);
+
+        $this->assertEquals(100.00, $product->decimal_price);
+    }
 }

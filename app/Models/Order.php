@@ -107,4 +107,14 @@ class Order extends Model
     {
         return $this->products->sum(fn ($product) => $product->uah_price * $product->pivot->quantity);
     }
+
+    /**
+     * Formatted total.
+     *
+     * @return float
+     */
+    public function getDecimalTotalAttribute()
+    {
+        return number_format($this->total / 100, 2, '.', '');
+    }
 }

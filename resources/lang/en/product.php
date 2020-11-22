@@ -21,7 +21,6 @@ return [
     'missing' => 'No products matched the given criteria.',
     'model' => 'Model',
     'plural' => 'Products',
-    'price_help' => 'Uses cents',
     'select' => 'Select a product',
     'title' => 'Product',
     'update' => 'Update Product',

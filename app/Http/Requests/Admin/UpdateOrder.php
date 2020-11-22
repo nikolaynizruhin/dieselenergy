@@ -13,4 +13,16 @@ class UpdateOrder extends StoreOrder
     {
         return parent::rules() + ['total' => 'required|numeric|min:0'];
     }
+
+    /**
+     * Get prepared data.
+     *
+     * @return array
+     */
+    public function prepared()
+    {
+        return array_merge($this->validated(), [
+            'total' => intval($this->total * 100),
+        ]);
+    }
 }

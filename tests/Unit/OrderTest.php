@@ -67,4 +67,12 @@ class OrderTest extends TestCase
 
         $this->assertEquals(0, $cart->order->fresh()->total);
     }
+
+    /** @test */
+    public function it_has_decimal_total()
+    {
+        $order = Order::factory()->create(['total' => 10000]);
+
+        $this->assertEquals(100.00, $order->decimal_total);
+    }
 }

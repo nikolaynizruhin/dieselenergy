@@ -85,7 +85,7 @@ class OrderController extends Controller
      */
     public function update(UpdateOrder $request, Order $order)
     {
-        $order->update($request->validated());
+        $order->update($request->prepared());
 
         return redirect()
             ->route('admin.orders.index')

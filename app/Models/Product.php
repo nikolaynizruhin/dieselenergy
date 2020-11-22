@@ -97,6 +97,16 @@ class Product extends Model
     }
 
     /**
+     * Formatted price.
+     *
+     * @return float
+     */
+    public function getDecimalPriceAttribute()
+    {
+        return number_format($this->price / 100, 2, '.', '');
+    }
+
+    /**
      * Get the brand of the product.
      */
     public function brand()
