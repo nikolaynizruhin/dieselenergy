@@ -4,7 +4,7 @@
             <div class="col mb-4">
                 <div class="card shadow-sm">
                     <a href="{{ route('products.show', $product) }}">
-                        <img src="{{ asset('storage/'.$product->defaultImage()->path) }}" class="card-img-top" alt="{{ $product->name }}">
+                        <img src="{{ asset('storage/'.$product->defaultImage()->path) }}" class="card-img-top" alt="{{ $product->name }}" loading="lazy">
                     </a>
                     <div class="card-body mb-n3">
                         <h6 class="card-title">

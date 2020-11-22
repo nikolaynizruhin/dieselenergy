@@ -7,7 +7,7 @@
     <div class="carousel-inner">
         @foreach($product->images as $image)
             <div class="carousel-item @if($image->pivot->is_default) active @endif">
-                <img src="{{ asset('/storage/'.$image->path) }}" class="d-block w-100" alt="{{ $product->name }}">
+                <img src="{{ asset('/storage/'.$image->path) }}" class="d-block w-100" alt="{{ $product->name }}" loading="lazy">
             </div>
         @endforeach
     </div>

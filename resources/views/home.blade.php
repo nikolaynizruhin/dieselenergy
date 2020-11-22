@@ -15,7 +15,7 @@
                 <a href="#contact" role="button" class="btn btn-outline-secondary btn-lg mb-1">Залишити заявку</a>
             </div>
             <div class="col-12 col-md d-none d-md-block">
-                <img src="{{ asset('images/wind-turbine.svg') }}" alt="Wind turbine" width="100%">
+                <img src="{{ asset('images/wind-turbine.svg') }}" alt="Wind turbine" width="100%" loading="lazy">
             </div>
         </div>
     </div>
@@ -128,25 +128,25 @@
 
         <div class="row">
             <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
-                <img src="{{ asset('/images/logos/ictv.png') }}" alt="ICTV" height="60">
+                <img src="{{ asset('/images/logos/ictv.png') }}" alt="ICTV" height="60" loading="lazy">
             </div>
             <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
-                <img src="{{ asset('/images/logos/iev.png') }}" alt="IEV" height="60">
+                <img src="{{ asset('/images/logos/iev.png') }}" alt="IEV" height="60" loading="lazy">
             </div>
             <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
-                <img src="{{ asset('/images/logos/motto.png') }}" alt="MOTTO" height="60">
+                <img src="{{ asset('/images/logos/motto.png') }}" alt="MOTTO" height="60" loading="lazy">
             </div>
         </div>
 
         <div class="row">
             <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
-                <img src="{{ asset('/images/logos/figaro.svg') }}" alt="Figaro" height="50">
+                <img src="{{ asset('/images/logos/figaro.svg') }}" alt="Figaro" height="50" loading="lazy">
             </div>
             <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
-                <img src="{{ asset('/images/logos/metro.svg') }}" alt="Metro" height="60">
+                <img src="{{ asset('/images/logos/metro.svg') }}" alt="Metro" height="60" loading="lazy">
             </div>
             <div class="col-12 col-md d-flex align-items-center bg-light p-5 justify-content-center m-1">
-                <img src="{{ asset('/images/logos/well.png') }}" alt="Небесна криниця" height="60">
+                <img src="{{ asset('/images/logos/well.png') }}" alt="Небесна криниця" height="60" loading="lazy">
             </div>
         </div>
     </div>

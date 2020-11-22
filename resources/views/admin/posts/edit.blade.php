@@ -43,7 +43,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">{{ __('image.title') }}</label>
                     <div class="col-md-6">
-                        <img src="{{ asset('storage/'.$post->image->path) }}" class="img-fluid img-thumbnail mb-3" alt="Responsive image">
+                        <img src="{{ asset('storage/'.$post->image->path) }}" class="img-fluid img-thumbnail mb-3" alt="{{ $post->title }}" loading="lazy">
                         <div class="custom-file">
                             <input type="file" id="inputImage" class="custom-file-input @error('image') is-invalid @enderror" name="image" accept="image/*">
                             <label class="custom-file-label" for="inputImage">{{ __('common.choose_images') }}</label>

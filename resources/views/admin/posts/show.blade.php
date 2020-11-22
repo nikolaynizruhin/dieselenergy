@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('image.title') }}</div>
                 <div class="col-md-9">
-                    <img src="{{ asset('storage/'.$post->image->path) }}" class="img-fluid img-thumbnail mb-3" alt="Responsive image">
+                    <img src="{{ asset('storage/'.$post->image->path) }}" class="img-fluid img-thumbnail mb-3" alt="{{ $post->title }}">
                 </div>
             </div>
 
