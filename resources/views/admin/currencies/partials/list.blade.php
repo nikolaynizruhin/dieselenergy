@@ -9,6 +9,7 @@
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('currency.code') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('currency.rate') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('currency.symbol') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
@@ -18,6 +19,7 @@
                     <th scope="row" class="font-weight-normal">{{ $currencies->firstItem() + $key }}</th>
                     <td>{{ $currency->code }}</td>
                     <td>{{ $currency->rate }}</td>
+                    <td>{{ $currency->symbol }}</td>
                     <td>
                         <a href="{{ route('admin.currencies.edit', $currency) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
