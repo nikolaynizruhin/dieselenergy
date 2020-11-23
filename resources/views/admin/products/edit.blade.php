@@ -139,7 +139,7 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon">{{ $product->brand->currency->code }}</span>
+                                <span class="input-group-text" id="basic-addon">{{ $product->brand->currency->symbol }}</span>
                             </div>
                             <input type="number" min="0.01" step="0.01" id="inputPrice" class="form-control rounded-right @error('price') is-invalid @enderror" aria-label="Price" aria-describedby="basic-addon" name="price" value="{{ old('price', $product->decimal_price) }}" required autocomplete="price">
 
