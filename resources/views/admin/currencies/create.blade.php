@@ -23,6 +23,19 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="inputSymbol" class="col-md-3 col-form-label">{{ __('currency.symbol') }}</label>
+                    <div class="col-md-6">
+                        <input type="text" id="inputSymbol" class="form-control @error('symbol') is-invalid @enderror" name="symbol" value="{{ old('symbol') }}" required autocomplete="symbol">
+
+                        @error('symbol')
+                            <div class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="inputRate" class="col-md-3 col-form-label">{{ __('currency.rate') }}</label>
                     <div class="col-md-6">
                         <input type="number" step="any" id="inputRate" class="form-control @error('rate') is-invalid @enderror" name="rate" value="{{ old('rate') }}" required autocomplete="rate">

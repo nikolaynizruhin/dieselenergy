@@ -24,6 +24,7 @@ class CurrencyFactory extends Factory
         return [
             'code' => $this->faker->unique()->currencyCode,
             'rate' => $this->faker->randomFloat($nbMaxDecimals = 4, $min = 1, $max = 50),
+            'symbol' => $this->faker->unique()->randomLetter
         ];
     }
 }

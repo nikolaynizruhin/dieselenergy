@@ -19,6 +19,7 @@ return [
     'deleted' => 'Currency deleted successfully!',
     'details' => 'Currency Details',
     'code' => 'Code',
+    'symbol' => 'Symbol',
     'rate' => 'Rate',
     'missing' => 'No currencies matched the given criteria.',
     'plural' => 'Currencies',

@@ -143,4 +143,41 @@ class UpdateCurrencyTest extends TestCase
             ->put(route('admin.currencies.update', $currency), $stub)
             ->assertSessionHasErrors('rate');
     }
+
+    /** @test */
+    public function user_cant_update_currency_without_symbol()
+    {
+        $user = User::factory()->create();
+        $currency = Currency::factory()->create();
+        $stub = Currency::factory()->raw(['symbol' => null]);
+
+        $this->actingAs($user)
+            ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertSessionHasErrors('symbol');
+    }
+
+    /** @test */
+    public function user_cant_update_currency_with_integer_symbol()
+    {
+        $user = User::factory()->create();
+        $currency = Currency::factory()->create();
+        $stub = Currency::factory()->raw(['symbol' => 1]);
+
+        $this->actingAs($user)
+            ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertSessionHasErrors('symbol');
+    }
+
+    /** @test */
+    public function user_cant_update_currency_with_existing_symbol()
+    {
+        $user = User::factory()->create();
+        $currency = Currency::factory()->create();
+        $existing = Currency::factory()->create();
+        $stub = Currency::factory()->raw(['symbol' => $existing->symbol]);
+
+        $this->actingAs($user)
+            ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertSessionHasErrors('symbol');
+    }
 }

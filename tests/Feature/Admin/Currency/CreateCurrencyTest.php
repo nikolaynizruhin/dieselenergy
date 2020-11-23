@@ -131,4 +131,38 @@ class CreateCurrencyTest extends TestCase
             ->post(route('admin.currencies.store'), $currency)
             ->assertSessionHasErrors('rate');
     }
+
+    /** @test */
+    public function user_cant_create_currency_without_symbol()
+    {
+        $user = User::factory()->create();
+        $currency = Currency::factory()->raw(['symbol' => null]);
+
+        $this->actingAs($user)
+            ->post(route('admin.currencies.store'), $currency)
+            ->assertSessionHasErrors('symbol');
+    }
+
+    /** @test */
+    public function user_cant_create_currency_with_integer_symbol()
+    {
+        $user = User::factory()->create();
+        $currency = Currency::factory()->raw(['symbol' => 1]);
+
+        $this->actingAs($user)
+            ->post(route('admin.currencies.store'), $currency)
+            ->assertSessionHasErrors('symbol');
+    }
+
+    /** @test */
+    public function user_cant_create_currency_with_existing_symbol()
+    {
+        $user = User::factory()->create();
+        $currency = Currency::factory()->create();
+        $stub = Currency::factory()->raw(['symbol' => $currency->symbol]);
+
+        $this->actingAs($user)
+            ->post(route('admin.currencies.store'), $stub)
+            ->assertSessionHasErrors('symbol');
+    }
 }

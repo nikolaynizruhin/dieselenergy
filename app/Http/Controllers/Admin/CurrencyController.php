@@ -42,6 +42,7 @@ class CurrencyController extends Controller
     {
         $validated = $request->validate([
             'code' => 'required|string|size:3|unique:currencies',
+            'symbol' => 'required|string|unique:currencies',
             'rate' => 'required|numeric|min:0',
         ]);
 
@@ -89,6 +90,11 @@ class CurrencyController extends Controller
                 'required',
                 'string',
                 'size:3',
+                Rule::unique('currencies')->ignore($currency),
+            ],
+            'symbol' => [
+                'required',
+                'string',
                 Rule::unique('currencies')->ignore($currency),
             ],
         ]);
