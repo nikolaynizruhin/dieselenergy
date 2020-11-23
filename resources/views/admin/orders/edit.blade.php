@@ -35,15 +35,20 @@
 
                 <!-- Total -->
                 <div class="form-group row">
-                    <label for="inputTotal" class="col-md-3 col-form-label">{{ __('common.total') }}, UAH</label>
+                    <label for="inputTotal" class="col-md-3 col-form-label">{{ __('common.total') }}</label>
                     <div class="col-md-6">
-                        <input type="number" min="0.00" step="0.01" id="inputTotal" class="form-control @error('total') is-invalid @enderror" value="{{ old('total', $order->decimal_total) }}" name="total" required>
-
-                        @error('total')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon">UAH</span>
                             </div>
-                        @enderror
+                            <input type="number" min="0.00" step="0.01" id="inputTotal" class="form-control rounded-right @error('total') is-invalid @enderror" aria-label="Total" aria-describedby="basic-addon" name="total" value="{{ old('total', $order->decimal_total) }}" required autocomplete="total">
+
+                            @error('total')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
                     </div>
                 </div>
 
