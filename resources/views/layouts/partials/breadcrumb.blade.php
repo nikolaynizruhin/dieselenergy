@@ -4,6 +4,10 @@
     </a>
     @foreach($links as $name => $link)
         @include('layouts.partials.icon', ['name' => 'chevron-right', 'classes' => 'mx-3', 'width' => '0.9em', 'height' => '0.9em'])
-        <a href="{{ $link }}" class="text-gray-500">{{ $name }}</a>
+        @if ($loop->last)
+            <span class="text-gray-500">{{ $name }}</span>
+        @else
+            <a href="{{ $link }}" class="text-gray-500">{{ $name }}</a>
+        @endif
     @endforeach
 </div>
