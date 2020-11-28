@@ -9,7 +9,7 @@
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <span class="d-block text-gray-500 mb-3">ТОВАРИ</span>
-                @foreach(\App\Models\Category::all() as $category)
+                @foreach($categories as $category)
                     <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('categories.products.index', $category) }}">
                         {{ $category->name }}
                     </a>

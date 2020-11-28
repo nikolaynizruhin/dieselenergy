@@ -12,6 +12,7 @@ use App\Http\View\Composers\Admin\ProductComposer;
 use App\Http\View\Composers\Admin\ProductsComposer;
 use App\Http\View\Composers\Admin\SpecificationComposer;
 use App\Http\View\Composers\CartComposer;
+use App\Http\View\Composers\CategoryComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,6 +35,11 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer(
+            ['layouts.partials.header', 'layouts.partials.footer'],
+            CategoryComposer::class
+        );
+
         View::composer(
             ['carts.index'],
             CartComposer::class
