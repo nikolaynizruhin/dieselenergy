@@ -29,7 +29,7 @@
                         @include('admin.orders.partials.status')
                     </td>
                     <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
-                    <td>@uah($order->total)</td>
+                    <td class="text-nowrap">@uah($order->total)</td>
                     <td>
                         <a href="{{ route('admin.orders.show', $order) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
