@@ -57,7 +57,7 @@
 
         <div class="row justify-content-center mt-5 mb-3">
             <div class="col text-center text-gray-500">
-                &copy; 2020 Diesel Energy, Inc. All rights reserved.
+                &copy; {{ date('Y') }} Diesel Energy, Inc. All rights reserved.
             </div>
         </div>
     </div>
