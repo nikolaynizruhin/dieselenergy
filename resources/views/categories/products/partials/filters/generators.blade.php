@@ -1,18 +1,32 @@
 <p class="mb-1 font-weight-bold text-uppercase letter-spacing text-gray-500">
-    <small>Потужність</small>
+    <small>Вид палива</small>
 </p>
 
 <div class="custom-control custom-checkbox">
-    <input name="filter[2][]" value="2,8" type="checkbox" class="custom-control-input" id="customCheck1" @if(in_array('2,8', request('filter.2', []))) checked @endif>
+    <input name="filter[43][]" value="Бензин" type="checkbox" class="custom-control-input" id="customCheck1" @if(in_array('Бензин', request('filter.43', []))) checked @endif>
     <label class="custom-control-label text-secondary" for="customCheck1">
-        <small>2,8</small>
+        <small>Бензин</small>
     </label>
 </div>
 
 <div class="custom-control custom-checkbox">
-    <input name="filter[2][]" value="4,5" type="checkbox" class="custom-control-input" id="customCheck2" @if(in_array('4,5', request('filter.2', []))) checked @endif>
+    <input name="filter[43][]" value="Дизель" type="checkbox" class="custom-control-input" id="customCheck2" @if(in_array('Дизель', request('filter.43', []))) checked @endif>
     <label class="custom-control-label text-secondary" for="customCheck2">
-        <small>4,5</small>
+        <small>Дизель</small>
+    </label>
+</div>
+
+<div class="custom-control custom-checkbox">
+    <input name="filter[43][]" value="Інверторний" type="checkbox" class="custom-control-input" id="customCheck3" @if(in_array('Інверторний', request('filter.43', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck3">
+        <small>Інверторний</small>
+    </label>
+</div>
+
+<div class="custom-control custom-checkbox">
+    <input name="filter[43][]" value="Зварювальний" type="checkbox" class="custom-control-input" id="customCheck4" @if(in_array('Зварювальний', request('filter.43', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck4">
+        <small>Зварювальний</small>
     </label>
 </div>
 
@@ -21,26 +35,79 @@
 </p>
 
 <div class="custom-control custom-checkbox">
-    <input name="filter[3][]" value="230" type="checkbox" class="custom-control-input" id="customCheck3" @if(in_array('230', request('filter.3', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck3">
-        <small>230</small>
+    <input name="filter[3][]" value="230" type="checkbox" class="custom-control-input" id="customCheck5" @if(in_array('230', request('filter.3', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck5">
+        <small>230 В</small>
+    </label>
+</div>
+
+<div class="custom-control custom-checkbox">
+    <input name="filter[3][]" value="380" type="checkbox" class="custom-control-input" id="customCheck6" @if(in_array('380', request('filter.3', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck6">
+        <small>380 В</small>
+    </label>
+</div>
+
+<div class="custom-control custom-checkbox">
+    <input name="filter[3][]" value="230/380" type="checkbox" class="custom-control-input" id="customCheck7" @if(in_array('230/380', request('filter.3', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck7">
+        <small>230/380 В</small>
+    </label>
+</div>
+
+<p class="mb-1 mt-3 font-weight-bold text-uppercase letter-spacing text-gray-500">
+    <small>Потужність</small>
+</p>
+
+<div class="custom-control custom-checkbox">
+    <input name="filter[2][]" value="2,8" type="checkbox" class="custom-control-input" id="customCheck10" @if(in_array('2,8', request('filter.2', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck10">
+        <small>2,8 кВт</small>
+    </label>
+</div>
+
+<div class="custom-control custom-checkbox">
+    <input name="filter[2][]" value="4,5" type="checkbox" class="custom-control-input" id="customCheck11" @if(in_array('4,5', request('filter.2', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck11">
+        <small>4,5 кВт</small>
+    </label>
+</div>
+
+<div class="custom-control custom-checkbox">
+    <input name="filter[2][]" value="5" type="checkbox" class="custom-control-input" id="customCheck12" @if(in_array('5', request('filter.2', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck12">
+        <small>5 кВт</small>
+    </label>
+</div>
+
+<div class="custom-control custom-checkbox">
+    <input name="filter[2][]" value="7,5" type="checkbox" class="custom-control-input" id="customCheck13" @if(in_array('7,5', request('filter.2', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck13">
+        <small>7,5 кВт</small>
+    </label>
+</div>
+
+<div class="custom-control custom-checkbox">
+    <input name="filter[2][]" value="10" type="checkbox" class="custom-control-input" id="customCheck14" @if(in_array('10', request('filter.2', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck14">
+        <small>10 кВт</small>
     </label>
 </div>
 
 <p class="mt-3 mb-1 font-weight-bold text-uppercase letter-spacing text-gray-500">
-    <small>Вага</small>
+    <small>Тип запуску</small>
 </p>
 
 <div class="custom-control custom-checkbox">
-    <input name="filter[5][]" value="154" type="checkbox" class="custom-control-input" id="customCheck4" @if(in_array('154', request('filter.5', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck4">
-        <small>154</small>
+    <input name="filter[4][]" value="ручний" type="checkbox" class="custom-control-input" id="customCheck8" @if(in_array('ручний', request('filter.4', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck8">
+        <small>ручний</small>
     </label>
 </div>
 
-<div class="custom-control custom-checkbox">
-    <input name="filter[5][]" value="51,5" type="checkbox" class="custom-control-input" id="customCheck5" @if(in_array('51,5', request('filter.5', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck5">
-        <small>51,5</small>
+<div class="mb-4 mb-md-0 custom-control custom-checkbox">
+    <input name="filter[4][]" value="ручний/електростарт" type="checkbox" class="custom-control-input" id="customCheck9" @if(in_array('ручний/електростарт', request('filter.4', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck9">
+        <small>ручний/електростарт</small>
     </label>
 </div>
