@@ -47,7 +47,9 @@ class StoreProduct extends FormRequest
     {
         $attributes = Arr::get($this->validated(), 'attributes', []);
 
-        return collect($attributes)->map(fn ($attribute) => ['value' => $attribute]);
+        return collect($attributes)
+            ->filter()
+            ->map(fn ($attribute) => ['value' => $attribute]);
     }
 
     /**
