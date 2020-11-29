@@ -17,15 +17,12 @@
                     <tr>
                         <th scope="row" class="font-weight-normal">{{ $images->firstItem() + $key }}</th>
                         <td>
-                            <a href="{{ asset('storage/'.$image->path) }}" class="mr-2">
+                            <a href="#" data-toggle="modal" data-target="#showImageModal{{ $image->id }}" class="mr-2">
                                 <img src="{{ asset('storage/'.$image->path) }}" class="img-thumbnail" alt="{{ $image->name }}" width="64" height="64" loading="lazy">
                             </a>
                         </td>
                         <td>{{ $image->name }}</td>
                         <td>
-                            <a href="#" data-toggle="modal" data-target="#showImageModal{{ $image->id }}" class="mr-2">
-                                @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
-                            </a>
                             <a href="#" data-toggle="modal" data-target="#deleteImageModal{{ $image->id }}">
                                 @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
                             </a>

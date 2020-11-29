@@ -18,7 +18,7 @@
                 <tr>
                     <th scope="row" class="font-weight-normal">{{ $images->firstItem() + $key }}</th>
                     <td>
-                        <a href="{{ asset('storage/'.$image->path) }}" class="mr-2">
+                        <a href="#" data-toggle="modal" data-target="#showImageModal{{ $image->id }}" class="mr-2">
                             <img src="{{ asset('storage/'.$image->path) }}" class="img-thumbnail" alt="{{ $image->name }}" width="64" height="64" loading="lazy">
                         </a>
                     </td>
@@ -29,9 +29,6 @@
                         @endif
                     </td>
                     <td>
-                        <a href="#" data-toggle="modal" data-target="#showImageModal{{ $image->id }}" class="mr-2">
-                            @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
                         <a href="{{ route('admin.medias.edit', $image->pivot->id) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
