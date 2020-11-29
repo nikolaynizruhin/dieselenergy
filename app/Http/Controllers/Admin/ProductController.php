@@ -67,6 +67,8 @@ class ProductController extends Controller
     {
         $images = $product->images()->search('path', $request->search)->latest()->paginate(10);
 
+        $product->load(['attributes' => fn ($query) => $query->whereNotNull('value')]);
+
         return view('admin.products.show', compact('product', 'images'));
     }
 
