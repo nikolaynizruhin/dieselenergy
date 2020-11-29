@@ -17,16 +17,20 @@
                     </div>
                     @if ($product->attributes->isNotEmpty())
                         <div class="card-body bg-light text-muted">
-                            @foreach ($product->attributes as $attribute)
-                                <div class="row mb-1">
-                                    <div class="col letter-spacing text-gray-500 text-uppercase">
-                                        <small>{{ $attribute->name }}</small>
-                                    </div>
-                                    <div class="col text-secondary">
-                                        <small>{{ $attribute->pivot->value }} {{ $attribute->measure }}</small>
-                                    </div>
-                                </div>
-                            @endforeach
+                            <table class="table table-borderless m-0">
+                                <tbody>
+                                    @foreach ($product->attributes as $attribute)
+                                        <tr>
+                                            <td class="p-1 letter-spacing text-gray-500 text-uppercase">
+                                                <small>{{ $attribute->name }}</small>
+                                            </td>
+                                            <td class="p-1 text-secondary">
+                                                <small>{{ $attribute->pivot->value }} {{ $attribute->measure }}</small>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     @endif
                     <div class="card-body">
