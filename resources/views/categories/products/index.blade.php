@@ -30,10 +30,12 @@
                         </p>
 
                         <div class="form-group">
-                            <label for="selectSort" class="sr-only">Sort</label>
+                            <label for="selectSort" class="sr-only">Сортувати</label>
                             <select class="form-control form-control-sm" name="sort" id="selectSort">
                                 <option value="name" @if (request('sort') === 'name') selected @endif>Назва (А - Я)</option>
                                 <option value="-name" @if (request('sort') === '-name') selected @endif>Назва (Я - А)</option>
+                                <option value="price" @if (request('sort') === 'price') selected @endif>Ціна (Низька > Висока)</option>
+                                <option value="-price" @if (request('sort') === '-price') selected @endif>Ціна (Висока > Низька)</option>
                             </select>
                         </div>
 
