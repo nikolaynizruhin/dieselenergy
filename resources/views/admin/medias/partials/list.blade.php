@@ -35,7 +35,7 @@
                         <a href="#" data-toggle="modal" data-target="#deleteImageModal{{ $image->id }}">
                             @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        @include('admin.images.partials.image')
+                        @include('admin.layouts.partials.image')
                         @include('admin.medias.partials.delete')
                     </td>
                 </tr>
