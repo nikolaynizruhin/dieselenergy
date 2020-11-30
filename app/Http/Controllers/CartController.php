@@ -30,7 +30,9 @@ class CartController extends Controller
     {
         Cart::add($request->product, $request->quantity);
 
-        return back()->with('status', trans('cart.added'));
+        return redirect()
+            ->route('carts.index')
+            ->with('status', trans('cart.added'));
     }
 
     /**

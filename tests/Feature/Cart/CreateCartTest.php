@@ -21,7 +21,7 @@ class CreateCartTest extends TestCase
 
         $this->from(route('categories.products.index', $product->category))
             ->post(route('carts.store', ['product_id' => $product->id, 'quantity' => 2]))
-            ->assertRedirect(route('categories.products.index', $product->category))
+            ->assertRedirect(route('carts.index'))
             ->assertSessionHas('cart')
             ->assertSessionHas('status', trans('cart.added'));
 
