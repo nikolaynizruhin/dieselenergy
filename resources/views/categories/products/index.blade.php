@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-3 col-lg-2">
+                <div class="col-12 col-sm-4 col-md-3 col-lg-2">
                     <form>
                         <p class="mb-1 font-weight-bold text-uppercase letter-spacing text-gray-500">
                             <small>Пошук</small>
@@ -42,7 +42,7 @@
                         @includeIf('categories.products.partials.filters.'.$category->slug)
                     </form>
                 </div>
-                <div class="col-12 col-md-9 col-lg-10">
+                <div class="col-12 col-sm-8 col-md-9 col-lg-10">
                     @include('layouts.partials.alert')
                     @include('categories.products.partials.'.($products->isEmpty() ? 'empty' : 'list'))
                 </div>
