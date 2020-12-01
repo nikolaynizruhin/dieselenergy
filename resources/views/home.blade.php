@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Продаж та технічне обслугування джерел безперебійного живлення')
+
 @section('content')
 <section id="hero" class="position-relative py-7">
     <div class="dots ml-sm-5 mt-5 top-0 left-0 height-72 width-48 position-absolute"></div>

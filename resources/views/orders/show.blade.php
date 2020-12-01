@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Замовлення')
+
 @section('content')
     <section class="position-relative py-5">
         <div class="dots mr-sm-5 mt-6 top-0 right-0 height-64 width-40 position-absolute"></div>

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Блог')
+
 @section('content')
     <section class="position-relative py-5">
         <div class="dots ml-sm-5 mt-5 top-0 left-0 height-72 width-48 position-absolute"></div>
