@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Продаж та технічне обслугування джерел безперебійного живлення')
+@section('title', 'Продаж та технічне обслугування генератрів')
 
 @section('content')
 <section id="hero" class="position-relative py-7">

@@ -9,6 +9,9 @@
 
     <title>@yield('title') | {{ config('app.name') }}</title>
 
+    <meta name="description" content="@yield('description')">
+    <meta name="keywords" content="@yield('keywords')">
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
