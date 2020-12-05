@@ -13,15 +13,11 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md">
-                <h1 class="font-weight-bold">DIESEL ENERGY</h1>
-                <h5 class="text-primary">надійні рішення для постачання<br>електроенергії</h5>
-                <p class="text-muted">Технічно продумані рішення та розробки найкращих світових інженерів дозволили нам стати партнером в обслуговуванні професійних дизельних електростанцій.</p>
+            <div class="col text-center">
+                <h2 class="font-weight-bold text-uppercase mb-3">Надійні рішення для постачання <span class="text-primary">електроенергії</span></h2>
+                <h5 class="text-muted mb-4">Технічно продумані рішення та розробки найкращих світових інженерів дозволили нам<br> стати партнером в обслуговуванні професійних дизельних електростанцій.</h5>
                 <button type="button" class="btn btn-primary btn-lg mb-1">Каталог товарів</button>
                 <a href="#contact" role="button" class="btn btn-outline-secondary btn-lg mb-1">Залишити заявку</a>
-            </div>
-            <div class="col-12 col-md d-none d-md-block">
-                <img src="{{ asset('images/wind-turbine.svg') }}" alt="Wind turbine" width="100%" loading="lazy">
             </div>
         </div>
     </div>
