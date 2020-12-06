@@ -31,6 +31,31 @@
 </div>
 
 <p class="mb-1 mt-3 font-weight-bold text-uppercase letter-spacing text-gray-500">
+    <small>Кількість фаз</small>
+</p>
+
+<div class="custom-control custom-checkbox">
+    <input name="filter[44][]" onchange="this.form.submit()" value="Однофазний" type="checkbox" class="custom-control-input" id="customCheck9" @if(in_array('Однофазний', request('filter.44', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck9">
+        <small>Однофазний</small>
+    </label>
+</div>
+
+<div class="custom-control custom-checkbox">
+    <input name="filter[44][]" onchange="this.form.submit()" value="Однофазний/Трифазний" type="checkbox" class="custom-control-input" id="customCheck10" @if(in_array('Однофазний/Трифазний', request('filter.44', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck10">
+        <small>Однофазний/Трифазний</small>
+    </label>
+</div>
+
+<div class="custom-control custom-checkbox">
+    <input name="filter[44][]" onchange="this.form.submit()" value="Трифазний" type="checkbox" class="custom-control-input" id="customCheck11" @if(in_array('Трифазний', request('filter.44', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck11">
+        <small>Трифазний</small>
+    </label>
+</div>
+
+<p class="mb-1 mt-3 font-weight-bold text-uppercase letter-spacing text-gray-500">
     <small>Напруга</small>
 </p>
 
