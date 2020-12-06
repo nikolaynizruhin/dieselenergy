@@ -7,15 +7,15 @@
 @section('keywords', 'придбати генератор, дизель генератор, бензиновий генератор, джерело безперебійного живлення')
 
 @section('content')
-<section id="hero" class="position-relative py-7">
+<section id="hero" class="position-relative py-md-8">
     <div class="dots ml-sm-5 mt-5 top-0 left-0 height-72 width-48 position-absolute"></div>
     <div class="dots mr-sm-5 mb-5 bottom-0 right-0 height-72 width-48 position-absolute"></div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
+    <div class="container my-6 my-md-0">
+        <div class="row justify-content-center">
+            <div class="col col-md-10 text-center">
                 <h2 class="font-weight-bold text-uppercase mb-3">Надійні рішення для постачання <span class="text-primary">електроенергії</span></h2>
-                <h5 class="text-muted mb-4">Технічно продумані рішення та розробки найкращих світових інженерів дозволили нам<br> стати партнером в обслуговуванні професійних дизельних електростанцій.</h5>
+                <h5 class="text-muted mb-4">Технічно продумані рішення та розробки найкращих світових інженерів дозволили нам стати партнером в обслуговуванні професійних дизельних електростанцій.</h5>
                 <button type="button" class="btn btn-primary btn-lg mb-1">Каталог товарів</button>
                 <a href="#contact" role="button" class="btn btn-outline-secondary btn-lg mb-1">Залишити заявку</a>
             </div>

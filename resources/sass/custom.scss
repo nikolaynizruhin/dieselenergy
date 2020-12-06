@@ -98,6 +98,13 @@
     padding-top: 10rem !important;
 }
 
+.py-md-8 {
+    @media (min-width: 768px) {
+        padding-bottom: 13rem !important;
+        padding-top: 13rem !important;
+    }
+}
+
 .opacity-60 {
     opacity: 0.6;
 }
