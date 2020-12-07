@@ -28,7 +28,7 @@
                             @include('admin.layouts.partials.status', ['status' => __('common.default'), 'type' => 'success'])
                         @endif
                     </td>
-                    <td>
+                    <td class="text-nowrap">
                         <a href="{{ route('admin.medias.edit', $image->pivot->id) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>

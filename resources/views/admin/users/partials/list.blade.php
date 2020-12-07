@@ -18,7 +18,7 @@
                         <th scope="row" class="font-weight-normal">{{ $users->firstItem() + $key }}</th>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>
+                        <td class="text-nowrap">
                             <a href="{{ route('admin.users.edit', $user) }}" class="mr-2">
                                 @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                             </a>

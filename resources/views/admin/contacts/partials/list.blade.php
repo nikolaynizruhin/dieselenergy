@@ -22,7 +22,7 @@
                         </a>
                     </td>
                     <td>{{ $contact->message }}</td>
-                    <td>
+                    <td class="text-nowrap">
                         <a href="{{ route('admin.contacts.show', $contact) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>

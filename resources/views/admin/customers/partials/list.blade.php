@@ -20,7 +20,7 @@
                     <td>{{ $customer->name }}</td>
                     <td>{{ $customer->email }}</td>
                     <td>{{ $customer->phone }}</td>
-                    <td>
+                    <td class="text-nowrap">
                         <a href="{{ route('admin.customers.show', $customer) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>

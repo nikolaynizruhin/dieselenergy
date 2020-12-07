@@ -22,7 +22,7 @@
                             </a>
                         </td>
                         <td>{{ $image->name }}</td>
-                        <td>
+                        <td class="text-nowrap">
                             <a href="#" data-toggle="modal" data-target="#deleteImageModal{{ $image->id }}">
                                 @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
                             </a>

@@ -20,7 +20,7 @@
                     <td>{{ $currency->code }}</td>
                     <td>{{ $currency->rate }}</td>
                     <td>{{ $currency->symbol }}</td>
-                    <td>
+                    <td class="text-nowrap">
                         <a href="{{ route('admin.currencies.edit', $currency) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>

@@ -18,7 +18,7 @@
                     <th scope="row" class="font-weight-normal">{{ $attributes->firstItem() + $key }}</th>
                     <td>{{ $attribute->name }}</td>
                     <td>{{ $attribute->measure }}</td>
-                    <td>
+                    <td class="text-nowrap">
                         <a href="{{ route('admin.attributes.edit', $attribute) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>

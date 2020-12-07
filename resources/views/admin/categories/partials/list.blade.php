@@ -18,7 +18,7 @@
                     <th scope="row" class="font-weight-normal">{{ $categories->firstItem() + $key }}</th>
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->slug }}</td>
-                    <td>
+                    <td class="text-nowrap">
                         <a href="{{ route('admin.categories.show', $category) }}" class="mr-2">
                             @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
