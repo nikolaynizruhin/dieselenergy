@@ -28,7 +28,7 @@
 
                         <div class="form-group">
                             <label for="inputSearch" class="sr-only">Пошук</label>
-                            <input type="text" name="search" value="{{ request('search') }}" class="form-control form-control-sm" id="inputSearch" aria-describedby="emailHelp" placeholder="Знайти товар..." autocomplete="search">
+                            <input type="search" name="search" value="{{ request('search') }}" class="form-control form-control-sm" id="inputSearch" aria-describedby="emailHelp" placeholder="Знайти товар..." autocomplete="search">
                         </div>
 
                         <p class="mb-1 font-weight-bold text-uppercase letter-spacing text-gray-500">

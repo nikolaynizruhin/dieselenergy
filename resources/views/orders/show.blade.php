@@ -9,10 +9,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-6 py-5 text-center">
-                    @include('layouts.partials.icon', ['name' => 'check-circle', 'classes' => 'text-success mb-3', 'width' => '4em', 'height' => '4em'])
+                    @include('layouts.partials.icon', ['name' => 'check-circle', 'classes' => 'text-success mb-3', 'width' => '3.5em', 'height' => '3.5em'])
                     <h2>Вітаємо!</h2>
                     <h4>Ваше замовлення прийнято.</h4>
-                    <p class="text-muted">На Вашу пошту буде відправлено інформацію про замовлення.<br>Наш консультант зв'яжеться з Вами найближчим часом для уточнення деталей.</p>
+                    <p class="text-muted">На Вашу пошту буде відправлено інформацію про замовлення. Наш консультант зв'яжеться з Вами найближчим часом для уточнення деталей.</p>
                 </div>
             </div>
         </div>
