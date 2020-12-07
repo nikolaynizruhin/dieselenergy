@@ -36,15 +36,15 @@
                     <div class="card-body p-0 shadow-sm">
                         <div class="row m-0 divide-x divide-x-md-0 divide-y-md">
                             <div class="col-12 col-md p-4 text-center">
-                                <h1 class="text-primary font-weight-bold">15</h1>
+                                <h1 class="text-primary font-weight-bold">{{ config('company.partners') }}</h1>
                                 <h5 class="text-muted">Партнерів</h5>
                             </div>
                             <div class="col-12 col-md p-4 text-center">
-                                <h1 class="text-primary font-weight-bold">7</h1>
+                                <h1 class="text-primary font-weight-bold">{{ date('Y') - config('company.year') }}</h1>
                                 <h5 class="text-muted">Років досвіду</h5>
                             </div>
                             <div class="col-12 col-md p-4 text-center">
-                                <h1 class="text-primary font-weight-bold">12</h1>
+                                <h1 class="text-primary font-weight-bold">{{ config('company.employees') }}</h1>
                                 <h5 class="text-muted">Робітників</h5>
                             </div>
                         </div>

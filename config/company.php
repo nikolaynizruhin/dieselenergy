@@ -17,4 +17,10 @@ return [
 
     'facebook' => 'https://www.facebook.com/Diesel-Energy-473907976127278/',
 
+    'year' => 2013,
+
+    'employees' => 12,
+
+    'partners' => 15,
+
 ];
