@@ -12,8 +12,8 @@
                     <span class="text-muted">{{ $item->category }}</span>
                 </td>
                 <td class="align-middle text-nowrap @if ($loop->first) border-top-0 @endif">@uah($item->price)</td>
-                <td class="align-middle @if ($loop->first) border-top-0 @endif" style="width: 12%">
-                    <form action="{{ route('carts.update', $key) }}" method="POST">
+                <td class="align-middle @if ($loop->first) border-top-0 @endif">
+                    <form action="{{ route('carts.update', $key) }}" method="POST" class="width-8">
                         @csrf
                         @method('PUT')
                         <div class="form-group mb-0">
