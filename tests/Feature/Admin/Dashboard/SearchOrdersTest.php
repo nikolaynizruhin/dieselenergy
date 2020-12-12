@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Admin\Dashboard;
 
-use App\Models\Customer;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
