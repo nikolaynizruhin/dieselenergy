@@ -18,7 +18,7 @@ class SearchOrdersTest extends TestCase
     {
         $order = Order::factory()->create();
 
-        $this->get(route('admin.dashboard', ['search' => $order->customer->name]))
+        $this->get(route('admin.dashboard', ['search' => $order->id]))
             ->assertRedirect(route('admin.login'));
     }
 
@@ -27,25 +27,17 @@ class SearchOrdersTest extends TestCase
     {
         $user = User::factory()->create();
 
-        [$jane, $john, $tom] = Customer::factory()
+        [$orderA, $orderB, $orderC] = Order::factory()
             ->count(3)
             ->state(new Sequence(
-                ['name' => 'Jane Doe'],
-                ['name' => 'John Doe'],
-                ['name' => 'Tom Jo'],
-            ))->create();
-
-        Order::factory()
-            ->count(3)
-            ->state(new Sequence(
-                ['customer_id' => $jane->id, 'created_at' => now()->subDay()],
-                ['customer_id' => $john->id],
-                ['customer_id' => $jane->id],
+                ['id' => 70613, 'created_at' => now()->subDay()],
+                ['id' => 70614],
+                ['id' => 70625],
             ))->create();
 
         $this->actingAs($user)
-            ->get(route('admin.dashboard', ['search' => 'Doe']))
-            ->assertSeeInOrder([$john->name, $jane->name])
-            ->assertDontSee($tom->name);
+            ->get(route('admin.dashboard', ['search' => '7061']))
+            ->assertSeeInOrder([$orderB->id, $orderA->id])
+            ->assertDontSee($orderC->id);
     }
 }

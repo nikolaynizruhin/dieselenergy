@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\ContactFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreContact;
 use App\Models\Contact;
@@ -12,12 +13,13 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Filters\Admin\ContactFilters $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, ContactFilters $filters)
     {
-        $contacts = Contact::search('message', $request->search)->latest()->paginate(10);
+        $contacts = Contact::filter($filters)->latest()->paginate(10);
 
         return view('admin.contacts.index', compact('contacts'));
     }

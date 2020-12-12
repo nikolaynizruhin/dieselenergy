@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\Customer\ContactFilters;
+use App\Filters\Admin\Customer\OrderFilters;
+use App\Filters\Admin\CustomerFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCustomer;
 use App\Http\Requests\Admin\UpdateCustomer;
@@ -14,11 +17,12 @@ class CustomerController extends Controller
      * Display a listing of the resource.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Filters\Admin\CustomerFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, CustomerFilters $filters)
     {
-        $customers = Customer::search('name', $request->search)->latest()->paginate(10);
+        $customers = Customer::filter($filters)->latest()->paginate(10);
 
         return view('admin.customers.index', compact('customers'));
     }
@@ -53,12 +57,14 @@ class CustomerController extends Controller
      *
      * @param  \App\Models\Customer  $customer
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Filters\Admin\Customer\ContactFilters  $contactFilters
+     * @param  \App\Filters\Admin\Customer\OrderFilters  $orderFilters
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer, Request $request)
+    public function show(Customer $customer, Request $request, ContactFilters $contactFilters, OrderFilters $orderFilters)
     {
-        $contacts = $customer->contacts()->search('message', request('search.contact'))->latest()->paginate(10);
-        $orders = $customer->orders()->search('id', request('search.order'))->latest()->paginate(10);
+        $contacts = $customer->contacts()->filter($contactFilters)->latest()->paginate(10);
+        $orders = $customer->orders()->filter($orderFilters)->latest()->paginate(10);
 
         return view('admin.customers.show', compact('customer', 'contacts', 'orders'));
     }

@@ -37,7 +37,7 @@ class FilterProductsTest extends TestCase
 
         $this->get(route('categories.products.index', [
             'category' => $generators,
-            'filter' => [$attribute->id => [10, 20]],
+            'attribute' => [$attribute->id => [10, 20]],
         ]))->assertSuccessful()
             ->assertViewIs('categories.products.index')
             ->assertViewHas('products')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\BrandFilters;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
@@ -13,11 +14,12 @@ class BrandController extends Controller
      * Display a listing of the resource.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Filters\Admin\BrandFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, BrandFilters $filters)
     {
-        $brands = Brand::with('currency')->search('name', $request->search)->orderBy('name')->paginate(10);
+        $brands = Brand::with('currency')->filter($filters)->orderBy('name')->paginate(10);
 
         return view('admin.brands.index', compact('brands'));
     }

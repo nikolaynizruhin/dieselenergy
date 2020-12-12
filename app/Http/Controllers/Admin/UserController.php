@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\UserFilters;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,11 +14,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Filters\Admin\UserFilters $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, UserFilters $filters)
     {
-        $users = User::search('name', $request->search)->orderBy('name')->paginate(10);
+        $users = User::filter($filters)->orderBy('name')->paginate(10);
 
         return view('admin.users.index', compact('users'));
     }

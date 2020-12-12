@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\AttributeFilters;
+use App\Filters\Admin\CategoryFilters;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -13,11 +15,12 @@ class CategoryController extends Controller
      * Display a listing of the resource.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Filters\Admin\CategoryFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, CategoryFilters $filters)
     {
-        $categories = Category::search('name', $request->search)->orderBy('name')->paginate(10);
+        $categories = Category::filter($filters)->orderBy('name')->paginate(10);
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -55,13 +58,14 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Category $category
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Filters\Admin\AttributeFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category, Request $request)
+    public function show(Category $category, Request $request, AttributeFilters $filters)
     {
-        $attributes = $category->attributes()->search('name', $request->search)->orderBy('name')->paginate(10);
+        $attributes = $category->attributes()->filter($filters)->orderBy('name')->paginate(10);
 
         return view('admin.categories.show', compact('category', 'attributes'));
     }

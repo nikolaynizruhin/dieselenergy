@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\AttributeFilters;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
@@ -12,12 +13,13 @@ class AttributeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Filters\Admin\AttributeFilters $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, AttributeFilters $filters)
     {
-        $attributes = Attribute::search('name', $request->search)->orderBy('name')->paginate(10);
+        $attributes = Attribute::filter($filters)->orderBy('name')->paginate(10);
 
         return view('admin.attributes.index', compact('attributes'));
     }

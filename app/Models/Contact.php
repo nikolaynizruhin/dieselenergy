@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasSearch;
+use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
-    use HasFactory, HasSearch;
+    use HasFactory, Filterable;
 
     /**
      * The attributes that are mass assignable.

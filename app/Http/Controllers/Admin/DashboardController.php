@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\OrderFilters;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -12,12 +13,13 @@ class DashboardController extends Controller
      * Show the application dashboard.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Filters\Admin\OrderFilters  $filters
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, OrderFilters $filters)
     {
         $orders = Order::with('customer')
-            ->searchByCustomer('name', $request->search)
+            ->filter($filters)
             ->latest()
             ->paginate(10);
 

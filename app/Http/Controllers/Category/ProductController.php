@@ -2,29 +2,30 @@
 
 namespace App\Http\Controllers\Category;
 
+use App\Filters\ProductFilters;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\FilterProducts;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Http\Requests\FilterProducts  $request
-     * @param  \App\Models\Category  $category
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Category $category
+     * @param \App\Filters\ProductFilters $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(FilterProducts $request, Category $category)
+    public function index(Request $request, Category $category, ProductFilters $filters)
     {
         $products = $category
             ->products()
             ->active()
             ->withFeatured($category)
-            ->filter($request->filters())
-            ->search('name', $request->search)
-            ->orderBy($request->column(), $request->direction())
+            ->filter($filters)
+            ->orderBy('name')
             ->paginate(9);
 
         return view('categories.products.index', compact('products', 'category'));

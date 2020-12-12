@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasSearch;
+use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use HasFactory, HasSearch;
+    use HasFactory, Filterable;
 
     /**
      * The new order status.
@@ -72,22 +72,6 @@ class Order extends Model
             self::PENDING,
             self::DONE,
         ];
-    }
-
-    /**
-     * Scope a query to search by customer attribute.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string  $attribute
-     * @param  string  $search
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeSearchByCustomer($query, $attribute, $search)
-    {
-        return $query->whereHas(
-            'customer',
-            fn (Builder $query) => $query->where($attribute, 'like', '%'.$search.'%')
-        );
     }
 
     /**

@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasSearch;
-use Illuminate\Database\Eloquent\Builder;
+use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory, HasSearch;
+    use HasFactory, Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -28,23 +27,6 @@ class Product extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
-
-    /**
-     * Scope a query to a filter term.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \Illuminate\Support\Collection  $filters
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeFilter($query, $filters)
-    {
-        $filters->each(fn ($values, $id) => $query
-            ->whereHas('attributes', fn (Builder $query) => $query
-                ->where('attribute_id', $id)
-                ->whereIn('value', $values)
-            )
-        );
-    }
 
     /**
      * Scope a query to only include active products.

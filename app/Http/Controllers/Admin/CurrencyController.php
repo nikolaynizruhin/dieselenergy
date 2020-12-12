@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\CurrencyFilters;
 use App\Http\Controllers\Controller;
 use App\Models\Currency;
 use Illuminate\Http\Request;
@@ -13,11 +14,12 @@ class CurrencyController extends Controller
      * Display a listing of the resource.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Filters\Admin\CurrencyFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, CurrencyFilters $filters)
     {
-        $currencies = Currency::search('code', $request->search)->orderBy('code')->paginate(10);
+        $currencies = Currency::filter($filters)->orderBy('code')->paginate(10);
 
         return view('admin.currencies.index', compact('currencies'));
     }

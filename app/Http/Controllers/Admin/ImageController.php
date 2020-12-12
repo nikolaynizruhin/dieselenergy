@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\ImageFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreImage;
 use App\Models\Image;
@@ -13,11 +14,12 @@ class ImageController extends Controller
      * Display a listing of the resource.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Filters\Admin\ImageFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, ImageFilters $filters)
     {
-        $images = Image::search('path', $request->search)->latest()->paginate(10);
+        $images = Image::filter($filters)->latest()->paginate(10);
 
         return view('admin.images.index', compact('images'));
     }

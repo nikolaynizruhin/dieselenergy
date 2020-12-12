@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\ImageFilters;
+use App\Filters\Admin\ProductFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreProduct;
 use App\Http\Requests\Admin\UpdateProduct;
@@ -15,11 +17,12 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Filters\Admin\ProductFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, ProductFilters $filters)
     {
-        $products = Product::search('name', $request->search)->orderBy('name')->paginate(10);
+        $products = Product::filter($filters)->orderBy('name')->paginate(10);
 
         return view('admin.products.index', compact('products'));
     }
@@ -61,11 +64,12 @@ class ProductController extends Controller
      *
      * @param  \App\Models\Product  $product
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Filters\Admin\ImageFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product, Request $request)
+    public function show(Product $product, Request $request, ImageFilters $filters)
     {
-        $images = $product->images()->search('path', $request->search)->latest()->paginate(10);
+        $images = $product->images()->filter($filters)->latest()->paginate(10);
 
         $product->load(['attributes' => fn ($query) => $query->whereNotNull('value')]);
 

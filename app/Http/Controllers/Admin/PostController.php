@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\Admin\PostFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePost;
 use App\Http\Requests\Admin\UpdatePost;
@@ -14,11 +15,12 @@ class PostController extends Controller
      * Display a listing of the resource.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Filters\Admin\PostFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, PostFilters $filters)
     {
-        $posts = Post::search('title', $request->search)->latest()->paginate(10);
+        $posts = Post::filter($filters)->latest()->paginate(10);
 
         return view('admin.posts.index', compact('posts'));
     }

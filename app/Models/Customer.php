@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasSearch;
+use App\Filters\Filterable;
 use App\Notifications\OrderConfirmed;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Customer extends Model
 {
-    use HasFactory, HasSearch, Notifiable;
+    use HasFactory, Filterable, Notifiable;
 
     /**
      * Phone number regex pattern.
