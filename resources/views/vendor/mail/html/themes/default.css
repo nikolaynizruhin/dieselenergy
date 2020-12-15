@@ -172,11 +172,12 @@ img {
     color: #b0adc5;
     font-size: 12px;
     text-align: center;
+    margin-top: 12px;
 }
 
 .footer a {
     color: #b0adc5;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .footer .social {

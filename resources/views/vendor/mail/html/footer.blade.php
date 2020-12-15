@@ -3,17 +3,15 @@
 <table class="footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
 <tr>
 <td class="content-cell" align="center">
-<div class="social">
 <a href="tel:{{ config('company.phone') }}">
-@include('layouts.partials.icon', ['name' => 'telephone', 'width' => '1.3em', 'height' => '1.3em'])
+<img src="{{ asset('/images/telephone.png') }}" width="24" alt="Phone">
 </a>
 <a href="mailto:{{ config('company.email') }}" style="margin: 0 20px">
-@include('layouts.partials.icon', ['name' => 'envelope', 'width' => '1.3em', 'height' => '1.3em'])
+<img src="{{ asset('/images/envelope.png') }}" width="24" alt="Email">
 </a>
 <a href="{{ config('company.facebook') }}">
-@include('layouts.partials.icon', ['name' => 'facebook', 'width' => '1.3em', 'height' => '1.3em'])
+<img src="{{ asset('/images/facebook.png') }}" width="24" alt="Facebook">
 </a>
-</div>
 {{ Illuminate\Mail\Markdown::parse($slot) }}
 </td>
 </tr>
