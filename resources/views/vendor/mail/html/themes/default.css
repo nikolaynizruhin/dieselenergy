@@ -180,11 +180,8 @@ img {
     text-decoration: none;
 }
 
-.footer .social {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
+.footer a + a {
+    margin-left: 20px;
 }
 
 /* Tables */

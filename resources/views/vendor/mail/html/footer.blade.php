@@ -6,7 +6,7 @@
 <a href="tel:{{ config('company.phone') }}">
 <img src="{{ asset('/images/telephone.png') }}" width="24" alt="Phone">
 </a>
-<a href="mailto:{{ config('company.email') }}" style="margin: 0 20px">
+<a href="mailto:{{ config('company.email') }}">
 <img src="{{ asset('/images/envelope.png') }}" width="24" alt="Email">
 </a>
 <a href="{{ config('company.facebook') }}">
