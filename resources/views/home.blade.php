@@ -73,7 +73,7 @@
             <div class="col-12 col-md mb-md-0 mb-3">
                 <div class="row">
                     <div class="col-12 col-md-2 mb-3">
-                        @include('layouts.partials.icon', ['name' => 'basket', 'classes' => 'text-primary', 'width' => '2em', 'height' => '2em'])
+                        @include('layouts.partials.icon', ['name' => 'basket', 'classes' => 'text-primary', 'width' => '2.2em', 'height' => '2.2em'])
                     </div>
                     <div class="col">
                         <h5>Продаж генераторів</h5>
@@ -84,7 +84,7 @@
             <div class="col-12 col-md mb-md-0 mb-3">
                 <div class="row">
                     <div class="col-12 col-md-2 mb-3">
-                        @include('layouts.partials.icon', ['name' => 'tools', 'classes' => 'text-primary', 'width' => '2em', 'height' => '2em'])
+                        @include('layouts.partials.icon', ['name' => 'tools', 'classes' => 'text-primary', 'width' => '2.2em', 'height' => '2.2em'])
                     </div>
                     <div class="col">
                         <h5>Сервісне обслуговування</h5>
@@ -97,7 +97,7 @@
             <div class="col-12 col-md mb-md-0 mb-3">
                 <div class="row">
                     <div class="col-12 col-md-2 mb-3">
-                        @include('layouts.partials.icon', ['name' => 'people', 'classes' => 'text-primary', 'width' => '2em', 'height' => '2em'])
+                        @include('layouts.partials.icon', ['name' => 'people', 'classes' => 'text-primary', 'width' => '2.2em', 'height' => '2.2em'])
                     </div>
                     <div class="col">
                         <h5>Технічна підтримка</h5>
@@ -108,7 +108,7 @@
             <div class="col-12 col-md mb-md-0 mb-3">
                 <div class="row">
                     <div class="col-12 col-md-2 mb-3">
-                        @include('layouts.partials.icon', ['name' => 'file-earmark-text', 'classes' => 'text-primary', 'width' => '2em', 'height' => '2em'])
+                        @include('layouts.partials.icon', ['name' => 'file-earmark-text', 'classes' => 'text-primary', 'width' => '2.2em', 'height' => '2.2em'])
                     </div>
                     <div class="col">
                         <h5>Проєктні роботи</h5>
