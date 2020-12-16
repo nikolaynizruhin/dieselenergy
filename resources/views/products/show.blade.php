@@ -43,7 +43,7 @@
                     <form class="mb-3" action="{{ route('carts.store') }}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="col-2 col-md-3 col-lg-2">
+                            <div class="col-3 col-sm-2 col-md-3 col-lg-2">
                                 <div class="form-group">
                                     <label for="inputAmount" class="sr-only">Кількість</label>
                                     <input type="number" name="quantity" value="1" min="1" max="99" class="form-control" id="inputAmount" aria-describedby="amountHelp">
