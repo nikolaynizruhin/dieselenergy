@@ -27,7 +27,7 @@
                     Блог
                 </a>
                 <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('privacy') }}">
-                    Політики
+                    Політика конфіденційності
                 </a>
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">

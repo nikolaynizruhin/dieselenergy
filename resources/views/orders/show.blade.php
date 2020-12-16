@@ -8,7 +8,7 @@
 
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-6 py-5 text-center">
+                <div class="col col-md-6 py-5 text-center">
                     @include('layouts.partials.icon', ['name' => 'check-circle', 'classes' => 'text-success mb-3', 'width' => '3.5em', 'height' => '3.5em'])
                     <h2>Вітаємо!</h2>
                     <h4>Ваше замовлення прийнято.</h4>
