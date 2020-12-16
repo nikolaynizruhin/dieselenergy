@@ -46,7 +46,7 @@ return [
     'settings' => 'Налаштування',
     'slug' => 'URL',
     'status' => 'Статус',
-    'support' => 'Підтрімка',
+    'support' => 'Підтримка',
     'title' => 'Назва',
     'total' => 'Всього',
     'update' => 'Оновити',
