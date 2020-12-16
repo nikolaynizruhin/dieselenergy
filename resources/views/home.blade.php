@@ -8,8 +8,8 @@
 
 @section('content')
 <section id="hero" class="position-relative py-md-8">
-    <div class="dots ml-sm-5 mt-5 top-0 left-0 height-72 width-48 position-absolute"></div>
-    <div class="dots mr-sm-5 mb-5 bottom-0 right-0 height-72 width-48 position-absolute"></div>
+    <div class="dots ml-sm-5 mt-n5 mt-md-5 top-0 left-0 height-72 width-48 position-absolute"></div>
+    <div class="dots mr-sm-5 mb-5 bottom-0 right-0 height-72 width-48 position-absolute d-none d-md-block"></div>
 
     <div class="container my-6 my-md-0">
         <div class="row justify-content-center">
@@ -56,8 +56,8 @@
 </section>
 
 <section id="services" class="position-relative py-6">
-    <div class="dots mt-7 top-0 left-0 width-40 height-64 position-absolute"></div>
-    <div class="dots bottom-0 right-0 width-40 height-64 position-absolute"></div>
+    <div class="dots ml-xl-5 mt-7 top-0 left-0 width-40 height-64 position-absolute"></div>
+    <div class="dots mr-xl-5 bottom-0 right-0 width-40 height-64 position-absolute"></div>
 
     <div class="container">
         <div class="row justify-content-center mb-5">
@@ -181,8 +181,8 @@
 </section>
 
 <section id="contact" class="position-relative py-6">
-    <div class="dots mt-5 top-0 left-0 height-80 width-48 position-absolute"></div>
-    <div class="dots mb-6 bottom-0 right-0 height-80 width-48 position-absolute"></div>
+    <div class="dots ml-xl-5 mt-5 top-0 left-0 height-80 width-48 position-absolute"></div>
+    <div class="dots mr-xl-5 mb-6 bottom-0 right-0 height-80 width-48 position-absolute"></div>
 
     <div class="container">
         <div class="row justify-content-center">
