@@ -20,11 +20,11 @@
                 <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('home').'#services' }}">
                     Послуги
                 </a>
-                <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('posts.index') }}">
-                    Блог
-                </a>
                 <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('home').'#numbers' }}">
                     Про нас
+                </a>
+                <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('posts.index') }}">
+                    Блог
                 </a>
                 <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('privacy') }}">
                     Політики

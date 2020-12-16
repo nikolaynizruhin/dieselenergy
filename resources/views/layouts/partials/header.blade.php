@@ -23,13 +23,13 @@
                     <a class="nav-link" href="{{ route('home').'#services' }}">Послуги</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home').'#numbers' }}">Про нас</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('posts.index') }}">Блог</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home').'#contact' }}">Контакти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home').'#numbers' }}">Про нас</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link position-relative" href="{{ route('carts.index') }}">
