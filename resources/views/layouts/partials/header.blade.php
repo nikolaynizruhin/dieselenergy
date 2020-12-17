@@ -23,7 +23,7 @@
                     <a class="nav-link" href="{{ route('home').'#services' }}">Послуги</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home').'#numbers' }}">Про нас</a>
+                    <a class="nav-link" href="{{ route('home').'#about-us' }}">Про нас</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('posts.index') }}">Блог</a>

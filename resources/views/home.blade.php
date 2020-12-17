@@ -7,7 +7,7 @@
 @section('keywords', 'придбати генератор, дизель генератор, бензиновий генератор, джерело безперебійного живлення')
 
 @section('content')
-<section id="hero" class="position-relative py-md-8">
+<section class="position-relative py-md-8">
     <div class="dots ml-sm-5 mt-n5 mt-md-5 top-0 left-0 height-72 width-48 position-absolute"></div>
     <div class="dots mr-sm-5 mb-5 bottom-0 right-0 height-72 width-48 position-absolute d-none d-md-block"></div>
 
@@ -23,7 +23,7 @@
     </div>
 </section>
 
-<section id="numbers" class="bg-light py-6">
+<section id="about-us" class="bg-light py-6">
     <div class="container">
         <div class="row">
             <div class="col d-flex justify-content-center flex-column">
@@ -120,7 +120,7 @@
     </div>
 </section>
 
-<section id="companies" class="py-6">
+<section class="py-6">
     <div class="container">
         <div class="row mb-4">
             <div class="col text-center">
@@ -151,7 +151,7 @@
     </div>
 </section>
 
-<section id="faq" class="bg-light py-6">
+<section class="bg-light py-6">
     <div class="container">
         <h2>Питання - відповіді</h2>
         <hr class="pb-2 pb-md-4">
@@ -259,4 +259,6 @@
         </div>
     </div>
 </section>
+
+@include('layouts.partials.services')
 @endsection

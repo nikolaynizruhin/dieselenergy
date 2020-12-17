@@ -20,7 +20,7 @@
                 <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('home').'#services' }}">
                     Послуги
                 </a>
-                <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('home').'#numbers' }}">
+                <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('home').'#about-us' }}">
                     Про нас
                 </a>
                 <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('posts.index') }}">
