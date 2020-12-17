@@ -16,7 +16,7 @@
             <div class="col col-md-10 text-center">
                 <h2 class="font-weight-bold text-uppercase mb-3">Надійні рішення для постачання <span class="text-primary">електроенергії</span></h2>
                 <h5 class="text-muted mb-4">Технічно продумані рішення та розробки найкращих світових інженерів дозволили нам стати партнером в обслуговуванні професійних дизельних електростанцій</h5>
-                <button type="button" class="btn btn-primary btn-lg mb-1">Каталог товарів</button>
+                <a href="{{ route('categories.products.index', \App\Models\Category::first()) }}" role="button" class="btn btn-primary btn-lg mb-1">Каталог товарів</a>
                 <a href="#contact" role="button" class="btn btn-outline-secondary btn-lg mb-1">Залишити заявку</a>
             </div>
         </div>
