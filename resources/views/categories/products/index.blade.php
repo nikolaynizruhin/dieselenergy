@@ -49,7 +49,6 @@
                     </form>
                 </div>
                 <div class="col-12 col-sm-8 col-md-9 col-lg-10">
-                    @include('layouts.partials.alert')
                     @include('categories.products.partials.'.($products->isEmpty() ? 'empty' : 'list'))
                 </div>
             </div>
