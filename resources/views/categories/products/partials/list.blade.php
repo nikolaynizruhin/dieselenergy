@@ -2,15 +2,9 @@
     @foreach ($products as $product)
         <div class="col mb-4">
             <div class="card h-100 shadow-sm">
-                <a href="{{ route('products.show', $product) }}">
-                    <img src="{{ asset('storage/'.$product->defaultImage()->path) }}" class="card-img-top" alt="{{ $product->name }}" loading="lazy">
-                </a>
+                <img src="{{ asset('storage/'.$product->defaultImage()->path) }}" class="card-img-top" alt="{{ $product->name }}" loading="lazy">
                 <div class="card-body mb-n3">
-                    <h6 class="card-title">
-                        <a href="{{ route('products.show', $product) }}" class="text-body">
-                            {{ $product->name }}
-                        </a>
-                    </h6>
+                    <h6 class="card-title">{{ $product->name }}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">{{ $product->category->name }}</h6>
                     <h5 class="card-title text-primary">@uah($product->uah_price)</h5>
                 </div>
@@ -33,15 +27,9 @@
                     </div>
                 @endif
                 <div class="card-body">
-                    <form action="{{ route('carts.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <input type="hidden" name="quantity" value="1">
-                        <button type="submit" class="btn btn-outline-secondary btn-block">
-                            @include('layouts.partials.icon', ['name' => 'cart2', 'classes' => 'pb-1', 'width' => '1.4em', 'height' => '1.4em'])
-                            Купити
-                        </button>
-                    </form>
+                    <a href="{{ route('products.show', $product) }}" role="button" class="btn btn-outline-secondary btn-block stretched-link">
+                        Деталі
+                    </a>
                 </div>
             </div>
         </div>
