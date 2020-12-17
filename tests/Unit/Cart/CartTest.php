@@ -42,6 +42,7 @@ class CartTest extends TestCase
         $item = Cart::add($this->product);
 
         $this->assertEquals($item->id, $this->product->id);
+        $this->assertEquals($item->slug, $this->product->slug);
         $this->assertEquals($item->name, $this->product->name);
         $this->assertEquals($item->category, $this->product->category->name);
         $this->assertEquals($item->price, $this->product->uah_price);

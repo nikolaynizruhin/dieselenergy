@@ -7,7 +7,7 @@
                     <img src="{{ asset('storage/'.$item->image) }}" width="100" alt="{{ $item->name }}" loading="lazy">
                 </td>
                 <td class="align-middle @if ($loop->first) border-top-0 @endif">
-                    <span class="font-weight-bold">{{ $item->name }}</span>
+                    <a href="{{ route('products.show', $item->slug) }}" class="font-weight-bold text-body">{{ $item->name }}</a>
                     <br>
                     <span class="text-muted">{{ $item->category }}</span>
                 </td>
