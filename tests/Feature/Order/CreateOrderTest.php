@@ -9,9 +9,11 @@ use App\Models\Image;
 use App\Models\Order;
 use App\Models\Product;
 use App\Notifications\OrderConfirmed;
+use App\Notifications\OrderCreated;
 use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
@@ -110,6 +112,29 @@ class CreateOrderTest extends TestCase
         Notification::assertSentTo(
             $customer,
             fn (OrderConfirmed $notification) => $notification->order->id === $order->id
+        );
+    }
+
+    /** @test */
+    public function it_should_send_order_created_email_to_admin()
+    {
+        Notification::fake();
+
+        $stub = Customer::factory()->make()->makeHidden('notes');
+
+        Cart::add($this->product);
+
+        $this->post(route('orders.store'), $stub->toArray() + ['privacy' => 1]);
+
+        $order = Customer::firstWhere('email', $stub->email)->orders()->first();
+
+        Notification::assertSentTo(
+            new AnonymousNotifiable,
+            OrderCreated::class,
+            function ($notification, $channels, $notifiable) use ($order) {
+                return $notifiable->routes['mail'] === config('company.email')
+                    && $notification->order->id === $order->id;
+            }
         );
     }
 

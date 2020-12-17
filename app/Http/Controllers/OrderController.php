@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrder;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Notifications\OrderCreated;
 use Facades\App\Cart\Cart;
+use Illuminate\Support\Facades\Notification;
 
 class OrderController extends Controller
 {
@@ -29,6 +31,9 @@ class OrderController extends Controller
         Cart::clear();
 
         $customer->sendOrderConfirmationNotification($order);
+
+        Notification::route('mail', config('company.email'))
+            ->notify(new OrderCreated($order));
 
         return redirect()->route('orders.show', [$order]);
     }

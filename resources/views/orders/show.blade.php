@@ -12,6 +12,7 @@
                     @include('layouts.partials.icon', ['name' => 'check-circle', 'classes' => 'text-success mb-3', 'width' => '3.5em', 'height' => '3.5em'])
                     <h2>Вітаємо!</h2>
                     <h4>Ваше замовлення прийнято.</h4>
+                    <p class="my-3 text-muted">Номер замовлення: <strong class="text-body">#{{ $order->id }}</strong></p>
                     <p class="text-muted">На Вашу пошту буде відправлено інформацію про замовлення. Наш консультант зв'яжеться з Вами найближчим часом для уточнення деталей.</p>
                 </div>
             </div>

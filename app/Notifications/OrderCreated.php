@@ -2,30 +2,30 @@
 
 namespace App\Notifications;
 
-use App\Models\Contact;
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ContactCreated extends Notification
+class OrderCreated extends Notification
 {
     use Queueable;
 
     /**
-     * A contact.
+     * An order.
      *
-     * @var \App\Models\Contact
+     * @var \App\Models\Order
      */
-    public $contact;
+    public $order;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Contact $contact)
+    public function __construct(Order $order)
     {
-        $this->contact = $contact;
+        $this->order = $order;
     }
 
     /**
@@ -48,13 +48,10 @@ class ContactCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Новий запит на зв\'зок')
-            ->line('Ви отримали новий запит на зв\'язок!')
-            ->line('Ім\'я: '.$this->contact->customer->name)
-            ->line('Пошта: '.$this->contact->customer->email)
-            ->line('Телефон: '.$this->contact->customer->phone)
-            ->line('Повідомлення: '.$this->contact->message)
-            ->action('Подивитись запит', route('admin.contacts.show', $this->contact));
+            ->subject('Нове замовлення')
+            ->line('Ви отримали нове замовлення!')
+            ->line('Номер замовлення: #'.$this->order->id)
+            ->action('Подивитись замовлення', route('admin.orders.show', $this->order));
     }
 
     /**

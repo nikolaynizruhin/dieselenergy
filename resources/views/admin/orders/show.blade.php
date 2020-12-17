@@ -11,6 +11,13 @@
 
         <div class="card-body">
             <div class="row">
+                <div class="col-md-3 text-muted">{{ __('common.number') }}</div>
+                <div class="col-md-9">{{ $order->id }}</div>
+            </div>
+
+            <hr>
+
+            <div class="row">
                 <div class="col-md-3 text-muted">{{ __('common.status') }}</div>
                 <div class="col-md-9">
                     <h5 class="m-0 p-0">
