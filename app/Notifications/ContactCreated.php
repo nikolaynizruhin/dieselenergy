@@ -48,7 +48,12 @@ class ContactCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->subject('Новий запит на зв\'зок')
                     ->line('Ви отримали новий запит на зв\'язок!')
+                    ->line('Ім\'я: '.$this->contact->customer->name)
+                    ->line('Пошта: '.$this->contact->customer->email)
+                    ->line('Телефон: '.$this->contact->customer->phone)
+                    ->line('Повідомлення: '.$this->contact->message)
                     ->action('Подивитись запит', route('admin.contacts.show', $this->contact));
     }
 
