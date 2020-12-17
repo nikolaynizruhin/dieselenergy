@@ -1,4 +1,4 @@
-<section class="bg-light py-6">
+<section class="bg-light py-5">
     <div class="container">
         <div class="row">
             <div class="col-12 col-md mb-5 mb-md-0">
@@ -33,7 +33,7 @@
                     <div class="col">
                         ТЕХНІЧНА ПІДТРИМКА
                         <br>
-                        <span class="text-muted">Cервісне технічне обслуговування нашими спеціалістами</span>
+                        <span class="text-muted">Технічне обслуговування нашими спеціалістами</span>
                     </div>
                 </div>
             </div>
