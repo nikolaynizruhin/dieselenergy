@@ -23,8 +23,7 @@ class DeleteCartTest extends TestCase
 
         $this->from(route('carts.index'))
             ->delete(route('carts.destroy', 0))
-            ->assertRedirect(route('carts.index'))
-            ->assertSessionHas('status', trans('cart.deleted'));
+            ->assertRedirect(route('carts.index'));
 
         $this->assertCount(0, Cart::items());
     }

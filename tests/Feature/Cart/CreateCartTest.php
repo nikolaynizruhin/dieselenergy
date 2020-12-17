@@ -22,8 +22,7 @@ class CreateCartTest extends TestCase
         $this->from(route('categories.products.index', $product->category))
             ->post(route('carts.store', ['product_id' => $product->id, 'quantity' => 2]))
             ->assertRedirect(route('carts.index'))
-            ->assertSessionHas('cart')
-            ->assertSessionHas('status', trans('cart.added'));
+            ->assertSessionHas('cart');
 
         $this->assertCount(1, $items = Cart::items());
         $this->assertEquals($product->id, $items->first()->id);

@@ -38,8 +38,7 @@ class UpdateCartTest extends TestCase
 
         $this->put(route('carts.update', ['cart' => 0, 'quantity' => 3]))
             ->assertRedirect(route('carts.index'))
-            ->assertSessionHas('cart')
-            ->assertSessionHas('status', trans('cart.updated'));
+            ->assertSessionHas('cart');
 
         $this->assertCount(1, $items = Cart::items());
         $this->assertEquals($this->product->id, $items->first()->id);

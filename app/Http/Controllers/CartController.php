@@ -30,9 +30,7 @@ class CartController extends Controller
     {
         Cart::add($request->product, $request->quantity);
 
-        return redirect()
-            ->route('carts.index')
-            ->with('status', trans('cart.added'));
+        return redirect()->route('carts.index');
     }
 
     /**
@@ -48,9 +46,7 @@ class CartController extends Controller
 
         Cart::update($id, $request->quantity);
 
-        return redirect()
-            ->route('carts.index')
-            ->with('status', trans('cart.updated'));
+        return redirect()->route('carts.index');
     }
 
     /**
@@ -63,6 +59,6 @@ class CartController extends Controller
     {
         Cart::delete($id);
 
-        return back()->with('status', trans('cart.deleted'));
+        return back();
     }
 }
