@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Filters\Filterable;
 use App\Notifications\OrderConfirmed;
+use Facades\App\Cart\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -52,10 +53,14 @@ class Customer extends Model
      */
     public function createOrder($notes = '')
     {
-        return $this->orders()->create([
+        $order = $this->orders()->create([
             'status' => Order::NEW,
             'notes' => $notes,
         ]);
+
+        Cart::store($order);
+
+        return $order;
     }
 
     /**

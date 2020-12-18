@@ -114,6 +114,8 @@ class Cart
         ]);
 
         $order->products()->attach($products->all());
+
+        $this->clear();
     }
 
     /**

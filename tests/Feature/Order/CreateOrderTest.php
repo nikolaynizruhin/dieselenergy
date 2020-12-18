@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Order;
 
+use App\Events\OrderCreated as OrderCreatedEvent;
 use App\Models\Brand;
 use App\Models\Currency;
 use App\Models\Customer;
@@ -14,6 +15,7 @@ use Facades\App\Cart\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Notifications\AnonymousNotifiable;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
@@ -136,6 +138,20 @@ class CreateOrderTest extends TestCase
                     && $notification->order->id === $order->id;
             }
         );
+    }
+
+    /** @test */
+    public function it_should_trigger_order_created_event()
+    {
+        Event::fake();
+
+        $stub = Customer::factory()->make()->makeHidden('notes');
+
+        Cart::add($this->product);
+
+        $this->post(route('orders.store'), $stub->toArray() + ['privacy' => 1]);
+
+        Event::assertDispatched(OrderCreatedEvent::class);
     }
 
     /** @test */
