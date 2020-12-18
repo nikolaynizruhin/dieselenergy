@@ -9,6 +9,13 @@ use Illuminate\Support\Collection;
 class Cart
 {
     /**
+     * Session cart key.
+     *
+     * @var string
+     */
+    const KEY = 'cart';
+
+    /**
      * Session manager.
      *
      * @var SessionManager
@@ -47,7 +54,7 @@ class Cart
             $items->put($key, $item);
         }
 
-        $this->session->put('cart', $items);
+        $this->session->put(self::KEY, $items);
 
         return $item;
     }
@@ -59,7 +66,7 @@ class Cart
      */
     public function items()
     {
-        return $this->session->get('cart', new Collection());
+        return $this->session->get(self::KEY, new Collection());
     }
 
     public function update($key, $quantity)
@@ -72,7 +79,7 @@ class Cart
 
         $items->put($key, $item);
 
-        $this->session->put('cart', $items);
+        $this->session->put(self::KEY, $items);
 
         return $item;
     }
@@ -92,7 +99,7 @@ class Cart
      */
     public function clear()
     {
-        $this->session->put('cart', new Collection());
+        $this->session->put(self::KEY, new Collection());
     }
 
     /**
@@ -120,6 +127,6 @@ class Cart
 
         $items->forget($key);
 
-        $this->session->put('cart', $items);
+        $this->session->put(self::KEY, $items);
     }
 }
