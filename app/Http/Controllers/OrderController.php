@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderCreated;
 use App\Http\Requests\StoreOrder;
 use App\Models\Customer;
 use App\Models\Order;
-use App\Events\OrderCreated;
 
 class OrderController extends Controller
 {

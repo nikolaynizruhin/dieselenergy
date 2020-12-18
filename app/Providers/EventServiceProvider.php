@@ -23,7 +23,7 @@ class EventServiceProvider extends ServiceProvider
         OrderCreated::class => [
             SendConfirmedNotification::class,
             SendCreatedNotification::class,
-        ]
+        ],
     ];
 
     /**
