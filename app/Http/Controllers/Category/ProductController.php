@@ -23,6 +23,7 @@ class ProductController extends Controller
         $products = $category
             ->products()
             ->active()
+            ->with(['category', 'brand.currency'])
             ->withFeatured($category)
             ->filter($filters)
             ->orderBy('name')

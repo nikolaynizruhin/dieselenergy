@@ -3,7 +3,6 @@
 namespace App\Http\View\Composers\Admin;
 
 use App\Models\Customer;
-use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -18,7 +17,6 @@ class DashboardComposer
     public function compose(View $view)
     {
         $view->with([
-            'totalOrders' => Order::count(),
             'totalCustomers' => Customer::count(),
             'soldProducts' => DB::table('order_product')->sum('quantity'),
         ]);

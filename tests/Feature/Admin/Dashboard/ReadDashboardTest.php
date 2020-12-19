@@ -40,7 +40,6 @@ class ReadDashboardTest extends TestCase
             ->assertSuccessful()
             ->assertViewIs('admin.dashboard')
             ->assertViewHas('orders')
-            ->assertViewHas('totalOrders', 2)
             ->assertViewHas('totalCustomers', 2)
             ->assertViewHas('soldProducts', 2)
             ->assertSeeInOrder([$orderA->status, $orderB->status]);

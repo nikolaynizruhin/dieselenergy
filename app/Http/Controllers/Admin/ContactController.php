@@ -19,7 +19,7 @@ class ContactController extends Controller
      */
     public function index(Request $request, ContactFilters $filters)
     {
-        $contacts = Contact::filter($filters)->latest()->paginate(10);
+        $contacts = Contact::with('customer')->filter($filters)->latest()->paginate(10);
 
         return view('admin.contacts.index', compact('contacts'));
     }

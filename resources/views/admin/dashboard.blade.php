@@ -9,7 +9,7 @@
                     <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.total.order') }}</h6>
                     <div class="row">
                         <div class="col">
-                            <h2>{{ $totalOrders }}</h2>
+                            <h2>{{ $orders->total() }}</h2>
                         </div>
                         <div class="col text-muted text-right">
                             @include('layouts.partials.icon', ['name' => 'basket', 'width' => '2em', 'height' => '2em'])
@@ -62,6 +62,6 @@
     </div>
 
     <div class="card shadow-sm">
-        @include('admin.orders.partials.'.($orders->total() ? 'list' : 'empty'))
+        @include('admin.orders.partials.'.($orders->isEmpty() ? 'empty' : 'list'))
     </div>
 @endsection

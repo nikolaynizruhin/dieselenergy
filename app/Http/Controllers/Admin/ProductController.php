@@ -22,7 +22,7 @@ class ProductController extends Controller
      */
     public function index(Request $request, ProductFilters $filters)
     {
-        $products = Product::filter($filters)->orderBy('name')->paginate(10);
+        $products = Product::with(['category', 'brand.currency'])->filter($filters)->orderBy('name')->paginate(10);
 
         return view('admin.products.index', compact('products'));
     }
