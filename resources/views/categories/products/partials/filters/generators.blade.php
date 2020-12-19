@@ -130,7 +130,7 @@
     </label>
 </div>
 
-<div class="mb-4 mb-md-0 custom-control custom-checkbox">
+<div class="custom-control custom-checkbox">
     <input name="attribute[4][]" onchange="this.form.submit()" value="ручний/електростарт" type="checkbox" class="custom-control-input" id="customCheck9" @if(in_array('ручний/електростарт', request('attribute.4', []))) checked @endif>
     <label class="custom-control-label text-secondary" for="customCheck9">
         <small>ручний/електростарт</small>

@@ -20,33 +20,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-sm-4 col-md-3 col-lg-2">
-                    <form>
-                        <p class="mb-1 font-weight-bold text-uppercase letter-spacing text-gray-500">
-                            <small>Пошук</small>
-                        </p>
-
-                        <div class="form-group">
-                            <label for="inputSearch" class="sr-only">Пошук</label>
-                            <input type="search" name="search" value="{{ request('search') }}" class="form-control form-control-sm" id="inputSearch" aria-describedby="emailHelp" placeholder="Знайти товар..." autocomplete="search">
+                <div class="col d-sm-none">
+                    <button class="btn btn-outline-secondary btn-block mb-3" type="button" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
+                        @include('layouts.partials.icon', ['name' => 'funnel', 'classes' => 'pb-1', 'width' => '1.4em', 'height' => '1.4em'])
+                        Фільтри
+                    </button>
+                    <div class="collapse mb-3" id="collapseFilters">
+                        <div class="card card-body">
+                            @include('categories.products.partials.filters')
                         </div>
-
-                        <p class="mb-1 font-weight-bold text-uppercase letter-spacing text-gray-500">
-                            <small>Сортувати</small>
-                        </p>
-
-                        <div class="form-group">
-                            <label for="selectSort" class="sr-only">Сортувати</label>
-                            <select class="form-control form-control-sm" name="sort" onchange="this.form.submit()" id="selectSort">
-                                <option value="name" @if (request('sort') === 'name') selected @endif>Назва (А - Я)</option>
-                                <option value="-name" @if (request('sort') === '-name') selected @endif>Назва (Я - А)</option>
-                                <option value="price" @if (request('sort') === 'price') selected @endif>Ціна (Низька > Висока)</option>
-                                <option value="-price" @if (request('sort') === '-price') selected @endif>Ціна (Висока > Низька)</option>
-                            </select>
-                        </div>
-
-                        @includeIf('categories.products.partials.filters.'.$category->slug)
-                    </form>
+                    </div>
+                </div>
+                <div class="d-none d-sm-block col-sm-4 col-md-3 col-lg-2">
+                    @include('categories.products.partials.filters')
                 </div>
                 <div class="col-12 col-sm-8 col-md-9 col-lg-10">
                     @include('categories.products.partials.'.($products->isEmpty() ? 'empty' : 'list'))
