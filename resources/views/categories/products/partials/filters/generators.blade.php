@@ -35,22 +35,22 @@
 </p>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[44][]" onchange="this.form.submit()" value="Однофазний" type="checkbox" class="custom-control-input" id="customCheck9" @if(in_array('Однофазний', request('attribute.44', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck9">
+    <input name="attribute[44][]" onchange="this.form.submit()" value="Однофазний" type="checkbox" class="custom-control-input" id="customCheck5" @if(in_array('Однофазний', request('attribute.44', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck5">
         <small>Однофазний</small>
     </label>
 </div>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[44][]" onchange="this.form.submit()" value="Однофазний/Трифазний" type="checkbox" class="custom-control-input" id="customCheck10" @if(in_array('Однофазний/Трифазний', request('attribute.44', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck10">
+    <input name="attribute[44][]" onchange="this.form.submit()" value="Однофазний/Трифазний" type="checkbox" class="custom-control-input" id="customCheck6" @if(in_array('Однофазний/Трифазний', request('attribute.44', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck6">
         <small>Однофазний/Трифазний</small>
     </label>
 </div>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[44][]" onchange="this.form.submit()" value="Трифазний" type="checkbox" class="custom-control-input" id="customCheck11" @if(in_array('Трифазний', request('attribute.44', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck11">
+    <input name="attribute[44][]" onchange="this.form.submit()" value="Трифазний" type="checkbox" class="custom-control-input" id="customCheck7" @if(in_array('Трифазний', request('attribute.44', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck7">
         <small>Трифазний</small>
     </label>
 </div>
@@ -60,22 +60,22 @@
 </p>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[3][]" onchange="this.form.submit()" value="230" type="checkbox" class="custom-control-input" id="customCheck5" @if(in_array('230', request('attribute.3', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck5">
+    <input name="attribute[3][]" onchange="this.form.submit()" value="230" type="checkbox" class="custom-control-input" id="customCheck8" @if(in_array('230', request('attribute.3', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck8">
         <small>230 В</small>
     </label>
 </div>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[3][]" onchange="this.form.submit()" value="380" type="checkbox" class="custom-control-input" id="customCheck6" @if(in_array('380', request('attribute.3', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck6">
+    <input name="attribute[3][]" onchange="this.form.submit()" value="380" type="checkbox" class="custom-control-input" id="customCheck9" @if(in_array('380', request('attribute.3', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck9">
         <small>380 В</small>
     </label>
 </div>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[3][]" onchange="this.form.submit()" value="230/380" type="checkbox" class="custom-control-input" id="customCheck7" @if(in_array('230/380', request('attribute.3', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck7">
+    <input name="attribute[3][]" onchange="this.form.submit()" value="230/380" type="checkbox" class="custom-control-input" id="customCheck10" @if(in_array('230/380', request('attribute.3', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck10">
         <small>230/380 В</small>
     </label>
 </div>
@@ -85,36 +85,36 @@
 </p>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[2][]" onchange="this.form.submit()" value="2,8" type="checkbox" class="custom-control-input" id="customCheck10" @if(in_array('2,8', request('attribute.2', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck10">
+    <input name="attribute[2][]" onchange="this.form.submit()" value="2,8" type="checkbox" class="custom-control-input" id="customCheck11" @if(in_array('2,8', request('attribute.2', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck11">
         <small>2,8 кВт</small>
     </label>
 </div>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[2][]" onchange="this.form.submit()" value="4,5" type="checkbox" class="custom-control-input" id="customCheck11" @if(in_array('4,5', request('attribute.2', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck11">
+    <input name="attribute[2][]" onchange="this.form.submit()" value="4,5" type="checkbox" class="custom-control-input" id="customCheck12" @if(in_array('4,5', request('attribute.2', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck12">
         <small>4,5 кВт</small>
     </label>
 </div>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[2][]" onchange="this.form.submit()" value="5" type="checkbox" class="custom-control-input" id="customCheck12" @if(in_array('5', request('attribute.2', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck12">
+    <input name="attribute[2][]" onchange="this.form.submit()" value="5" type="checkbox" class="custom-control-input" id="customCheck13" @if(in_array('5', request('attribute.2', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck13">
         <small>5 кВт</small>
     </label>
 </div>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[2][]" onchange="this.form.submit()" value="7,5" type="checkbox" class="custom-control-input" id="customCheck13" @if(in_array('7,5', request('attribute.2', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck13">
+    <input name="attribute[2][]" onchange="this.form.submit()" value="7,5" type="checkbox" class="custom-control-input" id="customCheck14" @if(in_array('7,5', request('attribute.2', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck14">
         <small>7,5 кВт</small>
     </label>
 </div>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[2][]" onchange="this.form.submit()" value="10" type="checkbox" class="custom-control-input" id="customCheck14" @if(in_array('10', request('attribute.2', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck14">
+    <input name="attribute[2][]" onchange="this.form.submit()" value="10" type="checkbox" class="custom-control-input" id="customCheck15" @if(in_array('10', request('attribute.2', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck15">
         <small>10 кВт</small>
     </label>
 </div>
@@ -124,15 +124,15 @@
 </p>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[4][]" onchange="this.form.submit()" value="ручний" type="checkbox" class="custom-control-input" id="customCheck8" @if(in_array('ручний', request('attribute.4', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck8">
+    <input name="attribute[4][]" onchange="this.form.submit()" value="ручний" type="checkbox" class="custom-control-input" id="customCheck16" @if(in_array('ручний', request('attribute.4', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck16">
         <small>ручний</small>
     </label>
 </div>
 
 <div class="custom-control custom-checkbox">
-    <input name="attribute[4][]" onchange="this.form.submit()" value="ручний/електростарт" type="checkbox" class="custom-control-input" id="customCheck9" @if(in_array('ручний/електростарт', request('attribute.4', []))) checked @endif>
-    <label class="custom-control-label text-secondary" for="customCheck9">
+    <input name="attribute[4][]" onchange="this.form.submit()" value="ручний/електростарт" type="checkbox" class="custom-control-input" id="customCheck17" @if(in_array('ручний/електростарт', request('attribute.4', []))) checked @endif>
+    <label class="custom-control-label text-secondary" for="customCheck17">
         <small>ручний/електростарт</small>
     </label>
 </div>
