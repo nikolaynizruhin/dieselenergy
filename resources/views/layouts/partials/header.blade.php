@@ -33,11 +33,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link position-relative" href="{{ route('carts.index') }}">
-                        Кошик
+                        @include('layouts.partials.icon', ['name' => 'cart2', 'classes' => 'pb-1', 'width' => '1.4em', 'height' => '1.4em'])
                         @if(\Facades\App\Cart\Cart::items()->isNotEmpty())
-                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-dot text-primary position-absolute top-0 ml-n2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-                            </svg>
+                            @include('layouts.partials.icon', ['name' => 'dot', 'classes' => 'text-primary position-absolute top-0 ml-n2', 'width' => '1.5em', 'height' => '1.5em'])
                         @endif
                     </a>
                 </li>
