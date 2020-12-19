@@ -36,7 +36,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(
-            ['layouts.app'],
+            ['layouts.app', 'home'],
             CategoryComposer::class
         );
 
