@@ -24,7 +24,8 @@ class ProductController extends Controller
             ->products()
             ->active()
             ->with(['category', 'brand.currency'])
-            ->withFeatured($category)
+            ->withFeaturedAttributes($category)
+            ->withDefaultImage()
             ->filter($filters)
             ->orderBy('name')
             ->paginate(9);

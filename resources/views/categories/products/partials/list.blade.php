@@ -2,7 +2,7 @@
     @foreach ($products as $product)
         <div class="col mb-4">
             <div class="card h-100 shadow-sm">
-                <img src="{{ asset('storage/'.$product->defaultImage()->path) }}" class="card-img-top" alt="{{ $product->name }}" loading="lazy">
+                <img src="{{ asset('storage/'.$product->images->first()->path) }}" class="card-img-top" alt="{{ $product->name }}" loading="lazy">
                 <div class="card-body mb-n3">
                     <h6 class="card-title">{{ $product->name }}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">{{ $product->category->name }}</h6>

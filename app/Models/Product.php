@@ -46,13 +46,26 @@ class Product extends Model
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeWithFeatured($query, $category)
+    public function scopeWithFeaturedAttributes($query, $category)
     {
         return $query->with([
             'attributes' => fn ($query) => $query->wherePivotIn(
                 'attribute_id',
                 Specification::featured($category),
             ),
+        ]);
+    }
+
+    /**
+     * Scope a query with default image.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithDefaultImage($query)
+    {
+        return $query->with([
+            'images' => fn ($query) => $query->wherePivot('is_default', 1),
         ]);
     }
 
