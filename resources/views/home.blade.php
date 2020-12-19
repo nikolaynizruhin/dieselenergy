@@ -130,22 +130,22 @@
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
             <div class="col d-flex align-items-center bg-light p-5 justify-content-center border-2 border-white border-solid">
-                <img src="{{ asset('/images/logos/ictv.png') }}" alt="ICTV" height="60" loading="lazy">
+                <img src="{{ asset('/images/logos/ictv.png') }}" alt="ICTV" height="60" width="151" loading="lazy">
             </div>
             <div class="col d-flex align-items-center bg-light p-5 justify-content-center border-2 border-white border-solid">
-                <img src="{{ asset('/images/logos/iev.png') }}" alt="IEV" height="60" loading="lazy">
+                <img src="{{ asset('/images/logos/iev.png') }}" alt="IEV" height="60" width="159" loading="lazy">
             </div>
             <div class="col d-flex align-items-center bg-light p-5 justify-content-center border-2 border-white border-solid">
-                <img src="{{ asset('/images/logos/motto.png') }}" alt="MOTTO" height="60" loading="lazy">
+                <img src="{{ asset('/images/logos/motto.png') }}" alt="MOTTO" height="60" width="202" loading="lazy">
             </div>
             <div class="col d-flex align-items-center bg-light p-5 justify-content-center border-2 border-white border-solid">
-                <img src="{{ asset('/images/logos/figaro.svg') }}" alt="Figaro" height="50" loading="lazy">
+                <img src="{{ asset('/images/logos/figaro.svg') }}" alt="Figaro" height="50" width="184" loading="lazy">
             </div>
             <div class="col d-flex align-items-center bg-light p-5 justify-content-center border-2 border-white border-solid">
-                <img src="{{ asset('/images/logos/metro.svg') }}" alt="Metro" height="60" loading="lazy">
+                <img src="{{ asset('/images/logos/metro.svg') }}" alt="Metro" height="60" width="156" loading="lazy">
             </div>
             <div class="col d-flex align-items-center bg-light p-5 justify-content-center border-2 border-white border-solid">
-                <img src="{{ asset('/images/logos/well.png') }}" alt="Небесна криниця" height="60" loading="lazy">
+                <img src="{{ asset('/images/logos/well.png') }}" alt="Небесна криниця" height="60" width="100" loading="lazy">
             </div>
         </div>
     </div>

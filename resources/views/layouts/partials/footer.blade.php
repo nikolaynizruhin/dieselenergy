@@ -3,7 +3,7 @@
         <div class="row mb-5">
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('/images/logo-white.svg') }}" alt="{{ config('app.name') }}" width="150" class="mb-3" loading="lazy">
+                    <img src="{{ asset('/images/logo-white.svg') }}" alt="{{ config('app.name') }}" width="150" height="39" class="mb-3" loading="lazy">
                 </a>
                 <p class="text-gray-400">Надійні рішення для постачання<br>електроенергії</p>
             </div>
