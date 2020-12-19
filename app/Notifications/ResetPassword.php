@@ -3,10 +3,14 @@
 namespace App\Notifications;
 
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ResetPassword extends ResetPasswordNotification
+class ResetPassword extends ResetPasswordNotification implements ShouldQueue
 {
+    use Queueable;
+
     /**
      * Build the mail representation of the notification.
      *
