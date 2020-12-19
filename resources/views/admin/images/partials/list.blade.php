@@ -17,7 +17,7 @@
                     <tr>
                         <th scope="row" class="font-weight-normal">{{ $images->firstItem() + $key }}</th>
                         <td>
-                            <a href="#" data-toggle="modal" data-target="#showImageModal{{ $image->id }}" class="mr-2">
+                            <a href="#" data-toggle="modal" data-target="#showImageModal{{ $image->id }}" class="mr-2 text-decoration-none">
                                 <img src="{{ asset('storage/'.$image->path) }}" class="img-thumbnail" alt="{{ $image->name }}" width="64" height="64" loading="lazy">
                             </a>
                         </td>

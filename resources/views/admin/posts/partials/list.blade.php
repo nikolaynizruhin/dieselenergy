@@ -17,10 +17,10 @@
                     <th scope="row" class="font-weight-normal">{{ $posts->firstItem() + $key }}</th>
                     <td>{{ $post->title }}</td>
                     <td class="text-nowrap">
-                        <a href="{{ route('admin.posts.show', $post) }}" class="mr-2">
+                        <a href="{{ route('admin.posts.show', $post) }}" class="mr-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="{{ route('admin.posts.edit', $post) }}" class="mr-2">
+                        <a href="{{ route('admin.posts.edit', $post) }}" class="mr-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
                         <a href="#" data-toggle="modal" data-target="#deletePostModal{{ $post->id }}">

@@ -19,7 +19,7 @@
                     <td>{{ $brand->name }}</td>
                     <td>{{ $brand->currency->code }}</td>
                     <td class="text-nowrap">
-                        <a href="{{ route('admin.brands.edit', $brand) }}" class="mr-2">
+                        <a href="{{ route('admin.brands.edit', $brand) }}" class="mr-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
                         <a href="#" data-toggle="modal" data-target="#deleteBrandModal{{ $brand->id }}">

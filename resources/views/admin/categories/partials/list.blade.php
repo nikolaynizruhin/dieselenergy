@@ -19,10 +19,10 @@
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->slug }}</td>
                     <td class="text-nowrap">
-                        <a href="{{ route('admin.categories.show', $category) }}" class="mr-2">
+                        <a href="{{ route('admin.categories.show', $category) }}" class="mr-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="{{ route('admin.categories.edit', $category) }}" class="mr-2">
+                        <a href="{{ route('admin.categories.edit', $category) }}" class="mr-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
                         <a href="#" data-toggle="modal" data-target="#deleteCategoryModal{{ $category->id }}">

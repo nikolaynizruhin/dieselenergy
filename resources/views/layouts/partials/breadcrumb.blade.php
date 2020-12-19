@@ -1,5 +1,5 @@
 <div class="letter-spacing text-gray-500">
-    <a href="{{ route('home') }}" class="text-gray-500">
+    <a href="{{ route('home') }}" class="text-gray-500 text-decoration-none">
         @include('layouts.partials.icon', ['name' => 'house-door-fill', 'width' => '1.2em', 'height' => '1.2em'])
     </a>
     @foreach($links as $name => $link)

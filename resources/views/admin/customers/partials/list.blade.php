@@ -21,10 +21,10 @@
                     <td>{{ $customer->email }}</td>
                     <td>{{ $customer->phone }}</td>
                     <td class="text-nowrap">
-                        <a href="{{ route('admin.customers.show', $customer) }}" class="mr-2">
+                        <a href="{{ route('admin.customers.show', $customer) }}" class="mr-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="{{ route('admin.customers.edit', $customer) }}" class="mr-2">
+                        <a href="{{ route('admin.customers.edit', $customer) }}" class="mr-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
                         <a href="#" data-toggle="modal" data-target="#deleteCustomerModal{{ $customer->id }}">

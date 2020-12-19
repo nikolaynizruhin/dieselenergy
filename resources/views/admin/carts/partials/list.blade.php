@@ -21,7 +21,7 @@
                     <td>{{ $product->pivot->quantity }}</td>
                     <td class="text-nowrap">@uah($product->pivot->quantity * $product->uah_price)</td>
                     <td class="text-nowrap">
-                        <a href="{{ route('admin.carts.edit', $product->pivot->id) }}" class="mr-2">
+                        <a href="{{ route('admin.carts.edit', $product->pivot->id) }}" class="mr-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
                         <a href="#" data-toggle="modal" data-target="#deleteCartModal{{ $product->id }}">
