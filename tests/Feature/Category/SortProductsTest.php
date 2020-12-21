@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class OrderProductsTest extends TestCase
+class SortProductsTest extends TestCase
 {
     use RefreshDatabase;
 
