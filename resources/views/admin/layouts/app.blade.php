@@ -25,6 +25,8 @@
                     @include('admin.layouts.partials.sidebar')
                 </div>
                 <div class="col-md-10">
+                    @include('admin.layouts.partials.alert')
+
                     @yield('content')
                 </div>
             </div>

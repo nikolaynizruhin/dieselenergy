@@ -1,9 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('content')
-
-    @include('layouts.partials.alert')
-
     <div class="row">
         <div class="col-md-4">
             @include('admin.layouts.partials.search', ['url' => route('admin.posts.index')])

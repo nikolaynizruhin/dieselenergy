@@ -1,9 +1,6 @@
 @extends('admin.layouts.auth')
 
 @section('content')
-
-    @include('layouts.partials.alert')
-
     <form method="POST" action="{{ route('admin.password.email') }}">
         @csrf
 
