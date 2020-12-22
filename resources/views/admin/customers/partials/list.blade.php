@@ -7,9 +7,27 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('customer.name') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.email') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.phone') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                       'title' => __('customer.name'),
+                       'field' => 'name',
+                       'route' => 'admin.customers.index'
+                   ])
+                </th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                       'title' => __('common.email'),
+                       'field' => 'email',
+                       'route' => 'admin.customers.index'
+                   ])
+                </th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                       'title' => __('common.phone'),
+                       'field' => 'phone',
+                       'route' => 'admin.customers.index'
+                   ])
+                </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
