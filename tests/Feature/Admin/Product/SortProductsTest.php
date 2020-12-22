@@ -39,14 +39,14 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_order_products()
+    public function guest_cant_sort_products()
     {
         $this->get(route('admin.products.index', ['sort' => 'name']))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function admin_can_order_products_ascending()
+    public function admin_can_sort_products_ascending()
     {
         $user = User::factory()->create();
 
@@ -59,7 +59,7 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_order_products_descending()
+    public function admin_can_sort_products_descending()
     {
         $user = User::factory()->create();
 

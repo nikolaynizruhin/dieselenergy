@@ -51,7 +51,7 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function guest_can_order_products_ascending()
+    public function guest_can_sort_products_ascending()
     {
         $this->get(route('categories.products.index', [
             'category' => $this->generators,
@@ -63,7 +63,7 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function guest_can_order_products_descending()
+    public function guest_can_sort_products_descending()
     {
         $this->get(route('categories.products.index', [
             'category' => $this->generators,
