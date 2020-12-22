@@ -8,10 +8,34 @@
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('customer.title') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.number') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.status') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.date') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.total') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                       'title' => __('common.number'),
+                       'field' => 'id',
+                       'route' => 'admin.orders.index'
+                   ])
+                </th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                       'title' => __('common.status'),
+                       'field' => 'status',
+                       'route' => 'admin.orders.index'
+                   ])
+                </th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                       'title' => __('common.date'),
+                       'field' => 'created_at',
+                       'route' => 'admin.orders.index'
+                   ])
+                </th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                       'title' => __('common.total'),
+                       'field' => 'total',
+                       'route' => 'admin.orders.index'
+                   ])
+                </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
