@@ -3,7 +3,6 @@
 namespace App\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Str;
 
 class ProductFilters extends Filters
 {
