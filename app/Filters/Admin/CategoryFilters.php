@@ -3,6 +3,7 @@
 namespace App\Filters\Admin;
 
 use App\Filters\Filters;
+use Illuminate\Support\Str;
 
 class CategoryFilters extends Filters
 {
@@ -11,7 +12,7 @@ class CategoryFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['search'];
+    protected $filters = ['search', 'sort'];
 
     /**
      * Filter the query by a given name.
@@ -22,5 +23,21 @@ class CategoryFilters extends Filters
     protected function search($name)
     {
         $this->builder->where('name', 'like', '%'.$name.'%');
+    }
+
+
+    /**
+     * Sort the query by a given user field.
+     *
+     * @param  string  $field
+     * @return void
+     */
+    protected function sort($field)
+    {
+        $direction = Str::startsWith($field, '-') ? 'desc' : 'asc';
+
+        $field = ltrim($field, '-');
+
+        $this->builder->orderBy($field, $direction);
     }
 }
