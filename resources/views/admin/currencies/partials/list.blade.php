@@ -7,8 +7,20 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('currency.code') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('currency.rate') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                        'title' => __('currency.code'),
+                        'field' => 'code',
+                        'route' => 'admin.currencies.index'
+                    ])
+                </th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                        'title' => __('currency.rate'),
+                        'field' => 'rate',
+                        'route' => 'admin.currencies.index'
+                    ])
+                </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('currency.symbol') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
