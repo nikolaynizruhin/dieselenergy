@@ -7,7 +7,13 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.title') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                        'title' => __('common.title'),
+                        'field' => 'title',
+                        'route' => 'admin.posts.index'
+                    ])
+                </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
