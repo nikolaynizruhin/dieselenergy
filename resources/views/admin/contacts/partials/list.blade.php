@@ -9,6 +9,7 @@
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('customer.title') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('contact.message') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">{{ __('common.date') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
@@ -22,6 +23,7 @@
                         </a>
                     </td>
                     <td>{{ $contact->message }}</td>
+                    <td class="text-nowrap">{{ $contact->created_at->format('Y-m-d H:i') }}</td>
                     <td class="text-nowrap">
                         <a href="{{ route('admin.contacts.show', $contact) }}" class="mr-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
