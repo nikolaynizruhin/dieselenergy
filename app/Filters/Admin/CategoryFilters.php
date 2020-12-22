@@ -25,7 +25,6 @@ class CategoryFilters extends Filters
         $this->builder->where('name', 'like', '%'.$name.'%');
     }
 
-
     /**
      * Sort the query by a given user field.
      *
