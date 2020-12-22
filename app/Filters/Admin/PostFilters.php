@@ -3,10 +3,12 @@
 namespace App\Filters\Admin;
 
 use App\Filters\Filters;
-use Illuminate\Support\Str;
+use App\Filters\HasSort;
 
 class PostFilters extends Filters
 {
+    use HasSort;
+
     /**
      * Registered filters to operate upon.
      *
@@ -23,20 +25,5 @@ class PostFilters extends Filters
     protected function search($title)
     {
         $this->builder->where('title', 'like', '%'.$title.'%');
-    }
-
-    /**
-     * Sort the query by a given user field.
-     *
-     * @param  string  $field
-     * @return void
-     */
-    protected function sort($field)
-    {
-        $direction = Str::startsWith($field, '-') ? 'desc' : 'asc';
-
-        $field = ltrim($field, '-');
-
-        $this->builder->orderBy($field, $direction);
     }
 }
