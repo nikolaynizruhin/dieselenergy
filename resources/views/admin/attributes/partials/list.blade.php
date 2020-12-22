@@ -7,8 +7,20 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.name') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.measure') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                       'title' => __('common.name'),
+                       'field' => 'name',
+                       'route' => 'admin.attributes.index'
+                   ])
+                </th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                       'title' => __('common.measure'),
+                       'field' => 'measure',
+                       'route' => 'admin.attributes.index'
+                   ])
+                </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
