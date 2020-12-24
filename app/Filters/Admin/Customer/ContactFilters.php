@@ -3,10 +3,14 @@
 namespace App\Filters\Admin\Customer;
 
 use App\Filters\Filters;
-use Illuminate\Support\Str;
+use App\Filters\HasSort;
 
 class ContactFilters extends Filters
 {
+    use HasSort {
+        sort as sortBy;
+    }
+
     /**
      * Registered filters to operate upon.
      *
@@ -22,9 +26,9 @@ class ContactFilters extends Filters
      */
     protected function search($search)
     {
-        $message = $search['contact'] ?? '';
-
-        $this->builder->where('message', 'like', '%'.$message.'%');
+        if (isset($search['contact'])) {
+            $this->builder->where('message', 'like', '%'.$search['contact'].'%');
+        }
     }
 
     /**
@@ -35,12 +39,8 @@ class ContactFilters extends Filters
      */
     protected function sort($field)
     {
-        $field = $field['contact'] ?? null;
-
-        $direction = Str::startsWith($field, '-') ? 'desc' : 'asc';
-
-        $field = ltrim($field, '-');
-
-        $this->builder->orderBy($field, $direction);
+        if (isset($field['contact'])) {
+            $this->sortBy($field['contact']);
+        }
     }
 }
