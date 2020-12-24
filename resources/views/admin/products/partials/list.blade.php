@@ -12,7 +12,6 @@
                             'title' => __('common.name'),
                             'field' => 'name',
                             'route' => ['name' => 'admin.products.index', 'parameters' => []],
-                            'nested' => null,
                         ])
                     </th>
                     <th scope="col" class="bg-light text-muted border-0">{{ __('category.title') }}</th>
@@ -21,7 +20,6 @@
                             'title' => __('common.status'),
                             'field' => 'status',
                             'route' => ['name' => 'admin.products.index', 'parameters' => []],
-                            'nested' => null,
                         ])
                     </th>
                     <th scope="col" class="bg-light text-muted border-0">
@@ -29,7 +27,6 @@
                             'title' => __('common.price'),
                             'field' => 'price',
                             'route' => ['name' => 'admin.products.index', 'parameters' => []],
-                            'nested' => null,
                         ])
                     </th>
                     <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>

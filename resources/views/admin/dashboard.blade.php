@@ -64,7 +64,6 @@
     <div class="card shadow-sm">
         @include('admin.orders.partials.'.($orders->isEmpty() ? 'empty' : 'list'), [
             'route' => ['name' => 'admin.dashboard', 'parameters' => []],
-            'nested' => null,
         ])
     </div>
 @endsection

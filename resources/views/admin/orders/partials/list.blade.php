@@ -13,7 +13,7 @@
                        'title' => __('common.number'),
                        'field' => 'id',
                        'route' => $route,
-                       'nested' => $nested,
+                       'nested' => $nested ?? null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
@@ -21,7 +21,7 @@
                        'title' => __('common.status'),
                        'field' => 'status',
                        'route' => $route,
-                       'nested' => $nested,
+                       'nested' => $nested ?? null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
@@ -29,7 +29,7 @@
                        'title' => __('common.date'),
                        'field' => 'created_at',
                        'route' => $route,
-                       'nested' => $nested,
+                       'nested' => $nested ?? null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
@@ -37,7 +37,7 @@
                        'title' => __('common.total'),
                        'field' => 'total',
                        'route' => $route,
-                       'nested' => $nested,
+                       'nested' => $nested ?? null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>

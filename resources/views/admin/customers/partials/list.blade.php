@@ -12,7 +12,6 @@
                        'title' => __('customer.name'),
                        'field' => 'name',
                        'route' => ['name' => 'admin.customers.index', 'parameters' => []],
-                       'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
@@ -20,7 +19,6 @@
                        'title' => __('common.email'),
                        'field' => 'email',
                        'route' => ['name' => 'admin.customers.index', 'parameters' => []],
-                       'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
@@ -28,7 +26,6 @@
                        'title' => __('common.phone'),
                        'field' => 'phone',
                        'route' => ['name' => 'admin.customers.index', 'parameters' => []],
-                       'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>

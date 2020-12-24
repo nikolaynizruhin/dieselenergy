@@ -15,7 +15,6 @@
                             'name' => 'admin.categories.show',
                             'parameters' => ['category' => $category],
                         ],
-                        'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
@@ -26,7 +25,6 @@
                             'name' => 'admin.categories.show',
                             'parameters' => ['category' => $category],
                         ],
-                        'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">

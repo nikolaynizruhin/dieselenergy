@@ -12,7 +12,6 @@
                         'title' => __('common.name'),
                         'field' => 'name',
                         'route' => ['name' => 'admin.brands.index', 'parameters' => []],
-                        'nested' => null,
                     ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('currency.title') }}</th>

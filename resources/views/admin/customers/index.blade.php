@@ -16,7 +16,6 @@
                 'name' => 'admin.customers.index',
                 'parameters' => []
             ],
-            'nested' => null,
         ])
     </div>
 @endsection

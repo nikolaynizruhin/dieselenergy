@@ -16,7 +16,6 @@
                 'name' => 'admin.contacts.index',
                 'parameters' => []
             ],
-            'nested' => null,
         ])
     </div>
 @endsection

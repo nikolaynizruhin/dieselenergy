@@ -12,7 +12,6 @@
                        'title' => __('common.name'),
                        'field' => 'name',
                        'route' => ['name' => 'admin.categories.index', 'parameters' => []],
-                       'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
@@ -20,7 +19,6 @@
                        'title' => __('common.slug'),
                        'field' => 'slug',
                        'route' => ['name' => 'admin.categories.index', 'parameters' => []],
-                       'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
