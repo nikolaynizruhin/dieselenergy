@@ -34,7 +34,6 @@ class SortCartsTest extends TestCase
      */
     private $order;
 
-
     protected function setUp(): void
     {
         parent::setUp();

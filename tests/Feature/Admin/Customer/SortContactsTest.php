@@ -52,9 +52,9 @@ class SortContactsTest extends TestCase
     public function guest_cant_sort_customer_contacts()
     {
         $this->get(route('admin.customers.show', [
-                'customer' => $this->customer,
-                'sort' => ['contact' => 'message'],
-            ]))->assertRedirect(route('admin.login'));
+            'customer' => $this->customer,
+            'sort' => ['contact' => 'message'],
+        ]))->assertRedirect(route('admin.login'));
     }
 
     /** @test */
