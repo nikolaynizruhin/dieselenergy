@@ -14,6 +14,21 @@ class SearchSpecificationsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
+    public function guest_cant_search_cart()
+    {
+        $attribute = Attribute::factory()->create(['name' => 'width attribute']);
+
+        $category = Category::factory()->create();
+
+        $category->attributes()->attach([$attribute->id]);
+
+        $this->get(route('admin.categories.show', [
+            'category' => $category,
+            'search' => 'width',
+        ]))->assertRedirect(route('admin.login'));
+    }
+
+    /** @test */
     public function user_can_search_specifications()
     {
         $user = User::factory()->create();
