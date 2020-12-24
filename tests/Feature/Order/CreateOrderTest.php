@@ -17,11 +17,12 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
+use Tests\Honeypot;
 use Tests\TestCase;
 
 class CreateOrderTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase, WithFaker, Honeypot;
 
     /**
      * Product.
@@ -59,8 +60,7 @@ class CreateOrderTest extends TestCase
         $response = $this->post(route('orders.store'), $customer->toArray() + [
             'notes' => $notes = $this->faker->paragraph,
             'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ]);
+        ] + $this->honeypot());
 
         $response->assertRedirect(route('orders.show', Order::first()));
 
@@ -90,10 +90,8 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $stub->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertRedirect();
+        $this->post(route('orders.store'), $stub->toArray() + ['privacy' => 1] + $this->honeypot())
+            ->assertRedirect();
 
         $this->assertDatabaseHas('customers', $stub->toArray());
         $this->assertDatabaseCount('customers', 1);
@@ -108,10 +106,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $stub->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ]);
+        $this->post(route('orders.store'), $stub->toArray() + ['privacy' => 1] + $this->honeypot());
 
         $customer = Customer::firstWhere('email', $stub->email);
 
@@ -132,10 +127,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $stub->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ]);
+        $this->post(route('orders.store'), $stub->toArray() + ['privacy' => 1] + $this->honeypot());
 
         $order = Customer::firstWhere('email', $stub->email)->orders()->first();
 
@@ -158,10 +150,7 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $stub->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ]);
+        $this->post(route('orders.store'), $stub->toArray() + ['privacy' => 1] + $this->honeypot());
 
         Event::assertDispatched(OrderCreatedEvent::class);
     }
@@ -175,10 +164,8 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertSessionHasErrors('name');
+        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -190,10 +177,8 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertSessionHasErrors('name');
+        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -205,10 +190,8 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertSessionHasErrors('name');
+        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
@@ -220,10 +203,8 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertSessionHasErrors('email');
+        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+            ->assertSessionHasErrors('email');
     }
 
     /** @test */
@@ -235,10 +216,8 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertSessionHasErrors('email');
+        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+            ->assertSessionHasErrors('email');
     }
 
     /** @test */
@@ -250,10 +229,8 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertSessionHasErrors('email');
+        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+            ->assertSessionHasErrors('email');
     }
 
     /** @test */
@@ -265,10 +242,8 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertSessionHasErrors('email');
+        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+            ->assertSessionHasErrors('email');
     }
 
     /** @test */
@@ -280,10 +255,8 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertSessionHasErrors('phone');
+        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+            ->assertSessionHasErrors('phone');
     }
 
     /** @test */
@@ -295,10 +268,8 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertSessionHasErrors('phone');
+        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+            ->assertSessionHasErrors('phone');
     }
 
     /** @test */
@@ -313,8 +284,7 @@ class CreateOrderTest extends TestCase
         $this->post(route('orders.store'), $customer->toArray() + [
             'notes' => 1,
             'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertSessionHasErrors('notes');
+        ] + $this->honeypot())->assertSessionHasErrors('notes');
     }
 
     /** @test */
@@ -324,10 +294,8 @@ class CreateOrderTest extends TestCase
             ->make()
             ->makeHidden('notes');
 
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'privacy' => 1,
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertSessionHasErrors('cart');
+        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+            ->assertSessionHasErrors('cart');
     }
 
     /** @test */
@@ -339,9 +307,8 @@ class CreateOrderTest extends TestCase
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + [
-            config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-        ])->assertSessionHasErrors('privacy');
+        $this->post(route('orders.store'), $customer->toArray() + $this->honeypot())
+            ->assertSessionHasErrors('privacy');
     }
 
     /** @test */
@@ -357,7 +324,8 @@ class CreateOrderTest extends TestCase
             'notes' => $notes = $this->faker->paragraph,
             'privacy' => 1,
             config('honeypot.field') => 'spam',
-        ])->assertSuccessful();
+        ] + $this->honeypot())
+            ->assertSuccessful();
 
         $this->assertDatabaseCount('orders', 0);
     }

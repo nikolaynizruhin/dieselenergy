@@ -7,11 +7,12 @@ use App\Notifications\ContactCreated;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
+use Tests\Honeypot;
 use Tests\TestCase;
 
 class CreateContactTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, Honeypot;
 
     /** @test */
     public function guest_can_create_contact()
@@ -25,9 +26,9 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact')
-                ->assertSessionHas('status', trans('contact.created'));
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact')
+            ->assertSessionHas('status', trans('contact.created'));
 
         $this->assertDatabaseHas('customers', [
             'name' => $contact->customer->name,
@@ -52,8 +53,8 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact');
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact');
 
         Notification::assertSentTo(
             new AnonymousNotifiable,
@@ -73,9 +74,9 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact')
-                ->assertSessionHasErrors('privacy');
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact')
+            ->assertSessionHasErrors('privacy');
     }
 
     /** @test */
@@ -90,8 +91,8 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact')
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('name');
     }
 
@@ -107,8 +108,8 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact')
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('name');
     }
 
@@ -124,8 +125,8 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact')
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('name');
     }
 
@@ -140,8 +141,8 @@ class CreateContactTest extends TestCase
                 'name' => $contact->customer->name,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact')
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('email');
     }
 
@@ -157,8 +158,8 @@ class CreateContactTest extends TestCase
                 'email' => 1,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact')
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('email');
     }
 
@@ -174,8 +175,8 @@ class CreateContactTest extends TestCase
                 'email' => str_repeat('a', 256),
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact')
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('email');
     }
 
@@ -191,9 +192,9 @@ class CreateContactTest extends TestCase
                 'email' => 'invalid',
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact')
-                ->assertSessionHasErrors('email');
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact')
+            ->assertSessionHasErrors('email');
     }
 
     /** @test */
@@ -208,8 +209,8 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => null,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact')
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('phone');
     }
 
@@ -225,8 +226,8 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => 0631234567,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact')
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('phone');
     }
 
@@ -242,8 +243,8 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => 1,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
-            ])->assertRedirect(route('home').'#contact')
+            ] + $this->honeypot())
+            ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('message');
     }
 
@@ -259,9 +260,9 @@ class CreateContactTest extends TestCase
                 'email' => $contact->customer->email,
                 'phone' => $contact->customer->phone,
                 'message' => $contact->message,
-                config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1),
                 config('honeypot.field') => 'spam',
-            ])->assertSuccessful();
+            ] + $this->honeypot())
+            ->assertSuccessful();
 
         $this->assertDatabaseCount('contacts', 0);
     }
