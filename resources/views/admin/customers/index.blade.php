@@ -11,6 +11,12 @@
     </div>
 
     <div class="card shadow-sm">
-        @include('admin.customers.partials.'.($customers->isEmpty() ? 'empty' : 'list'))
+        @include('admin.customers.partials.'.($customers->isEmpty() ? 'empty' : 'list'), [
+            'route' => [
+                'name' => 'admin.customers.index',
+                'params' => []
+            ],
+            'nested' => null,
+        ])
     </div>
 @endsection

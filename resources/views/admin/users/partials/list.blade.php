@@ -11,14 +11,16 @@
                         @include('admin.layouts.partials.sort', [
                             'title' => __('user.name'),
                             'field' => 'name',
-                            'route' => 'admin.users.index'
+                            'route' => ['name' => 'admin.users.index', 'params' => []],
+                            'nested' => null,
                         ])
                     </th>
                     <th scope="col" class="bg-light text-muted border-0">
                         @include('admin.layouts.partials.sort', [
                             'title' => __('common.email'),
                             'field' => 'email',
-                            'route' => 'admin.users.index'
+                            'route' => ['name' => 'admin.users.index', 'params' => []],
+                            'nested' => null,
                         ])
                     </th>
                     <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>

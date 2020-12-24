@@ -11,14 +11,16 @@
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.name'),
                        'field' => 'name',
-                       'route' => 'admin.categories.index'
+                       'route' => ['name' => 'admin.categories.index', 'params' => []],
+                       'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.slug'),
                        'field' => 'slug',
-                       'route' => 'admin.categories.index'
+                       'route' => ['name' => 'admin.categories.index', 'params' => []],
+                       'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>

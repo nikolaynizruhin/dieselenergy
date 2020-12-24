@@ -12,28 +12,32 @@
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.number'),
                        'field' => 'id',
-                       'route' => 'admin.orders.index'
+                       'route' => $route,
+                       'nested' => $nested,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.status'),
                        'field' => 'status',
-                       'route' => 'admin.orders.index'
+                       'route' => $route,
+                       'nested' => $nested,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.date'),
                        'field' => 'created_at',
-                       'route' => 'admin.orders.index'
+                       'route' => $route,
+                       'nested' => $nested,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.total'),
                        'field' => 'total',
-                       'route' => 'admin.orders.index'
+                       'route' => $route,
+                       'nested' => $nested,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>

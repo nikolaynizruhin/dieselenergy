@@ -13,7 +13,8 @@
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.date'),
                        'field' => 'created_at',
-                       'route' => 'admin.contacts.index'
+                       'route' => $route,
+                       'nested' => $nested,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>

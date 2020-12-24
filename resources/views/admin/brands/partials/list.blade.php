@@ -9,10 +9,11 @@
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
-                       'title' => __('common.name'),
-                       'field' => 'name',
-                       'route' => 'admin.brands.index'
-                   ])
+                        'title' => __('common.name'),
+                        'field' => 'name',
+                        'route' => ['name' => 'admin.brands.index', 'params' => []],
+                        'nested' => null,
+                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('currency.title') }}</th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>

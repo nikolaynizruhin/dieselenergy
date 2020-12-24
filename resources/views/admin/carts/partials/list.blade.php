@@ -7,9 +7,30 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.name') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.quantity') }}</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.price') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                        'title' => __('common.name'),
+                        'field' => 'name',
+                        'route' => ['name' => 'admin.orders.show', 'params' => ['order' => $order]],
+                        'nested' => null,
+                    ])
+                </th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                        'title' => __('common.quantity'),
+                        'field' => 'quantity',
+                        'route' => ['name' => 'admin.orders.show', 'params' => ['order' => $order]],
+                        'nested' => null,
+                    ])
+                </th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                        'title' => __('common.price'),
+                        'field' => 'price',
+                        'route' => ['name' => 'admin.orders.show', 'params' => ['order' => $order]],
+                        'nested' => null,
+                    ])
+                </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>

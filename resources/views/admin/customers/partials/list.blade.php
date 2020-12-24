@@ -11,21 +11,24 @@
                     @include('admin.layouts.partials.sort', [
                        'title' => __('customer.name'),
                        'field' => 'name',
-                       'route' => 'admin.customers.index'
+                       'route' => ['name' => 'admin.customers.index', 'params' => []],
+                       'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.email'),
                        'field' => 'email',
-                       'route' => 'admin.customers.index'
+                       'route' => ['name' => 'admin.customers.index', 'params' => []],
+                       'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.phone'),
                        'field' => 'phone',
-                       'route' => 'admin.customers.index'
+                       'route' => ['name' => 'admin.customers.index', 'params' => []],
+                       'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>

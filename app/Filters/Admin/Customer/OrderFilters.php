@@ -3,6 +3,7 @@
 namespace App\Filters\Admin\Customer;
 
 use App\Filters\Filters;
+use Illuminate\Support\Str;
 
 class OrderFilters extends Filters
 {
@@ -11,7 +12,7 @@ class OrderFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['search'];
+    protected $filters = ['search', 'sort'];
 
     /**
      * Filter the query by a given id.
@@ -24,5 +25,22 @@ class OrderFilters extends Filters
         $id = $search['order'] ?? '';
 
         $this->builder->where('id', 'like', '%'.$id.'%');
+    }
+
+    /**
+     * Sort the query by a given user field.
+     *
+     * @param  string|array  $field
+     * @return void
+     */
+    protected function sort($field)
+    {
+        $field = $field['order'] ?? null;
+
+        $direction = Str::startsWith($field, '-') ? 'desc' : 'asc';
+
+        $field = ltrim($field, '-');
+
+        $this->builder->orderBy($field, $direction);
     }
 }

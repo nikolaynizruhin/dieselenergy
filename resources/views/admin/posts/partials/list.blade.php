@@ -11,7 +11,8 @@
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.title'),
                         'field' => 'title',
-                        'route' => 'admin.posts.index'
+                        'route' => ['name' => 'admin.posts.index', 'params' => []],
+                        'nested' => null,
                     ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>

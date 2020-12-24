@@ -9,16 +9,18 @@
                 <th scope="col" class="bg-light text-muted border-0">#</th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
-                       'title' => __('common.name'),
-                       'field' => 'name',
-                       'route' => 'admin.attributes.index'
+                        'title' => __('common.name'),
+                        'field' => 'name',
+                        'route' => ['name' => 'admin.attributes.index', 'params' => []],
+                        'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
-                       'title' => __('common.measure'),
-                       'field' => 'measure',
-                       'route' => 'admin.attributes.index'
+                        'title' => __('common.measure'),
+                        'field' => 'measure',
+                        'route' => ['name' => 'admin.attributes.index', 'params' => []],
+                        'nested' => null,
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>

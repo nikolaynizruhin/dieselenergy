@@ -11,14 +11,16 @@
                     @include('admin.layouts.partials.sort', [
                         'title' => __('currency.code'),
                         'field' => 'code',
-                        'route' => 'admin.currencies.index'
+                        'route' => ['name' => 'admin.currencies.index', 'params' => []],
+                        'nested' => null,
                     ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
                         'title' => __('currency.rate'),
                         'field' => 'rate',
-                        'route' => 'admin.currencies.index'
+                        'route' => ['name' => 'admin.currencies.index', 'params' => []],
+                        'nested' => null,
                     ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('currency.symbol') }}</th>

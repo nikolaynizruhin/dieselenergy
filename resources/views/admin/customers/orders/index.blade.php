@@ -8,5 +8,11 @@
 </div>
 
 <div class="card shadow-sm mb-4">
-    @include('admin.orders.partials.'.($orders->total() ? 'list' : 'empty'))
+    @include('admin.orders.partials.'.($orders->isEmpty() ? 'empty' : 'list'), [
+        'route' => [
+            'name' => 'admin.customers.show',
+            'params' => ['customer' => $customer]
+        ],
+        'nested' => 'order'
+    ])
 </div>
