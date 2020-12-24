@@ -14,6 +14,21 @@ class SearchCartsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
+    public function guest_cant_search_cart()
+    {
+        $product = Product::factory()->create(['name' => 'Diesel Generator']);
+
+        $order = Order::factory()->create();
+
+        $order->products()->attach([$product->id]);
+
+        $this->get(route('admin.orders.show', [
+            'order' => $order,
+            'search' => 'Diesel',
+        ]))->assertRedirect(route('admin.login'));
+    }
+
+    /** @test */
     public function user_can_search_cart()
     {
         $user = User::factory()->create();
