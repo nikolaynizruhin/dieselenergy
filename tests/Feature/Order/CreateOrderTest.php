@@ -372,10 +372,10 @@ class CreateOrderTest extends TestCase
         Cart::add($this->product, $quantity = $this->faker->randomDigitNotNull);
 
         $this->post(route('orders.store'), $customer->toArray() + [
-                'notes' => $notes = $this->faker->paragraph,
-                'privacy' => 1,
-                config('honeypot.valid_from_field') => time(),
-            ])->assertSuccessful();
+            'notes' => $notes = $this->faker->paragraph,
+            'privacy' => 1,
+            config('honeypot.valid_from_field') => time(),
+        ])->assertSuccessful();
 
         $this->assertDatabaseCount('orders', 0);
     }
