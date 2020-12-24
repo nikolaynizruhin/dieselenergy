@@ -201,6 +201,8 @@
                     <form action="{{ route('contacts.store') }}" method="POST">
                         @csrf
 
+                        @include('layouts.partials.honeypot')
+
                         <div class="form-group">
                             <label for="inputName" class="font-weight-bold">Ім'я</label>
                             <input name="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" id="inputName" value="{{ old('name') }}" autocomplete="name" required>

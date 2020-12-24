@@ -2,6 +2,9 @@
     <div class="card-body">
         <form action="{{ route('orders.store') }}" method="POST">
             @csrf
+
+            @include('layouts.partials.honeypot')
+
             <div class="form-group">
                 <label for="inputName">Ім'я</label>
                 <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="inputName" required autocomplete="name" autofocus>

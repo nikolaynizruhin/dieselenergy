@@ -10,6 +10,16 @@ use App\Models\Order;
 class OrderController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('spam.block')->only('store');
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreOrder  $request

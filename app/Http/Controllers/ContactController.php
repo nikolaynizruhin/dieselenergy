@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Notification;
 class ContactController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('spam.block');
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreContact  $request
