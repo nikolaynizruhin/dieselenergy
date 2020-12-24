@@ -11,7 +11,7 @@
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.name'),
                         'field' => 'name',
-                        'route' => ['name' => 'admin.orders.show', 'params' => ['order' => $order]],
+                        'route' => ['name' => 'admin.orders.show', 'parameters' => ['order' => $order]],
                         'nested' => null,
                     ])
                 </th>
@@ -19,7 +19,7 @@
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.quantity'),
                         'field' => 'quantity',
-                        'route' => ['name' => 'admin.orders.show', 'params' => ['order' => $order]],
+                        'route' => ['name' => 'admin.orders.show', 'parameters' => ['order' => $order]],
                         'nested' => null,
                     ])
                 </th>
@@ -27,7 +27,7 @@
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.price'),
                         'field' => 'price',
-                        'route' => ['name' => 'admin.orders.show', 'params' => ['order' => $order]],
+                        'route' => ['name' => 'admin.orders.show', 'parameters' => ['order' => $order]],
                         'nested' => null,
                     ])
                 </th>

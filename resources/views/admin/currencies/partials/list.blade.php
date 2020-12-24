@@ -11,7 +11,7 @@
                     @include('admin.layouts.partials.sort', [
                         'title' => __('currency.code'),
                         'field' => 'code',
-                        'route' => ['name' => 'admin.currencies.index', 'params' => []],
+                        'route' => ['name' => 'admin.currencies.index', 'parameters' => []],
                         'nested' => null,
                     ])
                 </th>
@@ -19,7 +19,7 @@
                     @include('admin.layouts.partials.sort', [
                         'title' => __('currency.rate'),
                         'field' => 'rate',
-                        'route' => ['name' => 'admin.currencies.index', 'params' => []],
+                        'route' => ['name' => 'admin.currencies.index', 'parameters' => []],
                         'nested' => null,
                     ])
                 </th>

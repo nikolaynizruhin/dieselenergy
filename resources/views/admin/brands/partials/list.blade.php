@@ -11,7 +11,7 @@
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.name'),
                         'field' => 'name',
-                        'route' => ['name' => 'admin.brands.index', 'params' => []],
+                        'route' => ['name' => 'admin.brands.index', 'parameters' => []],
                         'nested' => null,
                     ])
                 </th>

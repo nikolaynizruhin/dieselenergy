@@ -12,7 +12,7 @@
 
     <div class="card shadow-sm">
         @include('admin.orders.partials.'.($orders->isEmpty() ? 'empty' : 'list'), [
-            'route' => ['name' => 'admin.orders.index', 'params' => []],
+            'route' => ['name' => 'admin.orders.index', 'parameters' => []],
             'nested' => null,
         ])
     </div>

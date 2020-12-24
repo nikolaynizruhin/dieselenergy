@@ -13,7 +13,7 @@
                         'field' => 'name',
                         'route' => [
                             'name' => 'admin.categories.show',
-                            'params' => ['category' => $category],
+                            'parameters' => ['category' => $category],
                         ],
                         'nested' => null,
                    ])
@@ -24,7 +24,7 @@
                         'field' => 'measure',
                         'route' => [
                             'name' => 'admin.categories.show',
-                            'params' => ['category' => $category],
+                            'parameters' => ['category' => $category],
                         ],
                         'nested' => null,
                    ])

@@ -11,7 +11,7 @@
                     @include('admin.layouts.partials.sort', [
                        'title' => __('customer.name'),
                        'field' => 'name',
-                       'route' => ['name' => 'admin.customers.index', 'params' => []],
+                       'route' => ['name' => 'admin.customers.index', 'parameters' => []],
                        'nested' => null,
                    ])
                 </th>
@@ -19,7 +19,7 @@
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.email'),
                        'field' => 'email',
-                       'route' => ['name' => 'admin.customers.index', 'params' => []],
+                       'route' => ['name' => 'admin.customers.index', 'parameters' => []],
                        'nested' => null,
                    ])
                 </th>
@@ -27,7 +27,7 @@
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.phone'),
                        'field' => 'phone',
-                       'route' => ['name' => 'admin.customers.index', 'params' => []],
+                       'route' => ['name' => 'admin.customers.index', 'parameters' => []],
                        'nested' => null,
                    ])
                 </th>

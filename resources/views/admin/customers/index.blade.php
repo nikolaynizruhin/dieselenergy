@@ -14,7 +14,7 @@
         @include('admin.customers.partials.'.($customers->isEmpty() ? 'empty' : 'list'), [
             'route' => [
                 'name' => 'admin.customers.index',
-                'params' => []
+                'parameters' => []
             ],
             'nested' => null,
         ])

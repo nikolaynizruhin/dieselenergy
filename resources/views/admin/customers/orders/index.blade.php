@@ -11,7 +11,7 @@
     @include('admin.orders.partials.'.($orders->isEmpty() ? 'empty' : 'list'), [
         'route' => [
             'name' => 'admin.customers.show',
-            'params' => ['customer' => $customer]
+            'parameters' => ['customer' => $customer]
         ],
         'nested' => 'order'
     ])

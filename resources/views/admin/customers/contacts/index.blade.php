@@ -11,7 +11,7 @@
     @include('admin.contacts.partials.'.($contacts->isEmpty() ? 'empty' : 'list'), [
         'route' => [
             'name' => 'admin.customers.show',
-            'params' => ['customer' => $customer]
+            'parameters' => ['customer' => $customer]
         ],
         'nested' => 'contact'
     ])
