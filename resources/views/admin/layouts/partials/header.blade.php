@@ -82,6 +82,12 @@
                         {{ __('currency.plural') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home') }}">
+                        @include('layouts.partials.icon', ['name' => 'globe2', 'classes' => 'mr-2', 'width' => '1.1em', 'height' => '1.1em'])
+                        {{ __('common.site') }}
+                    </a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

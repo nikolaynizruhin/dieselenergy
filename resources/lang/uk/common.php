@@ -47,6 +47,7 @@ return [
     'slug' => 'URL',
     'status' => 'Статус',
     'support' => 'Підтримка',
+    'site' => 'Сайт',
     'title' => 'Назва',
     'total' => 'Всього',
     'update' => 'Оновити',
