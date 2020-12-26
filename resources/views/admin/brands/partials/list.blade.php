@@ -14,7 +14,13 @@
                         'route' => ['name' => 'admin.brands.index', 'parameters' => []],
                     ])
                 </th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('currency.title') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                        'title' => __('currency.title'),
+                        'field' => 'currencies.code',
+                        'route' => ['name' => 'admin.brands.index', 'parameters' => []],
+                    ])
+                </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
             </thead>
