@@ -12,32 +12,6 @@ class SortCategoriesTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Euro currency.
-     *
-     * @var \App\Models\Category
-     */
-    private $ats;
-
-    /**
-     * Dollar currency.
-     *
-     * @var \App\Models\Category
-     */
-    private $generators;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        [$this->ats, $this->generators] = Category::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['name' => 'ATS'],
-                ['name' => 'Generators'],
-            ))->create();
-    }
-
     /** @test */
     public function guest_cant_sort_categories()
     {
@@ -46,28 +20,82 @@ class SortCategoriesTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_categories_ascending()
+    public function admin_can_sort_categories_by_name_ascending()
     {
         $user = User::factory()->create();
+
+        [$ats, $generators] = Category::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'ATS'],
+                ['name' => 'Generators'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.categories.index', ['sort' => 'name']))
             ->assertSuccessful()
             ->assertViewIs('admin.categories.index')
             ->assertViewHas('categories')
-            ->assertSeeInOrder([$this->ats->name, $this->generators->name]);
+            ->assertSeeInOrder([$ats->name, $generators->name]);
     }
 
     /** @test */
-    public function admin_can_sort_categories_descending()
+    public function admin_can_sort_categories_by_name_descending()
     {
         $user = User::factory()->create();
+
+        [$ats, $generators] = Category::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'ATS'],
+                ['name' => 'Generators'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.categories.index', ['sort' => '-name']))
             ->assertSuccessful()
             ->assertViewIs('admin.categories.index')
             ->assertViewHas('categories')
-            ->assertSeeInOrder([$this->generators->name, $this->ats->name]);
+            ->assertSeeInOrder([$generators->name, $ats->name]);
+    }
+
+    /** @test */
+    public function admin_can_sort_categories_by_slug_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$ats, $generators] = Category::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['slug' => 'ats'],
+                ['slug' => 'generators'],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.categories.index', ['sort' => 'slug']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.categories.index')
+            ->assertViewHas('categories')
+            ->assertSeeInOrder([$ats->slug, $generators->slug]);
+    }
+
+    /** @test */
+    public function admin_can_sort_categories_by_slug_descending()
+    {
+        $user = User::factory()->create();
+
+        [$ats, $generators] = Category::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['slug' => 'ats'],
+                ['slug' => 'generators'],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.categories.index', ['sort' => '-slug']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.categories.index')
+            ->assertViewHas('categories')
+            ->assertSeeInOrder([$generators->slug, $ats->slug]);
     }
 }

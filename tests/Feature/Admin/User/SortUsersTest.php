@@ -11,32 +11,6 @@ class SortUsersTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * User Adam.
-     *
-     * @var \App\Models\User
-     */
-    private $adam;
-
-    /**
-     * User Ben.
-     *
-     * @var \App\Models\User
-     */
-    private $ben;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        [$this->adam, $this->ben] = User::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['name' => 'Adam'],
-                ['name' => 'Ben'],
-            ))->create();
-    }
-
     /** @test */
     public function guest_cant_sort_users()
     {
@@ -45,28 +19,82 @@ class SortUsersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_users_ascending()
+    public function admin_can_sort_users_by_name_ascending()
     {
         $user = User::factory()->create();
+
+        [$adam, $ben] = User::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'Adam'],
+                ['name' => 'Ben'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.users.index', ['sort' => 'name']))
             ->assertSuccessful()
             ->assertViewIs('admin.users.index')
             ->assertViewHas('users')
-            ->assertSeeInOrder([$this->adam->name, $this->ben->name]);
+            ->assertSeeInOrder([$adam->name, $ben->name]);
     }
 
     /** @test */
-    public function admin_can_sort_users_descending()
+    public function admin_can_sort_users_by_name_descending()
     {
         $user = User::factory()->create();
+
+        [$adam, $ben] = User::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'Adam'],
+                ['name' => 'Ben'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.users.index', ['sort' => '-name']))
             ->assertSuccessful()
             ->assertViewIs('admin.users.index')
             ->assertViewHas('users')
-            ->assertSeeInOrder([$this->ben->name, $this->adam->name]);
+            ->assertSeeInOrder([$ben->name, $adam->name]);
+    }
+
+    /** @test */
+    public function admin_can_sort_users_by_email_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$adam, $ben] = User::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['email' => 'adam@example.com'],
+                ['email' => 'ben@example.com'],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.users.index', ['sort' => 'email']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.users.index')
+            ->assertViewHas('users')
+            ->assertSeeInOrder([$adam->email, $ben->email]);
+    }
+
+    /** @test */
+    public function admin_can_sort_users_by_email_descending()
+    {
+        $user = User::factory()->create();
+
+        [$adam, $ben] = User::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['email' => 'adam@example.com'],
+                ['email' => 'ben@example.com'],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.users.index', ['sort' => '-email']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.users.index')
+            ->assertViewHas('users')
+            ->assertSeeInOrder([$ben->email, $adam->email]);
     }
 }

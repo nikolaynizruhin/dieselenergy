@@ -21,7 +21,7 @@ class SortBrandsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_brands_ascending()
+    public function admin_can_sort_brands_by_name_ascending()
     {
         $user = User::factory()->create();
 
@@ -41,7 +41,7 @@ class SortBrandsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_brands_descending()
+    public function admin_can_sort_brands_by_name_descending()
     {
         $user = User::factory()->create();
 

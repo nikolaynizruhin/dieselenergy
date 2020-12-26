@@ -21,7 +21,7 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_contacts_ascending()
+    public function admin_can_sort_contacts_by_date_ascending()
     {
         $user = User::factory()->create();
 
@@ -41,7 +41,7 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_contacts_descending()
+    public function admin_can_sort_contacts_by_date_descending()
     {
         $user = User::factory()->create();
 
@@ -54,6 +54,46 @@ class SortContactsTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('admin.contacts.index', ['sort' => '-created_at']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.contacts.index')
+            ->assertViewHas('contacts')
+            ->assertSeeInOrder([$adam->message, $tom->message]);
+    }
+
+    /** @test */
+    public function admin_can_sort_contacts_by_message_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$adam, $tom] = Contact::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['message' => 'hey'],
+                ['message' => 'hello'],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.contacts.index', ['sort' => 'message']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.contacts.index')
+            ->assertViewHas('contacts')
+            ->assertSeeInOrder([$tom->message, $adam->message]);
+    }
+
+    /** @test */
+    public function admin_can_sort_contacts_by_message_descending()
+    {
+        $user = User::factory()->create();
+
+        [$adam, $tom] = Contact::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['message' => 'hey'],
+                ['message' => 'hello'],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.contacts.index', ['sort' => '-message']))
             ->assertSuccessful()
             ->assertViewIs('admin.contacts.index')
             ->assertViewHas('contacts')

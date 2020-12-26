@@ -12,32 +12,6 @@ class SortPostsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * About Us post.
-     *
-     * @var \App\Models\Post
-     */
-    private $about;
-
-    /**
-     * History post.
-     *
-     * @var \App\Models\Post
-     */
-    private $history;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        [$this->about, $this->history] = Post::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['title' => 'About Us'],
-                ['title' => 'History'],
-            ))->create();
-    }
-
     /** @test */
     public function guest_cant_sort_posts()
     {
@@ -46,28 +20,42 @@ class SortPostsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_posts_ascending()
+    public function admin_can_sort_posts_by_title_ascending()
     {
         $user = User::factory()->create();
+
+        [$about, $history] = Post::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['title' => 'About Us'],
+                ['title' => 'History'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.posts.index', ['sort' => 'title']))
             ->assertSuccessful()
             ->assertViewIs('admin.posts.index')
             ->assertViewHas('posts')
-            ->assertSeeInOrder([$this->about->title, $this->history->title]);
+            ->assertSeeInOrder([$about->title, $history->title]);
     }
 
     /** @test */
-    public function admin_can_sort_posts_descending()
+    public function admin_can_sort_posts_by_title_descending()
     {
         $user = User::factory()->create();
+
+        [$about, $history] = Post::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['title' => 'About Us'],
+                ['title' => 'History'],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.posts.index', ['sort' => '-title']))
             ->assertSuccessful()
             ->assertViewIs('admin.posts.index')
             ->assertViewHas('posts')
-            ->assertSeeInOrder([$this->history->title, $this->about->title]);
+            ->assertSeeInOrder([$history->title, $about->title]);
     }
 }
