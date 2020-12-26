@@ -7,14 +7,16 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
-                <th scope="col" class="bg-light text-muted border-0">
-                    @include('admin.layouts.partials.sort', [
-                       'title' => __('customer.title'),
-                       'field' => 'customers.name',
-                       'route' => $route,
-                       'nested' => $nested ?? null,
-                   ])
-                </th>
+                @if ($route['name'] === 'admin.orders.index')
+                    <th scope="col" class="bg-light text-muted border-0">
+                        @include('admin.layouts.partials.sort', [
+                           'title' => __('customer.title'),
+                           'field' => 'customers.name',
+                           'route' => $route,
+                           'nested' => $nested ?? null,
+                       ])
+                    </th>
+                @endif
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.number'),
@@ -54,11 +56,13 @@
             @foreach ($orders as $key => $order)
                 <tr>
                     <th scope="row" class="font-weight-normal">{{ $orders->firstItem() + $key }}</th>
-                    <td>
-                        <a href="{{ route('admin.customers.show', $order->customer) }}">
-                            {{ $order->customer->name }}
-                        </a>
-                    </td>
+                    @if ($route['name'] === 'admin.orders.index')
+                        <td>
+                            <a href="{{ route('admin.customers.show', $order->customer) }}">
+                                {{ $order->customer->name }}
+                            </a>
+                        </td>
+                    @endif
                     <td>{{ $order->id }}</td>
                     <td>
                         @include('admin.orders.partials.status')
