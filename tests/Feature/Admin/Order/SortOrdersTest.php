@@ -21,7 +21,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_orders_ascending()
+    public function admin_can_sort_orders_by_id_ascending()
     {
         $user = User::factory()->create();
 
@@ -41,7 +41,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_orders_descending()
+    public function admin_can_sort_orders_by_id_descending()
     {
         $user = User::factory()->create();
 
@@ -54,6 +54,126 @@ class SortOrdersTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('admin.orders.index', ['sort' => '-id']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.orders.index')
+            ->assertViewHas('orders')
+            ->assertSeeInOrder([$tom->id, $adam->id]);
+    }
+
+    /** @test */
+    public function admin_can_sort_orders_by_status_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$adam, $tom] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['status' => Order::PENDING],
+                ['status' => Order::NEW],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.orders.index', ['sort' => 'status']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.orders.index')
+            ->assertViewHas('orders')
+            ->assertSeeInOrder([$adam->status, $tom->status]);
+    }
+
+    /** @test */
+    public function admin_can_sort_orders_by_status_descending()
+    {
+        $user = User::factory()->create();
+
+        [$adam, $tom] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['status' => Order::PENDING],
+                ['status' => Order::NEW],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.orders.index', ['sort' => '-status']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.orders.index')
+            ->assertViewHas('orders')
+            ->assertSeeInOrder([$tom->status, $adam->status]);
+    }
+
+    /** @test */
+    public function admin_can_sort_orders_by_created_date_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$adam, $tom] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['created_at' => now()],
+                ['created_at' => now()->subDay()],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.orders.index', ['sort' => 'created_at']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.orders.index')
+            ->assertViewHas('orders')
+            ->assertSeeInOrder([$adam->id, $tom->id]);
+    }
+
+    /** @test */
+    public function admin_can_sort_orders_by_created_date_descending()
+    {
+        $user = User::factory()->create();
+
+        [$adam, $tom] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['created_at' => now()],
+                ['created_at' => now()->subDay()],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.orders.index', ['sort' => '-created_at']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.orders.index')
+            ->assertViewHas('orders')
+            ->assertSeeInOrder([$tom->id, $adam->id]);
+    }
+
+    /** @test */
+    public function admin_can_sort_orders_by_total_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$adam, $tom] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['total' => 100],
+                ['total' => 200],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.orders.index', ['sort' => 'total']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.orders.index')
+            ->assertViewHas('orders')
+            ->assertSeeInOrder([$adam->id, $tom->id]);
+    }
+
+    /** @test */
+    public function admin_can_sort_orders_by_total_descending()
+    {
+        $user = User::factory()->create();
+
+        [$adam, $tom] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['total' => 100],
+                ['total' => 200],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.orders.index', ['sort' => '-total']))
             ->assertSuccessful()
             ->assertViewIs('admin.orders.index')
             ->assertViewHas('orders')
