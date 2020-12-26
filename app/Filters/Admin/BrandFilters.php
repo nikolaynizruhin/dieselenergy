@@ -24,6 +24,6 @@ class BrandFilters extends Filters
      */
     protected function search($name)
     {
-        $this->builder->where('brand.name', 'like', '%'.$name.'%');
+        $this->builder->where('brands.name', 'like', '%'.$name.'%');
     }
 }
