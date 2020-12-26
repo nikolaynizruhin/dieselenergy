@@ -75,8 +75,8 @@ class SortContactsTest extends TestCase
         Contact::factory()
             ->count(2)
             ->state(new Sequence(
-                ['customer_id' => $adam->id],
-                ['customer_id' => $tom->id],
+                ['customer_id' => $adam],
+                ['customer_id' => $tom],
             ))->create();
 
         $this->actingAs($user)
@@ -102,8 +102,8 @@ class SortContactsTest extends TestCase
         Contact::factory()
             ->count(2)
             ->state(new Sequence(
-                ['customer_id' => $adam->id],
-                ['customer_id' => $tom->id],
+                ['customer_id' => $adam],
+                ['customer_id' => $tom],
             ))->create();
 
         $this->actingAs($user)

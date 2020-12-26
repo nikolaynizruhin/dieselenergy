@@ -75,8 +75,8 @@ class SortProductsTest extends TestCase
         Product::factory()
             ->count(2)
             ->state(new Sequence(
-                ['category_id' => $ats->id],
-                ['category_id' => $generators->id],
+                ['category_id' => $ats],
+                ['category_id' => $generators],
             ))->create();
 
         $this->actingAs($user)
@@ -102,8 +102,8 @@ class SortProductsTest extends TestCase
         Product::factory()
             ->count(2)
             ->state(new Sequence(
-                ['category_id' => $ats->id],
-                ['category_id' => $generators->id],
+                ['category_id' => $ats],
+                ['category_id' => $generators],
             ))->create();
 
         $this->actingAs($user)

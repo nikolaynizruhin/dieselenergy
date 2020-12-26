@@ -75,8 +75,8 @@ class SortBrandsTest extends TestCase
         Brand::factory()
             ->count(2)
             ->state(new Sequence(
-                ['currency_id' => $usd->id],
-                ['currency_id' => $eur->id],
+                ['currency_id' => $usd],
+                ['currency_id' => $eur],
             ))->create();
 
         $this->actingAs($user)
@@ -102,8 +102,8 @@ class SortBrandsTest extends TestCase
         Brand::factory()
             ->count(2)
             ->state(new Sequence(
-                ['currency_id' => $usd->id],
-                ['currency_id' => $eur->id],
+                ['currency_id' => $usd],
+                ['currency_id' => $eur],
             ))->create();
 
         $this->actingAs($user)
