@@ -3,6 +3,7 @@
 namespace Tests\Feature\Admin\Brand;
 
 use App\Models\Brand;
+use App\Models\Currency;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -11,32 +12,6 @@ use Tests\TestCase;
 class SortBrandsTest extends TestCase
 {
     use RefreshDatabase;
-
-    /**
-     * Euro currency.
-     *
-     * @var \App\Models\Brand
-     */
-    private $hyundai;
-
-    /**
-     * Dollar currency.
-     *
-     * @var \App\Models\Brand
-     */
-    private $sdmo;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        [$this->hyundai, $this->sdmo] = Brand::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['name' => 'Hyundai'],
-                ['name' => 'SDMO'],
-            ))->create();
-    }
 
     /** @test */
     public function guest_cant_sort_brands()
@@ -50,12 +25,19 @@ class SortBrandsTest extends TestCase
     {
         $user = User::factory()->create();
 
+        [$hyundai, $sdmo] = Brand::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'Hyundai'],
+                ['name' => 'SDMO'],
+            ))->create();
+
         $this->actingAs($user)
             ->get(route('admin.brands.index', ['sort' => 'name']))
             ->assertSuccessful()
             ->assertViewIs('admin.brands.index')
             ->assertViewHas('brands')
-            ->assertSeeInOrder([$this->hyundai->name, $this->sdmo->name]);
+            ->assertSeeInOrder([$hyundai->name, $sdmo->name]);
     }
 
     /** @test */
@@ -63,11 +45,72 @@ class SortBrandsTest extends TestCase
     {
         $user = User::factory()->create();
 
+        [$hyundai, $sdmo] = Brand::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'Hyundai'],
+                ['name' => 'SDMO'],
+            ))->create();
+
         $this->actingAs($user)
             ->get(route('admin.brands.index', ['sort' => '-name']))
             ->assertSuccessful()
             ->assertViewIs('admin.brands.index')
             ->assertViewHas('brands')
-            ->assertSeeInOrder([$this->sdmo->name, $this->hyundai->name]);
+            ->assertSeeInOrder([$sdmo->name, $hyundai->name]);
+    }
+
+    /** @test */
+    public function admin_can_sort_brands_by_currency_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$usd, $eur] = Currency::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['code' => 'USD'],
+                ['code' => 'EUR'],
+            ))->create();
+
+        Brand::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['currency_id' => $usd->id],
+                ['currency_id' => $eur->id],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.brands.index', ['sort' => 'currencies.code']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.brands.index')
+            ->assertViewHas('brands')
+            ->assertSeeInOrder([$eur->code, $usd->code]);
+    }
+
+    /** @test */
+    public function admin_can_sort_brands_by_currency_descending()
+    {
+        $user = User::factory()->create();
+
+        [$usd, $eur] = Currency::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['code' => 'USD'],
+                ['code' => 'EUR'],
+            ))->create();
+
+        Brand::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['currency_id' => $usd->id],
+                ['currency_id' => $eur->id],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.brands.index', ['sort' => 'currencies.code']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.brands.index')
+            ->assertViewHas('brands')
+            ->assertSeeInOrder([$eur->code, $usd->code]);
     }
 }

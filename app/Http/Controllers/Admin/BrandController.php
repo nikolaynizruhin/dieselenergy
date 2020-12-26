@@ -19,7 +19,11 @@ class BrandController extends Controller
      */
     public function index(Request $request, BrandFilters $filters)
     {
-        $brands = Brand::with('currency')->filter($filters)->orderBy('name')->paginate(10);
+        $brands = Brand::select('brands.*')
+            ->join('currencies', 'currencies.id', '=', 'brands.currency_id')
+            ->filter($filters)
+            ->orderBy('name')
+            ->paginate(10);
 
         return view('admin.brands.index', compact('brands'));
     }
