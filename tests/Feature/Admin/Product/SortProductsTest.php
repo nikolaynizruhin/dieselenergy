@@ -65,8 +65,12 @@ class SortProductsTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $ats = Category::factory()->create(['name' =>'ATS']);
-        $generators = Category::factory()->create(['name' =>'Generators']);
+        [$ats, $generators] = Category::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' =>'ATS'],
+                ['name' =>'Generators'],
+            ))->create();
 
         Product::factory()
             ->count(2)
@@ -88,8 +92,12 @@ class SortProductsTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $ats = Category::factory()->create(['name' =>'ATS']);
-        $generators = Category::factory()->create(['name' =>'Generators']);
+        [$ats, $generators] = Category::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' =>'ATS'],
+                ['name' =>'Generators'],
+            ))->create();
 
         Product::factory()
             ->count(2)
