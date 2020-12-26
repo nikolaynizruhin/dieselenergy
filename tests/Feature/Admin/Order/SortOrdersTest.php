@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin\Order;
 
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -11,32 +12,6 @@ use Tests\TestCase;
 class SortOrdersTest extends TestCase
 {
     use RefreshDatabase;
-
-    /**
-     * Adam's order.
-     *
-     * @var \App\Models\Order
-     */
-    private $adam;
-
-    /**
-     * Tom's order.
-     *
-     * @var \App\Models\Order
-     */
-    private $tom;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        [$this->adam, $this->tom] = Order::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['id' => 788365],
-                ['id' => 987445],
-            ))->create();
-    }
 
     /** @test */
     public function guest_cant_sort_orders()
@@ -50,12 +25,19 @@ class SortOrdersTest extends TestCase
     {
         $user = User::factory()->create();
 
+        [$adam, $tom] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['id' => 788365],
+                ['id' => 987445],
+            ))->create();
+
         $this->actingAs($user)
             ->get(route('admin.orders.index', ['sort' => 'id']))
             ->assertSuccessful()
             ->assertViewIs('admin.orders.index')
             ->assertViewHas('orders')
-            ->assertSeeInOrder([$this->adam->id, $this->tom->id]);
+            ->assertSeeInOrder([$adam->id, $tom->id]);
     }
 
     /** @test */
@@ -63,11 +45,72 @@ class SortOrdersTest extends TestCase
     {
         $user = User::factory()->create();
 
+        [$adam, $tom] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['id' => 788365],
+                ['id' => 987445],
+            ))->create();
+
         $this->actingAs($user)
             ->get(route('admin.orders.index', ['sort' => '-id']))
             ->assertSuccessful()
             ->assertViewIs('admin.orders.index')
             ->assertViewHas('orders')
-            ->assertSeeInOrder([$this->tom->id, $this->adam->id]);
+            ->assertSeeInOrder([$tom->id, $adam->id]);
+    }
+
+    /** @test */
+    public function admin_can_sort_orders_by_client_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$adam, $tom] = Customer::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'Adam'],
+                ['name' => 'Tom'],
+            ))->create();
+
+        Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['id' => 788365, 'customer_id' => $adam->id],
+                ['id' => 987445, 'customer_id' => $tom->id],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.orders.index', ['sort' => 'customers.name']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.orders.index')
+            ->assertViewHas('orders')
+            ->assertSeeInOrder([$adam->name, $tom->name]);
+    }
+
+    /** @test */
+    public function admin_can_sort_orders_by_client_descending()
+    {
+        $user = User::factory()->create();
+
+        [$adam, $tom] = Customer::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'Adam'],
+                ['name' => 'Tom'],
+            ))->create();
+
+        Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['id' => 788365, 'customer_id' => $adam->id],
+                ['id' => 987445, 'customer_id' => $tom->id],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.orders.index', ['sort' => '-customers.name']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.orders.index')
+            ->assertViewHas('orders')
+            ->assertSeeInOrder([$tom->name, $adam->name]);
     }
 }

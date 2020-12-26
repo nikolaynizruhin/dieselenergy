@@ -24,6 +24,6 @@ class ProductFilters extends Filters
      */
     protected function search($name)
     {
-        $this->builder->where('name', 'like', '%'.$name.'%');
+        $this->builder->where('products.name', 'like', '%'.$name.'%');
     }
 }

@@ -21,7 +21,8 @@ class OrderController extends Controller
      */
     public function index(Request $request, OrderFilters $filters)
     {
-        $orders = Order::with('customer')
+        $orders = Order::select('orders.*')
+            ->join('customers', 'customers.id', '=', 'orders.customer_id')
             ->filter($filters)
             ->latest()
             ->paginate(10);

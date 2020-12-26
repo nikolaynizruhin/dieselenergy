@@ -7,7 +7,14 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col" class="bg-light text-muted border-0">#</th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('customer.title') }}</th>
+                <th scope="col" class="bg-light text-muted border-0">
+                    @include('admin.layouts.partials.sort', [
+                       'title' => __('customer.title'),
+                       'field' => 'customers.name',
+                       'route' => $route,
+                       'nested' => $nested ?? null,
+                   ])
+                </th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
                        'title' => __('common.number'),

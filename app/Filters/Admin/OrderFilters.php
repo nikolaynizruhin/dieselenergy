@@ -24,6 +24,6 @@ class OrderFilters extends Filters
      */
     protected function search($id)
     {
-        $this->builder->where('id', 'like', '%'.$id.'%');
+        $this->builder->where('orders.id', 'like', '%'.$id.'%');
     }
 }

@@ -14,7 +14,13 @@
                             'route' => ['name' => 'admin.products.index', 'parameters' => []],
                         ])
                     </th>
-                    <th scope="col" class="bg-light text-muted border-0">{{ __('category.title') }}</th>
+                    <th scope="col" class="bg-light text-muted border-0">
+                        @include('admin.layouts.partials.sort', [
+                            'title' => __('category.title'),
+                            'field' => 'categories.name',
+                            'route' => ['name' => 'admin.products.index', 'parameters' => []],
+                        ])
+                    </th>
                     <th scope="col" class="bg-light text-muted border-0">
                         @include('admin.layouts.partials.sort', [
                             'title' => __('common.status'),
