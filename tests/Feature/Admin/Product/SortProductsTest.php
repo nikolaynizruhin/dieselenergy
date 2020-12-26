@@ -61,6 +61,86 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
+    public function admin_can_sort_products_by_price_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$patrol, $diesel] = Product::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['price' => 200],
+                ['price' => 100],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.products.index', ['sort' => 'price']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.products.index')
+            ->assertViewHas('products')
+            ->assertSeeInOrder([$diesel->name, $patrol->name]);
+    }
+
+    /** @test */
+    public function admin_can_sort_products_by_price_descending()
+    {
+        $user = User::factory()->create();
+
+        [$patrol, $diesel] = Product::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['price' => 200],
+                ['price' => 100],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.products.index', ['sort' => '-price']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.products.index')
+            ->assertViewHas('products')
+            ->assertSeeInOrder([$patrol->name, $diesel->name]);
+    }
+
+    /** @test */
+    public function admin_can_sort_products_by_status_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$patrol, $diesel] = Product::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['is_active' => true],
+                ['is_active' => false],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.products.index', ['sort' => 'status']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.products.index')
+            ->assertViewHas('products')
+            ->assertSeeInOrder([$diesel->name, $patrol->name]);
+    }
+
+    /** @test */
+    public function admin_can_sort_products_by_status_descending()
+    {
+        $user = User::factory()->create();
+
+        [$patrol, $diesel] = Product::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['is_active' => true],
+                ['is_active' => false],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.products.index', ['sort' => '-status']))
+            ->assertSuccessful()
+            ->assertViewIs('admin.products.index')
+            ->assertViewHas('products')
+            ->assertSeeInOrder([$patrol->name, $diesel->name]);
+    }
+
+    /** @test */
     public function admin_can_sort_products_by_category_ascending()
     {
         $user = User::factory()->create();
