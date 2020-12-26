@@ -24,6 +24,6 @@ class ContactFilters extends Filters
      */
     protected function search($message)
     {
-        $this->builder->where('message', 'like', '%'.$message.'%');
+        $this->builder->where('contacts.message', 'like', '%'.$message.'%');
     }
 }
