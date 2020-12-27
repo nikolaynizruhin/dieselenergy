@@ -113,7 +113,7 @@ class SortProductsTest extends TestCase
             ))->create();
 
         $this->actingAs($user)
-            ->get(route('admin.products.index', ['sort' => 'status']))
+            ->get(route('admin.products.index', ['sort' => 'is_active']))
             ->assertSuccessful()
             ->assertViewIs('admin.products.index')
             ->assertViewHas('products')
@@ -133,7 +133,7 @@ class SortProductsTest extends TestCase
             ))->create();
 
         $this->actingAs($user)
-            ->get(route('admin.products.index', ['sort' => '-status']))
+            ->get(route('admin.products.index', ['sort' => '-is_active']))
             ->assertSuccessful()
             ->assertViewIs('admin.products.index')
             ->assertViewHas('products')
