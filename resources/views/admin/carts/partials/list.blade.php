@@ -22,11 +22,7 @@
                     ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
-                    @include('admin.layouts.partials.sort', [
-                        'title' => __('common.price'),
-                        'field' => 'price',
-                        'route' => ['name' => 'admin.orders.show', 'parameters' => ['order' => $order]],
-                    ])
+                    {{ __('common.price') }}
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>

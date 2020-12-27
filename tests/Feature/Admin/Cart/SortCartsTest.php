@@ -4,6 +4,7 @@ namespace Tests\Feature\Admin\Cart;
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -12,20 +13,6 @@ use Tests\TestCase;
 class SortCartsTest extends TestCase
 {
     use RefreshDatabase;
-
-    /**
-     * Euro currency.
-     *
-     * @var \App\Models\Cart
-     */
-    private $hyundai;
-
-    /**
-     * Dollar currency.
-     *
-     * @var \App\Models\Cart
-     */
-    private $sdmo;
 
     /**
      * Order.
@@ -39,14 +26,6 @@ class SortCartsTest extends TestCase
         parent::setUp();
 
         $this->order = Order::factory()->create();
-
-        [$this->hyundai, $this->sdmo] = Cart::factory()
-            ->count(2)
-            ->for($this->order)
-            ->state(new Sequence(
-                ['quantity' => 1],
-                ['quantity' => 2],
-            ))->create();
     }
 
     /** @test */
@@ -59,9 +38,17 @@ class SortCartsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_carts_ascending()
+    public function admin_can_sort_carts_by_quantity_ascending()
     {
         $user = User::factory()->create();
+
+        [$hyundai, $sdmo] = Cart::factory()
+            ->count(2)
+            ->for($this->order)
+            ->state(new Sequence(
+                ['quantity' => 1],
+                ['quantity' => 2],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.orders.show', [
@@ -70,16 +57,21 @@ class SortCartsTest extends TestCase
             ]))->assertSuccessful()
             ->assertViewIs('admin.orders.show')
             ->assertViewHas('products')
-            ->assertSeeInOrder([
-                $this->hyundai->product->name,
-                $this->sdmo->product->name,
-            ]);
+            ->assertSeeInOrder([$hyundai->product->name, $sdmo->product->name]);
     }
 
     /** @test */
-    public function admin_can_sort_carts_descending()
+    public function admin_can_sort_carts_by_quantity_descending()
     {
         $user = User::factory()->create();
+
+        [$hyundai, $sdmo] = Cart::factory()
+            ->count(2)
+            ->for($this->order)
+            ->state(new Sequence(
+                ['quantity' => 1],
+                ['quantity' => 2],
+            ))->create();
 
         $this->actingAs($user)
             ->get(route('admin.orders.show', [
@@ -88,9 +80,66 @@ class SortCartsTest extends TestCase
             ]))->assertSuccessful()
             ->assertViewIs('admin.orders.show')
             ->assertViewHas('products')
-            ->assertSeeInOrder([
-                $this->sdmo->product->name,
-                $this->hyundai->product->name,
-            ]);
+            ->assertSeeInOrder([$sdmo->product->name, $hyundai->product->name]);
+    }
+
+    /** @test */
+    public function admin_can_sort_carts_by_product_name_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$diesel, $patrol] = Product::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'Diesel'],
+                ['name' => 'Patrol'],
+            ))->create();
+
+        [$hyundai, $sdmo] = Cart::factory()
+            ->count(2)
+            ->for($this->order)
+            ->state(new Sequence(
+                ['product_id' => $diesel],
+                ['product_id' => $patrol],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.orders.show', [
+                'order' => $this->order,
+                'sort' => 'name',
+            ]))->assertSuccessful()
+            ->assertViewIs('admin.orders.show')
+            ->assertViewHas('products')
+            ->assertSeeInOrder([$hyundai->product->name, $sdmo->product->name]);
+    }
+
+    /** @test */
+    public function admin_can_sort_carts_by_product_name_descending()
+    {
+        $user = User::factory()->create();
+
+        [$diesel, $patrol] = Product::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['name' => 'Diesel'],
+                ['name' => 'Patrol'],
+            ))->create();
+
+        [$hyundai, $sdmo] = Cart::factory()
+            ->count(2)
+            ->for($this->order)
+            ->state(new Sequence(
+                ['product_id' => $diesel],
+                ['product_id' => $patrol],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.orders.show', [
+                'order' => $this->order,
+                'sort' => '-name',
+            ]))->assertSuccessful()
+            ->assertViewIs('admin.orders.show')
+            ->assertViewHas('products')
+            ->assertSeeInOrder([$sdmo->product->name, $hyundai->product->name]);
     }
 }

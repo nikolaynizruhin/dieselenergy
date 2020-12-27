@@ -10,44 +10,44 @@
                 @if ($route['name'] === 'admin.orders.index')
                     <th scope="col" class="bg-light text-muted border-0">
                         @include('admin.layouts.partials.sort', [
-                           'title' => __('customer.title'),
-                           'field' => 'customers.name',
-                           'route' => $route,
-                           'nested' => $nested ?? null,
-                       ])
+                            'title' => __('customer.title'),
+                            'field' => 'customers.name',
+                            'route' => $route,
+                            'nested' => $nested ?? null,
+                        ])
                     </th>
                 @endif
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
-                       'title' => __('common.number'),
-                       'field' => 'id',
-                       'route' => $route,
-                       'nested' => $nested ?? null,
-                   ])
+                        'title' => __('common.number'),
+                        'field' => 'id',
+                        'route' => $route,
+                        'nested' => $nested ?? null,
+                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
-                       'title' => __('common.status'),
-                       'field' => 'status',
-                       'route' => $route,
-                       'nested' => $nested ?? null,
-                   ])
+                        'title' => __('common.status'),
+                        'field' => 'status',
+                        'route' => $route,
+                        'nested' => $nested ?? null,
+                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
-                       'title' => __('common.date'),
-                       'field' => 'created_at',
-                       'route' => $route,
-                       'nested' => $nested ?? null,
-                   ])
+                        'title' => __('common.date'),
+                        'field' => 'created_at',
+                        'route' => $route,
+                        'nested' => $nested ?? null,
+                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">
                     @include('admin.layouts.partials.sort', [
-                       'title' => __('common.total'),
-                       'field' => 'total',
-                       'route' => $route,
-                       'nested' => $nested ?? null,
-                   ])
+                        'title' => __('common.total'),
+                        'field' => 'total',
+                        'route' => $route,
+                        'nested' => $nested ?? null,
+                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
             </tr>
