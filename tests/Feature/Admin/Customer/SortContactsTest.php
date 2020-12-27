@@ -75,4 +75,44 @@ class SortContactsTest extends TestCase
             ]))->assertSuccessful()
             ->assertSeeInOrder([$support->message, $faq->message]);
     }
+
+    /** @test */
+    public function user_can_sort_customer_contacts_by_date_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$support, $faq] = Contact::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['created_at' => now()],
+                ['created_at' => now()->subDay()],
+            ))->create(['customer_id' => $this->customer->id]);
+
+        $this->actingAs($user)
+            ->get(route('admin.customers.show', [
+                'customer' => $this->customer,
+                'sort' => ['contact' => 'created_at'],
+            ]))->assertSuccessful()
+            ->assertSeeInOrder([$faq->message, $support->message]);
+    }
+
+    /** @test */
+    public function user_can_sort_customer_contacts_by_date_descending()
+    {
+        $user = User::factory()->create();
+
+        [$support, $faq] = Contact::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['created_at' => now()],
+                ['created_at' => now()->subDay()],
+            ))->create(['customer_id' => $this->customer->id]);
+
+        $this->actingAs($user)
+            ->get(route('admin.customers.show', [
+                'customer' => $this->customer,
+                'sort' => ['contact' => '-created_at'],
+            ]))->assertSuccessful()
+            ->assertSeeInOrder([$support->message, $faq->message]);
+    }
 }
