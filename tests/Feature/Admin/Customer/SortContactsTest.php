@@ -14,20 +14,6 @@ class SortContactsTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Support contact.
-     *
-     * @var \App\Models\Contact
-     */
-    private $support;
-
-    /**
-     * FAQ contact.
-     *
-     * @var \App\Models\Contact
-     */
-    private $faq;
-
-    /**
      * Customer.
      *
      * @var \App\Models\Customer
@@ -39,13 +25,6 @@ class SortContactsTest extends TestCase
         parent::setUp();
 
         $this->customer = Customer::factory()->create();
-
-        [$this->support, $this->faq] = Contact::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['message' => 'Support Message'],
-                ['message' => 'FAQ Message'],
-            ))->create(['customer_id' => $this->customer->id]);
     }
 
     /** @test */
@@ -58,28 +37,42 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_contacts_ascending()
+    public function user_can_sort_customer_contacts_by_message_ascending()
     {
         $user = User::factory()->create();
+
+        [$support, $faq] = Contact::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['message' => 'Support Message'],
+                ['message' => 'FAQ Message'],
+            ))->create(['customer_id' => $this->customer->id]);
 
         $this->actingAs($user)
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['contact' => 'message'],
             ]))->assertSuccessful()
-            ->assertSeeInOrder([$this->faq->message, $this->support->message]);
+            ->assertSeeInOrder([$faq->message, $support->message]);
     }
 
     /** @test */
-    public function user_can_sort_customer_contacts_descending()
+    public function user_can_sort_customer_contacts_by_message_descending()
     {
         $user = User::factory()->create();
+
+        [$support, $faq] = Contact::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['message' => 'Support Message'],
+                ['message' => 'FAQ Message'],
+            ))->create(['customer_id' => $this->customer->id]);
 
         $this->actingAs($user)
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['contact' => '-message'],
             ]))->assertSuccessful()
-            ->assertSeeInOrder([$this->support->message, $this->faq->message]);
+            ->assertSeeInOrder([$support->message, $faq->message]);
     }
 }
