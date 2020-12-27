@@ -66,4 +66,124 @@ class SortOrdersTest extends TestCase
             ]))->assertSuccessful()
             ->assertSeeInOrder([$orderOne->id, $orderTwo->id]);
     }
+
+    /** @test */
+    public function user_can_sort_customer_orders_by_status_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$orderOne, $orderTwo] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['status' => Order::NEW],
+                ['status' => Order::PENDING],
+            ))->create(['customer_id' => $this->customer->id]);
+
+        $this->actingAs($user)
+            ->get(route('admin.customers.show', [
+                'customer' => $this->customer,
+                'sort' => ['order' => 'status'],
+            ]))->assertSuccessful()
+            ->assertSeeInOrder([$orderTwo->status, $orderOne->status]);
+    }
+
+    /** @test */
+    public function user_can_sort_customer_orders_by_status_descending()
+    {
+        $user = User::factory()->create();
+
+        [$orderOne, $orderTwo] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['status' => Order::NEW],
+                ['status' => Order::PENDING],
+            ))->create(['customer_id' => $this->customer->id]);
+
+        $this->actingAs($user)
+            ->get(route('admin.customers.show', [
+                'customer' => $this->customer,
+                'sort' => ['order' => '-status'],
+            ]))->assertSuccessful()
+            ->assertSeeInOrder([$orderOne->status, $orderTwo->status]);
+    }
+
+    /** @test */
+    public function user_can_sort_customer_orders_by_date_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$orderOne, $orderTwo] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['created_at' => now()],
+                ['created_at' => now()->subDay()],
+            ))->create(['customer_id' => $this->customer->id]);
+
+        $this->actingAs($user)
+            ->get(route('admin.customers.show', [
+                'customer' => $this->customer,
+                'sort' => ['order' => 'created_at'],
+            ]))->assertSuccessful()
+            ->assertSeeInOrder([$orderTwo->id, $orderOne->id]);
+    }
+
+    /** @test */
+    public function user_can_sort_customer_orders_by_date_descending()
+    {
+        $user = User::factory()->create();
+
+        [$orderOne, $orderTwo] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['created_at' => now()],
+                ['created_at' => now()->subDay()],
+            ))->create(['customer_id' => $this->customer->id]);
+
+        $this->actingAs($user)
+            ->get(route('admin.customers.show', [
+                'customer' => $this->customer,
+                'sort' => ['order' => '-created_at'],
+            ]))->assertSuccessful()
+            ->assertSeeInOrder([$orderOne->id, $orderTwo->id]);
+    }
+
+    /** @test */
+    public function user_can_sort_customer_orders_by_total_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$orderOne, $orderTwo] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['total' => 200],
+                ['total' => 100],
+            ))->create(['customer_id' => $this->customer->id]);
+
+        $this->actingAs($user)
+            ->get(route('admin.customers.show', [
+                'customer' => $this->customer,
+                'sort' => ['order' => 'total'],
+            ]))->assertSuccessful()
+            ->assertSeeInOrder([$orderTwo->id, $orderOne->id]);
+    }
+
+    /** @test */
+    public function user_can_sort_customer_orders_by_total_descending()
+    {
+        $user = User::factory()->create();
+
+        [$orderOne, $orderTwo] = Order::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['total' => 200],
+                ['total' => 100],
+            ))->create(['customer_id' => $this->customer->id]);
+
+        $this->actingAs($user)
+            ->get(route('admin.customers.show', [
+                'customer' => $this->customer,
+                'sort' => ['order' => '-total'],
+            ]))->assertSuccessful()
+            ->assertSeeInOrder([$orderOne->id, $orderTwo->id]);
+    }
 }
