@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\StoreOrder;
 use App\Http\Requests\Admin\UpdateOrder;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -65,7 +66,11 @@ class OrderController extends Controller
      */
     public function show(Order $order, Request $request, ProductFilters $filters)
     {
-        $products = $order->products()->filter($filters)->orderBy('name')->paginate(10);
+        $products = $order->products()
+            ->select('products.*', DB::raw('price * quantity total'))
+            ->filter($filters)
+            ->orderBy('name')
+            ->paginate(10);
 
         return view('admin.orders.show', compact('order', 'products'));
     }

@@ -142,4 +142,64 @@ class SortCartsTest extends TestCase
             ->assertViewHas('products')
             ->assertSeeInOrder([$sdmo->product->name, $hyundai->product->name]);
     }
+
+    /** @test */
+    public function admin_can_sort_carts_by_total_price_ascending()
+    {
+        $user = User::factory()->create();
+
+        [$diesel, $patrol] = Product::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['price' => 1000],
+                ['price' => 2000],
+            ))->create();
+
+        [$hyundai, $sdmo] = Cart::factory()
+            ->count(2)
+            ->for($this->order)
+            ->state(new Sequence(
+                ['product_id' => $diesel, 'quantity' => 1],
+                ['product_id' => $patrol, 'quantity' => 1],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.orders.show', [
+                'order' => $this->order,
+                'sort' => 'total',
+            ]))->assertSuccessful()
+            ->assertViewIs('admin.orders.show')
+            ->assertViewHas('products')
+            ->assertSeeInOrder([$hyundai->product->name, $sdmo->product->name]);
+    }
+
+    /** @test */
+    public function admin_can_sort_carts_by_total_price_descending()
+    {
+        $user = User::factory()->create();
+
+        [$diesel, $patrol] = Product::factory()
+            ->count(2)
+            ->state(new Sequence(
+                ['price' => 1000],
+                ['price' => 2000],
+            ))->create();
+
+        [$hyundai, $sdmo] = Cart::factory()
+            ->count(2)
+            ->for($this->order)
+            ->state(new Sequence(
+                ['product_id' => $diesel, 'quantity' => 1],
+                ['product_id' => $patrol, 'quantity' => 1],
+            ))->create();
+
+        $this->actingAs($user)
+            ->get(route('admin.orders.show', [
+                'order' => $this->order,
+                'sort' => '-total',
+            ]))->assertSuccessful()
+            ->assertViewIs('admin.orders.show')
+            ->assertViewHas('products')
+            ->assertSeeInOrder([$sdmo->product->name, $hyundai->product->name]);
+    }
 }
