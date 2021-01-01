@@ -2,7 +2,7 @@
 
 @section('title', $category->name)
 
-@section('description', $category->name)
+@section('description', $category->name.'. Продаж генераторів. Сервісне обслуговування. Проєктні роботи. Технічна підтримка.')
 
 @section('keywords', $category->name)
 

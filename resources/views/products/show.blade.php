@@ -2,7 +2,7 @@
 
 @section('title', $product->name)
 
-@section('description', $product->name.'. '.$product->category->name)
+@section('description', $product->name.'. '.$product->category->name.'. Продаж генераторів. Сервісне обслуговування. Проєктні роботи. Технічна підтримка.')
 
 @section('keywords', implode(',', [$product->name, $product->model, $product->category->name]))
 

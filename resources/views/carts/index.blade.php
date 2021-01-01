@@ -2,6 +2,10 @@
 
 @section('title', 'Кошик')
 
+@push('meta')
+    <meta name="robots" content="noindex, follow">
+@endpush
+
 @section('content')
     <section class="position-relative py-5">
         <div class="dots mr-sm-5 mt-6 top-0 right-0 height-72 width-48 position-absolute"></div>

@@ -12,6 +12,8 @@
     <meta name="description" content="@yield('description')">
     <meta name="keywords" content="@yield('keywords')">
 
+    @stack('meta')
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 

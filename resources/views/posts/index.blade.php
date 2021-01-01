@@ -2,7 +2,7 @@
 
 @section('title', 'Блог')
 
-@section('description', 'Статті про джерела безперебійного живлення')
+@section('description', 'Статті про джерела безперебійного живлення. Продаж генераторів. Сервісне обслуговування. Проєктні роботи. Технічна підтримка.')
 
 @section('content')
     <section class="position-relative py-5">
