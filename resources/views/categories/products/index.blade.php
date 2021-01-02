@@ -15,6 +15,11 @@
                 <div class="col">
                     @include('layouts.partials.breadcrumb', ['links' => [$category->name => route('categories.products.index', $category)]])
                 </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <h1 class="h4">{{ $category->name }}</h1>
+                </div>
                 <div class="col text-right text-gray-500">
                     Всього: {{ $products->total() }}
                 </div>
