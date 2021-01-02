@@ -4,11 +4,11 @@
             <div class="card shadow-sm">
                 <img src="{{ asset('storage/'.$post->image->path) }}" class="card-img-top" alt="{{ $post->title }}" loading="lazy">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h3 class="card-title h5">
                         <a href="{{ route('posts.show', $post) }}" class="text-body text-decoration-none stretched-link">
                             {{ $post->title }}
                         </a>
-                    </h5>
+                    </h3>
                     <p class="card-text text-muted">{{ $post->excerpt }}</p>
                 </div>
             </div>

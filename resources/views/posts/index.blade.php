@@ -13,8 +13,8 @@
             <div class="row">
                 <div class="col d-flex justify-content-center flex-column mb-5">
                     <div class="text-center">
-                        <h2>Блог</h2>
-                        <h5 class="text-muted">Добірка цікавої інформації та новин</h5>
+                        <h1 class="h2">Блог</h1>
+                        <h2 class="h5 text-muted">Добірка цікавої інформації та новин</h2>
                     </div>
                 </div>
             </div>

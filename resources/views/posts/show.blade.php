@@ -19,7 +19,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col col-md-10 col-lg-8">
-                    <h2 class="mb-3">{{ $post->title }}</h2>
+                    <h1 class="h2 mb-3">{{ $post->title }}</h1>
                     <img src="{{ asset('/storage/'.$post->image->path) }}" class="img-fluid rounded mb-3" alt="{{ $post->title }}" loading="lazy">
                 </div>
             </div>

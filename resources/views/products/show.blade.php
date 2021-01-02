@@ -27,12 +27,12 @@
                     @include('products.partials.carousel')
                 </div>
                 <div class="col-12 col-md">
-                    <h5 class="font-weight-bold mb-3">
+                    <h1 class="font-weight-bold mb-3 h5">
                         {{ $product->name }}
                         <br>
                         <small class="text-muted">{{ $product->category->name }}</small>
-                    </h5>
-                    <h5 class="text-primary mb-3">@uah($product->uah_price)</h5>
+                    </h1>
+                    <p class="text-primary mb-3 h5">@uah($product->uah_price)</p>
                     <form class="mb-3" action="{{ route('carts.store') }}" method="POST">
                         @csrf
                         <div class="row">
