@@ -14,8 +14,8 @@
     <div class="container my-6 my-md-0">
         <div class="row justify-content-center">
             <div class="col col-md-10 text-center">
-                <h2 class="font-weight-bold text-uppercase mb-3">Надійні рішення для постачання <span class="text-primary">електроенергії</span></h2>
-                <h5 class="text-muted mb-4">Технічно продумані рішення та розробки найкращих світових інженерів дозволили нам стати партнером в обслуговуванні професійних дизельних електростанцій</h5>
+                <h1 class="font-weight-bold h2 text-uppercase mb-3">Надійні рішення для постачання <span class="text-primary">електроенергії</span></h1>
+                <h2 class="text-muted h5 mb-4">Технічно продумані рішення та розробки найкращих світових інженерів дозволили нам стати партнером в обслуговуванні професійних дизельних електростанцій</h2>
                 <a href="{{ route('categories.products.index', $categories->first()) }}" role="button" class="btn btn-primary btn-lg mb-1 d-block d-sm-inline-block">Каталог товарів</a>
                 <a href="#contact" role="button" class="btn btn-outline-secondary btn-lg mb-1 d-block d-sm-inline-block">Залишити заявку</a>
             </div>
@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col d-flex justify-content-center flex-column">
                 <div class="text-center">
-                    <h2>Ми забезпечуємо стабільну роботу Вашого бізнесу</h2>
+                    <h3 class="h2">Ми забезпечуємо стабільну роботу Вашого бізнесу</h3>
                     <h5 class="text-muted">Будуючи сучасні інженерні системи електроживлення</h5>
                 </div>
                 <br>
@@ -36,16 +36,16 @@
                     <div class="card-body p-0 shadow-sm">
                         <div class="row m-0 divide-x divide-x-md-0 divide-y-md">
                             <div class="col-12 col-md p-4 text-center">
-                                <h1 class="text-primary font-weight-bold">{{ config('company.partners') }}</h1>
-                                <h5 class="text-muted">Партнерів</h5>
+                                <p class="text-primary h1 font-weight-bold">{{ config('company.partners') }}</p>
+                                <p class="text-muted h5">Партнерів</p>
                             </div>
                             <div class="col-12 col-md p-4 text-center">
-                                <h1 class="text-primary font-weight-bold">{{ date('Y') - config('company.year') }}</h1>
-                                <h5 class="text-muted">Років досвіду</h5>
+                                <p class="text-primary h1 font-weight-bold">{{ date('Y') - config('company.year') }}</p>
+                                <p class="text-muted h5">Років досвіду</p>
                             </div>
                             <div class="col-12 col-md p-4 text-center">
-                                <h1 class="text-primary font-weight-bold">{{ config('company.employees') }}</h1>
-                                <h5 class="text-muted">Робітників</h5>
+                                <p class="text-primary h1 font-weight-bold">{{ config('company.employees') }}</p>
+                                <p class="text-muted h5">Робітників</p>
                             </div>
                         </div>
                     </div>
@@ -62,11 +62,11 @@
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col col-md-8 text-center">
-                <h6 class="text-primary letter-spacing font-weight-bold">НАШІ ПОСЛУГИ</h6>
-                <h2>МИ ПРОПОНУЄМО</h2>
-                <h5 class="text-muted">
+                <h5 class="text-primary h6 letter-spacing font-weight-bold">НАШІ ПОСЛУГИ</h5>
+                <h3 class="h2">МИ ПРОПОНУЄМО</h3>
+                <h4 class="text-muted h5">
                     Наш сервісний центр займається технічним обслуговуванням устаткування, з розробкою проєктної документації будь-якого рівня складності
-                </h5>
+                </h4>
             </div>
         </div>
         <div class="row text-center text-md-left mb-md-4">
@@ -153,7 +153,7 @@
 
 <section class="bg-light py-6">
     <div class="container">
-        <h2>Питання - відповіді</h2>
+        <h3 class="h2">Питання - відповіді</h3>
         <hr class="pb-2 pb-md-4">
         <div class="row mb-md-4">
             <div class="col-12 col-md-6">
@@ -193,7 +193,7 @@
                     <h3>Дякуємо!</h3>
                     <h5 class="text-muted">Ми зв'яжемося з Вами найближчим часом.</h5>
                 @else
-                    <h2 class="text-center">Зв'яжіться з нами</h2>
+                    <h3 class="text-center h2">Зв'яжіться з нами</h3>
                     <h5 class="text-muted text-center mb-5">
                         Якщо у Вас є питання про дизель генератори, ми з радістю надамо відповідь
                     </h5>
