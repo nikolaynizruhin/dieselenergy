@@ -4,9 +4,9 @@
             <div class="card h-100 shadow-sm">
                 <img src="{{ asset('storage/'.$product->images->first()->path) }}" class="card-img-top" alt="{{ $product->name }}" loading="lazy">
                 <div class="card-body mb-n3">
-                    <h6 class="card-title">{{ $product->name }}</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ $product->category->name }}</h6>
-                    <h5 class="card-title text-primary">@uah($product->uah_price)</h5>
+                    <p class="card-title h6">{{ $product->name }}</p>
+                    <p class="card-subtitle mb-2 text-muted h6">{{ $product->category->name }}</p>
+                    <p class="card-title text-primary h5">@uah($product->uah_price)</p>
                 </div>
                 @if ($product->attributes->isNotEmpty())
                     <div class="card-body bg-light text-muted">
