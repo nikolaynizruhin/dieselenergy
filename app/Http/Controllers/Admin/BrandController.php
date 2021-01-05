@@ -21,6 +21,7 @@ class BrandController extends Controller
     {
         $brands = Brand::select('brands.*')
             ->join('currencies', 'currencies.id', '=', 'brands.currency_id')
+            ->with('currency')
             ->filter($filters)
             ->orderBy('name')
             ->paginate(10);

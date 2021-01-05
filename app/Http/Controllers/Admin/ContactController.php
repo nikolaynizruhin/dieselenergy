@@ -21,6 +21,7 @@ class ContactController extends Controller
     {
         $contacts = Contact::select('contacts.*')
             ->join('customers', 'customers.id', '=', 'contacts.customer_id')
+            ->with('customer')
             ->filter($filters)
             ->latest()
             ->paginate(10);

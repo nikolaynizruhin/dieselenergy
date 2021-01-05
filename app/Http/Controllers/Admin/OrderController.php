@@ -24,6 +24,7 @@ class OrderController extends Controller
     {
         $orders = Order::select('orders.*')
             ->join('customers', 'customers.id', '=', 'orders.customer_id')
+            ->with('customer')
             ->filter($filters)
             ->latest()
             ->paginate(10);

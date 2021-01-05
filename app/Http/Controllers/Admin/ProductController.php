@@ -26,6 +26,7 @@ class ProductController extends Controller
             ->join('categories', 'categories.id', '=', 'products.category_id')
             ->join('brands', 'brands.id', '=', 'products.brand_id')
             ->join('currencies', 'currencies.id', '=', 'brands.currency_id')
+            ->with(['category', 'brand.currency'])
             ->filter($filters)
             ->orderBy('name')
             ->paginate(10);
