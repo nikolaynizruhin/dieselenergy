@@ -8,14 +8,14 @@
         <loc>{{ route('privacy') }}</loc>
         <lastmod>{{ view_modified_date('privacy') }}</lastmod>
     </url>
-    @for ($page = 1; $page <= $postPages; $page++)
+    @for ($page = 1; $page <= pages($posts->count()); $page++)
         <url>
             <loc>{{ route('posts.index', $page === 1 ? [] : ['page' => $page]) }}</loc>
             <lastmod>{{ view_modified_date('posts/index') }}</lastmod>
         </url>
     @endfor
     @foreach($categories as $category)
-        @for ($page = 1; $page <= $category->productPages(); $page++)
+        @for ($page = 1; $page <= pages($category->products_count); $page++)
             <url>
                 <loc>{{ route('categories.products.index', $page === 1 ? $category : ['category' => $category, 'page' => $page]) }}</loc>
                 <lastmod>{{ $category->updated_at->toDateString() }}</lastmod>

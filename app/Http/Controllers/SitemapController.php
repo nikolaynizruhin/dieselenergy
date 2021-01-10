@@ -22,7 +22,6 @@ class SitemapController extends Controller
             'products' => Product::active()->get(),
             'posts' => Post::all(),
             'categories' => Category::withProductCount()->get(),
-            'postPages' => Post::pages(),
         ])->header('Content-Type', 'application/xml');
     }
 }

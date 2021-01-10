@@ -24,14 +24,4 @@ class Post extends Model
     {
         return $this->belongsTo(Image::class);
     }
-
-    /**
-     * Amount of paginated pages.
-     *
-     * @return int
-     */
-    public static function pages()
-    {
-        return max((int) ceil(self::count() / 9), 1);
-    }
 }

@@ -47,14 +47,4 @@ class Category extends Model
     {
         return $query->withCount(['products' => fn (Builder $query) => $query->active()]);
     }
-
-    /**
-     * Amount of paginated product pages.
-     *
-     * @return int
-     */
-    public function productPages()
-    {
-        return max((int) ceil($this->products_count / 9), 1);
-    }
 }
