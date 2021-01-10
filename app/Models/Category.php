@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Filters\Filterable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,5 +35,26 @@ class Category extends Model
             ->using(Specification::class)
             ->withPivot('id')
             ->withTimestamps();
+    }
+
+    /**
+     * Scope a query with active product count.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithProductCount($query)
+    {
+        return $query->withCount(['products' => fn (Builder $query) => $query->active()]);
+    }
+
+    /**
+     * Amount of paginated product pages.
+     *
+     * @return int
+     */
+    public function productPages()
+    {
+        return max((int) ceil($this->products_count / 9), 1);
     }
 }

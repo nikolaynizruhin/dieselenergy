@@ -5,6 +5,7 @@ use App\Http\Controllers\Category\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
 Route::view('/privacy', 'privacy')->name('privacy');
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 Route::resource('contacts', ContactController::class)->only('store');
 Route::resource('carts', CartController::class);
 Route::resource('orders', OrderController::class)->only(['store', 'show']);
