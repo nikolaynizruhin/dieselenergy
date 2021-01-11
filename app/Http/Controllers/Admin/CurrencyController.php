@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Filters\Admin\CurrencyFilters;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreCurrency;
+use App\Http\Requests\Admin\UpdateCurrency;
 use App\Models\Currency;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class CurrencyController extends Controller
 {
@@ -37,33 +38,16 @@ class CurrencyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\StoreCurrency  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCurrency $request)
     {
-        $validated = $request->validate([
-            'code' => 'required|string|size:3|unique:currencies',
-            'symbol' => 'required|string|unique:currencies',
-            'rate' => 'required|numeric|min:0',
-        ]);
-
-        Currency::create($validated);
+        Currency::create($request->validated());
 
         return redirect()
             ->route('admin.currencies.index')
             ->with('status', trans('currency.created'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Currency  $currency
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Currency $currency)
-    {
-        //
     }
 
     /**
@@ -80,28 +64,13 @@ class CurrencyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\UpdateCurrency  $request
      * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Currency $currency)
+    public function update(UpdateCurrency $request, Currency $currency)
     {
-        $validated = $request->validate([
-            'rate' => 'required|numeric|min:0',
-            'code' => [
-                'required',
-                'string',
-                'size:3',
-                Rule::unique('currencies')->ignore($currency),
-            ],
-            'symbol' => [
-                'required',
-                'string',
-                Rule::unique('currencies')->ignore($currency),
-            ],
-        ]);
-
-        $currency->update($validated);
+        $currency->update($request->validated());
 
         return redirect()
             ->route('admin.currencies.index')
