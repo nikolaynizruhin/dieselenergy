@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Filters\Admin\BrandFilters;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreBrand;
+use App\Http\Requests\Admin\UpdateBrand;
 use App\Models\Brand;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class BrandController extends Controller
 {
@@ -42,17 +43,12 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\StoreBrand  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBrand $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:brands',
-            'currency_id' => 'required|numeric|exists:currencies,id',
-        ]);
-
-        Brand::create($validated);
+        Brand::create($request->validated());
 
         return redirect()
             ->route('admin.brands.index')
@@ -73,23 +69,13 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\UpdateBrand  $request
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand)
+    public function update(UpdateBrand $request, Brand $brand)
     {
-        $validated = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('brands')->ignore($brand),
-            ],
-            'currency_id' => 'required|numeric|exists:currencies,id',
-        ]);
-
-        $brand->update($validated);
+        $brand->update($request->validated());
 
         return redirect()
             ->route('admin.brands.index')
