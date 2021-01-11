@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Filters\Admin\UserFilters;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreUser;
+use App\Http\Requests\Admin\UpdateUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -37,17 +38,11 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\StoreUser  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUser $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -73,24 +68,13 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\UpdateUser  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUser $request, User $user)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users')->ignore($user),
-            ],
-        ]);
-
-        $user->update($validated);
+        $user->update($request->validated());
 
         return redirect()
             ->route('admin.users.index')
