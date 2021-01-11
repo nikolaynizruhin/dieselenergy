@@ -43,7 +43,7 @@ class Cart
     {
         $items = $this->items();
 
-        $key = $items->search(fn ($item) => $item->id == $product->id);
+        $key = $items->search(fn ($item) => $item->id === $product->id);
 
         if ($key === false) {
             $item = new Item($product, $quantity);

@@ -62,7 +62,7 @@ class Order extends Model
     /**
      * Get statuses.
      *
-     * @return string[]
+     * @return array
      */
     public static function statuses()
     {
