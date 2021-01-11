@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Filters\Admin\AttributeFilters;
 use App\Filters\Admin\CategoryFilters;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreCategory;
+use App\Http\Requests\Admin\UpdateCategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -38,17 +39,12 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\StoreCategory  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategory $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:categories',
-            'slug' => 'required|string|max:255|alpha_dash|unique:categories',
-        ]);
-
-        Category::create($validated);
+        Category::create($request->validated());
 
         return redirect()
             ->route('admin.categories.index')
@@ -84,29 +80,13 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\UpdateCategory  $request
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateCategory $request, Category $category)
     {
-        $validated = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('categories')->ignore($category),
-            ],
-            'slug' => [
-                'required',
-                'string',
-                'alpha_dash',
-                'max:255',
-                Rule::unique('categories')->ignore($category),
-            ],
-        ]);
-
-        $category->update($validated);
+        $category->update($request->validated());
 
         return redirect()
             ->route('admin.categories.index')
