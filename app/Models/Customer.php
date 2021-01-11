@@ -67,7 +67,7 @@ class Customer extends Model
      * Create contact.
      *
      * @param  string  $message
-     * @return \App\Models\Customer
+     * @return \App\Models\Contact
      */
     public function createContact($message)
     {

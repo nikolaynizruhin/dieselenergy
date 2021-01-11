@@ -121,7 +121,7 @@ class Cart
     /**
      * Delete item.
      *
-     * @param int $key
+     * @param string $key
      */
     public function delete($key)
     {

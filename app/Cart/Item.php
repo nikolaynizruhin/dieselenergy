@@ -35,7 +35,7 @@ class Item
     /**
      * Item Price.
      *
-     * @var int
+     * @var float
      */
     public $price;
 
@@ -73,7 +73,7 @@ class Item
     /**
      * Get item total price.
      *
-     * @return int
+     * @return float
      */
     public function total()
     {

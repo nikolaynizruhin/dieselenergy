@@ -22,6 +22,7 @@ class ContactCreated extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      *
+     * @param  \App\Models\Contact  $contact
      * @return void
      */
     public function __construct(Contact $contact)

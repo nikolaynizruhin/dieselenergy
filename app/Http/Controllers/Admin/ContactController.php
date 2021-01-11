@@ -79,7 +79,7 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\StoreContact  $request
+     * @param  \App\Http\Requests\Admin\StoreContact  $request
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */

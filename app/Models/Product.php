@@ -94,7 +94,7 @@ class Product extends Model
     /**
      * Formatted price.
      *
-     * @return float
+     * @return string
      */
     public function getDecimalPriceAttribute()
     {
