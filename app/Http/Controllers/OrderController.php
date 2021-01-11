@@ -34,7 +34,7 @@ class OrderController extends Controller
 
         $order = $customer->createOrder($request->notes);
 
-        event(new OrderCreated($order));
+        OrderCreated::dispatch($order);
 
         return redirect()->route('orders.show', [$order]);
     }

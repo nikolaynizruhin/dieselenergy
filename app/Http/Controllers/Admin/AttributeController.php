@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Filters\Admin\AttributeFilters;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreAttribute;
+use App\Http\Requests\Admin\UpdateAttribute;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class AttributeController extends Controller
 {
@@ -37,17 +38,12 @@ class AttributeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\StoreAttribute  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAttribute $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:attributes',
-            'measure' => 'nullable|string|max:255',
-        ]);
-
-        Attribute::create($validated);
+        Attribute::create($request->validated());
 
         return redirect()
             ->route('admin.attributes.index')
@@ -68,23 +64,13 @@ class AttributeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\UpdateAttribute  $request
      * @param  \App\Models\Attribute  $attribute
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Attribute $attribute)
+    public function update(UpdateAttribute $request, Attribute $attribute)
     {
-        $validated = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('attributes')->ignore($attribute),
-            ],
-            'measure' => 'nullable|string|max:255',
-        ]);
-
-        $attribute->update($validated);
+        $attribute->update($request->validated());
 
         return redirect()
             ->route('admin.attributes.index')
