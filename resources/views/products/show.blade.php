@@ -4,7 +4,7 @@
 
 @section('description', $product->name.'. '.$product->category->name.'. Продаж генераторів. Сервісне обслуговування. Проєктні роботи. Технічна підтримка.')
 
-@section('keywords', implode(',', [$product->name, $product->model, $product->category->name]))
+@section('keywords', implode(',', [$product->name, $product->brand->name.' '.$product->model, $product->category->name]))
 
 @section('content')
     <section class="position-relative py-5">
@@ -27,12 +27,14 @@
                     @include('products.partials.carousel')
                 </div>
                 <div class="col-12 col-md">
-                    <h1 class="font-weight-bold mb-3 h5">
+                    <h1 class="font-weight-bold mb-3 h4">
                         {{ $product->name }}
                         <br>
                         <small class="text-muted">{{ $product->category->name }}</small>
                     </h1>
-                    <p class="text-primary mb-3 h5">@uah($product->uah_price)</p>
+                    <p class="mb-1 text-muted">Виробник: <strong class="text-body">{{ $product->brand->name }}</strong></p>
+                    <p class="text-muted">Модель: <strong class="text-body">{{ $product->model }}</strong></p>
+                    <p class="text-primary mb-3 h4">@uah($product->uah_price)</p>
                     <form class="mb-3" action="{{ route('carts.store') }}" method="POST">
                         @csrf
                         <div class="row">
