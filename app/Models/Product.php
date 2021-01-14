@@ -148,4 +148,21 @@ class Product extends Model
             ->withPivot('id', 'value')
             ->withTimestamps();
     }
+
+    /**
+     * Get list of recommended products.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function recommendations()
+    {
+        return self::active()
+            ->withDefaultImage()
+            ->with('category')
+            ->where('id', '<>', $this->id)
+            ->where('category_id', $this->category_id)
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
+    }
 }
