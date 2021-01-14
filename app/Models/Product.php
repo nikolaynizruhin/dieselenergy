@@ -158,7 +158,7 @@ class Product extends Model
     {
         return self::active()
             ->withDefaultImage()
-            ->with('category')
+            ->with(['category', 'brand.currency'])
             ->where('id', '<>', $this->id)
             ->where('category_id', $this->category_id)
             ->inRandomOrder()
