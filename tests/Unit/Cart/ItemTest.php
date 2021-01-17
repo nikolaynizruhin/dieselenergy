@@ -5,7 +5,6 @@ namespace Tests\Unit\Cart;
 use App\Cart\Item;
 use App\Models\Brand;
 use App\Models\Currency;
-use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

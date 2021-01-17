@@ -6,7 +6,6 @@ use App\Events\OrderCreated as OrderCreatedEvent;
 use App\Models\Brand;
 use App\Models\Currency;
 use App\Models\Customer;
-use App\Models\Image;
 use App\Models\Order;
 use App\Models\Product;
 use App\Notifications\OrderConfirmed;
