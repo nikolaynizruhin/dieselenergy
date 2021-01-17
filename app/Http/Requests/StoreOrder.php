@@ -54,7 +54,7 @@ class StoreOrder extends FormRequest
     {
         $validator->after(function ($validator) {
             if (Cart::items()->isEmpty()) {
-                $validator->errors()->add('cart', "Cart can't be empty!");
+                $validator->errors()->add('cart', 'Кошик не повинен бути порожнім.');
             }
         });
     }

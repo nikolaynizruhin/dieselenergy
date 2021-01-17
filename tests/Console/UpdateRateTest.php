@@ -43,7 +43,7 @@ class UpdateRateTest extends TestCase
         $eur = Currency::factory()->create(['code' => 'EUR', 'rate' => 30.0025]);
 
         $this->artisan('rate:update')
-            ->expectsOutput('Currency rates updated successfully!')
+            ->expectsTable(['Currency', 'Rate'], [['USD', 28.3650], ['EUR', 33.2636]])
             ->assertExitCode(0);
 
         Http::assertSent(function ($request) {

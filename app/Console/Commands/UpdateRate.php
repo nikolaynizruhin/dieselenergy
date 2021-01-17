@@ -31,13 +31,15 @@ class UpdateRate extends Command
     {
         $rates = Minfin::getRates();
 
-        Currency::each(function ($currency) use ($rates) {
+        $currencies = Currency::all()->map(function ($currency) use ($rates) {
             $rate = collect($rates)->firstWhere('currency', strtolower($currency->code));
 
             $currency->update(['rate' => (float) $rate['ask']]);
+
+            return ['code' => $currency->code, 'rate' => $currency->rate];
         });
 
-        $this->info('Currency rates updated successfully!');
+        $this->table(['Currency', 'Rate'], $currencies);
 
         return 0;
     }
