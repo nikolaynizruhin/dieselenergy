@@ -4,7 +4,6 @@ namespace Tests\Feature\Category;
 
 use App\Models\Attribute;
 use App\Models\Category;
-use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;

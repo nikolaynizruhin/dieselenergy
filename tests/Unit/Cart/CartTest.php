@@ -4,7 +4,6 @@ namespace Tests\Unit\Cart;
 
 use App\Models\Brand;
 use App\Models\Currency;
-use App\Models\Image;
 use App\Models\Order;
 use App\Models\Product;
 use Facades\App\Cart\Cart;
