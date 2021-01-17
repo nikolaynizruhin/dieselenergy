@@ -58,17 +58,4 @@ class ContactCreated extends Notification implements ShouldQueue
             ->line('Повідомлення: '.$this->contact->message)
             ->action('Подивитись запит', route('admin.contacts.show', $this->contact));
     }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

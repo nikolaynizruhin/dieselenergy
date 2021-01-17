@@ -52,17 +52,4 @@ class OrderConfirmed extends Notification implements ShouldQueue
             ->subject('Підтвердження замовлення')
             ->markdown('mail.order.confirmed', ['order' => $this->order]);
     }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

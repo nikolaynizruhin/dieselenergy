@@ -54,17 +54,4 @@ class OrderCreated extends Notification implements ShouldQueue
             ->line('Номер замовлення: #'.$this->order->id)
             ->action('Подивитись замовлення', route('admin.orders.show', $this->order));
     }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }
