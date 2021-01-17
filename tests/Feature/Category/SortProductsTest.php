@@ -43,7 +43,7 @@ class SortProductsTest extends TestCase
         [$this->patrol, $this->diesel] = Product::factory()
             ->count(2)
             ->active()
-            ->hasAttached(Image::factory(), ['is_default' => 1])
+            ->hasDefaultImage()
             ->state(new Sequence(
                 ['name' => 'Patrol Generator'],
                 ['name' => 'Diesel Generator'],

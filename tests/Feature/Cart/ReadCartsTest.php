@@ -15,9 +15,7 @@ class ReadCartsTest extends TestCase
     /** @test */
     public function guest_can_read_carts()
     {
-        $product = Product::factory()
-            ->hasAttached(Image::factory(), ['is_default' => 1])
-            ->create();
+        $product = Product::factory()->hasDefaultImage()->create();
 
         Cart::add($product);
 

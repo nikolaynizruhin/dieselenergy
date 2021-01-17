@@ -15,9 +15,7 @@ class DeleteCartTest extends TestCase
     /** @test */
     public function guest_can_delete_cart_item()
     {
-        $product = Product::factory()
-            ->hasAttached(Image::factory(), ['is_default' => 1])
-            ->create();
+        $product = Product::factory()->hasDefaultImage()->create();
 
         Cart::add($product);
 

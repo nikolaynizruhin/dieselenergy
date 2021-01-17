@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -53,5 +54,15 @@ class ProductFactory extends Factory
     public function inactive()
     {
         return $this->state(['is_active' => false]);
+    }
+
+    /**
+     * Attach default image.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function hasDefaultImage()
+    {
+        return $this->hasAttached(Image::factory(), ['is_default' => 1]);
     }
 }

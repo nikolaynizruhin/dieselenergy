@@ -26,9 +26,7 @@ class UpdateCartTest extends TestCase
     {
         parent::setUp();
 
-        $this->product = Product::factory()
-            ->hasAttached(Image::factory(), ['is_default' => 1])
-            ->create();
+        $this->product = Product::factory()->hasDefaultImage()->create();
     }
 
     /** @test */

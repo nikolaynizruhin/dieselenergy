@@ -75,9 +75,7 @@ class ProductTest extends TestCase
     /** @test */
     public function it_has_default_image()
     {
-        $product = Product::factory()
-            ->hasAttached(Image::factory(), ['is_default' => 1])
-            ->create();
+        $product = Product::factory()->hasDefaultImage()->create();
 
         $this->assertNotNull($product->defaultImage());
         $this->assertInstanceOf(Image::class, $product->defaultImage());
