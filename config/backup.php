@@ -22,6 +22,6 @@ return [
     |
     */
 
-    'source' => storage_path('app/public/images')
+    'source' => storage_path('app/public/images'),
 
 ];
