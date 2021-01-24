@@ -2,7 +2,6 @@
 
 namespace App\Database;
 
-use Illuminate\Database\Connection;
 use Symfony\Component\Process\Process;
 
 abstract class Dumper
