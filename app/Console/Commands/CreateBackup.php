@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Facades\App\Database\Dumper as Database;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use ZipArchive;
@@ -31,15 +32,21 @@ class CreateBackup extends Command
     {
         $zip = new ZipArchive();
 
-        $zip->open(config('backup.destination'), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+        $zip->open(config('backup.filename'), ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
-        $images = File::files(config('backup.source'));
+        $images = File::files(config('backup.files'));
 
         foreach ($images as $image) {
             $zip->addFile($image->getPathname(), 'images/'.$image->getFilename());
         }
 
+        Database::dump(config('backup.database'));
+
+        $zip->addFile(config('backup.database'), 'database.sql');
+
         $zip->close();
+
+        unlink(config('backup.database'));
 
         $this->info('Backup created successfully!');
 

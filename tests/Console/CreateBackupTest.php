@@ -13,8 +13,8 @@ class CreateBackupTest extends TestCase
         parent::setUp();
 
         config([
-            'backup.destination' => storage_path('framework/testing/disks/public/backup.zip'),
-            'backup.source' => storage_path('framework/testing/disks/public/images'),
+            'backup.filename' => storage_path('framework/testing/disks/public/backup.zip'),
+            'backup.files' => storage_path('framework/testing/disks/public/images'),
         ]);
     }
 
