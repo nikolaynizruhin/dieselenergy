@@ -6,7 +6,7 @@ use App\Models\Currency;
 use Facades\App\Services\Minfin;
 use Illuminate\Console\Command;
 
-class UpdateRate extends Command
+class UpdateRates extends Command
 {
     /**
      * The name and signature of the console command.
