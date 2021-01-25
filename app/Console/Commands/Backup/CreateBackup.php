@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Backup;
 
 use Facades\App\Dump\Dumper;
 use Illuminate\Console\Command;
