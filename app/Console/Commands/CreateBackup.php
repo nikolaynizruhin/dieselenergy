@@ -21,7 +21,7 @@ class CreateBackup extends Command
      *
      * @var string
      */
-    protected $description = 'Backup images';
+    protected $description = 'Backup database and images';
 
     /**
      * Execute the console command.

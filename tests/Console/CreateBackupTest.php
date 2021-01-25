@@ -19,7 +19,7 @@ class CreateBackupTest extends TestCase
     }
 
     /** @test */
-    public function it_can_backup_images()
+    public function it_can_backup_database_and_images()
     {
         Storage::fake();
 

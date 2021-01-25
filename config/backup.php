@@ -35,4 +35,26 @@ return [
 
     'files' => storage_path('app/public/images'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Backups Folder
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the backups source folder path.
+    |
+    */
+
+    'backups' => storage_path('app/backups'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Backups Lifetime
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the backups lifetime in days.
+    |
+    */
+
+    'lifetime' => 7,
+
 ];
