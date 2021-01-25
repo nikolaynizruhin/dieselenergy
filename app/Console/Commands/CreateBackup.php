@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use Facades\App\Database\Dumper as Database;
+use Facades\App\Dump\Dumper;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use ZipArchive;
@@ -40,7 +40,7 @@ class CreateBackup extends Command
             $zip->addFile($image->getPathname(), 'images/'.$image->getFilename());
         }
 
-        Database::dump(config('backup.database'));
+        Dumper::dump(config('backup.database'));
 
         $zip->addFile(config('backup.database'), 'database.sql');
 

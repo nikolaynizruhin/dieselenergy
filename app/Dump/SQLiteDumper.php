@@ -1,9 +1,14 @@
 <?php
 
-namespace App\Database;
+namespace App\Dump;
 
 class SQLiteDumper extends Dumper
 {
+    /**
+     * Dump database.
+     *
+     * @param  string  $path
+     */
     public function dump($path)
     {
         $command = 'sqlite3 "${:SOURCE}" .dump > "${:DESTINATION}"';

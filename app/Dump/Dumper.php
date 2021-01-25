@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database;
+namespace App\Dump;
 
 use Symfony\Component\Process\Process;
 
@@ -23,6 +23,11 @@ abstract class Dumper
         $this->config = $config;
     }
 
+    /**
+     * Dump database.
+     *
+     * @param  string  $path
+     */
     abstract public function dump($path);
 
     /**

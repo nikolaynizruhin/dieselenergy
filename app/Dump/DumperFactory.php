@@ -1,11 +1,17 @@
 <?php
 
-namespace App\Database;
+namespace App\Dump;
 
 use InvalidArgumentException;
 
 class DumperFactory
 {
+    /**
+     * Dumper factory.
+     *
+     * @param  array  $config
+     * @return \App\Dump\Dumper
+     */
     public static function make($config)
     {
         switch ($config['driver']) {

@@ -1,9 +1,14 @@
 <?php
 
-namespace App\Database;
+namespace App\Dump;
 
 class MySQLDumper extends Dumper
 {
+    /**
+     * Dump database.
+     *
+     * @param  string  $path
+     */
     public function dump($path)
     {
         $command = 'mysqldump -u"${:USERNAME}" -p"${:PASSWORD}" "${:DATABASE}" > "${:DESTINATION}"';
