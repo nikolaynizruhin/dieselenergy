@@ -2,7 +2,7 @@
 
 namespace App\Database;
 
-class SQLite extends Dumper
+class SQLiteDumper extends Dumper
 {
     public function dump($path)
     {

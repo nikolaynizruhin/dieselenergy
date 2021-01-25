@@ -2,7 +2,7 @@
 
 namespace App\Database;
 
-class MySQL extends Dumper
+class MySQLDumper extends Dumper
 {
     public function dump($path)
     {

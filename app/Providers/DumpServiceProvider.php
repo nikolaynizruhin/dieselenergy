@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Database\Dumper;
-use App\Database\Factory as DumperFactory;
+use App\Database\DumperFactory;
 use Illuminate\Support\ServiceProvider;
 
 class DumpServiceProvider extends ServiceProvider

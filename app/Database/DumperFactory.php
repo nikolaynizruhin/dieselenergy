@@ -4,15 +4,15 @@ namespace App\Database;
 
 use InvalidArgumentException;
 
-class Factory
+class DumperFactory
 {
     public static function make($config)
     {
         switch ($config['driver']) {
             case 'mysql':
-                return new MySQL($config);
+                return new MySQLDumper($config);
             case 'sqlite':
-                return new SQLite($config);
+                return new SQLiteDumper($config);
         }
 
         throw new InvalidArgumentException("Unsupported driver [{$config['driver']}].");
