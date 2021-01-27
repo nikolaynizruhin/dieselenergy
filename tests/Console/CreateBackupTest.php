@@ -12,23 +12,20 @@ class CreateBackupTest extends TestCase
     {
         parent::setUp();
 
-        config([
-            'backup.filename' => storage_path('framework/testing/disks/public/backup.zip'),
-            'backup.files' => storage_path('framework/testing/disks/public/images'),
-        ]);
+        config(['backup.filename' => 'backup.zip']);
     }
 
     /** @test */
     public function it_can_backup_database_and_images()
     {
-        Storage::fake();
+        Storage::fake('local');
 
-        UploadedFile::fake()->image('product.jpg')->store('images');
+        UploadedFile::fake()->image('product.jpg')->store('public/images', 'local');
 
         $this->artisan('backup:create')
             ->expectsOutput('Backup created successfully!')
             ->assertExitCode(0);
 
-        Storage::assertExists('backup.zip');
+        Storage::disk('local')->assertExists('backup.zip');
     }
 }

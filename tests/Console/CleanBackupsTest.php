@@ -19,13 +19,13 @@ class CleanBackupsTest extends TestCase
     {
         parent::setUp();
 
-        config(['backup.backups' => storage_path('framework/testing/disks/public/backups')]);
+//        config(['backup.backups' => storage_path('framework/testing/disks/public/backups')]);
 
-        Storage::fake();
+        Storage::fake('local');
 
         $this->backup = UploadedFile::fake()
             ->create('backup.zip')
-            ->storeAs('backups', 'backup.zip');
+            ->storeAs('backups', 'backup.zip', 'local');
     }
 
     /** @test */
@@ -37,7 +37,7 @@ class CleanBackupsTest extends TestCase
             ->expectsOutput('Backups cleaned successfully!')
             ->assertExitCode(0);
 
-        Storage::assertMissing($this->backup);
+        Storage::disk('local')->assertMissing($this->backup);
     }
 
     /** @test */
@@ -47,6 +47,6 @@ class CleanBackupsTest extends TestCase
             ->expectsOutput('Backups cleaned successfully!')
             ->assertExitCode(0);
 
-        Storage::assertExists($this->backup);
+        Storage::disk('local')->assertExists($this->backup);
     }
 }

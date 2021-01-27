@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'filename' => storage_path('app/backups/'.date('Ymd').'.zip'),
+    'filename' => 'backups/'.date('Ymd').'.zip',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     |
     */
 
-    'database' => database_path('backup.sql'),
+    'database' => 'backup.sql',
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ return [
     |
     */
 
-    'files' => storage_path('app/public/images'),
+    'files' => 'public/images',
 
     /*
     |--------------------------------------------------------------------------
@@ -44,7 +44,7 @@ return [
     |
     */
 
-    'backups' => storage_path('app/backups'),
+    'backups' => 'backups',
 
     /*
     |--------------------------------------------------------------------------

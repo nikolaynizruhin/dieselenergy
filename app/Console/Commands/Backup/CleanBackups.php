@@ -4,7 +4,8 @@ namespace App\Console\Commands\Backup;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CleanBackups extends Command
 {
@@ -29,14 +30,15 @@ class CleanBackups extends Command
      */
     public function handle()
     {
-        $backups = File::files(config('backup.backups'));
+        $backups = Storage::disk('local')->files(config('backup.backups'));
 
         collect($backups)
+            ->filter(fn ($backup) => Str::endsWith($backup, '.zip'))
             ->filter(function ($backup) {
-                $changedAt = Carbon::createFromTimestamp($backup->getCTime());
+                $changedAt = Carbon::createFromTimestamp(Storage::disk('local')->lastModified($backup));
 
                 return now()->diffInDays($changedAt) > config('backup.lifetime');
-            })->each(fn ($backup) => unlink($backup->getPathname()));
+            })->each(fn ($backup) => Storage::disk('local')->delete($backup));
 
         $this->info('Backups cleaned successfully!');
 

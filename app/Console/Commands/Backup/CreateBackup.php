@@ -4,7 +4,7 @@ namespace App\Console\Commands\Backup;
 
 use Facades\App\Dump\Dumper;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use ZipArchive;
 
 class CreateBackup extends Command
@@ -32,21 +32,21 @@ class CreateBackup extends Command
     {
         $zip = new ZipArchive();
 
-        $zip->open(config('backup.filename'), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+        $zip->open(Storage::disk('local')->path(config('backup.filename')), ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
-        $images = File::files(config('backup.files'));
+        $images = Storage::disk('local')->files(config('backup.files'));
 
         foreach ($images as $image) {
-            $zip->addFile($image->getPathname(), 'images/'.$image->getFilename());
+            $zip->addFile(Storage::disk('local')->path($image), $image);
         }
 
-        Dumper::dump(config('backup.database'));
+        Dumper::dump(Storage::disk('local')->path(config('backup.database')));
 
-        $zip->addFile(config('backup.database'), 'database.sql');
+        $zip->addFile(Storage::disk('local')->path(config('backup.database')), 'database.sql');
 
         $zip->close();
 
-        unlink(config('backup.database'));
+        Storage::disk('local')->delete(config('backup.database'));
 
         $this->info('Backup created successfully!');
 
