@@ -35,9 +35,10 @@ class CleanBackups extends Command
         collect($backups)
             ->filter(fn ($backup) => Str::endsWith($backup, '.zip'))
             ->filter(function ($backup) {
-                $changedAt = Carbon::createFromTimestamp(Storage::disk('local')->lastModified($backup));
+                $timestamp = Storage::disk('local')->lastModified($backup);
+                $modifiedAt = Carbon::createFromTimestamp($timestamp);
 
-                return now()->diffInDays($changedAt) > config('backup.lifetime');
+                return now()->diffInDays($modifiedAt) > config('backup.lifetime');
             })->each(fn ($backup) => Storage::disk('local')->delete($backup));
 
         $this->info('Backups cleaned successfully!');
