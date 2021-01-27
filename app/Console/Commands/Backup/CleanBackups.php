@@ -24,22 +24,36 @@ class CleanBackups extends Command
     protected $description = 'Cleanup old backups';
 
     /**
+     * Local storage.
+     *
+     * @var \Illuminate\Support\Facades\Storage
+     */
+    private $storage;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->storage = Storage::disk('local');
+    }
+
+    /**
      * Execute the console command.
      *
      * @return int
      */
     public function handle()
     {
-        $backups = Storage::disk('local')->files(config('backup.backups'));
+        $backups = $this->storage->files(config('backup.backups'));
 
         collect($backups)
             ->filter(fn ($backup) => Str::endsWith($backup, '.zip'))
             ->filter(function ($backup) {
-                $timestamp = Storage::disk('local')->lastModified($backup);
+                $timestamp = $this->storage->lastModified($backup);
                 $modifiedAt = Carbon::createFromTimestamp($timestamp);
 
                 return now()->diffInDays($modifiedAt) > config('backup.lifetime');
-            })->each(fn ($backup) => Storage::disk('local')->delete($backup));
+            })->each(fn ($backup) => $this->storage->delete($backup));
 
         $this->info('Backups cleaned successfully!');
 

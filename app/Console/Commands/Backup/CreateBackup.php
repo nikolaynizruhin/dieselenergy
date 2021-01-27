@@ -24,29 +24,52 @@ class CreateBackup extends Command
     protected $description = 'Backup database and images';
 
     /**
+     * Local storage.
+     *
+     * @var \Illuminate\Support\Facades\Storage
+     */
+    private $storage;
+
+    /**
+     * Zip archive.
+     *
+     * @var \ZipArchive
+     */
+    private $zip;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->zip = new ZipArchive();
+        $this->storage = Storage::disk('local');
+    }
+
+    /**
      * Execute the console command.
      *
      * @return int
      */
     public function handle()
     {
-        $zip = new ZipArchive();
+        $this->zip->open(
+            $this->storage->path(config('backup.filename')),
+            ZipArchive::CREATE | ZipArchive::OVERWRITE,
+        );
 
-        $zip->open(Storage::disk('local')->path(config('backup.filename')), ZipArchive::CREATE | ZipArchive::OVERWRITE);
-
-        $images = Storage::disk('local')->files(config('backup.files'));
+        $images = $this->storage->files(config('backup.files'));
 
         foreach ($images as $image) {
-            $zip->addFile(Storage::disk('local')->path($image), $image);
+            $this->zip->addFile($this->storage->path($image), $image);
         }
 
-        Dumper::dump(Storage::disk('local')->path(config('backup.database')));
+        Dumper::dump($this->storage->path(config('backup.database')));
 
-        $zip->addFile(Storage::disk('local')->path(config('backup.database')), 'database.sql');
+        $this->zip->addFile($this->storage->path(config('backup.database')), 'database.sql');
 
-        $zip->close();
+        $this->zip->close();
 
-        Storage::disk('local')->delete(config('backup.database'));
+        $this->storage->delete(config('backup.database'));
 
         $this->info('Backup created successfully!');
 
