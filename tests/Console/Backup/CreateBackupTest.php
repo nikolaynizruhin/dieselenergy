@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Console;
+namespace Tests\Console\Backup;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;

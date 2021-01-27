@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Console;
+namespace Tests\Console\Backup;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -18,8 +18,6 @@ class CleanBackupsTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-//        config(['backup.backups' => storage_path('framework/testing/disks/public/backups')]);
 
         Storage::fake('local');
 
