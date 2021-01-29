@@ -16,28 +16,47 @@ class CleanBackups implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
+     * Local storage.
+     *
+     * @var \Illuminate\Contracts\Filesystem\Filesystem
+     */
+    private $storage;
+
+    public function __construct()
+    {
+        $this->storage = Storage::disk('local');
+    }
+
+    /**
      * Execute the job.
      *
      * @return void
      */
     public function handle()
     {
-        $storage = Storage::disk('local');
+        $backups = $this->storage->files(config('backup.backups'));
 
-        $backups = $storage->files(config('backup.backups'));
+        collect($backups)
+            ->filter(fn ($backup) => $this->canBeRemoved($backup))
+            ->each(fn ($backup) => $this->storage->delete($backup));
+    }
 
-        foreach ($backups as $backup) {
-            if (! Str::endsWith($backup, '.zip')) {
-                continue;
-            }
-
-            $modifiedAt = Carbon::createFromTimestamp($storage->lastModified($backup));
-
-            if (now()->diffInDays($modifiedAt) <= config('backup.lifetime')) {
-                continue;
-            }
-
-            $storage->delete($backup);
+    /**
+     * Check if backup can be removed.
+     *
+     * @param  string  $backup
+     * @return bool
+     */
+    private function canBeRemoved($backup)
+    {
+        if (! Str::endsWith($backup, '.zip')) {
+            return false;
         }
+
+        $timestamp = $this->storage->lastModified($backup);
+
+        $modifiedAt = Carbon::createFromTimestamp($timestamp);
+
+        return now()->diffInDays($modifiedAt) > config('backup.lifetime');
     }
 }
