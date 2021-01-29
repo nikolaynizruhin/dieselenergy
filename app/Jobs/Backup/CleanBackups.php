@@ -16,35 +16,28 @@ class CleanBackups implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * Local storage.
-     *
-     * @var \Illuminate\Support\Facades\Storage
-     */
-    private $storage;
-
-    public function __construct()
-    {
-        $this->storage = Storage::disk('local');
-    }
-
-    /**
      * Execute the job.
      *
      * @return void
      */
     public function handle()
     {
-        $backups = $this->storage->files(config('backup.backups'));
+        $storage = Storage::disk('local');
 
-        collect($backups)->filter(function ($backup) {
+        $backups = $storage->files(config('backup.backups'));
+
+        foreach ($backups as $backup) {
             if (! Str::endsWith($backup, '.zip')) {
-                return false;
+                continue;
             }
 
-            $timestamp = $this->storage->lastModified($backup);
-            $modifiedAt = Carbon::createFromTimestamp($timestamp);
+            $modifiedAt = Carbon::createFromTimestamp($storage->lastModified($backup));
 
-            return now()->diffInDays($modifiedAt) > config('backup.lifetime');
-        })->each(fn ($backup) => $this->storage->delete($backup));
+            if (now()->diffInDays($modifiedAt) <= config('backup.lifetime')) {
+                continue;
+            }
+
+            $storage->delete($backup);
+        }
     }
 }
