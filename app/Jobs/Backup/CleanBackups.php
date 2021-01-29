@@ -34,9 +34,7 @@ class CleanBackups implements ShouldQueue
      */
     public function handle()
     {
-        $backups = $this->storage->files(config('backup.backups'));
-
-        collect($backups)
+        collect($this->backups())
             ->filter(fn ($backup) => $this->canBeRemoved($backup))
             ->each(fn ($backup) => $this->storage->delete($backup));
     }
@@ -58,5 +56,15 @@ class CleanBackups implements ShouldQueue
         $modifiedAt = Carbon::createFromTimestamp($timestamp);
 
         return now()->diffInDays($modifiedAt) > config('backup.lifetime');
+    }
+
+    /**
+     * Get list of backups.
+     *
+     * @return array
+     */
+    private function backups()
+    {
+        return $this->storage->files(config('backup.backups'));
     }
 }
