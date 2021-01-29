@@ -16,30 +16,80 @@ class CreateBackup implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
+     * Local storage.
+     *
+     * @var \Illuminate\Contracts\Filesystem\Filesystem
+     */
+    private $storage;
+
+    /**
+     * Zip archive.
+     *
+     * @var \ZipArchive
+     */
+    private $zip;
+
+    public function __construct()
+    {
+        $this->zip = new ZipArchive();
+        $this->storage = Storage::disk('local');
+    }
+
+    /**
      * Execute the job.
      *
      * @return void
      */
     public function handle()
     {
-        $zip = new ZipArchive();
+        $this->zip->open($this->filename(), ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
-        $storage = Storage::disk('local');
+        $this->backupImages();
 
-        $zip->open($storage->path(config('backup.filename')), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+        $this->backupDatabase();
 
-        $images = $storage->files(config('backup.files'));
+        $this->zip->close();
+
+        $this->cleanup();
+    }
+
+    /**
+     * Backup images.
+     */
+    private function backupImages()
+    {
+        $images = $this->storage->files(config('backup.files'));
 
         foreach ($images as $image) {
-            $zip->addFile($storage->path($image), $image);
+            $this->zip->addFile($this->storage->path($image), $image);
         }
+    }
 
-        Dumper::dump($storage->path(config('backup.database')));
+    /**
+     * Backup database.
+     */
+    private function backupDatabase()
+    {
+        Dumper::dump($this->storage->path(config('backup.database')));
 
-        $zip->addFile($storage->path(config('backup.database')), 'database.sql');
+        $this->zip->addFile($this->storage->path(config('backup.database')), 'database.sql');
+    }
 
-        $zip->close();
+    /**
+     * Cleanup temporary files.
+     */
+    private function cleanup()
+    {
+        $this->storage->delete(config('backup.database'));
+    }
 
-        $storage->delete(config('backup.database'));
+    /**
+     * Get backup filename.
+     *
+     * @return string
+     */
+    private function filename()
+    {
+        return $this->storage->path(config('backup.filename'));
     }
 }

@@ -34,9 +34,11 @@ class CleanBackups implements ShouldQueue
      */
     public function handle()
     {
-        collect($this->backups())
-            ->filter(fn ($backup) => $this->canBeRemoved($backup))
-            ->each(fn ($backup) => $this->storage->delete($backup));
+        foreach ($this->backups() as $backup) {
+            if ($this->canBeRemoved($backup)) {
+                $this->storage->delete($backup);
+            }
+        }
     }
 
     /**
