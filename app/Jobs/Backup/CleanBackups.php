@@ -22,6 +22,9 @@ class CleanBackups implements ShouldQueue
      */
     private $storage;
 
+    /**
+     * Command constructor.
+     */
     public function __construct()
     {
         $this->storage = Storage::disk('local');
