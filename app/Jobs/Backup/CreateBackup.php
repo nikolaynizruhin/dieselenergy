@@ -61,7 +61,7 @@ class CreateBackup implements ShouldQueue
         $images = $this->storage->files(config('backup.files'));
 
         foreach ($images as $image) {
-            $this->zip->addFile($this->storage->path($image), $image);
+            $this->zip->addFile($this->storage->path($image), ltrim($image, 'public'));
         }
     }
 
