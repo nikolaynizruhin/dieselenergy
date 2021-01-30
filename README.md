@@ -37,5 +37,5 @@ php artisan storage:link
 ## Testing
 
 ```
-php artisan test
+php artisan test --parallel
 ```
