@@ -58,9 +58,7 @@ class CreateBackup implements ShouldQueue
      */
     private function backupImages()
     {
-        $images = $this->storage->files(config('backup.files'));
-
-        foreach ($images as $image) {
+        foreach ($this->images() as $image) {
             $this->zip->addFile($this->storage->path($image), ltrim($image, 'public'));
         }
     }
@@ -91,5 +89,15 @@ class CreateBackup implements ShouldQueue
     private function filename()
     {
         return $this->storage->path(config('backup.filename'));
+    }
+
+    /**
+     * Get images.
+     *
+     * @return array
+     */
+    private function images()
+    {
+        return $this->storage->files(config('backup.files'));
     }
 }
