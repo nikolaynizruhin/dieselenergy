@@ -41,7 +41,7 @@ class CreateOrderTest extends TestCase
         $brand = Brand::factory()->for($currency);
         $this->product = Product::factory()
             ->for($brand)
-            ->hasDefaultImage()
+            ->withDefaultImage()
             ->create();
     }
 

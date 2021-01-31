@@ -20,7 +20,7 @@ class SearchProductsTest extends TestCase
         [$patrol, $diesel] = Product::factory()
             ->count(2)
             ->active()
-            ->hasDefaultImage()
+            ->withDefaultImage()
             ->state(new Sequence(
                 ['name' => 'Patrol Generator'],
                 ['name' => 'Diesel Generator'],

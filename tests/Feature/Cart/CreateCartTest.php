@@ -14,7 +14,7 @@ class CreateCartTest extends TestCase
     /** @test */
     public function guest_can_add_product_to_cart()
     {
-        $product = Product::factory()->hasDefaultImage()->create();
+        $product = Product::factory()->withDefaultImage()->create();
 
         $this->from(route('categories.products.index', $product->category))
             ->post(route('carts.store', ['product_id' => $product->id, 'quantity' => 2]))

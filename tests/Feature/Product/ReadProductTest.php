@@ -20,7 +20,7 @@ class ReadProductTest extends TestCase
         [$product, $generator, $waterPump] = Product::factory()
             ->count(3)
             ->active()
-            ->hasDefaultImage()
+            ->withDefaultImage()
             ->state(new Sequence(
                 ['category_id' => $generators->id],
                 ['category_id' => $generators->id],

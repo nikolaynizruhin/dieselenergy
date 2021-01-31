@@ -61,7 +61,7 @@ class ProductFactory extends Factory
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function hasDefaultImage()
+    public function withDefaultImage()
     {
         return $this->hasAttached(Image::factory(), ['is_default' => 1]);
     }

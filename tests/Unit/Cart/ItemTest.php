@@ -20,7 +20,7 @@ class ItemTest extends TestCase
         $brand = Brand::factory()->for($currency);
         $product = Product::factory()
             ->for($brand)
-            ->hasDefaultImage()
+            ->withDefaultImage()
             ->create(['price' => 10000]);
 
         $item = new Item($product, 2);

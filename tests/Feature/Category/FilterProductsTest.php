@@ -22,7 +22,7 @@ class FilterProductsTest extends TestCase
         [$patrol, $diesel, $waterPump] = Product::factory()
             ->count(3)
             ->active()
-            ->hasDefaultImage()
+            ->withDefaultImage()
             ->state(new Sequence(
                 ['name' => 'Patrol Generator'],
                 ['name' => 'Diesel Generator'],

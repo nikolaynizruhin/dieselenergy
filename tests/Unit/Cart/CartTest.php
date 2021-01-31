@@ -30,7 +30,7 @@ class CartTest extends TestCase
     {
         parent::setUp();
 
-        $this->product = Product::factory()->hasDefaultImage()->create();
+        $this->product = Product::factory()->withDefaultImage()->create();
     }
 
     /** @test */
@@ -101,12 +101,12 @@ class CartTest extends TestCase
 
         $generator = Product::factory()
             ->for($brand)
-            ->hasDefaultImage()
+            ->withDefaultImage()
             ->create(['price' => 10000]);
 
         $waterPump = Product::factory()
             ->for($brand)
-            ->hasDefaultImage()
+            ->withDefaultImage()
             ->create(['price' => 10000]);
 
         Cart::add($generator, 2);
