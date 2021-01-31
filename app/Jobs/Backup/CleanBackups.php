@@ -4,11 +4,11 @@ namespace App\Jobs\Backup;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CleanBackups implements ShouldQueue
@@ -24,10 +24,12 @@ class CleanBackups implements ShouldQueue
 
     /**
      * Command constructor.
+     *
+     * @param  \Illuminate\Filesystem\FilesystemManager
      */
-    public function __construct()
+    public function __construct(FilesystemManager $storage)
     {
-        $this->storage = Storage::disk('local');
+        $this->storage = $storage->disk('local');
     }
 
     /**

@@ -5,10 +5,10 @@ namespace App\Jobs\Backup;
 use Facades\App\Dump\Dumper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
 use ZipArchive;
 
 class CreateBackup implements ShouldQueue
@@ -29,10 +29,16 @@ class CreateBackup implements ShouldQueue
      */
     private $zip;
 
-    public function __construct()
+    /**
+     * CreateBackup constructor.
+     *
+     * @param  \ZipArchive  $zip
+     * @param  \Illuminate\Filesystem\FilesystemManager  $storage
+     */
+    public function __construct(ZipArchive $zip, FilesystemManager $storage)
     {
-        $this->zip = new ZipArchive();
-        $this->storage = Storage::disk('local');
+        $this->zip = $zip;
+        $this->storage = $storage->disk('local');
     }
 
     /**
