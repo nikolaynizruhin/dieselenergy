@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container-lg">
-        <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
+        <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('/images/logo.svg') }}" alt="{{ config('app.name') }}" width="130">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -80,12 +80,6 @@
                     <a class="nav-link" href="{{ route('admin.currencies.index') }}">
                         @include('layouts.partials.icon', ['name' => 'cash-stack', 'classes' => 'mr-2', 'width' => '1.1em', 'height' => '1.1em'])
                         {{ __('currency.plural') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
-                        @include('layouts.partials.icon', ['name' => 'globe2', 'classes' => 'mr-2', 'width' => '1.1em', 'height' => '1.1em'])
-                        {{ __('common.site') }}
                     </a>
                 </li>
             </ul>

@@ -48,7 +48,6 @@ return [
     'slug' => 'Slug',
     'status' => 'Status',
     'support' => 'Support',
-    'site' => 'Site',
     'title' => 'Title',
     'total' => 'Total',
     'update' => 'Update',
