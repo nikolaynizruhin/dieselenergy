@@ -4,6 +4,9 @@
     <div class="card shadow-sm mb-4">
         <div class="card-header border-0 bg-white lead">
             {{ __('customer.details') }}
+            <a class="float-right" href="{{ route('admin.customers.edit', $customer) }}" role="button">
+                @include('layouts.partials.icon', ['name' => 'pencil', 'width' => '1em', 'height' => '1em'])
+            </a>
         </div>
 
 
