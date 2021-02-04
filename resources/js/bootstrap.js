@@ -4,12 +4,10 @@
  * code may be modified to fit the specific needs of your application.
  */
 
-try {
-    window.Popper = require('popper.js').default;
-    window.$ = window.jQuery = require('jquery');
-    window.bsCustomFileInput = require('bs-custom-file-input');
+window.Popper = require('popper.js').default;
+window.$ = window.jQuery = require('jquery');
+window.bsCustomFileInput = require('bs-custom-file-input');
 
-    require('bootstrap');
-} catch (e) {}
+require('bootstrap');
 
 $(document).ready(() => bsCustomFileInput.init());
