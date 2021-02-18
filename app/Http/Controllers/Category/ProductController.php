@@ -41,10 +41,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product->load(['attributes' => fn ($query) => $query->whereNotNull('value')]);
-
-        $recommendations = $product->recommendations();
-
-        return view('products.show', compact('product', 'recommendations'));
+        return view('products.show', [
+            'product' => $product->loadAttributes(),
+            'recommendations' => $product->recommendations(),
+        ]);
     }
 }

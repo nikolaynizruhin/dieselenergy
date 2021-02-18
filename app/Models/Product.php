@@ -57,6 +57,16 @@ class Product extends Model
     }
 
     /**
+     * Load product attributes.
+     *
+     * @return \App\Models\Product
+     */
+    public function loadAttributes()
+    {
+        return $this->load(['attributes' => fn ($query) => $query->whereNotNull('value')]);
+    }
+
+    /**
      * Scope a query with default image.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
