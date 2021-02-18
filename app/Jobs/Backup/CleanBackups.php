@@ -54,10 +54,17 @@ class CleanBackups implements ShouldQueue
      */
     private function canBeRemoved($backup)
     {
-        if (! Str::endsWith($backup, '.zip')) {
-            return false;
-        }
+        return Str::endsWith($backup, '.zip') ? $this->isOutdated($backup) : false;
+    }
 
+    /**
+     * Check if backup is outdated.
+     *
+     * @param  string  $backup
+     * @return bool
+     */
+    private function isOutdated($backup)
+    {
         $timestamp = $this->storage->lastModified($backup);
 
         $modifiedAt = Carbon::createFromTimestamp($timestamp);
