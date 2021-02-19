@@ -90,9 +90,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $product->category->load([
-            'attributes.products' => fn ($query) => $query->where('product_id', $product->id),
-        ]);
+        $product->category->loadAttributes($product);
 
         return view('admin.products.edit', compact('product'));
     }

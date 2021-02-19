@@ -47,4 +47,17 @@ class Category extends Model
     {
         return $query->withCount(['products' => fn (Builder $query) => $query->active()]);
     }
+
+    /**
+     * Load product category attributes.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \App\Models\Category
+     */
+    public function loadAttributes(Product $product)
+    {
+        return $this->load([
+            'attributes.products' => fn ($query) => $query->where('product_id', $product->id),
+        ]);
+    }
 }
