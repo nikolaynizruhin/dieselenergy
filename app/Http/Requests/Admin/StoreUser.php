@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class StoreUser extends FormRequest
 {
@@ -28,5 +29,17 @@ class StoreUser extends FormRequest
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ];
+    }
+
+    /**
+     * Get user attributes.
+     *
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return array_merge($this->validated(), [
+            'password' => Hash::make($this->password),
+        ]);
     }
 }
