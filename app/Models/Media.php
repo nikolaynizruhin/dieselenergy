@@ -61,4 +61,14 @@ class Media extends Pivot
             ])->update(['is_default' => 0]);
         }
     }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::saved(fn ($media) => $media->unmarkOtherDefaults());
+    }
 }
