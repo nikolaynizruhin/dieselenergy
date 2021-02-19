@@ -76,9 +76,9 @@ class ProductController extends Controller
      */
     public function show(Product $product, Request $request, ImageFilters $filters)
     {
-        $images = $product->images()->filter($filters)->latest()->paginate(10);
+        $product->loadAttributes();
 
-        $product->load(['attributes' => fn ($query) => $query->whereNotNull('value')]);
+        $images = $product->images()->filter($filters)->latest()->paginate(10);
 
         return view('admin.products.show', compact('product', 'images'));
     }
