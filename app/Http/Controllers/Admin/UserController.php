@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\StoreUser;
 use App\Http\Requests\Admin\UpdateUser;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
