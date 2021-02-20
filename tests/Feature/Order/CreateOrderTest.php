@@ -31,6 +31,13 @@ class CreateOrderTest extends TestCase
     private $product;
 
     /**
+     * Amount of products in the cart.
+     *
+     * @var int
+     */
+    private $quantity;
+
+    /**
      * Setup.
      */
     protected function setUp(): void
@@ -43,13 +50,13 @@ class CreateOrderTest extends TestCase
             ->for($brand)
             ->withDefaultImage()
             ->create();
+
+        Cart::add($this->product, $this->quantity = $this->faker->randomDigitNotNull);
     }
 
     /** @test */
     public function guest_can_create_order()
     {
-        Cart::add($this->product, $quantity = $this->faker->randomDigitNotNull);
-
         $total = Cart::total();
 
         $this->post(route('orders.store'), $fields = $this->validFields())
@@ -63,7 +70,7 @@ class CreateOrderTest extends TestCase
 
         $this->assertDatabaseHas('order_product', [
             'product_id' => $this->product->id,
-            'quantity' => $quantity,
+            'quantity' => $this->quantity,
         ]);
 
         $this->assertDatabaseHas('orders', [
@@ -79,8 +86,6 @@ class CreateOrderTest extends TestCase
     public function it_should_update_existing_customer()
     {
         $customer = Customer::factory()->create();
-
-        Cart::add($this->product);
 
         $this->post(route('orders.store'), $fields = $this->validFields(['email' => $customer->email]))
             ->assertRedirect();
@@ -99,8 +104,6 @@ class CreateOrderTest extends TestCase
     {
         Notification::fake();
 
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $fields = $this->validFields());
 
         $customer = Customer::firstWhere('email', $fields['email']);
@@ -117,8 +120,6 @@ class CreateOrderTest extends TestCase
     public function it_should_send_order_created_email_to_admin()
     {
         Notification::fake();
-
-        Cart::add($this->product);
 
         $this->post(route('orders.store'), $fields = $this->validFields());
 
@@ -139,8 +140,6 @@ class CreateOrderTest extends TestCase
     {
         Event::fake();
 
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields());
 
         Event::assertDispatched(OrderCreatedEvent::class);
@@ -149,8 +148,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_without_customer_name()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields(['name' => null]))
             ->assertSessionHasErrors('name');
     }
@@ -158,8 +155,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_integer_customer_name()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields(['name' => 1]))
             ->assertSessionHasErrors('name');
     }
@@ -167,8 +162,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_customer_name_more_than_255_chars()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields([
             'name' => str_repeat('a', 256),
         ]))->assertSessionHasErrors('name');
@@ -177,8 +170,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_without_customer_email()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields(['email' => null]))
             ->assertSessionHasErrors('email');
     }
@@ -186,8 +177,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_integer_customer_email()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields(['email' => 1]))
             ->assertSessionHasErrors('email');
     }
@@ -195,8 +184,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_customer_email_more_than_255_chars()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields([
             'email' => str_repeat('a', 256),
         ]))->assertSessionHasErrors('email');
@@ -205,8 +192,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_invalid_customer_email()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields(['email' => 'invalid']))
             ->assertSessionHasErrors('email');
     }
@@ -214,8 +199,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_without_customer_phone()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields(['phone' => null]))
             ->assertSessionHasErrors('phone');
     }
@@ -223,8 +206,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_incorrect_customer_phone_format()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields(['phone' => 0631234567]))
             ->assertSessionHasErrors('phone');
     }
@@ -232,8 +213,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_integer_notes()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields(['notes' => 1]))
             ->assertSessionHasErrors('notes');
     }
@@ -241,6 +220,8 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_empty_cart()
     {
+        Cart::clear();
+
         $this->post(route('orders.store'), $this->validFields())
             ->assertSessionHasErrors('cart');
     }
@@ -248,8 +229,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_without_accepting_privacy()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields(['privacy' => null]))
             ->assertSessionHasErrors('privacy');
     }
@@ -257,8 +236,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_with_spam()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields([
             config('honeypot.field') => 'spam',
         ]))->assertSuccessful();
@@ -269,8 +246,6 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_too_quickly()
     {
-        Cart::add($this->product);
-
         $this->post(route('orders.store'), $this->validFields([
             config('honeypot.valid_from_field') => time(),
         ]))->assertSuccessful();
