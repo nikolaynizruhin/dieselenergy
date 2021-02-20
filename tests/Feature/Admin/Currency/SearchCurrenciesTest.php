@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Currency;
 
 use App\Models\Currency;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

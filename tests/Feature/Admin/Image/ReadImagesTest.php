@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Image;
 
 use App\Models\Image;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -22,8 +21,6 @@ class ReadImagesTest extends TestCase
     /** @test */
     public function user_can_read_images()
     {
-
-
         [$diesel, $patrol] = Image::factory()
             ->count(2)
             ->state(new Sequence(

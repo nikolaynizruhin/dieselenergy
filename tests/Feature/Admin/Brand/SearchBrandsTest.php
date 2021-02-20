@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Brand;
 
 use App\Models\Brand;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

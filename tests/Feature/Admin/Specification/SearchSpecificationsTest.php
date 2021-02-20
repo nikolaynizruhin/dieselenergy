@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Specification;
 
 use App\Models\Attribute;
 use App\Models\Category;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -31,8 +30,6 @@ class SearchSpecificationsTest extends TestCase
     /** @test */
     public function user_can_search_specifications()
     {
-
-
         [$width, $height, $weight] = Attribute::factory()
             ->count(3)
             ->state(new Sequence(

@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Image;
 
 use App\Models\Image;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,7 +22,6 @@ class DeleteImageTest extends TestCase
     /** @test */
     public function user_can_delete_image()
     {
-
         $image = Image::factory()->create();
 
         $this->login()

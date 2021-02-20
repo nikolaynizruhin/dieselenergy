@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Admin\Image;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -23,8 +22,6 @@ class CreateImageTest extends TestCase
     /** @test */
     public function user_can_visit_create_image_page()
     {
-
-
         $this->login()
             ->get(route('admin.images.create'))
             ->assertViewIs('admin.images.create');
@@ -49,8 +46,6 @@ class CreateImageTest extends TestCase
 
         $image = UploadedFile::fake()->image('product.jpg');
 
-
-
         $this->login()
             ->post(route('admin.images.store'), [
                 'images' => [$image],
@@ -65,8 +60,6 @@ class CreateImageTest extends TestCase
     /** @test */
     public function user_cant_create_image_without_image()
     {
-
-
         $this->login()
             ->post(route('admin.images.store'), [
                 'images' => [null],
@@ -76,8 +69,6 @@ class CreateImageTest extends TestCase
     /** @test */
     public function user_cant_create_image_with_integer_image()
     {
-
-
         $this->login()
             ->post(route('admin.images.store'), [
                 'images' => [1],
@@ -88,8 +79,6 @@ class CreateImageTest extends TestCase
     public function user_cant_create_image_with_pdf_file()
     {
         $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
-
-
 
         $this->login()
             ->post(route('admin.products.store'), [

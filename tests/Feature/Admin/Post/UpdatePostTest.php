@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Post;
 
 use App\Models\Image;
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +25,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_can_visit_update_post_page()
     {
-
         $post = Post::factory()->create();
 
         $this->login()
@@ -52,7 +50,6 @@ class UpdatePostTest extends TestCase
 
         $image = UploadedFile::fake()->image('post.jpg');
 
-
         $post = Post::factory()->create();
         $stub = Post::factory()
             ->make()
@@ -76,7 +73,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_without_title()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['title' => null]);
 
@@ -88,7 +84,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_with_integer_title()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['title' => 1]);
 
@@ -100,7 +95,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_without_excerpt()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['excerpt' => null]);
 
@@ -112,7 +106,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_with_integer_excerpt()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['excerpt' => 1]);
 
@@ -124,7 +117,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_with_title_more_than_255_chars()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['title' => str_repeat('a', 256)]);
 
@@ -136,7 +128,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_with_existing_title()
     {
-
         $post = Post::factory()->create();
         $existing = Post::factory()->create();
         $stub = Post::factory()->raw(['title' => $existing->title]);
@@ -149,7 +140,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_without_slug()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['slug' => null]);
 
@@ -161,7 +151,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_with_integer_slug()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['slug' => 1]);
 
@@ -173,7 +162,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_with_slug_more_than_255_chars()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['slug' => str_repeat('a', 256)]);
 
@@ -185,7 +173,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_with_existing_slug()
     {
-
         $post = Post::factory()->create();
         $existing = Post::factory()->create();
         $stub = Post::factory()->raw(['slug' => $existing->slug]);
@@ -198,7 +185,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_without_body()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['body' => null]);
 
@@ -210,7 +196,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_with_integer_body()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['body' => 1]);
 
@@ -222,7 +207,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_without_image()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['image' => null]);
 
@@ -234,7 +218,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_post_with_string_image()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['image' => 'string']);
 
@@ -246,7 +229,6 @@ class UpdatePostTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_integer_image()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['image' => 1]);
 
@@ -259,7 +241,6 @@ class UpdatePostTest extends TestCase
     public function user_cant_update_post_with_pdf_file()
     {
         $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
-
 
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['image' => $pdf]);

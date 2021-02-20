@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Customer;
 
 use App\Models\Customer;
 use App\Models\Order;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -16,7 +15,6 @@ class SearchOrdersTest extends TestCase
     /** @test */
     public function user_can_search_customer_orders()
     {
-
         $customer = Customer::factory()->create();
 
         [$orderOne, $orderTwo, $orderThree] = Order::factory()

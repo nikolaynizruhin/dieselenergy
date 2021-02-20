@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Media;
 
 use App\Models\Media;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,7 +22,6 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_can_visit_update_media_page()
     {
-
         $media = Media::factory()->create();
 
         $this->login()
@@ -44,7 +42,6 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_can_update_media()
     {
-
         $media = Media::factory()->create();
         $stub = Media::factory()->raw();
 
@@ -59,8 +56,6 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function it_should_unmark_other_default_medias()
     {
-
-
         $defaultMedia = Media::factory()
             ->default()
             ->create();
@@ -84,7 +79,6 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_cant_update_media_without_product()
     {
-
         $media = Media::factory()->create();
         $stub = Media::factory()->raw(['product_id' => null]);
 
@@ -96,7 +90,6 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_cant_update_media_with_string_product()
     {
-
         $media = Media::factory()->create();
         $stub = Media::factory()->raw(['product_id' => 'string']);
 
@@ -108,7 +101,6 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_cant_update_media_with_nonexistent_product()
     {
-
         $media = Media::factory()->create();
         $stub = Media::factory()->raw(['product_id' => 10]);
 
@@ -120,7 +112,6 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_cant_update_media_without_image()
     {
-
         $media = Media::factory()->create();
         $stub = Media::factory()->raw(['image_id' => null]);
 
@@ -132,7 +123,6 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_cant_update_media_with_string_image()
     {
-
         $media = Media::factory()->create();
         $stub = Media::factory()->raw(['image_id' => 'string']);
 
@@ -144,7 +134,6 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_cant_update_media_with_nonexistent_image()
     {
-
         $media = Media::factory()->create();
         $stub = Media::factory()->raw(['image_id' => 10]);
 

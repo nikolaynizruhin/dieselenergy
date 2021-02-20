@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Customer;
 
 use App\Models\Customer;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,7 +22,6 @@ class DeleteCustomerTest extends TestCase
     /** @test */
     public function user_can_delete_customer()
     {
-
         $customer = Customer::factory()->create();
 
         $this->login()

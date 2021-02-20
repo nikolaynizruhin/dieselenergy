@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Media;
 
 use App\Models\Image;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -16,8 +15,6 @@ class SearchMediasTest extends TestCase
     /** @test */
     public function user_can_search_media()
     {
-
-
         [$diesel, $patrol, $waterPump] = Image::factory()
             ->count(3)
             ->state(new Sequence(

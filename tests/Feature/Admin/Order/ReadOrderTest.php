@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Order;
 
 use App\Models\Order;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,7 +22,6 @@ class ReadOrderTest extends TestCase
     /** @test */
     public function user_can_read_order()
     {
-
         $order = Order::factory()->create();
 
         $this->login()

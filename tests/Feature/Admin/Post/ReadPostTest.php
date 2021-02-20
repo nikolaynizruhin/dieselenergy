@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Post;
 
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,7 +22,6 @@ class ReadPostTest extends TestCase
     /** @test */
     public function user_can_read_post()
     {
-
         $post = Post::factory()->create();
 
         $this->login()

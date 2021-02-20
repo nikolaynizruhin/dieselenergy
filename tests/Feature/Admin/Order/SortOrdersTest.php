@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Order;
 
 use App\Models\Customer;
 use App\Models\Order;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -23,8 +22,6 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_by_id_ascending()
     {
-
-
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
@@ -43,8 +40,6 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_by_id_descending()
     {
-
-
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
@@ -63,8 +58,6 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_by_status_ascending()
     {
-
-
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
@@ -83,8 +76,6 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_by_status_descending()
     {
-
-
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
@@ -103,8 +94,6 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_by_created_date_ascending()
     {
-
-
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
@@ -123,8 +112,6 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_by_created_date_descending()
     {
-
-
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
@@ -143,8 +130,6 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_by_total_ascending()
     {
-
-
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
@@ -163,8 +148,6 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_by_total_descending()
     {
-
-
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
@@ -183,8 +166,6 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_by_client_ascending()
     {
-
-
         [$adam, $tom] = Customer::factory()
             ->count(2)
             ->state(new Sequence(
@@ -210,8 +191,6 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_by_client_descending()
     {
-
-
         [$adam, $tom] = Customer::factory()
             ->count(2)
             ->state(new Sequence(

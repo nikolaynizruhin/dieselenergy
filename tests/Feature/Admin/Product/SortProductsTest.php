@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Product;
 
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -23,8 +22,6 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_name_ascending()
     {
-
-
         [$patrol, $diesel] = Product::factory()
             ->count(2)
             ->state(new Sequence(
@@ -43,8 +40,6 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_name_descending()
     {
-
-
         [$patrol, $diesel] = Product::factory()
             ->count(2)
             ->state(new Sequence(
@@ -63,8 +58,6 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_price_ascending()
     {
-
-
         [$patrol, $diesel] = Product::factory()
             ->count(2)
             ->state(new Sequence(
@@ -83,8 +76,6 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_price_descending()
     {
-
-
         [$patrol, $diesel] = Product::factory()
             ->count(2)
             ->state(new Sequence(
@@ -103,8 +94,6 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_status_ascending()
     {
-
-
         [$patrol, $diesel] = Product::factory()
             ->count(2)
             ->state(new Sequence(
@@ -123,8 +112,6 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_status_descending()
     {
-
-
         [$patrol, $diesel] = Product::factory()
             ->count(2)
             ->state(new Sequence(
@@ -143,8 +130,6 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_category_ascending()
     {
-
-
         [$ats, $generators] = Category::factory()
             ->count(2)
             ->state(new Sequence(
@@ -170,8 +155,6 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_category_descending()
     {
-
-
         [$ats, $generators] = Category::factory()
             ->count(2)
             ->state(new Sequence(

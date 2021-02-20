@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Specification;
 
 use App\Models\Specification;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,7 +22,6 @@ class DeleteSpecificationTest extends TestCase
     /** @test */
     public function user_can_delete_specification()
     {
-
         $specification = Specification::factory()->create();
 
         $this->login()

@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Dashboard;
 
 use App\Models\Order;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -48,8 +47,6 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_ascending()
     {
-
-
         $this->login()
             ->get(route('admin.dashboard', ['sort' => 'id']))
             ->assertSuccessful()
@@ -61,8 +58,6 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_descending()
     {
-
-
         $this->login()
             ->get(route('admin.dashboard', ['sort' => '-id']))
             ->assertSuccessful()

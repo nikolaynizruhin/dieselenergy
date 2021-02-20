@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Product;
 
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -24,8 +23,6 @@ class SearchProductsTest extends TestCase
     /** @test */
     public function user_can_search_products()
     {
-
-
         [$diesel, $patrol, $waterPump] = Product::factory()
             ->count(3)
             ->state(new Sequence(

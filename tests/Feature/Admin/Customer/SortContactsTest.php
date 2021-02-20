@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Customer;
 
 use App\Models\Contact;
 use App\Models\Customer;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -39,8 +38,6 @@ class SortContactsTest extends TestCase
     /** @test */
     public function user_can_sort_customer_contacts_by_message_ascending()
     {
-
-
         [$support, $faq] = Contact::factory()
             ->count(2)
             ->state(new Sequence(
@@ -59,8 +56,6 @@ class SortContactsTest extends TestCase
     /** @test */
     public function user_can_sort_customer_contacts_by_message_descending()
     {
-
-
         [$support, $faq] = Contact::factory()
             ->count(2)
             ->state(new Sequence(
@@ -79,8 +74,6 @@ class SortContactsTest extends TestCase
     /** @test */
     public function user_can_sort_customer_contacts_by_date_ascending()
     {
-
-
         [$support, $faq] = Contact::factory()
             ->count(2)
             ->state(new Sequence(
@@ -99,8 +92,6 @@ class SortContactsTest extends TestCase
     /** @test */
     public function user_can_sort_customer_contacts_by_date_descending()
     {
-
-
         [$support, $faq] = Contact::factory()
             ->count(2)
             ->state(new Sequence(

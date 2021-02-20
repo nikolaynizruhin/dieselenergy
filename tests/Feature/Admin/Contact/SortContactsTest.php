@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Contact;
 
 use App\Models\Contact;
 use App\Models\Customer;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
