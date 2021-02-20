@@ -26,13 +26,13 @@ class UpdateCartTest extends TestCase
         parent::setUp();
 
         $this->product = Product::factory()->withDefaultImage()->create();
+
+        Cart::add($this->product, 1);
     }
 
     /** @test */
     public function guest_can_update_cart()
     {
-        Cart::add($this->product, 1);
-
         $this->put(route('carts.update', ['cart' => 0, 'quantity' => 3]))
             ->assertRedirect(route('carts.index'))
             ->assertSessionHas('cart');
@@ -45,8 +45,6 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function guest_cant_create_cart_without_quantity()
     {
-        Cart::add($this->product, 1);
-
         $this->put(route('carts.update', 0))
             ->assertSessionHasErrors('quantity');
     }
@@ -54,8 +52,6 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function user_cant_update_cart_with_string_quantity()
     {
-        Cart::add($this->product, 1);
-
         $this->put(route('carts.update', ['cart' => 0, 'quantity' => 'string']))
             ->assertSessionHasErrors('quantity');
     }
@@ -63,8 +59,6 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function guest_cant_update_cart_with_zero_quantity()
     {
-        Cart::add($this->product, 1);
-
         $this->put(route('carts.update', ['cart' => 0, 'quantity' => 0]))
             ->assertSessionHasErrors('quantity');
     }
