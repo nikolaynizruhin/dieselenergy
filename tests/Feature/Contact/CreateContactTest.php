@@ -17,26 +17,18 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_can_create_contact()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'message' => $contact->message,
-            ] + $this->honeypot())
+            ->post(route('contacts.store'), $fields = $this->validFields())
             ->assertRedirect(route('home').'#contact')
             ->assertSessionHas('status', trans('contact.created'));
 
         $this->assertDatabaseHas('customers', [
-            'name' => $contact->customer->name,
-            'email' => $contact->customer->email,
-            'phone' => $contact->customer->phone,
+            'name' => $fields['name'],
+            'email' => $fields['email'],
+            'phone' => $fields['phone'],
         ]);
 
-        $this->assertDatabaseHas('contacts', ['message' => $contact->message]);
+        $this->assertDatabaseHas('contacts', ['message' => $fields['message']]);
     }
 
     /** @test */
@@ -44,37 +36,22 @@ class CreateContactTest extends TestCase
     {
         Notification::fake();
 
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'message' => $contact->message,
-            ] + $this->honeypot())
+            ->post(route('contacts.store'), $fields = $this->validFields())
             ->assertRedirect(route('home').'#contact');
 
         Notification::assertSentTo(
             new AnonymousNotifiable,
             ContactCreated::class,
-            fn ($notification, $channels) => $notification->contact->customer->email === $contact->customer->email,
+            fn ($notification, $channels) => $notification->contact->customer->email === $fields['email'],
         );
     }
 
     /** @test */
     public function guest_cant_create_contact_without_accepting_privacy()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'message' => $contact->message,
-            ] + $this->honeypot())
+            ->post(route('contacts.store'), $this->validFields(['privacy' => null]))
             ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('privacy');
     }
@@ -82,16 +59,8 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_without_name()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => null,
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'message' => $contact->message,
-            ] + $this->honeypot())
+            ->post(route('contacts.store'), $this->validFields(['name' => null]))
             ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('name');
     }
@@ -99,16 +68,8 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_integer_name()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => 1,
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'message' => $contact->message,
-            ] + $this->honeypot())
+            ->post(route('contacts.store'), $this->validFields(['name' => 1]))
             ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('name');
     }
@@ -116,32 +77,18 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_name_more_than_255_chars()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
+            ->post(route('contacts.store'), $this->validFields([
                 'name' => str_repeat('a', 256),
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'message' => $contact->message,
-            ] + $this->honeypot())
-            ->assertRedirect(route('home').'#contact')
+            ]))->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('name');
     }
 
     /** @test */
     public function guest_cant_create_contact_without_email()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => $contact->customer->name,
-                'phone' => $contact->customer->phone,
-                'message' => $contact->message,
-            ] + $this->honeypot())
+            ->post(route('contacts.store'), $this->validFields(['email' => null]))
             ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('email');
     }
@@ -149,16 +96,8 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_integer_email()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => $contact->customer->name,
-                'email' => 1,
-                'phone' => $contact->customer->phone,
-                'message' => $contact->message,
-            ] + $this->honeypot())
+            ->post(route('contacts.store'), $this->validFields(['email' => 1]))
             ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('email');
     }
@@ -166,33 +105,18 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_email_more_than_255_chars()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => $contact->customer->name,
+            ->post(route('contacts.store'), $this->validFields([
                 'email' => str_repeat('a', 256),
-                'phone' => $contact->customer->phone,
-                'message' => $contact->message,
-            ] + $this->honeypot())
-            ->assertRedirect(route('home').'#contact')
+            ]))->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('email');
     }
 
     /** @test */
     public function guest_cant_create_contact_with_invalid_email()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => $contact->customer->name,
-                'email' => 'invalid',
-                'phone' => $contact->customer->phone,
-                'message' => $contact->message,
-            ] + $this->honeypot())
+            ->post(route('contacts.store'), $this->validFields(['email' => 'invalid']))
             ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('email');
     }
@@ -200,16 +124,8 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_without_phone()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => null,
-                'message' => $contact->message,
-            ] + $this->honeypot())
+            ->post(route('contacts.store'), $this->validFields(['phone' => null]))
             ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('phone');
     }
@@ -217,16 +133,8 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_incorrect_phone_format()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => 0631234567,
-                'message' => $contact->message,
-            ] + $this->honeypot())
+            ->post(route('contacts.store'), $this->validFields(['phone' => 0631234567]))
             ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('phone');
     }
@@ -234,16 +142,8 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_integer_message()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'message' => 1,
-            ] + $this->honeypot())
+            ->post(route('contacts.store'), $this->validFields(['message' => 1]))
             ->assertRedirect(route('home').'#contact')
             ->assertSessionHasErrors('message');
     }
@@ -251,18 +151,10 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_with_spam()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'message' => $contact->message,
+            ->post(route('contacts.store'), $this->validFields([
                 config('honeypot.field') => 'spam',
-            ] + $this->honeypot())
-            ->assertSuccessful();
+            ]))->assertSuccessful();
 
         $this->assertDatabaseCount('contacts', 0);
     }
@@ -270,18 +162,30 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact_too_quickly()
     {
-        $contact = Contact::factory()->make();
-
         $this->from(route('home'))
-            ->post(route('contacts.store'), [
-                'privacy' => 1,
-                'name' => $contact->customer->name,
-                'email' => $contact->customer->email,
-                'phone' => $contact->customer->phone,
-                'message' => $contact->message,
+            ->post(route('contacts.store'), $this->validFields([
                 config('honeypot.valid_from_field') => time(),
-            ])->assertSuccessful();
+            ]))->assertSuccessful();
 
         $this->assertDatabaseCount('contacts', 0);
+    }
+
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
+    {
+        $contact = Contact::factory()->make();
+
+        return array_merge([
+            'privacy' => 1,
+            'name' => $contact->customer->name,
+            'email' => $contact->customer->email,
+            'phone' => $contact->customer->phone,
+            'message' => $contact->message,
+        ] + $this->honeypot(), $overrides);
     }
 }
