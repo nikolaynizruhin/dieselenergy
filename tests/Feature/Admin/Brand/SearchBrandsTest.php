@@ -24,8 +24,6 @@ class SearchBrandsTest extends TestCase
     /** @test */
     public function user_can_search_brands()
     {
-        $user = User::factory()->create();
-
         [$sdmo, $hyundai, $bosch] = Brand::factory()
             ->count(3)
             ->state(new Sequence(
@@ -34,7 +32,7 @@ class SearchBrandsTest extends TestCase
                 ['name' => 'Bosch'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.brands.index', ['search' => 'Brand']))
             ->assertSeeInOrder([$hyundai->name, $sdmo->name])
             ->assertDontSee($bosch->name);

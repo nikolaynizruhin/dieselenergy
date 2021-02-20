@@ -22,8 +22,6 @@ class ReadAttributesTest extends TestCase
     /** @test */
     public function user_can_read_attributes()
     {
-        $user = User::factory()->create();
-
         [$weight, $power] = Attribute::factory()
             ->count(2)
             ->state(new Sequence(
@@ -31,7 +29,7 @@ class ReadAttributesTest extends TestCase
                 ['name' => 'Power'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.attributes.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.attributes.index')

@@ -24,8 +24,6 @@ class SearchAttributesTest extends TestCase
     /** @test */
     public function user_can_search_attributes()
     {
-        $user = User::factory()->create();
-
         [$power, $width, $height] = Attribute::factory()
             ->count(3)
             ->state(new Sequence(
@@ -34,7 +32,7 @@ class SearchAttributesTest extends TestCase
                 ['name' => 'height attribute'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.attributes.index', ['search' => 'attribute']))
             ->assertSeeInOrder([$height->name, $width->name])
             ->assertDontSee($power->name);

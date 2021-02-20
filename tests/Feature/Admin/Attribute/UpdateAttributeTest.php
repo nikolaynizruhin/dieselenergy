@@ -24,10 +24,9 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_can_visit_update_attribute_page()
     {
-        $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.attributes.edit', $attribute))
             ->assertViewIs('admin.attributes.edit')
             ->assertViewHas('attribute', $attribute);
@@ -47,11 +46,10 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_can_update_attribute()
     {
-        $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
         $stub = Attribute::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.attributes.update', $attribute), $stub)
             ->assertRedirect(route('admin.attributes.index'))
             ->assertSessionHas('status', trans('attribute.updated'));
@@ -62,11 +60,10 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_cant_update_attribute_without_name()
     {
-        $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
         $stub = Attribute::factory()->raw(['name' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.attributes.update', $attribute), $stub)
             ->assertSessionHasErrors('name');
     }
@@ -74,11 +71,10 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_cant_update_attribute_with_integer_name()
     {
-        $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
         $stub = Attribute::factory()->raw(['name' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.attributes.update', $attribute), $stub)
             ->assertSessionHasErrors('name');
     }
@@ -86,11 +82,10 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_cant_update_attribute_with_name_more_than_255_chars()
     {
-        $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
         $stub = Attribute::factory()->raw(['name' => str_repeat('a', 256)]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.attributes.update', $attribute), $stub)
             ->assertSessionHasErrors('name');
     }
@@ -98,11 +93,10 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_cant_update_attribute_with_existing_name()
     {
-        $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
         $existing = Attribute::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.attributes.update', $attribute), [
                 'name' => $existing->name,
             ])->assertSessionHasErrors('name');
@@ -111,11 +105,10 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_cant_update_attribute_with_integer_measure()
     {
-        $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
         $stub = Attribute::factory()->raw(['measure' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.attributes.update', $attribute), $stub)
             ->assertSessionHasErrors('measure');
     }
@@ -123,11 +116,10 @@ class UpdateAttributeTest extends TestCase
     /** @test */
     public function user_cant_update_attribute_with_measure_more_than_255_chars()
     {
-        $user = User::factory()->create();
         $attribute = Attribute::factory()->create();
         $stub = Attribute::factory()->raw(['measure' => str_repeat('a', 256)]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.attributes.update', $attribute), $stub)
             ->assertSessionHasErrors('measure');
     }

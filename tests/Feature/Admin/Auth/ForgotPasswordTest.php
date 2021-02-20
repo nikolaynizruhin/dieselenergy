@@ -25,9 +25,7 @@ class ForgotPasswordTest extends TestCase
     /** @test */
     public function user_can_visit_forgot_password_page()
     {
-        $user = User::factory()->make();
-
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.password.request'))
             ->assertSuccessful()
             ->assertViewIs('admin.auth.passwords.email');

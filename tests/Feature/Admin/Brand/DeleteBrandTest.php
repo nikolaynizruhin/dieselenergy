@@ -23,10 +23,9 @@ class DeleteBrandTest extends TestCase
     /** @test */
     public function user_can_delete_brand()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.brands.index'))
             ->delete(route('admin.brands.destroy', $brand))
             ->assertRedirect(route('admin.brands.index'))

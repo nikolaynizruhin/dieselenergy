@@ -23,8 +23,6 @@ class SortBrandsTest extends TestCase
     /** @test */
     public function admin_can_sort_brands_by_name_ascending()
     {
-        $user = User::factory()->create();
-
         [$hyundai, $sdmo] = Brand::factory()
             ->count(2)
             ->state(new Sequence(
@@ -32,7 +30,7 @@ class SortBrandsTest extends TestCase
                 ['name' => 'SDMO'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.brands.index', ['sort' => 'name']))
             ->assertSuccessful()
             ->assertViewIs('admin.brands.index')
@@ -43,8 +41,6 @@ class SortBrandsTest extends TestCase
     /** @test */
     public function admin_can_sort_brands_by_name_descending()
     {
-        $user = User::factory()->create();
-
         [$hyundai, $sdmo] = Brand::factory()
             ->count(2)
             ->state(new Sequence(
@@ -52,7 +48,7 @@ class SortBrandsTest extends TestCase
                 ['name' => 'SDMO'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.brands.index', ['sort' => '-name']))
             ->assertSuccessful()
             ->assertViewIs('admin.brands.index')
@@ -63,8 +59,6 @@ class SortBrandsTest extends TestCase
     /** @test */
     public function admin_can_sort_brands_by_currency_ascending()
     {
-        $user = User::factory()->create();
-
         [$usd, $eur] = Currency::factory()
             ->count(2)
             ->state(new Sequence(
@@ -79,7 +73,7 @@ class SortBrandsTest extends TestCase
                 ['currency_id' => $eur],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.brands.index', ['sort' => 'currencies.code']))
             ->assertSuccessful()
             ->assertViewIs('admin.brands.index')
@@ -90,8 +84,6 @@ class SortBrandsTest extends TestCase
     /** @test */
     public function admin_can_sort_brands_by_currency_descending()
     {
-        $user = User::factory()->create();
-
         [$usd, $eur] = Currency::factory()
             ->count(2)
             ->state(new Sequence(
@@ -106,7 +98,7 @@ class SortBrandsTest extends TestCase
                 ['currency_id' => $eur],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.brands.index', ['sort' => 'currencies.code']))
             ->assertSuccessful()
             ->assertViewIs('admin.brands.index')

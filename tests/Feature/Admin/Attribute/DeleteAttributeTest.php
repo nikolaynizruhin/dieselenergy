@@ -38,9 +38,7 @@ class DeleteAttributeTest extends TestCase
     /** @test */
     public function user_can_delete_attribute()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.attributes.index'))
             ->delete(route('admin.attributes.destroy', $this->attribute))
             ->assertRedirect(route('admin.attributes.index'))

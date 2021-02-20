@@ -22,9 +22,7 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_can_visit_create_brand_page()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.brands.create'))
             ->assertViewIs('admin.brands.create');
     }
@@ -41,10 +39,9 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_can_create_brand()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.brands.store'), $brand)
             ->assertRedirect(route('admin.brands.index'))
             ->assertSessionHas('status', trans('brand.created'));
@@ -55,9 +52,7 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_cant_create_brand_without_name()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.brands.store'))
             ->assertSessionHasErrors('name');
     }
@@ -65,9 +60,7 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_cant_create_brand_with_integer_name()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.brands.store'), [
                 'name' => 1,
             ])->assertSessionHasErrors('name');
@@ -76,9 +69,7 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_cant_create_brand_with_name_more_than_255_chars()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.brands.store'), [
                 'name' => str_repeat('a', 256),
             ])->assertSessionHasErrors('name');
@@ -87,10 +78,9 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_cant_create_brand_with_existing_name()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.brands.store'), [
                 'name' => $brand->name,
             ])->assertSessionHasErrors('name');
@@ -99,10 +89,9 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_cant_create_brand_without_currency()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->raw(['currency_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.brands.store'), $brand)
             ->assertSessionHasErrors('currency_id');
     }
@@ -110,10 +99,9 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_cant_create_brand_with_string_currency()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->raw(['currency_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.brands.store'), $brand)
             ->assertSessionHasErrors('currency_id');
     }
@@ -121,10 +109,9 @@ class CreateBrandTest extends TestCase
     /** @test */
     public function user_cant_create_brand_with_nonexistent_currency()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->raw(['currency_id' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.brands.store'), $brand)
             ->assertSessionHasErrors('currency_id');
     }

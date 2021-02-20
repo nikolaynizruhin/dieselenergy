@@ -24,9 +24,7 @@ class LoginTest extends TestCase
     /** @test */
     public function authenticated_user_cant_view_login_page()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.login'))
             ->assertRedirect(route('admin.dashboard'));
     }
@@ -99,9 +97,7 @@ class LoginTest extends TestCase
     /** @test */
     public function user_can_logout()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.logout'))
             ->assertRedirect('/');
 

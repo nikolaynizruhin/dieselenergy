@@ -22,8 +22,6 @@ class ReadBrandsTest extends TestCase
     /** @test */
     public function user_can_read_brands()
     {
-        $user = User::factory()->create();
-
         [$sdmo, $hyundai] = Brand::factory()
             ->count(2)
             ->state(new Sequence(
@@ -31,7 +29,7 @@ class ReadBrandsTest extends TestCase
                 ['name' => 'Hyundai']
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.brands.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.brands.index')

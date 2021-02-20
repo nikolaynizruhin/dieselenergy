@@ -22,8 +22,6 @@ class SortAttributesTest extends TestCase
     /** @test */
     public function admin_can_sort_attributes_by_name_ascending()
     {
-        $user = User::factory()->create();
-
         [$height, $weight] = Attribute::factory()
             ->count(2)
             ->state(new Sequence(
@@ -31,7 +29,7 @@ class SortAttributesTest extends TestCase
                 ['name' => 'Weight'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.attributes.index', ['sort' => 'name']))
             ->assertSuccessful()
             ->assertViewIs('admin.attributes.index')
@@ -42,8 +40,6 @@ class SortAttributesTest extends TestCase
     /** @test */
     public function admin_can_sort_attributes_by_name_descending()
     {
-        $user = User::factory()->create();
-
         [$height, $weight] = Attribute::factory()
             ->count(2)
             ->state(new Sequence(
@@ -51,7 +47,7 @@ class SortAttributesTest extends TestCase
                 ['name' => 'Weight'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.attributes.index', ['sort' => '-name']))
             ->assertSuccessful()
             ->assertViewIs('admin.attributes.index')
@@ -62,8 +58,6 @@ class SortAttributesTest extends TestCase
     /** @test */
     public function admin_can_sort_attributes_by_measure_ascending()
     {
-        $user = User::factory()->create();
-
         [$height, $weight] = Attribute::factory()
             ->count(2)
             ->state(new Sequence(
@@ -71,7 +65,7 @@ class SortAttributesTest extends TestCase
                 ['measure' => 'V'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.attributes.index', ['sort' => 'measure']))
             ->assertSuccessful()
             ->assertViewIs('admin.attributes.index')
@@ -82,8 +76,6 @@ class SortAttributesTest extends TestCase
     /** @test */
     public function admin_can_sort_attributes_by_measure_descending()
     {
-        $user = User::factory()->create();
-
         [$height, $weight] = Attribute::factory()
             ->count(2)
             ->state(new Sequence(
@@ -91,7 +83,7 @@ class SortAttributesTest extends TestCase
                 ['measure' => 'V'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.attributes.index', ['sort' => '-measure']))
             ->assertSuccessful()
             ->assertViewIs('admin.attributes.index')

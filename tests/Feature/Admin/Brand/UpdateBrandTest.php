@@ -24,10 +24,9 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_can_visit_update_brand_page()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.brands.edit', $brand))
             ->assertViewIs('admin.brands.edit')
             ->assertViewHas('brand', $brand);
@@ -46,11 +45,10 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_can_update_brand()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->create();
         $stub = Brand::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.brands.update', $brand), $stub)
             ->assertRedirect(route('admin.brands.index'))
             ->assertSessionHas('status', trans('brand.updated'));
@@ -61,10 +59,9 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_cant_update_brand_without_name()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.brands.update', $brand), [
                 'name' => null,
             ])->assertSessionHasErrors('name');
@@ -73,10 +70,9 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_cant_update_brand_with_integer_name()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.brands.update', $brand), [
                 'name' => 1,
             ])->assertSessionHasErrors('name');
@@ -85,10 +81,9 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_cant_update_brand_with_name_more_than_255_chars()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.brands.update', $brand), [
                 'name' => str_repeat('a', 256),
             ])->assertSessionHasErrors('name');
@@ -97,11 +92,10 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_cant_update_brand_with_existing_name()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->create();
         $existing = Brand::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.brands.update', $brand), [
                 'name' => $existing->name,
             ])->assertSessionHasErrors('name');
@@ -110,11 +104,10 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_brand()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->create();
         $stub = Brand::factory()->raw(['currency_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.brands.update', $brand), $stub)
             ->assertSessionHasErrors('currency_id');
     }
@@ -122,11 +115,10 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_string_brand()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->create();
         $stub = Brand::factory()->raw(['currency_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.brands.update', $brand), $stub)
             ->assertSessionHasErrors('currency_id');
     }
@@ -134,11 +126,10 @@ class UpdateBrandTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_nonexistent_brand()
     {
-        $user = User::factory()->create();
         $brand = Brand::factory()->create();
         $stub = Brand::factory()->raw(['currency_id' => 100]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.brands.update', $brand), $stub)
             ->assertSessionHasErrors('currency_id');
     }
