@@ -48,22 +48,18 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_can_create_order()
     {
-        $customer = Customer::factory()
-            ->make()
-            ->makeHidden('notes');
-
         Cart::add($this->product, $quantity = $this->faker->randomDigitNotNull);
 
         $total = Cart::total();
 
-        $response = $this->post(route('orders.store'), $customer->toArray() + [
-            'notes' => $notes = $this->faker->paragraph,
-            'privacy' => 1,
-        ] + $this->honeypot());
+        $this->post(route('orders.store'), $fields = $this->validFields())
+            ->assertRedirect(route('orders.show', Order::first()));
 
-        $response->assertRedirect(route('orders.show', Order::first()));
-
-        $this->assertDatabaseHas('customers', $customer->toArray());
+        $this->assertDatabaseHas('customers', [
+            'name' => $fields['name'],
+            'phone' => $fields['phone'],
+            'email' => $fields['email'],
+        ]);
 
         $this->assertDatabaseHas('order_product', [
             'product_id' => $this->product->id,
@@ -73,7 +69,7 @@ class CreateOrderTest extends TestCase
         $this->assertDatabaseHas('orders', [
             'status' => Order::NEW,
             'total' => $total,
-            'notes' => $notes,
+            'notes' => $fields['notes'],
         ]);
 
         $this->assertTrue(Cart::items()->isEmpty());
@@ -83,16 +79,18 @@ class CreateOrderTest extends TestCase
     public function it_should_update_existing_customer()
     {
         $customer = Customer::factory()->create();
-        $stub = Customer::factory()
-            ->make(['email' => $customer->email])
-            ->makeHidden('notes');
 
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $stub->toArray() + ['privacy' => 1] + $this->honeypot())
+        $this->post(route('orders.store'), $fields = $this->validFields(['email' => $customer->email]))
             ->assertRedirect();
 
-        $this->assertDatabaseHas('customers', $stub->toArray());
+        $this->assertDatabaseHas('customers', [
+            'name' => $fields['name'],
+            'phone' => $fields['phone'],
+            'email' => $fields['email'],
+        ]);
+
         $this->assertDatabaseCount('customers', 1);
     }
 
@@ -101,13 +99,11 @@ class CreateOrderTest extends TestCase
     {
         Notification::fake();
 
-        $stub = Customer::factory()->make()->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $stub->toArray() + ['privacy' => 1] + $this->honeypot());
+        $this->post(route('orders.store'), $fields = $this->validFields());
 
-        $customer = Customer::firstWhere('email', $stub->email);
+        $customer = Customer::firstWhere('email', $fields['email']);
 
         $order = $customer->orders()->first();
 
@@ -122,13 +118,11 @@ class CreateOrderTest extends TestCase
     {
         Notification::fake();
 
-        $stub = Customer::factory()->make()->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $stub->toArray() + ['privacy' => 1] + $this->honeypot());
+        $this->post(route('orders.store'), $fields = $this->validFields());
 
-        $order = Customer::firstWhere('email', $stub->email)->orders()->first();
+        $order = Customer::firstWhere('email', $fields['email'])->orders()->first();
 
         Notification::assertSentTo(
             new AnonymousNotifiable,
@@ -145,11 +139,9 @@ class CreateOrderTest extends TestCase
     {
         Event::fake();
 
-        $stub = Customer::factory()->make()->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $stub->toArray() + ['privacy' => 1] + $this->honeypot());
+        $this->post(route('orders.store'), $this->validFields());
 
         Event::assertDispatched(OrderCreatedEvent::class);
     }
@@ -157,174 +149,119 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_without_customer_name()
     {
-        $customer = Customer::factory()
-            ->make(['name' => null])
-            ->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+        $this->post(route('orders.store'), $this->validFields(['name' => null]))
             ->assertSessionHasErrors('name');
     }
 
     /** @test */
     public function guest_cant_create_order_with_integer_customer_name()
     {
-        $customer = Customer::factory()
-            ->make(['name' => 1])
-            ->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+        $this->post(route('orders.store'), $this->validFields(['name' => 1]))
             ->assertSessionHasErrors('name');
     }
 
     /** @test */
     public function guest_cant_create_order_with_customer_name_more_than_255_chars()
     {
-        $customer = Customer::factory()
-            ->make(['name' => str_repeat('a', 256)])
-            ->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
-            ->assertSessionHasErrors('name');
+        $this->post(route('orders.store'), $this->validFields([
+            'name' => str_repeat('a', 256),
+        ]))->assertSessionHasErrors('name');
     }
 
     /** @test */
     public function guest_cant_create_order_without_customer_email()
     {
-        $customer = Customer::factory()
-            ->make(['email' => null])
-            ->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+        $this->post(route('orders.store'), $this->validFields(['email' => null]))
             ->assertSessionHasErrors('email');
     }
 
     /** @test */
     public function guest_cant_create_order_with_integer_customer_email()
     {
-        $customer = Customer::factory()
-            ->make(['email' => 1])
-            ->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+        $this->post(route('orders.store'), $this->validFields(['email' => 1]))
             ->assertSessionHasErrors('email');
     }
 
     /** @test */
     public function guest_cant_create_order_with_customer_email_more_than_255_chars()
     {
-        $customer = Customer::factory()
-            ->make(['email' => str_repeat('a', 256)])
-            ->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
-            ->assertSessionHasErrors('email');
+        $this->post(route('orders.store'), $this->validFields([
+            'email' => str_repeat('a', 256),
+        ]))->assertSessionHasErrors('email');
     }
 
     /** @test */
     public function guest_cant_create_order_with_invalid_customer_email()
     {
-        $customer = Customer::factory()
-            ->make(['email' => 'invalid'])
-            ->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+        $this->post(route('orders.store'), $this->validFields(['email' => 'invalid']))
             ->assertSessionHasErrors('email');
     }
 
     /** @test */
     public function guest_cant_create_order_without_customer_phone()
     {
-        $customer = Customer::factory()
-            ->make(['phone' => null])
-            ->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+        $this->post(route('orders.store'), $this->validFields(['phone' => null]))
             ->assertSessionHasErrors('phone');
     }
 
     /** @test */
     public function guest_cant_create_order_with_incorrect_customer_phone_format()
     {
-        $customer = Customer::factory()
-            ->make(['phone' => 0631234567])
-            ->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+        $this->post(route('orders.store'), $this->validFields(['phone' => 0631234567]))
             ->assertSessionHasErrors('phone');
     }
 
     /** @test */
     public function guest_cant_create_order_with_integer_notes()
     {
-        $customer = Customer::factory()
-            ->make()
-            ->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'notes' => 1,
-            'privacy' => 1,
-        ] + $this->honeypot())->assertSessionHasErrors('notes');
+        $this->post(route('orders.store'), $this->validFields(['notes' => 1]))
+            ->assertSessionHasErrors('notes');
     }
 
     /** @test */
     public function guest_cant_create_order_with_empty_cart()
     {
-        $customer = Customer::factory()
-            ->make()
-            ->makeHidden('notes');
-
-        $this->post(route('orders.store'), $customer->toArray() + ['privacy' => 1] + $this->honeypot())
+        $this->post(route('orders.store'), $this->validFields())
             ->assertSessionHasErrors('cart');
     }
 
     /** @test */
     public function guest_cant_create_order_without_accepting_privacy()
     {
-        $customer = Customer::factory()
-            ->make()
-            ->makeHidden('notes');
-
         Cart::add($this->product);
 
-        $this->post(route('orders.store'), $customer->toArray() + $this->honeypot())
+        $this->post(route('orders.store'), $this->validFields(['privacy' => null]))
             ->assertSessionHasErrors('privacy');
     }
 
     /** @test */
     public function guest_cant_create_order_with_spam()
     {
-        $customer = Customer::factory()
-            ->make()
-            ->makeHidden('notes');
+        Cart::add($this->product);
 
-        Cart::add($this->product, $quantity = $this->faker->randomDigitNotNull);
-
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'notes' => $notes = $this->faker->paragraph,
-            'privacy' => 1,
+        $this->post(route('orders.store'), $this->validFields([
             config('honeypot.field') => 'spam',
-        ] + $this->honeypot())
-            ->assertSuccessful();
+        ]))->assertSuccessful();
 
         $this->assertDatabaseCount('orders', 0);
     }
@@ -332,18 +269,31 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_order_too_quickly()
     {
-        $customer = Customer::factory()
-            ->make()
-            ->makeHidden('notes');
+        Cart::add($this->product);
 
-        Cart::add($this->product, $quantity = $this->faker->randomDigitNotNull);
-
-        $this->post(route('orders.store'), $customer->toArray() + [
-            'notes' => $notes = $this->faker->paragraph,
-            'privacy' => 1,
+        $this->post(route('orders.store'), $this->validFields([
             config('honeypot.valid_from_field') => time(),
-        ])->assertSuccessful();
+        ]))->assertSuccessful();
 
         $this->assertDatabaseCount('orders', 0);
+    }
+
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
+    {
+        $customer = Customer::factory()->make();
+
+        return array_merge([
+            'privacy' => 1,
+            'name' => $customer->name,
+            'email' => $customer->email,
+            'phone' => $customer->phone,
+            'notes' => $this->faker->paragraph,
+        ] + $this->honeypot(), $overrides);
     }
 }
