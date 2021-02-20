@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Order;
 
 use App\Models\Order;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -24,7 +23,6 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_can_visit_update_order_page()
     {
-
         $order = Order::factory()->create();
 
         $this->login()
@@ -47,7 +45,6 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_can_update_order()
     {
-
         $order = Order::factory()->create();
         $stub = Order::factory()->raw();
 
@@ -64,7 +61,6 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_order_with_integer_notes()
     {
-
         $order = Order::factory()->create();
         $stub = Order::factory()->raw(['notes' => 1]);
 
@@ -76,7 +72,6 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_order_without_customer()
     {
-
         $order = Order::factory()->create();
         $stub = Order::factory()->raw(['customer_id' => null]);
 
@@ -88,7 +83,6 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_order_with_string_customer()
     {
-
         $order = Order::factory()->create();
         $stub = Order::factory()->raw(['customer_id' => 'string']);
 
@@ -100,7 +94,6 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_order_with_nonexistent_customer()
     {
-
         $order = Order::factory()->create();
         $stub = Order::factory()->raw(['customer_id' => 10]);
 
@@ -112,7 +105,6 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_order_without_status()
     {
-
         $order = Order::factory()->create();
         $stub = Order::factory()->raw(['status' => null]);
 
@@ -124,7 +116,6 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_order_with_integer_status()
     {
-
         $order = Order::factory()->create();
         $stub = Order::factory()->raw(['status' => 1]);
 
@@ -136,7 +127,6 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_total()
     {
-
         $order = Order::factory()->create();
         $stub = Order::factory()->raw(['total' => null]);
 
@@ -148,7 +138,6 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_string_total()
     {
-
         $order = Order::factory()->create();
         $stub = Order::factory()->raw(['total' => 'string']);
 
@@ -160,7 +149,6 @@ class UpdateOrderTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_negative_total()
     {
-
         $order = Order::factory()->create();
         $stub = Order::factory()->raw(['total' => -1]);
 

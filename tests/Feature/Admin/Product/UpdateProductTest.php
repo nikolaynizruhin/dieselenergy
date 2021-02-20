@@ -6,7 +6,6 @@ use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -29,7 +28,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_can_visit_update_product_page()
     {
-
         $product = Product::factory()->create();
 
         $this->login()
@@ -52,7 +50,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_can_update_product()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw();
 
@@ -69,7 +66,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_can_update_product_with_attributes()
     {
-
         $category = Category::factory()->create();
         $product = Product::factory()->create();
         $attribute = Attribute::factory()->create();
@@ -103,7 +99,6 @@ class UpdateProductTest extends TestCase
 
         $image = UploadedFile::fake()->image('product.jpg');
 
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw();
 
@@ -130,7 +125,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_name()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['name' => null]);
 
@@ -142,7 +136,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_integer_name()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['name' => 1]);
 
@@ -154,7 +147,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_name_more_than_255_chars()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw([
             'name' => str_repeat('a', 256),
@@ -168,7 +160,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_existing_name()
     {
-
         $product = Product::factory()->create();
         $existing = Product::factory()->create();
         $stub = Product::factory()->raw([
@@ -183,7 +174,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_model()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['model' => null]);
 
@@ -195,7 +185,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_integer_model()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['model' => 1]);
 
@@ -207,7 +196,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_model_more_than_255_chars()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw([
             'model' => str_repeat('a', 256),
@@ -221,7 +209,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_existing_model()
     {
-
         $product = Product::factory()->create();
         $existing = Product::factory()->create();
         $stub = Product::factory()->raw([
@@ -236,7 +223,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_slug()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['slug' => null]);
 
@@ -248,7 +234,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_integer_slug()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['slug' => 1]);
 
@@ -260,7 +245,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_slug_more_than_255_chars()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw([
             'slug' => str_repeat('a', 256),
@@ -274,7 +258,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_existing_slug()
     {
-
         $product = Product::factory()->create();
         $existing = Product::factory()->create();
         $stub = Product::factory()->raw([
@@ -289,7 +272,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_price()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['price' => null]);
 
@@ -301,7 +283,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_string_price()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['price' => 'string']);
 
@@ -313,7 +294,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_zero_price()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['price' => 0]);
 
@@ -325,7 +305,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_brand()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['brand_id' => null]);
 
@@ -337,7 +316,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_string_brand()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['brand_id' => 'string']);
 
@@ -349,7 +327,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_nonexistent_brand()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['brand_id' => 100]);
 
@@ -361,7 +338,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_without_category()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['category_id' => null]);
 
@@ -373,7 +349,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_string_category()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['category_id' => 'string']);
 
@@ -385,7 +360,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_nonexistent_category()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['category_id' => 100]);
 
@@ -397,7 +371,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_string_image()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw();
 
@@ -410,7 +383,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_integer_image()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw();
 
@@ -425,7 +397,6 @@ class UpdateProductTest extends TestCase
     {
         $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
 
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw();
 
@@ -438,7 +409,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_update_product_with_integer_attributes()
     {
-
         $category = Category::factory()->create();
         $attribute = Attribute::factory()->create();
 
@@ -459,7 +429,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_attribute_more_than_255_chars()
     {
-
         $category = Category::factory()->create();
         $attribute = Attribute::factory()->create();
 
@@ -480,7 +449,6 @@ class UpdateProductTest extends TestCase
     /** @test */
     public function unrelated_attribute_should_not_be_attached_to_product()
     {
-
         $category = Category::factory()->create();
         $unrelated = Attribute::factory()->create();
         $product = Product::factory()->create();

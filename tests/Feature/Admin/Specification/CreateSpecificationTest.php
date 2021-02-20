@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Specification;
 
 use App\Models\Category;
 use App\Models\Specification;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -23,7 +22,6 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_can_visit_create_specification_page()
     {
-
         $category = Category::factory()->create();
 
         $this->login()
@@ -43,8 +41,6 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_can_create_specification()
     {
-
-
         $stub = Specification::factory()->raw();
 
         $this->login()
@@ -60,8 +56,6 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_without_category()
     {
-
-
         $stub = Specification::factory()->raw(['category_id' => null]);
 
         $this->login()
@@ -72,8 +66,6 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_with_string_category()
     {
-
-
         $stub = Specification::factory()->raw(['category_id' => 'string']);
 
         $this->login()
@@ -84,8 +76,6 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_with_nonexistent_category()
     {
-
-
         $stub = Specification::factory()->raw(['category_id' => 10]);
 
         $this->login()
@@ -96,8 +86,6 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_without_attribute()
     {
-
-
         $stub = Specification::factory()->raw(['attribute_id' => null]);
 
         $this->login()
@@ -108,8 +96,6 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_with_string_attribute()
     {
-
-
         $stub = Specification::factory()->raw(['attribute_id' => 'string']);
 
         $this->login()
@@ -120,8 +106,6 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_with_nonexistent_attribute()
     {
-
-
         $stub = Specification::factory()->raw(['attribute_id' => 10]);
 
         $this->login()
@@ -132,7 +116,6 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_existing_specification()
     {
-
         $specification = Specification::factory()->create();
 
         $this->login()

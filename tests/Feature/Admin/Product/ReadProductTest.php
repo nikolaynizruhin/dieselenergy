@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Product;
 
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,8 +22,6 @@ class ReadProductTest extends TestCase
     /** @test */
     public function user_can_read_product()
     {
-
-
         $product = Product::factory()->create();
 
         $this->login()

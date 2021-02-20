@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Post;
 
 use App\Models\Image;
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -25,8 +24,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_can_visit_create_post_page()
     {
-
-
         $this->login()
             ->get(route('admin.posts.create'))
             ->assertViewIs('admin.posts.create');
@@ -47,7 +44,6 @@ class CreatePostTest extends TestCase
         Storage::fake();
 
         $image = UploadedFile::fake()->image('post.jpg');
-
 
         $post = Post::factory()
             ->make()
@@ -71,7 +67,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_without_title()
     {
-
         $post = Post::factory()->raw(['title' => null]);
 
         $this->login()
@@ -82,7 +77,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_with_integer_title()
     {
-
         $post = Post::factory()->raw(['title' => 1]);
 
         $this->login()
@@ -93,7 +87,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_without_excerpt()
     {
-
         $post = Post::factory()->raw(['excerpt' => null]);
 
         $this->login()
@@ -104,7 +97,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_with_integer_excerpt()
     {
-
         $post = Post::factory()->raw(['excerpt' => 1]);
 
         $this->login()
@@ -115,7 +107,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_with_title_more_than_255_chars()
     {
-
         $post = Post::factory()->raw(['title' => str_repeat('a', 256)]);
 
         $this->login()
@@ -126,7 +117,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_with_existing_title()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['title' => $post->title]);
 
@@ -138,7 +128,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_without_slug()
     {
-
         $post = Post::factory()->raw(['slug' => null]);
 
         $this->login()
@@ -149,7 +138,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_with_integer_slug()
     {
-
         $post = Post::factory()->raw(['slug' => 1]);
 
         $this->login()
@@ -160,7 +148,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_with_slug_more_than_255_chars()
     {
-
         $post = Post::factory()->raw(['slug' => str_repeat('a', 256)]);
 
         $this->login()
@@ -171,7 +158,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_with_existing_slug()
     {
-
         $post = Post::factory()->create();
         $stub = Post::factory()->raw(['slug' => $post->slug]);
 
@@ -183,7 +169,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_without_body()
     {
-
         $post = Post::factory()->raw(['body' => null]);
 
         $this->login()
@@ -194,7 +179,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_with_integer_body()
     {
-
         $post = Post::factory()->raw(['body' => 1]);
 
         $this->login()
@@ -205,7 +189,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_without_image()
     {
-
         $post = Post::factory()->raw(['image' => null]);
 
         $this->login()
@@ -216,7 +199,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_post_with_string_image()
     {
-
         $post = Post::factory()->raw(['image' => 'string']);
 
         $this->login()
@@ -227,7 +209,6 @@ class CreatePostTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_image()
     {
-
         $post = Post::factory()->raw(['image' => 1]);
 
         $this->login()
@@ -239,7 +220,6 @@ class CreatePostTest extends TestCase
     public function user_cant_create_post_with_pdf_file()
     {
         $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
-
 
         $post = Post::factory()->raw(['image' => $pdf]);
 

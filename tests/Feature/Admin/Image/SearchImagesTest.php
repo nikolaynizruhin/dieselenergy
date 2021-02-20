@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Image;
 
 use App\Models\Image;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -24,8 +23,6 @@ class SearchImagesTest extends TestCase
     /** @test */
     public function user_can_search_images()
     {
-
-
         [$diesel, $patrol, $waterPump] = Image::factory()
             ->count(3)
             ->state(new Sequence(

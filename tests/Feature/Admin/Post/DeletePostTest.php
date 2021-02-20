@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Post;
 
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,7 +22,6 @@ class DeletePostTest extends TestCase
     /** @test */
     public function user_can_delete_post()
     {
-
         $post = Post::factory()->create();
 
         $this->login()

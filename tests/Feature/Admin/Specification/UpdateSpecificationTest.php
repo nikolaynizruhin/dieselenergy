@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Specification;
 
 use App\Models\Specification;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,7 +22,6 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_can_visit_update_specification_page()
     {
-
         $specification = Specification::factory()->create();
 
         $this->login()
@@ -43,8 +41,6 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_can_update_specification()
     {
-
-
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw();
 
@@ -59,8 +55,6 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_without_category()
     {
-
-
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw(['category_id' => null]);
 
@@ -72,8 +66,6 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_with_string_category()
     {
-
-
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw(['category_id' => 'string']);
 
@@ -85,8 +77,6 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_with_nonexistent_category()
     {
-
-
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw(['category_id' => 10]);
 
@@ -98,8 +88,6 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_without_attribute()
     {
-
-
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw(['attribute_id' => null]);
 
@@ -111,8 +99,6 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_with_string_attribute()
     {
-
-
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw(['attribute_id' => 'string']);
 
@@ -124,8 +110,6 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_with_nonexistent_attribute()
     {
-
-
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw(['attribute_id' => 10]);
 

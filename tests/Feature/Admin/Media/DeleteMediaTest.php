@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Media;
 
 use App\Models\Media;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,7 +22,6 @@ class DeleteMediaTest extends TestCase
     /** @test */
     public function user_can_delete_media()
     {
-
         $media = Media::factory()->create();
 
         $this->login()

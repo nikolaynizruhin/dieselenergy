@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Post;
 
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -22,8 +21,6 @@ class SortPostsTest extends TestCase
     /** @test */
     public function admin_can_sort_posts_by_title_ascending()
     {
-
-
         [$about, $history] = Post::factory()
             ->count(2)
             ->state(new Sequence(
@@ -42,8 +39,6 @@ class SortPostsTest extends TestCase
     /** @test */
     public function admin_can_sort_posts_by_title_descending()
     {
-
-
         [$about, $history] = Post::factory()
             ->count(2)
             ->state(new Sequence(

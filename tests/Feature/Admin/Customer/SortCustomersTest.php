@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Customer;
 
 use App\Models\Customer;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -22,8 +21,6 @@ class SortCustomersTest extends TestCase
     /** @test */
     public function admin_can_sort_customers_by_name_ascending()
     {
-
-
         [$adam, $tom] = Customer::factory()
             ->count(2)
             ->state(new Sequence(
@@ -42,8 +39,6 @@ class SortCustomersTest extends TestCase
     /** @test */
     public function admin_can_sort_customers_by_name_descending()
     {
-
-
         [$adam, $tom] = Customer::factory()
             ->count(2)
             ->state(new Sequence(
@@ -62,8 +57,6 @@ class SortCustomersTest extends TestCase
     /** @test */
     public function admin_can_sort_customers_by_email_ascending()
     {
-
-
         [$adam, $tom] = Customer::factory()
             ->count(2)
             ->state(new Sequence(
@@ -82,8 +75,6 @@ class SortCustomersTest extends TestCase
     /** @test */
     public function admin_can_sort_customers_by_email_descending()
     {
-
-
         [$adam, $tom] = Customer::factory()
             ->count(2)
             ->state(new Sequence(
@@ -102,8 +93,6 @@ class SortCustomersTest extends TestCase
     /** @test */
     public function admin_can_sort_customers_by_phone_ascending()
     {
-
-
         [$adam, $tom] = Customer::factory()
             ->count(2)
             ->state(new Sequence(
@@ -122,8 +111,6 @@ class SortCustomersTest extends TestCase
     /** @test */
     public function admin_can_sort_customers_by_phone_descending()
     {
-
-
         [$adam, $tom] = Customer::factory()
             ->count(2)
             ->state(new Sequence(

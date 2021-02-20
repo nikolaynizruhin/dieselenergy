@@ -6,7 +6,6 @@ use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -27,7 +26,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_can_visit_create_product_page()
     {
-
         $category = Category::factory()->create();
 
         $this->login()
@@ -48,7 +46,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_can_create_product()
     {
-
         $product = Product::factory()->raw();
 
         $this->login()
@@ -64,7 +61,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_can_create_product_with_attributes()
     {
-
         $category = Category::factory()->create();
         $attribute = Attribute::factory()->create();
 
@@ -93,7 +89,6 @@ class CreateProductTest extends TestCase
 
         $image = UploadedFile::fake()->image('product.jpg');
 
-
         $product = Product::factory()->raw();
 
         $this->login()
@@ -119,7 +114,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_without_name()
     {
-
         $product = Product::factory()->raw(['name' => null]);
 
         $this->login()
@@ -130,7 +124,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_name()
     {
-
         $product = Product::factory()->raw(['name' => 1]);
 
         $this->login()
@@ -141,7 +134,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_name_more_than_255_chars()
     {
-
         $product = Product::factory()->raw([
             'name' => str_repeat('a', 256),
         ]);
@@ -154,7 +146,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_existing_name()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw([
             'name' => $product->name,
@@ -168,7 +159,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_without_model()
     {
-
         $product = Product::factory()->raw(['model' => null]);
 
         $this->login()
@@ -179,7 +169,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_model()
     {
-
         $product = Product::factory()->raw(['model' => 1]);
 
         $this->login()
@@ -190,7 +179,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_model_more_than_255_chars()
     {
-
         $product = Product::factory()->raw([
             'model' => str_repeat('a', 256),
         ]);
@@ -203,7 +191,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_existing_model()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['model' => $product->model]);
 
@@ -215,7 +202,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_without_slug()
     {
-
         $product = Product::factory()->raw(['slug' => null]);
 
         $this->login()
@@ -226,7 +212,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_slug()
     {
-
         $product = Product::factory()->raw(['slug' => 1]);
 
         $this->login()
@@ -237,7 +222,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_slug_more_than_255_chars()
     {
-
         $product = Product::factory()->raw([
             'slug' => str_repeat('a', 256),
         ]);
@@ -250,7 +234,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_existing_slug()
     {
-
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['slug' => $product->slug]);
 
@@ -262,7 +245,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_description()
     {
-
         $product = Product::factory()->raw(['description' => 1]);
 
         $this->login()
@@ -273,7 +255,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_without_price()
     {
-
         $product = Product::factory()->raw(['price' => null]);
 
         $this->login()
@@ -284,7 +265,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_string_price()
     {
-
         $product = Product::factory()->raw(['price' => 'string']);
 
         $this->login()
@@ -295,7 +275,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_zero_price()
     {
-
         $product = Product::factory()->raw(['price' => 0]);
 
         $this->login()
@@ -306,7 +285,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_without_brand()
     {
-
         $product = Product::factory()->raw(['brand_id' => null]);
 
         $this->login()
@@ -317,7 +295,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_string_brand()
     {
-
         $product = Product::factory()->raw(['brand_id' => 'string']);
 
         $this->login()
@@ -328,7 +305,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_nonexistent_brand()
     {
-
         $product = Product::factory()->raw(['brand_id' => 1]);
 
         $this->login()
@@ -339,7 +315,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_without_category()
     {
-
         $product = Product::factory()->raw(['category_id' => null]);
 
         $this->login()
@@ -350,7 +325,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_string_category()
     {
-
         $product = Product::factory()->raw(['category_id' => 'string']);
 
         $this->login()
@@ -361,7 +335,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_nonexistent_category()
     {
-
         $product = Product::factory()->raw(['category_id' => 1]);
 
         $this->login()
@@ -372,7 +345,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_string_image()
     {
-
         $product = Product::factory()->raw();
 
         $this->login()
@@ -384,7 +356,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_image()
     {
-
         $product = Product::factory()->raw();
 
         $this->login()
@@ -398,7 +369,6 @@ class CreateProductTest extends TestCase
     {
         $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
 
-
         $product = Product::factory()->raw();
 
         $this->login()
@@ -410,7 +380,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function by_default_product_should_be_inactive()
     {
-
         $product = Product::factory()->make()->makeHidden('is_active');
 
         $this->login()
@@ -423,7 +392,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_attributes()
     {
-
         $category = Category::factory()->create();
         $attribute = Attribute::factory()->create();
 
@@ -442,7 +410,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_attribute_more_than_255_chars()
     {
-
         $category = Category::factory()->create();
         $attribute = Attribute::factory()->create();
 
@@ -461,7 +428,6 @@ class CreateProductTest extends TestCase
     /** @test */
     public function unrelated_attribute_should_not_be_attached_to_product()
     {
-
         $category = Category::factory()->create();
         $unrelated = Attribute::factory()->create();
 

@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Dashboard;
 
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -23,7 +22,6 @@ class ReadDashboardTest extends TestCase
     /** @test */
     public function user_can_read_dashboard()
     {
-
         $product = Product::factory()->create();
 
         [$orderA, $orderB] = Order::factory()

@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Customer;
 
 use App\Models\Customer;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -24,7 +23,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_can_visit_update_customer_page()
     {
-
         $customer = Customer::factory()->create();
 
         $this->login()
@@ -45,7 +43,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_can_update_customer()
     {
-
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw();
 
@@ -60,7 +57,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_without_name()
     {
-
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['name' => null]);
 
@@ -72,7 +68,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_with_integer_name()
     {
-
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['name' => 1]);
 
@@ -84,7 +79,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_with_name_more_than_255_chars()
     {
-
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['name' => str_repeat('a', 256)]);
 
@@ -96,7 +90,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_without_email()
     {
-
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['email' => null]);
 
@@ -108,7 +101,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_user_with_integer_email()
     {
-
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['email' => 1]);
 
@@ -120,7 +112,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_user_with_email_more_than_255_chars()
     {
-
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['email' => str_repeat('a', 256)]);
 
@@ -132,7 +123,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_with_invalid_email()
     {
-
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['email' => 'invalid']);
 
@@ -144,7 +134,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_with_duplicated_email()
     {
-
         $customer = Customer::factory()->create();
         $existed = Customer::factory()->create();
 
@@ -156,7 +145,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_without_phone()
     {
-
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['phone' => null]);
 
@@ -168,7 +156,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_with_incorrect_phone_format()
     {
-
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['phone' => 80631234567]);
 
@@ -180,7 +167,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_with_integer_notes()
     {
-
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['notes' => 1]);
 

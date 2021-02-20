@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Post;
 
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -24,8 +23,6 @@ class SearchPostsTest extends TestCase
     /** @test */
     public function user_can_search_posts()
     {
-
-
         [$aboutUs, $howTo, $comparison] = Post::factory()
             ->count(3)
             ->state(new Sequence(

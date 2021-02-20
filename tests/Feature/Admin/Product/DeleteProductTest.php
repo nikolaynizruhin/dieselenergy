@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Product;
 
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,7 +22,6 @@ class DeleteProductTest extends TestCase
     /** @test */
     public function user_can_delete_product()
     {
-
         $product = Product::factory()->create();
 
         $this->login()

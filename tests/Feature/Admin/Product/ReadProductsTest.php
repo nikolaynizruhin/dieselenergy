@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Product;
 
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -22,8 +21,6 @@ class ReadProductsTest extends TestCase
     /** @test */
     public function user_can_read_products()
     {
-
-
         [$petrol, $diesel] = Product::factory()
             ->count(2)
             ->state(new Sequence(
