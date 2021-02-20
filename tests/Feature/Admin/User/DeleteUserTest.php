@@ -22,9 +22,9 @@ class DeleteUserTest extends TestCase
     /** @test */
     public function user_can_delete_user()
     {
-        [$admin, $user] = User::factory()->count(2)->create();
+        $user = User::factory()->create();
 
-        $this->actingAs($admin)
+        $this->login()
             ->from(route('admin.users.index'))
             ->delete(route('admin.users.destroy', $user))
             ->assertRedirect(route('admin.users.index'))

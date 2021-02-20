@@ -21,8 +21,6 @@ class SortUsersTest extends TestCase
     /** @test */
     public function admin_can_sort_users_by_name_ascending()
     {
-        $user = User::factory()->create();
-
         [$adam, $ben] = User::factory()
             ->count(2)
             ->state(new Sequence(
@@ -30,7 +28,7 @@ class SortUsersTest extends TestCase
                 ['name' => 'Ben'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.users.index', ['sort' => 'name']))
             ->assertSuccessful()
             ->assertViewIs('admin.users.index')
@@ -41,8 +39,6 @@ class SortUsersTest extends TestCase
     /** @test */
     public function admin_can_sort_users_by_name_descending()
     {
-        $user = User::factory()->create();
-
         [$adam, $ben] = User::factory()
             ->count(2)
             ->state(new Sequence(
@@ -50,7 +46,7 @@ class SortUsersTest extends TestCase
                 ['name' => 'Ben'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.users.index', ['sort' => '-name']))
             ->assertSuccessful()
             ->assertViewIs('admin.users.index')
@@ -61,8 +57,6 @@ class SortUsersTest extends TestCase
     /** @test */
     public function admin_can_sort_users_by_email_ascending()
     {
-        $user = User::factory()->create();
-
         [$adam, $ben] = User::factory()
             ->count(2)
             ->state(new Sequence(
@@ -70,7 +64,7 @@ class SortUsersTest extends TestCase
                 ['email' => 'ben@example.com'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.users.index', ['sort' => 'email']))
             ->assertSuccessful()
             ->assertViewIs('admin.users.index')
@@ -81,8 +75,6 @@ class SortUsersTest extends TestCase
     /** @test */
     public function admin_can_sort_users_by_email_descending()
     {
-        $user = User::factory()->create();
-
         [$adam, $ben] = User::factory()
             ->count(2)
             ->state(new Sequence(
@@ -90,7 +82,7 @@ class SortUsersTest extends TestCase
                 ['email' => 'ben@example.com'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.users.index', ['sort' => '-email']))
             ->assertSuccessful()
             ->assertViewIs('admin.users.index')

@@ -22,9 +22,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_can_visit_create_user_page()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.users.create'))
             ->assertViewIs('admin.users.create');
     }
@@ -43,10 +41,9 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_can_create_user()
     {
-        $admin = User::factory()->create();
         $stub = User::factory()->make();
 
-        $this->actingAs($admin)
+        $this->login()
             ->post(route('admin.users.store'), [
                 'name' => $stub->name,
                 'email' => $stub->email,
@@ -65,9 +62,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_without_name()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.users.store'), [
                 'email' => $this->faker->email,
                 'password' => 'password',
@@ -78,9 +73,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_integer_name()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.users.store'), [
                 'name' => 1,
                 'email' => $this->faker->email,
@@ -92,9 +85,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_name_more_than_255_chars()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.users.store'), [
                 'name' => str_repeat('a', 256),
                 'email' => $this->faker->email,
@@ -106,9 +97,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_without_email()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.users.store'), [
                 'name' => $this->faker->name,
                 'password' => 'password',
@@ -119,9 +108,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_integer_email()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.users.store'), [
                 'name' => $this->faker->name,
                 'email' => 1,
@@ -133,9 +120,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_email_more_than_255_chars()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.users.store'), [
                 'name' => $this->faker->name,
                 'email' => str_repeat('a', 256),
@@ -147,9 +132,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_invalid_email()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.users.store'), [
                 'name' => $this->faker->name,
                 'email' => 'invalid',
@@ -175,9 +158,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_without_password()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.users.store'), [
                 'name' => $this->faker->name,
                 'email' => $this->faker->email,
@@ -188,9 +169,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_integer_password()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.users.store'), [
                 'name' => $this->faker->name,
                 'email' => $this->faker->email,
@@ -202,9 +181,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_with_password_less_than_8_chars()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.users.store'), [
                 'name' => $this->faker->name,
                 'email' => $this->faker->email,
@@ -216,9 +193,7 @@ class CreateUserTest extends TestCase
     /** @test */
     public function user_cant_create_user_without_password_confirmation()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.users.store'), [
                 'name' => $this->faker->name,
                 'email' => $this->faker->email,

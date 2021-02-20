@@ -23,16 +23,15 @@ class SearchUsersTest extends TestCase
     /** @test */
     public function user_can_search_users()
     {
-        [$admin, $john, $jane, $tom] = User::factory()
-            ->count(4)
+        [$john, $jane, $tom] = User::factory()
+            ->count(3)
             ->state(new Sequence(
-                ['name' => 'Admin'],
                 ['name' => 'John Doe'],
                 ['name' => 'Jane Doe'],
                 ['name' => 'Tom Jo'],
             ))->create();
 
-        $this->actingAs($admin)
+        $this->login()
             ->get(route('admin.users.index', ['search' => 'Doe']))
             ->assertSeeInOrder([$jane->email, $john->email])
             ->assertDontSee($tom->email);

@@ -21,15 +21,14 @@ class ReadUsersTest extends TestCase
     /** @test */
     public function user_can_read_users()
     {
-        [$admin, $john, $jane] = User::factory()
-            ->count(3)
+        [$john, $jane] = User::factory()
+            ->count(2)
             ->state(new Sequence(
-                ['name' => 'Admin'],
                 ['name' => 'John Doe'],
                 ['name' => 'Jane Doe'],
             ))->create();
 
-        $this->actingAs($admin)
+        $this->login()
             ->get(route('admin.users.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.users.index')
