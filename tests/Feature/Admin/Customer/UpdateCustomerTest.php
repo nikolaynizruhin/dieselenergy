@@ -24,10 +24,10 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_can_visit_update_customer_page()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.edit', $customer))
             ->assertViewIs('admin.customers.edit');
     }
@@ -45,11 +45,11 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_can_update_customer()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.customers.update', $customer), $stub)
             ->assertRedirect(route('admin.customers.index'))
             ->assertSessionHas('status', trans('customer.updated'));
@@ -60,11 +60,11 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_without_name()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['name' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.customers.update', $customer), $stub)
             ->assertSessionHasErrors('name');
     }
@@ -72,11 +72,11 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_with_integer_name()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['name' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.customers.update', $customer), $stub)
             ->assertSessionHasErrors('name');
     }
@@ -84,11 +84,11 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_with_name_more_than_255_chars()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['name' => str_repeat('a', 256)]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.customers.update', $customer), $stub)
             ->assertSessionHasErrors('name');
     }
@@ -96,11 +96,11 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_without_email()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['email' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.customers.update', $customer), $stub)
             ->assertSessionHasErrors('email');
     }
@@ -108,11 +108,11 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_user_with_integer_email()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['email' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.customers.update', $customer), $stub)
             ->assertSessionHasErrors('email');
     }
@@ -120,11 +120,11 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_user_with_email_more_than_255_chars()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['email' => str_repeat('a', 256)]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.customers.update', $customer), $stub)
             ->assertSessionHasErrors('email');
     }
@@ -132,11 +132,11 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_with_invalid_email()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['email' => 'invalid']);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.customers.update', $customer), $stub)
             ->assertSessionHasErrors('email');
     }
@@ -144,11 +144,11 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_with_duplicated_email()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
         $existed = Customer::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.customers.update', $customer), $existed->toArray())
             ->assertSessionHasErrors('email');
     }
@@ -156,11 +156,11 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_without_phone()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['phone' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.customers.update', $customer), $stub)
             ->assertSessionHasErrors('phone');
     }
@@ -168,11 +168,11 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_with_incorrect_phone_format()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['phone' => 80631234567]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.customers.update', $customer), $stub)
             ->assertSessionHasErrors('phone');
     }
@@ -180,11 +180,11 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_cant_update_customer_with_integer_notes()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
         $stub = Customer::factory()->raw(['notes' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.customers.update', $customer), $stub)
             ->assertSessionHasErrors('notes');
     }

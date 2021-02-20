@@ -39,7 +39,7 @@ class SortContactsTest extends TestCase
     /** @test */
     public function user_can_sort_customer_contacts_by_message_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$support, $faq] = Contact::factory()
             ->count(2)
@@ -48,7 +48,7 @@ class SortContactsTest extends TestCase
                 ['message' => 'FAQ Message'],
             ))->create(['customer_id' => $this->customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['contact' => 'message'],
@@ -59,7 +59,7 @@ class SortContactsTest extends TestCase
     /** @test */
     public function user_can_sort_customer_contacts_by_message_descending()
     {
-        $user = User::factory()->create();
+
 
         [$support, $faq] = Contact::factory()
             ->count(2)
@@ -68,7 +68,7 @@ class SortContactsTest extends TestCase
                 ['message' => 'FAQ Message'],
             ))->create(['customer_id' => $this->customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['contact' => '-message'],
@@ -79,7 +79,7 @@ class SortContactsTest extends TestCase
     /** @test */
     public function user_can_sort_customer_contacts_by_date_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$support, $faq] = Contact::factory()
             ->count(2)
@@ -88,7 +88,7 @@ class SortContactsTest extends TestCase
                 ['created_at' => now()->subDay()],
             ))->create(['customer_id' => $this->customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['contact' => 'created_at'],
@@ -99,7 +99,7 @@ class SortContactsTest extends TestCase
     /** @test */
     public function user_can_sort_customer_contacts_by_date_descending()
     {
-        $user = User::factory()->create();
+
 
         [$support, $faq] = Contact::factory()
             ->count(2)
@@ -108,7 +108,7 @@ class SortContactsTest extends TestCase
                 ['created_at' => now()->subDay()],
             ))->create(['customer_id' => $this->customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['contact' => '-created_at'],

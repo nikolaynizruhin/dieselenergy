@@ -24,7 +24,7 @@ class SearchImagesTest extends TestCase
     /** @test */
     public function user_can_search_images()
     {
-        $user = User::factory()->create();
+
 
         [$diesel, $patrol, $waterPump] = Image::factory()
             ->count(3)
@@ -34,7 +34,7 @@ class SearchImagesTest extends TestCase
                 ['path' => 'images/token.jpg'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.images.index', ['search' => 'path']))
             ->assertSeeInOrder([$patrol->name, $diesel->path])
             ->assertDontSee($waterPump->path);

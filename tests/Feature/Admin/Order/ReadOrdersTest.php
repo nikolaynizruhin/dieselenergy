@@ -22,7 +22,7 @@ class ReadOrdersTest extends TestCase
     /** @test */
     public function user_can_read_orders()
     {
-        $user = User::factory()->create();
+
 
         [$orderB, $orderA] = Order::factory()
             ->count(2)
@@ -31,7 +31,7 @@ class ReadOrdersTest extends TestCase
                 ['created_at' => now()],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.orders.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.orders.index')

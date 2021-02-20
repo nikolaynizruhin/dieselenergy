@@ -22,7 +22,7 @@ class ReadProductsTest extends TestCase
     /** @test */
     public function user_can_read_products()
     {
-        $user = User::factory()->create();
+
 
         [$petrol, $diesel] = Product::factory()
             ->count(2)
@@ -31,7 +31,7 @@ class ReadProductsTest extends TestCase
                 ['name' => 'Diesel'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.products.index')

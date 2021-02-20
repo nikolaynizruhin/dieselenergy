@@ -22,8 +22,6 @@ class ReadCurrenciesTest extends TestCase
     /** @test */
     public function user_can_read_currencies()
     {
-        $user = User::factory()->create();
-
         [$eur, $usd] = Currency::factory()
             ->count(2)
             ->state(new Sequence(
@@ -31,7 +29,7 @@ class ReadCurrenciesTest extends TestCase
                 ['code' => 'USD']
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.currencies.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.currencies.index')

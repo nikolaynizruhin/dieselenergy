@@ -24,8 +24,6 @@ class SearchCategoriesTest extends TestCase
     /** @test */
     public function user_can_search_categories()
     {
-        $user = User::factory()->create();
-
         [$patrol, $diesel, $waterPumps] = Category::factory()
             ->count(3)
             ->state(new Sequence(
@@ -34,7 +32,7 @@ class SearchCategoriesTest extends TestCase
                 ['name' => 'Water Pumps'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.categories.index', ['search' => 'Generators']))
             ->assertSeeInOrder([$diesel->name, $patrol->name])
             ->assertDontSee($waterPumps->name);

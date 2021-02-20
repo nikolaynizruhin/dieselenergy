@@ -22,7 +22,7 @@ class ReadPostsTest extends TestCase
     /** @test */
     public function user_can_read_posts()
     {
-        $user = User::factory()->create();
+
 
         [$aboutUs, $howTo] = Post::factory()
             ->count(2)
@@ -36,7 +36,7 @@ class ReadPostsTest extends TestCase
                 ],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.posts.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.posts.index')

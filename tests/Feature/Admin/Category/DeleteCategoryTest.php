@@ -23,10 +23,9 @@ class DeleteCategoryTest extends TestCase
     /** @test */
     public function user_can_delete_category()
     {
-        $user = User::factory()->create();
         $category = Category::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.categories.index'))
             ->delete(route('admin.categories.destroy', $category))
             ->assertRedirect(route('admin.categories.index'))

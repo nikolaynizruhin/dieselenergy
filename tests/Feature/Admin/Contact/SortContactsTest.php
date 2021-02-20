@@ -23,8 +23,6 @@ class SortContactsTest extends TestCase
     /** @test */
     public function admin_can_sort_contacts_by_date_ascending()
     {
-        $user = User::factory()->create();
-
         [$adam, $tom] = Contact::factory()
             ->count(2)
             ->state(new Sequence(
@@ -32,7 +30,7 @@ class SortContactsTest extends TestCase
                 ['created_at' => now()->subDay()],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.contacts.index', ['sort' => 'created_at']))
             ->assertSuccessful()
             ->assertViewIs('admin.contacts.index')
@@ -43,8 +41,6 @@ class SortContactsTest extends TestCase
     /** @test */
     public function admin_can_sort_contacts_by_date_descending()
     {
-        $user = User::factory()->create();
-
         [$adam, $tom] = Contact::factory()
             ->count(2)
             ->state(new Sequence(
@@ -52,7 +48,7 @@ class SortContactsTest extends TestCase
                 ['created_at' => now()->subDay()],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.contacts.index', ['sort' => '-created_at']))
             ->assertSuccessful()
             ->assertViewIs('admin.contacts.index')
@@ -63,8 +59,6 @@ class SortContactsTest extends TestCase
     /** @test */
     public function admin_can_sort_contacts_by_message_ascending()
     {
-        $user = User::factory()->create();
-
         [$adam, $tom] = Contact::factory()
             ->count(2)
             ->state(new Sequence(
@@ -72,7 +66,7 @@ class SortContactsTest extends TestCase
                 ['message' => 'hello'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.contacts.index', ['sort' => 'message']))
             ->assertSuccessful()
             ->assertViewIs('admin.contacts.index')
@@ -83,8 +77,6 @@ class SortContactsTest extends TestCase
     /** @test */
     public function admin_can_sort_contacts_by_message_descending()
     {
-        $user = User::factory()->create();
-
         [$adam, $tom] = Contact::factory()
             ->count(2)
             ->state(new Sequence(
@@ -92,7 +84,7 @@ class SortContactsTest extends TestCase
                 ['message' => 'hello'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.contacts.index', ['sort' => '-message']))
             ->assertSuccessful()
             ->assertViewIs('admin.contacts.index')
@@ -103,8 +95,6 @@ class SortContactsTest extends TestCase
     /** @test */
     public function admin_can_sort_contacts_by_customer_ascending()
     {
-        $user = User::factory()->create();
-
         [$adam, $tom] = Customer::factory()
             ->count(2)
             ->state(new Sequence(
@@ -119,7 +109,7 @@ class SortContactsTest extends TestCase
                 ['customer_id' => $tom],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.contacts.index', ['sort' => 'customers.name']))
             ->assertSuccessful()
             ->assertViewIs('admin.contacts.index')
@@ -130,8 +120,6 @@ class SortContactsTest extends TestCase
     /** @test */
     public function admin_can_sort_contacts_by_customer_descending()
     {
-        $user = User::factory()->create();
-
         [$adam, $tom] = Customer::factory()
             ->count(2)
             ->state(new Sequence(
@@ -146,7 +134,7 @@ class SortContactsTest extends TestCase
                 ['customer_id' => $tom],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.contacts.index', ['sort' => '-customers.name']))
             ->assertSuccessful()
             ->assertViewIs('admin.contacts.index')

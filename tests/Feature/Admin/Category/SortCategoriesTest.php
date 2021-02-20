@@ -22,8 +22,6 @@ class SortCategoriesTest extends TestCase
     /** @test */
     public function admin_can_sort_categories_by_name_ascending()
     {
-        $user = User::factory()->create();
-
         [$ats, $generators] = Category::factory()
             ->count(2)
             ->state(new Sequence(
@@ -31,7 +29,7 @@ class SortCategoriesTest extends TestCase
                 ['name' => 'Generators'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.categories.index', ['sort' => 'name']))
             ->assertSuccessful()
             ->assertViewIs('admin.categories.index')
@@ -42,8 +40,6 @@ class SortCategoriesTest extends TestCase
     /** @test */
     public function admin_can_sort_categories_by_name_descending()
     {
-        $user = User::factory()->create();
-
         [$ats, $generators] = Category::factory()
             ->count(2)
             ->state(new Sequence(
@@ -51,7 +47,7 @@ class SortCategoriesTest extends TestCase
                 ['name' => 'Generators'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.categories.index', ['sort' => '-name']))
             ->assertSuccessful()
             ->assertViewIs('admin.categories.index')
@@ -62,8 +58,6 @@ class SortCategoriesTest extends TestCase
     /** @test */
     public function admin_can_sort_categories_by_slug_ascending()
     {
-        $user = User::factory()->create();
-
         [$ats, $generators] = Category::factory()
             ->count(2)
             ->state(new Sequence(
@@ -71,7 +65,7 @@ class SortCategoriesTest extends TestCase
                 ['slug' => 'generators'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.categories.index', ['sort' => 'slug']))
             ->assertSuccessful()
             ->assertViewIs('admin.categories.index')
@@ -82,8 +76,6 @@ class SortCategoriesTest extends TestCase
     /** @test */
     public function admin_can_sort_categories_by_slug_descending()
     {
-        $user = User::factory()->create();
-
         [$ats, $generators] = Category::factory()
             ->count(2)
             ->state(new Sequence(
@@ -91,7 +83,7 @@ class SortCategoriesTest extends TestCase
                 ['slug' => 'generators'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.categories.index', ['sort' => '-slug']))
             ->assertSuccessful()
             ->assertViewIs('admin.categories.index')

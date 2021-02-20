@@ -23,10 +23,10 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_can_visit_create_media_page()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.medias.create', ['product_id' => $product->id]))
             ->assertViewIs('admin.medias.create');
     }
@@ -43,10 +43,10 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_can_create_media()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.medias.store'), $media)
             ->assertRedirect(route('admin.products.show', $media['product_id']))
             ->assertSessionHas('status', trans('media.created'));
@@ -57,13 +57,13 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function it_should_unmark_other_default_medias()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->default()->create();
         $stub = Media::factory()->default()->raw([
             'product_id' => $media->product_id,
         ]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.medias.store'), $stub)
             ->assertRedirect();
 
@@ -73,10 +73,10 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_media_without_product()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->raw(['product_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.medias.store'), $media)
             ->assertSessionHasErrors('product_id');
     }
@@ -84,10 +84,10 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_media_with_string_product()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->raw(['product_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.medias.store'), $media)
             ->assertSessionHasErrors('product_id');
     }
@@ -95,10 +95,10 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_media_with_nonexistent_product()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->raw(['product_id' => 10]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.medias.store'), $media)
             ->assertSessionHasErrors('product_id');
     }
@@ -106,10 +106,10 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_media_without_image()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->raw(['image_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.medias.store'), $media)
             ->assertSessionHasErrors('image_id');
     }
@@ -117,10 +117,10 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_media_with_string_image()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->raw(['image_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.medias.store'), $media)
             ->assertSessionHasErrors('image_id');
     }
@@ -128,10 +128,10 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_media_with_nonexistent_image()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->raw(['image_id' => 10]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.medias.store'), $media)
             ->assertSessionHasErrors('image_id');
     }
@@ -139,10 +139,10 @@ class CreateMediaTest extends TestCase
     /** @test */
     public function user_cant_create_existing_media()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.medias.store'), $media->toArray())
             ->assertSessionHasErrors('product_id');
     }

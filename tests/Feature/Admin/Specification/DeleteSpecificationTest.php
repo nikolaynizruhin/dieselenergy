@@ -23,10 +23,10 @@ class DeleteSpecificationTest extends TestCase
     /** @test */
     public function user_can_delete_specification()
     {
-        $user = User::factory()->create();
+
         $specification = Specification::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.categories.show', $specification->category_id))
             ->delete(route('admin.specifications.destroy', $specification->id))
             ->assertRedirect(route('admin.categories.show', $specification->category_id))

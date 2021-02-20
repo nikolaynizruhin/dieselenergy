@@ -23,11 +23,9 @@ class ReadCategoryTest extends TestCase
     /** @test */
     public function user_can_read_category()
     {
-        $user = User::factory()->create();
-
         $category = Category::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.categories.show', $category))
             ->assertSuccessful()
             ->assertViewIs('admin.categories.show')

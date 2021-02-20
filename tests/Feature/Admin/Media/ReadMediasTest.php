@@ -16,7 +16,7 @@ class ReadMediasTest extends TestCase
     /** @test */
     public function user_can_read_medias()
     {
-        $user = User::factory()->create();
+
 
         [$diesel, $patrol] = Image::factory()
             ->count(2)
@@ -29,7 +29,7 @@ class ReadMediasTest extends TestCase
 
         $product->images()->attach([$diesel->id, $patrol->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.show', $product))
             ->assertSuccessful()
             ->assertViewIs('admin.products.show')

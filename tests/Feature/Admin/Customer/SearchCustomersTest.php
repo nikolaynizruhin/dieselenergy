@@ -24,7 +24,7 @@ class SearchCustomersTest extends TestCase
     /** @test */
     public function user_can_search_customers()
     {
-        $user = User::factory()->create();
+
 
         [$john, $jane, $tom] = Customer::factory()
             ->count(3)
@@ -34,7 +34,7 @@ class SearchCustomersTest extends TestCase
                 ['name' => 'Tom Jo'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.index', ['search' => 'Doe']))
             ->assertSeeInOrder([$jane->email, $john->email])
             ->assertDontSee($tom->email);

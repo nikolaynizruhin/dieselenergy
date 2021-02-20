@@ -23,10 +23,10 @@ class DeleteImageTest extends TestCase
     /** @test */
     public function user_can_delete_image()
     {
-        $user = User::factory()->create();
+
         $image = Image::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.images.index'))
             ->delete(route('admin.images.destroy', $image))
             ->assertRedirect(route('admin.images.index'))

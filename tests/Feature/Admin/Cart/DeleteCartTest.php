@@ -29,8 +29,6 @@ class DeleteCartTest extends TestCase
     /** @test */
     public function user_can_delete_cart()
     {
-        $user = User::factory()->create();
-
         $product = Product::factory()->create();
         $order = Order::factory()->create();
 
@@ -38,7 +36,7 @@ class DeleteCartTest extends TestCase
 
         $id = $order->products()->find($product->id)->pivot->id;
 
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.orders.show', $order))
             ->delete(route('admin.carts.destroy', $id))
             ->assertRedirect(route('admin.orders.show', $order))

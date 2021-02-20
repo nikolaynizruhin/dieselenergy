@@ -24,7 +24,7 @@ class SearchProductsTest extends TestCase
     /** @test */
     public function user_can_search_products()
     {
-        $user = User::factory()->create();
+
 
         [$diesel, $patrol, $waterPump] = Product::factory()
             ->count(3)
@@ -34,7 +34,7 @@ class SearchProductsTest extends TestCase
                 ['name' => 'Water Pump'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.index', ['search' => 'Generator']))
             ->assertSeeInOrder([$diesel->name, $patrol->name])
             ->assertDontSee($waterPump->name);

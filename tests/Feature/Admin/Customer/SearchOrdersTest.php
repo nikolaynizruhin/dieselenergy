@@ -16,7 +16,7 @@ class SearchOrdersTest extends TestCase
     /** @test */
     public function user_can_search_customer_orders()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
 
         [$orderOne, $orderTwo, $orderThree] = Order::factory()
@@ -27,7 +27,7 @@ class SearchOrdersTest extends TestCase
                 ['id' => 2992],
             ))->create(['customer_id' => $customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $customer,
                 'search' => ['order' => 788],

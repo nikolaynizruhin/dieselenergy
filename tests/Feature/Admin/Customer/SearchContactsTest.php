@@ -16,7 +16,7 @@ class SearchContactsTest extends TestCase
     /** @test */
     public function user_can_search_customer_contacts()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
 
         [$support, $faq, $sale] = Contact::factory()
@@ -27,7 +27,7 @@ class SearchContactsTest extends TestCase
                 ['message' => 'Sale'],
             ))->create(['customer_id' => $customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $customer,
                 'search' => ['contact' => 'message'],

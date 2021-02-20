@@ -23,10 +23,10 @@ class DeleteCustomerTest extends TestCase
     /** @test */
     public function user_can_delete_customer()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.customers.index'))
             ->delete(route('admin.customers.destroy', $customer))
             ->assertRedirect(route('admin.customers.index'))

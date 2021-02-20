@@ -17,8 +17,6 @@ class ReadCartsTest extends TestCase
     /** @test */
     public function user_can_read_carts()
     {
-        $user = User::factory()->create();
-
         [$patrol, $diesel] = Product::factory()
             ->count(2)
             ->state(new Sequence(
@@ -33,7 +31,7 @@ class ReadCartsTest extends TestCase
             $diesel->id => ['quantity' => $this->faker->randomDigit],
         ]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.orders.show', $order))
             ->assertSuccessful()
             ->assertViewIs('admin.orders.show')

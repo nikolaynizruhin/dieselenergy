@@ -22,7 +22,7 @@ class ReadImagesTest extends TestCase
     /** @test */
     public function user_can_read_images()
     {
-        $user = User::factory()->create();
+
 
         [$diesel, $patrol] = Image::factory()
             ->count(2)
@@ -31,7 +31,7 @@ class ReadImagesTest extends TestCase
                 ['created_at' => now()],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.images.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.images.index')

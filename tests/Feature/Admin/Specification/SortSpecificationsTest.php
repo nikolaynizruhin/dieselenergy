@@ -62,9 +62,9 @@ class SortSpecificationsTest extends TestCase
     /** @test */
     public function user_can_sort_specifications_ascending()
     {
-        $user = User::factory()->create();
 
-        $this->actingAs($user)
+
+        $this->login()
             ->get(route('admin.categories.show', [
                 'category' => $this->category,
                 'sort' => 'name',
@@ -75,9 +75,9 @@ class SortSpecificationsTest extends TestCase
     /** @test */
     public function user_can_sort_specifications_descending()
     {
-        $user = User::factory()->create();
 
-        $this->actingAs($user)
+
+        $this->login()
             ->get(route('admin.categories.show', [
                 'category' => $this->category,
                 'sort' => '-name',

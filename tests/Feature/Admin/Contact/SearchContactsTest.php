@@ -24,8 +24,6 @@ class SearchContactsTest extends TestCase
     /** @test */
     public function user_can_search_contacts()
     {
-        $user = User::factory()->create();
-
         [$contactSale, $contactSupport, $contactOther] = Contact::factory()
             ->count(3)
             ->state(new Sequence(
@@ -34,7 +32,7 @@ class SearchContactsTest extends TestCase
                 ['message' => 'Other'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.contacts.index', ['search' => 'Contact']))
             ->assertSeeInOrder([$contactSale->message, $contactSupport->message])
             ->assertDontSee($contactOther->message);

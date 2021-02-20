@@ -23,10 +23,10 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_can_visit_update_specification_page()
     {
-        $user = User::factory()->create();
+
         $specification = Specification::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.specifications.edit', $specification))
             ->assertViewIs('admin.specifications.edit');
     }
@@ -43,12 +43,12 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_can_update_specification()
     {
-        $user = User::factory()->create();
+
 
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.specifications.update', $specification), $stub)
             ->assertRedirect(route('admin.categories.show', $stub['category_id']))
             ->assertSessionHas('status', trans('specification.updated'));
@@ -59,12 +59,12 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_without_category()
     {
-        $user = User::factory()->create();
+
 
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw(['category_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.specifications.update', $specification), $stub)
             ->assertSessionHasErrors('category_id');
     }
@@ -72,12 +72,12 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_with_string_category()
     {
-        $user = User::factory()->create();
+
 
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw(['category_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.specifications.update', $specification), $stub)
             ->assertSessionHasErrors('category_id');
     }
@@ -85,12 +85,12 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_with_nonexistent_category()
     {
-        $user = User::factory()->create();
+
 
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw(['category_id' => 10]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.specifications.update', $specification), $stub)
             ->assertSessionHasErrors('category_id');
     }
@@ -98,12 +98,12 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_without_attribute()
     {
-        $user = User::factory()->create();
+
 
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw(['attribute_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.specifications.update', $specification), $stub)
             ->assertSessionHasErrors('attribute_id');
     }
@@ -111,12 +111,12 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_with_string_attribute()
     {
-        $user = User::factory()->create();
+
 
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw(['attribute_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.specifications.update', $specification), $stub)
             ->assertSessionHasErrors('attribute_id');
     }
@@ -124,12 +124,12 @@ class UpdateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_update_specification_with_nonexistent_attribute()
     {
-        $user = User::factory()->create();
+
 
         $specification = Specification::factory()->create();
         $stub = Specification::factory()->raw(['attribute_id' => 10]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.specifications.update', $specification), $stub)
             ->assertSessionHasErrors('attribute_id');
     }

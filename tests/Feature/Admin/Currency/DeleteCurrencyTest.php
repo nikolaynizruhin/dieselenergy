@@ -23,10 +23,9 @@ class DeleteCurrencyTest extends TestCase
     /** @test */
     public function user_can_delete_category()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.currencies.index'))
             ->delete(route('admin.currencies.destroy', $currency))
             ->assertRedirect(route('admin.currencies.index'))

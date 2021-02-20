@@ -16,7 +16,7 @@ class SearchMediasTest extends TestCase
     /** @test */
     public function user_can_search_media()
     {
-        $user = User::factory()->create();
+
 
         [$diesel, $patrol, $waterPump] = Image::factory()
             ->count(3)
@@ -30,7 +30,7 @@ class SearchMediasTest extends TestCase
 
         $product->images()->attach([$diesel->id, $patrol->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.show', [
                 'product' => $product,
                 'search' => 'path',

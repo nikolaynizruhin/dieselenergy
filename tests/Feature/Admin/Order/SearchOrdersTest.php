@@ -24,7 +24,7 @@ class SearchOrdersTest extends TestCase
     /** @test */
     public function user_can_search_orders()
     {
-        $user = User::factory()->create();
+
 
         [$orderA, $orderB, $orderC] = Order::factory()
             ->count(3)
@@ -34,7 +34,7 @@ class SearchOrdersTest extends TestCase
                 ['id' => 70625],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.orders.index', ['search' => '7061']))
             ->assertSeeInOrder([$orderB->id, $orderA->id])
             ->assertDontSee($orderC->id);

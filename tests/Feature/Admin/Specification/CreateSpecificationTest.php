@@ -23,10 +23,10 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_can_visit_create_specification_page()
     {
-        $user = User::factory()->create();
+
         $category = Category::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.specifications.create', ['category_id' => $category->id]))
             ->assertViewIs('admin.specifications.create');
     }
@@ -43,11 +43,11 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_can_create_specification()
     {
-        $user = User::factory()->create();
+
 
         $stub = Specification::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.specifications.store'), $stub)
             ->assertRedirect(route('admin.categories.show', $stub['category_id']))
             ->assertSessionHas('status', trans('specification.created'));
@@ -60,11 +60,11 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_without_category()
     {
-        $user = User::factory()->create();
+
 
         $stub = Specification::factory()->raw(['category_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.specifications.store'), $stub)
             ->assertSessionHasErrors('category_id');
     }
@@ -72,11 +72,11 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_with_string_category()
     {
-        $user = User::factory()->create();
+
 
         $stub = Specification::factory()->raw(['category_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.specifications.store'), $stub)
             ->assertSessionHasErrors('category_id');
     }
@@ -84,11 +84,11 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_with_nonexistent_category()
     {
-        $user = User::factory()->create();
+
 
         $stub = Specification::factory()->raw(['category_id' => 10]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.specifications.store'), $stub)
             ->assertSessionHasErrors('category_id');
     }
@@ -96,11 +96,11 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_without_attribute()
     {
-        $user = User::factory()->create();
+
 
         $stub = Specification::factory()->raw(['attribute_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.specifications.store'), $stub)
             ->assertSessionHasErrors('attribute_id');
     }
@@ -108,11 +108,11 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_with_string_attribute()
     {
-        $user = User::factory()->create();
+
 
         $stub = Specification::factory()->raw(['attribute_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.specifications.store'), $stub)
             ->assertSessionHasErrors('attribute_id');
     }
@@ -120,11 +120,11 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_specification_with_nonexistent_attribute()
     {
-        $user = User::factory()->create();
+
 
         $stub = Specification::factory()->raw(['attribute_id' => 10]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.specifications.store'), $stub)
             ->assertSessionHasErrors('attribute_id');
     }
@@ -132,10 +132,10 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function user_cant_create_existing_specification()
     {
-        $user = User::factory()->create();
+
         $specification = Specification::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.specifications.store'), $specification->toArray())
             ->assertSessionHasErrors('attribute_id');
     }

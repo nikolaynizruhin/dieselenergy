@@ -23,10 +23,10 @@ class ReadOrderTest extends TestCase
     /** @test */
     public function user_can_read_order()
     {
-        $user = User::factory()->create();
+
         $order = Order::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.orders.show', $order))
             ->assertSuccessful()
             ->assertViewIs('admin.orders.show')

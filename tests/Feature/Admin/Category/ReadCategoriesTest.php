@@ -22,8 +22,6 @@ class ReadCategoriesTest extends TestCase
     /** @test */
     public function user_can_read_categories()
     {
-        $user = User::factory()->create();
-
         [$generators, $ats] = Category::factory()
             ->count(2)
             ->state(new Sequence(
@@ -31,7 +29,7 @@ class ReadCategoriesTest extends TestCase
                 ['name' => 'ATS'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.categories.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.categories.index')

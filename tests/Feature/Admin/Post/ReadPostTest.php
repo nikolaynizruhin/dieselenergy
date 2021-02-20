@@ -23,10 +23,10 @@ class ReadPostTest extends TestCase
     /** @test */
     public function user_can_read_post()
     {
-        $user = User::factory()->create();
+
         $post = Post::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.posts.show', $post))
             ->assertSuccessful()
             ->assertViewIs('admin.posts.show')

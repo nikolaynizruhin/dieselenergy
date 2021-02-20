@@ -24,10 +24,9 @@ class UpdateCurrencyTest extends TestCase
     /** @test */
     public function user_can_visit_edit_currency_page()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.currencies.edit', $currency))
             ->assertViewIs('admin.currencies.edit');
     }
@@ -45,11 +44,10 @@ class UpdateCurrencyTest extends TestCase
     /** @test */
     public function user_can_update_currency()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
         $stub = Currency::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.currencies.update', $currency), $stub)
             ->assertRedirect(route('admin.currencies.index'))
             ->assertSessionHas('status', trans('currency.updated'));
@@ -60,11 +58,10 @@ class UpdateCurrencyTest extends TestCase
     /** @test */
     public function user_cant_update_currency_without_code()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
         $stub = Currency::factory()->raw(['code' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.currencies.update', $currency), $stub)
             ->assertSessionHasErrors('code');
     }
@@ -72,11 +69,10 @@ class UpdateCurrencyTest extends TestCase
     /** @test */
     public function user_cant_update_currency_with_integer_code()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
         $stub = Currency::factory()->raw(['code' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.currencies.update', $currency), $stub)
             ->assertSessionHasErrors('code');
     }
@@ -84,11 +80,10 @@ class UpdateCurrencyTest extends TestCase
     /** @test */
     public function user_cant_update_currency_with_code_different_than_3_chars()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
         $stub = Currency::factory()->raw(['code' => 'US']);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.currencies.update', $currency), $stub)
             ->assertSessionHasErrors('code');
     }
@@ -96,12 +91,11 @@ class UpdateCurrencyTest extends TestCase
     /** @test */
     public function user_cant_update_currency_with_existing_code()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
         $existing = Currency::factory()->create();
         $stub = Currency::factory()->raw(['code' => $existing->code]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.currencies.update', $currency), $stub)
             ->assertSessionHasErrors('code');
     }
@@ -109,11 +103,10 @@ class UpdateCurrencyTest extends TestCase
     /** @test */
     public function user_cant_update_currency_without_rate()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
         $stub = Currency::factory()->raw(['rate' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.currencies.update', $currency), $stub)
             ->assertSessionHasErrors('rate');
     }
@@ -121,11 +114,10 @@ class UpdateCurrencyTest extends TestCase
     /** @test */
     public function user_cant_update_currency_with_string_rate()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
         $stub = Currency::factory()->raw(['rate' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.currencies.update', $currency), $stub)
             ->assertSessionHasErrors('rate');
     }
@@ -133,13 +125,12 @@ class UpdateCurrencyTest extends TestCase
     /** @test */
     public function user_cant_update_currency_with_rate_less_than_0()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
         $stub = Currency::factory()->raw([
             'rate' => $this->faker->randomFloat($nbMaxDecimals = 4, $min = -10, $max = -1),
         ]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.currencies.update', $currency), $stub)
             ->assertSessionHasErrors('rate');
     }
@@ -147,11 +138,10 @@ class UpdateCurrencyTest extends TestCase
     /** @test */
     public function user_cant_update_currency_without_symbol()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
         $stub = Currency::factory()->raw(['symbol' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.currencies.update', $currency), $stub)
             ->assertSessionHasErrors('symbol');
     }
@@ -159,11 +149,10 @@ class UpdateCurrencyTest extends TestCase
     /** @test */
     public function user_cant_update_currency_with_integer_symbol()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
         $stub = Currency::factory()->raw(['symbol' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.currencies.update', $currency), $stub)
             ->assertSessionHasErrors('symbol');
     }
@@ -171,12 +160,11 @@ class UpdateCurrencyTest extends TestCase
     /** @test */
     public function user_cant_update_currency_with_existing_symbol()
     {
-        $user = User::factory()->create();
         $currency = Currency::factory()->create();
         $existing = Currency::factory()->create();
         $stub = Currency::factory()->raw(['symbol' => $existing->symbol]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.currencies.update', $currency), $stub)
             ->assertSessionHasErrors('symbol');
     }

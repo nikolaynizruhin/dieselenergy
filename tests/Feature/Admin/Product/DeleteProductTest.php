@@ -23,10 +23,10 @@ class DeleteProductTest extends TestCase
     /** @test */
     public function user_can_delete_product()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.products.index'))
             ->delete(route('admin.products.destroy', $product))
             ->assertRedirect(route('admin.products.index'))

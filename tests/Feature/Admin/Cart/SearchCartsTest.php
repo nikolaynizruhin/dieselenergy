@@ -31,8 +31,6 @@ class SearchCartsTest extends TestCase
     /** @test */
     public function user_can_search_cart()
     {
-        $user = User::factory()->create();
-
         [$patrol, $diesel, $waterPump] = Product::factory()
             ->count(3)
             ->state(new Sequence(
@@ -45,7 +43,7 @@ class SearchCartsTest extends TestCase
 
         $order->products()->attach([$diesel->id, $patrol->id, $waterPump->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.orders.show', [
                 'order' => $order,
                 'search' => 'Generator',

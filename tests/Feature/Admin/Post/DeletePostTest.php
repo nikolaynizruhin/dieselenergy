@@ -23,10 +23,10 @@ class DeletePostTest extends TestCase
     /** @test */
     public function user_can_delete_post()
     {
-        $user = User::factory()->create();
+
         $post = Post::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.posts.index'))
             ->delete(route('admin.posts.destroy', $post))
             ->assertRedirect(route('admin.posts.index'))

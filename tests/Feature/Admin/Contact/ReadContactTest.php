@@ -23,10 +23,9 @@ class ReadContactTest extends TestCase
     /** @test */
     public function user_can_read_contact()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.contacts.show', $contact))
             ->assertSuccessful()
             ->assertViewIs('admin.contacts.show')

@@ -22,9 +22,7 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_can_visit_create_category_page()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.categories.create'))
             ->assertViewIs('admin.categories.create');
     }
@@ -41,10 +39,9 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_can_create_category()
     {
-        $user = User::factory()->create();
         $category = Category::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.categories.store'), $category)
             ->assertRedirect(route('admin.categories.index'))
             ->assertSessionHas('status', trans('category.created'));
@@ -55,10 +52,9 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_cant_create_category_without_name()
     {
-        $user = User::factory()->create();
         $category = Category::factory()->raw(['name' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.categories.store'), $category)
             ->assertSessionHasErrors('name');
     }
@@ -66,10 +62,9 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_cant_create_category_with_integer_name()
     {
-        $user = User::factory()->create();
         $category = User::factory()->raw(['name' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.categories.store'), $category)
             ->assertSessionHasErrors('name');
     }
@@ -77,10 +72,9 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_cant_create_category_with_name_more_than_255_chars()
     {
-        $user = User::factory()->create();
         $category = Category::factory()->raw(['name' => str_repeat('a', 256)]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.categories.store'), $category)
             ->assertSessionHasErrors('name');
     }
@@ -88,11 +82,10 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_cant_create_category_with_existing_name()
     {
-        $user = User::factory()->create();
         $category = Category::factory()->create();
         $stub = Category::factory()->raw(['name' => $category->name]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.categories.store'), $stub)
             ->assertSessionHasErrors('name');
     }
@@ -100,11 +93,10 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_cant_create_category_with_existing_slug()
     {
-        $user = User::factory()->create();
         $category = Category::factory()->create();
         $stub = Category::factory()->raw(['slug' => $category->slug]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.categories.store'), $stub)
             ->assertSessionHasErrors('slug');
     }
@@ -112,10 +104,9 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_cant_create_category_without_slug()
     {
-        $user = User::factory()->create();
         $category = Category::factory()->raw(['slug' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.categories.store'), $category)
             ->assertSessionHasErrors('slug');
     }
@@ -123,10 +114,9 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_cant_create_category_with_integer_slug()
     {
-        $user = User::factory()->create();
         $category = Category::factory()->raw(['slug' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.categories.store'), $category)
             ->assertSessionHasErrors('slug');
     }
@@ -134,10 +124,9 @@ class CreateCategoryTest extends TestCase
     /** @test */
     public function user_cant_create_category_with_slug_more_than_255_chars()
     {
-        $user = User::factory()->create();
         $category = Category::factory()->raw(['slug' => str_repeat('a', 256)]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.categories.store'), $category)
             ->assertSessionHasErrors('slug');
     }

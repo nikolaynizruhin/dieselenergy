@@ -48,9 +48,9 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_ascending()
     {
-        $user = User::factory()->create();
 
-        $this->actingAs($user)
+
+        $this->login()
             ->get(route('admin.dashboard', ['sort' => 'id']))
             ->assertSuccessful()
             ->assertViewIs('admin.dashboard')
@@ -61,9 +61,9 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function admin_can_sort_orders_descending()
     {
-        $user = User::factory()->create();
 
-        $this->actingAs($user)
+
+        $this->login()
             ->get(route('admin.dashboard', ['sort' => '-id']))
             ->assertSuccessful()
             ->assertViewIs('admin.dashboard')

@@ -23,10 +23,10 @@ class DeleteOrderTest extends TestCase
     /** @test */
     public function user_can_delete_order()
     {
-        $user = User::factory()->create();
+
         $order = Order::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.orders.index'))
             ->delete(route('admin.orders.destroy', $order))
             ->assertRedirect(route('admin.orders.index'))

@@ -23,10 +23,9 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_can_visit_update_contact_page()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.contacts.edit', $contact))
             ->assertViewIs('admin.contacts.edit');
     }
@@ -44,11 +43,10 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_can_update_contact()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->create();
         $stub = Contact::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.contacts.update', $contact), $stub)
             ->assertRedirect(route('admin.contacts.index'))
             ->assertSessionHas('status', trans('contact.updated'));
@@ -59,11 +57,10 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_cant_update_contact_with_integer_message()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->create();
         $stub = Contact::factory()->raw(['message' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.contacts.update', $contact), $stub)
             ->assertSessionHasErrors('message');
     }
@@ -71,11 +68,10 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_cant_update_contact_without_customer()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->create();
         $stub = Contact::factory()->raw(['customer_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.contacts.update', $contact), $stub)
             ->assertSessionHasErrors('customer_id');
     }
@@ -83,11 +79,10 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_cant_update_contact_with_string_customer()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->create();
         $stub = Contact::factory()->raw(['customer_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.contacts.update', $contact), $stub)
             ->assertSessionHasErrors('customer_id');
     }
@@ -95,11 +90,10 @@ class UpdateContactTest extends TestCase
     /** @test */
     public function user_cant_update_contact_with_nonexistent_customer()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->create();
         $stub = Contact::factory()->raw(['customer_id' => 10]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.contacts.update', $contact), $stub)
             ->assertSessionHasErrors('customer_id');
     }

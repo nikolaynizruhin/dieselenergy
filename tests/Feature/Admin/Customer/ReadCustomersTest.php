@@ -22,7 +22,7 @@ class ReadCustomersTest extends TestCase
     /** @test */
     public function user_can_read_customers()
     {
-        $user = User::factory()->create();
+
 
         [$jane, $john] = Customer::factory()
             ->count(2)
@@ -31,7 +31,7 @@ class ReadCustomersTest extends TestCase
                 ['created_at' => now()]
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.index'))
             ->assertSuccessful()
             ->assertViewIs('admin.customers.index')

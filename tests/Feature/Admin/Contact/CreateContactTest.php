@@ -21,9 +21,7 @@ class CreateContactTest extends TestCase
     /** @test */
     public function user_can_visit_create_contact_page()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.contacts.create'))
             ->assertViewIs('admin.contacts.create');
     }
@@ -40,10 +38,9 @@ class CreateContactTest extends TestCase
     /** @test */
     public function user_can_create_contact()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.contacts.store'), $contact)
             ->assertRedirect(route('admin.contacts.index'))
             ->assertSessionHas('status', trans('contact.created'));
@@ -54,10 +51,9 @@ class CreateContactTest extends TestCase
     /** @test */
     public function user_cant_create_contact_with_integer_message()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->raw(['message' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.contacts.store'), $contact)
             ->assertSessionHasErrors('message');
     }
@@ -65,10 +61,9 @@ class CreateContactTest extends TestCase
     /** @test */
     public function user_cant_create_contact_without_customer()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->raw(['customer_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.contacts.store'), $contact)
             ->assertSessionHasErrors('customer_id');
     }
@@ -76,10 +71,9 @@ class CreateContactTest extends TestCase
     /** @test */
     public function user_cant_create_contact_with_string_customer()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->raw(['customer_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.contacts.store'), $contact)
             ->assertSessionHasErrors('customer_id');
     }
@@ -87,10 +81,9 @@ class CreateContactTest extends TestCase
     /** @test */
     public function user_cant_create_contact_with_nonexistent_customer()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->raw(['customer_id' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.contacts.store'), $contact)
             ->assertSessionHasErrors('customer_id');
     }

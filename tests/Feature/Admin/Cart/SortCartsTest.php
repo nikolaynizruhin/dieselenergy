@@ -40,8 +40,6 @@ class SortCartsTest extends TestCase
     /** @test */
     public function admin_can_sort_carts_by_quantity_ascending()
     {
-        $user = User::factory()->create();
-
         [$hyundai, $sdmo] = Cart::factory()
             ->count(2)
             ->for($this->order)
@@ -50,7 +48,7 @@ class SortCartsTest extends TestCase
                 ['quantity' => 2],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.orders.show', [
                 'order' => $this->order,
                 'sort' => 'quantity',
@@ -63,8 +61,6 @@ class SortCartsTest extends TestCase
     /** @test */
     public function admin_can_sort_carts_by_quantity_descending()
     {
-        $user = User::factory()->create();
-
         [$hyundai, $sdmo] = Cart::factory()
             ->count(2)
             ->for($this->order)
@@ -73,7 +69,7 @@ class SortCartsTest extends TestCase
                 ['quantity' => 2],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.orders.show', [
                 'order' => $this->order,
                 'sort' => '-quantity',
@@ -86,8 +82,6 @@ class SortCartsTest extends TestCase
     /** @test */
     public function admin_can_sort_carts_by_product_name_ascending()
     {
-        $user = User::factory()->create();
-
         [$diesel, $patrol] = Product::factory()
             ->count(2)
             ->state(new Sequence(
@@ -103,7 +97,7 @@ class SortCartsTest extends TestCase
                 ['product_id' => $patrol],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.orders.show', [
                 'order' => $this->order,
                 'sort' => 'name',
@@ -116,8 +110,6 @@ class SortCartsTest extends TestCase
     /** @test */
     public function admin_can_sort_carts_by_product_name_descending()
     {
-        $user = User::factory()->create();
-
         [$diesel, $patrol] = Product::factory()
             ->count(2)
             ->state(new Sequence(
@@ -133,7 +125,7 @@ class SortCartsTest extends TestCase
                 ['product_id' => $patrol],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.orders.show', [
                 'order' => $this->order,
                 'sort' => '-name',
@@ -146,8 +138,6 @@ class SortCartsTest extends TestCase
     /** @test */
     public function admin_can_sort_carts_by_total_price_ascending()
     {
-        $user = User::factory()->create();
-
         [$diesel, $patrol] = Product::factory()
             ->count(2)
             ->state(new Sequence(
@@ -163,7 +153,7 @@ class SortCartsTest extends TestCase
                 ['product_id' => $patrol, 'quantity' => 1],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.orders.show', [
                 'order' => $this->order,
                 'sort' => 'total',
@@ -176,8 +166,6 @@ class SortCartsTest extends TestCase
     /** @test */
     public function admin_can_sort_carts_by_total_price_descending()
     {
-        $user = User::factory()->create();
-
         [$diesel, $patrol] = Product::factory()
             ->count(2)
             ->state(new Sequence(
@@ -193,7 +181,7 @@ class SortCartsTest extends TestCase
                 ['product_id' => $patrol, 'quantity' => 1],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.orders.show', [
                 'order' => $this->order,
                 'sort' => '-total',

@@ -23,10 +23,10 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_can_visit_update_media_page()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.medias.edit', $media))
             ->assertViewIs('admin.medias.edit');
     }
@@ -44,11 +44,11 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_can_update_media()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->create();
         $stub = Media::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.medias.update', $media), $stub)
             ->assertRedirect(route('admin.products.show', $stub['product_id']))
             ->assertSessionHas('status', trans('media.updated'));
@@ -59,7 +59,7 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function it_should_unmark_other_default_medias()
     {
-        $user = User::factory()->create();
+
 
         $defaultMedia = Media::factory()
             ->default()
@@ -74,7 +74,7 @@ class UpdateMediaTest extends TestCase
             ->default()
             ->raw(['product_id' => $defaultMedia->product_id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.medias.update', $media), $stub)
             ->assertRedirect();
 
@@ -84,11 +84,11 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_cant_update_media_without_product()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->create();
         $stub = Media::factory()->raw(['product_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.medias.update', $media), $stub)
             ->assertSessionHasErrors('product_id');
     }
@@ -96,11 +96,11 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_cant_update_media_with_string_product()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->create();
         $stub = Media::factory()->raw(['product_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.medias.update', $media), $stub)
             ->assertSessionHasErrors('product_id');
     }
@@ -108,11 +108,11 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_cant_update_media_with_nonexistent_product()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->create();
         $stub = Media::factory()->raw(['product_id' => 10]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.medias.update', $media), $stub)
             ->assertSessionHasErrors('product_id');
     }
@@ -120,11 +120,11 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_cant_update_media_without_image()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->create();
         $stub = Media::factory()->raw(['image_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.medias.update', $media), $stub)
             ->assertSessionHasErrors('image_id');
     }
@@ -132,11 +132,11 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_cant_update_media_with_string_image()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->create();
         $stub = Media::factory()->raw(['image_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.medias.update', $media), $stub)
             ->assertSessionHasErrors('image_id');
     }
@@ -144,11 +144,11 @@ class UpdateMediaTest extends TestCase
     /** @test */
     public function user_cant_update_media_with_nonexistent_image()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->create();
         $stub = Media::factory()->raw(['image_id' => 10]);
 
-        $this->actingAs($user)
+        $this->login()
             ->put(route('admin.medias.update', $media), $stub)
             ->assertSessionHasErrors('image_id');
     }

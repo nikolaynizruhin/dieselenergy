@@ -24,8 +24,6 @@ class SearchCurrenciesTest extends TestCase
     /** @test */
     public function user_can_search_currencies()
     {
-        $user = User::factory()->create();
-
         [$usd, $eur, $rub] = Currency::factory()
             ->count(3)
             ->state(new Sequence(
@@ -34,7 +32,7 @@ class SearchCurrenciesTest extends TestCase
                 ['code' => 'RUB'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.currencies.index', ['search' => 'R']))
             ->assertSeeInOrder([$eur->code, $rub->code])
             ->assertDontSee($usd->code);

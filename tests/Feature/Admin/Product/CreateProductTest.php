@@ -27,10 +27,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_can_visit_create_product_page()
     {
-        $user = User::factory()->create();
+
         $category = Category::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.create', ['category_id' => $category->id]))
             ->assertViewIs('admin.products.create')
             ->assertViewHas(['brands', 'category']);
@@ -48,10 +48,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_can_create_product()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.created'));
@@ -64,7 +64,7 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_can_create_product_with_attributes()
     {
-        $user = User::factory()->create();
+
         $category = Category::factory()->create();
         $attribute = Attribute::factory()->create();
 
@@ -72,7 +72,7 @@ class CreateProductTest extends TestCase
 
         $product = Product::factory()->raw(['category_id' => $category->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product + [
                 'attributes' => [
                     $attribute->id => $value = $this->faker->word,
@@ -93,10 +93,10 @@ class CreateProductTest extends TestCase
 
         $image = UploadedFile::fake()->image('product.jpg');
 
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product + [
                 'images' => [$image],
             ])->assertRedirect(route('admin.products.index'))
@@ -119,10 +119,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_without_name()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['name' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('name');
     }
@@ -130,10 +130,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_name()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['name' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('name');
     }
@@ -141,12 +141,12 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_name_more_than_255_chars()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw([
             'name' => str_repeat('a', 256),
         ]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('name');
     }
@@ -154,13 +154,13 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_existing_name()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->create();
         $stub = Product::factory()->raw([
             'name' => $product->name,
         ]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $stub)
             ->assertSessionHasErrors('name');
     }
@@ -168,10 +168,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_without_model()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['model' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('model');
     }
@@ -179,10 +179,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_model()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['model' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('model');
     }
@@ -190,12 +190,12 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_model_more_than_255_chars()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw([
             'model' => str_repeat('a', 256),
         ]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('model');
     }
@@ -203,11 +203,11 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_existing_model()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['model' => $product->model]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $stub)
             ->assertSessionHasErrors('model');
     }
@@ -215,10 +215,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_without_slug()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['slug' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('slug');
     }
@@ -226,10 +226,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_slug()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['slug' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('slug');
     }
@@ -237,12 +237,12 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_slug_more_than_255_chars()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw([
             'slug' => str_repeat('a', 256),
         ]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('slug');
     }
@@ -250,11 +250,11 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_existing_slug()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->create();
         $stub = Product::factory()->raw(['slug' => $product->slug]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $stub)
             ->assertSessionHasErrors('slug');
     }
@@ -262,10 +262,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_description()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['description' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('description');
     }
@@ -273,10 +273,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_without_price()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['price' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('price');
     }
@@ -284,10 +284,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_string_price()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['price' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('price');
     }
@@ -295,10 +295,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_zero_price()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['price' => 0]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('price');
     }
@@ -306,10 +306,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_without_brand()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['brand_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('brand_id');
     }
@@ -317,10 +317,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_string_brand()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['brand_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('brand_id');
     }
@@ -328,10 +328,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_nonexistent_brand()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['brand_id' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('brand_id');
     }
@@ -339,10 +339,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_without_category()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['category_id' => null]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('category_id');
     }
@@ -350,10 +350,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_string_category()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['category_id' => 'string']);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('category_id');
     }
@@ -361,10 +361,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_nonexistent_category()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw(['category_id' => 1]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('category_id');
     }
@@ -372,10 +372,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_string_image()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product + [
                 'images' => ['string'],
             ])->assertSessionHasErrors('images.*');
@@ -384,10 +384,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_image()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product + [
                 'images' => [1],
             ])->assertSessionHasErrors('images.*');
@@ -398,10 +398,10 @@ class CreateProductTest extends TestCase
     {
         $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
 
-        $user = User::factory()->create();
+
         $product = Product::factory()->raw();
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product + [
                 'images' => [$pdf],
             ])->assertSessionHasErrors('images.*');
@@ -410,10 +410,10 @@ class CreateProductTest extends TestCase
     /** @test */
     public function by_default_product_should_be_inactive()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->make()->makeHidden('is_active');
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product->toArray())
             ->assertRedirect();
 
@@ -423,7 +423,7 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_integer_attributes()
     {
-        $user = User::factory()->create();
+
         $category = Category::factory()->create();
         $attribute = Attribute::factory()->create();
 
@@ -434,7 +434,7 @@ class CreateProductTest extends TestCase
             'attributes' => [$attribute->id => 1],
         ]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('attributes.'.$attribute->id);
     }
@@ -442,7 +442,7 @@ class CreateProductTest extends TestCase
     /** @test */
     public function user_cant_create_product_with_attribute_more_than_255_chars()
     {
-        $user = User::factory()->create();
+
         $category = Category::factory()->create();
         $attribute = Attribute::factory()->create();
 
@@ -453,7 +453,7 @@ class CreateProductTest extends TestCase
             'attributes' => [$attribute->id => str_repeat('a', 256)],
         ]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $product)
             ->assertSessionHasErrors('attributes.'.$attribute->id);
     }
@@ -461,7 +461,7 @@ class CreateProductTest extends TestCase
     /** @test */
     public function unrelated_attribute_should_not_be_attached_to_product()
     {
-        $user = User::factory()->create();
+
         $category = Category::factory()->create();
         $unrelated = Attribute::factory()->create();
 
@@ -470,7 +470,7 @@ class CreateProductTest extends TestCase
             'attributes' => [$unrelated->id => $this->faker->randomDigit],
         ]);
 
-        $this->actingAs($user)
+        $this->login()
             ->post(route('admin.products.store'), $stub)
             ->assertRedirect();
 

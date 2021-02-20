@@ -22,8 +22,6 @@ class SortCurrenciesTest extends TestCase
     /** @test */
     public function admin_can_sort_currencies_by_code_ascending()
     {
-        $user = User::factory()->create();
-
         [$euro, $dollar] = Currency::factory()
             ->count(2)
             ->state(new Sequence(
@@ -31,7 +29,7 @@ class SortCurrenciesTest extends TestCase
                 ['code' => 'USD'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.currencies.index', ['sort' => 'code']))
             ->assertSuccessful()
             ->assertViewIs('admin.currencies.index')
@@ -42,8 +40,6 @@ class SortCurrenciesTest extends TestCase
     /** @test */
     public function admin_can_sort_currencies_by_code_descending()
     {
-        $user = User::factory()->create();
-
         [$euro, $dollar] = Currency::factory()
             ->count(2)
             ->state(new Sequence(
@@ -51,7 +47,7 @@ class SortCurrenciesTest extends TestCase
                 ['code' => 'USD'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.currencies.index', ['sort' => '-code']))
             ->assertSuccessful()
             ->assertViewIs('admin.currencies.index')
@@ -62,8 +58,6 @@ class SortCurrenciesTest extends TestCase
     /** @test */
     public function admin_can_sort_currencies_by_rate_ascending()
     {
-        $user = User::factory()->create();
-
         [$dollar, $euro] = Currency::factory()
             ->count(2)
             ->state(new Sequence(
@@ -71,7 +65,7 @@ class SortCurrenciesTest extends TestCase
                 ['rate' => 28.0000],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.currencies.index', ['sort' => 'rate']))
             ->assertSuccessful()
             ->assertViewIs('admin.currencies.index')
@@ -82,8 +76,6 @@ class SortCurrenciesTest extends TestCase
     /** @test */
     public function admin_can_sort_currencies_by_rate_descending()
     {
-        $user = User::factory()->create();
-
         [$dollar, $euro] = Currency::factory()
             ->count(2)
             ->state(new Sequence(
@@ -91,7 +83,7 @@ class SortCurrenciesTest extends TestCase
                 ['rate' => 28.0000],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.currencies.index', ['sort' => '-rate']))
             ->assertSuccessful()
             ->assertViewIs('admin.currencies.index')

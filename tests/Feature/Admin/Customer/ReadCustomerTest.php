@@ -23,10 +23,10 @@ class ReadCustomerTest extends TestCase
     /** @test */
     public function user_can_read_customer()
     {
-        $user = User::factory()->create();
+
         $customer = Customer::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', $customer))
             ->assertSuccessful()
             ->assertViewIs('admin.customers.show')

@@ -24,7 +24,7 @@ class SearchPostsTest extends TestCase
     /** @test */
     public function user_can_search_posts()
     {
-        $user = User::factory()->create();
+
 
         [$aboutUs, $howTo, $comparison] = Post::factory()
             ->count(3)
@@ -41,7 +41,7 @@ class SearchPostsTest extends TestCase
                 ],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.posts.index', ['search' => 'Post']))
             ->assertSeeInOrder([$howTo->title, $aboutUs->title])
             ->assertDontSee($comparison->title);

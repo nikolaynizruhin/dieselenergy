@@ -23,7 +23,7 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_name_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$patrol, $diesel] = Product::factory()
             ->count(2)
@@ -32,7 +32,7 @@ class SortProductsTest extends TestCase
                 ['name' => 'Diesel Generator'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.index', ['sort' => 'name']))
             ->assertSuccessful()
             ->assertViewIs('admin.products.index')
@@ -43,7 +43,7 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_name_descending()
     {
-        $user = User::factory()->create();
+
 
         [$patrol, $diesel] = Product::factory()
             ->count(2)
@@ -52,7 +52,7 @@ class SortProductsTest extends TestCase
                 ['name' => 'Diesel Generator'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.index', ['sort' => '-name']))
             ->assertSuccessful()
             ->assertViewIs('admin.products.index')
@@ -63,7 +63,7 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_price_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$patrol, $diesel] = Product::factory()
             ->count(2)
@@ -72,7 +72,7 @@ class SortProductsTest extends TestCase
                 ['price' => 100],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.index', ['sort' => 'price']))
             ->assertSuccessful()
             ->assertViewIs('admin.products.index')
@@ -83,7 +83,7 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_price_descending()
     {
-        $user = User::factory()->create();
+
 
         [$patrol, $diesel] = Product::factory()
             ->count(2)
@@ -92,7 +92,7 @@ class SortProductsTest extends TestCase
                 ['price' => 100],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.index', ['sort' => '-price']))
             ->assertSuccessful()
             ->assertViewIs('admin.products.index')
@@ -103,7 +103,7 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_status_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$patrol, $diesel] = Product::factory()
             ->count(2)
@@ -112,7 +112,7 @@ class SortProductsTest extends TestCase
                 ['is_active' => false],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.index', ['sort' => 'is_active']))
             ->assertSuccessful()
             ->assertViewIs('admin.products.index')
@@ -123,7 +123,7 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_status_descending()
     {
-        $user = User::factory()->create();
+
 
         [$patrol, $diesel] = Product::factory()
             ->count(2)
@@ -132,7 +132,7 @@ class SortProductsTest extends TestCase
                 ['is_active' => false],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.index', ['sort' => '-is_active']))
             ->assertSuccessful()
             ->assertViewIs('admin.products.index')
@@ -143,7 +143,7 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_category_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$ats, $generators] = Category::factory()
             ->count(2)
@@ -159,7 +159,7 @@ class SortProductsTest extends TestCase
                 ['category_id' => $generators],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.index', ['sort' => 'categories.name']))
             ->assertSuccessful()
             ->assertViewIs('admin.products.index')
@@ -170,7 +170,7 @@ class SortProductsTest extends TestCase
     /** @test */
     public function admin_can_sort_products_by_category_descending()
     {
-        $user = User::factory()->create();
+
 
         [$ats, $generators] = Category::factory()
             ->count(2)
@@ -186,7 +186,7 @@ class SortProductsTest extends TestCase
                 ['category_id' => $generators],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.products.index', ['sort' => '-categories.name']))
             ->assertSuccessful()
             ->assertViewIs('admin.products.index')

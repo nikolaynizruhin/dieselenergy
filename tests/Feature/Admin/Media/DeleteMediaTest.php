@@ -23,10 +23,10 @@ class DeleteMediaTest extends TestCase
     /** @test */
     public function user_can_delete_media()
     {
-        $user = User::factory()->create();
+
         $media = Media::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.products.show', $media->product))
             ->delete(route('admin.medias.destroy', $media))
             ->assertRedirect(route('admin.products.show', $media->product))

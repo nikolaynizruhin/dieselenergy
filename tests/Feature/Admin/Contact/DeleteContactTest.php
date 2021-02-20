@@ -23,10 +23,9 @@ class DeleteContactTest extends TestCase
     /** @test */
     public function user_can_delete_contact()
     {
-        $user = User::factory()->create();
         $contact = Contact::factory()->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->from(route('admin.contacts.index'))
             ->delete(route('admin.contacts.destroy', $contact))
             ->assertRedirect(route('admin.contacts.index'))

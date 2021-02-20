@@ -30,7 +30,7 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function user_can_sort_customer_orders_by_id_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -39,7 +39,7 @@ class SortOrdersTest extends TestCase
                 ['id' => 78822],
             ))->create(['customer_id' => $this->customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['order' => 'id'],
@@ -50,7 +50,7 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function user_can_sort_customer_orders_by_id_descending()
     {
-        $user = User::factory()->create();
+
 
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -59,7 +59,7 @@ class SortOrdersTest extends TestCase
                 ['id' => 78822],
             ))->create(['customer_id' => $this->customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['order' => '-id'],
@@ -70,7 +70,7 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function user_can_sort_customer_orders_by_status_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -79,7 +79,7 @@ class SortOrdersTest extends TestCase
                 ['status' => Order::PENDING],
             ))->create(['customer_id' => $this->customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['order' => 'status'],
@@ -90,7 +90,7 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function user_can_sort_customer_orders_by_status_descending()
     {
-        $user = User::factory()->create();
+
 
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -99,7 +99,7 @@ class SortOrdersTest extends TestCase
                 ['status' => Order::PENDING],
             ))->create(['customer_id' => $this->customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['order' => '-status'],
@@ -110,7 +110,7 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function user_can_sort_customer_orders_by_date_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -119,7 +119,7 @@ class SortOrdersTest extends TestCase
                 ['created_at' => now()->subDay()],
             ))->create(['customer_id' => $this->customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['order' => 'created_at'],
@@ -130,7 +130,7 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function user_can_sort_customer_orders_by_date_descending()
     {
-        $user = User::factory()->create();
+
 
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -139,7 +139,7 @@ class SortOrdersTest extends TestCase
                 ['created_at' => now()->subDay()],
             ))->create(['customer_id' => $this->customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['order' => '-created_at'],
@@ -150,7 +150,7 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function user_can_sort_customer_orders_by_total_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -159,7 +159,7 @@ class SortOrdersTest extends TestCase
                 ['total' => 100],
             ))->create(['customer_id' => $this->customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['order' => 'total'],
@@ -170,7 +170,7 @@ class SortOrdersTest extends TestCase
     /** @test */
     public function user_can_sort_customer_orders_by_total_descending()
     {
-        $user = User::factory()->create();
+
 
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -179,7 +179,7 @@ class SortOrdersTest extends TestCase
                 ['total' => 100],
             ))->create(['customer_id' => $this->customer->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.show', [
                 'customer' => $this->customer,
                 'sort' => ['order' => '-total'],

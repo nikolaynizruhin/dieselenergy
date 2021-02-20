@@ -22,7 +22,7 @@ class SortCustomersTest extends TestCase
     /** @test */
     public function admin_can_sort_customers_by_name_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$adam, $tom] = Customer::factory()
             ->count(2)
@@ -31,7 +31,7 @@ class SortCustomersTest extends TestCase
                 ['name' => 'Tom'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.index', ['sort' => 'name']))
             ->assertSuccessful()
             ->assertViewIs('admin.customers.index')
@@ -42,7 +42,7 @@ class SortCustomersTest extends TestCase
     /** @test */
     public function admin_can_sort_customers_by_name_descending()
     {
-        $user = User::factory()->create();
+
 
         [$adam, $tom] = Customer::factory()
             ->count(2)
@@ -51,7 +51,7 @@ class SortCustomersTest extends TestCase
                 ['name' => 'Tom'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.index', ['sort' => '-name']))
             ->assertSuccessful()
             ->assertViewIs('admin.customers.index')
@@ -62,7 +62,7 @@ class SortCustomersTest extends TestCase
     /** @test */
     public function admin_can_sort_customers_by_email_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$adam, $tom] = Customer::factory()
             ->count(2)
@@ -71,7 +71,7 @@ class SortCustomersTest extends TestCase
                 ['email' => 'tom@example.com'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.index', ['sort' => 'email']))
             ->assertSuccessful()
             ->assertViewIs('admin.customers.index')
@@ -82,7 +82,7 @@ class SortCustomersTest extends TestCase
     /** @test */
     public function admin_can_sort_customers_by_email_descending()
     {
-        $user = User::factory()->create();
+
 
         [$adam, $tom] = Customer::factory()
             ->count(2)
@@ -91,7 +91,7 @@ class SortCustomersTest extends TestCase
                 ['email' => 'tom@example.com'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.index', ['sort' => '-email']))
             ->assertSuccessful()
             ->assertViewIs('admin.customers.index')
@@ -102,7 +102,7 @@ class SortCustomersTest extends TestCase
     /** @test */
     public function admin_can_sort_customers_by_phone_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$adam, $tom] = Customer::factory()
             ->count(2)
@@ -111,7 +111,7 @@ class SortCustomersTest extends TestCase
                 ['phone' => '+380632234567'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.index', ['sort' => 'phone']))
             ->assertSuccessful()
             ->assertViewIs('admin.customers.index')
@@ -122,7 +122,7 @@ class SortCustomersTest extends TestCase
     /** @test */
     public function admin_can_sort_customers_by_phone_descending()
     {
-        $user = User::factory()->create();
+
 
         [$adam, $tom] = Customer::factory()
             ->count(2)
@@ -131,7 +131,7 @@ class SortCustomersTest extends TestCase
                 ['phone' => '+380632234567'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.customers.index', ['sort' => '-phone']))
             ->assertSuccessful()
             ->assertViewIs('admin.customers.index')

@@ -22,7 +22,7 @@ class SortPostsTest extends TestCase
     /** @test */
     public function admin_can_sort_posts_by_title_ascending()
     {
-        $user = User::factory()->create();
+
 
         [$about, $history] = Post::factory()
             ->count(2)
@@ -31,7 +31,7 @@ class SortPostsTest extends TestCase
                 ['title' => 'History'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.posts.index', ['sort' => 'title']))
             ->assertSuccessful()
             ->assertViewIs('admin.posts.index')
@@ -42,7 +42,7 @@ class SortPostsTest extends TestCase
     /** @test */
     public function admin_can_sort_posts_by_title_descending()
     {
-        $user = User::factory()->create();
+
 
         [$about, $history] = Post::factory()
             ->count(2)
@@ -51,7 +51,7 @@ class SortPostsTest extends TestCase
                 ['title' => 'History'],
             ))->create();
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.posts.index', ['sort' => '-title']))
             ->assertSuccessful()
             ->assertViewIs('admin.posts.index')

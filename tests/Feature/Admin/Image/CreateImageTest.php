@@ -23,9 +23,9 @@ class CreateImageTest extends TestCase
     /** @test */
     public function user_can_visit_create_image_page()
     {
-        $user = User::factory()->create();
 
-        $this->actingAs($user)
+
+        $this->login()
             ->get(route('admin.images.create'))
             ->assertViewIs('admin.images.create');
     }
@@ -49,9 +49,9 @@ class CreateImageTest extends TestCase
 
         $image = UploadedFile::fake()->image('product.jpg');
 
-        $user = User::factory()->create();
 
-        $this->actingAs($user)
+
+        $this->login()
             ->post(route('admin.images.store'), [
                 'images' => [$image],
             ])->assertRedirect(route('admin.images.index'))
@@ -65,9 +65,9 @@ class CreateImageTest extends TestCase
     /** @test */
     public function user_cant_create_image_without_image()
     {
-        $user = User::factory()->create();
 
-        $this->actingAs($user)
+
+        $this->login()
             ->post(route('admin.images.store'), [
                 'images' => [null],
             ])->assertSessionHasErrors('images.*');
@@ -76,9 +76,9 @@ class CreateImageTest extends TestCase
     /** @test */
     public function user_cant_create_image_with_integer_image()
     {
-        $user = User::factory()->create();
 
-        $this->actingAs($user)
+
+        $this->login()
             ->post(route('admin.images.store'), [
                 'images' => [1],
             ])->assertSessionHasErrors('images.*');
@@ -89,9 +89,9 @@ class CreateImageTest extends TestCase
     {
         $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
 
-        $user = User::factory()->create();
 
-        $this->actingAs($user)
+
+        $this->login()
             ->post(route('admin.products.store'), [
                 'images' => [$pdf],
             ])->assertSessionHasErrors('images.*');

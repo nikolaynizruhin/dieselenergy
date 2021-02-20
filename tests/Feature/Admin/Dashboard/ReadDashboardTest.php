@@ -23,7 +23,7 @@ class ReadDashboardTest extends TestCase
     /** @test */
     public function user_can_read_dashboard()
     {
-        $user = User::factory()->create();
+
         $product = Product::factory()->create();
 
         [$orderA, $orderB] = Order::factory()
@@ -35,7 +35,7 @@ class ReadDashboardTest extends TestCase
 
         $orderA->products()->attach($product, ['quantity' => 2]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.dashboard'))
             ->assertSuccessful()
             ->assertViewIs('admin.dashboard')

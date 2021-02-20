@@ -16,7 +16,7 @@ class ReadSpecificationsTest extends TestCase
     /** @test */
     public function user_can_read_specifications()
     {
-        $user = User::factory()->create();
+
 
         [$width, $height] = Attribute::factory()
             ->count(2)
@@ -29,7 +29,7 @@ class ReadSpecificationsTest extends TestCase
 
         $category->attributes()->attach([$width->id, $height->id]);
 
-        $this->actingAs($user)
+        $this->login()
             ->get(route('admin.categories.show', $category))
             ->assertSuccessful()
             ->assertViewIs('admin.categories.show')
