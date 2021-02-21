@@ -59,8 +59,12 @@ class UpdateSpecificationTest extends TestCase
         $stub = Specification::factory()->raw(['category_id' => null]);
 
         $this->login()
+            ->from(route('admin.specifications.edit', $specification))
             ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertRedirect(route('admin.specifications.edit', $specification))
             ->assertSessionHasErrors('category_id');
+
+        $this->assertDatabaseCount('attribute_category', 1);
     }
 
     /** @test */
@@ -70,8 +74,12 @@ class UpdateSpecificationTest extends TestCase
         $stub = Specification::factory()->raw(['category_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.specifications.edit', $specification))
             ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertRedirect(route('admin.specifications.edit', $specification))
             ->assertSessionHasErrors('category_id');
+
+        $this->assertDatabaseCount('attribute_category', 1);
     }
 
     /** @test */
@@ -81,8 +89,12 @@ class UpdateSpecificationTest extends TestCase
         $stub = Specification::factory()->raw(['category_id' => 10]);
 
         $this->login()
+            ->from(route('admin.specifications.edit', $specification))
             ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertRedirect(route('admin.specifications.edit', $specification))
             ->assertSessionHasErrors('category_id');
+
+        $this->assertDatabaseCount('attribute_category', 1);
     }
 
     /** @test */
@@ -92,8 +104,12 @@ class UpdateSpecificationTest extends TestCase
         $stub = Specification::factory()->raw(['attribute_id' => null]);
 
         $this->login()
+            ->from(route('admin.specifications.edit', $specification))
             ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertRedirect(route('admin.specifications.edit', $specification))
             ->assertSessionHasErrors('attribute_id');
+
+        $this->assertDatabaseCount('attribute_category', 1);
     }
 
     /** @test */
@@ -103,8 +119,12 @@ class UpdateSpecificationTest extends TestCase
         $stub = Specification::factory()->raw(['attribute_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.specifications.edit', $specification))
             ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertRedirect(route('admin.specifications.edit', $specification))
             ->assertSessionHasErrors('attribute_id');
+
+        $this->assertDatabaseCount('attribute_category', 1);
     }
 
     /** @test */
@@ -114,7 +134,11 @@ class UpdateSpecificationTest extends TestCase
         $stub = Specification::factory()->raw(['attribute_id' => 10]);
 
         $this->login()
+            ->from(route('admin.specifications.edit', $specification))
             ->put(route('admin.specifications.update', $specification), $stub)
+            ->assertRedirect(route('admin.specifications.edit', $specification))
             ->assertSessionHasErrors('attribute_id');
+
+        $this->assertDatabaseCount('attribute_category', 1);
     }
 }
