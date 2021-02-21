@@ -65,8 +65,12 @@ class UpdateOrderTest extends TestCase
         $stub = Order::factory()->raw(['notes' => 1]);
 
         $this->login()
+            ->from(route('admin.orders.edit', $order))
             ->put(route('admin.orders.update', $order), $stub)
+            ->assertRedirect(route('admin.orders.edit', $order))
             ->assertSessionHasErrors('notes');
+
+        $this->assertDatabaseCount('orders', 1);
     }
 
     /** @test */
@@ -76,8 +80,12 @@ class UpdateOrderTest extends TestCase
         $stub = Order::factory()->raw(['customer_id' => null]);
 
         $this->login()
+            ->from(route('admin.orders.edit', $order))
             ->put(route('admin.orders.update', $order), $stub)
+            ->assertRedirect(route('admin.orders.edit', $order))
             ->assertSessionHasErrors('customer_id');
+
+        $this->assertDatabaseCount('orders', 1);
     }
 
     /** @test */
@@ -87,8 +95,12 @@ class UpdateOrderTest extends TestCase
         $stub = Order::factory()->raw(['customer_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.orders.edit', $order))
             ->put(route('admin.orders.update', $order), $stub)
+            ->assertRedirect(route('admin.orders.edit', $order))
             ->assertSessionHasErrors('customer_id');
+
+        $this->assertDatabaseCount('orders', 1);
     }
 
     /** @test */
@@ -98,8 +110,12 @@ class UpdateOrderTest extends TestCase
         $stub = Order::factory()->raw(['customer_id' => 10]);
 
         $this->login()
+            ->from(route('admin.orders.edit', $order))
             ->put(route('admin.orders.update', $order), $stub)
+            ->assertRedirect(route('admin.orders.edit', $order))
             ->assertSessionHasErrors('customer_id');
+
+        $this->assertDatabaseCount('orders', 1);
     }
 
     /** @test */
@@ -109,8 +125,12 @@ class UpdateOrderTest extends TestCase
         $stub = Order::factory()->raw(['status' => null]);
 
         $this->login()
+            ->from(route('admin.orders.edit', $order))
             ->put(route('admin.orders.update', $order), $stub)
+            ->assertRedirect(route('admin.orders.edit', $order))
             ->assertSessionHasErrors('status');
+
+        $this->assertDatabaseCount('orders', 1);
     }
 
     /** @test */
@@ -120,8 +140,12 @@ class UpdateOrderTest extends TestCase
         $stub = Order::factory()->raw(['status' => 1]);
 
         $this->login()
+            ->from(route('admin.orders.edit', $order))
             ->put(route('admin.orders.update', $order), $stub)
+            ->assertRedirect(route('admin.orders.edit', $order))
             ->assertSessionHasErrors('status');
+
+        $this->assertDatabaseCount('orders', 1);
     }
 
     /** @test */
@@ -131,8 +155,12 @@ class UpdateOrderTest extends TestCase
         $stub = Order::factory()->raw(['total' => null]);
 
         $this->login()
+            ->from(route('admin.orders.edit', $order))
             ->put(route('admin.orders.update', $order), $stub)
+            ->assertRedirect(route('admin.orders.edit', $order))
             ->assertSessionHasErrors('total');
+
+        $this->assertDatabaseCount('orders', 1);
     }
 
     /** @test */
@@ -142,8 +170,12 @@ class UpdateOrderTest extends TestCase
         $stub = Order::factory()->raw(['total' => 'string']);
 
         $this->login()
+            ->from(route('admin.orders.edit', $order))
             ->put(route('admin.orders.update', $order), $stub)
+            ->assertRedirect(route('admin.orders.edit', $order))
             ->assertSessionHasErrors('total');
+
+        $this->assertDatabaseCount('orders', 1);
     }
 
     /** @test */
@@ -153,7 +185,11 @@ class UpdateOrderTest extends TestCase
         $stub = Order::factory()->raw(['total' => -1]);
 
         $this->login()
+            ->from(route('admin.orders.edit', $order))
             ->put(route('admin.orders.update', $order), $stub)
+            ->assertRedirect(route('admin.orders.edit', $order))
             ->assertSessionHasErrors('total');
+
+        $this->assertDatabaseCount('orders', 1);
     }
 }

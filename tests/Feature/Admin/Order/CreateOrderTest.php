@@ -54,8 +54,12 @@ class CreateOrderTest extends TestCase
         $order = Order::factory()->raw(['notes' => 1]);
 
         $this->login()
+            ->from(route('admin.orders.create'))
             ->post(route('admin.orders.store'), $order)
+            ->assertRedirect(route('admin.orders.create'))
             ->assertSessionHasErrors('notes');
+
+        $this->assertDatabaseCount('orders', 0);
     }
 
     /** @test */
@@ -64,8 +68,12 @@ class CreateOrderTest extends TestCase
         $order = Order::factory()->raw(['customer_id' => null]);
 
         $this->login()
+            ->from(route('admin.orders.create'))
             ->post(route('admin.orders.store'), $order)
+            ->assertRedirect(route('admin.orders.create'))
             ->assertSessionHasErrors('customer_id');
+
+        $this->assertDatabaseCount('orders', 0);
     }
 
     /** @test */
@@ -74,8 +82,12 @@ class CreateOrderTest extends TestCase
         $order = Order::factory()->raw(['customer_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.orders.create'))
             ->post(route('admin.orders.store'), $order)
+            ->assertRedirect(route('admin.orders.create'))
             ->assertSessionHasErrors('customer_id');
+
+        $this->assertDatabaseCount('orders', 0);
     }
 
     /** @test */
@@ -84,8 +96,12 @@ class CreateOrderTest extends TestCase
         $order = Order::factory()->raw(['customer_id' => 1]);
 
         $this->login()
+            ->from(route('admin.orders.create'))
             ->post(route('admin.orders.store'), $order)
+            ->assertRedirect(route('admin.orders.create'))
             ->assertSessionHasErrors('customer_id');
+
+        $this->assertDatabaseCount('orders', 0);
     }
 
     /** @test */
@@ -94,8 +110,12 @@ class CreateOrderTest extends TestCase
         $order = Order::factory()->raw(['status' => null]);
 
         $this->login()
+            ->from(route('admin.orders.create'))
             ->post(route('admin.orders.store'), $order)
+            ->assertRedirect(route('admin.orders.create'))
             ->assertSessionHasErrors('status');
+
+        $this->assertDatabaseCount('orders', 0);
     }
 
     /** @test */
@@ -104,7 +124,11 @@ class CreateOrderTest extends TestCase
         $order = Order::factory()->raw(['status' => 1]);
 
         $this->login()
+            ->from(route('admin.orders.create'))
             ->post(route('admin.orders.store'), $order)
+            ->assertRedirect(route('admin.orders.create'))
             ->assertSessionHasErrors('status');
+
+        $this->assertDatabaseCount('orders', 0);
     }
 }
