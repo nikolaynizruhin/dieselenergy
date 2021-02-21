@@ -18,9 +18,11 @@ class UpdateUserPasswordTest extends TestCase
         $user = User::factory()->create();
 
         $this->put(route('admin.users.password.update', $user), [
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => 'new-password',
+            'password_confirmation' => 'new-password',
         ])->assertRedirect(route('admin.login'));
+
+        $this->assertTrue(Hash::check('password', $user->fresh()->password));
     }
 
     /** @test */
@@ -48,9 +50,11 @@ class UpdateUserPasswordTest extends TestCase
             ->from(route('admin.users.password.update', $user))
             ->from(route('admin.users.password.update', $user))
             ->put(route('admin.users.password.update', $user), [
-                'password_confirmation' => 'password',
+                'password_confirmation' => 'new-password',
             ])->assertRedirect(route('admin.users.password.update', $user))
             ->assertSessionHasErrors('password');
+
+        $this->assertTrue(Hash::check('password', $user->fresh()->password));
     }
 
     /** @test */
@@ -66,6 +70,8 @@ class UpdateUserPasswordTest extends TestCase
                 'password_confirmation' => 12345678,
             ])->assertRedirect(route('admin.users.password.update', $user))
             ->assertSessionHasErrors('password');
+
+        $this->assertTrue(Hash::check('password', $user->fresh()->password));
     }
 
     /** @test */
@@ -80,6 +86,8 @@ class UpdateUserPasswordTest extends TestCase
                 'password_confirmation' => 'small',
             ])->assertRedirect(route('admin.users.password.update', $user))
             ->assertSessionHasErrors('password');
+
+        $this->assertTrue(Hash::check('password', $user->fresh()->password));
     }
 
     /** @test */
@@ -93,5 +101,7 @@ class UpdateUserPasswordTest extends TestCase
                 'password' => 'password',
             ])->assertRedirect(route('admin.users.password.update', $user))
             ->assertSessionHasErrors('password');
+
+        $this->assertTrue(Hash::check('password', $user->fresh()->password));
     }
 }
