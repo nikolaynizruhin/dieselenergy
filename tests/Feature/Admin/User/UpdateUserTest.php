@@ -67,9 +67,13 @@ class UpdateUserTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
+            ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
                 'email' => $this->faker->email,
-            ])->assertSessionHasErrors('name');
+            ])->assertRedirect(route('admin.users.edit', $user))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
@@ -78,10 +82,14 @@ class UpdateUserTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
+            ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
                 'name' => 1,
                 'email' => $this->faker->email,
-            ])->assertSessionHasErrors('name');
+            ])->assertRedirect(route('admin.users.edit', $user))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
@@ -90,10 +98,14 @@ class UpdateUserTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
+            ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
                 'name' => str_repeat('a', 256),
                 'email' => $this->faker->email,
-            ])->assertSessionHasErrors('name');
+            ])->assertRedirect(route('admin.users.edit', $user))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
@@ -102,9 +114,13 @@ class UpdateUserTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
+            ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
                 'name' => $this->faker->name,
-            ])->assertSessionHasErrors('email');
+            ])->assertRedirect(route('admin.users.edit', $user))
+            ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
@@ -113,10 +129,14 @@ class UpdateUserTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
+            ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
                 'name' => $this->faker->name,
                 'email' => 1,
-            ])->assertSessionHasErrors('email');
+            ])->assertRedirect(route('admin.users.edit', $user))
+            ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
@@ -125,10 +145,14 @@ class UpdateUserTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
+            ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
                 'name' => $this->faker->name,
                 'email' => str_repeat('a', 256),
-            ])->assertSessionHasErrors('email');
+            ])->assertRedirect(route('admin.users.edit', $user))
+            ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
@@ -137,10 +161,14 @@ class UpdateUserTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
+            ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
                 'name' => $this->faker->name,
                 'email' => 'invalid',
-            ])->assertSessionHasErrors('email');
+            ])->assertRedirect(route('admin.users.edit', $user))
+            ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
@@ -149,9 +177,13 @@ class UpdateUserTest extends TestCase
         [$admin, $user] = User::factory()->count(2)->create();
 
         $this->actingAs($admin)
+            ->from(route('admin.users.edit', $admin))
             ->put(route('admin.users.update', $admin), [
                 'name' => $this->faker->name,
                 'email' => $user->email,
-            ])->assertSessionHasErrors('email');
+            ])->assertRedirect(route('admin.users.edit', $admin))
+            ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('users', 2);
     }
 }
