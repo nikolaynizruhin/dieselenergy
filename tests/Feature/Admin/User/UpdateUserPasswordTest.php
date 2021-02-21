@@ -29,6 +29,7 @@ class UpdateUserPasswordTest extends TestCase
         $admin = User::factory()->create();
 
         $this->actingAs($admin)
+            ->from(route('admin.users.password.update', $admin))
             ->put(route('admin.users.password.update', $admin), [
                 'password' => 'new-password',
                 'password_confirmation' => 'new-password',
@@ -44,9 +45,12 @@ class UpdateUserPasswordTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
+            ->from(route('admin.users.password.update', $user))
+            ->from(route('admin.users.password.update', $user))
             ->put(route('admin.users.password.update', $user), [
                 'password_confirmation' => 'password',
-            ])->assertSessionHasErrors('password');
+            ])->assertRedirect(route('admin.users.password.update', $user))
+            ->assertSessionHasErrors('password');
     }
 
     /** @test */
@@ -55,10 +59,13 @@ class UpdateUserPasswordTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
+            ->from(route('admin.users.password.update', $user))
+            ->from(route('admin.users.password.update', $user))
             ->put(route('admin.users.password.update', $user), [
                 'password' => 12345678,
                 'password_confirmation' => 12345678,
-            ])->assertSessionHasErrors('password');
+            ])->assertRedirect(route('admin.users.password.update', $user))
+            ->assertSessionHasErrors('password');
     }
 
     /** @test */
@@ -67,10 +74,12 @@ class UpdateUserPasswordTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
+            ->from(route('admin.users.password.update', $user))
             ->put(route('admin.users.password.update', $user), [
                 'password' => 'small',
                 'password_confirmation' => 'small',
-            ])->assertSessionHasErrors('password');
+            ])->assertRedirect(route('admin.users.password.update', $user))
+            ->assertSessionHasErrors('password');
     }
 
     /** @test */
@@ -79,8 +88,10 @@ class UpdateUserPasswordTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
+            ->from(route('admin.users.password.update', $user))
             ->put(route('admin.users.password.update', $user), [
                 'password' => 'password',
-            ])->assertSessionHasErrors('password');
+            ])->assertRedirect(route('admin.users.password.update', $user))
+            ->assertSessionHasErrors('password');
     }
 }
