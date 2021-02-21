@@ -84,7 +84,10 @@ class UpdateMediaTest extends TestCase
 
         $this->login()
             ->put(route('admin.medias.update', $media), $stub)
+            ->assertRedirect()
             ->assertSessionHasErrors('product_id');
+
+        $this->assertDatabaseCount('image_product', 1);
     }
 
     /** @test */
@@ -95,7 +98,10 @@ class UpdateMediaTest extends TestCase
 
         $this->login()
             ->put(route('admin.medias.update', $media), $stub)
+            ->assertRedirect()
             ->assertSessionHasErrors('product_id');
+
+        $this->assertDatabaseCount('image_product', 1);
     }
 
     /** @test */
@@ -106,7 +112,10 @@ class UpdateMediaTest extends TestCase
 
         $this->login()
             ->put(route('admin.medias.update', $media), $stub)
+            ->assertRedirect()
             ->assertSessionHasErrors('product_id');
+
+        $this->assertDatabaseCount('image_product', 1);
     }
 
     /** @test */
@@ -116,8 +125,12 @@ class UpdateMediaTest extends TestCase
         $stub = Media::factory()->raw(['image_id' => null]);
 
         $this->login()
+            ->from(route('admin.medias.edit', $media))
             ->put(route('admin.medias.update', $media), $stub)
+            ->assertRedirect(route('admin.medias.edit', $media))
             ->assertSessionHasErrors('image_id');
+
+        $this->assertDatabaseCount('image_product', 1);
     }
 
     /** @test */
@@ -127,8 +140,12 @@ class UpdateMediaTest extends TestCase
         $stub = Media::factory()->raw(['image_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.medias.edit', $media))
             ->put(route('admin.medias.update', $media), $stub)
+            ->assertRedirect(route('admin.medias.edit', $media))
             ->assertSessionHasErrors('image_id');
+
+        $this->assertDatabaseCount('image_product', 1);
     }
 
     /** @test */
@@ -138,7 +155,11 @@ class UpdateMediaTest extends TestCase
         $stub = Media::factory()->raw(['image_id' => 10]);
 
         $this->login()
+            ->from(route('admin.medias.edit', $media))
             ->put(route('admin.medias.update', $media), $stub)
+            ->assertRedirect(route('admin.medias.edit', $media))
             ->assertSessionHasErrors('image_id');
+
+        $this->assertDatabaseCount('image_product', 1);
     }
 }

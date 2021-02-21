@@ -60,8 +60,9 @@ class CreateMediaTest extends TestCase
         ]);
 
         $this->login()
+            ->from(route('admin.medias.create'))
             ->post(route('admin.medias.store'), $stub)
-            ->assertRedirect();
+            ->assertRedirect(route('admin.products.show', $media->product));
 
         $this->assertFalse($media->fresh()->is_default);
     }
@@ -73,7 +74,10 @@ class CreateMediaTest extends TestCase
 
         $this->login()
             ->post(route('admin.medias.store'), $media)
+            ->assertRedirect()
             ->assertSessionHasErrors('product_id');
+
+        $this->assertDatabaseCount('image_product', 0);
     }
 
     /** @test */
@@ -83,7 +87,10 @@ class CreateMediaTest extends TestCase
 
         $this->login()
             ->post(route('admin.medias.store'), $media)
+            ->assertRedirect()
             ->assertSessionHasErrors('product_id');
+
+        $this->assertDatabaseCount('image_product', 0);
     }
 
     /** @test */
@@ -93,7 +100,10 @@ class CreateMediaTest extends TestCase
 
         $this->login()
             ->post(route('admin.medias.store'), $media)
+            ->assertRedirect()
             ->assertSessionHasErrors('product_id');
+
+        $this->assertDatabaseCount('image_product', 0);
     }
 
     /** @test */
@@ -102,8 +112,12 @@ class CreateMediaTest extends TestCase
         $media = Media::factory()->raw(['image_id' => null]);
 
         $this->login()
+            ->from(route('admin.medias.create'))
             ->post(route('admin.medias.store'), $media)
+            ->assertRedirect(route('admin.medias.create'))
             ->assertSessionHasErrors('image_id');
+
+        $this->assertDatabaseCount('image_product', 0);
     }
 
     /** @test */
@@ -112,8 +126,12 @@ class CreateMediaTest extends TestCase
         $media = Media::factory()->raw(['image_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.medias.create'))
             ->post(route('admin.medias.store'), $media)
+            ->assertRedirect(route('admin.medias.create'))
             ->assertSessionHasErrors('image_id');
+
+        $this->assertDatabaseCount('image_product', 0);
     }
 
     /** @test */
@@ -122,8 +140,12 @@ class CreateMediaTest extends TestCase
         $media = Media::factory()->raw(['image_id' => 10]);
 
         $this->login()
+            ->from(route('admin.medias.create'))
             ->post(route('admin.medias.store'), $media)
+            ->assertRedirect(route('admin.medias.create'))
             ->assertSessionHasErrors('image_id');
+
+        $this->assertDatabaseCount('image_product', 0);
     }
 
     /** @test */
@@ -132,7 +154,11 @@ class CreateMediaTest extends TestCase
         $media = Media::factory()->create();
 
         $this->login()
+            ->from(route('admin.medias.create'))
             ->post(route('admin.medias.store'), $media->toArray())
+            ->assertRedirect(route('admin.medias.create'))
             ->assertSessionHasErrors('product_id');
+
+        $this->assertDatabaseCount('image_product', 1);
     }
 }

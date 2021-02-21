@@ -61,18 +61,22 @@ class CreateImageTest extends TestCase
     public function user_cant_create_image_without_image()
     {
         $this->login()
+            ->from(route('admin.images.create'))
             ->post(route('admin.images.store'), [
                 'images' => [null],
-            ])->assertSessionHasErrors('images.*');
+            ])->assertRedirect(route('admin.images.create'))
+            ->assertSessionHasErrors('images.*');
     }
 
     /** @test */
     public function user_cant_create_image_with_integer_image()
     {
         $this->login()
+            ->from(route('admin.images.create'))
             ->post(route('admin.images.store'), [
                 'images' => [1],
-            ])->assertSessionHasErrors('images.*');
+            ])->assertRedirect(route('admin.images.create'))
+            ->assertSessionHasErrors('images.*');
     }
 
     /** @test */
@@ -81,8 +85,10 @@ class CreateImageTest extends TestCase
         $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
 
         $this->login()
+            ->from(route('admin.images.create'))
             ->post(route('admin.products.store'), [
                 'images' => [$pdf],
-            ])->assertSessionHasErrors('images.*');
+            ])->assertRedirect(route('admin.images.create'))
+            ->assertSessionHasErrors('images.*');
     }
 }
