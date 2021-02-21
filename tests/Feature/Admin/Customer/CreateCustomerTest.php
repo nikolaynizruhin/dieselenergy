@@ -54,8 +54,12 @@ class CreateCustomerTest extends TestCase
         $customer = Customer::factory()->raw(['name' => null]);
 
         $this->login()
+            ->from(route('admin.customers.create'))
             ->post(route('admin.customers.store'), $customer)
+            ->assertRedirect(route('admin.customers.create'))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('customers', 0);
     }
 
     /** @test */
@@ -64,8 +68,12 @@ class CreateCustomerTest extends TestCase
         $customer = Customer::factory()->raw(['name' => 1]);
 
         $this->login()
+            ->from(route('admin.customers.create'))
             ->post(route('admin.customers.store'), $customer)
+            ->assertRedirect(route('admin.customers.create'))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('customers', 0);
     }
 
     /** @test */
@@ -74,8 +82,12 @@ class CreateCustomerTest extends TestCase
         $customer = Customer::factory()->raw(['name' => str_repeat('a', 256)]);
 
         $this->login()
+            ->from(route('admin.customers.create'))
             ->post(route('admin.customers.store'), $customer)
+            ->assertRedirect(route('admin.customers.create'))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('customers', 0);
     }
 
     /** @test */
@@ -84,8 +96,12 @@ class CreateCustomerTest extends TestCase
         $customer = Customer::factory()->raw(['email' => null]);
 
         $this->login()
+            ->from(route('admin.customers.create'))
             ->post(route('admin.customers.store'), $customer)
+            ->assertRedirect(route('admin.customers.create'))
             ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('customers', 0);
     }
 
     /** @test */
@@ -94,8 +110,12 @@ class CreateCustomerTest extends TestCase
         $customer = Customer::factory()->raw(['email' => 1]);
 
         $this->login()
+            ->from(route('admin.customers.create'))
             ->post(route('admin.customers.store'), $customer)
+            ->assertRedirect(route('admin.customers.create'))
             ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('customers', 0);
     }
 
     /** @test */
@@ -104,8 +124,12 @@ class CreateCustomerTest extends TestCase
         $customer = Customer::factory()->raw(['email' => str_repeat('a', 256)]);
 
         $this->login()
+            ->from(route('admin.customers.create'))
             ->post(route('admin.customers.store'), $customer)
+            ->assertRedirect(route('admin.customers.create'))
             ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('customers', 0);
     }
 
     /** @test */
@@ -114,8 +138,12 @@ class CreateCustomerTest extends TestCase
         $customer = Customer::factory()->raw(['email' => 'invalid']);
 
         $this->login()
+            ->from(route('admin.customers.create'))
             ->post(route('admin.customers.store'), $customer)
+            ->assertRedirect(route('admin.customers.create'))
             ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('customers', 0);
     }
 
     /** @test */
@@ -124,8 +152,12 @@ class CreateCustomerTest extends TestCase
         $customer = Customer::factory()->create();
 
         $this->login()
+            ->from(route('admin.customers.create'))
             ->post(route('admin.customers.store'), $customer->toArray())
+            ->assertRedirect(route('admin.customers.create'))
             ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('customers', 1);
     }
 
     /** @test */
@@ -134,8 +166,12 @@ class CreateCustomerTest extends TestCase
         $customer = Customer::factory()->raw(['phone' => null]);
 
         $this->login()
+            ->from(route('admin.customers.create'))
             ->post(route('admin.customers.store'), $customer)
+            ->assertRedirect(route('admin.customers.create'))
             ->assertSessionHasErrors('phone');
+
+        $this->assertDatabaseCount('customers', 0);
     }
 
     /** @test */
@@ -144,8 +180,12 @@ class CreateCustomerTest extends TestCase
         $customer = Customer::factory()->raw(['phone' => 80631234567]);
 
         $this->login()
+            ->from(route('admin.customers.create'))
             ->post(route('admin.customers.store'), $customer)
+            ->assertRedirect(route('admin.customers.create'))
             ->assertSessionHasErrors('phone');
+
+        $this->assertDatabaseCount('customers', 0);
     }
 
     /** @test */
@@ -154,7 +194,11 @@ class CreateCustomerTest extends TestCase
         $customer = Customer::factory()->raw(['notes' => 1]);
 
         $this->login()
+            ->from(route('admin.customers.create'))
             ->post(route('admin.customers.store'), $customer)
+            ->assertRedirect(route('admin.customers.create'))
             ->assertSessionHasErrors('notes');
+
+        $this->assertDatabaseCount('customers', 0);
     }
 }
