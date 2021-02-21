@@ -61,9 +61,13 @@ class UpdateBrandTest extends TestCase
         $brand = Brand::factory()->create();
 
         $this->login()
+            ->from(route('admin.brands.edit', $brand))
             ->put(route('admin.brands.update', $brand), [
                 'name' => null,
-            ])->assertSessionHasErrors('name');
+            ])->assertRedirect(route('admin.brands.edit', $brand))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('brands', 1);
     }
 
     /** @test */
@@ -72,9 +76,13 @@ class UpdateBrandTest extends TestCase
         $brand = Brand::factory()->create();
 
         $this->login()
+            ->from(route('admin.brands.edit', $brand))
             ->put(route('admin.brands.update', $brand), [
                 'name' => 1,
-            ])->assertSessionHasErrors('name');
+            ])->assertRedirect(route('admin.brands.edit', $brand))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('brands', 1);
     }
 
     /** @test */
@@ -83,9 +91,13 @@ class UpdateBrandTest extends TestCase
         $brand = Brand::factory()->create();
 
         $this->login()
+            ->from(route('admin.brands.edit', $brand))
             ->put(route('admin.brands.update', $brand), [
                 'name' => str_repeat('a', 256),
-            ])->assertSessionHasErrors('name');
+            ])->assertRedirect(route('admin.brands.edit', $brand))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('brands', 1);
     }
 
     /** @test */
@@ -95,9 +107,13 @@ class UpdateBrandTest extends TestCase
         $existing = Brand::factory()->create();
 
         $this->login()
+            ->from(route('admin.brands.edit', $brand))
             ->put(route('admin.brands.update', $brand), [
                 'name' => $existing->name,
-            ])->assertSessionHasErrors('name');
+            ])->assertRedirect(route('admin.brands.edit', $brand))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('brands', 2);
     }
 
     /** @test */
@@ -107,8 +123,12 @@ class UpdateBrandTest extends TestCase
         $stub = Brand::factory()->raw(['currency_id' => null]);
 
         $this->login()
+            ->from(route('admin.brands.edit', $brand))
             ->put(route('admin.brands.update', $brand), $stub)
+            ->assertRedirect(route('admin.brands.edit', $brand))
             ->assertSessionHasErrors('currency_id');
+
+        $this->assertDatabaseCount('brands', 1);
     }
 
     /** @test */
@@ -118,8 +138,12 @@ class UpdateBrandTest extends TestCase
         $stub = Brand::factory()->raw(['currency_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.brands.edit', $brand))
             ->put(route('admin.brands.update', $brand), $stub)
+            ->assertRedirect(route('admin.brands.edit', $brand))
             ->assertSessionHasErrors('currency_id');
+
+        $this->assertDatabaseCount('brands', 1);
     }
 
     /** @test */
@@ -129,7 +153,11 @@ class UpdateBrandTest extends TestCase
         $stub = Brand::factory()->raw(['currency_id' => 100]);
 
         $this->login()
+            ->from(route('admin.brands.edit', $brand))
             ->put(route('admin.brands.update', $brand), $stub)
+            ->assertRedirect(route('admin.brands.edit', $brand))
             ->assertSessionHasErrors('currency_id');
+
+        $this->assertDatabaseCount('brands', 1);
     }
 }

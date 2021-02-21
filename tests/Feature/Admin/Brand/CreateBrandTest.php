@@ -52,26 +52,38 @@ class CreateBrandTest extends TestCase
     public function user_cant_create_brand_without_name()
     {
         $this->login()
+            ->from(route('admin.brands.create'))
             ->post(route('admin.brands.store'))
+            ->assertRedirect(route('admin.brands.create'))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('brands', 0);
     }
 
     /** @test */
     public function user_cant_create_brand_with_integer_name()
     {
         $this->login()
+            ->from(route('admin.brands.create'))
             ->post(route('admin.brands.store'), [
                 'name' => 1,
-            ])->assertSessionHasErrors('name');
+            ])->assertRedirect(route('admin.brands.create'))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('brands', 0);
     }
 
     /** @test */
     public function user_cant_create_brand_with_name_more_than_255_chars()
     {
         $this->login()
+            ->from(route('admin.brands.create'))
             ->post(route('admin.brands.store'), [
                 'name' => str_repeat('a', 256),
-            ])->assertSessionHasErrors('name');
+            ])->assertRedirect(route('admin.brands.create'))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('brands', 0);
     }
 
     /** @test */
@@ -80,9 +92,13 @@ class CreateBrandTest extends TestCase
         $brand = Brand::factory()->create();
 
         $this->login()
+            ->from(route('admin.brands.create'))
             ->post(route('admin.brands.store'), [
                 'name' => $brand->name,
-            ])->assertSessionHasErrors('name');
+            ])->assertRedirect(route('admin.brands.create'))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('brands', 1);
     }
 
     /** @test */
@@ -91,8 +107,12 @@ class CreateBrandTest extends TestCase
         $brand = Brand::factory()->raw(['currency_id' => null]);
 
         $this->login()
+            ->from(route('admin.brands.create'))
             ->post(route('admin.brands.store'), $brand)
+            ->assertRedirect(route('admin.brands.create'))
             ->assertSessionHasErrors('currency_id');
+
+        $this->assertDatabaseCount('brands', 0);
     }
 
     /** @test */
@@ -101,8 +121,12 @@ class CreateBrandTest extends TestCase
         $brand = Brand::factory()->raw(['currency_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.brands.create'))
             ->post(route('admin.brands.store'), $brand)
+            ->assertRedirect(route('admin.brands.create'))
             ->assertSessionHasErrors('currency_id');
+
+        $this->assertDatabaseCount('brands', 0);
     }
 
     /** @test */
@@ -111,7 +135,11 @@ class CreateBrandTest extends TestCase
         $brand = Brand::factory()->raw(['currency_id' => 1]);
 
         $this->login()
+            ->from(route('admin.brands.create'))
             ->post(route('admin.brands.store'), $brand)
+            ->assertRedirect(route('admin.brands.create'))
             ->assertSessionHasErrors('currency_id');
+
+        $this->assertDatabaseCount('brands', 0);
     }
 }

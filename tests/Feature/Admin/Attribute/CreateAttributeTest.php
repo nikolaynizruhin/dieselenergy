@@ -54,8 +54,12 @@ class CreateAttributeTest extends TestCase
         $attribute = Attribute::factory()->raw(['name' => null]);
 
         $this->login()
+            ->from(route('admin.attributes.create'))
             ->post(route('admin.attributes.store'), $attribute)
+            ->assertRedirect(route('admin.attributes.create'))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('attributes', 0);
     }
 
     /** @test */
@@ -64,8 +68,12 @@ class CreateAttributeTest extends TestCase
         $attribute = Attribute::factory()->raw(['name' => 1]);
 
         $this->login()
+            ->from(route('admin.attributes.create'))
             ->post(route('admin.attributes.store'), $attribute)
+            ->assertRedirect(route('admin.attributes.create'))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('attributes', 0);
     }
 
     /** @test */
@@ -74,8 +82,12 @@ class CreateAttributeTest extends TestCase
         $attribute = Attribute::factory()->raw(['name' => str_repeat('a', 256)]);
 
         $this->login()
-            ->post(route('admin.products.store'), $attribute)
+            ->from(route('admin.attributes.create'))
+            ->post(route('admin.attributes.store'), $attribute)
+            ->assertRedirect(route('admin.attributes.create'))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('attributes', 0);
     }
 
     /** @test */
@@ -85,8 +97,12 @@ class CreateAttributeTest extends TestCase
         $stub = Attribute::factory()->raw(['name' => $attribute->name]);
 
         $this->login()
+            ->from(route('admin.attributes.create'))
             ->post(route('admin.attributes.store'), $stub)
+            ->assertRedirect(route('admin.attributes.create'))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('attributes', 1);
     }
 
     /** @test */
@@ -95,8 +111,12 @@ class CreateAttributeTest extends TestCase
         $attribute = Attribute::factory()->raw(['measure' => 1]);
 
         $this->login()
+            ->from(route('admin.attributes.create'))
             ->post(route('admin.attributes.store'), $attribute)
+            ->assertRedirect(route('admin.attributes.create'))
             ->assertSessionHasErrors('measure');
+
+        $this->assertDatabaseCount('attributes', 0);
     }
 
     /** @test */
@@ -105,7 +125,11 @@ class CreateAttributeTest extends TestCase
         $attribute = Attribute::factory()->raw(['measure' => str_repeat('a', 256)]);
 
         $this->login()
+            ->from(route('admin.attributes.create'))
             ->post(route('admin.attributes.store'), $attribute)
+            ->assertRedirect(route('admin.attributes.create'))
             ->assertSessionHasErrors('measure');
+
+        $this->assertDatabaseCount('attributes', 0);
     }
 }
