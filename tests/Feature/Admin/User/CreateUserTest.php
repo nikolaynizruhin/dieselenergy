@@ -30,32 +30,22 @@ class CreateUserTest extends TestCase
     /** @test */
     public function guest_cant_create_user()
     {
-        $this->post(route('admin.users.store'), [
-            'name' => $this->faker->name,
-            'email' => $this->faker->email,
-            'password' => 'password',
-            'password_confirmation' => 'password',
-        ])->assertRedirect(route('admin.login'));
+        $this->post(route('admin.users.store'), $this->validFields())
+            ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_create_user()
     {
-        $stub = User::factory()->make();
-
         $this->login()
-            ->post(route('admin.users.store'), [
-                'name' => $stub->name,
-                'email' => $stub->email,
-                'password' => 'password',
-                'password_confirmation' => 'password',
-            ])->assertRedirect(route('admin.users.index'))
+            ->post(route('admin.users.store'), $fields = $this->validFields())
+            ->assertRedirect(route('admin.users.index'))
             ->assertSessionHas('status', trans('user.created'));
 
-        $user = User::firstWhere('email', $stub->email);
+        $user = User::firstWhere('email', $fields['email']);
 
-        $this->assertEquals($user->name, $stub->name);
-        $this->assertEquals($user->email, $stub->email);
+        $this->assertEquals($user->name, $fields['name']);
+        $this->assertEquals($user->email, $fields['email']);
         $this->assertTrue(Hash::check('password', $user->password));
     }
 
@@ -63,82 +53,86 @@ class CreateUserTest extends TestCase
     public function user_cant_create_user_without_name()
     {
         $this->login()
-            ->post(route('admin.users.store'), [
-                'email' => $this->faker->email,
-                'password' => 'password',
-                'password_confirmation' => 'password',
-            ])->assertSessionHasErrors('name');
+            ->from(route('admin.users.create'))
+            ->post(route('admin.users.store'), $this->validFields(['name' => null]))
+            ->assertRedirect(route('admin.users.create'))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
     public function user_cant_create_user_with_integer_name()
     {
         $this->login()
-            ->post(route('admin.users.store'), [
-                'name' => 1,
-                'email' => $this->faker->email,
-                'password' => 'password',
-                'password_confirmation' => 'password',
-            ])->assertSessionHasErrors('name');
+            ->from(route('admin.users.create'))
+            ->post(route('admin.users.store'), $this->validFields(['name' => 1]))
+            ->assertRedirect(route('admin.users.create'))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
     public function user_cant_create_user_with_name_more_than_255_chars()
     {
         $this->login()
-            ->post(route('admin.users.store'), [
+            ->from(route('admin.users.create'))
+            ->post(route('admin.users.store'), $this->validFields([
                 'name' => str_repeat('a', 256),
-                'email' => $this->faker->email,
-                'password' => 'password',
-                'password_confirmation' => 'password',
-            ])->assertSessionHasErrors('name');
+            ]))->assertRedirect(route('admin.users.create'))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
     public function user_cant_create_user_without_email()
     {
         $this->login()
-            ->post(route('admin.users.store'), [
-                'name' => $this->faker->name,
-                'password' => 'password',
-                'password_confirmation' => 'password',
-            ])->assertSessionHasErrors('email');
+            ->from(route('admin.users.create'))
+            ->post(route('admin.users.store'), $this->validFields(['email' => null]))
+            ->assertRedirect(route('admin.users.create'))
+            ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
     public function user_cant_create_user_with_integer_email()
     {
         $this->login()
-            ->post(route('admin.users.store'), [
-                'name' => $this->faker->name,
-                'email' => 1,
-                'password' => 'password',
-                'password_confirmation' => 'password',
-            ])->assertSessionHasErrors('email');
+            ->from(route('admin.users.create'))
+            ->post(route('admin.users.store'), $this->validFields(['email' => 1]))
+            ->assertRedirect(route('admin.users.create'))
+            ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
     public function user_cant_create_user_with_email_more_than_255_chars()
     {
         $this->login()
-            ->post(route('admin.users.store'), [
-                'name' => $this->faker->name,
+            ->from(route('admin.users.create'))
+            ->post(route('admin.users.store'), $this->validFields([
                 'email' => str_repeat('a', 256),
-                'password' => 'password',
-                'password_confirmation' => 'password',
-            ])->assertSessionHasErrors('email');
+            ]))->assertRedirect(route('admin.users.create'))
+            ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
     public function user_cant_create_user_with_invalid_email()
     {
         $this->login()
-            ->post(route('admin.users.store'), [
-                'name' => $this->faker->name,
-                'email' => 'invalid',
-                'password' => 'password',
-                'password_confirmation' => 'password',
-            ])->assertSessionHasErrors('email');
+            ->from(route('admin.users.create'))
+            ->post(route('admin.users.store'), $this->validFields(['email' => 'invalid']))
+            ->assertRedirect(route('admin.users.create'))
+            ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
@@ -146,58 +140,80 @@ class CreateUserTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->actingAs($user)
-            ->post(route('admin.users.store'), [
-                'name' => $this->faker->name,
-                'email' => $user->email,
-                'password' => 'password',
-                'password_confirmation' => 'password',
-            ])->assertSessionHasErrors('email');
+        $this->login()
+            ->from(route('admin.users.create'))
+            ->post(route('admin.users.store'), $this->validFields(['email' => $user->email]))
+            ->assertRedirect(route('admin.users.create'))
+            ->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('users', 2);
     }
 
     /** @test */
     public function user_cant_create_user_without_password()
     {
         $this->login()
-            ->post(route('admin.users.store'), [
-                'name' => $this->faker->name,
-                'email' => $this->faker->email,
-                'password_confirmation' => 'password',
-            ])->assertSessionHasErrors('password');
+            ->from(route('admin.users.create'))
+            ->post(route('admin.users.store'), $this->validFields(['password' => null]))
+            ->assertRedirect(route('admin.users.create'))
+            ->assertSessionHasErrors('password');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
     public function user_cant_create_user_with_integer_password()
     {
         $this->login()
-            ->post(route('admin.users.store'), [
-                'name' => $this->faker->name,
-                'email' => $this->faker->email,
+            ->from(route('admin.users.create'))
+            ->post(route('admin.users.store'), $this->validFields([
                 'password' => 12345678,
                 'password_confirmation' => 12345678,
-            ])->assertSessionHasErrors('password');
+            ]))->assertRedirect(route('admin.users.create'))
+            ->assertSessionHasErrors('password');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
     public function user_cant_create_user_with_password_less_than_8_chars()
     {
         $this->login()
-            ->post(route('admin.users.store'), [
-                'name' => $this->faker->name,
-                'email' => $this->faker->email,
+            ->from(route('admin.users.create'))
+            ->post(route('admin.users.store'), $this->validFields([
                 'password' => 'small',
                 'password_confirmation' => 'small',
-            ])->assertSessionHasErrors('password');
+            ]))->assertRedirect(route('admin.users.create'))
+            ->assertSessionHasErrors('password');
+
+        $this->assertDatabaseCount('users', 1);
     }
 
     /** @test */
     public function user_cant_create_user_without_password_confirmation()
     {
         $this->login()
-            ->post(route('admin.users.store'), [
-                'name' => $this->faker->name,
-                'email' => $this->faker->email,
-                'password' => 'password',
-            ])->assertSessionHasErrors('password');
+            ->from(route('admin.users.create'))
+            ->post(route('admin.users.store'), $this->validFields(['password_confirmation' => null]))
+            ->assertRedirect(route('admin.users.create'))
+            ->assertSessionHasErrors('password');
+
+        $this->assertDatabaseCount('users', 1);
+    }
+
+    /**
+     * Get valid user fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
+    {
+        return array_merge([
+            'name' => $this->faker->name,
+            'email' => $this->faker->email,
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ], $overrides);
     }
 }
