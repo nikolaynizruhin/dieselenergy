@@ -77,8 +77,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['title' => null]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('title');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -88,8 +92,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['title' => 1]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('title');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -99,8 +107,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['excerpt' => null]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('excerpt');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -110,8 +122,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['excerpt' => 1]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('excerpt');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -121,8 +137,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['title' => str_repeat('a', 256)]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('title');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -133,8 +153,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['title' => $existing->title]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('title');
+
+        $this->assertDatabaseCount('posts', 2);
     }
 
     /** @test */
@@ -144,8 +168,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['slug' => null]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -155,8 +183,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['slug' => 1]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -166,8 +198,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['slug' => str_repeat('a', 256)]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -178,8 +214,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['slug' => $existing->slug]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('posts', 2);
     }
 
     /** @test */
@@ -189,8 +229,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['body' => null]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('body');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -200,8 +244,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['body' => 1]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('body');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -211,8 +259,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['image' => null]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('image');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -222,8 +274,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['image' => 'string']);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('image');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -233,8 +289,12 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['image' => 1]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('image');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 
     /** @test */
@@ -246,7 +306,11 @@ class UpdatePostTest extends TestCase
         $stub = Post::factory()->raw(['image' => $pdf]);
 
         $this->login()
+            ->from(route('admin.posts.edit', $post))
             ->put(route('admin.posts.update', $post), $stub)
+            ->assertRedirect(route('admin.posts.edit', $post))
             ->assertSessionHasErrors('image');
+
+        $this->assertDatabaseCount('posts', 1);
     }
 }
