@@ -140,8 +140,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['name' => 1]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -153,8 +157,12 @@ class UpdateProductTest extends TestCase
         ]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -167,8 +175,12 @@ class UpdateProductTest extends TestCase
         ]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('products', 2);
     }
 
     /** @test */
@@ -178,8 +190,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['model' => null]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('model');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -189,8 +205,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['model' => 1]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('model');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -202,8 +222,12 @@ class UpdateProductTest extends TestCase
         ]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('model');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -216,8 +240,12 @@ class UpdateProductTest extends TestCase
         ]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('model');
+
+        $this->assertDatabaseCount('products', 2);
     }
 
     /** @test */
@@ -227,8 +255,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['slug' => null]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -238,8 +270,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['slug' => 1]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -251,8 +287,12 @@ class UpdateProductTest extends TestCase
         ]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -265,8 +305,12 @@ class UpdateProductTest extends TestCase
         ]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('products', 2);
     }
 
     /** @test */
@@ -276,8 +320,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['price' => null]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('price');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -287,8 +335,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['price' => 'string']);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('price');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -298,8 +350,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['price' => 0]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('price');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -309,8 +365,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['brand_id' => null]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('brand_id');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -320,8 +380,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['brand_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('brand_id');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -331,8 +395,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['brand_id' => 100]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('brand_id');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -342,8 +410,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['category_id' => null]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('category_id');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -353,8 +425,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['category_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('category_id');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -364,8 +440,12 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw(['category_id' => 100]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('category_id');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -375,9 +455,13 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw();
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub + [
                 'images' => ['string'],
-            ])->assertSessionHasErrors('images.*');
+            ])->assertRedirect(route('admin.products.edit', $product))
+            ->assertSessionHasErrors('images.*');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -387,9 +471,13 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw();
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub + [
                 'images' => [1],
-            ])->assertSessionHasErrors('images.*');
+            ])->assertRedirect(route('admin.products.edit', $product))
+            ->assertSessionHasErrors('images.*');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -401,9 +489,13 @@ class UpdateProductTest extends TestCase
         $stub = Product::factory()->raw();
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub + [
                 'images' => [$pdf],
-            ])->assertSessionHasErrors('images.*');
+            ])->assertRedirect(route('admin.products.edit', $product))
+            ->assertSessionHasErrors('images.*');
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -422,8 +514,12 @@ class UpdateProductTest extends TestCase
         ]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('attributes.'.$attribute->id);
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
@@ -442,8 +538,12 @@ class UpdateProductTest extends TestCase
         ]);
 
         $this->login()
+            ->from(route('admin.products.edit', $product))
             ->put(route('admin.products.update', $product), $stub)
+            ->assertRedirect(route('admin.products.edit', $product))
             ->assertSessionHasErrors('attributes.'.$attribute->id);
+
+        $this->assertDatabaseCount('products', 1);
     }
 
     /** @test */
