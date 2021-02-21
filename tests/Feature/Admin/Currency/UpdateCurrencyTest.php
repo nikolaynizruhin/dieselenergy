@@ -61,8 +61,12 @@ class UpdateCurrencyTest extends TestCase
         $stub = Currency::factory()->raw(['code' => null]);
 
         $this->login()
+            ->from(route('admin.currencies.edit', $currency))
             ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertRedirect(route('admin.currencies.edit', $currency))
             ->assertSessionHasErrors('code');
+
+        $this->assertDatabaseCount('currencies', 1);
     }
 
     /** @test */
@@ -72,8 +76,12 @@ class UpdateCurrencyTest extends TestCase
         $stub = Currency::factory()->raw(['code' => 1]);
 
         $this->login()
+            ->from(route('admin.currencies.edit', $currency))
             ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertRedirect(route('admin.currencies.edit', $currency))
             ->assertSessionHasErrors('code');
+
+        $this->assertDatabaseCount('currencies', 1);
     }
 
     /** @test */
@@ -83,8 +91,12 @@ class UpdateCurrencyTest extends TestCase
         $stub = Currency::factory()->raw(['code' => 'US']);
 
         $this->login()
+            ->from(route('admin.currencies.edit', $currency))
             ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertRedirect(route('admin.currencies.edit', $currency))
             ->assertSessionHasErrors('code');
+
+        $this->assertDatabaseCount('currencies', 1);
     }
 
     /** @test */
@@ -95,8 +107,12 @@ class UpdateCurrencyTest extends TestCase
         $stub = Currency::factory()->raw(['code' => $existing->code]);
 
         $this->login()
+            ->from(route('admin.currencies.edit', $currency))
             ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertRedirect(route('admin.currencies.edit', $currency))
             ->assertSessionHasErrors('code');
+
+        $this->assertDatabaseCount('currencies', 2);
     }
 
     /** @test */
@@ -106,8 +122,12 @@ class UpdateCurrencyTest extends TestCase
         $stub = Currency::factory()->raw(['rate' => null]);
 
         $this->login()
+            ->from(route('admin.currencies.edit', $currency))
             ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertRedirect(route('admin.currencies.edit', $currency))
             ->assertSessionHasErrors('rate');
+
+        $this->assertDatabaseCount('currencies', 1);
     }
 
     /** @test */
@@ -117,8 +137,12 @@ class UpdateCurrencyTest extends TestCase
         $stub = Currency::factory()->raw(['rate' => 'string']);
 
         $this->login()
+            ->from(route('admin.currencies.edit', $currency))
             ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertRedirect(route('admin.currencies.edit', $currency))
             ->assertSessionHasErrors('rate');
+
+        $this->assertDatabaseCount('currencies', 1);
     }
 
     /** @test */
@@ -130,8 +154,12 @@ class UpdateCurrencyTest extends TestCase
         ]);
 
         $this->login()
+            ->from(route('admin.currencies.edit', $currency))
             ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertRedirect(route('admin.currencies.edit', $currency))
             ->assertSessionHasErrors('rate');
+
+        $this->assertDatabaseCount('currencies', 1);
     }
 
     /** @test */
@@ -141,8 +169,12 @@ class UpdateCurrencyTest extends TestCase
         $stub = Currency::factory()->raw(['symbol' => null]);
 
         $this->login()
+            ->from(route('admin.currencies.edit', $currency))
             ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertRedirect(route('admin.currencies.edit', $currency))
             ->assertSessionHasErrors('symbol');
+
+        $this->assertDatabaseCount('currencies', 1);
     }
 
     /** @test */
@@ -152,8 +184,12 @@ class UpdateCurrencyTest extends TestCase
         $stub = Currency::factory()->raw(['symbol' => 1]);
 
         $this->login()
+            ->from(route('admin.currencies.edit', $currency))
             ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertRedirect(route('admin.currencies.edit', $currency))
             ->assertSessionHasErrors('symbol');
+
+        $this->assertDatabaseCount('currencies', 1);
     }
 
     /** @test */
@@ -164,7 +200,11 @@ class UpdateCurrencyTest extends TestCase
         $stub = Currency::factory()->raw(['symbol' => $existing->symbol]);
 
         $this->login()
+            ->from(route('admin.currencies.edit', $currency))
             ->put(route('admin.currencies.update', $currency), $stub)
+            ->assertRedirect(route('admin.currencies.edit', $currency))
             ->assertSessionHasErrors('symbol');
+
+        $this->assertDatabaseCount('currencies', 2);
     }
 }

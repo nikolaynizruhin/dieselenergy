@@ -60,8 +60,12 @@ class UpdateContactTest extends TestCase
         $stub = Contact::factory()->raw(['message' => 1]);
 
         $this->login()
+            ->from(route('admin.contacts.edit', $contact))
             ->put(route('admin.contacts.update', $contact), $stub)
+            ->assertRedirect(route('admin.contacts.edit', $contact))
             ->assertSessionHasErrors('message');
+
+        $this->assertDatabaseCount('contacts', 1);
     }
 
     /** @test */
@@ -71,8 +75,12 @@ class UpdateContactTest extends TestCase
         $stub = Contact::factory()->raw(['customer_id' => null]);
 
         $this->login()
+            ->from(route('admin.contacts.edit', $contact))
             ->put(route('admin.contacts.update', $contact), $stub)
+            ->assertRedirect(route('admin.contacts.edit', $contact))
             ->assertSessionHasErrors('customer_id');
+
+        $this->assertDatabaseCount('contacts', 1);
     }
 
     /** @test */
@@ -82,8 +90,12 @@ class UpdateContactTest extends TestCase
         $stub = Contact::factory()->raw(['customer_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.contacts.edit', $contact))
             ->put(route('admin.contacts.update', $contact), $stub)
+            ->assertRedirect(route('admin.contacts.edit', $contact))
             ->assertSessionHasErrors('customer_id');
+
+        $this->assertDatabaseCount('contacts', 1);
     }
 
     /** @test */
@@ -93,7 +105,11 @@ class UpdateContactTest extends TestCase
         $stub = Contact::factory()->raw(['customer_id' => 10]);
 
         $this->login()
+            ->from(route('admin.contacts.edit', $contact))
             ->put(route('admin.contacts.update', $contact), $stub)
+            ->assertRedirect(route('admin.contacts.edit', $contact))
             ->assertSessionHasErrors('customer_id');
+
+        $this->assertDatabaseCount('contacts', 1);
     }
 }

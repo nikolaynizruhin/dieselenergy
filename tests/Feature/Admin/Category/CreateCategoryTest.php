@@ -55,8 +55,12 @@ class CreateCategoryTest extends TestCase
         $category = Category::factory()->raw(['name' => null]);
 
         $this->login()
+            ->from(route('admin.categories.create'))
             ->post(route('admin.categories.store'), $category)
+            ->assertRedirect(route('admin.categories.create'))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('categories', 0);
     }
 
     /** @test */
@@ -65,8 +69,12 @@ class CreateCategoryTest extends TestCase
         $category = User::factory()->raw(['name' => 1]);
 
         $this->login()
+            ->from(route('admin.categories.create'))
             ->post(route('admin.categories.store'), $category)
+            ->assertRedirect(route('admin.categories.create'))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('categories', 0);
     }
 
     /** @test */
@@ -75,8 +83,12 @@ class CreateCategoryTest extends TestCase
         $category = Category::factory()->raw(['name' => str_repeat('a', 256)]);
 
         $this->login()
+            ->from(route('admin.categories.create'))
             ->post(route('admin.categories.store'), $category)
+            ->assertRedirect(route('admin.categories.create'))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('categories', 0);
     }
 
     /** @test */
@@ -86,8 +98,12 @@ class CreateCategoryTest extends TestCase
         $stub = Category::factory()->raw(['name' => $category->name]);
 
         $this->login()
+            ->from(route('admin.categories.create'))
             ->post(route('admin.categories.store'), $stub)
+            ->assertRedirect(route('admin.categories.create'))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('categories', 1);
     }
 
     /** @test */
@@ -97,8 +113,12 @@ class CreateCategoryTest extends TestCase
         $stub = Category::factory()->raw(['slug' => $category->slug]);
 
         $this->login()
+            ->from(route('admin.categories.create'))
             ->post(route('admin.categories.store'), $stub)
+            ->assertRedirect(route('admin.categories.create'))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('categories', 1);
     }
 
     /** @test */
@@ -107,8 +127,12 @@ class CreateCategoryTest extends TestCase
         $category = Category::factory()->raw(['slug' => null]);
 
         $this->login()
+            ->from(route('admin.categories.create'))
             ->post(route('admin.categories.store'), $category)
+            ->assertRedirect(route('admin.categories.create'))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('categories', 0);
     }
 
     /** @test */
@@ -117,8 +141,12 @@ class CreateCategoryTest extends TestCase
         $category = Category::factory()->raw(['slug' => 1]);
 
         $this->login()
+            ->from(route('admin.categories.create'))
             ->post(route('admin.categories.store'), $category)
+            ->assertRedirect(route('admin.categories.create'))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('categories', 0);
     }
 
     /** @test */
@@ -127,7 +155,11 @@ class CreateCategoryTest extends TestCase
         $category = Category::factory()->raw(['slug' => str_repeat('a', 256)]);
 
         $this->login()
+            ->from(route('admin.categories.create'))
             ->post(route('admin.categories.store'), $category)
+            ->assertRedirect(route('admin.categories.create'))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('categories', 0);
     }
 }

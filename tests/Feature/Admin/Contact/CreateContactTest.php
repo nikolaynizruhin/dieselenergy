@@ -53,8 +53,12 @@ class CreateContactTest extends TestCase
         $contact = Contact::factory()->raw(['message' => 1]);
 
         $this->login()
+            ->from(route('admin.contacts.create'))
             ->post(route('admin.contacts.store'), $contact)
+            ->assertRedirect(route('admin.contacts.create'))
             ->assertSessionHasErrors('message');
+
+        $this->assertDatabaseCount('contacts', 0);
     }
 
     /** @test */
@@ -63,8 +67,12 @@ class CreateContactTest extends TestCase
         $contact = Contact::factory()->raw(['customer_id' => null]);
 
         $this->login()
+            ->from(route('admin.contacts.create'))
             ->post(route('admin.contacts.store'), $contact)
+            ->assertRedirect(route('admin.contacts.create'))
             ->assertSessionHasErrors('customer_id');
+
+        $this->assertDatabaseCount('contacts', 0);
     }
 
     /** @test */
@@ -73,8 +81,12 @@ class CreateContactTest extends TestCase
         $contact = Contact::factory()->raw(['customer_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.contacts.create'))
             ->post(route('admin.contacts.store'), $contact)
+            ->assertRedirect(route('admin.contacts.create'))
             ->assertSessionHasErrors('customer_id');
+
+        $this->assertDatabaseCount('contacts', 0);
     }
 
     /** @test */
@@ -83,7 +95,11 @@ class CreateContactTest extends TestCase
         $contact = Contact::factory()->raw(['customer_id' => 1]);
 
         $this->login()
+            ->from(route('admin.contacts.create'))
             ->post(route('admin.contacts.store'), $contact)
+            ->assertRedirect(route('admin.contacts.create'))
             ->assertSessionHasErrors('customer_id');
+
+        $this->assertDatabaseCount('contacts', 0);
     }
 }

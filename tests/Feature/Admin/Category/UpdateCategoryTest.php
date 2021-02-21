@@ -62,8 +62,12 @@ class UpdateCategoryTest extends TestCase
         $stub = Category::factory()->raw(['name' => null]);
 
         $this->login()
+            ->from(route('admin.categories.edit', $category))
             ->put(route('admin.categories.update', $category), $stub)
+            ->assertRedirect(route('admin.categories.edit', $category))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('categories', 1);
     }
 
     /** @test */
@@ -73,8 +77,12 @@ class UpdateCategoryTest extends TestCase
         $stub = Category::factory()->raw(['name' => 1]);
 
         $this->login()
+            ->from(route('admin.categories.edit', $category))
             ->put(route('admin.categories.update', $category), $stub)
+            ->assertRedirect(route('admin.categories.edit', $category))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('categories', 1);
     }
 
     /** @test */
@@ -84,8 +92,12 @@ class UpdateCategoryTest extends TestCase
         $stub = Category::factory()->raw(['name' => str_repeat('a', 256)]);
 
         $this->login()
+            ->from(route('admin.categories.edit', $category))
             ->put(route('admin.categories.update', $category), $stub)
+            ->assertRedirect(route('admin.categories.edit', $category))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('categories', 1);
     }
 
     /** @test */
@@ -96,8 +108,12 @@ class UpdateCategoryTest extends TestCase
         $stub = Category::factory()->raw(['name' => $existing]);
 
         $this->login()
+            ->from(route('admin.categories.edit', $category))
             ->put(route('admin.categories.update', $category), $stub)
+            ->assertRedirect(route('admin.categories.edit', $category))
             ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseCount('categories', 2);
     }
 
     /** @test */
@@ -108,8 +124,12 @@ class UpdateCategoryTest extends TestCase
         $stub = Category::factory()->raw(['slug' => $existing]);
 
         $this->login()
+            ->from(route('admin.categories.edit', $category))
             ->put(route('admin.categories.update', $category), $stub)
+            ->assertRedirect(route('admin.categories.edit', $category))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('categories', 2);
     }
 
     /** @test */
@@ -119,8 +139,12 @@ class UpdateCategoryTest extends TestCase
         $stub = Category::factory()->raw(['slug' => null]);
 
         $this->login()
+            ->from(route('admin.categories.edit', $category))
             ->put(route('admin.categories.update', $category), $stub)
+            ->assertRedirect(route('admin.categories.edit', $category))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('categories', 1);
     }
 
     /** @test */
@@ -130,8 +154,12 @@ class UpdateCategoryTest extends TestCase
         $stub = Category::factory()->raw(['slug' => 1]);
 
         $this->login()
+            ->from(route('admin.categories.edit', $category))
             ->put(route('admin.categories.update', $category), $stub)
+            ->assertRedirect(route('admin.categories.edit', $category))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('categories', 1);
     }
 
     /** @test */
@@ -141,7 +169,11 @@ class UpdateCategoryTest extends TestCase
         $stub = Category::factory()->raw(['slug' => str_repeat('a', 256)]);
 
         $this->login()
+            ->from(route('admin.categories.edit', $category))
             ->put(route('admin.categories.update', $category), $stub)
+            ->assertRedirect(route('admin.categories.edit', $category))
             ->assertSessionHasErrors('slug');
+
+        $this->assertDatabaseCount('categories', 1);
     }
 }

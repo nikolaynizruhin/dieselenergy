@@ -57,8 +57,12 @@ class CreateCartTest extends TestCase
         $cart = Cart::factory()->raw(['order_id' => null]);
 
         $this->login()
+            ->from(route('admin.carts.create'))
             ->post(route('admin.carts.store'), $cart)
+            ->assertRedirect(route('admin.carts.create'))
             ->assertSessionHasErrors('order_id');
+
+        $this->assertDatabaseCount('order_product', 0);
     }
 
     /** @test */
@@ -67,8 +71,12 @@ class CreateCartTest extends TestCase
         $cart = Cart::factory()->raw(['order_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.carts.create'))
             ->post(route('admin.carts.store'), $cart)
+            ->assertRedirect(route('admin.carts.create'))
             ->assertSessionHasErrors('order_id');
+
+        $this->assertDatabaseCount('order_product', 0);
     }
 
     /** @test */
@@ -77,8 +85,12 @@ class CreateCartTest extends TestCase
         $cart = Cart::factory()->raw(['order_id' => 10]);
 
         $this->login()
+            ->from(route('admin.carts.create'))
             ->post(route('admin.carts.store'), $cart)
+            ->assertRedirect(route('admin.carts.create'))
             ->assertSessionHasErrors('order_id');
+
+        $this->assertDatabaseCount('order_product', 0);
     }
 
     /** @test */
@@ -87,8 +99,12 @@ class CreateCartTest extends TestCase
         $cart = Cart::factory()->raw(['product_id' => null]);
 
         $this->login()
+            ->from(route('admin.carts.create'))
             ->post(route('admin.carts.store'), $cart)
+            ->assertRedirect(route('admin.carts.create'))
             ->assertSessionHasErrors('product_id');
+
+        $this->assertDatabaseCount('order_product', 0);
     }
 
     /** @test */
@@ -97,8 +113,12 @@ class CreateCartTest extends TestCase
         $cart = Cart::factory()->raw(['product_id' => 'string']);
 
         $this->login()
+            ->from(route('admin.carts.create'))
             ->post(route('admin.carts.store'), $cart)
+            ->assertRedirect(route('admin.carts.create'))
             ->assertSessionHasErrors('product_id');
+
+        $this->assertDatabaseCount('order_product', 0);
     }
 
     /** @test */
@@ -107,8 +127,12 @@ class CreateCartTest extends TestCase
         $cart = Cart::factory()->raw(['product_id' => 10]);
 
         $this->login()
+            ->from(route('admin.carts.create'))
             ->post(route('admin.carts.store'), $cart)
+            ->assertRedirect(route('admin.carts.create'))
             ->assertSessionHasErrors('product_id');
+
+        $this->assertDatabaseCount('order_product', 0);
     }
 
     /** @test */
@@ -117,8 +141,12 @@ class CreateCartTest extends TestCase
         $cart = Cart::factory()->create();
 
         $this->login()
+            ->from(route('admin.carts.create'))
             ->post(route('admin.carts.store'), $cart->toArray())
+            ->assertRedirect(route('admin.carts.create'))
             ->assertSessionHasErrors('product_id');
+
+        $this->assertDatabaseCount('order_product', 1);
     }
 
     /** @test */
@@ -127,8 +155,12 @@ class CreateCartTest extends TestCase
         $cart = Cart::factory()->raw(['quantity' => null]);
 
         $this->login()
+            ->from(route('admin.carts.create'))
             ->post(route('admin.carts.store'), $cart)
+            ->assertRedirect(route('admin.carts.create'))
             ->assertSessionHasErrors('quantity');
+
+        $this->assertDatabaseCount('order_product', 0);
     }
 
     /** @test */
@@ -137,8 +169,12 @@ class CreateCartTest extends TestCase
         $cart = Cart::factory()->raw(['quantity' => 'string']);
 
         $this->login()
+            ->from(route('admin.carts.create'))
             ->post(route('admin.carts.store'), $cart)
+            ->assertRedirect(route('admin.carts.create'))
             ->assertSessionHasErrors('quantity');
+
+        $this->assertDatabaseCount('order_product', 0);
     }
 
     /** @test */
@@ -147,7 +183,11 @@ class CreateCartTest extends TestCase
         $cart = Cart::factory()->raw(['quantity' => 0]);
 
         $this->login()
+            ->from(route('admin.carts.create'))
             ->post(route('admin.carts.store'), $cart)
+            ->assertRedirect(route('admin.carts.create'))
             ->assertSessionHasErrors('quantity');
+
+        $this->assertDatabaseCount('order_product', 0);
     }
 }
