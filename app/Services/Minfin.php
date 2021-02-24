@@ -32,6 +32,6 @@ class Minfin
      */
     public function getRates()
     {
-        return $this->http->get('/mb/'.config('services.minfin.key'))->json();
+        return $this->http->get('/mb/'.config('services.minfin.key'))->collect();
     }
 }

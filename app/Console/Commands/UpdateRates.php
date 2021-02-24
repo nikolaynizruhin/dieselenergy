@@ -32,7 +32,7 @@ class UpdateRates extends Command
         $rates = Minfin::getRates();
 
         $currencies = Currency::all()->map(function ($currency) use ($rates) {
-            $rate = collect($rates)->firstWhere('currency', strtolower($currency->code));
+            $rate = $rates->firstWhere('currency', strtolower($currency->code));
 
             $currency->update(['rate' => (float) $rate['ask']]);
 
