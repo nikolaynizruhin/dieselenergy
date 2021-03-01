@@ -22,6 +22,7 @@ class OrderCreated extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      *
+     * @param  \App\Models\Order  $order
      * @return void
      */
     public function __construct(Order $order)
