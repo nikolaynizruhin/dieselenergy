@@ -32,8 +32,10 @@
                         <br>
                         <small class="text-muted">{{ $product->category->name }}</small>
                     </h1>
-                    <p class="mb-1 text-muted">Виробник: <strong class="text-body">{{ $product->brand->name }}</strong></p>
-                    <p class="text-muted">Модель: <strong class="text-body">{{ $product->model }}</strong></p>
+                    <p class="text-muted mb-0">Виробник:</p>
+                    <p class="text-body font-weight-bold">{{ $product->brand->name }}</p>
+                    <p class="text-muted mb-0">Модель:</p>
+                    <p class="text-body font-weight-bold">{{ $product->model }}</p>
                     <p class="text-primary mb-3 h4">@uah($product->uah_price)</p>
                     <form class="mb-3" action="{{ route('carts.store') }}" method="POST">
                         @csrf
