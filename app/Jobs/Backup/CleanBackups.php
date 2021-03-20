@@ -79,6 +79,6 @@ class CleanBackups implements ShouldQueue
      */
     private function backups()
     {
-        return $this->storage->files(config('backup.backups'));
+        return $this->storage->files(config('backup.folder'));
     }
 }
