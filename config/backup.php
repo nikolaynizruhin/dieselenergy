@@ -4,14 +4,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Backup Destination File
+    | Backup File Format
     |--------------------------------------------------------------------------
     |
-    | This option controls the backup destination filename.
+    | This option controls the backup file format.
     |
     */
 
-    'filename' => 'backups/'.date('Ymd').'.zip',
+    'format' => 'Ymd',
 
     /*
     |--------------------------------------------------------------------------

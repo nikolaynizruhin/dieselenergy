@@ -23,7 +23,7 @@ class CleanBackupsTest extends TestCase
 
         $this->backup = UploadedFile::fake()
             ->create('backup.zip')
-            ->storeAs('backups', 'backup.zip', 'local');
+            ->storeAs(config('backup.folder'), 'backup.zip', 'local');
     }
 
     /** @test */

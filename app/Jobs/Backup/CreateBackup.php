@@ -94,7 +94,17 @@ class CreateBackup implements ShouldQueue
      */
     private function filename()
     {
-        return $this->storage->path(config('backup.filename'));
+        return $this->storage->path($this->file());
+    }
+
+    /**
+     * Get backup file.
+     *
+     * @return string
+     */
+    private function file()
+    {
+        return config('backup.folder').'/'.date(config('backup.format')).'.zip';
     }
 
     /**
