@@ -69,7 +69,7 @@ class CleanBackups implements ShouldQueue
 
         $modifiedAt = Carbon::createFromTimestamp($timestamp);
 
-        return now()->diffInDays($modifiedAt) > config('backup.lifetime');
+        return now()->diffInDays($modifiedAt) >= config('backup.lifetime');
     }
 
     /**
