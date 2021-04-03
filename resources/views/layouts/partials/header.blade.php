@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown d-none d-sm-flex">
+                <li class="nav-item dropdown d-none d-md-flex">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Товари
                     </a>
@@ -20,7 +20,7 @@
                     </div>
                 </li>
                 @foreach($categories as $category)
-                    <li class="nav-item d-sm-none">
+                    <li class="nav-item d-md-none">
                         <a class="nav-link" href="{{ route('categories.products.index', $category) }}">{{ $category->name }}</a>
                     </li>
                 @endforeach
