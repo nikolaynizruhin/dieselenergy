@@ -53,7 +53,7 @@
 
             <div class="row">
                 <div class="col-md-3 text-muted">{{ __('post.body') }}</div>
-                <div class="col-md-9">{{ $post->body }}</div>
+                <div class="col-md-9">@markdown($post->body)</div>
             </div>
         </div>
     </div>
