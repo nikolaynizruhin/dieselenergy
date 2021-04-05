@@ -5,41 +5,15 @@ namespace App\Jobs\Backup;
 use Facades\App\Dump\Dumper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use ZipArchive;
 
 class CreateBackup implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    /**
-     * Local storage.
-     *
-     * @var \Illuminate\Contracts\Filesystem\Filesystem
-     */
-    private $storage;
-
-    /**
-     * Zip archive.
-     *
-     * @var \ZipArchive
-     */
-    private $zip;
-
-    /**
-     * CreateBackup constructor.
-     *
-     * @param  \ZipArchive  $zip
-     * @param  \Illuminate\Filesystem\FilesystemManager  $storage
-     */
-    public function __construct(ZipArchive $zip, FilesystemManager $storage)
-    {
-        $this->zip = $zip;
-        $this->storage = $storage->disk('local');
-    }
 
     /**
      * Execute the job.
@@ -48,35 +22,41 @@ class CreateBackup implements ShouldQueue
      */
     public function handle()
     {
-        $this->zip->open($this->filename(), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+        $zip = new ZipArchive;
 
-        $this->backupImages();
+        $zip->open($this->filename(), ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
-        $this->backupDatabase();
+        $this->backupImages($zip);
 
-        $this->zip->close();
+        $this->backupDatabase($zip);
+
+        $zip->close();
 
         $this->cleanup();
     }
 
     /**
      * Backup images.
+     *
+     * @param  \ZipArchive  $zip
      */
-    private function backupImages()
+    private function backupImages($zip)
     {
         foreach ($this->images() as $image) {
-            $this->zip->addFile($this->storage->path($image), ltrim($image, 'public'));
+            $zip->addFile(Storage::disk('local')->path($image), ltrim($image, 'public'));
         }
     }
 
     /**
      * Backup database.
+     *
+     * @param  \ZipArchive  $zip
      */
-    private function backupDatabase()
+    private function backupDatabase($zip)
     {
-        Dumper::dump($this->storage->path(config('backup.database')));
+        Dumper::dump(Storage::disk('local')->path(config('backup.database')));
 
-        $this->zip->addFile($this->storage->path(config('backup.database')), 'database.sql');
+        $zip->addFile(Storage::disk('local')->path(config('backup.database')), 'database.sql');
     }
 
     /**
@@ -84,7 +64,7 @@ class CreateBackup implements ShouldQueue
      */
     private function cleanup()
     {
-        $this->storage->delete(config('backup.database'));
+        Storage::disk('local')->delete(config('backup.database'));
     }
 
     /**
@@ -94,7 +74,7 @@ class CreateBackup implements ShouldQueue
      */
     private function filename()
     {
-        return $this->storage->path($this->file());
+        return Storage::disk('local')->path($this->file());
     }
 
     /**
@@ -114,6 +94,6 @@ class CreateBackup implements ShouldQueue
      */
     private function images()
     {
-        return $this->storage->files(config('backup.files'));
+        return Storage::disk('local')->files(config('backup.files'));
     }
 }

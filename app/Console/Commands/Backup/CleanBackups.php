@@ -22,32 +22,13 @@ class CleanBackups extends Command
     protected $description = 'Cleanup old backups';
 
     /**
-     * Clean backups job.
-     *
-     * @var \App\Jobs\Backup\CleanBackups
-     */
-    private $cleanBackups;
-
-    /**
-     * CleanBackups constructor.
-     *
-     * @param  \App\Jobs\Backup\CleanBackups  $cleanBackups
-     */
-    public function __construct(CleanBackupsJob $cleanBackups)
-    {
-        parent::__construct();
-
-        $this->cleanBackups = $cleanBackups;
-    }
-
-    /**
      * Execute the console command.
      *
      * @return int
      */
     public function handle()
     {
-        dispatch($this->cleanBackups);
+        CleanBackupsJob::dispatch();
 
         $this->info('Backups cleaned successfully!');
 

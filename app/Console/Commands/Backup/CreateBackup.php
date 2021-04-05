@@ -22,32 +22,13 @@ class CreateBackup extends Command
     protected $description = 'Backup database and images';
 
     /**
-     * Create backup job.
-     *
-     * @var \App\Jobs\Backup\CreateBackup
-     */
-    private $backup;
-
-    /**
-     * CreateBackup constructor.
-     *
-     * @param  \App\Jobs\Backup\CreateBackup  $backup
-     */
-    public function __construct(CreateBackupJob $backup)
-    {
-        parent::__construct();
-
-        $this->backup = $backup;
-    }
-
-    /**
      * Execute the console command.
      *
      * @return int
      */
     public function handle()
     {
-        dispatch($this->backup);
+        CreateBackupJob::dispatch();
 
         $this->info('Backup created successfully!');
 

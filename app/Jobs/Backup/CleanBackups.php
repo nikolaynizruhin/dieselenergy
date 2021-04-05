@@ -4,33 +4,16 @@ namespace App\Jobs\Backup;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CleanBackups implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    /**
-     * Local storage.
-     *
-     * @var \Illuminate\Contracts\Filesystem\Filesystem
-     */
-    private $storage;
-
-    /**
-     * Command constructor.
-     *
-     * @param  \Illuminate\Filesystem\FilesystemManager
-     */
-    public function __construct(FilesystemManager $storage)
-    {
-        $this->storage = $storage->disk('local');
-    }
 
     /**
      * Execute the job.
@@ -41,7 +24,7 @@ class CleanBackups implements ShouldQueue
     {
         foreach ($this->backups() as $backup) {
             if ($this->canBeRemoved($backup)) {
-                $this->storage->delete($backup);
+                Storage::disk('local')->delete($backup);
             }
         }
     }
@@ -65,7 +48,7 @@ class CleanBackups implements ShouldQueue
      */
     private function isOutdated($backup)
     {
-        $timestamp = $this->storage->lastModified($backup);
+        $timestamp = Storage::disk('local')->lastModified($backup);
 
         $modifiedAt = Carbon::createFromTimestamp($timestamp);
 
@@ -79,6 +62,6 @@ class CleanBackups implements ShouldQueue
      */
     private function backups()
     {
-        return $this->storage->files(config('backup.folder'));
+        return Storage::disk('local')->files(config('backup.folder'));
     }
 }
