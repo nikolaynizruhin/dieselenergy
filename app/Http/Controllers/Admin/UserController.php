@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUser;
 use App\Http\Requests\Admin\UpdateUser;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
