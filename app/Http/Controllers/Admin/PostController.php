@@ -14,11 +14,10 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Filters\Admin\PostFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, PostFilters $filters)
+    public function index(PostFilters $filters)
     {
         $posts = Post::filter($filters)->latest()->paginate(10);
 

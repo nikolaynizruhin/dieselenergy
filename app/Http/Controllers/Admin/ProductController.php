@@ -16,11 +16,10 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Filters\Admin\ProductFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, ProductFilters $filters)
+    public function index(ProductFilters $filters)
     {
         $products = Product::select('products.*')
             ->join('categories', 'categories.id', '=', 'products.category_id')
@@ -70,11 +69,10 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Product  $product
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Filters\Admin\ImageFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product, Request $request, ImageFilters $filters)
+    public function show(Product $product, ImageFilters $filters)
     {
         return view('admin.products.show', [
             'product' => $product->loadAttributes(),

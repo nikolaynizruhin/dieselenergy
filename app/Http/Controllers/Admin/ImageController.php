@@ -13,11 +13,10 @@ class ImageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Filters\Admin\ImageFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, ImageFilters $filters)
+    public function index(ImageFilters $filters)
     {
         $images = Image::filter($filters)->latest()->paginate(10);
 

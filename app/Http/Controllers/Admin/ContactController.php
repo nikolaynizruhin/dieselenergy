@@ -13,11 +13,10 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  \App\Filters\Admin\ContactFilters $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, ContactFilters $filters)
+    public function index(ContactFilters $filters)
     {
         $contacts = Contact::select('contacts.*')
             ->join('customers', 'customers.id', '=', 'contacts.customer_id')

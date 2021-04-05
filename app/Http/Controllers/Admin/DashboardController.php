@@ -12,11 +12,10 @@ class DashboardController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Filters\Admin\OrderFilters  $filters
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function __invoke(Request $request, OrderFilters $filters)
+    public function __invoke(OrderFilters $filters)
     {
         $orders = Order::with('customer')
             ->filter($filters)

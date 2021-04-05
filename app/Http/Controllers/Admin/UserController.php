@@ -17,7 +17,7 @@ class UserController extends Controller
      * @param  \App\Filters\Admin\UserFilters $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, UserFilters $filters)
+    public function index(UserFilters $filters)
     {
         $users = User::filter($filters)->orderBy('name')->paginate(10);
 

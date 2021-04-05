@@ -14,11 +14,10 @@ class CurrencyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Filters\Admin\CurrencyFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, CurrencyFilters $filters)
+    public function index(CurrencyFilters $filters)
     {
         $currencies = Currency::filter($filters)->orderBy('code')->paginate(10);
 

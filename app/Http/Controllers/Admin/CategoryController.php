@@ -55,11 +55,10 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Category $category
-     * @param  \Illuminate\Http\Request $request
      * @param  \App\Filters\Admin\AttributeFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category, Request $request, AttributeFilters $filters)
+    public function show(Category $category, AttributeFilters $filters)
     {
         $attributes = $category->attributes()->filter($filters)->orderBy('name')->paginate(10);
 

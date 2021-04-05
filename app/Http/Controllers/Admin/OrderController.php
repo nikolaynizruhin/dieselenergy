@@ -16,11 +16,10 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Filters\Admin\OrderFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, OrderFilters $filters)
+    public function index(OrderFilters $filters)
     {
         $orders = Order::select('orders.*')
             ->join('customers', 'customers.id', '=', 'orders.customer_id')
@@ -61,11 +60,10 @@ class OrderController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Order  $order
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Filters\Admin\ProductFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order, Request $request, ProductFilters $filters)
+    public function show(Order $order, ProductFilters $filters)
     {
         $products = $order->products()
             ->select('products.*', DB::raw('price * quantity total'))

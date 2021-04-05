@@ -16,11 +16,10 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Filters\Admin\CustomerFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, CustomerFilters $filters)
+    public function index(CustomerFilters $filters)
     {
         $customers = Customer::filter($filters)->latest()->paginate(10);
 
@@ -56,12 +55,11 @@ class CustomerController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Customer  $customer
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Filters\Admin\Customer\ContactFilters  $contactFilters
      * @param  \App\Filters\Admin\Customer\OrderFilters  $orderFilters
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer, Request $request, ContactFilters $contactFilters, OrderFilters $orderFilters)
+    public function show(Customer $customer, ContactFilters $contactFilters, OrderFilters $orderFilters)
     {
         $contacts = $customer->contacts()->filter($contactFilters)->latest()->paginate(10);
         $orders = $customer->orders()->filter($orderFilters)->latest()->paginate(10);
