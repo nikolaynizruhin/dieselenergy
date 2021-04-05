@@ -6,7 +6,6 @@ use App\Filters\Admin\ImageFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreImage;
 use App\Models\Image;
-use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {

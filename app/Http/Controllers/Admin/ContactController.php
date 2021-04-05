@@ -6,7 +6,6 @@ use App\Filters\Admin\ContactFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreContact;
 use App\Models\Contact;
-use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {

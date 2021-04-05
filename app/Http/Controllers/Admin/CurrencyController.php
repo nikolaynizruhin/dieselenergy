@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCurrency;
 use App\Http\Requests\Admin\UpdateCurrency;
 use App\Models\Currency;
-use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
 {
