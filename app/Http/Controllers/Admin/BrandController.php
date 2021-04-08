@@ -14,11 +14,10 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Filters\Admin\BrandFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, BrandFilters $filters)
+    public function index(BrandFilters $filters)
     {
         $brands = Brand::select('brands.*')
             ->join('currencies', 'currencies.id', '=', 'brands.currency_id')

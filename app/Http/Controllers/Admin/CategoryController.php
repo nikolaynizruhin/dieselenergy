@@ -8,18 +8,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCategory;
 use App\Http\Requests\Admin\UpdateCategory;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Filters\Admin\CategoryFilters  $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, CategoryFilters $filters)
+    public function index(CategoryFilters $filters)
     {
         $categories = Category::filter($filters)->orderBy('name')->paginate(10);
 

@@ -7,18 +7,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreAttribute;
 use App\Http\Requests\Admin\UpdateAttribute;
 use App\Models\Attribute;
-use Illuminate\Http\Request;
 
 class AttributeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @param \App\Filters\Admin\AttributeFilters $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, AttributeFilters $filters)
+    public function index(AttributeFilters $filters)
     {
         $attributes = Attribute::filter($filters)->orderBy('name')->paginate(10);
 
