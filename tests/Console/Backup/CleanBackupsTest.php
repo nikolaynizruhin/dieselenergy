@@ -29,7 +29,7 @@ class CleanBackupsTest extends TestCase
     /** @test */
     public function it_can_clean_backups_older_than_a_week()
     {
-        $this->travel(config('backup.lifetime') + 1)->days();
+        $this->travel(config('backup.lifetime'))->days();
 
         $this->artisan('backup:clean')
             ->expectsOutput('Backups cleaned successfully!')
