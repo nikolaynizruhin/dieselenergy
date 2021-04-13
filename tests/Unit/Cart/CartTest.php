@@ -132,7 +132,7 @@ class CartTest extends TestCase
     {
         $order = Order::factory()->create();
 
-        Cart::add($this->product, $quantity = $this->faker->randomDigitNotNull);
+        Cart::add($this->product, $quantity = $this->faker->randomDigitNotNull());
 
         $this->assertDatabaseCount('order_product', 0);
 

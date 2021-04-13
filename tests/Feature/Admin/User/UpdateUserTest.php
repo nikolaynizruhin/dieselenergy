@@ -37,8 +37,8 @@ class UpdateUserTest extends TestCase
         $user = User::factory()->create();
 
         $this->put(route('admin.users.update', $user), [
-            'name' => $this->faker->name,
-            'email' => $this->faker->email,
+            'name' => $this->faker->name(),
+            'email' => $this->faker->email(),
         ])->assertRedirect(route('admin.login'));
     }
 
@@ -69,7 +69,7 @@ class UpdateUserTest extends TestCase
         $this->actingAs($user)
             ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
-                'email' => $this->faker->email,
+                'email' => $this->faker->email(),
             ])->assertRedirect(route('admin.users.edit', $user))
             ->assertSessionHasErrors('name');
 
@@ -85,7 +85,7 @@ class UpdateUserTest extends TestCase
             ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
                 'name' => 1,
-                'email' => $this->faker->email,
+                'email' => $this->faker->email(),
             ])->assertRedirect(route('admin.users.edit', $user))
             ->assertSessionHasErrors('name');
 
@@ -101,7 +101,7 @@ class UpdateUserTest extends TestCase
             ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
                 'name' => str_repeat('a', 256),
-                'email' => $this->faker->email,
+                'email' => $this->faker->email(),
             ])->assertRedirect(route('admin.users.edit', $user))
             ->assertSessionHasErrors('name');
 
@@ -116,7 +116,7 @@ class UpdateUserTest extends TestCase
         $this->actingAs($user)
             ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
-                'name' => $this->faker->name,
+                'name' => $this->faker->name(),
             ])->assertRedirect(route('admin.users.edit', $user))
             ->assertSessionHasErrors('email');
 
@@ -131,7 +131,7 @@ class UpdateUserTest extends TestCase
         $this->actingAs($user)
             ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
-                'name' => $this->faker->name,
+                'name' => $this->faker->name(),
                 'email' => 1,
             ])->assertRedirect(route('admin.users.edit', $user))
             ->assertSessionHasErrors('email');
@@ -147,7 +147,7 @@ class UpdateUserTest extends TestCase
         $this->actingAs($user)
             ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
-                'name' => $this->faker->name,
+                'name' => $this->faker->name(),
                 'email' => str_repeat('a', 256),
             ])->assertRedirect(route('admin.users.edit', $user))
             ->assertSessionHasErrors('email');
@@ -163,7 +163,7 @@ class UpdateUserTest extends TestCase
         $this->actingAs($user)
             ->from(route('admin.users.edit', $user))
             ->put(route('admin.users.update', $user), [
-                'name' => $this->faker->name,
+                'name' => $this->faker->name(),
                 'email' => 'invalid',
             ])->assertRedirect(route('admin.users.edit', $user))
             ->assertSessionHasErrors('email');
@@ -179,7 +179,7 @@ class UpdateUserTest extends TestCase
         $this->actingAs($admin)
             ->from(route('admin.users.edit', $admin))
             ->put(route('admin.users.update', $admin), [
-                'name' => $this->faker->name,
+                'name' => $this->faker->name(),
                 'email' => $user->email,
             ])->assertRedirect(route('admin.users.edit', $admin))
             ->assertSessionHasErrors('email');

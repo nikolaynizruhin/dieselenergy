@@ -26,8 +26,8 @@ class ReadCartsTest extends TestCase
         $order = Order::factory()->create();
 
         $order->products()->attach([
-            $patrol->id => ['quantity' => $this->faker->randomDigit],
-            $diesel->id => ['quantity' => $this->faker->randomDigit],
+            $patrol->id => ['quantity' => $this->faker->randomDigit()],
+            $diesel->id => ['quantity' => $this->faker->randomDigit()],
         ]);
 
         $this->login()

@@ -51,7 +51,7 @@ class CreateOrderTest extends TestCase
             ->withDefaultImage()
             ->create();
 
-        Cart::add($this->product, $this->quantity = $this->faker->randomDigitNotNull);
+        Cart::add($this->product, $this->quantity = $this->faker->randomDigitNotNull());
     }
 
     /** @test */
@@ -268,7 +268,7 @@ class CreateOrderTest extends TestCase
             'name' => $customer->name,
             'email' => $customer->email,
             'phone' => $customer->phone,
-            'notes' => $this->faker->paragraph,
+            'notes' => $this->faker->paragraph(),
         ] + $this->honeypot(), $overrides);
     }
 }

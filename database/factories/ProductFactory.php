@@ -25,12 +25,12 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->sentence,
-            'model' => $this->faker->unique()->word,
-            'slug' => $this->faker->unique()->slug,
-            'description' => $this->faker->paragraph,
+            'name' => $this->faker->unique()->sentence(),
+            'model' => $this->faker->unique()->word(),
+            'slug' => $this->faker->unique()->slug(),
+            'description' => $this->faker->paragraph(),
             'price' => $this->faker->randomNumber(5),
-            'is_active' => $this->faker->boolean,
+            'is_active' => $this->faker->boolean(),
             'brand_id' => Brand::factory(),
             'category_id' => Category::factory(),
         ];

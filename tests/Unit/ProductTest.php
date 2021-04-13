@@ -43,7 +43,7 @@ class ProductTest extends TestCase
     {
         $product = Product::factory()
             ->hasAttached(Attribute::factory(), [
-                'value' => $value = $this->faker->randomDigit,
+                'value' => $value = $this->faker->randomDigit(),
             ])->create();
 
         $this->assertInstanceOf(Collection::class, $product->attributes);
@@ -55,7 +55,7 @@ class ProductTest extends TestCase
     {
         $product = Product::factory()
             ->hasAttached(Order::factory(), [
-                'quantity' => $quantity = $this->faker->randomDigit,
+                'quantity' => $quantity = $this->faker->randomDigit(),
             ])->create();
 
         $this->assertInstanceOf(Collection::class, $product->orders);

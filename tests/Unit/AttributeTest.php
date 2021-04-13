@@ -29,7 +29,7 @@ class AttributeTest extends TestCase
     {
         $attribute = Attribute::factory()
             ->hasAttached(Product::factory(), [
-                'value' => $value = $this->faker->randomDigit,
+                'value' => $value = $this->faker->randomDigit(),
             ])->create();
 
         $this->assertInstanceOf(Collection::class, $attribute->products);

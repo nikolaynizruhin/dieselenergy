@@ -32,7 +32,7 @@ class OrderTest extends TestCase
     {
         $order = Order::factory()
             ->hasAttached(Product::factory(), [
-                'quantity' => $quantity = $this->faker->randomDigit,
+                'quantity' => $quantity = $this->faker->randomDigit(),
             ])->create();
 
         $this->assertInstanceOf(Collection::class, $order->products);

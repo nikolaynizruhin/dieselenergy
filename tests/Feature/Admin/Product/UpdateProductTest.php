@@ -77,7 +77,7 @@ class UpdateProductTest extends TestCase
         $this->login()
             ->put(route('admin.products.update', $product), $stub + [
                 'attributes' => [
-                    $attribute->id => $value = $this->faker->word,
+                    $attribute->id => $value = $this->faker->word(),
                 ],
             ])->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.updated'));
@@ -555,7 +555,7 @@ class UpdateProductTest extends TestCase
 
         $stub = Product::factory()->raw([
             'category_id' => $category->id,
-            'attributes' => [$unrelated->id => $this->faker->randomDigit],
+            'attributes' => [$unrelated->id => $this->faker->randomDigit()],
         ]);
 
         $this->login()

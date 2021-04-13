@@ -23,7 +23,7 @@ class BrandFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->word,
+            'name' => $this->faker->unique()->word(),
             'currency_id' => Currency::factory(),
         ];
     }

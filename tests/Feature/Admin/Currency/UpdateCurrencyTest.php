@@ -150,7 +150,7 @@ class UpdateCurrencyTest extends TestCase
     {
         $currency = Currency::factory()->create();
         $stub = Currency::factory()->raw([
-            'rate' => $this->faker->randomFloat($nbMaxDecimals = 4, $min = -10, $max = -1),
+            'rate' => $this->faker->randomFloat(4, -10, -1),
         ]);
 
         $this->login()

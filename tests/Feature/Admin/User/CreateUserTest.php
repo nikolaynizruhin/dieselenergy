@@ -210,8 +210,8 @@ class CreateUserTest extends TestCase
     private function validFields($overrides = [])
     {
         return array_merge([
-            'name' => $this->faker->name,
-            'email' => $this->faker->email,
+            'name' => $this->faker->name(),
+            'email' => $this->faker->email(),
             'password' => 'password',
             'password_confirmation' => 'password',
         ], $overrides);

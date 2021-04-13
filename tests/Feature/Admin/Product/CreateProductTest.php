@@ -71,7 +71,7 @@ class CreateProductTest extends TestCase
         $this->login()
             ->post(route('admin.products.store'), $product + [
                 'attributes' => [
-                    $attribute->id => $value = $this->faker->word,
+                    $attribute->id => $value = $this->faker->word(),
                 ],
             ])->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.created'));
@@ -541,7 +541,7 @@ class CreateProductTest extends TestCase
 
         $stub = Product::factory()->raw([
             'category_id' => $category->id,
-            'attributes' => [$unrelated->id => $this->faker->randomDigit],
+            'attributes' => [$unrelated->id => $this->faker->randomDigit()],
         ]);
 
         $this->login()

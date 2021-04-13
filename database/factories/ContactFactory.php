@@ -24,7 +24,7 @@ class ContactFactory extends Factory
     {
         return [
             'customer_id' => Customer::factory(),
-            'message' => $this->faker->paragraph,
+            'message' => $this->faker->paragraph(),
         ];
     }
 }

@@ -26,7 +26,7 @@ class OrderFactory extends Factory
             'customer_id' => Customer::factory(),
             'status' => $this->faker->randomElement(Order::statuses()),
             'total' => $this->faker->randomNumber(5),
-            'notes' => $this->faker->sentence,
+            'notes' => $this->faker->sentence(),
         ];
     }
 }

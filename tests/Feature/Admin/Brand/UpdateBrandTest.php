@@ -37,7 +37,7 @@ class UpdateBrandTest extends TestCase
         $brand = Brand::factory()->create();
 
         $this->put(route('admin.brands.update', $brand), [
-            'name' => $this->faker->word,
+            'name' => $this->faker->word(),
         ])->assertRedirect(route('admin.login'));
     }
 

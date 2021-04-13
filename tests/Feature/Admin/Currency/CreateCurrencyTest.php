@@ -137,7 +137,7 @@ class CreateCurrencyTest extends TestCase
     public function user_cant_create_currency_with_rate_less_than_0()
     {
         $currency = Currency::factory()->raw([
-            'rate' => $this->faker->randomFloat($nbMaxDecimals = 4, $min = -10, $max = -1),
+            'rate' => $this->faker->randomFloat(4, -10, -1),
         ]);
 
         $this->login()

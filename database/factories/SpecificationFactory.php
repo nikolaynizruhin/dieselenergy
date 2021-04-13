@@ -26,7 +26,7 @@ class SpecificationFactory extends Factory
         return [
             'category_id' => Category::factory(),
             'attribute_id' => Attribute::factory(),
-            'is_featured' => $this->faker->boolean,
+            'is_featured' => $this->faker->boolean(),
         ];
     }
 }
