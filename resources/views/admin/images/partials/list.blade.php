@@ -36,7 +36,7 @@
     </div>
 </div>
 <div class="card-footer bg-white text-muted">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
         {{ __('common.total') }} {{ $images->total() }} {{ __('common.records') }}
         {{ $images->withQueryString()->links() }}
     </div>
