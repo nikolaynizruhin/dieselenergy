@@ -35,60 +35,27 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(
-            ['layouts.app'],
-            CategoryComposer::class
-        );
+        View::composer('layouts.app', CategoryComposer::class);
 
-        View::composer(
-            ['carts.index'],
-            CartComposer::class
-        );
+        View::composer('carts.index', CartComposer::class);
 
         // Admin
-        View::composer(
-            ['admin.dashboard'],
-            DashboardComposer::class
-        );
+        View::composer('admin.dashboard', DashboardComposer::class);
 
-        View::composer(
-            ['admin.products.index'],
-            ProductsComposer::class
-        );
+        View::composer('admin.products.index', ProductsComposer::class);
 
-        View::composer(
-            ['admin.products.create', 'admin.products.edit'],
-            ProductComposer::class
-        );
+        View::composer('admin.medias.create', MediaComposer::class);
 
-        View::composer(
-            ['admin.orders.create', 'admin.orders.edit'],
-            OrderComposer::class
-        );
+        View::composer(['admin.products.create', 'admin.products.edit'], ProductComposer::class);
 
-        View::composer(
-            ['admin.contacts.create', 'admin.contacts.edit'],
-            ContactComposer::class
-        );
+        View::composer(['admin.orders.create', 'admin.orders.edit'], OrderComposer::class);
 
-        View::composer(
-            ['admin.carts.create', 'admin.carts.edit'],
-            AdminCartComposer::class
-        );
+        View::composer(['admin.contacts.create', 'admin.contacts.edit'], ContactComposer::class);
 
-        View::composer(
-            ['admin.medias.create'],
-            MediaComposer::class
-        );
+        View::composer(['admin.carts.create', 'admin.carts.edit'], AdminCartComposer::class);
 
-        View::composer(
-            ['admin.specifications.create', 'admin.specifications.edit'],
-            SpecificationComposer::class
-        );
+        View::composer(['admin.specifications.create', 'admin.specifications.edit'], SpecificationComposer::class);
 
-        View::composer(
-            ['admin.brands.create', 'admin.brands.edit', 'admin.brands.index'],
-            BrandComposer::class
-        );
+        View::composer(['admin.brands.create', 'admin.brands.edit', 'admin.brands.index'], BrandComposer::class);
     }
 }
