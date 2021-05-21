@@ -25,9 +25,11 @@
             </div>
         @endif
         <div class="card-body">
-            <a href="{{ route('products.show', $product) }}" role="button" class="btn btn-outline-secondary btn-block stretched-link">
-                Деталі
-            </a>
+            <div class="d-grid">
+                <a href="{{ route('products.show', $product) }}" role="button" class="btn btn-outline-secondary stretched-link">
+                    Деталі
+                </a>
+            </div>
         </div>
     </div>
 </div>

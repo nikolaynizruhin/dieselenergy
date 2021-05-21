@@ -11,11 +11,11 @@
             @method('PUT')
             <div class="card-body">
                 <!-- Status -->
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <label for="selectStatus" class="col-md-3 col-form-label">{{ __('common.status') }}</label>
                     <div class="col-md-6">
                         <select id="selectStatus"
-                                class="form-control @error('status') is-invalid @enderror"
+                                class="form-select @error('status') is-invalid @enderror"
                                 name="status"
                                 required>
                             @foreach ($statuses as $status)
@@ -26,26 +26,24 @@
                         </select>
 
                         @error('status')
-                        <div class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                        <div class="invalid-feedback">
+                            {{ $message }}
                         </div>
                         @enderror
                     </div>
                 </div>
 
                 <!-- Total -->
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <label for="inputTotal" class="col-md-3 col-form-label">{{ __('common.total') }}</label>
                     <div class="col-md-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon">UAH</span>
-                            </div>
-                            <input type="number" min="0.00" step="0.01" id="inputTotal" class="form-control rounded-right @error('total') is-invalid @enderror" aria-label="Total" aria-describedby="basic-addon" name="total" value="{{ old('total', $order->decimal_total) }}" required autocomplete="total">
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="basic-addon">UAH</span>
+                            <input type="number" min="0.00" step="0.01" id="inputTotal" class="form-control @error('total') is-invalid @enderror" aria-label="Total" aria-describedby="basic-addon" name="total" value="{{ old('total', $order->decimal_total) }}" required autocomplete="total">
 
                             @error('total')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
                                 </div>
                             @enderror
                         </div>
@@ -53,11 +51,11 @@
                 </div>
 
                 <!-- Customer -->
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <label for="selectCustomer" class="col-md-3 col-form-label">{{ __('customer.title') }}</label>
                     <div class="col-md-6">
                         <select id="selectCustomer"
-                                class="form-control @error('customer_id') is-invalid @enderror"
+                                class="form-select @error('customer_id') is-invalid @enderror"
                                 name="customer_id"
                                 required>
                             <option value="">{{ __('customer.select') }}</option>
@@ -69,30 +67,30 @@
                         </select>
 
                         @error('customer_id')
-                        <div class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                        <div class="invalid-feedback">
+                            {{ $message }}
                         </div>
                         @enderror
                     </div>
                 </div>
 
                 <!-- Notes -->
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <label for="inputNotes" class="col-md-3 col-form-label">{{ __('common.notes') }}</label>
                     <div class="col-md-6">
                         <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" id="inputNotes" rows="3">{{ old('notes', $order->notes) }}</textarea>
 
                         @error('notes')
-                        <div class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                        <div class="invalid-feedback">
+                            {{ $message }}
                         </div>
                         @enderror
                     </div>
                 </div>
             </div>
 
-            <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('common.update') }}</button>
+            <div class="card-footer bg-light text-end border-0">
+                <button type="submit" class="btn btn-primary text-white">{{ __('common.update') }}</button>
             </div>
         </form>
     </div>

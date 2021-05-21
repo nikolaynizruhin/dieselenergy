@@ -33,15 +33,15 @@
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <span class="d-block text-gray-500 mb-3">КОНТАКТИ</span>
                 <a href="tel:{{ config('company.phone') }}" class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2">
-                    @include('layouts.partials.icon', ['name' => 'telephone', 'classes' => 'mr-2', 'width' => '1.3em', 'height' => '1.3em'])
+                    @include('layouts.partials.icon', ['name' => 'telephone', 'classes' => 'me-2', 'width' => '1.3em', 'height' => '1.3em'])
                     +38 (097) 799 75 42
                 </a>
                 <a href="mailto:{{ config('company.email') }}" class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2">
-                    @include('layouts.partials.icon', ['name' => 'envelope', 'classes' => 'mr-2', 'width' => '1.3em', 'height' => '1.3em'])
+                    @include('layouts.partials.icon', ['name' => 'envelope', 'classes' => 'me-2', 'width' => '1.3em', 'height' => '1.3em'])
                     {{ config('company.email') }}
                 </a>
                 <a href="{{ config('company.facebook') }}" class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2">
-                    @include('layouts.partials.icon', ['name' => 'facebook', 'classes' => 'mr-2', 'width' => '1.3em', 'height' => '1.3em'])
+                    @include('layouts.partials.icon', ['name' => 'facebook', 'classes' => 'me-2', 'width' => '1.3em', 'height' => '1.3em'])
                     {{ config('app.name') }}
                 </a>
             </div>

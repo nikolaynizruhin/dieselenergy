@@ -19,18 +19,6 @@
     }
 }
 
-.border-2 {
-    border-width: 2px;
-}
-
-.border-white {
-    border-color: white;
-}
-
-.border-solid {
-    border-style: solid;
-}
-
 .height-64 {
     height: 16rem;
 }
@@ -53,22 +41,6 @@
 
 .width-48 {
     width: 12rem;
-}
-
-.top-0	{
-    top: 0;
-}
-
-.right-0 {
-    right: 0;
-}
-
-.bottom-0 {
-    bottom: 0;
-}
-
-.left-0	{
-    left: 0;
 }
 
 .letter-spacing {
@@ -102,6 +74,18 @@
     padding-top: 10rem !important;
 }
 
+.py-md-7 {
+    @media (min-width: 768px) {
+        padding-bottom: 10rem !important;
+        padding-top: 10rem !important;
+    }
+}
+
+.py-8 {
+    padding-bottom: 15rem !important;
+    padding-top: 15rem !important;
+}
+
 .py-md-8 {
     @media (min-width: 768px) {
         padding-bottom: 13rem !important;
@@ -131,4 +115,8 @@
 
 .hover-text-secondary:hover {
     color: #6c757d;
+}
+
+.z-n1 {
+    z-index: -1;
 }

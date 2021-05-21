@@ -7,11 +7,11 @@
 @section('keywords', $category->name)
 
 @section('content')
-    <section class="position-relative py-5">
-        <div class="dots mr-sm-5 mt-6 top-0 right-0 height-72 width-48 position-absolute"></div>
+    <section class="pt-4 pb-5">
+        <div class="container position-relative">
+            <div class="dots top-0 end-0 height-72 width-48 position-absolute z-n1"></div>
 
-        <div class="container">
-            <div class="row mt-n3 mb-4">
+            <div class="row mb-4">
                 <div class="col">
                     @include('layouts.partials.breadcrumb', ['links' => [$category->name => route('categories.products.index', $category)]])
                 </div>
@@ -20,16 +20,18 @@
                 <div class="col">
                     <h1 class="h4">{{ $category->name }}</h1>
                 </div>
-                <div class="col text-right text-gray-500">
+                <div class="col text-end text-gray-500">
                     Всього: {{ $products->total() }}
                 </div>
             </div>
             <div class="row">
                 <div class="col d-sm-none">
-                    <button class="btn btn-outline-secondary btn-block mb-3" type="button" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
-                        @include('layouts.partials.icon', ['name' => 'funnel', 'classes' => 'pb-1', 'width' => '1.4em', 'height' => '1.4em'])
-                        Фільтри
-                    </button>
+                    <div class="d-grid">
+                        <button class="btn btn-outline-secondary btn-block mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
+                            @include('layouts.partials.icon', ['name' => 'funnel', 'classes' => 'pb-1', 'width' => '1.4em', 'height' => '1.4em'])
+                            Фільтри
+                        </button>
+                    </div>
                     <div class="collapse mb-3" id="collapseFilters">
                         <div class="card card-body">
                             @include('categories.products.partials.filters')

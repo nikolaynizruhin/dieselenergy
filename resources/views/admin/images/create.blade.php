@@ -11,25 +11,22 @@
             <div class="card-body">
 
                 <!-- Images -->
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label">{{ __('common.images') }}</label>
+                <div class="mb-3 row">
+                    <label class="col-md-3 col-form-label" for="inputImages">{{ __('common.images') }}</label>
                     <div class="col-md-6">
-                        <div class="custom-file">
-                            <input type="file" multiple id="inputImages" class="custom-file-input @error('images.*') is-invalid @enderror" name="images[]" accept="image/*">
-                            <label class="custom-file-label" for="inputImages">{{ __('common.choose_images') }}</label>
+                        <input type="file" multiple id="inputImages" class="form-control @error('images.*') is-invalid @enderror" name="images[]" accept="image/*">
 
-                            @error('images.*')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
-                        </div>
+                        @error('images.*')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
             </div>
 
-            <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('common.create') }}</button>
+            <div class="card-footer bg-light text-end border-0">
+                <button type="submit" class="btn btn-primary text-white">{{ __('common.create') }}</button>
             </div>
         </form>
     </div>

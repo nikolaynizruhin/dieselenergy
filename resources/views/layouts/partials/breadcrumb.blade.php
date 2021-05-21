@@ -7,7 +7,7 @@
         @if ($loop->last)
             <span class="text-gray-500">{{ $name }}</span>
         @else
-            <a href="{{ $link }}" class="text-gray-500">{{ $name }}</a>
+            <a href="{{ $link }}" class="text-gray-500 text-decoration-none">{{ $name }}</a>
         @endif
     @endforeach
 </div>

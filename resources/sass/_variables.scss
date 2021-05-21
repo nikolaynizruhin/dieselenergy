@@ -1,11 +1,11 @@
 // Theme
-$theme-colors: (
-    "primary": #ff6606,
-    "teal": #20c997,
-);
+$primary: #ff6606;
 
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
 
 // Links
 $link-color: #6c757d;
+
+// Negative Margins
+$enable-negative-margins: true;

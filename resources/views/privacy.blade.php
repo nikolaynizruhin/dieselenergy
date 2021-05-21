@@ -3,12 +3,12 @@
 @section('title', 'Політики конфіденційності')
 
 @section('content')
-    <section class="position-relative py-5">
-        <div class="dots mr-sm-5 mt-5 top-0 right-0 height-72 width-48 position-absolute"></div>
-        <div class="dots ml-sm-5 mb-3 bottom-0 left-0 height-72 width-48 position-absolute"></div>
+    <section class="pb-5 pt-4">
 
-        <div class="container">
-            <div class="row justify-content-center mt-n3 mb-4">
+        <div class="container position-relative">
+            <div class="dots top-0 end-0 height-72 width-48 position-absolute z-n1"></div>
+
+            <div class="row justify-content-center mb-4">
                 <div class="col col-md-10 col-lg-8">
                     @include('layouts.partials.breadcrumb', ['links' => ['Політика конфіденційності' => route('privacy')]])
                 </div>
@@ -82,6 +82,8 @@
                     <p>Інші права та обов'язки Diesel Energy, як оператора персональних даних визначаються чинним законодавством України в області персональних даних. Посадові особи Diesel Energy, винні в порушенні норм, що регулюють обробку і захист персональних даних, несуть матеріальну, дисциплінарну, адміністративну, цивільно-правову чи кримінальну відповідальність у порядку, встановленому законодавством України.</p>
                 </div>
             </div>
+
+            <div class="dots bottom-0 start-0 height-72 width-48 position-absolute z-n1"></div>
         </div>
     </section>
 @endsection
