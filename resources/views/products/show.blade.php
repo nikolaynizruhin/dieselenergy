@@ -55,22 +55,26 @@
                             </div>
                         </div>
                     </form>
-                    <p class="text-muted">
-                        @include('layouts.partials.icon', ['name' => 'shield-check', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'me-2'])
-                        Гарантійне та післягарантійне обслуговування електростанцій
-                    </p>
-                    <p class="text-muted">
-                        @include('layouts.partials.icon', ['name' => 'truck', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'me-2'])
-                        Доставка продукції здійснюється по всій Україні
-                    </p>
-                    <p class="text-muted">
-                        @include('layouts.partials.icon', ['name' => 'tools', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'me-2'])
-                        Cервісне технічне обслуговування нашими спеціалістами
-                    </p>
-                    <p class="text-muted">
-                        @include('layouts.partials.icon', ['name' => 'credit-card', 'width' => '1.5em', 'height' => '1.5em', 'classes' => 'me-2'])
-                        Безготівковий розрахунок
-                    </p>
+                    <table class="table table-borderless text-muted">
+                        <tbody>
+                        <tr>
+                            <td>@include('layouts.partials.icon', ['name' => 'shield-check', 'width' => '1.5em', 'height' => '1.5em'])</td>
+                            <td>Гарантійне та післягарантійне обслуговування електростанцій</td>
+                        </tr>
+                        <tr>
+                            <td>@include('layouts.partials.icon', ['name' => 'truck', 'width' => '1.5em', 'height' => '1.5em'])</td>
+                            <td>Доставка продукції здійснюється по всій Україні</td>
+                        </tr>
+                        <tr>
+                            <td>@include('layouts.partials.icon', ['name' => 'tools', 'width' => '1.5em', 'height' => '1.5em'])</td>
+                            <td>Cервісне технічне обслуговування нашими спеціалістами</td>
+                        </tr>
+                        <tr>
+                            <td>@include('layouts.partials.icon', ['name' => 'credit-card', 'width' => '1.5em', 'height' => '1.5em'])</td>
+                            <td>Безготівковий розрахунок</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="row justify-content-center">
