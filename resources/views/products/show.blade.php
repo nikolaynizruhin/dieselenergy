@@ -7,12 +7,12 @@
 @section('keywords', implode(',', [$product->name, $product->brand->name.' '.$product->model, $product->category->name]))
 
 @section('content')
-    <section class="py-5">
+    <section class="pt-4 pb-5">
 
         <div class="container position-relative">
             <div class="dots top-0 end-0 height-72 width-48 position-absolute z-n1"></div>
 
-            <div class="row mt-n3 mb-4">
+            <div class="row mb-4">
                 <div class="col">
                     @include('layouts.partials.breadcrumb', [
                         'links' => [
