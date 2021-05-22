@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="row mb-4">
-                <div class="col-12 col-md">
+                <div class="col-12 col-md px-xl-5">
                     @include('products.partials.carousel')
                 </div>
                 <div class="col-12 col-md">
