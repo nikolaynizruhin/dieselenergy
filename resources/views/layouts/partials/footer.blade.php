@@ -10,37 +10,37 @@
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <strong class="d-block text-gray-500 mb-3 letter-spacing">ТОВАРИ</strong>
                 @foreach($categories as $category)
-                    <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('categories.products.index', $category) }}">
+                    <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('categories.products.index', $category) }}">
                         {{ $category->name }}
                     </a>
                 @endforeach
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <strong class="d-block text-gray-500 mb-3 letter-spacing">КОМПАНІЯ</strong>
-                <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('home').'#services' }}">
+                <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('home').'#services' }}">
                     Послуги
                 </a>
-                <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('home').'#about-us' }}">
+                <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('home').'#about-us' }}">
                     Про нас
                 </a>
-                <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('posts.index') }}">
+                <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('posts.index') }}">
                     Блог
                 </a>
-                <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('privacy') }}">
+                <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('privacy') }}">
                     Політика конфіденційності
                 </a>
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <strong class="d-block text-gray-500 mb-3 letter-spacing">КОНТАКТИ</strong>
-                <a href="tel:{{ config('company.phone') }}" class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2">
+                <a href="tel:{{ config('company.phone') }}" class="d-block text-gray-300 text-decoration-none mb-2">
                     @include('layouts.partials.icon', ['name' => 'telephone', 'classes' => 'me-2', 'width' => '1.3em', 'height' => '1.3em'])
                     +38 (097) 799 75 42
                 </a>
-                <a href="mailto:{{ config('company.email') }}" class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2">
+                <a href="mailto:{{ config('company.email') }}" class="d-block text-gray-300 text-decoration-none mb-2">
                     @include('layouts.partials.icon', ['name' => 'envelope', 'classes' => 'me-2', 'width' => '1.3em', 'height' => '1.3em'])
                     {{ config('company.email') }}
                 </a>
-                <a href="{{ config('company.facebook') }}" class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2">
+                <a href="{{ config('company.facebook') }}" class="d-block text-gray-300 text-decoration-none mb-2">
                     @include('layouts.partials.icon', ['name' => 'facebook', 'classes' => 'me-2', 'width' => '1.3em', 'height' => '1.3em'])
                     {{ config('app.name') }}
                 </a>
