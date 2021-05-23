@@ -5,10 +5,10 @@
                 <a href="{{ route('home') }}">
                     <img src="{{ asset('/images/logo-white.svg') }}" alt="{{ config('app.name') }}" width="150" height="39" class="mb-3" loading="lazy">
                 </a>
-                <p class="text-gray-400">Надійні рішення для постачання<br>електроенергії</p>
+                <p class="text-gray-300">Надійні рішення для постачання<br>електроенергії</p>
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
-                <span class="d-block text-gray-500 mb-3">ТОВАРИ</span>
+                <strong class="d-block text-gray-500 mb-3 letter-spacing">ТОВАРИ</strong>
                 @foreach($categories as $category)
                     <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('categories.products.index', $category) }}">
                         {{ $category->name }}
@@ -16,7 +16,7 @@
                 @endforeach
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
-                <span class="d-block text-gray-500 mb-3">КОМПАНІЯ</span>
+                <strong class="d-block text-gray-500 mb-3 letter-spacing">КОМПАНІЯ</strong>
                 <a class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2" href="{{ route('home').'#services' }}">
                     Послуги
                 </a>
@@ -31,7 +31,7 @@
                 </a>
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
-                <span class="d-block text-gray-500 mb-3">КОНТАКТИ</span>
+                <strong class="d-block text-gray-500 mb-3 letter-spacing">КОНТАКТИ</strong>
                 <a href="tel:{{ config('company.phone') }}" class="d-block text-gray-300 hover-text-secondary text-decoration-none mb-2">
                     @include('layouts.partials.icon', ['name' => 'telephone', 'classes' => 'me-2', 'width' => '1.3em', 'height' => '1.3em'])
                     +38 (097) 799 75 42
@@ -50,7 +50,7 @@
         <hr class="border-top">
 
         <div class="row justify-content-center mt-5 mb-3">
-            <div class="col text-center text-gray-500">
+            <div class="col text-center text-gray-300">
                 &copy; {{ date('Y') }} Diesel Energy, LLC.
             </div>
         </div>
