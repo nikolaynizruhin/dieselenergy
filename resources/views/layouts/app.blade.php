@@ -24,9 +24,6 @@
 
     @stack('meta')
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -65,5 +62,8 @@
     </main>
 
     @include('layouts.partials.footer')
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

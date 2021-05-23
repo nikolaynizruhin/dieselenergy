@@ -9,9 +9,6 @@
 
     <title>{{ config('app.name') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Styles -->
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 </head>
@@ -32,5 +29,8 @@
             </div>
         </div>
     </main>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
