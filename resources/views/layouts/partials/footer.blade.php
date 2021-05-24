@@ -51,7 +51,7 @@
 
         <div class="row justify-content-center mt-5 mb-3">
             <div class="col text-center text-gray-300">
-                &copy; {{ date('Y') }} Diesel Energy, LLC.
+                &copy; {{ date('Y') }} {{ config('app.name') }}, LLC.
             </div>
         </div>
     </div>
