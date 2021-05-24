@@ -8,7 +8,7 @@
                 <p class="text-gray-300">Надійні рішення для постачання<br>електроенергії</p>
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
-                <strong class="d-block text-gray-500 mb-3 letter-spacing">ТОВАРИ</strong>
+                <strong class="d-block text-gray-500 mb-2 letter-spacing">ТОВАРИ</strong>
                 @foreach($categories as $category)
                     <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('categories.products.index', $category) }}">
                         {{ $category->name }}
@@ -16,7 +16,7 @@
                 @endforeach
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
-                <strong class="d-block text-gray-500 mb-3 letter-spacing">КОМПАНІЯ</strong>
+                <strong class="d-block text-gray-500 mb-2 letter-spacing">КОМПАНІЯ</strong>
                 <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('home').'#services' }}">
                     Послуги
                 </a>
@@ -31,7 +31,7 @@
                 </a>
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
-                <strong class="d-block text-gray-500 mb-3 letter-spacing">КОНТАКТИ</strong>
+                <strong class="d-block text-gray-500 mb-2 letter-spacing">КОНТАКТИ</strong>
                 <a href="tel:{{ config('company.phone') }}" class="d-block text-gray-300 text-decoration-none mb-2">
                     @include('layouts.partials.icon', ['name' => 'telephone', 'classes' => 'me-2', 'width' => '1.3em', 'height' => '1.3em'])
                     +38 (097) 799 75 42
