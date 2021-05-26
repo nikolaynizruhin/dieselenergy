@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <nav>
+    <nav aria-label="Pagination">
         <ul class="pagination mb-0">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
@@ -28,7 +28,7 @@
                             <li class="page-item" aria-current="page">
                                 <span class="page-link bg-light">
                                     {{ $page }}
-                                    <span class="sr-only">(current)</span>
+                                    <span class="visually-hidden">(current)</span>
                                 </span>
                             </li>
                         @else

@@ -11,7 +11,7 @@
                         <div class="col">
                             <h2>{{ $orders->total() }}</h2>
                         </div>
-                        <div class="col text-muted text-right">
+                        <div class="col text-muted text-end">
                             @include('layouts.partials.icon', ['name' => 'basket', 'width' => '2em', 'height' => '2em'])
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                         <div class="col">
                             <h2>{{ $totalCustomers }}</h2>
                         </div>
-                        <div class="col text-muted text-right">
+                        <div class="col text-muted text-end">
                             @include('layouts.partials.icon', ['name' => 'people', 'width' => '2em', 'height' => '2em'])
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                         <div class="col">
                             <h2>{{ $soldProducts }}</h2>
                         </div>
-                        <div class="col text-muted text-right">
+                        <div class="col text-muted text-end">
                             @include('layouts.partials.icon', ['name' => 'cart3', 'width' => '2em', 'height' => '2em'])
                         </div>
                     </div>
@@ -56,8 +56,8 @@
         <div class="col-md-4">
             @include('admin.layouts.partials.search', ['url' => route('admin.dashboard')])
         </div>
-        <div class="col text-right">
-            <a class="btn btn-primary d-block d-md-inline-block shadow-sm mb-3" href="{{ route('admin.orders.create') }}" role="button">{{ __('order.add') }}</a>
+        <div class="col text-end">
+            <a class="btn btn-primary text-white d-block d-md-inline-block shadow-sm mb-3" href="{{ route('admin.orders.create') }}" role="button">{{ __('order.add') }}</a>
         </div>
     </div>
 

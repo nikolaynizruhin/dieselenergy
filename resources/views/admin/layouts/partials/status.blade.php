@@ -1,3 +1,3 @@
-<span class="badge badge-pill badge-{{ $type }}">
+<span class="badge rounded-pill badge-{{ $type }}">
     {{ $status }}
 </span>

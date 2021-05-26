@@ -24,9 +24,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'is_active' => 'boolean',
-    ];
+    protected $casts = ['is_active' => 'boolean'];
 
     /**
      * Scope a query to only include active products.

@@ -7,10 +7,10 @@
 @endpush
 
 @section('content')
-    <section class="position-relative py-5">
-        <div class="dots mr-sm-5 mt-6 top-0 right-0 height-64 width-40 position-absolute"></div>
+    <section class="py-5">
+        <div class="container position-relative">
+            <div class="dots top-0 end-0 height-64 width-40 position-absolute z-n1"></div>
 
-        <div class="container">
             <div class="row justify-content-center">
                 <div class="col col-md-6 py-5 text-center">
                     @include('layouts.partials.icon', ['name' => 'check-circle', 'classes' => 'text-success mb-3', 'width' => '3.5em', 'height' => '3.5em'])

@@ -16,9 +16,7 @@ class Image extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'path',
-    ];
+    protected $fillable = ['path'];
 
     /**
      * The products that belong to the image.

@@ -3,15 +3,13 @@
         <div class="modal-content">
             <div class="modal-header border-0">
                 <h5 class="modal-title" id="deleteModal{{ $post->id }}">{{ __('post.delete') }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-muted">
                 {{ __('common.alert.delete') }} {{ $post->title }}?
             </div>
             <div class="modal-footer border-0 bg-light">
-                <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('common.close') }}</button>
+                <button type="button" class="btn btn-link" data-bs-dismiss="modal">{{ __('common.close') }}</button>
                 <form action="{{ route('admin.posts.destroy', $post) }}" method="POST">
                     @csrf
                     @method('DELETE')

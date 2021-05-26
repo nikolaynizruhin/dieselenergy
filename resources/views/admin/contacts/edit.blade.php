@@ -11,11 +11,11 @@
             @method('PUT')
             <div class="card-body">
                 <!-- Customer -->
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <label for="selectCustomer" class="col-md-3 col-form-label">{{ __('customer.title') }}</label>
                     <div class="col-md-6">
                         <select id="selectCustomer"
-                                class="form-control @error('customer_id') is-invalid @enderror"
+                                class="form-select @error('customer_id') is-invalid @enderror"
                                 name="customer_id"
                                 required>
                             <option value="">{{ __('customer.select') }}</option>
@@ -27,30 +27,30 @@
                         </select>
 
                         @error('customer_id')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                            <div class="invalid-feedback">
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
                 </div>
 
                 <!-- Message -->
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <label for="inputMessage" class="col-md-3 col-form-label">{{ __('contact.message') }}</label>
                     <div class="col-md-6">
                         <textarea name="message" class="form-control @error('message') is-invalid @enderror" id="inputMessage" rows="3">{{ old('message', $contact->message) }}</textarea>
 
                         @error('message')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                            <div class="invalid-feedback">
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
                 </div>
             </div>
 
-            <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('common.update') }}</button>
+            <div class="card-footer bg-light text-end border-0">
+                <button type="submit" class="btn btn-primary text-white">{{ __('common.update') }}</button>
             </div>
         </form>
     </div>

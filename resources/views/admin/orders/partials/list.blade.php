@@ -4,11 +4,11 @@
 <div class="card-body p-0">
     <div class="table-responsive">
         <table class="table mb-0">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col" class="bg-light text-muted border-0">#</th>
+            <thead>
+            <tr class="table-light">
+                <th scope="col" class="text-muted border-bottom">#</th>
                 @if ($route['name'] === 'admin.orders.index')
-                    <th scope="col" class="bg-light text-muted border-0">
+                    <th scope="col" class="text-muted border-bottom">
                         @include('admin.layouts.partials.sort', [
                             'title' => __('customer.title'),
                             'field' => 'customers.name',
@@ -17,7 +17,7 @@
                         ])
                     </th>
                 @endif
-                <th scope="col" class="bg-light text-muted border-0">
+                <th scope="col" class="text-muted border-bottom">
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.number'),
                         'field' => 'id',
@@ -25,7 +25,7 @@
                         'nested' => $nested ?? null,
                     ])
                 </th>
-                <th scope="col" class="bg-light text-muted border-0">
+                <th scope="col" class="text-muted border-bottom">
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.status'),
                         'field' => 'status',
@@ -33,7 +33,7 @@
                         'nested' => $nested ?? null,
                     ])
                 </th>
-                <th scope="col" class="bg-light text-muted border-0">
+                <th scope="col" class="text-muted border-bottom">
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.date'),
                         'field' => 'created_at',
@@ -41,7 +41,7 @@
                         'nested' => $nested ?? null,
                     ])
                 </th>
-                <th scope="col" class="bg-light text-muted border-0">
+                <th scope="col" class="text-muted border-bottom">
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.total'),
                         'field' => 'total',
@@ -49,13 +49,13 @@
                         'nested' => $nested ?? null,
                     ])
                 </th>
-                <th scope="col" class="bg-light text-muted border-0">{{ __('common.actions') }}</th>
+                <th scope="col" class="text-muted border-bottom">{{ __('common.actions') }}</th>
             </tr>
             </thead>
             <tbody class="text-muted">
             @foreach ($orders as $key => $order)
                 <tr>
-                    <th scope="row" class="font-weight-normal">{{ $orders->firstItem() + $key }}</th>
+                    <th scope="row" class="fw-normal">{{ $orders->firstItem() + $key }}</th>
                     @if ($route['name'] === 'admin.orders.index')
                         <td>
                             <a href="{{ route('admin.customers.show', $order->customer) }}">
@@ -70,13 +70,13 @@
                     <td class="text-nowrap">{{ $order->created_at->format('Y-m-d H:i') }}</td>
                     <td class="text-nowrap">@uah($order->total)</td>
                     <td class="text-nowrap">
-                        <a href="{{ route('admin.orders.show', $order) }}" class="mr-2 text-decoration-none">
+                        <a href="{{ route('admin.orders.show', $order) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="{{ route('admin.orders.edit', $order) }}" class="mr-2 text-decoration-none">
+                        <a href="{{ route('admin.orders.edit', $order) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="#" data-toggle="modal" data-target="#deleteOrderModal{{ $order->id }}">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#deleteOrderModal{{ $order->id }}">
                             @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
                         @include('admin.orders.partials.delete')
@@ -87,7 +87,7 @@
         </table>
     </div>
 </div>
-<div class="card-footer bg-white text-muted">
+<div class="card-footer bg-white text-muted border-0">
     <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
         {{ __('common.total') }} {{ $orders->total() }} {{ __('common.records') }}
         {{ $orders->withQueryString()->links() }}

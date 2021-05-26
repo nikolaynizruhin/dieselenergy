@@ -15,7 +15,9 @@ class Post extends Model
      *
      * @var array
      */
-    protected $fillable = ['slug', 'title', 'excerpt', 'body', 'image_id'];
+    protected $fillable = [
+        'slug', 'title', 'excerpt', 'body', 'image_id',
+    ];
 
     /**
      * Get the image that owns the post.

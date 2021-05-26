@@ -15,7 +15,9 @@ class Attribute extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'measure'];
+    protected $fillable = [
+        'name', 'measure',
+    ];
 
     /**
      * Get the attribute's field.

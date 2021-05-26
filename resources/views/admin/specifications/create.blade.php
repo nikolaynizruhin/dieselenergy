@@ -11,11 +11,11 @@
             <div class="card-body">
 
                 <!-- Category -->
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <label for="selectCategory" class="col-md-3 col-form-label">{{ __('category.title') }}</label>
                     <div class="col-md-6">
                         <select id="selectCategory"
-                                class="form-control @error('category_id') is-invalid @enderror"
+                                class="form-select @error('category_id') is-invalid @enderror"
                                 name="category_id"
                                 required>
                             <option value="{{ $category->id }}" selected>
@@ -24,19 +24,19 @@
                         </select>
 
                         @error('category_id')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                            <div class="invalid-feedback">
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
                 </div>
 
                 <!-- Attribute -->
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <label for="selectAttribute" class="col-md-3 col-form-label">{{ __('attribute.title') }}</label>
                     <div class="col-md-6">
                         <select id="selectAttribute"
-                                class="form-control @error('attribute_id') is-invalid @enderror"
+                                class="form-select @error('attribute_id') is-invalid @enderror"
                                 name="attribute_id"
                                 required>
                             <option value="">{{ __('attribute.select') }}</option>
@@ -50,24 +50,24 @@
                         </select>
 
                         @error('attribute_id')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                            <div class="invalid-feedback">
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
                 </div>
 
                 <!-- Featured -->
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <div class="col-md-3">{{ __('common.feature') }}</div>
                     <div class="col-md-6">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input @error('is_featured') is-invalid @enderror" value="1" name="is_featured" id="inputFeatured" @if (old('is_featured')) checked @endif>
-                            <label class="custom-control-label" for="inputFeatured">{{ __('common.is_featured') }}</label>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input @error('is_featured') is-invalid @enderror" value="1" name="is_featured" id="inputFeatured" @if (old('is_featured')) checked @endif>
+                            <label class="form-check-label" for="inputFeatured">{{ __('common.is_featured') }}</label>
 
                             @error('is_active')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
                                 </div>
                             @enderror
                         </div>
@@ -75,8 +75,8 @@
                 </div>
             </div>
 
-            <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('common.create') }}</button>
+            <div class="card-footer bg-light text-end border-0">
+                <button type="submit" class="btn btn-primary text-white">{{ __('common.create') }}</button>
             </div>
         </form>
     </div>

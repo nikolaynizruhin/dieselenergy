@@ -7,12 +7,12 @@
 @section('keywords', $post->title)
 
 @section('content')
-    <section class="position-relative py-5">
-        <div class="dots mr-sm-5 mt-5 top-0 right-0 height-72 width-48 position-absolute"></div>
-        <div class="dots ml-sm-5 mb-3 bottom-0 left-0 height-72 width-48 position-absolute"></div>
+    <section class="pt-4 pb-5">
 
-        <div class="container">
-            <div class="row justify-content-center mt-n3 mb-4">
+        <div class="container position-relative">
+            <div class="dots top-0 end-0 height-72 width-48 position-absolute z-n1"></div>
+
+            <div class="row justify-content-center mb-4">
                 <div class="col col-md-10 col-lg-8">
                     @include('layouts.partials.breadcrumb', ['links' => ['Блог' => route('posts.index'), $post->title => route('posts.index', $post)]])
                 </div>
@@ -28,6 +28,8 @@
                     @markdown($post->body)
                 </div>
             </div>
+
+            <div class="dots bottom-0 start-0 height-72 width-48 position-absolute z-n1"></div>
         </div>
     </section>
 @endsection

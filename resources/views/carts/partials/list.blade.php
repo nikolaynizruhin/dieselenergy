@@ -7,7 +7,7 @@
                     <img src="{{ asset('storage/'.$item->image) }}" width="100" alt="{{ $item->name }}" loading="lazy">
                 </td>
                 <td class="align-middle @if ($loop->first) border-top-0 @endif">
-                    <a href="{{ route('products.show', $item->slug) }}" class="font-weight-bold text-body">{{ $item->name }}</a>
+                    <a href="{{ route('products.show', $item->slug) }}" class="fw-bold text-body text-decoration-none">{{ $item->name }}</a>
                     <br>
                     <span class="text-muted">{{ $item->category }}</span>
                 </td>
@@ -16,8 +16,8 @@
                     <form action="{{ route('carts.update', $key) }}" method="POST" class="width-8">
                         @csrf
                         @method('PUT')
-                        <div class="form-group mb-0">
-                            <label for="quantity" class="sr-only">Amount</label>
+                        <div class="mb-0">
+                            <label for="quantity" class="visually-hidden">Amount</label>
                             <input type="number" name="quantity" onchange="this.form.submit()" value="{{ $item->quantity }}" min="1" class="form-control" id="quantity" aria-describedby="quantityHelp">
                         </div>
                     </form>
@@ -36,7 +36,7 @@
         @endforeach
         <tr>
             <td colspan="4">Всього:</td>
-            <td colspan="2" class="font-weight-bold">@uah($total)</td>
+            <td colspan="2" class="fw-bold">@uah($total)</td>
         </tr>
         </tbody>
     </table>

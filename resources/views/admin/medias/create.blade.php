@@ -11,11 +11,11 @@
             <div class="card-body">
 
                 <!-- Product -->
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <label for="selectProduct" class="col-md-3 col-form-label">{{ __('product.title') }}</label>
                     <div class="col-md-6">
                         <select id="selectProduct"
-                                class="form-control @error('product_id') is-invalid @enderror"
+                                class="form-select @error('product_id') is-invalid @enderror"
                                 name="product_id"
                                 required>
                             <option value="{{ $product->id }}" selected>
@@ -24,19 +24,19 @@
                         </select>
 
                         @error('product_id')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                            <div class="invalid-feedback">
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
                 </div>
 
                 <!-- Image -->
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <label for="selectImage" class="col-md-3 col-form-label">{{ __('image.title') }}</label>
                     <div class="col-md-6">
                         <select id="selectImage"
-                                class="form-control @error('image_id') is-invalid @enderror"
+                                class="form-select @error('image_id') is-invalid @enderror"
                                 name="image_id"
                                 required>
                             <option value="">{{ __('image.select') }}</option>
@@ -50,24 +50,24 @@
                         </select>
 
                         @error('image_id')
-                            <div class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                            <div class="invalid-feedback">
+                                {{ $message }}
                             </div>
                         @enderror
                     </div>
                 </div>
 
                 <!-- Status -->
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <div class="col-md-3">{{ __('common.status') }}</div>
                     <div class="col-md-6">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input @error('is_default') is-invalid @enderror" value="1" name="is_default" id="inputDefault" @if (old('is_default')) checked @endif>
-                            <label class="custom-control-label" for="inputDefault">{{ __('common.default') }}</label>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input @error('is_default') is-invalid @enderror" value="1" name="is_default" id="inputDefault" @if (old('is_default')) checked @endif>
+                            <label class="form-check-label" for="inputDefault">{{ __('common.default') }}</label>
 
                             @error('is_default')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
                                 </div>
                             @enderror
                         </div>
@@ -75,8 +75,8 @@
                 </div>
             </div>
 
-            <div class="card-footer bg-light text-right border-0">
-                <button type="submit" class="btn btn-primary">{{ __('common.create') }}</button>
+            <div class="card-footer bg-light text-end border-0">
+                <button type="submit" class="btn btn-primary text-white">{{ __('common.create') }}</button>
             </div>
         </form>
     </div>
