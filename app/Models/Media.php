@@ -28,9 +28,7 @@ class Media extends Pivot
      *
      * @var array
      */
-    protected $casts = [
-        'is_default' => 'boolean',
-    ];
+    protected $casts = ['is_default' => 'boolean'];
 
     /**
      * Get the product that owns the media.

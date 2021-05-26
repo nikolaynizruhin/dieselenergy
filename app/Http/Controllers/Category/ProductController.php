@@ -13,12 +13,11 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @param \App\Models\Category $category
      * @param \App\Filters\ProductFilters $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Category $category, ProductFilters $filters)
+    public function index(Category $category, ProductFilters $filters)
     {
         $products = $category
             ->products()

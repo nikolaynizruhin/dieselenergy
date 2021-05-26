@@ -24,9 +24,7 @@ class Currency extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'rate' => 'float',
-    ];
+    protected $casts = ['rate' => 'float'];
 
     /**
      * Get the brands for the currency.

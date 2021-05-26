@@ -28,9 +28,7 @@ class Specification extends Pivot
      *
      * @var array
      */
-    protected $casts = [
-        'is_featured' => 'boolean',
-    ];
+    protected $casts = ['is_featured' => 'boolean'];
 
     /**
      * Get featured attribute ids by category.
@@ -73,8 +71,7 @@ class Specification extends Pivot
     {
         return self::where('category_id', $categoryId)
             ->pluck('attribute_id')
-            ->mapWithKeys(fn ($id) => [
-                'attributes.'.$id => $rules,
-            ])->all();
+            ->mapWithKeys(fn ($id) => ['attributes.'.$id => $rules])
+            ->all();
     }
 }

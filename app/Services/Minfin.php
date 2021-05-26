@@ -20,9 +20,7 @@ class Minfin
      */
     public function __construct()
     {
-        $this->http = Http::withOptions([
-            'base_uri' => config('services.minfin.url'),
-        ]);
+        $this->http = Http::withOptions(['base_uri' => config('services.minfin.url')]);
     }
 
     /**

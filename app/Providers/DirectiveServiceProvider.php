@@ -26,6 +26,6 @@ class DirectiveServiceProvider extends ServiceProvider
     {
         Blade::directive('uah', fn ($price) => "<?php echo number_format($price, 0, '.', ' ').' ₴'; ?>");
 
-        Blade::directive('markdown', fn ($content) => "<?php echo Markdown::parse($content); ?>");
+        Blade::directive('markdown', fn ($content) => "<?php echo Markdown::parse($content) ?>");
     }
 }

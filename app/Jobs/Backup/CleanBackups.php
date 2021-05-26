@@ -37,7 +37,7 @@ class CleanBackups implements ShouldQueue
      */
     private function canBeRemoved($backup)
     {
-        return Str::endsWith($backup, '.zip') ? $this->isOutdated($backup) : false;
+        return Str::endsWith($backup, '.zip') && $this->isOutdated($backup);
     }
 
     /**
