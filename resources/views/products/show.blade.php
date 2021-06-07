@@ -81,24 +81,23 @@
                 <div class="col col-md-10 col-lg-9">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Опис</button>
+                            <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Опис</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Характеристики</button>
+                            <button class="nav-link" id="attribute-tab" data-bs-toggle="tab" data-bs-target="#attribute" type="button" role="tab" aria-controls="attribute" aria-selected="false">Характеристики</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active text-justify pt-4" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade show active text-justify pt-4" id="description" role="tabpanel" aria-labelledby="description-tab">
                             @markdown($product->description)
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <br>
-                            <table class="table table-bordered">
+                        <div class="tab-pane fade pt-2" id="attribute" role="tabpanel" aria-labelledby="attribute-tab">
+                            <table class="table">
                                 <thead>
-                                <tr>
-                                    <th scope="col">Назва</th>
-                                    <th scope="col">Значення</th>
-                                </tr>
+                                    <tr>
+                                        <th scope="col">Назва</th>
+                                        <th scope="col">Значення</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($product->attributes as $attribute)
