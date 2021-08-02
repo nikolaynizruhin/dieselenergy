@@ -35,7 +35,6 @@ class UpdateAttributeTest extends TestCase
     public function guest_cant_update_attribute()
     {
         $attribute = Attribute::factory()->create();
-
         $stub = Attribute::factory()->raw();
 
         $this->put(route('admin.attributes.update', $attribute), $stub)
