@@ -15,11 +15,7 @@
                     <div class="col-md-6">
                         <input type="text" id="inputCode" class="form-control @error('code') is-invalid @enderror" name="code" value="{{ old('code', $currency->code) }}" required autocomplete="code" autofocus>
 
-                        @error('code')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'code'])
                     </div>
                 </div>
 
@@ -28,11 +24,7 @@
                     <div class="col-md-6">
                         <input type="text" id="inputSymbol" class="form-control @error('symbol') is-invalid @enderror" name="symbol" value="{{ old('symbol', $currency->symbol) }}" required autocomplete="symbol">
 
-                        @error('symbol')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'symbol'])
                     </div>
                 </div>
 
@@ -41,11 +33,7 @@
                     <div class="col-md-6">
                         <input type="number" step="any" id="inputRate" class="form-control @error('rate') is-invalid @enderror" name="rate" value="{{ old('rate', $currency->rate) }}" required autocomplete="rate">
 
-                        @error('rate')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'rate'])
                     </div>
                 </div>
             </div>

@@ -16,11 +16,7 @@
                     <div class="col-md-6">
                         <input type="file" multiple id="inputImages" class="form-control @error('images.*') is-invalid @enderror" name="images[]" accept="image/*">
 
-                        @error('images.*')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'images.*'])
                     </div>
                 </div>
             </div>

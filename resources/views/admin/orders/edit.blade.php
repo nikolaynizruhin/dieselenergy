@@ -25,11 +25,7 @@
                             @endforeach
                         </select>
 
-                        @error('status')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'status'])
                     </div>
                 </div>
 
@@ -41,11 +37,7 @@
                             <span class="input-group-text" id="basic-addon">UAH</span>
                             <input type="number" min="0.00" step="0.01" id="inputTotal" class="form-control @error('total') is-invalid @enderror" aria-label="Total" aria-describedby="basic-addon" name="total" value="{{ old('total', $order->decimal_total) }}" required autocomplete="total">
 
-                            @error('total')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('layouts.partials.error', ['name' => 'total'])
                         </div>
                     </div>
                 </div>
@@ -66,11 +58,7 @@
                             @endforeach
                         </select>
 
-                        @error('customer_id')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'customer_id'])
                     </div>
                 </div>
 
@@ -80,11 +68,7 @@
                     <div class="col-md-6">
                         <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" id="inputNotes" rows="3">{{ old('notes', $order->notes) }}</textarea>
 
-                        @error('notes')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'notes'])
                     </div>
                 </div>
             </div>

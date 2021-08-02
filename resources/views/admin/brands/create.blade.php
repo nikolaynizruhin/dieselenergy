@@ -16,11 +16,7 @@
                     <div class="col-md-6">
                         <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                        @error('name')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'name'])
                     </div>
                 </div>
 
@@ -37,11 +33,7 @@
                             @endforeach
                         </select>
 
-                        @error('currency_id')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'currency_id'])
                     </div>
                 </div>
             </div>

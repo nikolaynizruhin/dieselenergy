@@ -24,11 +24,7 @@
                             @endforeach
                         </select>
 
-                        @error('status')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'status'])
                     </div>
                 </div>
 
@@ -48,11 +44,7 @@
                             @endforeach
                         </select>
 
-                        @error('customer_id')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'customer_id'])
                     </div>
                 </div>
 
@@ -62,11 +54,7 @@
                     <div class="col-md-6">
                         <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" id="inputNotes" rows="3">{{ old('notes') }}</textarea>
 
-                        @error('notes')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'notes'])
                     </div>
                 </div>
             </div>

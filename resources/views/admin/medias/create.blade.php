@@ -23,11 +23,7 @@
                             </option>
                         </select>
 
-                        @error('product_id')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'product_id'])
                     </div>
                 </div>
 
@@ -49,11 +45,7 @@
                             @endforeach
                         </select>
 
-                        @error('image_id')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'image_id'])
                     </div>
                 </div>
 
@@ -65,11 +57,7 @@
                             <input type="checkbox" class="form-check-input @error('is_default') is-invalid @enderror" value="1" name="is_default" id="inputDefault" @if (old('is_default')) checked @endif>
                             <label class="form-check-label" for="inputDefault">{{ __('common.default') }}</label>
 
-                            @error('is_default')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('layouts.partials.error', ['name' => 'is_default'])
                         </div>
                     </div>
                 </div>

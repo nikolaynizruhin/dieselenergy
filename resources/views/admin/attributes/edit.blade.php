@@ -15,11 +15,7 @@
                     <div class="col-md-6">
                         <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $attribute->name) }}" required autocomplete="name" autofocus>
 
-                        @error('name')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'name'])
                     </div>
                 </div>
 
@@ -28,11 +24,7 @@
                     <div class="col-md-6">
                         <input type="text" id="inputMeasure" class="form-control @error('measure') is-invalid @enderror" name="measure" value="{{ old('measure', $attribute->measure) }}" autocomplete="measure">
 
-                        @error('measure')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'measure'])
                     </div>
                 </div>
             </div>

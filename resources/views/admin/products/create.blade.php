@@ -16,11 +16,7 @@
                     <div class="col-md-6">
                         <input type="file" multiple id="inputImages" class="form-control @error('images.*') is-invalid @enderror" name="images[]" accept="image/*">
 
-                        @error('images.*')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'images.*'])
                     </div>
                 </div>
 
@@ -30,11 +26,7 @@
                     <div class="col-md-6">
                         <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                        @error('name')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'name'])
                     </div>
                 </div>
 
@@ -44,11 +36,7 @@
                     <div class="col-md-6">
                         <input type="text" id="inputModel" class="form-control @error('model') is-invalid @enderror" name="model" value="{{ old('model') }}" required autocomplete="model">
 
-                        @error('model')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'model'])
                     </div>
                 </div>
 
@@ -58,11 +46,7 @@
                     <div class="col-md-6">
                         <input type="text" id="inputSlug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') }}" required autocomplete="slug">
 
-                        @error('slug')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'slug'])
                     </div>
                 </div>
 
@@ -74,11 +58,7 @@
                             <input type="checkbox" class="form-check-input @error('is_active') is-invalid @enderror" value="1" name="is_active" id="inputStatus" @if (old('is_active', true)) checked @endif>
                             <label class="form-check-label" for="inputStatus">{{ __('common.active') }}</label>
 
-                            @error('is_active')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('layouts.partials.error', ['name' => 'is_active'])
                         </div>
                     </div>
                 </div>
@@ -96,11 +76,7 @@
                             @endforeach
                         </select>
 
-                        @error('brand_id')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'brand_id'])
                     </div>
                 </div>
 
@@ -114,11 +90,7 @@
                             </option>
                         </select>
 
-                        @error('category_id')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'category_id'])
                     </div>
                 </div>
 
@@ -130,11 +102,7 @@
                     <div class="col-md-6">
                         <input type="number" min="0.01" step="0.01" id="inputPrice" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price">
 
-                        @error('price')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'price'])
                     </div>
                 </div>
 
@@ -149,11 +117,7 @@
                     <div class="col-md-6">
                         <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="10" aria-describedby="descriptionHelpBlock">{{ old('description') }}</textarea>
 
-                        @error('description')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'description'])
                     </div>
                 </div>
 
@@ -164,11 +128,7 @@
                         <div class="col-md-6">
                             <input type="text" id="inputAttribute{{ $attribute->id }}" class="form-control @error('attributes.'.$attribute->id) is-invalid @enderror" name="attributes[{{ $attribute->id }}]" value="{{ old('attributes.'.$attribute->id) }}">
 
-                            @error('attributes.'.$attribute->id)
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('layouts.partials.error', ['name' => 'attributes.'.$attribute->id])
                         </div>
                     </div>
                 @endforeach

@@ -17,11 +17,7 @@
                     <div class="col-md-6">
                         <input type="text" id="inputTitle" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $post->title) }}" required autocomplete="title" autofocus>
 
-                        @error('title')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'title'])
                     </div>
                 </div>
 
@@ -31,11 +27,7 @@
                     <div class="col-md-6">
                         <input type="text" id="inputSlug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug', $post->slug) }}" required autocomplete="slug">
 
-                        @error('slug')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'slug'])
                     </div>
                 </div>
 
@@ -47,11 +39,7 @@
 
                         <input type="file" id="inputImage" class="form-control @error('image') is-invalid @enderror" name="image" accept="image/*">
 
-                        @error('image')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'image'])
                     </div>
                 </div>
 
@@ -61,11 +49,7 @@
                     <div class="col-md-6">
                         <textarea name="excerpt" class="form-control @error('excerpt') is-invalid @enderror" id="inputExcerpt" rows="3">{{ old('excerpt', $post->excerpt) }}</textarea>
 
-                        @error('excerpt')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'excerpt'])
                     </div>
                 </div>
 
@@ -80,11 +64,7 @@
                     <div class="col-md-6">
                         <textarea name="body" class="form-control @error('body') is-invalid @enderror" id="inputBody" rows="10" aria-describedby="bodyHelpBlock">{{ old('body', $post->body) }}</textarea>
 
-                        @error('body')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'body'])
                     </div>
                 </div>
             </div>

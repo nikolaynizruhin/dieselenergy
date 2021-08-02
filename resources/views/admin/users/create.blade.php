@@ -16,11 +16,7 @@
                     <div class="col-md-6">
                         <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                        @error('name')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'name'])
                     </div>
                 </div>
 
@@ -30,11 +26,7 @@
                     <div class="col-md-6">
                         <input type="email" id="inputEmail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                        @error('email')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'email'])
                     </div>
                 </div>
 
@@ -44,11 +36,7 @@
                     <div class="col-md-6">
                         <input type="password" id="inputPassword" class="form-control @error('password') is-invalid @enderror" name="password" required>
 
-                        @error('password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'password'])
                     </div>
                 </div>
 

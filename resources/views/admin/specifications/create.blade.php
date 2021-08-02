@@ -23,11 +23,7 @@
                             </option>
                         </select>
 
-                        @error('category_id')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'category_id'])
                     </div>
                 </div>
 
@@ -49,11 +45,7 @@
                             @endforeach
                         </select>
 
-                        @error('attribute_id')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'attribute_id'])
                     </div>
                 </div>
 
@@ -65,11 +57,7 @@
                             <input type="checkbox" class="form-check-input @error('is_featured') is-invalid @enderror" value="1" name="is_featured" id="inputFeatured" @if (old('is_featured')) checked @endif>
                             <label class="form-check-label" for="inputFeatured">{{ __('common.is_featured') }}</label>
 
-                            @error('is_active')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('layouts.partials.error', ['name' => 'is_active'])
                         </div>
                     </div>
                 </div>

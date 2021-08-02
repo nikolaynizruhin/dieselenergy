@@ -209,51 +209,31 @@
                             <label for="inputName" class="fw-bold">Ім'я</label>
                             <input name="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" id="inputName" value="{{ old('name') }}" autocomplete="name" required>
 
-                            @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('layouts.partials.error', ['name' => 'name'])
                         </div>
                         <div class="mb-3">
                             <label for="inputEmail" class="fw-bold form-label">Email</label>
                             <input name="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" id="inputEmail" value="{{ old('email') }}" autocomplete="email" required>
 
-                            @error('email')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('layouts.partials.error', ['name' => 'email'])
                         </div>
                         <div class="mb-3">
                             <label for="inputPhone" class="fw-bold form-label">Телефон</label>
                             <input name="phone" type="tel" class="form-control form-control-lg @error('phone') is-invalid @enderror" id="inputPhone" value="{{ old('phone', '+380') }}" pattern="[+]{1}380[0-9]{9}" autocomplete="phone" required>
 
-                            @error('phone')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('layouts.partials.error', ['name' => 'phone'])
                         </div>
                         <div class="mb-3">
                             <label for="inputMessage" class="fw-bold form-label">Ваше повідомлення</label>
                             <textarea name="message" class="form-control form-control-lg @error('message') is-invalid @enderror" id="inputMessage" rows="4">{{ old('message') }}</textarea>
 
-                            @error('message')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('layouts.partials.error', ['name' => 'message'])
                         </div>
                         <div class="form-check form-switch mb-3">
                             <input name="privacy" value="1" type="checkbox" class="form-check-input @error('privacy') is-invalid @enderror" @if(old('privacy')) checked @endif id="accept" required>
                             <label class="form-check-label text-muted" for="accept">Згода на <a href="{{ route('privacy') }}">обробку персональних даних</a></label>
 
-                            @error('privacy')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('layouts.partials.error', ['name' => 'privacy'])
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary text-white btn-lg">Відправити</button>

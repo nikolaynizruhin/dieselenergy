@@ -24,11 +24,7 @@
                             </option>
                         </select>
 
-                        @error('order_id')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'order_id'])
                     </div>
                 </div>
 
@@ -48,11 +44,7 @@
                             @endforeach
                         </select>
 
-                        @error('product_id')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'product_id'])
                     </div>
                 </div>
 
@@ -62,11 +54,7 @@
                     <div class="col-md-6">
                         <input type="number" id="inputQuantity" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity', $cart->quantity) }}" required min="1">
 
-                        @error('quantity')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        @include('layouts.partials.error', ['name' => 'quantity'])
                     </div>
                 </div>
             </div>

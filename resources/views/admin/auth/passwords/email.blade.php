@@ -9,11 +9,7 @@
 
             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-            @error('email')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
+            @include('layouts.partials.error', ['name' => 'email'])
         </div>
 
         <button type="submit" class="btn btn-primary text-white">
