@@ -5,7 +5,7 @@
 
     <div class="mb-3">
         <label for="inputSearch" class="form-label visually-hidden">Пошук</label>
-        <input type="search" name="search" value="{{ request('search') }}" class="form-control form-control-sm" id="inputSearch" aria-describedby="emailHelp" placeholder="Знайти товар..." autocomplete="search">
+        <input type="search" name="search" onsearch="this.form.submit()" value="{{ request('search') }}" class="form-control form-control-sm" id="inputSearch" aria-describedby="emailHelp" placeholder="Знайти товар..." autocomplete="search">
     </div>
 
     <p class="mb-1 fw-bold text-uppercase letter-spacing text-gray-500">
