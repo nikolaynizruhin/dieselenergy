@@ -15,10 +15,9 @@
     <div class="mb-3">
         <label for="selectSort" class="form-label visually-hidden">Сортувати</label>
         <select class="form-select form-select-sm" name="sort" onchange="this.form.submit()" id="selectSort">
-            <option value="name" @if (request('sort') === 'name') selected @endif>Назва (А - Я)</option>
-            <option value="-name" @if (request('sort') === '-name') selected @endif>Назва (Я - А)</option>
-            <option value="price" @if (request('sort') === 'price') selected @endif>Ціна (Низька > Висока)</option>
-            <option value="-price" @if (request('sort') === '-price') selected @endif>Ціна (Висока > Низька)</option>
+            @foreach (\App\Models\Product::sorts() as $value => $label)
+                <option value="{{ $value }}" @if (request('sort') === $value) selected @endif>{{ $label }}</option>
+            @endforeach
         </select>
     </div>
 
