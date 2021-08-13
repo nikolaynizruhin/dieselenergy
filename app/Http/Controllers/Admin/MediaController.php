@@ -36,7 +36,7 @@ class MediaController extends Controller
 
         return redirect()
             ->route('admin.products.show', $request->product_id)
-            ->with('status', trans('media.created'));
+            ->with('status', __('media.created'));
     }
 
     /**
@@ -63,7 +63,7 @@ class MediaController extends Controller
 
         return redirect()
             ->route('admin.products.show', $request->product_id)
-            ->with('status', trans('media.updated'));
+            ->with('status', __('media.updated'));
     }
 
     /**
@@ -76,6 +76,6 @@ class MediaController extends Controller
     {
         $media->delete();
 
-        return back()->with('status', trans('media.deleted'));
+        return back()->with('status', __('media.deleted'));
     }
 }

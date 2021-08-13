@@ -49,7 +49,7 @@ class ContactController extends Controller
 
         return redirect()
             ->route('admin.contacts.index')
-            ->with('status', trans('contact.created'));
+            ->with('status', __('contact.created'));
     }
 
     /**
@@ -87,7 +87,7 @@ class ContactController extends Controller
 
         return redirect()
             ->route('admin.contacts.index')
-            ->with('status', trans('contact.updated'));
+            ->with('status', __('contact.updated'));
     }
 
     /**
@@ -100,6 +100,6 @@ class ContactController extends Controller
     {
         $contact->delete();
 
-        return back()->with('status', trans('contact.deleted'));
+        return back()->with('status', __('contact.deleted'));
     }
 }

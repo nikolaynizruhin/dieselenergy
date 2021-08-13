@@ -25,10 +25,10 @@ class ResetPassword extends ResetPasswordNotification implements ShouldQueue
         ], false));
 
         return (new MailMessage)
-            ->subject(trans('emails.reset_password.subject'))
-            ->line(trans('emails.reset_password.line_1'))
-            ->action(trans('emails.reset_password.action'), $url)
-            ->line(trans('emails.reset_password.line_2', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
-            ->line(trans('emails.reset_password.line_3'));
+            ->subject(__('emails.reset_password.subject'))
+            ->line(__('emails.reset_password.line_1'))
+            ->action(__('emails.reset_password.action'), $url)
+            ->line(__('emails.reset_password.line_2', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
+            ->line(__('emails.reset_password.line_3'));
     }
 }

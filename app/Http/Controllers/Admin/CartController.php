@@ -36,7 +36,7 @@ class CartController extends Controller
 
         return redirect()
             ->route('admin.orders.show', $request->order_id)
-            ->with('status', trans('cart.created'));
+            ->with('status', __('cart.created'));
     }
 
     /**
@@ -63,7 +63,7 @@ class CartController extends Controller
 
         return redirect()
             ->route('admin.orders.show', $request->order_id)
-            ->with('status', trans('cart.updated'));
+            ->with('status', __('cart.updated'));
     }
 
     /**
@@ -76,6 +76,6 @@ class CartController extends Controller
     {
         $cart->delete();
 
-        return back()->with('status', trans('cart.deleted'));
+        return back()->with('status', __('cart.deleted'));
     }
 }

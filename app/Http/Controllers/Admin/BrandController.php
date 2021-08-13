@@ -50,7 +50,7 @@ class BrandController extends Controller
 
         return redirect()
             ->route('admin.brands.index')
-            ->with('status', trans('brand.created'));
+            ->with('status', __('brand.created'));
     }
 
     /**
@@ -77,7 +77,7 @@ class BrandController extends Controller
 
         return redirect()
             ->route('admin.brands.index')
-            ->with('status', trans('brand.updated'));
+            ->with('status', __('brand.updated'));
     }
 
     /**
@@ -90,6 +90,6 @@ class BrandController extends Controller
     {
         $brand->delete();
 
-        return back()->with('status', trans('brand.deleted'));
+        return back()->with('status', __('brand.deleted'));
     }
 }

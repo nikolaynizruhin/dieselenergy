@@ -45,7 +45,7 @@ class CurrencyController extends Controller
 
         return redirect()
             ->route('admin.currencies.index')
-            ->with('status', trans('currency.created'));
+            ->with('status', __('currency.created'));
     }
 
     /**
@@ -72,7 +72,7 @@ class CurrencyController extends Controller
 
         return redirect()
             ->route('admin.currencies.index')
-            ->with('status', trans('currency.updated'));
+            ->with('status', __('currency.updated'));
     }
 
     /**
@@ -85,6 +85,6 @@ class CurrencyController extends Controller
     {
         $currency->delete();
 
-        return back()->with('status', trans('currency.deleted'));
+        return back()->with('status', __('currency.deleted'));
     }
 }

@@ -46,7 +46,7 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('admin.categories.index')
-            ->with('status', trans('category.created'));
+            ->with('status', __('category.created'));
     }
 
     /**
@@ -87,7 +87,7 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('admin.categories.index')
-            ->with('status', trans('category.updated'));
+            ->with('status', __('category.updated'));
     }
 
     /**
@@ -100,6 +100,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return back()->with('status', trans('category.deleted'));
+        return back()->with('status', __('category.deleted'));
     }
 }

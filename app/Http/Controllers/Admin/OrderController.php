@@ -52,7 +52,7 @@ class OrderController extends Controller
 
         return redirect()
             ->route('admin.orders.index')
-            ->with('status', trans('order.created'));
+            ->with('status', __('order.created'));
     }
 
     /**
@@ -97,7 +97,7 @@ class OrderController extends Controller
 
         return redirect()
             ->route('admin.orders.index')
-            ->with('status', trans('order.updated'));
+            ->with('status', __('order.updated'));
     }
 
     /**
@@ -110,6 +110,6 @@ class OrderController extends Controller
     {
         $order->delete();
 
-        return back()->with('status', trans('order.deleted'));
+        return back()->with('status', __('order.deleted'));
     }
 }

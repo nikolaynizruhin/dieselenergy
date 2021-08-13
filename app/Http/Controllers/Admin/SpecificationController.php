@@ -36,7 +36,7 @@ class SpecificationController extends Controller
 
         return redirect()
             ->route('admin.categories.show', $request->category_id)
-            ->with('status', trans('specification.created'));
+            ->with('status', __('specification.created'));
     }
 
     /**
@@ -63,7 +63,7 @@ class SpecificationController extends Controller
 
         return redirect()
             ->route('admin.categories.show', $request->category_id)
-            ->with('status', trans('specification.updated'));
+            ->with('status', __('specification.updated'));
     }
 
     /**
@@ -76,6 +76,6 @@ class SpecificationController extends Controller
     {
         $specification->delete();
 
-        return back()->with('status', trans('specification.deleted'));
+        return back()->with('status', __('specification.deleted'));
     }
 }

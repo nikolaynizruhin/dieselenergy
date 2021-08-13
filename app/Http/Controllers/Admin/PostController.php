@@ -45,7 +45,7 @@ class PostController extends Controller
 
         return redirect()
             ->route('admin.posts.index')
-            ->with('status', trans('post.created'));
+            ->with('status', __('post.created'));
     }
 
     /**
@@ -83,7 +83,7 @@ class PostController extends Controller
 
         return redirect()
             ->route('admin.posts.index')
-            ->with('status', trans('post.updated'));
+            ->with('status', __('post.updated'));
     }
 
     /**
@@ -96,6 +96,6 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return back()->with('status', trans('post.deleted'));
+        return back()->with('status', __('post.deleted'));
     }
 }

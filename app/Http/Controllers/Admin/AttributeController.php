@@ -45,7 +45,7 @@ class AttributeController extends Controller
 
         return redirect()
             ->route('admin.attributes.index')
-            ->with('status', trans('attribute.created'));
+            ->with('status', __('attribute.created'));
     }
 
     /**
@@ -72,7 +72,7 @@ class AttributeController extends Controller
 
         return redirect()
             ->route('admin.attributes.index')
-            ->with('status', trans('attribute.updated'));
+            ->with('status', __('attribute.updated'));
     }
 
     /**
@@ -85,6 +85,6 @@ class AttributeController extends Controller
     {
         $attribute->delete();
 
-        return back()->with('status', trans('attribute.deleted'));
+        return back()->with('status', __('attribute.deleted'));
     }
 }

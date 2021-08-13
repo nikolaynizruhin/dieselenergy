@@ -37,6 +37,6 @@ class ContactController extends Controller
         Notification::route('mail', config('company.email'))
             ->notify(new ContactCreated($contact));
 
-        return redirect(route('home').'#contact')->with('status', trans('contact.created'));
+        return redirect(route('home').'#contact')->with('status', __('contact.created'));
     }
 }

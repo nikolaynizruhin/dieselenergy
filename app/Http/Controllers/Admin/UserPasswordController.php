@@ -24,6 +24,6 @@ class UserPasswordController extends Controller
 
         return redirect()
             ->route('admin.users.index')
-            ->with('status', trans('user.password.updated'));
+            ->with('status', __('user.password.updated'));
     }
 }

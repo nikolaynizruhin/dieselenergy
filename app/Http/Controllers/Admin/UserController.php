@@ -45,7 +45,7 @@ class UserController extends Controller
 
         return redirect()
             ->route('admin.users.index')
-            ->with('status', trans('user.created'));
+            ->with('status', __('user.created'));
     }
 
     /**
@@ -72,7 +72,7 @@ class UserController extends Controller
 
         return redirect()
             ->route('admin.users.index')
-            ->with('status', trans('user.updated'));
+            ->with('status', __('user.updated'));
     }
 
     /**
@@ -85,6 +85,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return back()->with('status', trans('user.deleted'));
+        return back()->with('status', __('user.deleted'));
     }
 }
