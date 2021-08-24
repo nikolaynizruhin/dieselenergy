@@ -3,6 +3,7 @@
 namespace Tests\Console;
 
 use App\Models\Currency;
+use Illuminate\Console\Command;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
@@ -44,7 +45,7 @@ class UpdateRateTest extends TestCase
 
         $this->artisan('rate:update')
             ->expectsTable(['Currency', 'Rate'], [['USD', 28.3650], ['EUR', 33.2636]])
-            ->assertExitCode(0);
+            ->assertExitCode(Command::SUCCESS);
 
         Http::assertSent(function ($request) {
             return $request->url() == config('services.minfin.url').'/mb/'.config('services.minfin.key');

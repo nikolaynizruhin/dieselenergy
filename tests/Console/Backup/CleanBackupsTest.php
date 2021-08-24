@@ -2,6 +2,7 @@
 
 namespace Tests\Console\Backup;
 
+use Illuminate\Console\Command;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -33,7 +34,7 @@ class CleanBackupsTest extends TestCase
 
         $this->artisan('backup:clean')
             ->expectsOutput('Backups cleaned successfully!')
-            ->assertExitCode(0);
+            ->assertExitCode(Command::SUCCESS);
 
         Storage::disk('local')->assertMissing($this->backup);
     }
@@ -43,7 +44,7 @@ class CleanBackupsTest extends TestCase
     {
         $this->artisan('backup:clean')
             ->expectsOutput('Backups cleaned successfully!')
-            ->assertExitCode(0);
+            ->assertExitCode(Command::SUCCESS);
 
         Storage::disk('local')->assertExists($this->backup);
     }

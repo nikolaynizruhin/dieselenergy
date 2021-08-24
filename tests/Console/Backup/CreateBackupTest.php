@@ -2,6 +2,7 @@
 
 namespace Tests\Console\Backup;
 
+use Illuminate\Console\Command;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -22,7 +23,7 @@ class CreateBackupTest extends TestCase
 
         $this->artisan('backup:create')
             ->expectsOutput('Backup created successfully!')
-            ->assertExitCode(0);
+            ->assertExitCode(Command::SUCCESS);
 
         Storage::disk('local')
             ->assertExists(config('backup.folder').'/'.date(config('backup.format')).'.zip');
