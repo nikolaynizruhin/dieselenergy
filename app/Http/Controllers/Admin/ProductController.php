@@ -75,10 +75,16 @@ class ProductController extends Controller
      */
     public function show(Product $product, ImageFilters $filters)
     {
-        return view('admin.products.show', [
-            'product' => $product->loadAttributes(),
-            'images' => $product->images()->filter($filters)->latest()->paginate(10)->withQueryString(),
-        ]);
+        $product = $product->loadAttributes();
+
+        $images = $product
+            ->images()
+            ->filter($filters)
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('admin.products.show', compact('product', 'images'));
     }
 
     /**
