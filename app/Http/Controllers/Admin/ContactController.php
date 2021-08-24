@@ -22,7 +22,8 @@ class ContactController extends Controller
             ->with('customer')
             ->filter($filters)
             ->latest()
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.contacts.index', compact('contacts'));
     }

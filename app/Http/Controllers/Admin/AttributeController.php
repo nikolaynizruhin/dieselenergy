@@ -18,7 +18,10 @@ class AttributeController extends Controller
      */
     public function index(AttributeFilters $filters)
     {
-        $attributes = Attribute::filter($filters)->orderBy('name')->paginate(10);
+        $attributes = Attribute::filter($filters)
+            ->orderBy('name')
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.attributes.index', compact('attributes'));
     }

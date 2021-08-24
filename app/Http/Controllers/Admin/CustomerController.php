@@ -20,7 +20,10 @@ class CustomerController extends Controller
      */
     public function index(CustomerFilters $filters)
     {
-        $customers = Customer::filter($filters)->latest()->paginate(10);
+        $customers = Customer::filter($filters)
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.customers.index', compact('customers'));
     }
@@ -60,8 +63,19 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer, ContactFilters $contactFilters, OrderFilters $orderFilters)
     {
-        $contacts = $customer->contacts()->filter($contactFilters)->latest()->paginate(10);
-        $orders = $customer->orders()->filter($orderFilters)->latest()->paginate(10);
+        $contacts = $customer
+            ->contacts()
+            ->filter($contactFilters)
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        $orders = $customer
+            ->orders()
+            ->filter($orderFilters)
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.customers.show', compact('customer', 'contacts', 'orders'));
     }

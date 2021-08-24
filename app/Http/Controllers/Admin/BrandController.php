@@ -23,7 +23,8 @@ class BrandController extends Controller
             ->with('currency')
             ->filter($filters)
             ->orderBy('name')
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.brands.index', compact('brands'));
     }

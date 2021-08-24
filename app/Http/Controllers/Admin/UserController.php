@@ -18,7 +18,10 @@ class UserController extends Controller
      */
     public function index(UserFilters $filters)
     {
-        $users = User::filter($filters)->orderBy('name')->paginate(10);
+        $users = User::filter($filters)
+            ->orderBy('name')
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.users.index', compact('users'));
     }

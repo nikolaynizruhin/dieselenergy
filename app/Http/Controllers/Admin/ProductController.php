@@ -28,7 +28,8 @@ class ProductController extends Controller
             ->with(['category', 'brand.currency'])
             ->filter($filters)
             ->orderBy('name')
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.products.index', compact('products'));
     }
@@ -76,7 +77,7 @@ class ProductController extends Controller
     {
         return view('admin.products.show', [
             'product' => $product->loadAttributes(),
-            'images' => $product->images()->filter($filters)->latest()->paginate(10),
+            'images' => $product->images()->filter($filters)->latest()->paginate(10)->withQueryString(),
         ]);
     }
 

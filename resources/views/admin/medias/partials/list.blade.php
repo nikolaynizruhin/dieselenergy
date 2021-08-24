@@ -47,6 +47,6 @@
 <div class="card-footer bg-white text-muted border-0">
     <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
         {{ __('common.total') }} {{ $images->total() }} {{ __('common.records') }}
-        {{ $images->withQueryString()->links() }}
+        {{ $images->links() }}
     </div>
 </div>

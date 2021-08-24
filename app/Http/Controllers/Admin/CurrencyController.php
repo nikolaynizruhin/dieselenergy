@@ -18,7 +18,10 @@ class CurrencyController extends Controller
      */
     public function index(CurrencyFilters $filters)
     {
-        $currencies = Currency::filter($filters)->orderBy('code')->paginate(10);
+        $currencies = Currency::filter($filters)
+            ->orderBy('code')
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.currencies.index', compact('currencies'));
     }

@@ -19,7 +19,8 @@ class DashboardController extends Controller
         $orders = Order::with('customer')
             ->filter($filters)
             ->latest()
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.dashboard', compact('orders'));
     }

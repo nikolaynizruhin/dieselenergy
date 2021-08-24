@@ -25,7 +25,8 @@ class OrderController extends Controller
             ->with('customer')
             ->filter($filters)
             ->latest()
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.orders.index', compact('orders'));
     }
@@ -68,7 +69,8 @@ class OrderController extends Controller
             ->select('products.*', DB::raw('price * quantity total'))
             ->filter($filters)
             ->orderBy('name')
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.orders.show', compact('order', 'products'));
     }

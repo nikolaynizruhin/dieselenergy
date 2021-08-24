@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('image')->paginate(9);
+        $posts = Post::with('image')->paginate(9)->withQueryString();
 
         return view('posts.index', compact('posts'));
     }

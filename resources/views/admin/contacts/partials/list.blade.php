@@ -70,6 +70,6 @@
 <div class="card-footer bg-white text-muted border-0">
     <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
         {{ __('common.total') }} {{ $contacts->total() }} {{ __('common.records') }}
-        {{ $contacts->withQueryString()->links() }}
+        {{ $contacts->links() }}
     </div>
 </div>

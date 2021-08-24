@@ -26,7 +26,8 @@ class ProductController extends Controller
             ->withDefaultImage()
             ->filter($filters)
             ->orderBy('name')
-            ->paginate(9);
+            ->paginate(9)
+            ->withQueryString();
 
         return view('categories.products.index', compact('products', 'category'));
     }

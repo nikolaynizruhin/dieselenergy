@@ -19,7 +19,10 @@ class CategoryController extends Controller
      */
     public function index(CategoryFilters $filters)
     {
-        $categories = Category::filter($filters)->orderBy('name')->paginate(10);
+        $categories = Category::filter($filters)
+            ->orderBy('name')
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -58,7 +61,12 @@ class CategoryController extends Controller
      */
     public function show(Category $category, AttributeFilters $filters)
     {
-        $attributes = $category->attributes()->filter($filters)->orderBy('name')->paginate(10);
+        $attributes = $category
+            ->attributes()
+            ->filter($filters)
+            ->orderBy('name')
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.categories.show', compact('category', 'attributes'));
     }

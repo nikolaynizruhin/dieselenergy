@@ -48,7 +48,7 @@
             <br>
             <div class="row">
                 <div class="col offset-md-3 offset-lg-2">
-                    {{ $products->withQueryString()->links('layouts.partials.pagination') }}
+                    {{ $products->links('layouts.partials.pagination') }}
                 </div>
             </div>
         </div>
