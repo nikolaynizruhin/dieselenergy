@@ -106,6 +106,10 @@ return [
     'required_with_all'    => "Поле :attribute є обов'язковим для заповнення, коли :values вказано.",
     'required_without'     => "Поле :attribute є обов'язковим для заповнення, коли :values не вказано.",
     'required_without_all' => "Поле :attribute є обов'язковим для заповнення, коли :values не вказано.",
+    'prohibited'           => 'Поле :attribute заборонено.',
+    'prohibited_if'        => 'Поле :attribute заборонено, коли :other є рівним :value.',
+    'prohibited_unless'    => 'Поле :attribute заборонено, доки :other є в :values.',
+    'prohibits'            => 'Поле :attribute забороняє :other від присутності.',
     'same'                 => 'Поля :attribute та :other мають збігатися.',
     'size'                 => [
         'numeric' => 'Поле :attribute має бути довжини :size.',
