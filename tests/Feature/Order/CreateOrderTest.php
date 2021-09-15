@@ -128,10 +128,8 @@ class CreateOrderTest extends TestCase
         Notification::assertSentTo(
             new AnonymousNotifiable,
             OrderCreated::class,
-            function ($notification, $channels, $notifiable) use ($order) {
-                return $notifiable->routes['mail'] === config('company.email')
-                    && $notification->order->id === $order->id;
-            }
+            fn ($notification, $channels, $notifiable) => $notifiable->routes['mail'] === config('company.email')
+                && $notification->order->id === $order->id
         );
     }
 
