@@ -25,7 +25,7 @@ class Cart
     /**
      * Cart constructor.
      *
-     * @param SessionManager $session
+     * @param  SessionManager  $session
      */
     public function __construct(SessionManager $session)
     {
@@ -121,7 +121,7 @@ class Cart
     /**
      * Delete item.
      *
-     * @param string $key
+     * @param  string  $key
      */
     public function delete($key)
     {

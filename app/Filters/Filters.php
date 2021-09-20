@@ -30,7 +30,7 @@ abstract class Filters
     /**
      * Create a new instance.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      */
     public function __construct(Request $request)
     {
@@ -40,7 +40,7 @@ abstract class Filters
     /**
      * Apply the filters.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $builder
+     * @param  \Illuminate\Database\Eloquent\Builder  $builder
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function apply($builder)

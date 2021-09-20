@@ -13,7 +13,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Filters\Admin\UserFilters $filters
+     * @param  \App\Filters\Admin\UserFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(UserFilters $filters)

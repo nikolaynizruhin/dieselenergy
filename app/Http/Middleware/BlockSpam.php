@@ -35,7 +35,7 @@ class BlockSpam
     /**
      * Check if form has been submitted too quickly.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return bool
      */
     private function submittedTooQuickly(Request $request)
