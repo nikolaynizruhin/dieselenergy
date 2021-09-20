@@ -13,7 +13,7 @@ class AttributeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param \App\Filters\Admin\AttributeFilters $filters
+     * @param  \App\Filters\Admin\AttributeFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(AttributeFilters $filters)

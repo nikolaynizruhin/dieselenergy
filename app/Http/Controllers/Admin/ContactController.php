@@ -12,7 +12,7 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Filters\Admin\ContactFilters $filters
+     * @param  \App\Filters\Admin\ContactFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(ContactFilters $filters)

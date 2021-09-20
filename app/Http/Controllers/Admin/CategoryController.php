@@ -55,7 +55,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category $category
+     * @param  \App\Models\Category  $category
      * @param  \App\Filters\Admin\AttributeFilters  $filters
      * @return \Illuminate\Http\Response
      */

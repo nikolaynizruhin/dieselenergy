@@ -48,7 +48,7 @@ class Customer extends Model
     /**
      * Create a new order.
      *
-     * @param string $notes
+     * @param  string  $notes
      * @return \App\Models\Order
      */
     public function createOrder($notes = '')
