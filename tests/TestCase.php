@@ -16,7 +16,7 @@ abstract class TestCase extends BaseTestCase
      * @param  \App\Models\User|null  $user
      * @return $this
      */
-    protected function login($user = null)
+    protected function login(?User $user = null)
     {
         $user = $user ?: User::factory()->create();
 
