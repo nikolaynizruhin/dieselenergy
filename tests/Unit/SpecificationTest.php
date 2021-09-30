@@ -12,7 +12,7 @@ class SpecificationTest extends TestCase
     public function it_has_attribute()
     {
         $specification = Specification::factory()
-            ->for(Attribute::factory())
+            ->forAttribute()
             ->create();
 
         $this->assertInstanceOf(Attribute::class, $specification->attribute);

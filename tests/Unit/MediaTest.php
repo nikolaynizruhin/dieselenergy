@@ -13,7 +13,7 @@ class MediaTest extends TestCase
     public function it_has_product()
     {
         $media = Media::factory()
-            ->for(Product::factory())
+            ->forProduct()
             ->create();
 
         $this->assertInstanceOf(Product::class, $media->product);
@@ -23,7 +23,7 @@ class MediaTest extends TestCase
     public function it_has_image()
     {
         $media = Media::factory()
-            ->for(Image::factory())
+            ->forImage()
             ->create();
 
         $this->assertInstanceOf(Image::class, $media->image);

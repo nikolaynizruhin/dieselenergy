@@ -22,7 +22,7 @@ class ProductTest extends TestCase
     public function it_has_brand()
     {
         $product = Product::factory()
-            ->for(Brand::factory())
+            ->forBrand()
             ->create();
 
         $this->assertInstanceOf(Brand::class, $product->brand);
@@ -32,7 +32,7 @@ class ProductTest extends TestCase
     public function it_has_category()
     {
         $product = Product::factory()
-            ->for(Category::factory())
+            ->forCategory()
             ->create();
 
         $this->assertInstanceOf(Category::class, $product->category);

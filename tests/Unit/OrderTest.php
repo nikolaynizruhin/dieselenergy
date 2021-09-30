@@ -21,7 +21,7 @@ class OrderTest extends TestCase
     public function it_has_customer()
     {
         $order = Order::factory()
-            ->for(Customer::factory())
+            ->forCustomer()
             ->create();
 
         $this->assertInstanceOf(Customer::class, $order->customer);
