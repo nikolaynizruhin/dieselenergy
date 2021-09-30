@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class DeleteImageTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_cant_delete_image()

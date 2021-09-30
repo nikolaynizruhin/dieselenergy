@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class SearchAttributesTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_cant_search_attributes()

@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class ReadProductTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function user_can_read_product()

@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class SearchContactsTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function user_can_search_customer_contacts()

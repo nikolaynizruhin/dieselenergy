@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class UpdateContactTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_cant_visit_edit_contact_page()

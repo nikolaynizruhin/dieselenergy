@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class CurrencyTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function it_has_many_brands()

@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class ReadCartsTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_can_read_carts()

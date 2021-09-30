@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class UpdateMediaTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_cant_visit_update_media_page()

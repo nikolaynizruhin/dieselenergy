@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class SortOrdersTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /**
      * Adam's order.

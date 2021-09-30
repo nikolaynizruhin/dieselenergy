@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class ResetPasswordTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function user_can_view_password_reset_page()

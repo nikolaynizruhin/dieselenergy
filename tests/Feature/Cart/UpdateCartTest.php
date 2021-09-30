@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class UpdateCartTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /**
      * Product.

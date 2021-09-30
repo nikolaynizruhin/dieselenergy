@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class ReadCustomerTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_cant_read_customer()

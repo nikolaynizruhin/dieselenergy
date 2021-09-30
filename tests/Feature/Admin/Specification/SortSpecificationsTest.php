@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class SortSpecificationsTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /**
      * Height attribute.

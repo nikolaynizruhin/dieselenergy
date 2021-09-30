@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class PostTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function it_has_image()

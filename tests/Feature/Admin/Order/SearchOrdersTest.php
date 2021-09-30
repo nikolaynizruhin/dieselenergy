@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class SearchOrdersTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_cant_search_orders()

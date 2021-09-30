@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class BrandTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function it_has_many_products()

@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function user_can_view_login_page()

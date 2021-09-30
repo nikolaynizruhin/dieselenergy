@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class ReadPostsTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_cant_read_posts()

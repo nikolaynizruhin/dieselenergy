@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class DeleteCartTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_can_delete_cart_item()

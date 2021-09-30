@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class SortOrdersTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /**
      * Customer.

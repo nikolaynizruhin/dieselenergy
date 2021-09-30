@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class UpdateRateTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function it_updates_currency_rates()

@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class ImageTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function it_has_many_products()

@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class DeleteAttributeTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /**
      * Product.

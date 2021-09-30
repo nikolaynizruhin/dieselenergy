@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class CreateOrderTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_cant_visit_create_order_page()

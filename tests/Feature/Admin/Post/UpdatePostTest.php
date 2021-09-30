@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class UpdatePostTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_cant_visit_update_post_page()

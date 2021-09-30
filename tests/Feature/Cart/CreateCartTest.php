@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class CreateCartTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_can_add_product_to_cart()

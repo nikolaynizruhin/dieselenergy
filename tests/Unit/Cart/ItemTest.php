@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class ItemTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function it_can_get_total()

@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class ForgotPasswordTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_can_visit_forgot_password_page()

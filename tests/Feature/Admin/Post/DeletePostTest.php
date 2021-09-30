@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class DeletePostTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_cant_delete_post()

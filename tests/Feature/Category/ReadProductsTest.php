@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class ReadProductsTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_can_read_category_products()

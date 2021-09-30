@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class SearchProductsTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_can_search_products()

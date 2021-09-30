@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class SortAttributesTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_cant_sort_attributes()

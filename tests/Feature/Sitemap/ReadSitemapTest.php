@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class ReadSitemapTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /** @test */
     public function guest_can_read_sitemap()

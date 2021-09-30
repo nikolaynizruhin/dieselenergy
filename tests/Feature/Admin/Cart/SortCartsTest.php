@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class SortCartsTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /**
      * Order.

@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class SortProductsTest extends TestCase
 {
-    use RefreshDatabase;
+
 
     /**
      * Patrol generator.
