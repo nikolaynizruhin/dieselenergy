@@ -3,13 +3,10 @@
 namespace Tests\Feature\Admin\Attribute;
 
 use App\Models\Attribute;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeleteAttributeTest extends TestCase
 {
-
-
     /**
      * Product.
      *

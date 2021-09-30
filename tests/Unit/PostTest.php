@@ -4,13 +4,10 @@ namespace Tests\Unit;
 
 use App\Models\Image;
 use App\Models\Post;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PostTest extends TestCase
 {
-
-
     /** @test */
     public function it_has_image()
     {

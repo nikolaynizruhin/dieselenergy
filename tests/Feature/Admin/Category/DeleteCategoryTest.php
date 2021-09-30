@@ -3,13 +3,10 @@
 namespace Tests\Feature\Admin\Category;
 
 use App\Models\Category;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeleteCategoryTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_delete_category()
     {

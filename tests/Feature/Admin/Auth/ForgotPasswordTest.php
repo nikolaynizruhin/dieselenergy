@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Auth;
 
 use App\Models\User;
 use App\Notifications\ResetPassword;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
@@ -12,8 +11,6 @@ use Tests\TestCase;
 
 class ForgotPasswordTest extends TestCase
 {
-
-
     /** @test */
     public function guest_can_visit_forgot_password_page()
     {

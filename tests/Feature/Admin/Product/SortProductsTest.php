@@ -5,13 +5,10 @@ namespace Tests\Feature\Admin\Product;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SortProductsTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_sort_products()
     {

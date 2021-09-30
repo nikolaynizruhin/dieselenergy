@@ -3,13 +3,10 @@
 namespace Tests\Feature\Admin\Post;
 
 use App\Models\Post;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeletePostTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_delete_post()
     {

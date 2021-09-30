@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\Currency;
 
 use App\Models\Currency;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SearchCurrenciesTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_search_currencies()
     {

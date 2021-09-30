@@ -3,13 +3,10 @@
 namespace Tests\Feature\Admin\Image;
 
 use App\Models\Image;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeleteImageTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_delete_image()
     {

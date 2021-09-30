@@ -5,13 +5,10 @@ namespace Tests\Feature\Admin\Specification;
 use App\Models\Attribute;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SearchSpecificationsTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_search_cart()
     {

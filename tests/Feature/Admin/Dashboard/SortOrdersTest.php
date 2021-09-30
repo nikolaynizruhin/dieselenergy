@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\Dashboard;
 
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SortOrdersTest extends TestCase
 {
-
-
     /**
      * Adam's order.
      *

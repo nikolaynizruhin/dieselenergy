@@ -5,15 +5,12 @@ namespace Tests\Unit;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ImageTest extends TestCase
 {
-
-
     /** @test */
     public function it_has_many_products()
     {

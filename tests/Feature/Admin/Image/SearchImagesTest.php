@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\Image;
 
 use App\Models\Image;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SearchImagesTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_search_images()
     {

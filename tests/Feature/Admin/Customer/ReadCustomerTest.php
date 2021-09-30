@@ -3,13 +3,10 @@
 namespace Tests\Feature\Admin\Customer;
 
 use App\Models\Customer;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ReadCustomerTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_read_customer()
     {

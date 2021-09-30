@@ -5,13 +5,10 @@ namespace Tests\Feature\Admin\Specification;
 use App\Models\Attribute;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SortSpecificationsTest extends TestCase
 {
-
-
     /**
      * Height attribute.
      *

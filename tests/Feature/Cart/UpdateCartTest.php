@@ -4,13 +4,10 @@ namespace Tests\Feature\Cart;
 
 use App\Models\Product;
 use Facades\App\Cart\Cart;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UpdateCartTest extends TestCase
 {
-
-
     /**
      * Product.
      *

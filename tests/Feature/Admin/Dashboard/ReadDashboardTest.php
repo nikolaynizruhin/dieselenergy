@@ -5,13 +5,10 @@ namespace Tests\Feature\Admin\Dashboard;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ReadDashboardTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_read_dashboard()
     {

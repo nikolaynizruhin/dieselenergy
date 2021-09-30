@@ -5,13 +5,10 @@ namespace Tests\Feature\Admin\Customer;
 use App\Models\Contact;
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SearchContactsTest extends TestCase
 {
-
-
     /** @test */
     public function user_can_search_customer_contacts()
     {

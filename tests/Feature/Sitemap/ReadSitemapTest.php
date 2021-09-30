@@ -4,13 +4,10 @@ namespace Tests\Feature\Sitemap;
 
 use App\Models\Post;
 use App\Models\Product;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ReadSitemapTest extends TestCase
 {
-
-
     /** @test */
     public function guest_can_read_sitemap()
     {

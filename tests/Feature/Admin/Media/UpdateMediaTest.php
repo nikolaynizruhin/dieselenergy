@@ -3,13 +3,10 @@
 namespace Tests\Feature\Admin\Media;
 
 use App\Models\Media;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UpdateMediaTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_visit_update_media_page()
     {

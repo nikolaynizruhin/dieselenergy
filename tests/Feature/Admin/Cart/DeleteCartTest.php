@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\Cart;
 
 use App\Models\Order;
 use App\Models\Product;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeleteCartTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_delete_cart()
     {

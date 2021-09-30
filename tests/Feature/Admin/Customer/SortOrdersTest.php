@@ -5,13 +5,10 @@ namespace Tests\Feature\Admin\Customer;
 use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SortOrdersTest extends TestCase
 {
-
-
     /**
      * Customer.
      *

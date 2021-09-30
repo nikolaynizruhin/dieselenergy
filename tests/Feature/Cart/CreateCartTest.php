@@ -4,13 +4,10 @@ namespace Tests\Feature\Cart;
 
 use App\Models\Product;
 use Facades\App\Cart\Cart;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CreateCartTest extends TestCase
 {
-
-
     /** @test */
     public function guest_can_add_product_to_cart()
     {

@@ -4,15 +4,12 @@ namespace Tests\Feature\Admin\Post;
 
 use App\Models\Image;
 use App\Models\Post;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UpdatePostTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_visit_update_post_page()
     {

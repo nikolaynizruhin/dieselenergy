@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\User;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ReadUsersTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_read_users()
     {

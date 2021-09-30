@@ -5,13 +5,10 @@ namespace Tests\Feature\Admin\Brand;
 use App\Models\Brand;
 use App\Models\Currency;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SortBrandsTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_sort_brands()
     {
