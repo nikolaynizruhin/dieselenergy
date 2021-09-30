@@ -3,13 +3,10 @@
 namespace Tests\Feature\Admin\Specification;
 
 use App\Models\Specification;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeleteSpecificationTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_delete_specification()
     {

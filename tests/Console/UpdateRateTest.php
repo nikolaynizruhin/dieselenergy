@@ -4,14 +4,11 @@ namespace Tests\Console;
 
 use App\Models\Currency;
 use Illuminate\Console\Command;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class UpdateRateTest extends TestCase
 {
-
-
     /** @test */
     public function it_updates_currency_rates()
     {

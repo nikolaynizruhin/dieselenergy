@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\Order;
 
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SearchOrdersTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_search_orders()
     {

@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\Brand;
 
 use App\Models\Brand;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SearchBrandsTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_search_brands()
     {

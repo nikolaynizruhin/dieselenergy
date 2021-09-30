@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Auth;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
@@ -11,8 +10,6 @@ use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
-
-
     /** @test */
     public function user_can_view_login_page()
     {

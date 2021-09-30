@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\Category;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SortCategoriesTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_sort_categories()
     {

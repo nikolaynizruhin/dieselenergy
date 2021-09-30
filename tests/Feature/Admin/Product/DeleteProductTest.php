@@ -3,13 +3,10 @@
 namespace Tests\Feature\Admin\Product;
 
 use App\Models\Product;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeleteProductTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_delete_product()
     {

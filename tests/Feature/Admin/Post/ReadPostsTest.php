@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\Post;
 
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ReadPostsTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_read_posts()
     {

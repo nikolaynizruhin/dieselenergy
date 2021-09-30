@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\Customer;
 
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SortCustomersTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_sort_customers()
     {

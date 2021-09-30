@@ -5,13 +5,10 @@ namespace Tests\Feature\Admin\Order;
 use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SortOrdersTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_sort_orders()
     {

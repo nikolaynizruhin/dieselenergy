@@ -6,13 +6,10 @@ use App\Cart\Item;
 use App\Models\Brand;
 use App\Models\Currency;
 use App\Models\Product;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ItemTest extends TestCase
 {
-
-
     /** @test */
     public function it_can_get_total()
     {

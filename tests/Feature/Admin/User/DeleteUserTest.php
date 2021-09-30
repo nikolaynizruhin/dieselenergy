@@ -3,13 +3,10 @@
 namespace Tests\Feature\Admin\User;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeleteUserTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_delete_user()
     {

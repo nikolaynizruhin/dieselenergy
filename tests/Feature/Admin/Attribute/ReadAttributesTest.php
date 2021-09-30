@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\Attribute;
 
 use App\Models\Attribute;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ReadAttributesTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_read_attributes()
     {

@@ -3,13 +3,10 @@
 namespace Tests\Feature\Order;
 
 use App\Models\Order;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ReadOrderTest extends TestCase
 {
-
-
     /** @test */
     public function guest_can_read_order()
     {

@@ -3,13 +3,10 @@
 namespace Tests\Feature\Admin\Contact;
 
 use App\Models\Contact;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeleteContactTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_delete_contact()
     {

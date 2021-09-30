@@ -5,13 +5,10 @@ namespace Tests\Feature\Admin\Media;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ReadMediasTest extends TestCase
 {
-
-
     /** @test */
     public function user_can_read_medias()
     {

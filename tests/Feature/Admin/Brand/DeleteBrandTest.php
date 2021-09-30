@@ -3,13 +3,10 @@
 namespace Tests\Feature\Admin\Brand;
 
 use App\Models\Brand;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeleteBrandTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_delete_brand()
     {

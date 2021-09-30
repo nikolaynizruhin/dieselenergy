@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\Product;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ReadProductsTest extends TestCase
 {
-
-
     /** @test */
     public function guest_cant_read_products()
     {
