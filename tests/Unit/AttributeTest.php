@@ -18,7 +18,7 @@ class AttributeTest extends TestCase
     public function it_has_many_categories()
     {
         $attribute = Attribute::factory()
-            ->hasAttached(Category::factory())
+            ->hasCategories()
             ->create();
 
         $this->assertInstanceOf(Collection::class, $attribute->categories);

@@ -15,7 +15,7 @@ class ImageTest extends TestCase
     public function it_has_many_products()
     {
         $image = Image::factory()
-            ->hasAttached(Product::factory())
+            ->hasProducts()
             ->create();
 
         $this->assertInstanceOf(Collection::class, $image->products);

@@ -17,7 +17,7 @@ class CategoryTest extends TestCase
     public function it_has_many_products()
     {
         $category = Category::factory()
-            ->hasProducts(1)
+            ->hasProducts()
             ->create();
 
         $this->assertInstanceOf(Collection::class, $category->products);
@@ -27,7 +27,7 @@ class CategoryTest extends TestCase
     public function it_has_many_attributes()
     {
         $category = Category::factory()
-            ->hasAttached(Attribute::factory())
+            ->hasAttributes()
             ->create();
 
         $this->assertInstanceOf(Collection::class, $category->attributes);
