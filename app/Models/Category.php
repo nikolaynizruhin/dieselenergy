@@ -59,7 +59,7 @@ class Category extends Model
     public function loadAttributes(Product $product)
     {
         return $this->load([
-            'attributes.products' => fn ($query) => $query->where('product_id', $product->id),
+            'attributes.products' => fn ($query) => $query->whereBelongsTo($product),
         ]);
     }
 }
