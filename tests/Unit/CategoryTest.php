@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use App\Models\Attribute;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
