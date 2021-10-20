@@ -29,6 +29,8 @@ class UpdateProductTest extends TestCase
     public function user_can_visit_update_product_page()
     {
         $product = Product::factory()->create();
+        $attribute = Attribute::factory()->create();
+        $product->category->attributes()->attach($attribute);
 
         $this->login()
             ->get(route('admin.products.edit', $product))
