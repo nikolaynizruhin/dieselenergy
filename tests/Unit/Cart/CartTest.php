@@ -7,7 +7,6 @@ use App\Models\Currency;
 use App\Models\Order;
 use App\Models\Product;
 use Facades\App\Cart\Cart;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Collection;
 use Tests\TestCase;

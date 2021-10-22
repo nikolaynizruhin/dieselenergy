@@ -11,7 +11,6 @@ use App\Models\Product;
 use App\Notifications\OrderConfirmed;
 use App\Notifications\OrderCreated;
 use Facades\App\Cart\Cart;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Event;

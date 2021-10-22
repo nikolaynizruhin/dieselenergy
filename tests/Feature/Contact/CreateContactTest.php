@@ -4,7 +4,6 @@ namespace Tests\Feature\Contact;
 
 use App\Models\Contact;
 use App\Notifications\ContactCreated;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
 use Tests\Honeypot;
