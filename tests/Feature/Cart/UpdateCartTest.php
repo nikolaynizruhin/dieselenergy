@@ -42,7 +42,7 @@ class UpdateCartTest extends TestCase
     /** @test */
     public function guest_cant_create_cart_without_quantity()
     {
-        $this->put(route('carts.update', 0))
+        $this->put(route('carts.update', ['cart' => 0]))
             ->assertSessionHasErrors('quantity');
     }
 
