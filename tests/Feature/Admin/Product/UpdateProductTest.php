@@ -14,7 +14,7 @@ use Tests\TestCase;
 
 class UpdateProductTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function guest_cant_visit_update_product_page()

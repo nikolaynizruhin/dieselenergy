@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class UpdateAttributeTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function guest_cant_visit_update_attribute_page()

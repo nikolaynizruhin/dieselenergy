@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class UpdateUserPasswordTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function guest_cant_update_user_password()

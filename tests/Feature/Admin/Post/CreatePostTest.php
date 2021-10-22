@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class CreatePostTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function guest_cant_visit_create_post_page()

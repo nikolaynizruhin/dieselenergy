@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class UpdateCategoryTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function guest_cant_visit_update_category_page()

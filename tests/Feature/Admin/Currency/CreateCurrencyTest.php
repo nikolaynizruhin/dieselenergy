@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class CreateCurrencyTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function guest_cant_visit_create_currency_page()

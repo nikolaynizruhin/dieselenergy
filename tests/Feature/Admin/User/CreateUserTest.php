@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class CreateUserTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function guest_cant_visit_create_user_page()

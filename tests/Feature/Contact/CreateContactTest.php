@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class CreateContactTest extends TestCase
 {
-    use RefreshDatabase, Honeypot;
+    use Honeypot;
 
     /** @test */
     public function guest_can_create_contact()

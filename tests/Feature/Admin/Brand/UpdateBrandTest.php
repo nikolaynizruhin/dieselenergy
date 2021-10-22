@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class UpdateBrandTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function guest_cant_visit_update_brand_page()

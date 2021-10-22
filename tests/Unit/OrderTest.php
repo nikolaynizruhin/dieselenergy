@@ -15,7 +15,7 @@ use Tests\TestCase;
 
 class OrderTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function it_has_customer()

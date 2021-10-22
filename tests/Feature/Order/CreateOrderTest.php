@@ -21,7 +21,7 @@ use Tests\TestCase;
 
 class CreateOrderTest extends TestCase
 {
-    use RefreshDatabase, WithFaker, Honeypot;
+    use WithFaker, Honeypot;
 
     /**
      * Product.

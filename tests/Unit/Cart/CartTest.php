@@ -14,7 +14,7 @@ use Tests\TestCase;
 
 class CartTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /**
      * Product.

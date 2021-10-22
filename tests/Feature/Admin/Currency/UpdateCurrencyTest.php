@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class UpdateCurrencyTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function guest_cant_visit_edit_currency_page()

@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class UpdateCustomerTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function guest_cant_visit_update_customer_page()

@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class CreateImageTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function guest_cant_visit_create_image_page()

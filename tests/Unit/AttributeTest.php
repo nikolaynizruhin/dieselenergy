@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class AttributeTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function it_has_many_categories()

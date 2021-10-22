@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class CreateCustomerTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function guest_cant_visit_create_customer_page()

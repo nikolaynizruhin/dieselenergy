@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class ReadCartsTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function user_can_read_carts()
