@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Order;
 
 use App\Models\Order;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
