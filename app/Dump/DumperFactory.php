@@ -14,10 +14,13 @@ class DumperFactory
      */
     public static function make($config)
     {
-        return match ($config['driver']) {
-            'mysql' => new MySQLDumper($config),
-            'sqlite' => new SQLiteDumper($config),
-            default => throw new InvalidArgumentException("Unsupported driver [{$config['driver']}]."),
-        };
+        switch ($config['driver']) {
+            case 'mysql':
+                return new MySQLDumper($config);
+            case 'sqlite':
+                return new SQLiteDumper($config);
+            default:
+                throw new InvalidArgumentException("Unsupported driver [{$config['driver']}].");
+        }
     }
 }
