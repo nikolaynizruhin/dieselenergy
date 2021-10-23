@@ -28,166 +28,80 @@ class CreateCurrencyTest extends TestCase
     /** @test */
     public function guest_cant_create_currency()
     {
-        $currency = Currency::factory()->raw();
-
-        $this->post(route('admin.currencies.store'), $currency)
+        $this->post(route('admin.currencies.store'), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_create_currency()
     {
-        $currency = Currency::factory()->raw();
-
         $this->login()
-            ->post(route('admin.currencies.store'), $currency)
+            ->post(route('admin.currencies.store'), $fields = $this->validFields())
             ->assertRedirect(route('admin.currencies.index'))
             ->assertSessionHas('status', trans('currency.created'));
 
-        $this->assertDatabaseHas('currencies', $currency);
+        $this->assertDatabaseHas('currencies', $fields);
     }
 
-    /** @test */
-    public function user_cant_create_currency_without_code()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_create_currency_with_invalid_data($field, $data, $count = 0)
     {
-        $currency = Currency::factory()->raw(['code' => null]);
-
         $this->login()
             ->from(route('admin.currencies.create'))
-            ->post(route('admin.currencies.store'), $currency)
+            ->post(route('admin.currencies.store'), $data())
             ->assertRedirect(route('admin.currencies.create'))
-            ->assertSessionHasErrors('code');
+            ->assertSessionHasErrors($field);
 
-        $this->assertDatabaseCount('currencies', 0);
+        $this->assertDatabaseCount('currencies', $count);
     }
 
-    /** @test */
-    public function user_cant_create_currency_with_integer_code()
+    public function validationProvider(): array
     {
-        $currency = Currency::factory()->raw(['code' => 1]);
-
-        $this->login()
-            ->from(route('admin.currencies.create'))
-            ->post(route('admin.currencies.store'), $currency)
-            ->assertRedirect(route('admin.currencies.create'))
-            ->assertSessionHasErrors('code');
-
-        $this->assertDatabaseCount('currencies', 0);
+        return [
+            'Code cant be an integer' => [
+                'code', fn () => $this->validFields(['code' => 1]),
+            ],
+            'Code is required' => [
+                'code', fn () => $this->validFields(['code' => null]),
+            ],
+            'Code must be 3 chars' => [
+                'code', fn () => $this->validFields(['code' => 'us']),
+            ],
+            'Code must be unique' => [
+                'code', fn () => $this->validFields(['code' => Currency::factory()->create()->code]), 1,
+            ],
+            'Rate is required' => [
+                'rate', fn () => $this->validFields(['rate' => null]),
+            ],
+            'Rate cant be a string' => [
+                'rate', fn () => $this->validFields(['rate' => 'string']),
+            ],
+            'Rate cant be less than zero' => [
+                'rate', fn () => $this->validFields(['rate' => -1]),
+            ],
+            'Symbol is required' => [
+                'symbol', fn () => $this->validFields(['symbol' => null]),
+            ],
+            'Symbol cant be an integer' => [
+                'symbol', fn () => $this->validFields(['symbol' => 1]),
+            ],
+            'Symbol must be unique' => [
+                'symbol', fn () => $this->validFields(['symbol' => Currency::factory()->create()->symbol]), 1,
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_create_currency_with_code_different_than_3_chars()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $currency = Currency::factory()->raw(['code' => 'US']);
-
-        $this->login()
-            ->from(route('admin.currencies.create'))
-            ->post(route('admin.currencies.store'), $currency)
-            ->assertRedirect(route('admin.currencies.create'))
-            ->assertSessionHasErrors('code');
-
-        $this->assertDatabaseCount('currencies', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_currency_with_existing_code()
-    {
-        $currency = Currency::factory()->create();
-        $stub = Currency::factory()->raw(['code' => $currency->code]);
-
-        $this->login()
-            ->from(route('admin.currencies.create'))
-            ->post(route('admin.currencies.store'), $stub)
-            ->assertRedirect(route('admin.currencies.create'))
-            ->assertSessionHasErrors('code');
-
-        $this->assertDatabaseCount('currencies', 1);
-    }
-
-    /** @test */
-    public function user_cant_create_currency_without_rate()
-    {
-        $currency = Currency::factory()->raw(['rate' => null]);
-
-        $this->login()
-            ->from(route('admin.currencies.create'))
-            ->post(route('admin.currencies.store'), $currency)
-            ->assertRedirect(route('admin.currencies.create'))
-            ->assertSessionHasErrors('rate');
-
-        $this->assertDatabaseCount('currencies', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_currency_with_string_rate()
-    {
-        $currency = Currency::factory()->raw(['rate' => 'string']);
-
-        $this->login()
-            ->from(route('admin.currencies.create'))
-            ->post(route('admin.currencies.store'), $currency)
-            ->assertRedirect(route('admin.currencies.create'))
-            ->assertSessionHasErrors('rate');
-
-        $this->assertDatabaseCount('currencies', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_currency_with_rate_less_than_0()
-    {
-        $currency = Currency::factory()->raw([
-            'rate' => $this->faker->randomFloat(4, -10, -1),
-        ]);
-
-        $this->login()
-            ->from(route('admin.currencies.create'))
-            ->post(route('admin.currencies.store'), $currency)
-            ->assertRedirect(route('admin.currencies.create'))
-            ->assertSessionHasErrors('rate');
-
-        $this->assertDatabaseCount('currencies', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_currency_without_symbol()
-    {
-        $currency = Currency::factory()->raw(['symbol' => null]);
-
-        $this->login()
-            ->from(route('admin.currencies.create'))
-            ->post(route('admin.currencies.store'), $currency)
-            ->assertRedirect(route('admin.currencies.create'))
-            ->assertSessionHasErrors('symbol');
-
-        $this->assertDatabaseCount('currencies', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_currency_with_integer_symbol()
-    {
-        $currency = Currency::factory()->raw(['symbol' => 1]);
-
-        $this->login()
-            ->from(route('admin.currencies.create'))
-            ->post(route('admin.currencies.store'), $currency)
-            ->assertRedirect(route('admin.currencies.create'))
-            ->assertSessionHasErrors('symbol');
-
-        $this->assertDatabaseCount('currencies', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_currency_with_existing_symbol()
-    {
-        $currency = Currency::factory()->create();
-        $stub = Currency::factory()->raw(['symbol' => $currency->symbol]);
-
-        $this->login()
-            ->from(route('admin.currencies.create'))
-            ->post(route('admin.currencies.store'), $stub)
-            ->assertRedirect(route('admin.currencies.create'))
-            ->assertSessionHasErrors('symbol');
-
-        $this->assertDatabaseCount('currencies', 1);
+        return Currency::factory()->raw($overrides);
     }
 }

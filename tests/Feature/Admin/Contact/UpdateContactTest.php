@@ -7,106 +7,97 @@ use Tests\TestCase;
 
 class UpdateContactTest extends TestCase
 {
+    /**
+     * Product.
+     *
+     * @var \App\Models\Contact
+     */
+    private $contact;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contact = Contact::factory()->create();
+    }
+
     /** @test */
     public function guest_cant_visit_edit_contact_page()
     {
-        $contact = Contact::factory()->create();
-
-        $this->get(route('admin.contacts.edit', $contact))
+        $this->get(route('admin.contacts.edit', $this->contact))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_visit_update_contact_page()
     {
-        $contact = Contact::factory()->create();
-
         $this->login()
-            ->get(route('admin.contacts.edit', $contact))
+            ->get(route('admin.contacts.edit', $this->contact))
             ->assertViewIs('admin.contacts.edit');
     }
 
     /** @test */
     public function guest_cant_update_contact()
     {
-        $contact = Contact::factory()->create();
-        $stub = Contact::factory()->raw();
-
-        $this->put(route('admin.contacts.update', $contact), $stub)
+        $this->put(route('admin.contacts.update', $this->contact), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_update_contact()
     {
-        $contact = Contact::factory()->create();
-        $stub = Contact::factory()->raw();
-
         $this->login()
-            ->put(route('admin.contacts.update', $contact), $stub)
+            ->put(route('admin.contacts.update', $this->contact), $fields = $this->validFields())
             ->assertRedirect(route('admin.contacts.index'))
             ->assertSessionHas('status', trans('contact.updated'));
 
-        $this->assertDatabaseHas('contacts', $stub);
+        $this->assertDatabaseHas('contacts', $fields);
     }
 
-    /** @test */
-    public function user_cant_update_contact_with_integer_message()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_update_contact_with_invalid_data($field, $data)
     {
-        $contact = Contact::factory()->create();
-        $stub = Contact::factory()->raw(['message' => 1]);
-
         $this->login()
-            ->from(route('admin.contacts.edit', $contact))
-            ->put(route('admin.contacts.update', $contact), $stub)
-            ->assertRedirect(route('admin.contacts.edit', $contact))
-            ->assertSessionHasErrors('message');
+            ->from(route('admin.contacts.edit', $this->contact))
+            ->put(route('admin.contacts.update', $this->contact), $data())
+            ->assertRedirect(route('admin.contacts.edit', $this->contact))
+            ->assertSessionHasErrors($field);
 
         $this->assertDatabaseCount('contacts', 1);
     }
 
-    /** @test */
-    public function user_cant_update_contact_without_customer()
+    public function validationProvider(): array
     {
-        $contact = Contact::factory()->create();
-        $stub = Contact::factory()->raw(['customer_id' => null]);
-
-        $this->login()
-            ->from(route('admin.contacts.edit', $contact))
-            ->put(route('admin.contacts.update', $contact), $stub)
-            ->assertRedirect(route('admin.contacts.edit', $contact))
-            ->assertSessionHasErrors('customer_id');
-
-        $this->assertDatabaseCount('contacts', 1);
+        return [
+            'Message cant be an integer' => [
+                'message', fn () => $this->validFields(['message' => 1]),
+            ],
+            'Customer is required' => [
+                'customer_id', fn () => $this->validFields(['customer_id' => null]),
+            ],
+            'Customer cant be string' => [
+                'customer_id', fn () => $this->validFields(['customer_id' => 'string']),
+            ],
+            'Customer must exists' => [
+                'customer_id', fn () => $this->validFields(['customer_id' => 10]),
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_update_contact_with_string_customer()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $contact = Contact::factory()->create();
-        $stub = Contact::factory()->raw(['customer_id' => 'string']);
-
-        $this->login()
-            ->from(route('admin.contacts.edit', $contact))
-            ->put(route('admin.contacts.update', $contact), $stub)
-            ->assertRedirect(route('admin.contacts.edit', $contact))
-            ->assertSessionHasErrors('customer_id');
-
-        $this->assertDatabaseCount('contacts', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_contact_with_nonexistent_customer()
-    {
-        $contact = Contact::factory()->create();
-        $stub = Contact::factory()->raw(['customer_id' => 10]);
-
-        $this->login()
-            ->from(route('admin.contacts.edit', $contact))
-            ->put(route('admin.contacts.update', $contact), $stub)
-            ->assertRedirect(route('admin.contacts.edit', $contact))
-            ->assertSessionHasErrors('customer_id');
-
-        $this->assertDatabaseCount('contacts', 1);
+        return Contact::factory()->raw($overrides);
     }
 }

@@ -3,218 +3,123 @@
 namespace Tests\Feature\Admin\Customer;
 
 use App\Models\Customer;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateCustomerTest extends TestCase
 {
-    use WithFaker;
+    /**
+     * Product.
+     *
+     * @var \App\Models\Customer
+     */
+    private $customer;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->customer = Customer::factory()->create();
+    }
 
     /** @test */
     public function guest_cant_visit_update_customer_page()
     {
-        $customer = Customer::factory()->create();
-
-        $this->get(route('admin.customers.edit', $customer))
+        $this->get(route('admin.customers.edit', $this->customer))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_visit_update_customer_page()
     {
-        $customer = Customer::factory()->create();
-
         $this->login()
-            ->get(route('admin.customers.edit', $customer))
+            ->get(route('admin.customers.edit', $this->customer))
             ->assertViewIs('admin.customers.edit');
     }
 
     /** @test */
     public function guest_cant_update_customer()
     {
-        $customer = Customer::factory()->create();
-        $stub = Customer::factory()->raw();
-
-        $this->put(route('admin.customers.update', $customer), $stub)
+        $this->put(route('admin.customers.update', $this->customer), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_update_customer()
     {
-        $customer = Customer::factory()->create();
-        $stub = Customer::factory()->raw();
-
         $this->login()
-            ->put(route('admin.customers.update', $customer), $stub)
+            ->put(route('admin.customers.update', $this->customer), $fields = $this->validFields())
             ->assertRedirect(route('admin.customers.index'))
             ->assertSessionHas('status', trans('customer.updated'));
 
-        $this->assertDatabaseHas('customers', $stub);
+        $this->assertDatabaseHas('customers', $fields);
     }
 
-    /** @test */
-    public function user_cant_update_customer_without_name()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_update_customer_with_invalid_data($field, $data, $count = 1)
     {
-        $customer = Customer::factory()->create();
-        $stub = Customer::factory()->raw(['name' => null]);
-
         $this->login()
-            ->from(route('admin.customers.edit', $customer))
-            ->put(route('admin.customers.update', $customer), $stub)
-            ->assertRedirect(route('admin.customers.edit', $customer))
-            ->assertSessionHasErrors('name');
+            ->from(route('admin.customers.edit', $this->customer))
+            ->put(route('admin.customers.update', $this->customer), $data())
+            ->assertRedirect(route('admin.customers.edit', $this->customer))
+            ->assertSessionHasErrors($field);
 
-        $this->assertDatabaseCount('customers', 1);
+        $this->assertDatabaseCount('customers', $count);
     }
 
-    /** @test */
-    public function user_cant_update_customer_with_integer_name()
+    public function validationProvider(): array
     {
-        $customer = Customer::factory()->create();
-        $stub = Customer::factory()->raw(['name' => 1]);
-
-        $this->login()
-            ->from(route('admin.customers.edit', $customer))
-            ->put(route('admin.customers.update', $customer), $stub)
-            ->assertRedirect(route('admin.customers.edit', $customer))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('customers', 1);
+        return [
+            'Name is required' => [
+                'name', fn () => $this->validFields(['name' => null]),
+            ],
+            'Name cant be an integer' => [
+                'name', fn () => $this->validFields(['name' => 1]),
+            ],
+            'Name cant be more than 255 chars' => [
+                'name', fn () => $this->validFields(['name' => Str::random(256)]),
+            ],
+            'Email is required' => [
+                'email', fn () => $this->validFields(['email' => null]),
+            ],
+            'Email cant be an integer' => [
+                'email', fn () => $this->validFields(['email' => 1]),
+            ],
+            'Email cant be more than 255 chars' => [
+                'email', fn () => $this->validFields(['email' => Str::random(256)]),
+            ],
+            'Email must be valid' => [
+                'email', fn () => $this->validFields(['email' => 'invalid']),
+            ],
+            'Email must be unique' => [
+                'email', fn () => $this->validFields(['email' => Customer::factory()->create()->email]), 2,
+            ],
+            'Phone is required' => [
+                'phone', fn () => $this->validFields(['phone' => null]),
+            ],
+            'Phone must have valid format' => [
+                'phone', fn () => $this->validFields(['phone' => 0631234567]),
+            ],
+            'Notes cant be an integer' => [
+                'notes', fn () => $this->validFields(['notes' => 1]),
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_update_customer_with_name_more_than_255_chars()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $customer = Customer::factory()->create();
-        $stub = Customer::factory()->raw(['name' => str_repeat('a', 256)]);
-
-        $this->login()
-            ->from(route('admin.customers.edit', $customer))
-            ->put(route('admin.customers.update', $customer), $stub)
-            ->assertRedirect(route('admin.customers.edit', $customer))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('customers', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_customer_without_email()
-    {
-        $customer = Customer::factory()->create();
-        $stub = Customer::factory()->raw(['email' => null]);
-
-        $this->login()
-            ->from(route('admin.customers.edit', $customer))
-            ->put(route('admin.customers.update', $customer), $stub)
-            ->assertRedirect(route('admin.customers.edit', $customer))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('customers', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_user_with_integer_email()
-    {
-        $customer = Customer::factory()->create();
-        $stub = Customer::factory()->raw(['email' => 1]);
-
-        $this->login()
-            ->from(route('admin.customers.edit', $customer))
-            ->put(route('admin.customers.update', $customer), $stub)
-            ->assertRedirect(route('admin.customers.edit', $customer))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('customers', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_user_with_email_more_than_255_chars()
-    {
-        $customer = Customer::factory()->create();
-        $stub = Customer::factory()->raw(['email' => str_repeat('a', 256)]);
-
-        $this->login()
-            ->from(route('admin.customers.edit', $customer))
-            ->put(route('admin.customers.update', $customer), $stub)
-            ->assertRedirect(route('admin.customers.edit', $customer))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('customers', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_customer_with_invalid_email()
-    {
-        $customer = Customer::factory()->create();
-        $stub = Customer::factory()->raw(['email' => 'invalid']);
-
-        $this->login()
-            ->from(route('admin.customers.edit', $customer))
-            ->put(route('admin.customers.update', $customer), $stub)
-            ->assertRedirect(route('admin.customers.edit', $customer))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('customers', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_customer_with_duplicated_email()
-    {
-        $customer = Customer::factory()->create();
-        $existed = Customer::factory()->create();
-
-        $this->login()
-            ->from(route('admin.customers.edit', $customer))
-            ->put(route('admin.customers.update', $customer), $existed->toArray())
-            ->assertRedirect(route('admin.customers.edit', $customer))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('customers', 2);
-    }
-
-    /** @test */
-    public function user_cant_update_customer_without_phone()
-    {
-        $customer = Customer::factory()->create();
-        $stub = Customer::factory()->raw(['phone' => null]);
-
-        $this->login()
-            ->from(route('admin.customers.edit', $customer))
-            ->put(route('admin.customers.update', $customer), $stub)
-            ->assertRedirect(route('admin.customers.edit', $customer))
-            ->assertSessionHasErrors('phone');
-
-        $this->assertDatabaseCount('customers', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_customer_with_incorrect_phone_format()
-    {
-        $customer = Customer::factory()->create();
-        $stub = Customer::factory()->raw(['phone' => 80631234567]);
-
-        $this->login()
-            ->from(route('admin.customers.edit', $customer))
-            ->put(route('admin.customers.update', $customer), $stub)
-            ->assertRedirect(route('admin.customers.edit', $customer))
-            ->assertSessionHasErrors('phone');
-
-        $this->assertDatabaseCount('customers', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_customer_with_integer_notes()
-    {
-        $customer = Customer::factory()->create();
-        $stub = Customer::factory()->raw(['notes' => 1]);
-
-        $this->login()
-            ->from(route('admin.customers.edit', $customer))
-            ->put(route('admin.customers.update', $customer), $stub)
-            ->assertRedirect(route('admin.customers.edit', $customer))
-            ->assertSessionHasErrors('notes');
-
-        $this->assertDatabaseCount('customers', 1);
+        return Customer::factory()->raw($overrides);
     }
 }

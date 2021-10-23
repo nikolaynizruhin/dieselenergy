@@ -6,37 +6,48 @@ use App\Models\Image;
 use App\Models\Post;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdatePostTest extends TestCase
 {
+    /**
+     * Product.
+     *
+     * @var \App\Models\Post
+     */
+    private $post;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->post = Post::factory()->create();
+    }
+
     /** @test */
     public function guest_cant_visit_update_post_page()
     {
-        $post = Post::factory()->create();
-
-        $this->get(route('admin.posts.edit', $post))
+        $this->get(route('admin.posts.edit', $this->post))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_visit_update_post_page()
     {
-        $post = Post::factory()->create();
-
         $this->login()
-            ->get(route('admin.posts.edit', $post))
+            ->get(route('admin.posts.edit', $this->post))
             ->assertViewIs('admin.posts.edit')
-            ->assertViewHas('post', $post);
+            ->assertViewHas('post', $this->post);
     }
 
     /** @test */
     public function guest_cant_update_post()
     {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw();
-
-        $this->put(route('admin.posts.update', $post), $stub)
+        $this->put(route('admin.posts.update', $this->post), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
@@ -47,14 +58,12 @@ class UpdatePostTest extends TestCase
 
         $image = UploadedFile::fake()->image('post.jpg');
 
-        $post = Post::factory()->create();
-        $stub = Post::factory()
-            ->make()
-            ->makeHidden('image_id')
-            ->toArray();
+        $stub = $this->validFields();
+
+        unset($stub['image_id']);
 
         $this->login()
-            ->put(route('admin.posts.update', $post), $stub + [
+            ->put(route('admin.posts.update', $this->post), $stub + [
                 'image' => $image,
             ])->assertRedirect(route('admin.posts.index'))
             ->assertSessionHas('status', trans('post.updated'));
@@ -67,247 +76,83 @@ class UpdatePostTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function user_cant_update_post_without_title()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_update_post_with_invalid_data($field, $data, $count = 1)
     {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['title' => null]);
-
         $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('title');
+            ->from(route('admin.posts.edit', $this->post))
+            ->put(route('admin.posts.update', $this->post), $data())
+            ->assertRedirect(route('admin.posts.edit', $this->post))
+            ->assertSessionHasErrors($field);
 
-        $this->assertDatabaseCount('posts', 1);
+        $this->assertDatabaseCount('posts', $count);
     }
 
-    /** @test */
-    public function user_cant_update_post_with_integer_title()
+    public function validationProvider(): array
     {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['title' => 1]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('title');
-
-        $this->assertDatabaseCount('posts', 1);
+        return [
+            'Title is required' => [
+                'title', fn () => $this->validFields(['title' => null]),
+            ],
+            'Title cant be an integer' => [
+                'title', fn () => $this->validFields(['title' => 1]),
+            ],
+            'Title cant be more than 255 chars' => [
+                'title', fn () => $this->validFields(['title' => Str::random(256)]),
+            ],
+            'Title must be unique' => [
+                'title', fn () => $this->validFields(['title' => Post::factory()->create()->title]), 2,
+            ],
+            'Excerpt is required' => [
+                'excerpt', fn () => $this->validFields(['excerpt' => null]),
+            ],
+            'Excerpt cant be an integer' => [
+                'excerpt', fn () => $this->validFields(['excerpt' => 1]),
+            ],
+            'Slug must be unique' => [
+                'slug', fn () => $this->validFields(['slug' => Post::factory()->create()->slug]), 2,
+            ],
+            'Slug is required' => [
+                'slug', fn () => $this->validFields(['slug' => null]),
+            ],
+            'Slug cant be an integer' => [
+                'slug', fn () => $this->validFields(['slug' => 1]),
+            ],
+            'Slug cant be more than 255 chars' => [
+                'slug', fn () => $this->validFields(['slug' => Str::random(256)]),
+            ],
+            'Body is required' => [
+                'body', fn () => $this->validFields(['body' => null]),
+            ],
+            'Body cant be an integer' => [
+                'body', fn () => $this->validFields(['body' => 1]),
+            ],
+            'Image is required' => [
+                'image', fn () => $this->validFields(['image' => null]),
+            ],
+            'Image cant be an integer' => [
+                'image', fn () => $this->validFields(['image' => 1]),
+            ],
+            'Image cant be a string' => [
+                'image', fn () => $this->validFields(['image' => 'string']),
+            ],
+            'Image cant be a pdf file' => [
+                'image', fn () => $this->validFields(['image' => UploadedFile::fake()->create('document.pdf', 1, 'application/pdf')]),
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_update_post_without_excerpt()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['excerpt' => null]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('excerpt');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_post_with_integer_excerpt()
-    {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['excerpt' => 1]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('excerpt');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_post_with_title_more_than_255_chars()
-    {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['title' => str_repeat('a', 256)]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('title');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_post_with_existing_title()
-    {
-        $post = Post::factory()->create();
-        $existing = Post::factory()->create();
-        $stub = Post::factory()->raw(['title' => $existing->title]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('title');
-
-        $this->assertDatabaseCount('posts', 2);
-    }
-
-    /** @test */
-    public function user_cant_update_post_without_slug()
-    {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['slug' => null]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_post_with_integer_slug()
-    {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['slug' => 1]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_post_with_slug_more_than_255_chars()
-    {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['slug' => str_repeat('a', 256)]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_post_with_existing_slug()
-    {
-        $post = Post::factory()->create();
-        $existing = Post::factory()->create();
-        $stub = Post::factory()->raw(['slug' => $existing->slug]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('posts', 2);
-    }
-
-    /** @test */
-    public function user_cant_update_post_without_body()
-    {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['body' => null]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('body');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_post_with_integer_body()
-    {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['body' => 1]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('body');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_post_without_image()
-    {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['image' => null]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('image');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_post_with_string_image()
-    {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['image' => 'string']);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('image');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_integer_image()
-    {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['image' => 1]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('image');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_post_with_pdf_file()
-    {
-        $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
-
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['image' => $pdf]);
-
-        $this->login()
-            ->from(route('admin.posts.edit', $post))
-            ->put(route('admin.posts.update', $post), $stub)
-            ->assertRedirect(route('admin.posts.edit', $post))
-            ->assertSessionHasErrors('image');
-
-        $this->assertDatabaseCount('posts', 1);
+        return Post::factory()->raw($overrides);
     }
 }

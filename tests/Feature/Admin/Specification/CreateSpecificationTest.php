@@ -4,13 +4,10 @@ namespace Tests\Feature\Admin\Specification;
 
 use App\Models\Category;
 use App\Models\Specification;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CreateSpecificationTest extends TestCase
 {
-    use WithFaker;
-
     /** @test */
     public function guest_cant_visit_create_specification_page()
     {
@@ -31,122 +28,71 @@ class CreateSpecificationTest extends TestCase
     /** @test */
     public function guest_cant_create_specification()
     {
-        $stub = Specification::factory()->raw();
-
-        $this->post(route('admin.specifications.store'), $stub)
+        $this->post(route('admin.specifications.store'), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_create_specification()
     {
-        $stub = Specification::factory()->raw();
-
         $this->login()
-            ->post(route('admin.specifications.store'), $stub)
-            ->assertRedirect(route('admin.categories.show', $stub['category_id']))
+            ->post(route('admin.specifications.store'), $fields = $this->validFields())
+            ->assertRedirect(route('admin.categories.show', $fields['category_id']))
             ->assertSessionHas('status', trans('specification.created'));
 
-        $specification = Specification::firstWhere($stub);
-
-        $this->assertDatabaseHas('attribute_category', ['id' => $specification->id]);
+        $this->assertDatabaseHas('attribute_category', $fields);
     }
 
-    /** @test */
-    public function user_cant_create_specification_without_category()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_create_specification_with_invalid_data($field, $data, $count = 0)
     {
-        $stub = Specification::factory()->raw(['category_id' => null]);
-
         $this->login()
             ->from(route('admin.specifications.create'))
-            ->post(route('admin.specifications.store'), $stub)
+            ->post(route('admin.specifications.store'), $data())
             ->assertRedirect(route('admin.specifications.create'))
-            ->assertSessionHasErrors('category_id');
+            ->assertSessionHasErrors($field);
 
-        $this->assertDatabaseCount('attribute_category', 0);
+        $this->assertDatabaseCount('attribute_category', $count);
     }
 
-    /** @test */
-    public function user_cant_create_specification_with_string_category()
+    public function validationProvider(): array
     {
-        $stub = Specification::factory()->raw(['category_id' => 'string']);
-
-        $this->login()
-            ->from(route('admin.specifications.create'))
-            ->post(route('admin.specifications.store'), $stub)
-            ->assertRedirect(route('admin.specifications.create'))
-            ->assertSessionHasErrors('category_id');
-
-        $this->assertDatabaseCount('attribute_category', 0);
+        return [
+            'Category is required' => [
+                'category_id', fn () => $this->validFields(['category_id' => null]),
+            ],
+            'Category cant be string' => [
+                'category_id', fn () => $this->validFields(['category_id' => 'string']),
+            ],
+            'Category must exists' => [
+                'category_id', fn () => $this->validFields(['category_id' => 10]),
+            ],
+            'Attribute is required' => [
+                'attribute_id', fn () => $this->validFields(['attribute_id' => null]),
+            ],
+            'Attribute cant be string' => [
+                'attribute_id', fn () => $this->validFields(['attribute_id' => 'string']),
+            ],
+            'Attribute must exists' => [
+                'attribute_id', fn () => $this->validFields(['attribute_id' => 10]),
+            ],
+            'Specification must be unique' => [
+                'attribute_id', fn () => Specification::factory()->create()->toArray(), 1,
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_create_specification_with_nonexistent_category()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $stub = Specification::factory()->raw(['category_id' => 10]);
-
-        $this->login()
-            ->from(route('admin.specifications.create'))
-            ->post(route('admin.specifications.store'), $stub)
-            ->assertRedirect(route('admin.specifications.create'))
-            ->assertSessionHasErrors('category_id');
-
-        $this->assertDatabaseCount('attribute_category', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_specification_without_attribute()
-    {
-        $stub = Specification::factory()->raw(['attribute_id' => null]);
-
-        $this->login()
-            ->from(route('admin.specifications.create'))
-            ->post(route('admin.specifications.store'), $stub)
-            ->assertRedirect(route('admin.specifications.create'))
-            ->assertSessionHasErrors('attribute_id');
-
-        $this->assertDatabaseCount('attribute_category', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_specification_with_string_attribute()
-    {
-        $stub = Specification::factory()->raw(['attribute_id' => 'string']);
-
-        $this->login()
-            ->from(route('admin.specifications.create'))
-            ->post(route('admin.specifications.store'), $stub)
-            ->assertRedirect(route('admin.specifications.create'))
-            ->assertSessionHasErrors('attribute_id');
-
-        $this->assertDatabaseCount('attribute_category', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_specification_with_nonexistent_attribute()
-    {
-        $stub = Specification::factory()->raw(['attribute_id' => 10]);
-
-        $this->login()
-            ->from(route('admin.specifications.create'))
-            ->post(route('admin.specifications.store'), $stub)
-            ->assertRedirect(route('admin.specifications.create'))
-            ->assertSessionHasErrors('attribute_id');
-
-        $this->assertDatabaseCount('attribute_category', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_existing_specification()
-    {
-        $specification = Specification::factory()->create();
-
-        $this->login()
-            ->from(route('admin.specifications.create'))
-            ->post(route('admin.specifications.store'), $specification->toArray())
-            ->assertRedirect(route('admin.specifications.create'))
-            ->assertSessionHasErrors('attribute_id');
-
-        $this->assertDatabaseCount('attribute_category', 1);
+        return Specification::factory()->raw($overrides);
     }
 }

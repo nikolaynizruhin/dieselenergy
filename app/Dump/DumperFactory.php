@@ -19,8 +19,8 @@ class DumperFactory
                 return new MySQLDumper($config);
             case 'sqlite':
                 return new SQLiteDumper($config);
+            default:
+                throw new InvalidArgumentException("Unsupported driver [{$config['driver']}].");
         }
-
-        throw new InvalidArgumentException("Unsupported driver [{$config['driver']}].");
     }
 }
