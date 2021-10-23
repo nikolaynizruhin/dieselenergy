@@ -42,7 +42,7 @@ class CreateCartTest extends TestCase
                 'product_id', fn () => ['product_id' => null, 'quantity' => 1],
             ],
             'Product cant be a string' => [
-                'product_id', fn () => ['product_id' => 'string', 'quantity' => 1]
+                'product_id', fn () => ['product_id' => 'string', 'quantity' => 1],
             ],
             'Product must exists' => [
                 'product_id', fn () => ['product_id' => 10, 'quantity' => 1],

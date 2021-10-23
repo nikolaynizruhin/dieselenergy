@@ -117,10 +117,10 @@ class CreateContactTest extends TestCase
     {
         return [
             'Contact cant contain spam' => [
-                fn() => $this->validFields([config('honeypot.field') => 'spam']),
+                fn () => $this->validFields([config('honeypot.field') => 'spam']),
             ],
             'Contact cant be created too quickly' => [
-                fn() => $this->validFields([config('honeypot.valid_from_field') => time()]),
+                fn () => $this->validFields([config('honeypot.valid_from_field') => time()]),
             ],
         ];
     }

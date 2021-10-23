@@ -25,7 +25,6 @@ class UpdateCustomerTest extends TestCase
         $this->customer = Customer::factory()->create();
     }
 
-
     /** @test */
     public function guest_cant_visit_update_customer_page()
     {

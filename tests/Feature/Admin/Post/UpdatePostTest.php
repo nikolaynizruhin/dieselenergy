@@ -91,7 +91,6 @@ class UpdatePostTest extends TestCase
         $this->assertDatabaseCount('posts', $count);
     }
 
-
     public function validationProvider(): array
     {
         return [
