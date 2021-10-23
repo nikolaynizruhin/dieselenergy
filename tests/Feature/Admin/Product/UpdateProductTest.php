@@ -9,58 +9,67 @@ use App\Models\Product;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateProductTest extends TestCase
 {
     use WithFaker;
 
+    /**
+     * Product.
+     *
+     * @var \App\Models\Product
+     */
+    private $product;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->product = Product::factory()->create();
+    }
+
     /** @test */
     public function guest_cant_visit_update_product_page()
     {
-        $product = Product::factory()->create();
-
-        $this->get(route('admin.products.edit', $product))
+        $this->get(route('admin.products.edit', $this->product))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_visit_update_product_page()
     {
-        $product = Product::factory()->create();
         $attribute = Attribute::factory()->create();
-        $product->category->attributes()->attach($attribute);
+        $this->product->category->attributes()->attach($attribute);
 
         $this->login()
-            ->get(route('admin.products.edit', $product))
+            ->get(route('admin.products.edit', $this->product))
             ->assertViewIs('admin.products.edit')
-            ->assertViewHas('product', $product)
+            ->assertViewHas('product', $this->product)
             ->assertViewHas(['brands']);
     }
 
     /** @test */
     public function guest_cant_update_product()
     {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw();
-
-        $this->put(route('admin.products.update', $product), $stub)
+        $this->put(route('admin.products.update', $this->product), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_update_product()
     {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw();
-
         $this->login()
-            ->put(route('admin.products.update', $product), $stub)
+            ->put(route('admin.products.update', $this->product), $fields = $this->validFields())
             ->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.updated'));
 
-        $this->assertDatabaseHas('products', array_merge($stub, [
-            'price' => $stub['price'] * 100,
+        $this->assertDatabaseHas('products', array_merge($fields, [
+            'price' => $fields['price'] * 100,
         ]));
     }
 
@@ -68,15 +77,14 @@ class UpdateProductTest extends TestCase
     public function user_can_update_product_with_attributes()
     {
         $category = Category::factory()->create();
-        $product = Product::factory()->create();
         $attribute = Attribute::factory()->create();
 
         $category->attributes()->attach($attribute);
 
-        $stub = Product::factory()->raw(['category_id' => $category->id]);
+        $stub = $this->validFields(['category_id' => $category->id]);
 
         $this->login()
-            ->put(route('admin.products.update', $product), $stub + [
+            ->put(route('admin.products.update', $this->product), $stub + [
                 'attributes' => [
                     $attribute->id => $value = $this->faker->word(),
                 ],
@@ -88,7 +96,7 @@ class UpdateProductTest extends TestCase
         ]));
 
         $this->assertDatabaseHas('attribute_product', [
-            'product_id' => $product->id,
+            'product_id' => $this->product->id,
             'value' => $value,
         ]);
     }
@@ -100,11 +108,10 @@ class UpdateProductTest extends TestCase
 
         $image = UploadedFile::fake()->image('product.jpg');
 
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw();
+        $stub = $this->validFields();
 
         $this->login()
-            ->put(route('admin.products.update', $product), $stub + [
+            ->put(route('admin.products.update', $this->product), $stub + [
                 'images' => [$image],
             ])->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.updated'));
@@ -115,7 +122,7 @@ class UpdateProductTest extends TestCase
 
         $this->assertDatabaseHas('image_product', [
             'image_id' => Image::firstWhere('path', $path)->id,
-            'product_id' => $product->id,
+            'product_id' => $this->product->id,
         ]);
 
         $this->assertDatabaseHas('products', array_merge($stub, [
@@ -124,445 +131,178 @@ class UpdateProductTest extends TestCase
     }
 
     /** @test */
-    public function user_cant_update_product_without_name()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['name' => null]);
-
-        $this->login()
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertSessionHasErrors('name');
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_integer_name()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['name' => 1]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_name_more_than_255_chars()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw([
-            'name' => str_repeat('a', 256),
-        ]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_existing_name()
-    {
-        $product = Product::factory()->create();
-        $existing = Product::factory()->create();
-        $stub = Product::factory()->raw([
-            'name' => $existing->name,
-        ]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('products', 2);
-    }
-
-    /** @test */
-    public function user_cant_update_product_without_model()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['model' => null]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('model');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_integer_model()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['model' => 1]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('model');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_model_more_than_255_chars()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw([
-            'model' => str_repeat('a', 256),
-        ]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('model');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_existing_model()
-    {
-        $product = Product::factory()->create();
-        $existing = Product::factory()->create();
-        $stub = Product::factory()->raw([
-            'model' => $existing->model,
-        ]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('model');
-
-        $this->assertDatabaseCount('products', 2);
-    }
-
-    /** @test */
-    public function user_cant_update_product_without_slug()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['slug' => null]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_integer_slug()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['slug' => 1]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_slug_more_than_255_chars()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw([
-            'slug' => str_repeat('a', 256),
-        ]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_existing_slug()
-    {
-        $product = Product::factory()->create();
-        $existing = Product::factory()->create();
-        $stub = Product::factory()->raw([
-            'slug' => $existing->slug,
-        ]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('products', 2);
-    }
-
-    /** @test */
-    public function user_cant_update_product_without_price()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['price' => null]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('price');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_string_price()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['price' => 'string']);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('price');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_zero_price()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['price' => 0]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('price');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_without_brand()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['brand_id' => null]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('brand_id');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_string_brand()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['brand_id' => 'string']);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('brand_id');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_nonexistent_brand()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['brand_id' => 100]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('brand_id');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_without_category()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['category_id' => null]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('category_id');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_string_category()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['category_id' => 'string']);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('category_id');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_nonexistent_category()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw(['category_id' => 100]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('category_id');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_string_image()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw();
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub + [
-                'images' => ['string'],
-            ])->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('images.*');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_integer_image()
-    {
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw();
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub + [
-                'images' => [1],
-            ])->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('images.*');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_pdf_image()
-    {
-        $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
-
-        $product = Product::factory()->create();
-        $stub = Product::factory()->raw();
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub + [
-                'images' => [$pdf],
-            ])->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('images.*');
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_integer_attributes()
-    {
-        $category = Category::factory()->create();
-        $attribute = Attribute::factory()->create();
-
-        $category->attributes()->attach($attribute);
-
-        $product = Product::factory()->create();
-
-        $stub = Product::factory()->raw([
-            'category_id' => $category->id,
-            'attributes' => [$attribute->id => 1],
-        ]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('attributes.'.$attribute->id);
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
-    public function user_cant_create_product_with_attribute_more_than_255_chars()
-    {
-        $category = Category::factory()->create();
-        $attribute = Attribute::factory()->create();
-
-        $category->attributes()->attach($attribute);
-
-        $product = Product::factory()->create();
-
-        $stub = Product::factory()->raw([
-            'category_id' => $category->id,
-            'attributes' => [$attribute->id => str_repeat('a', 256)],
-        ]);
-
-        $this->login()
-            ->from(route('admin.products.edit', $product))
-            ->put(route('admin.products.update', $product), $stub)
-            ->assertRedirect(route('admin.products.edit', $product))
-            ->assertSessionHasErrors('attributes.'.$attribute->id);
-
-        $this->assertDatabaseCount('products', 1);
-    }
-
-    /** @test */
     public function unrelated_attribute_should_not_be_attached_to_product()
     {
         $category = Category::factory()->create();
         $unrelated = Attribute::factory()->create();
-        $product = Product::factory()->create();
 
-        $stub = Product::factory()->raw([
+        $stub = $this->validFields([
             'category_id' => $category->id,
             'attributes' => [$unrelated->id => $this->faker->randomDigit()],
         ]);
 
         $this->login()
-            ->put(route('admin.products.update', $product), $stub)
+            ->put(route('admin.products.update', $this->product), $stub)
             ->assertRedirect();
 
-        $this->assertFalse($product->fresh()->attributes->contains($unrelated));
+        $this->assertFalse($this->product->fresh()->attributes->contains($unrelated));
+    }
+
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_update_product_with_invalid_data($field, $data, $count = 1)
+    {
+        $this->login()
+            ->from(route('admin.products.edit', $this->product))
+            ->put(route('admin.products.update', $this->product), $data())
+            ->assertRedirect(route('admin.products.edit', $this->product))
+            ->assertSessionHasErrors($field);
+
+        $this->assertDatabaseCount('products', $count);
+    }
+
+    public function validationProvider(): array
+    {
+        return [
+            'Name is required' => [
+                'name', fn () => $this->validFields(['name' => null]),
+            ],
+            'Name cant be an integer' => [
+                'name', fn () => $this->validFields(['name' => 1]),
+            ],
+            'Name cant be more than 255 chars' => [
+                'name', fn () => $this->validFields(['name' => Str::random(256)]),
+            ],
+            'Name must be unique' => [
+                'name', fn () => $this->validFields(['name' => Product::factory()->create()->name]), 2,
+            ],
+            'Model is required' => [
+                'model', fn () => $this->validFields(['model' => null]),
+            ],
+            'Model cant be an integer' => [
+                'model', fn () => $this->validFields(['model' => 1]),
+            ],
+            'Model cant be more than 255 chars' => [
+                'model', fn () => $this->validFields(['model' => Str::random(256)]),
+            ],
+            'Model must be unique' => [
+                'model', fn () => $this->validFields(['model' => Product::factory()->create()->model]), 2,
+            ],
+            'Slug must be unique' => [
+                'slug', fn () => $this->validFields(['slug' => Product::factory()->create()->slug]), 2,
+            ],
+            'Slug is required' => [
+                'slug', fn () => $this->validFields(['slug' => null]),
+            ],
+            'Slug cant be an integer' => [
+                'slug', fn () => $this->validFields(['slug' => 1]),
+            ],
+            'Slug cant be more than 255 chars' => [
+                'slug', fn () => $this->validFields(['slug' => Str::random(256)]),
+            ],
+            'Description cant be an integer' => [
+                'description', fn () => $this->validFields(['description' => 1]),
+            ],
+            'Price is required' => [
+                'price', fn () => $this->validFields(['price' => null]),
+            ],
+            'Price cant be a string' => [
+                'price', fn () => $this->validFields(['price' => 'string']),
+            ],
+            'Price cant be zero' => [
+                'price', fn () => $this->validFields(['price' => 0]),
+            ],
+            'Brand is required' => [
+                'brand_id', fn () => $this->validFields(['brand_id' => null]),
+            ],
+            'Brand cant be string' => [
+                'brand_id', fn () => $this->validFields(['brand_id' => 'string']),
+            ],
+            'Brand must exists' => [
+                'brand_id', fn () => $this->validFields(['brand_id' => 10]),
+            ],
+            'Category is required' => [
+                'category_id', fn () => $this->validFields(['category_id' => null]),
+            ],
+            'Category cant be string' => [
+                'category_id', fn () => $this->validFields(['category_id' => 'string']),
+            ],
+            'Category must exists' => [
+                'category_id', fn () => $this->validFields(['category_id' => 10]),
+            ],
+            'Image cant be a string' => [
+                'images.*', fn () => $this->validFields() + ['images' => ['string']],
+            ],
+            'Image cant be an integer' => [
+                'images.*', fn () => $this->validFields() + ['images' => [1]],
+            ],
+            'Image cant be a pdf file' => [
+                'images.*', fn () => $this->validFields() + ['images' => [UploadedFile::fake()->create('document.pdf', 1, 'application/pdf')]],
+            ],
+        ];
+    }
+
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
+    {
+        return Product::factory()->raw($overrides);
+    }
+
+    /**
+     * @test
+     * @dataProvider validationAttributeProvider
+     */
+    public function user_cant_update_product_with_integer_attributes($data)
+    {
+        [$attributeId, $fields] = $data();
+
+        $this->login()
+            ->from(route('admin.products.edit', $this->product))
+            ->put(route('admin.products.update', $this->product), $fields)
+            ->assertRedirect(route('admin.products.edit', $this->product))
+            ->assertSessionHasErrors('attributes.'.$attributeId);
+
+        $this->assertDatabaseCount('products', 1);
+    }
+
+    public function validationAttributeProvider(): array
+    {
+        return [
+            'Attribute cant be an integer' => [
+                fn () => $this->validAttributeFields(1),
+            ],
+            'Attribute cant be more than 255 chars' => [
+                fn () => $this->validAttributeFields(Str::random(256)),
+            ],
+        ];
+    }
+
+    /**
+     * Get valid contact fields.
+     *
+     * @param  mixed  $value
+     * @return array
+     */
+    private function validAttributeFields($value)
+    {
+        $category = Category::factory()->create();
+        $attribute = Attribute::factory()->create();
+
+        $category->attributes()->attach($attribute);
+
+        return [
+            $attribute->id,
+            Product::factory()->raw([
+                'category_id' => $category->id,
+                'attributes' => [$attribute->id => $value],
+            ]),
+        ];
     }
 }

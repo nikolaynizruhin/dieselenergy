@@ -6,6 +6,7 @@ use App\Models\Contact;
 use App\Notifications\ContactCreated;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use Tests\Honeypot;
 use Tests\TestCase;
 
@@ -46,127 +47,82 @@ class CreateContactTest extends TestCase
         );
     }
 
-    /** @test */
-    public function guest_cant_create_contact_without_accepting_privacy()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function guest_cant_create_contact_with_invalid_data($field, $data)
     {
         $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields(['privacy' => null]))
+            ->post(route('contacts.store'), $data())
             ->assertRedirect(route('home').'#contact')
-            ->assertSessionHasErrors('privacy');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_without_name()
-    {
-        $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields(['name' => null]))
-            ->assertRedirect(route('home').'#contact')
-            ->assertSessionHasErrors('name');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_with_integer_name()
-    {
-        $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields(['name' => 1]))
-            ->assertRedirect(route('home').'#contact')
-            ->assertSessionHasErrors('name');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_with_name_more_than_255_chars()
-    {
-        $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields([
-                'name' => str_repeat('a', 256),
-            ]))->assertRedirect(route('home').'#contact')
-            ->assertSessionHasErrors('name');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_without_email()
-    {
-        $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields(['email' => null]))
-            ->assertRedirect(route('home').'#contact')
-            ->assertSessionHasErrors('email');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_with_integer_email()
-    {
-        $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields(['email' => 1]))
-            ->assertRedirect(route('home').'#contact')
-            ->assertSessionHasErrors('email');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_with_email_more_than_255_chars()
-    {
-        $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields([
-                'email' => str_repeat('a', 256),
-            ]))->assertRedirect(route('home').'#contact')
-            ->assertSessionHasErrors('email');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_with_invalid_email()
-    {
-        $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields(['email' => 'invalid']))
-            ->assertRedirect(route('home').'#contact')
-            ->assertSessionHasErrors('email');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_without_phone()
-    {
-        $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields(['phone' => null]))
-            ->assertRedirect(route('home').'#contact')
-            ->assertSessionHasErrors('phone');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_with_incorrect_phone_format()
-    {
-        $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields(['phone' => 0631234567]))
-            ->assertRedirect(route('home').'#contact')
-            ->assertSessionHasErrors('phone');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_with_integer_message()
-    {
-        $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields(['message' => 1]))
-            ->assertRedirect(route('home').'#contact')
-            ->assertSessionHasErrors('message');
-    }
-
-    /** @test */
-    public function guest_cant_create_contact_with_spam()
-    {
-        $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields([
-                config('honeypot.field') => 'spam',
-            ]))->assertSuccessful();
+            ->assertInvalid($field);
 
         $this->assertDatabaseCount('contacts', 0);
     }
 
-    /** @test */
-    public function guest_cant_create_contact_too_quickly()
+    public function validationProvider(): array
+    {
+        return [
+            'Privacy is required' => [
+                'privacy', fn () => $this->validFields(['privacy' => null]),
+            ],
+            'Name is required' => [
+                'name', fn () => $this->validFields(['name' => null]),
+            ],
+            'Name cant be an integer' => [
+                'name', fn () => $this->validFields(['name' => 1]),
+            ],
+            'Name cant be more than 255 chars' => [
+                'name', fn () => $this->validFields(['name' => Str::random(256)]),
+            ],
+            'Email is required' => [
+                'email', fn () => $this->validFields(['email' => null]),
+            ],
+            'Email cant be an integer' => [
+                'email', fn () => $this->validFields(['email' => 1]),
+            ],
+            'Email cant be more than 255 chars' => [
+                'email', fn () => $this->validFields(['email' => Str::random(256)]),
+            ],
+            'Email must be valid' => [
+                'email', fn () => $this->validFields(['email' => 'invalid']),
+            ],
+            'Phone is required' => [
+                'phone', fn () => $this->validFields(['phone' => null]),
+            ],
+            'Phone must have valid format' => [
+                'phone', fn () => $this->validFields(['phone' => 0631234567]),
+            ],
+            'Message cant be an integer' => [
+                'message', fn () => $this->validFields(['message' => 1]),
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider spamProvider
+     */
+    public function guest_cant_create_contact_with_spam($data)
     {
         $this->from(route('home'))
-            ->post(route('contacts.store'), $this->validFields([
-                config('honeypot.valid_from_field') => time(),
-            ]))->assertSuccessful();
+            ->post(route('contacts.store'), $data())
+            ->assertSuccessful();
 
         $this->assertDatabaseCount('contacts', 0);
+    }
+
+    public function spamProvider()
+    {
+        return [
+            'Contact cant contain spam' => [
+                fn() => $this->validFields([config('honeypot.field') => 'spam']),
+            ],
+            'Contact cant be created too quickly' => [
+                fn() => $this->validFields([config('honeypot.valid_from_field') => time()]),
+            ],
+        ];
     }
 
     /**

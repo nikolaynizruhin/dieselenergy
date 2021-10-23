@@ -4,15 +4,13 @@ namespace Tests\Feature\Admin\Post;
 
 use App\Models\Image;
 use App\Models\Post;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CreatePostTest extends TestCase
 {
-    use WithFaker;
-
     /** @test */
     public function guest_cant_visit_create_post_page()
     {
@@ -31,9 +29,7 @@ class CreatePostTest extends TestCase
     /** @test */
     public function guest_cant_create_post()
     {
-        $post = Post::factory()->raw();
-
-        $this->post(route('admin.posts.store'), $post)
+        $this->post(route('admin.posts.store'), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
@@ -44,10 +40,9 @@ class CreatePostTest extends TestCase
 
         $image = UploadedFile::fake()->image('post.jpg');
 
-        $post = Post::factory()
-            ->make()
-            ->makeHidden('image_id')
-            ->toArray();
+        $post = $this->validFields();
+
+        unset($post['image_id']);
 
         $this->login()
             ->post(route('admin.posts.store'), $post + [
@@ -63,231 +58,83 @@ class CreatePostTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function user_cant_create_post_without_title()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_create_post_with_invalid_data($field, $data, $count = 0)
     {
-        $post = Post::factory()->raw(['title' => null]);
-
         $this->login()
             ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
+            ->post(route('admin.posts.store'), $data())
             ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('title');
+            ->assertSessionHasErrors($field);
 
-        $this->assertDatabaseCount('posts', 0);
+        $this->assertDatabaseCount('posts', $count);
     }
 
-    /** @test */
-    public function user_cant_create_post_with_integer_title()
+    public function validationProvider(): array
     {
-        $post = Post::factory()->raw(['title' => 1]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('title');
-
-        $this->assertDatabaseCount('posts', 0);
+        return [
+            'Title is required' => [
+                'title', fn () => $this->validFields(['title' => null]),
+            ],
+            'Title cant be an integer' => [
+                'title', fn () => $this->validFields(['title' => 1]),
+            ],
+            'Title cant be more than 255 chars' => [
+                'title', fn () => $this->validFields(['title' => Str::random(256)]),
+            ],
+            'Title must be unique' => [
+                'title', fn () => $this->validFields(['title' => Post::factory()->create()->title]), 1,
+            ],
+            'Excerpt is required' => [
+                'excerpt', fn () => $this->validFields(['excerpt' => null]),
+            ],
+            'Excerpt cant be an integer' => [
+                'excerpt', fn () => $this->validFields(['excerpt' => 1]),
+            ],
+            'Slug must be unique' => [
+                'slug', fn () => $this->validFields(['slug' => Post::factory()->create()->slug]), 1,
+            ],
+            'Slug is required' => [
+                'slug', fn () => $this->validFields(['slug' => null]),
+            ],
+            'Slug cant be an integer' => [
+                'slug', fn () => $this->validFields(['slug' => 1]),
+            ],
+            'Slug cant be more than 255 chars' => [
+                'slug', fn () => $this->validFields(['slug' => Str::random(256)]),
+            ],
+            'Body is required' => [
+                'body', fn () => $this->validFields(['body' => null]),
+            ],
+            'Body cant be an integer' => [
+                'body', fn () => $this->validFields(['body' => 1]),
+            ],
+            'Image is required' => [
+               'image', fn () => $this->validFields(['image' => null]),
+            ],
+            'Image cant be an integer' => [
+                'image', fn () => $this->validFields(['image' => 1]),
+            ],
+            'Image cant be a string' => [
+                'image', fn () => $this->validFields(['image' => 'string']),
+            ],
+            'Image cant be a pdf file' => [
+                'image', fn () => $this->validFields(['image' => UploadedFile::fake()->create('document.pdf', 1, 'application/pdf')]),
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_create_post_without_excerpt()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $post = Post::factory()->raw(['excerpt' => null]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('excerpt');
-
-        $this->assertDatabaseCount('posts', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_post_with_integer_excerpt()
-    {
-        $post = Post::factory()->raw(['excerpt' => 1]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('excerpt');
-
-        $this->assertDatabaseCount('posts', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_post_with_title_more_than_255_chars()
-    {
-        $post = Post::factory()->raw(['title' => str_repeat('a', 256)]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('title');
-
-        $this->assertDatabaseCount('posts', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_post_with_existing_title()
-    {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['title' => $post->title]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $stub)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('title');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_create_post_without_slug()
-    {
-        $post = Post::factory()->raw(['slug' => null]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('posts', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_post_with_integer_slug()
-    {
-        $post = Post::factory()->raw(['slug' => 1]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('posts', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_post_with_slug_more_than_255_chars()
-    {
-        $post = Post::factory()->raw(['slug' => str_repeat('a', 256)]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('posts', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_post_with_existing_slug()
-    {
-        $post = Post::factory()->create();
-        $stub = Post::factory()->raw(['slug' => $post->slug]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $stub)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('posts', 1);
-    }
-
-    /** @test */
-    public function user_cant_create_post_without_body()
-    {
-        $post = Post::factory()->raw(['body' => null]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('body');
-
-        $this->assertDatabaseCount('posts', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_post_with_integer_body()
-    {
-        $post = Post::factory()->raw(['body' => 1]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('body');
-
-        $this->assertDatabaseCount('posts', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_post_without_image()
-    {
-        $post = Post::factory()->raw(['image' => null]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('image');
-
-        $this->assertDatabaseCount('posts', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_post_with_string_image()
-    {
-        $post = Post::factory()->raw(['image' => 'string']);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('image');
-
-        $this->assertDatabaseCount('posts', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_product_with_integer_image()
-    {
-        $post = Post::factory()->raw(['image' => 1]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('image');
-
-        $this->assertDatabaseCount('posts', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_post_with_pdf_file()
-    {
-        $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
-
-        $post = Post::factory()->raw(['image' => $pdf]);
-
-        $this->login()
-            ->from(route('admin.posts.create'))
-            ->post(route('admin.posts.store'), $post)
-            ->assertRedirect(route('admin.posts.create'))
-            ->assertSessionHasErrors('image');
-
-        $this->assertDatabaseCount('posts', 0);
+        return Post::factory()->raw($overrides);
     }
 }

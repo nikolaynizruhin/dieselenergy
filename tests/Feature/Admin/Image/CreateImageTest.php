@@ -9,8 +9,6 @@ use Tests\TestCase;
 
 class CreateImageTest extends TestCase
 {
-    use WithFaker;
-
     /** @test */
     public function guest_cant_visit_create_image_page()
     {
@@ -56,38 +54,33 @@ class CreateImageTest extends TestCase
         $this->assertDatabaseHas('images', ['path' => $path]);
     }
 
-    /** @test */
-    public function user_cant_create_image_without_image()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_create_image_with_invalid_data($data)
     {
         $this->login()
             ->from(route('admin.images.create'))
-            ->post(route('admin.images.store'), [
-                'images' => [null],
-            ])->assertRedirect(route('admin.images.create'))
+            ->post(route('admin.images.store'), ['images' => $data()])
+            ->assertRedirect(route('admin.images.create'))
             ->assertSessionHasErrors('images.*');
+
+        $this->assertDatabaseCount('images', 0);
     }
 
-    /** @test */
-    public function user_cant_create_image_with_integer_image()
+    public function validationProvider(): array
     {
-        $this->login()
-            ->from(route('admin.images.create'))
-            ->post(route('admin.images.store'), [
-                'images' => [1],
-            ])->assertRedirect(route('admin.images.create'))
-            ->assertSessionHasErrors('images.*');
-    }
-
-    /** @test */
-    public function user_cant_create_image_with_pdf_file()
-    {
-        $pdf = UploadedFile::fake()->create('document.pdf', 1, 'application/pdf');
-
-        $this->login()
-            ->from(route('admin.images.create'))
-            ->post(route('admin.products.store'), [
-                'images' => [$pdf],
-            ])->assertRedirect(route('admin.images.create'))
-            ->assertSessionHasErrors('images.*');
+        return [
+            'Image is required' => [
+                fn () => [null],
+            ],
+            'Image cant be an integer' => [
+                fn () => [1],
+            ],
+            'Image cant be a pdf file' => [
+                fn () => [UploadedFile::fake()->create('document.pdf', 1, 'application/pdf')],
+            ],
+        ];
     }
 }

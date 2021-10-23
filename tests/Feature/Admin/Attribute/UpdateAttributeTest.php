@@ -4,144 +4,111 @@ namespace Tests\Feature\Admin\Attribute;
 
 use App\Models\Attribute;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateAttributeTest extends TestCase
 {
     use WithFaker;
 
+    /**
+     * Product.
+     *
+     * @var \App\Models\Attribute
+     */
+    private $attribute;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->attribute = Attribute::factory()->create();
+    }
+
     /** @test */
     public function guest_cant_visit_update_attribute_page()
     {
-        $attribute = Attribute::factory()->create();
-
-        $this->get(route('admin.attributes.edit', $attribute))
+        $this->get(route('admin.attributes.edit', $this->attribute))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_visit_update_attribute_page()
     {
-        $attribute = Attribute::factory()->create();
-
         $this->login()
-            ->get(route('admin.attributes.edit', $attribute))
+            ->get(route('admin.attributes.edit', $this->attribute))
             ->assertViewIs('admin.attributes.edit')
-            ->assertViewHas('attribute', $attribute);
+            ->assertViewHas('attribute', $this->attribute);
     }
 
     /** @test */
     public function guest_cant_update_attribute()
     {
-        $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->raw();
-
-        $this->put(route('admin.attributes.update', $attribute), $stub)
+        $this->put(route('admin.attributes.update', $this->attribute), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_update_attribute()
     {
-        $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->raw();
-
         $this->login()
-            ->put(route('admin.attributes.update', $attribute), $stub)
+            ->put(route('admin.attributes.update', $this->attribute), $fields = $this->validFields())
             ->assertRedirect(route('admin.attributes.index'))
             ->assertSessionHas('status', trans('attribute.updated'));
 
-        $this->assertDatabaseHas('attributes', $stub);
+        $this->assertDatabaseHas('attributes', $fields);
     }
 
-    /** @test */
-    public function user_cant_update_attribute_without_name()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_update_attribute_with_invalid_data($field, $data, $count = 1)
     {
-        $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->raw(['name' => null]);
-
         $this->login()
-            ->from(route('admin.attributes.edit', $attribute))
-            ->put(route('admin.attributes.update', $attribute), $stub)
-            ->assertRedirect(route('admin.attributes.edit', $attribute))
-            ->assertSessionHasErrors('name');
+            ->from(route('admin.attributes.edit', $this->attribute))
+            ->put(route('admin.attributes.update', $this->attribute), $data())
+            ->assertRedirect(route('admin.attributes.edit', $this->attribute))
+            ->assertSessionHasErrors($field);
 
-        $this->assertDatabaseCount('attributes', 1);
+        $this->assertDatabaseCount('attributes', $count);
     }
 
-    /** @test */
-    public function user_cant_update_attribute_with_integer_name()
+    public function validationProvider(): array
     {
-        $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->raw(['name' => 1]);
-
-        $this->login()
-            ->from(route('admin.attributes.edit', $attribute))
-            ->put(route('admin.attributes.update', $attribute), $stub)
-            ->assertRedirect(route('admin.attributes.edit', $attribute))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('attributes', 1);
+        return [
+            'Name is required' => [
+                'name', fn () => $this->validFields(['name' => null]),
+            ],
+            'Name cant be an integer' => [
+                'name', fn () => $this->validFields(['name' => 1]),
+            ],
+            'Name cant be more than 255 chars' => [
+                'name', fn () => $this->validFields(['name' => Str::random(256)]),
+            ],
+            'Measure cant be an integer' => [
+                'measure', fn () => $this->validFields(['measure' => 1]),
+            ],
+            'Measure cant be more than 255 chars' => [
+                'measure', fn () => $this->validFields(['measure' => Str::random(256)]),
+            ],
+            'Name must be unique' => [
+                'name', fn () => $this->validFields(['name' => Attribute::factory()->create()->name]), 2,
+            ]
+        ];
     }
 
-    /** @test */
-    public function user_cant_update_attribute_with_name_more_than_255_chars()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->raw(['name' => str_repeat('a', 256)]);
-
-        $this->login()
-            ->from(route('admin.attributes.edit', $attribute))
-            ->put(route('admin.attributes.update', $attribute), $stub)
-            ->assertRedirect(route('admin.attributes.edit', $attribute))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('attributes', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_attribute_with_existing_name()
-    {
-        $attribute = Attribute::factory()->create();
-        $existing = Attribute::factory()->create();
-
-        $this->login()
-            ->from(route('admin.attributes.edit', $attribute))
-            ->put(route('admin.attributes.update', $attribute), [
-                'name' => $existing->name,
-            ])->assertRedirect(route('admin.attributes.edit', $attribute))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('attributes', 2);
-    }
-
-    /** @test */
-    public function user_cant_update_attribute_with_integer_measure()
-    {
-        $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->raw(['measure' => 1]);
-
-        $this->login()
-            ->from(route('admin.attributes.edit', $attribute))
-            ->put(route('admin.attributes.update', $attribute), $stub)
-            ->assertRedirect(route('admin.attributes.edit', $attribute))
-            ->assertSessionHasErrors('measure');
-
-        $this->assertDatabaseCount('attributes', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_attribute_with_measure_more_than_255_chars()
-    {
-        $attribute = Attribute::factory()->create();
-        $stub = Attribute::factory()->raw(['measure' => str_repeat('a', 256)]);
-
-        $this->login()
-            ->from(route('admin.attributes.edit', $attribute))
-            ->put(route('admin.attributes.update', $attribute), $stub)
-            ->assertRedirect(route('admin.attributes.edit', $attribute))
-            ->assertSessionHasErrors('measure');
-
-        $this->assertDatabaseCount('attributes', 1);
+        return Attribute::factory()->raw($overrides);
     }
 }

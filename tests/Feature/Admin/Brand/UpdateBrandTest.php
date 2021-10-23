@@ -3,160 +3,112 @@
 namespace Tests\Feature\Admin\Brand;
 
 use App\Models\Brand;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateBrandTest extends TestCase
 {
-    use WithFaker;
+    /**
+     * Product.
+     *
+     * @var \App\Models\Brand
+     */
+    private $brand;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->brand = Brand::factory()->create();
+    }
 
     /** @test */
     public function guest_cant_visit_update_brand_page()
     {
-        $brand = Brand::factory()->create();
-
-        $this->get(route('admin.brands.edit', $brand))
+        $this->get(route('admin.brands.edit', $this->brand))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_visit_update_brand_page()
     {
-        $brand = Brand::factory()->create();
-
         $this->login()
-            ->get(route('admin.brands.edit', $brand))
+            ->get(route('admin.brands.edit', $this->brand))
             ->assertViewIs('admin.brands.edit')
-            ->assertViewHas('brand', $brand);
+            ->assertViewHas('brand', $this->brand);
     }
 
     /** @test */
     public function guest_cant_update_brand()
     {
-        $brand = Brand::factory()->create();
-
-        $this->put(route('admin.brands.update', $brand), [
-            'name' => $this->faker->word(),
-        ])->assertRedirect(route('admin.login'));
+        $this->put(route('admin.brands.update', $this->brand), $this->validFields())
+            ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_update_brand()
     {
-        $brand = Brand::factory()->create();
-        $stub = Brand::factory()->raw();
-
         $this->login()
-            ->put(route('admin.brands.update', $brand), $stub)
+            ->put(route('admin.brands.update', $this->brand), $fields = $this->validFields())
             ->assertRedirect(route('admin.brands.index'))
             ->assertSessionHas('status', trans('brand.updated'));
 
-        $this->assertDatabaseHas('brands', $stub);
+        $this->assertDatabaseHas('brands', $fields);
     }
 
-    /** @test */
-    public function user_cant_update_brand_without_name()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_update_brand_with_invalid_data($field, $data, $count = 1)
     {
-        $brand = Brand::factory()->create();
-
         $this->login()
-            ->from(route('admin.brands.edit', $brand))
-            ->put(route('admin.brands.update', $brand), [
-                'name' => null,
-            ])->assertRedirect(route('admin.brands.edit', $brand))
-            ->assertSessionHasErrors('name');
+            ->from(route('admin.brands.edit', $this->brand))
+            ->put(route('admin.brands.update', $this->brand), $data())
+            ->assertRedirect(route('admin.brands.edit', $this->brand))
+            ->assertSessionHasErrors($field);
 
-        $this->assertDatabaseCount('brands', 1);
+        $this->assertDatabaseCount('brands', $count);
     }
 
-    /** @test */
-    public function user_cant_update_brand_with_integer_name()
+    public function validationProvider(): array
     {
-        $brand = Brand::factory()->create();
-
-        $this->login()
-            ->from(route('admin.brands.edit', $brand))
-            ->put(route('admin.brands.update', $brand), [
-                'name' => 1,
-            ])->assertRedirect(route('admin.brands.edit', $brand))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('brands', 1);
+        return [
+            'Name is required' => [
+                'name', fn () => $this->validFields(['name' => null]),
+            ],
+            'Name cant be an integer' => [
+                'name', fn () => $this->validFields(['name' => 1]),
+            ],
+            'Name cant be more than 255 chars' => [
+                'name', fn () => $this->validFields(['name' => Str::random(256)]),
+            ],
+            'Currency is required' => [
+                'currency_id', fn () => $this->validFields(['currency_id' => null]),
+            ],
+            'Currency cant be string' => [
+                'currency_id', fn () => $this->validFields(['currency_id' => 'string']),
+            ],
+            'Currency must exists' => [
+                'currency_id', fn () => $this->validFields(['currency_id' => 10]),
+            ],
+            'Name must be unique' => [
+                'name', fn () => $this->validFields(['name' => Brand::factory()->create()->name]), 2,
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_update_brand_with_name_more_than_255_chars()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $brand = Brand::factory()->create();
-
-        $this->login()
-            ->from(route('admin.brands.edit', $brand))
-            ->put(route('admin.brands.update', $brand), [
-                'name' => str_repeat('a', 256),
-            ])->assertRedirect(route('admin.brands.edit', $brand))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('brands', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_brand_with_existing_name()
-    {
-        $brand = Brand::factory()->create();
-        $existing = Brand::factory()->create();
-
-        $this->login()
-            ->from(route('admin.brands.edit', $brand))
-            ->put(route('admin.brands.update', $brand), [
-                'name' => $existing->name,
-            ])->assertRedirect(route('admin.brands.edit', $brand))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('brands', 2);
-    }
-
-    /** @test */
-    public function user_cant_update_product_without_brand()
-    {
-        $brand = Brand::factory()->create();
-        $stub = Brand::factory()->raw(['currency_id' => null]);
-
-        $this->login()
-            ->from(route('admin.brands.edit', $brand))
-            ->put(route('admin.brands.update', $brand), $stub)
-            ->assertRedirect(route('admin.brands.edit', $brand))
-            ->assertSessionHasErrors('currency_id');
-
-        $this->assertDatabaseCount('brands', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_string_brand()
-    {
-        $brand = Brand::factory()->create();
-        $stub = Brand::factory()->raw(['currency_id' => 'string']);
-
-        $this->login()
-            ->from(route('admin.brands.edit', $brand))
-            ->put(route('admin.brands.update', $brand), $stub)
-            ->assertRedirect(route('admin.brands.edit', $brand))
-            ->assertSessionHasErrors('currency_id');
-
-        $this->assertDatabaseCount('brands', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_nonexistent_brand()
-    {
-        $brand = Brand::factory()->create();
-        $stub = Brand::factory()->raw(['currency_id' => 100]);
-
-        $this->login()
-            ->from(route('admin.brands.edit', $brand))
-            ->put(route('admin.brands.update', $brand), $stub)
-            ->assertRedirect(route('admin.brands.edit', $brand))
-            ->assertSessionHasErrors('currency_id');
-
-        $this->assertDatabaseCount('brands', 1);
+        return Brand::factory()->raw($overrides);
     }
 }

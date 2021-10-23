@@ -26,106 +26,68 @@ class CreateOrderTest extends TestCase
     /** @test */
     public function guest_cant_create_product()
     {
-        $order = Order::factory()->raw();
-
-        $this->post(route('admin.orders.store'), $order)
+        $this->post(route('admin.orders.store'), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_create_order()
     {
-        $order = Order::factory()->raw(['total' => 0]);
-
         $this->login()
-            ->post(route('admin.orders.store'), $order)
+            ->post(route('admin.orders.store'), $fields = $this->validFields(['total' => 0]))
             ->assertRedirect(route('admin.orders.index'))
             ->assertSessionHas('status', trans('order.created'));
 
-        $this->assertDatabaseHas('orders', $order);
+        $this->assertDatabaseHas('orders', $fields);
     }
 
-    /** @test */
-    public function user_cant_create_order_with_integer_notes()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_create_order_with_invalid_data($field, $data, $count = 0)
     {
-        $order = Order::factory()->raw(['notes' => 1]);
-
         $this->login()
             ->from(route('admin.orders.create'))
-            ->post(route('admin.orders.store'), $order)
+            ->post(route('admin.orders.store'), $data())
             ->assertRedirect(route('admin.orders.create'))
-            ->assertSessionHasErrors('notes');
+            ->assertSessionHasErrors($field);
 
-        $this->assertDatabaseCount('orders', 0);
+        $this->assertDatabaseCount('orders', $count);
     }
 
-    /** @test */
-    public function user_cant_create_order_without_customer()
+    public function validationProvider(): array
     {
-        $order = Order::factory()->raw(['customer_id' => null]);
-
-        $this->login()
-            ->from(route('admin.orders.create'))
-            ->post(route('admin.orders.store'), $order)
-            ->assertRedirect(route('admin.orders.create'))
-            ->assertSessionHasErrors('customer_id');
-
-        $this->assertDatabaseCount('orders', 0);
+        return [
+            'Notes cant be an integer' => [
+                'notes', fn () => $this->validFields(['notes' => 1]),
+            ],
+            'Customer is required' => [
+                'customer_id', fn () => $this->validFields(['customer_id' => null]),
+            ],
+            'Customer cant be string' => [
+                'customer_id', fn () => $this->validFields(['customer_id' => 'string']),
+            ],
+            'Customer must exists' => [
+                'customer_id', fn () => $this->validFields(['customer_id' => 1]),
+            ],
+            'Status is required' => [
+                'status', fn () => $this->validFields(['status' => null]),
+            ],
+            'Status cant be an integer' => [
+                'status', fn () => $this->validFields(['status' => 1]),
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_create_order_with_string_customer()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $order = Order::factory()->raw(['customer_id' => 'string']);
-
-        $this->login()
-            ->from(route('admin.orders.create'))
-            ->post(route('admin.orders.store'), $order)
-            ->assertRedirect(route('admin.orders.create'))
-            ->assertSessionHasErrors('customer_id');
-
-        $this->assertDatabaseCount('orders', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_order_with_nonexistent_customer()
-    {
-        $order = Order::factory()->raw(['customer_id' => 1]);
-
-        $this->login()
-            ->from(route('admin.orders.create'))
-            ->post(route('admin.orders.store'), $order)
-            ->assertRedirect(route('admin.orders.create'))
-            ->assertSessionHasErrors('customer_id');
-
-        $this->assertDatabaseCount('orders', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_order_without_status()
-    {
-        $order = Order::factory()->raw(['status' => null]);
-
-        $this->login()
-            ->from(route('admin.orders.create'))
-            ->post(route('admin.orders.store'), $order)
-            ->assertRedirect(route('admin.orders.create'))
-            ->assertSessionHasErrors('status');
-
-        $this->assertDatabaseCount('orders', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_order_with_integer_status()
-    {
-        $order = Order::factory()->raw(['status' => 1]);
-
-        $this->login()
-            ->from(route('admin.orders.create'))
-            ->post(route('admin.orders.store'), $order)
-            ->assertRedirect(route('admin.orders.create'))
-            ->assertSessionHasErrors('status');
-
-        $this->assertDatabaseCount('orders', 0);
+        return Order::factory()->raw($overrides);
     }
 }

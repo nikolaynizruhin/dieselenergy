@@ -39,4 +39,14 @@ class MediaFactory extends Factory
     {
         return $this->state(['is_default' => 1]);
     }
+
+    /**
+     * Indicate that the media is default.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function nonDefault()
+    {
+        return $this->state(['is_default' => 0]);
+    }
 }

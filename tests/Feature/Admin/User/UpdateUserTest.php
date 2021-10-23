@@ -4,185 +4,123 @@ namespace Tests\Feature\Admin\User;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateUserTest extends TestCase
 {
-    use WithFaker;
+    /**
+     * Product.
+     *
+     * @var \App\Models\User
+     */
+    private $user;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = User::factory()->create();
+    }
 
     /** @test */
     public function guest_cant_visit_update_user_page()
     {
-        $user = User::factory()->create();
-
-        $this->get(route('admin.users.edit', $user))
+        $this->get(route('admin.users.edit', $this->user))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_visit_update_user_page()
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
-            ->get(route('admin.users.edit', $user))
+        $this->actingAs($this->user)
+            ->get(route('admin.users.edit', $this->user))
             ->assertViewIs('admin.users.edit')
-            ->assertViewHas('user', $user);
+            ->assertViewHas('user', $this->user);
     }
 
     /** @test */
     public function guest_cant_update_user()
     {
-        $user = User::factory()->create();
-
-        $this->put(route('admin.users.update', $user), [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->email(),
-        ])->assertRedirect(route('admin.login'));
+        $this->put(route('admin.users.update', $this->user), $this->validFields())
+            ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_update_user()
     {
-        $admin = User::factory()->create();
-        $user = User::factory()->make();
-
-        $this->actingAs($admin)
-            ->put(route('admin.users.update', $admin), [
-                'name' => $user->name,
-                'email' => $user->email,
-            ])->assertRedirect(route('admin.users.index'))
+        $this->actingAs($this->user)
+            ->put(route('admin.users.update', $this->user), $fields = $this->validFields())
+            ->assertRedirect(route('admin.users.index'))
             ->assertSessionHas('status', trans('user.updated'));
 
         $this->assertDatabaseHas('users', [
-            'name' => $user->name,
-            'email' => $user->email,
+            'name' => $fields['name'],
+            'email' => $fields['email'],
         ]);
     }
 
-    /** @test */
-    public function user_cant_update_user_without_name()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_update_user_with_invalid_data($field, $data, $count = 1)
     {
-        $user = User::factory()->create();
+        $this->actingAs($this->user)
+            ->from(route('admin.users.edit', $this->user))
+            ->put(route('admin.users.update', $this->user), $data())
+            ->assertRedirect(route('admin.users.edit', $this->user))
+            ->assertSessionHasErrors($field);
 
-        $this->actingAs($user)
-            ->from(route('admin.users.edit', $user))
-            ->put(route('admin.users.update', $user), [
-                'email' => $this->faker->email(),
-            ])->assertRedirect(route('admin.users.edit', $user))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseCount('users', $count);
     }
 
-    /** @test */
-    public function user_cant_update_user_with_integer_name()
+    public function validationProvider(): array
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
-            ->from(route('admin.users.edit', $user))
-            ->put(route('admin.users.update', $user), [
-                'name' => 1,
-                'email' => $this->faker->email(),
-            ])->assertRedirect(route('admin.users.edit', $user))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('users', 1);
+        return [
+            'Name is required' => [
+                'name', fn () => $this->validFields(['name' => null]),
+            ],
+            'Name cant be an integer' => [
+                'name', fn () => $this->validFields(['name' => 1]),
+            ],
+            'Name cant be more than 255 chars' => [
+                'name', fn () => $this->validFields(['name' => Str::random(256)]),
+            ],
+            'Email is required' => [
+                'email', fn () => $this->validFields(['email' => null]),
+            ],
+            'Email cant be an integer' => [
+                'email', fn () => $this->validFields(['email' => 1]),
+            ],
+            'Email cant be more than 255 chars' => [
+                'email', fn () => $this->validFields(['email' => Str::random(256)]),
+            ],
+            'Email must be valid' => [
+                'email', fn () => $this->validFields(['email' => 'invalid']),
+            ],
+            'Email must be unique' => [
+                'email', fn () => $this->validFields(['email' => User::factory()->create()->email]), 2,
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_update_user_with_name_more_than_255_chars()
+    /**
+     * Get valid user fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $user = User::factory()->create();
+        $user = User::factory()->make();
 
-        $this->actingAs($user)
-            ->from(route('admin.users.edit', $user))
-            ->put(route('admin.users.update', $user), [
-                'name' => str_repeat('a', 256),
-                'email' => $this->faker->email(),
-            ])->assertRedirect(route('admin.users.edit', $user))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('users', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_user_without_email()
-    {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
-            ->from(route('admin.users.edit', $user))
-            ->put(route('admin.users.update', $user), [
-                'name' => $this->faker->name(),
-            ])->assertRedirect(route('admin.users.edit', $user))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('users', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_user_with_integer_email()
-    {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
-            ->from(route('admin.users.edit', $user))
-            ->put(route('admin.users.update', $user), [
-                'name' => $this->faker->name(),
-                'email' => 1,
-            ])->assertRedirect(route('admin.users.edit', $user))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('users', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_user_with_email_more_than_255_chars()
-    {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
-            ->from(route('admin.users.edit', $user))
-            ->put(route('admin.users.update', $user), [
-                'name' => $this->faker->name(),
-                'email' => str_repeat('a', 256),
-            ])->assertRedirect(route('admin.users.edit', $user))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('users', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_user_with_invalid_email()
-    {
-        $user = User::factory()->create();
-
-        $this->actingAs($user)
-            ->from(route('admin.users.edit', $user))
-            ->put(route('admin.users.update', $user), [
-                'name' => $this->faker->name(),
-                'email' => 'invalid',
-            ])->assertRedirect(route('admin.users.edit', $user))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('users', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_user_with_duplicated_email()
-    {
-        [$admin, $user] = User::factory()->count(2)->create();
-
-        $this->actingAs($admin)
-            ->from(route('admin.users.edit', $admin))
-            ->put(route('admin.users.update', $admin), [
-                'name' => $this->faker->name(),
-                'email' => $user->email,
-            ])->assertRedirect(route('admin.users.edit', $admin))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('users', 2);
+        return array_merge([
+            'name' => $user->name,
+            'email' => $user->email,
+        ], $overrides);
     }
 }

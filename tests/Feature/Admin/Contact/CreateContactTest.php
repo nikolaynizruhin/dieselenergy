@@ -25,78 +25,62 @@ class CreateContactTest extends TestCase
     /** @test */
     public function guest_cant_create_contact()
     {
-        $contact = Contact::factory()->raw();
-
-        $this->post(route('admin.contacts.store'), $contact)
+        $this->post(route('admin.contacts.store'), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_create_contact()
     {
-        $contact = Contact::factory()->raw();
-
         $this->login()
-            ->post(route('admin.contacts.store'), $contact)
+            ->post(route('admin.contacts.store'), $fields = $this->validFields())
             ->assertRedirect(route('admin.contacts.index'))
             ->assertSessionHas('status', trans('contact.created'));
 
-        $this->assertDatabaseHas('contacts', $contact);
+        $this->assertDatabaseHas('contacts', $fields);
     }
 
-    /** @test */
-    public function user_cant_create_contact_with_integer_message()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_create_contact_with_invalid_data($field, $data)
     {
-        $contact = Contact::factory()->raw(['message' => 1]);
-
         $this->login()
             ->from(route('admin.contacts.create'))
-            ->post(route('admin.contacts.store'), $contact)
+            ->post(route('admin.contacts.store'), $data())
             ->assertRedirect(route('admin.contacts.create'))
-            ->assertSessionHasErrors('message');
+            ->assertSessionHasErrors($field);
 
         $this->assertDatabaseCount('contacts', 0);
     }
 
-    /** @test */
-    public function user_cant_create_contact_without_customer()
+    public function validationProvider(): array
     {
-        $contact = Contact::factory()->raw(['customer_id' => null]);
-
-        $this->login()
-            ->from(route('admin.contacts.create'))
-            ->post(route('admin.contacts.store'), $contact)
-            ->assertRedirect(route('admin.contacts.create'))
-            ->assertSessionHasErrors('customer_id');
-
-        $this->assertDatabaseCount('contacts', 0);
+        return [
+            'Message cant be an integer' => [
+                'message', fn () => $this->validFields(['message' => 1]),
+            ],
+            'Customer is required' => [
+                'customer_id', fn () => $this->validFields(['customer_id' => null]),
+            ],
+            'Customer cant be string' => [
+                'customer_id', fn () => $this->validFields(['customer_id' => 'string']),
+            ],
+            'Customer must exists' => [
+                'customer_id', fn () => $this->validFields(['customer_id' => 1]),
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_create_contact_with_string_customer()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $contact = Contact::factory()->raw(['customer_id' => 'string']);
-
-        $this->login()
-            ->from(route('admin.contacts.create'))
-            ->post(route('admin.contacts.store'), $contact)
-            ->assertRedirect(route('admin.contacts.create'))
-            ->assertSessionHasErrors('customer_id');
-
-        $this->assertDatabaseCount('contacts', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_contact_with_nonexistent_customer()
-    {
-        $contact = Contact::factory()->raw(['customer_id' => 1]);
-
-        $this->login()
-            ->from(route('admin.contacts.create'))
-            ->post(route('admin.contacts.store'), $contact)
-            ->assertRedirect(route('admin.contacts.create'))
-            ->assertSessionHasErrors('customer_id');
-
-        $this->assertDatabaseCount('contacts', 0);
+        return Contact::factory()->raw($overrides);
     }
 }

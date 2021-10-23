@@ -3,13 +3,11 @@
 namespace Tests\Feature\Admin\Customer;
 
 use App\Models\Customer;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CreateCustomerTest extends TestCase
 {
-    use WithFaker;
-
     /** @test */
     public function guest_cant_visit_create_customer_page()
     {
@@ -28,176 +26,83 @@ class CreateCustomerTest extends TestCase
     /** @test */
     public function guest_cant_create_customer()
     {
-        $customer = Customer::factory()->raw();
-
-        $this->post(route('admin.customers.store'), $customer)
+        $this->post(route('admin.customers.store'), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_create_customer()
     {
-        $customer = Customer::factory()->raw();
-
         $this->login()
-            ->post(route('admin.customers.store'), $customer)
+            ->post(route('admin.customers.store'), $fields = $this->validFields())
             ->assertRedirect(route('admin.customers.index'))
             ->assertSessionHas('status', trans('customer.created'));
 
-        $this->assertDatabaseHas('customers', $customer);
+        $this->assertDatabaseHas('customers', $fields);
     }
 
-    /** @test */
-    public function user_cant_create_customer_without_name()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_create_customer_with_invalid_data($field, $data, $count = 0)
     {
-        $customer = Customer::factory()->raw(['name' => null]);
-
         $this->login()
             ->from(route('admin.customers.create'))
-            ->post(route('admin.customers.store'), $customer)
+            ->post(route('admin.customers.store'), $data())
             ->assertRedirect(route('admin.customers.create'))
-            ->assertSessionHasErrors('name');
+            ->assertSessionHasErrors($field);
 
-        $this->assertDatabaseCount('customers', 0);
+        $this->assertDatabaseCount('customers', $count);
     }
 
-    /** @test */
-    public function user_cant_create_customer_with_integer_name()
+    public function validationProvider(): array
     {
-        $customer = Customer::factory()->raw(['name' => 1]);
-
-        $this->login()
-            ->from(route('admin.customers.create'))
-            ->post(route('admin.customers.store'), $customer)
-            ->assertRedirect(route('admin.customers.create'))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('customers', 0);
+        return [
+            'Name is required' => [
+                'name', fn () => $this->validFields(['name' => null]),
+            ],
+            'Name cant be an integer' => [
+                'name', fn () => $this->validFields(['name' => 1]),
+            ],
+            'Name cant be more than 255 chars' => [
+                'name', fn () => $this->validFields(['name' => Str::random(256)]),
+            ],
+            'Email is required' => [
+                'email', fn () => $this->validFields(['email' => null]),
+            ],
+            'Email cant be an integer' => [
+                'email', fn () => $this->validFields(['email' => 1]),
+            ],
+            'Email cant be more than 255 chars' => [
+                'email', fn () => $this->validFields(['email' => Str::random(256)]),
+            ],
+            'Email must be valid' => [
+                'email', fn () => $this->validFields(['email' => 'invalid']),
+            ],
+            'Email must be unique' => [
+                'email', fn () => $this->validFields(['email' => Customer::factory()->create()->email]), 1,
+            ],
+            'Phone is required' => [
+                'phone', fn () => $this->validFields(['phone' => null]),
+            ],
+            'Phone must have valid format' => [
+                'phone', fn () => $this->validFields(['phone' => 0631234567]),
+            ],
+            'Notes cant be an integer' => [
+                'notes', fn () => $this->validFields(['notes' => 1]),
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_create_customer_with_name_more_than_255_chars()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $customer = Customer::factory()->raw(['name' => str_repeat('a', 256)]);
-
-        $this->login()
-            ->from(route('admin.customers.create'))
-            ->post(route('admin.customers.store'), $customer)
-            ->assertRedirect(route('admin.customers.create'))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('customers', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_customer_without_email()
-    {
-        $customer = Customer::factory()->raw(['email' => null]);
-
-        $this->login()
-            ->from(route('admin.customers.create'))
-            ->post(route('admin.customers.store'), $customer)
-            ->assertRedirect(route('admin.customers.create'))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('customers', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_user_with_integer_email()
-    {
-        $customer = Customer::factory()->raw(['email' => 1]);
-
-        $this->login()
-            ->from(route('admin.customers.create'))
-            ->post(route('admin.customers.store'), $customer)
-            ->assertRedirect(route('admin.customers.create'))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('customers', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_user_with_email_more_than_255_chars()
-    {
-        $customer = Customer::factory()->raw(['email' => str_repeat('a', 256)]);
-
-        $this->login()
-            ->from(route('admin.customers.create'))
-            ->post(route('admin.customers.store'), $customer)
-            ->assertRedirect(route('admin.customers.create'))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('customers', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_customer_with_invalid_email()
-    {
-        $customer = Customer::factory()->raw(['email' => 'invalid']);
-
-        $this->login()
-            ->from(route('admin.customers.create'))
-            ->post(route('admin.customers.store'), $customer)
-            ->assertRedirect(route('admin.customers.create'))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('customers', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_customer_with_duplicated_email()
-    {
-        $customer = Customer::factory()->create();
-
-        $this->login()
-            ->from(route('admin.customers.create'))
-            ->post(route('admin.customers.store'), $customer->toArray())
-            ->assertRedirect(route('admin.customers.create'))
-            ->assertSessionHasErrors('email');
-
-        $this->assertDatabaseCount('customers', 1);
-    }
-
-    /** @test */
-    public function user_cant_create_customer_without_phone()
-    {
-        $customer = Customer::factory()->raw(['phone' => null]);
-
-        $this->login()
-            ->from(route('admin.customers.create'))
-            ->post(route('admin.customers.store'), $customer)
-            ->assertRedirect(route('admin.customers.create'))
-            ->assertSessionHasErrors('phone');
-
-        $this->assertDatabaseCount('customers', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_customer_with_incorrect_phone_format()
-    {
-        $customer = Customer::factory()->raw(['phone' => 80631234567]);
-
-        $this->login()
-            ->from(route('admin.customers.create'))
-            ->post(route('admin.customers.store'), $customer)
-            ->assertRedirect(route('admin.customers.create'))
-            ->assertSessionHasErrors('phone');
-
-        $this->assertDatabaseCount('customers', 0);
-    }
-
-    /** @test */
-    public function user_cant_create_customer_with_integer_notes()
-    {
-        $customer = Customer::factory()->raw(['notes' => 1]);
-
-        $this->login()
-            ->from(route('admin.customers.create'))
-            ->post(route('admin.customers.store'), $customer)
-            ->assertRedirect(route('admin.customers.create'))
-            ->assertSessionHasErrors('notes');
-
-        $this->assertDatabaseCount('customers', 0);
+        return Customer::factory()->raw($overrides);
     }
 }

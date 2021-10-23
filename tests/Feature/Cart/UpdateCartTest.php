@@ -39,24 +39,28 @@ class UpdateCartTest extends TestCase
         $this->assertEquals(3, $items->first()->quantity);
     }
 
-    /** @test */
-    public function guest_cant_create_cart_without_quantity()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function guest_cant_create_cart_with_invalid_data($data)
     {
-        $this->put(route('carts.update', ['cart' => 0]))
-            ->assertSessionHasErrors('quantity');
+        $this->put(route('carts.update', $data))
+            ->assertInvalid('quantity');
     }
 
-    /** @test */
-    public function user_cant_update_cart_with_string_quantity()
+    public function validationProvider(): array
     {
-        $this->put(route('carts.update', ['cart' => 0, 'quantity' => 'string']))
-            ->assertSessionHasErrors('quantity');
-    }
-
-    /** @test */
-    public function guest_cant_update_cart_with_zero_quantity()
-    {
-        $this->put(route('carts.update', ['cart' => 0, 'quantity' => 0]))
-            ->assertSessionHasErrors('quantity');
+        return [
+            'Quantity is required' => [
+                ['cart' => 0, 'quantity' => null],
+            ],
+            'Quantity cant be a string' => [
+                ['cart' => 0, 'quantity' => 'string'],
+            ],
+            'Quantity cant be zero' => [
+                ['cart' => 0, 'quantity' => 0],
+            ],
+        ];
     }
 }

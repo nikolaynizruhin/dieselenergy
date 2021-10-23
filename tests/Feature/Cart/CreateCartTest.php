@@ -23,51 +23,39 @@ class CreateCartTest extends TestCase
         $this->assertEquals(2, $items->first()->quantity);
     }
 
-    /** @test */
-    public function guest_cant_create_cart_without_product()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function guest_cant_create_cart_with_invalid_data($field, $data)
     {
-        $this->post(route('carts.store', ['quantity' => 1]))
-            ->assertSessionHasErrors('product_id');
+        $this->post(route('carts.store', $data()))
+            ->assertInvalid($field);
+
+        $this->assertEmpty(Cart::items());
     }
 
-    /** @test */
-    public function guest_cant_create_cart_with_string_product()
+    public function validationProvider(): array
     {
-        $this->post(route('carts.store', ['product_id' => 'string', 'quantity' => 1]))
-            ->assertSessionHasErrors('product_id');
-    }
-
-    /** @test */
-    public function guest_cant_create_cart_with_nonexistent_product()
-    {
-        $this->post(route('carts.store', ['product_id' => 10, 'quantity' => 1]))
-            ->assertSessionHasErrors('product_id');
-    }
-
-    /** @test */
-    public function guest_cant_create_cart_without_quantity()
-    {
-        $product = Product::factory()->create();
-
-        $this->post(route('carts.store', ['product_id' => $product->id]))
-            ->assertSessionHasErrors('quantity');
-    }
-
-    /** @test */
-    public function user_cant_create_cart_with_string_quantity()
-    {
-        $product = Product::factory()->create();
-
-        $this->post(route('carts.store', ['product_id' => $product->id, 'quantity' => 'string']))
-            ->assertSessionHasErrors('quantity');
-    }
-
-    /** @test */
-    public function guest_cant_create_cart_with_zero_quantity()
-    {
-        $product = Product::factory()->create();
-
-        $this->post(route('carts.store', ['product_id' => $product->id, 'quantity' => 0]))
-            ->assertSessionHasErrors('quantity');
+        return [
+            'Product is required' => [
+                'product_id', fn () => ['product_id' => null, 'quantity' => 1],
+            ],
+            'Product cant be a string' => [
+                'product_id', fn () => ['product_id' => 'string', 'quantity' => 1]
+            ],
+            'Product must exists' => [
+                'product_id', fn () => ['product_id' => 10, 'quantity' => 1],
+            ],
+            'Quantity is required' => [
+                'quantity', fn () => ['product_id' => Product::factory()->create()->id, 'quantity' => null],
+            ],
+            'Quantity cant be a string' => [
+                'quantity', fn () => ['product_id' => Product::factory()->create()->id, 'quantity' => 'string'],
+            ],
+            'Quantity cant be zero' => [
+                'quantity', fn () => ['product_id' => Product::factory()->create()->id, 'quantity' => 0],
+            ],
+        ];
     }
 }

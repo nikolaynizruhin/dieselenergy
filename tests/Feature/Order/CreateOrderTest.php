@@ -15,6 +15,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use Tests\Honeypot;
 use Tests\TestCase;
 
@@ -142,112 +143,88 @@ class CreateOrderTest extends TestCase
         Event::assertDispatched(OrderCreatedEvent::class);
     }
 
-    /** @test */
-    public function guest_cant_create_order_without_customer_name()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function guest_cant_create_order_with_invalid_data($field, $data)
     {
-        $this->post(route('orders.store'), $this->validFields(['name' => null]))
-            ->assertSessionHasErrors('name');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_with_integer_customer_name()
-    {
-        $this->post(route('orders.store'), $this->validFields(['name' => 1]))
-            ->assertSessionHasErrors('name');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_with_customer_name_more_than_255_chars()
-    {
-        $this->post(route('orders.store'), $this->validFields([
-            'name' => str_repeat('a', 256),
-        ]))->assertSessionHasErrors('name');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_without_customer_email()
-    {
-        $this->post(route('orders.store'), $this->validFields(['email' => null]))
-            ->assertSessionHasErrors('email');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_with_integer_customer_email()
-    {
-        $this->post(route('orders.store'), $this->validFields(['email' => 1]))
-            ->assertSessionHasErrors('email');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_with_customer_email_more_than_255_chars()
-    {
-        $this->post(route('orders.store'), $this->validFields([
-            'email' => str_repeat('a', 256),
-        ]))->assertSessionHasErrors('email');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_with_invalid_customer_email()
-    {
-        $this->post(route('orders.store'), $this->validFields(['email' => 'invalid']))
-            ->assertSessionHasErrors('email');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_without_customer_phone()
-    {
-        $this->post(route('orders.store'), $this->validFields(['phone' => null]))
-            ->assertSessionHasErrors('phone');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_with_incorrect_customer_phone_format()
-    {
-        $this->post(route('orders.store'), $this->validFields(['phone' => 0631234567]))
-            ->assertSessionHasErrors('phone');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_with_integer_notes()
-    {
-        $this->post(route('orders.store'), $this->validFields(['notes' => 1]))
-            ->assertSessionHasErrors('notes');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_with_empty_cart()
-    {
-        Cart::clear();
-
-        $this->post(route('orders.store'), $this->validFields())
-            ->assertSessionHasErrors('cart');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_without_accepting_privacy()
-    {
-        $this->post(route('orders.store'), $this->validFields(['privacy' => null]))
-            ->assertSessionHasErrors('privacy');
-    }
-
-    /** @test */
-    public function guest_cant_create_order_with_spam()
-    {
-        $this->post(route('orders.store'), $this->validFields([
-            config('honeypot.field') => 'spam',
-        ]))->assertSuccessful();
+        $this->post(route('orders.store'), $data())
+            ->assertSessionHasErrors($field);
 
         $this->assertDatabaseCount('orders', 0);
+        $this->assertDatabaseCount('customers', 0);
     }
 
-    /** @test */
-    public function guest_cant_create_order_too_quickly()
+    public function validationProvider(): array
     {
-        $this->post(route('orders.store'), $this->validFields([
-            config('honeypot.valid_from_field') => time(),
-        ]))->assertSuccessful();
+        return [
+            'Privacy is required' => [
+                'privacy', fn () => $this->validFields(['privacy' => null]),
+            ],
+            'Name is required' => [
+                'name', fn () => $this->validFields(['name' => null]),
+            ],
+            'Name cant be an integer' => [
+                'name', fn () => $this->validFields(['name' => 1]),
+            ],
+            'Name cant be more than 255 chars' => [
+                'name', fn () => $this->validFields(['name' => Str::random(256)]),
+            ],
+            'Email is required' => [
+                'email', fn () => $this->validFields(['email' => null]),
+            ],
+            'Email cant be an integer' => [
+                'email', fn () => $this->validFields(['email' => 1]),
+            ],
+            'Email cant be more than 255 chars' => [
+                'email', fn () => $this->validFields(['email' => Str::random(256)]),
+            ],
+            'Email must be valid' => [
+                'email', fn () => $this->validFields(['email' => 'invalid']),
+            ],
+            'Phone is required' => [
+                'phone', fn () => $this->validFields(['phone' => null]),
+            ],
+            'Phone must have valid format' => [
+                'phone', fn () => $this->validFields(['phone' => 0631234567]),
+            ],
+            'Notes cant be an integer' => [
+                'notes', fn () => $this->validFields(['notes' => 1]),
+            ],
+            'Cart cant be empty' => [
+                'cart', function () {
+                    Cart::clear();
+
+                    return $this->validFields();
+                }
+            ]
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider spamProvider
+     */
+    public function guest_cant_create_order_with_spam($data)
+    {
+        $this->post(route('orders.store'), $data())
+            ->assertSuccessful();
 
         $this->assertDatabaseCount('orders', 0);
+        $this->assertDatabaseCount('customers', 0);
+    }
+
+    public function spamProvider()
+    {
+        return [
+            'Order cant contain spam' => [
+                fn() => $this->validFields([config('honeypot.field') => 'spam']),
+            ],
+            'Order cant be created too quickly' => [
+                fn() => $this->validFields([config('honeypot.valid_from_field') => time()]),
+            ],
+        ];
     }
 
     /**
@@ -265,7 +242,7 @@ class CreateOrderTest extends TestCase
             'name' => $customer->name,
             'email' => $customer->email,
             'phone' => $customer->phone,
-            'notes' => $this->faker->paragraph(),
+            'notes' => $customer->notes,
         ] + $this->honeypot(), $overrides);
     }
 }

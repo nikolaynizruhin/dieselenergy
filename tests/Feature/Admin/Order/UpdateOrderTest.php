@@ -8,187 +8,116 @@ use Tests\TestCase;
 
 class UpdateOrderTest extends TestCase
 {
-    use WithFaker;
+    /**
+     * Product.
+     *
+     * @var \App\Models\Order
+     */
+    private $order;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->order = Order::factory()->create();
+    }
 
     /** @test */
     public function guest_cant_visit_update_order_page()
     {
-        $order = Order::factory()->create();
-
-        $this->get(route('admin.orders.edit', $order))
+        $this->get(route('admin.orders.edit', $this->order))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_visit_update_order_page()
     {
-        $order = Order::factory()->create();
-
         $this->login()
-            ->get(route('admin.orders.edit', $order))
+            ->get(route('admin.orders.edit', $this->order))
             ->assertViewIs('admin.orders.edit')
-            ->assertViewHas('order', $order)
+            ->assertViewHas('order', $this->order)
             ->assertViewHas(['customers', 'statuses', 'products']);
     }
 
     /** @test */
     public function guest_cant_update_order()
     {
-        $order = Order::factory()->create();
-        $stub = Order::factory()->raw();
-
-        $this->put(route('admin.orders.update', $order), $stub)
+        $this->put(route('admin.orders.update', $this->order), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_update_order()
     {
-        $order = Order::factory()->create();
-        $stub = Order::factory()->raw();
-
         $this->login()
-            ->put(route('admin.orders.update', $order), $stub)
+            ->put(route('admin.orders.update', $this->order), $fields = $this->validFields())
             ->assertRedirect(route('admin.orders.index'))
             ->assertSessionHas('status', trans('order.updated'));
 
-        $this->assertDatabaseHas('orders', array_merge($stub, [
-            'total' => $stub['total'] * 100,
+        $this->assertDatabaseHas('orders', array_merge($fields, [
+            'total' => $fields['total'] * 100,
         ]));
     }
 
-    /** @test */
-    public function user_cant_update_order_with_integer_notes()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_update_order_with_invalid_data($field, $data)
     {
-        $order = Order::factory()->create();
-        $stub = Order::factory()->raw(['notes' => 1]);
-
         $this->login()
-            ->from(route('admin.orders.edit', $order))
-            ->put(route('admin.orders.update', $order), $stub)
-            ->assertRedirect(route('admin.orders.edit', $order))
-            ->assertSessionHasErrors('notes');
+            ->from(route('admin.orders.edit', $this->order))
+            ->put(route('admin.orders.update', $this->order), $data())
+            ->assertRedirect(route('admin.orders.edit', $this->order))
+            ->assertSessionHasErrors($field);
 
         $this->assertDatabaseCount('orders', 1);
     }
 
-    /** @test */
-    public function user_cant_update_order_without_customer()
+    public function validationProvider(): array
     {
-        $order = Order::factory()->create();
-        $stub = Order::factory()->raw(['customer_id' => null]);
-
-        $this->login()
-            ->from(route('admin.orders.edit', $order))
-            ->put(route('admin.orders.update', $order), $stub)
-            ->assertRedirect(route('admin.orders.edit', $order))
-            ->assertSessionHasErrors('customer_id');
-
-        $this->assertDatabaseCount('orders', 1);
+        return [
+            'Notes cant be an integer' => [
+                'notes', fn () => $this->validFields(['notes' => 1]),
+            ],
+            'Customer is required' => [
+                'customer_id', fn () => $this->validFields(['customer_id' => null]),
+            ],
+            'Customer cant be string' => [
+                'customer_id', fn () => $this->validFields(['customer_id' => 'string']),
+            ],
+            'Customer must exists' => [
+                'customer_id', fn () => $this->validFields(['customer_id' => 10]),
+            ],
+            'Status is required' => [
+                'status', fn () => $this->validFields(['status' => null]),
+            ],
+            'Status cant be an integer' => [
+                'status', fn () => $this->validFields(['status' => 1]),
+            ],
+            'Total is required' => [
+                'total', fn () => $this->validFields(['total' => null]),
+            ],
+            'Total cant be string' => [
+                'total', fn () => $this->validFields(['total' => 'string']),
+            ],
+            'Total cant be negative' => [
+                'total', fn () => $this->validFields(['total' => -1]),
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_update_order_with_string_customer()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $order = Order::factory()->create();
-        $stub = Order::factory()->raw(['customer_id' => 'string']);
-
-        $this->login()
-            ->from(route('admin.orders.edit', $order))
-            ->put(route('admin.orders.update', $order), $stub)
-            ->assertRedirect(route('admin.orders.edit', $order))
-            ->assertSessionHasErrors('customer_id');
-
-        $this->assertDatabaseCount('orders', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_order_with_nonexistent_customer()
-    {
-        $order = Order::factory()->create();
-        $stub = Order::factory()->raw(['customer_id' => 10]);
-
-        $this->login()
-            ->from(route('admin.orders.edit', $order))
-            ->put(route('admin.orders.update', $order), $stub)
-            ->assertRedirect(route('admin.orders.edit', $order))
-            ->assertSessionHasErrors('customer_id');
-
-        $this->assertDatabaseCount('orders', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_order_without_status()
-    {
-        $order = Order::factory()->create();
-        $stub = Order::factory()->raw(['status' => null]);
-
-        $this->login()
-            ->from(route('admin.orders.edit', $order))
-            ->put(route('admin.orders.update', $order), $stub)
-            ->assertRedirect(route('admin.orders.edit', $order))
-            ->assertSessionHasErrors('status');
-
-        $this->assertDatabaseCount('orders', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_order_with_integer_status()
-    {
-        $order = Order::factory()->create();
-        $stub = Order::factory()->raw(['status' => 1]);
-
-        $this->login()
-            ->from(route('admin.orders.edit', $order))
-            ->put(route('admin.orders.update', $order), $stub)
-            ->assertRedirect(route('admin.orders.edit', $order))
-            ->assertSessionHasErrors('status');
-
-        $this->assertDatabaseCount('orders', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_without_total()
-    {
-        $order = Order::factory()->create();
-        $stub = Order::factory()->raw(['total' => null]);
-
-        $this->login()
-            ->from(route('admin.orders.edit', $order))
-            ->put(route('admin.orders.update', $order), $stub)
-            ->assertRedirect(route('admin.orders.edit', $order))
-            ->assertSessionHasErrors('total');
-
-        $this->assertDatabaseCount('orders', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_string_total()
-    {
-        $order = Order::factory()->create();
-        $stub = Order::factory()->raw(['total' => 'string']);
-
-        $this->login()
-            ->from(route('admin.orders.edit', $order))
-            ->put(route('admin.orders.update', $order), $stub)
-            ->assertRedirect(route('admin.orders.edit', $order))
-            ->assertSessionHasErrors('total');
-
-        $this->assertDatabaseCount('orders', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_product_with_negative_total()
-    {
-        $order = Order::factory()->create();
-        $stub = Order::factory()->raw(['total' => -1]);
-
-        $this->login()
-            ->from(route('admin.orders.edit', $order))
-            ->put(route('admin.orders.update', $order), $stub)
-            ->assertRedirect(route('admin.orders.edit', $order))
-            ->assertSessionHasErrors('total');
-
-        $this->assertDatabaseCount('orders', 1);
+        return Order::factory()->raw($overrides);
     }
 }

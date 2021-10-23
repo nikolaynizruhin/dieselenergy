@@ -4,175 +4,115 @@ namespace Tests\Feature\Admin\Category;
 
 use App\Models\Category;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateCategoryTest extends TestCase
 {
-    use WithFaker;
+    /**
+     * Product.
+     *
+     * @var \App\Models\Category
+     */
+    private $category;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->category = Category::factory()->create();
+    }
 
     /** @test */
     public function guest_cant_visit_update_category_page()
     {
-        $category = Category::factory()->create();
-
-        $this->get(route('admin.categories.edit', $category))
+        $this->get(route('admin.categories.edit', $this->category))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_visit_update_category_page()
     {
-        $category = Category::factory()->create();
-
         $this->login()
-            ->get(route('admin.categories.edit', $category))
+            ->get(route('admin.categories.edit', $this->category))
             ->assertViewIs('admin.categories.edit')
-            ->assertViewHas('category', $category);
+            ->assertViewHas('category', $this->category);
     }
 
     /** @test */
     public function guest_cant_update_category()
     {
-        $category = Category::factory()->create();
-        $stub = Category::factory()->raw();
-
-        $this->put(route('admin.categories.update', $category), $stub)
+        $this->put(route('admin.categories.update', $this->category), $this->validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_update_category()
     {
-        $category = Category::factory()->create();
-        $stub = Category::factory()->raw();
-
         $this->login()
-            ->put(route('admin.categories.update', $category), $stub)
+            ->put(route('admin.categories.update', $this->category), $fields = $this->validFields())
             ->assertRedirect(route('admin.categories.index'))
             ->assertSessionHas('status', trans('category.updated'));
 
-        $this->assertDatabaseHas('categories', $stub);
+        $this->assertDatabaseHas('categories', $fields);
     }
 
-    /** @test */
-    public function user_cant_update_category_without_name()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_update_category_with_invalid_data($field, $data, $count = 1)
     {
-        $category = Category::factory()->create();
-        $stub = Category::factory()->raw(['name' => null]);
-
         $this->login()
-            ->from(route('admin.categories.edit', $category))
-            ->put(route('admin.categories.update', $category), $stub)
-            ->assertRedirect(route('admin.categories.edit', $category))
-            ->assertSessionHasErrors('name');
+            ->from(route('admin.categories.edit', $this->category))
+            ->put(route('admin.categories.update', $this->category), $data())
+            ->assertRedirect(route('admin.categories.edit', $this->category))
+            ->assertSessionHasErrors($field);
 
-        $this->assertDatabaseCount('categories', 1);
+        $this->assertDatabaseCount('categories', $count);
     }
 
-    /** @test */
-    public function user_cant_update_category_with_integer_name()
+    public function validationProvider(): array
     {
-        $category = Category::factory()->create();
-        $stub = Category::factory()->raw(['name' => 1]);
-
-        $this->login()
-            ->from(route('admin.categories.edit', $category))
-            ->put(route('admin.categories.update', $category), $stub)
-            ->assertRedirect(route('admin.categories.edit', $category))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('categories', 1);
+        return [
+            'Name is required' => [
+                'name', fn () => $this->validFields(['name' => null]),
+            ],
+            'Name cant be an integer' => [
+                'name', fn () => $this->validFields(['name' => 1]),
+            ],
+            'Name cant be more than 255 chars' => [
+                'name', fn () => $this->validFields(['name' => Str::random(256)]),
+            ],
+            'Name must be unique' => [
+                'name', fn () => $this->validFields(['name' => Category::factory()->create()->name]), 2,
+            ],
+            'Slug must be unique' => [
+                'slug', fn () => $this->validFields(['slug' => Category::factory()->create()->slug]), 2,
+            ],
+            'Slug is required' => [
+                'slug', fn () => $this->validFields(['slug' => null]),
+            ],
+            'Slug cant be an integer' => [
+                'slug', fn () => $this->validFields(['slug' => 1]),
+            ],
+            'Slug cant be more than 255 chars' => [
+                'slug', fn () => $this->validFields(['slug' => Str::random(256)]),
+            ],
+        ];
     }
 
-    /** @test */
-    public function user_cant_update_category_with_name_more_than_255_chars()
+    /**
+     * Get valid contact fields.
+     *
+     * @param  array  $overrides
+     * @return array
+     */
+    private function validFields($overrides = [])
     {
-        $category = Category::factory()->create();
-        $stub = Category::factory()->raw(['name' => str_repeat('a', 256)]);
-
-        $this->login()
-            ->from(route('admin.categories.edit', $category))
-            ->put(route('admin.categories.update', $category), $stub)
-            ->assertRedirect(route('admin.categories.edit', $category))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('categories', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_category_with_existing_name()
-    {
-        $category = Category::factory()->create();
-        $existing = Category::factory()->create();
-        $stub = Category::factory()->raw(['name' => $existing]);
-
-        $this->login()
-            ->from(route('admin.categories.edit', $category))
-            ->put(route('admin.categories.update', $category), $stub)
-            ->assertRedirect(route('admin.categories.edit', $category))
-            ->assertSessionHasErrors('name');
-
-        $this->assertDatabaseCount('categories', 2);
-    }
-
-    /** @test */
-    public function user_cant_update_category_with_existing_slug()
-    {
-        $category = Category::factory()->create();
-        $existing = Category::factory()->create();
-        $stub = Category::factory()->raw(['slug' => $existing]);
-
-        $this->login()
-            ->from(route('admin.categories.edit', $category))
-            ->put(route('admin.categories.update', $category), $stub)
-            ->assertRedirect(route('admin.categories.edit', $category))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('categories', 2);
-    }
-
-    /** @test */
-    public function user_cant_update_category_without_slug()
-    {
-        $category = Category::factory()->create();
-        $stub = Category::factory()->raw(['slug' => null]);
-
-        $this->login()
-            ->from(route('admin.categories.edit', $category))
-            ->put(route('admin.categories.update', $category), $stub)
-            ->assertRedirect(route('admin.categories.edit', $category))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('categories', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_category_with_integer_slug()
-    {
-        $category = Category::factory()->create();
-        $stub = Category::factory()->raw(['slug' => 1]);
-
-        $this->login()
-            ->from(route('admin.categories.edit', $category))
-            ->put(route('admin.categories.update', $category), $stub)
-            ->assertRedirect(route('admin.categories.edit', $category))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('categories', 1);
-    }
-
-    /** @test */
-    public function user_cant_update_category_with_slug_more_than_255_chars()
-    {
-        $category = Category::factory()->create();
-        $stub = Category::factory()->raw(['slug' => str_repeat('a', 256)]);
-
-        $this->login()
-            ->from(route('admin.categories.edit', $category))
-            ->put(route('admin.categories.update', $category), $stub)
-            ->assertRedirect(route('admin.categories.edit', $category))
-            ->assertSessionHasErrors('slug');
-
-        $this->assertDatabaseCount('categories', 1);
+        return Category::factory()->raw($overrides);
     }
 }
