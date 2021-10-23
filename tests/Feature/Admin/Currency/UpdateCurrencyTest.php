@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Currency;
 
 use App\Models\Currency;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UpdateCurrencyTest extends TestCase

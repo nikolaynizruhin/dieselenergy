@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Category;
 
 use App\Models\Category;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 

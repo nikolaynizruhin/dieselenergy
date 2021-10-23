@@ -197,8 +197,8 @@ class CreateOrderTest extends TestCase
                     Cart::clear();
 
                     return $this->validFields();
-                }
-            ]
+                },
+            ],
         ];
     }
 
@@ -219,10 +219,10 @@ class CreateOrderTest extends TestCase
     {
         return [
             'Order cant contain spam' => [
-                fn() => $this->validFields([config('honeypot.field') => 'spam']),
+                fn () => $this->validFields([config('honeypot.field') => 'spam']),
             ],
             'Order cant be created too quickly' => [
-                fn() => $this->validFields([config('honeypot.valid_from_field') => time()]),
+                fn () => $this->validFields([config('honeypot.valid_from_field') => time()]),
             ],
         ];
     }

@@ -97,7 +97,7 @@ class UpdateAttributeTest extends TestCase
             ],
             'Name must be unique' => [
                 'name', fn () => $this->validFields(['name' => Attribute::factory()->create()->name]), 2,
-            ]
+            ],
         ];
     }
 

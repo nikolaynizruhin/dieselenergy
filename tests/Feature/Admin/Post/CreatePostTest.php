@@ -113,7 +113,7 @@ class CreatePostTest extends TestCase
                 'body', fn () => $this->validFields(['body' => 1]),
             ],
             'Image is required' => [
-               'image', fn () => $this->validFields(['image' => null]),
+                'image', fn () => $this->validFields(['image' => null]),
             ],
             'Image cant be an integer' => [
                 'image', fn () => $this->validFields(['image' => 1]),

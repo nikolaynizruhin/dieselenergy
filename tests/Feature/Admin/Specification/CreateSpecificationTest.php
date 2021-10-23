@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\Specification;
 
 use App\Models\Category;
 use App\Models\Specification;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CreateSpecificationTest extends TestCase
