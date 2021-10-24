@@ -86,7 +86,7 @@ class CreateSpecificationTest extends TestCase
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid specification fields.
      *
      * @param  array  $overrides
      * @return array

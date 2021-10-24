@@ -86,6 +86,9 @@ class UpdateBrandTest extends TestCase
             'Name cant be more than 255 chars' => [
                 'name', fn () => $this->validFields(['name' => Str::random(256)]),
             ],
+            'Name must be unique' => [
+                'name', fn () => $this->validFields(['name' => Brand::factory()->create()->name]), 2,
+            ],
             'Currency is required' => [
                 'currency_id', fn () => $this->validFields(['currency_id' => null]),
             ],
@@ -95,14 +98,11 @@ class UpdateBrandTest extends TestCase
             'Currency must exists' => [
                 'currency_id', fn () => $this->validFields(['currency_id' => 10]),
             ],
-            'Name must be unique' => [
-                'name', fn () => $this->validFields(['name' => Brand::factory()->create()->name]), 2,
-            ],
         ];
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid brand fields.
      *
      * @param  array  $overrides
      * @return array

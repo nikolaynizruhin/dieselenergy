@@ -87,7 +87,7 @@ class CreateCategoryTest extends TestCase
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid category fields.
      *
      * @param  array  $overrides
      * @return array

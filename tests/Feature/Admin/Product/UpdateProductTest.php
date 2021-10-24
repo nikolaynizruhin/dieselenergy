@@ -245,7 +245,7 @@ class UpdateProductTest extends TestCase
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid product fields.
      *
      * @param  array  $overrides
      * @return array
@@ -285,7 +285,7 @@ class UpdateProductTest extends TestCase
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid product attribute fields.
      *
      * @param  mixed  $value
      * @return array

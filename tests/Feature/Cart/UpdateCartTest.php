@@ -43,24 +43,18 @@ class UpdateCartTest extends TestCase
      * @test
      * @dataProvider validationProvider
      */
-    public function guest_cant_create_cart_with_invalid_data($data)
+    public function guest_cant_create_cart_with_invalid_data($quantity)
     {
-        $this->put(route('carts.update', $data))
+        $this->put(route('carts.update', ['cart' => 0, 'quantity' => $quantity]))
             ->assertInvalid('quantity');
     }
 
     public function validationProvider(): array
     {
         return [
-            'Quantity is required' => [
-                ['cart' => 0, 'quantity' => null],
-            ],
-            'Quantity cant be a string' => [
-                ['cart' => 0, 'quantity' => 'string'],
-            ],
-            'Quantity cant be zero' => [
-                ['cart' => 0, 'quantity' => 0],
-            ],
+            'Quantity is required' => [null],
+            'Quantity cant be a string' => ['string'],
+            'Quantity cant be zero' => [0],
         ];
     }
 }

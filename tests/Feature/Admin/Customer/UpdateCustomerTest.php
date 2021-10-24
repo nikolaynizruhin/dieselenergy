@@ -113,7 +113,7 @@ class UpdateCustomerTest extends TestCase
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid customer fields.
      *
      * @param  array  $overrides
      * @return array

@@ -128,7 +128,7 @@ class CreatePostTest extends TestCase
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid post fields.
      *
      * @param  array  $overrides
      * @return array

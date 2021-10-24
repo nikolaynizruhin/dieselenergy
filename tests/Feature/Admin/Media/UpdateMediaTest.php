@@ -116,7 +116,7 @@ class UpdateMediaTest extends TestCase
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid media fields.
      *
      * @param  array  $overrides
      * @return array

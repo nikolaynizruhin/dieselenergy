@@ -89,20 +89,20 @@ class UpdateAttributeTest extends TestCase
             'Name cant be more than 255 chars' => [
                 'name', fn () => $this->validFields(['name' => Str::random(256)]),
             ],
+            'Name must be unique' => [
+                'name', fn () => $this->validFields(['name' => Attribute::factory()->create()->name]), 2,
+            ],
             'Measure cant be an integer' => [
                 'measure', fn () => $this->validFields(['measure' => 1]),
             ],
             'Measure cant be more than 255 chars' => [
                 'measure', fn () => $this->validFields(['measure' => Str::random(256)]),
             ],
-            'Name must be unique' => [
-                'name', fn () => $this->validFields(['name' => Attribute::factory()->create()->name]), 2,
-            ],
         ];
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid attribute fields.
      *
      * @param  array  $overrides
      * @return array

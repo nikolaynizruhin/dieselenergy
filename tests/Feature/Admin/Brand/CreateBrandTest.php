@@ -68,6 +68,9 @@ class CreateBrandTest extends TestCase
             'Name cant be more than 255 chars' => [
                 'name', fn () => $this->validFields(['name' => Str::random(256)]),
             ],
+            'Name must be unique' => [
+                'name', fn () => $this->validFields(['name' => Brand::factory()->create()->name]), 1,
+            ],
             'Currency is required' => [
                 'currency_id', fn () => $this->validFields(['currency_id' => null]),
             ],
@@ -77,14 +80,11 @@ class CreateBrandTest extends TestCase
             'Currency must exists' => [
                 'currency_id', fn () => $this->validFields(['currency_id' => 1]),
             ],
-            'Name must be unique' => [
-                'name', fn () => $this->validFields(['name' => Brand::factory()->create()->name]), 1,
-            ],
         ];
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid brand fields.
      *
      * @param  array  $overrides
      * @return array

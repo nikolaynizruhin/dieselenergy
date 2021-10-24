@@ -228,7 +228,7 @@ class CreateOrderTest extends TestCase
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid order fields.
      *
      * @param  array  $overrides
      * @return array

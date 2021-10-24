@@ -97,7 +97,7 @@ class CreateCartTest extends TestCase
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid cart fields.
      *
      * @param  array  $overrides
      * @return array

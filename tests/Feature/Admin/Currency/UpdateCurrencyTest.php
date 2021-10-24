@@ -109,7 +109,7 @@ class UpdateCurrencyTest extends TestCase
     }
 
     /**
-     * Get valid contact fields.
+     * Get valid currency fields.
      *
      * @param  array  $overrides
      * @return array
