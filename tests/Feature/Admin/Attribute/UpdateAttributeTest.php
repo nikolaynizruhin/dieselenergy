@@ -3,14 +3,11 @@
 namespace Tests\Feature\Admin\Attribute;
 
 use App\Models\Attribute;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateAttributeTest extends TestCase
 {
-    use WithFaker;
-
     /**
      * Product.
      *
