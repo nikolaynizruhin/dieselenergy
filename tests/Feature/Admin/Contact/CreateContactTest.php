@@ -2,11 +2,12 @@
 
 namespace Tests\Feature\Admin\Contact;
 
-use App\Models\Contact;
 use Tests\TestCase;
 
 class CreateContactTest extends TestCase
 {
+    use HasValidation;
+
     /** @test */
     public function guest_cant_visit_create_contact_page()
     {
@@ -53,34 +54,5 @@ class CreateContactTest extends TestCase
             ->assertSessionHasErrors($field);
 
         $this->assertDatabaseCount('contacts', 0);
-    }
-
-    public function validationProvider(): array
-    {
-        return [
-            'Message cant be an integer' => [
-                'message', fn () => $this->validFields(['message' => 1]),
-            ],
-            'Customer is required' => [
-                'customer_id', fn () => $this->validFields(['customer_id' => null]),
-            ],
-            'Customer cant be string' => [
-                'customer_id', fn () => $this->validFields(['customer_id' => 'string']),
-            ],
-            'Customer must exists' => [
-                'customer_id', fn () => $this->validFields(['customer_id' => 1]),
-            ],
-        ];
-    }
-
-    /**
-     * Get valid contact fields.
-     *
-     * @param  array  $overrides
-     * @return array
-     */
-    private function validFields($overrides = [])
-    {
-        return Contact::factory()->raw($overrides);
     }
 }

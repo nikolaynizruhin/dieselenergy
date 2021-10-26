@@ -7,6 +7,8 @@ use Tests\TestCase;
 
 class UpdateContactTest extends TestCase
 {
+    use HasValidation;
+
     /**
      * Product.
      *
@@ -70,34 +72,5 @@ class UpdateContactTest extends TestCase
             ->assertSessionHasErrors($field);
 
         $this->assertDatabaseCount('contacts', 1);
-    }
-
-    public function validationProvider(): array
-    {
-        return [
-            'Message cant be an integer' => [
-                'message', fn () => $this->validFields(['message' => 1]),
-            ],
-            'Customer is required' => [
-                'customer_id', fn () => $this->validFields(['customer_id' => null]),
-            ],
-            'Customer cant be string' => [
-                'customer_id', fn () => $this->validFields(['customer_id' => 'string']),
-            ],
-            'Customer must exists' => [
-                'customer_id', fn () => $this->validFields(['customer_id' => 10]),
-            ],
-        ];
-    }
-
-    /**
-     * Get valid contact fields.
-     *
-     * @param  array  $overrides
-     * @return array
-     */
-    private function validFields($overrides = [])
-    {
-        return Contact::factory()->raw($overrides);
     }
 }

@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class UpdateUserPasswordTest extends TestCase
 {
+    use HasValidation;
+
     /**
      * Product.
      *
@@ -50,33 +52,29 @@ class UpdateUserPasswordTest extends TestCase
      * @test
      * @dataProvider validationProvider
      */
-    public function user_cant_update_user_with_invalid_password($data)
+    public function user_cant_update_user_with_invalid_password($field, $data)
     {
         $this->actingAs($this->user)
             ->from(route('admin.users.password.update', $this->user))
             ->put(route('admin.users.password.update', $this->user), $data())
             ->assertRedirect(route('admin.users.password.update', $this->user))
-            ->assertSessionHasErrors('password');
+            ->assertSessionHasErrors($field);
 
         $this->assertTrue(Hash::check('password', $this->user->fresh()->password));
     }
 
     public function validationProvider(): array
     {
-        return [
-            'Password is required' => [
-                fn () => $this->validFields(['password' => null]),
-            ],
-            'Password confirmation is required' => [
-                fn () => $this->validFields(['password_confirmation' => null]),
-            ],
-            'Password cant be an integer' => [
-                fn () => $this->validFields(['password' => 12345678, 'password_confirmation' => 12345678]),
-            ],
-            'Password cant be less than 8 chars' => [
-                fn () => $this->validFields(['password' => 'small', 'password_confirmation' => 'small']),
-            ],
-        ];
+        return array_filter(
+            $this->provider(2),
+            fn ($name) => in_array($name, [
+                'Password is required',
+                'Password confirmation is required',
+                'Password cant be an integer',
+                'Password cant be less than 8 chars',
+            ]),
+            ARRAY_FILTER_USE_KEY
+        );
     }
 
     /**

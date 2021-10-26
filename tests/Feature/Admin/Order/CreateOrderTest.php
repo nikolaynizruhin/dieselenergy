@@ -2,11 +2,12 @@
 
 namespace Tests\Feature\Admin\Order;
 
-use App\Models\Order;
 use Tests\TestCase;
 
 class CreateOrderTest extends TestCase
 {
+    use HasValidation;
+
     /** @test */
     public function guest_cant_visit_create_order_page()
     {
@@ -43,7 +44,7 @@ class CreateOrderTest extends TestCase
 
     /**
      * @test
-     * @dataProvider validationProvider
+     * @dataProvider provider
      */
     public function user_cant_create_order_with_invalid_data($field, $data, $count = 0)
     {
@@ -54,40 +55,5 @@ class CreateOrderTest extends TestCase
             ->assertSessionHasErrors($field);
 
         $this->assertDatabaseCount('orders', $count);
-    }
-
-    public function validationProvider(): array
-    {
-        return [
-            'Notes cant be an integer' => [
-                'notes', fn () => $this->validFields(['notes' => 1]),
-            ],
-            'Customer is required' => [
-                'customer_id', fn () => $this->validFields(['customer_id' => null]),
-            ],
-            'Customer cant be string' => [
-                'customer_id', fn () => $this->validFields(['customer_id' => 'string']),
-            ],
-            'Customer must exists' => [
-                'customer_id', fn () => $this->validFields(['customer_id' => 1]),
-            ],
-            'Status is required' => [
-                'status', fn () => $this->validFields(['status' => null]),
-            ],
-            'Status cant be an integer' => [
-                'status', fn () => $this->validFields(['status' => 1]),
-            ],
-        ];
-    }
-
-    /**
-     * Get valid order fields.
-     *
-     * @param  array  $overrides
-     * @return array
-     */
-    private function validFields($overrides = [])
-    {
-        return Order::factory()->raw($overrides);
     }
 }

@@ -3,11 +3,12 @@
 namespace Tests\Feature\Admin\User;
 
 use App\Models\User;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateUserTest extends TestCase
 {
+    use HasValidation;
+
     /**
      * Product.
      *
@@ -79,32 +80,20 @@ class UpdateUserTest extends TestCase
 
     public function validationProvider(): array
     {
-        return [
-            'Name is required' => [
-                'name', fn () => $this->validFields(['name' => null]),
-            ],
-            'Name cant be an integer' => [
-                'name', fn () => $this->validFields(['name' => 1]),
-            ],
-            'Name cant be more than 255 chars' => [
-                'name', fn () => $this->validFields(['name' => Str::random(256)]),
-            ],
-            'Email is required' => [
-                'email', fn () => $this->validFields(['email' => null]),
-            ],
-            'Email cant be an integer' => [
-                'email', fn () => $this->validFields(['email' => 1]),
-            ],
-            'Email cant be more than 255 chars' => [
-                'email', fn () => $this->validFields(['email' => Str::random(256)]),
-            ],
-            'Email must be valid' => [
-                'email', fn () => $this->validFields(['email' => 'invalid']),
-            ],
-            'Email must be unique' => [
-                'email', fn () => $this->validFields(['email' => User::factory()->create()->email]), 2,
-            ],
-        ];
+        return array_filter(
+            $this->provider(2),
+            fn ($name) => in_array($name, [
+                'Name is required',
+                'Name cant be an integer',
+                'Name cant be more than 255 chars',
+                'Email is required',
+                'Email cant be an integer',
+                'Email cant be more than 255 chars',
+                'Email must be valid',
+                'Email must be unique',
+            ]),
+            ARRAY_FILTER_USE_KEY
+        );
     }
 
     /**

@@ -7,6 +7,8 @@ use Tests\TestCase;
 
 class UpdateOrderTest extends TestCase
 {
+    use HasValidation;
+
     /**
      * Product.
      *
@@ -76,27 +78,9 @@ class UpdateOrderTest extends TestCase
         $this->assertDatabaseCount('orders', 1);
     }
 
-    public function validationProvider(): array
+    public function validationProvider()
     {
-        return [
-            'Notes cant be an integer' => [
-                'notes', fn () => $this->validFields(['notes' => 1]),
-            ],
-            'Customer is required' => [
-                'customer_id', fn () => $this->validFields(['customer_id' => null]),
-            ],
-            'Customer cant be string' => [
-                'customer_id', fn () => $this->validFields(['customer_id' => 'string']),
-            ],
-            'Customer must exists' => [
-                'customer_id', fn () => $this->validFields(['customer_id' => 10]),
-            ],
-            'Status is required' => [
-                'status', fn () => $this->validFields(['status' => null]),
-            ],
-            'Status cant be an integer' => [
-                'status', fn () => $this->validFields(['status' => 1]),
-            ],
+        return $this->provider() + [
             'Total is required' => [
                 'total', fn () => $this->validFields(['total' => null]),
             ],
@@ -107,16 +91,5 @@ class UpdateOrderTest extends TestCase
                 'total', fn () => $this->validFields(['total' => -1]),
             ],
         ];
-    }
-
-    /**
-     * Get valid order fields.
-     *
-     * @param  array  $overrides
-     * @return array
-     */
-    private function validFields($overrides = [])
-    {
-        return Order::factory()->raw($overrides);
     }
 }
