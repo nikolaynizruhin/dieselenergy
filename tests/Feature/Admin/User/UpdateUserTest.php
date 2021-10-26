@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\User;
 
 use App\Models\User;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateUserTest extends TestCase

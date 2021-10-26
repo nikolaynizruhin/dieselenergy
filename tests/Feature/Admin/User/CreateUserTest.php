@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin\User;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CreateUserTest extends TestCase

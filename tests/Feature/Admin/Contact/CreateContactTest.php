@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Admin\Contact;
 
-use App\Models\Contact;
 use Tests\TestCase;
 
 class CreateContactTest extends TestCase

@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Brand;
 
 use App\Models\Brand;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateBrandTest extends TestCase

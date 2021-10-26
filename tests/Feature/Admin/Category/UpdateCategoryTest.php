@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Category;
 
 use App\Models\Category;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateCategoryTest extends TestCase

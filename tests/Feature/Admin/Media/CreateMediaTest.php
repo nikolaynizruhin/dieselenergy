@@ -80,7 +80,7 @@ class CreateMediaTest extends TestCase
         return $this->provider() + [
             'Media must be unique' => [
                 'product_id', fn () => Media::factory()->create()->toArray(), 1,
-            ]
+            ],
         ];
     }
 }
