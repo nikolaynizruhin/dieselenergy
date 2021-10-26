@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 
 trait HasValidation
 {
-
     public function provider($count = 1): array
     {
         return [

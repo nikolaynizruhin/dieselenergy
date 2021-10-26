@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin\Customer;
 
 use App\Models\Customer;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateCustomerTest extends TestCase

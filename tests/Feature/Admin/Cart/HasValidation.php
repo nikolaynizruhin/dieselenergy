@@ -2,9 +2,7 @@
 
 namespace Tests\Feature\Admin\Cart;
 
-use App\Models\Brand;
 use App\Models\Cart;
-use Illuminate\Support\Str;
 
 trait HasValidation
 {
