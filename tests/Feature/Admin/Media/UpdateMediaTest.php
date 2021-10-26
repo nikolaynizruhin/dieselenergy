@@ -7,6 +7,8 @@ use Tests\TestCase;
 
 class UpdateMediaTest extends TestCase
 {
+    use HasValidation;
+
     /**
      * Product.
      *
@@ -91,38 +93,8 @@ class UpdateMediaTest extends TestCase
         $this->assertDatabaseCount('image_product', 1);
     }
 
-    public function validationProvider(): array
+    public function validationProvider()
     {
-        return [
-            'Product is required' => [
-                'product_id', fn () => $this->validFields(['product_id' => null]),
-            ],
-            'Product cant be string' => [
-                'product_id', fn () => $this->validFields(['product_id' => 'string']),
-            ],
-            'Product must exists' => [
-                'product_id', fn () => $this->validFields(['product_id' => 10]),
-            ],
-            'Image is required' => [
-                'image_id', fn () => $this->validFields(['image_id' => null]),
-            ],
-            'Image cant be string' => [
-                'image_id', fn () => $this->validFields(['image_id' => 'string']),
-            ],
-            'Image must exists' => [
-                'image_id', fn () => $this->validFields(['image_id' => 10]),
-            ],
-        ];
-    }
-
-    /**
-     * Get valid media fields.
-     *
-     * @param  array  $overrides
-     * @return array
-     */
-    private function validFields($overrides = [])
-    {
-        return Media::factory()->raw($overrides);
+        return $this->provider();
     }
 }

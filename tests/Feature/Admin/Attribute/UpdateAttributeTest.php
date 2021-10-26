@@ -3,11 +3,12 @@
 namespace Tests\Feature\Admin\Attribute;
 
 use App\Models\Attribute;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UpdateAttributeTest extends TestCase
 {
+    use HasValidation;
+
     /**
      * Product.
      *
@@ -74,38 +75,8 @@ class UpdateAttributeTest extends TestCase
         $this->assertDatabaseCount('attributes', $count);
     }
 
-    public function validationProvider(): array
+    public function validationProvider()
     {
-        return [
-            'Name is required' => [
-                'name', fn () => $this->validFields(['name' => null]),
-            ],
-            'Name cant be an integer' => [
-                'name', fn () => $this->validFields(['name' => 1]),
-            ],
-            'Name cant be more than 255 chars' => [
-                'name', fn () => $this->validFields(['name' => Str::random(256)]),
-            ],
-            'Name must be unique' => [
-                'name', fn () => $this->validFields(['name' => Attribute::factory()->create()->name]), 2,
-            ],
-            'Measure cant be an integer' => [
-                'measure', fn () => $this->validFields(['measure' => 1]),
-            ],
-            'Measure cant be more than 255 chars' => [
-                'measure', fn () => $this->validFields(['measure' => Str::random(256)]),
-            ],
-        ];
-    }
-
-    /**
-     * Get valid attribute fields.
-     *
-     * @param  array  $overrides
-     * @return array
-     */
-    private function validFields($overrides = [])
-    {
-        return Attribute::factory()->raw($overrides);
+        return $this->provider(2);
     }
 }

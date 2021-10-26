@@ -7,6 +7,8 @@ use Tests\TestCase;
 
 class UpdateSpecificationTest extends TestCase
 {
+    use HasValidation;
+
     /**
      * Product.
      *
@@ -72,41 +74,8 @@ class UpdateSpecificationTest extends TestCase
         $this->assertDatabaseCount('attribute_category', $count);
     }
 
-    public function validationProvider(): array
+    public function validationProvider()
     {
-        return [
-            'Category is required' => [
-                'category_id', fn () => $this->validFields(['category_id' => null]),
-            ],
-            'Category cant be string' => [
-                'category_id', fn () => $this->validFields(['category_id' => 'string']),
-            ],
-            'Category must exists' => [
-                'category_id', fn () => $this->validFields(['category_id' => 10]),
-            ],
-            'Attribute is required' => [
-                'attribute_id', fn () => $this->validFields(['attribute_id' => null]),
-            ],
-            'Attribute cant be string' => [
-                'attribute_id', fn () => $this->validFields(['attribute_id' => 'string']),
-            ],
-            'Attribute must exists' => [
-                'attribute_id', fn () => $this->validFields(['attribute_id' => 10]),
-            ],
-            'Specification must be unique' => [
-                'attribute_id', fn () => Specification::factory()->create()->toArray(), 2,
-            ],
-        ];
-    }
-
-    /**
-     * Get valid specification fields.
-     *
-     * @param  array  $overrides
-     * @return array
-     */
-    private function validFields($overrides = [])
-    {
-        return Specification::factory()->raw($overrides);
+        return $this->provider(2);
     }
 }

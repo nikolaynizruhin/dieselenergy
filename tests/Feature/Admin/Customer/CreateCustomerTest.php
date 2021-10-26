@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class CreateCustomerTest extends TestCase
 {
+    use HasValidation;
+
     /** @test */
     public function guest_cant_visit_create_customer_page()
     {
@@ -56,53 +58,8 @@ class CreateCustomerTest extends TestCase
         $this->assertDatabaseCount('customers', $count);
     }
 
-    public function validationProvider(): array
+    public function validationProvider()
     {
-        return [
-            'Name is required' => [
-                'name', fn () => $this->validFields(['name' => null]),
-            ],
-            'Name cant be an integer' => [
-                'name', fn () => $this->validFields(['name' => 1]),
-            ],
-            'Name cant be more than 255 chars' => [
-                'name', fn () => $this->validFields(['name' => Str::random(256)]),
-            ],
-            'Email is required' => [
-                'email', fn () => $this->validFields(['email' => null]),
-            ],
-            'Email cant be an integer' => [
-                'email', fn () => $this->validFields(['email' => 1]),
-            ],
-            'Email cant be more than 255 chars' => [
-                'email', fn () => $this->validFields(['email' => Str::random(256)]),
-            ],
-            'Email must be valid' => [
-                'email', fn () => $this->validFields(['email' => 'invalid']),
-            ],
-            'Email must be unique' => [
-                'email', fn () => $this->validFields(['email' => Customer::factory()->create()->email]), 1,
-            ],
-            'Phone is required' => [
-                'phone', fn () => $this->validFields(['phone' => null]),
-            ],
-            'Phone must have valid format' => [
-                'phone', fn () => $this->validFields(['phone' => 0631234567]),
-            ],
-            'Notes cant be an integer' => [
-                'notes', fn () => $this->validFields(['notes' => 1]),
-            ],
-        ];
-    }
-
-    /**
-     * Get valid customer fields.
-     *
-     * @param  array  $overrides
-     * @return array
-     */
-    private function validFields($overrides = [])
-    {
-        return Customer::factory()->raw($overrides);
+        return $this->provider();
     }
 }

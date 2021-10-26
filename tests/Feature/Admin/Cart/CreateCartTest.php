@@ -2,12 +2,13 @@
 
 namespace Tests\Feature\Admin\Cart;
 
-use App\Models\Cart;
 use App\Models\Order;
 use Tests\TestCase;
 
 class CreateCartTest extends TestCase
 {
+    use HasValidation;
+
     /** @test */
     public function guest_cant_visit_create_cart_page()
     {
@@ -60,50 +61,8 @@ class CreateCartTest extends TestCase
         $this->assertDatabaseCount('order_product', $count);
     }
 
-    public function validationProvider(): array
+    public function validationProvider()
     {
-        return [
-            'Quantity is required' => [
-                'quantity', fn () => $this->validFields(['quantity' => null]),
-            ],
-            'Quantity cant be a string' => [
-                'quantity', fn () => $this->validFields(['quantity' => 'string']),
-            ],
-            'Quantity cant be zero' => [
-                'quantity', fn () => $this->validFields(['quantity' => 0]),
-            ],
-            'Product is required' => [
-                'product_id', fn () => $this->validFields(['product_id' => null]),
-            ],
-            'Product cant be string' => [
-                'product_id', fn () => $this->validFields(['product_id' => 'string']),
-            ],
-            'Product must exists' => [
-                'product_id', fn () => $this->validFields(['product_id' => 1]),
-            ],
-            'Order is required' => [
-                'order_id', fn () => $this->validFields(['order_id' => null]),
-            ],
-            'Order cant be string' => [
-                'order_id', fn () => $this->validFields(['order_id' => 'string']),
-            ],
-            'Order must exists' => [
-                'order_id', fn () => $this->validFields(['order_id' => 1]),
-            ],
-            'Cart must be unique' => [
-                'product_id', fn () => Cart::factory()->create()->toArray(), 1,
-            ],
-        ];
-    }
-
-    /**
-     * Get valid cart fields.
-     *
-     * @param  array  $overrides
-     * @return array
-     */
-    private function validFields($overrides = [])
-    {
-        return Cart::factory()->raw($overrides);
+        return $this->provider();
     }
 }
