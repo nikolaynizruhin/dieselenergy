@@ -64,22 +64,23 @@ class ForgotPasswordTest extends TestCase
         Notification::assertNotSentTo($user, ResetPassword::class);
     }
 
-    /** @test */
-    public function user_cant_get_reset_password_email_without_email()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_get_reset_password_email_with_invalid_email($email)
     {
         $this->from(route('admin.password.request'))
-            ->post(route('admin.password.email'))
+            ->post(route('admin.password.email'), ['email' => $email])
             ->assertRedirect(route('admin.password.request'))
             ->assertSessionHasErrors('email');
     }
 
-    /** @test */
-    public function user_cant_get_reset_password_email_with_invalid_email()
+    public function validationProvider()
     {
-        $this->from(route('admin.password.request'))
-            ->post(route('admin.password.email'), [
-                'email' => 'invalid',
-            ])->assertRedirect(route('admin.password.request'))
-            ->assertSessionHasErrors('email');
+        return [
+            'Email is required' => [null],
+            'Email must be valid' => ['invalid'],
+        ];
     }
 }

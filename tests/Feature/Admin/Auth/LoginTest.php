@@ -57,16 +57,15 @@ class LoginTest extends TestCase
         $this->assertAuthenticatedAs($user);
     }
 
-    /** @test */
-    public function user_cant_login_with_incorrect_password()
+    /**
+     * @test
+     * @dataProvider validationProvider
+     */
+    public function user_cant_login_with_invalid_data($data)
     {
-        $user = User::factory()->create();
-
         $this->from(route('admin.login'))
-            ->post(route('admin.login'), [
-                'email' => $user->email,
-                'password' => 'incorrect',
-            ])->assertRedirect(route('admin.login'))
+            ->post(route('admin.login'), $data())
+            ->assertRedirect(route('admin.login'))
             ->assertSessionHasErrors('email');
 
         $this->assertTrue(session()->hasOldInput('email'));
@@ -75,20 +74,16 @@ class LoginTest extends TestCase
         $this->assertGuest();
     }
 
-    /** @test */
-    public function user_cant_login_with_missing_email()
+    public function validationProvider()
     {
-        $this->from(route('admin.login'))
-            ->post(route('admin.login'), [
-                'email' => 'missing@example.com',
-                'password' => 'incorrect',
-            ])->assertRedirect(route('admin.login'))
-            ->assertSessionHasErrors('email');
-
-        $this->assertTrue(session()->hasOldInput('email'));
-        $this->assertFalse(session()->hasOldInput('password'));
-
-        $this->assertGuest();
+        return [
+            'Email must exists' => [
+                fn () => ['email' => 'missing@example.com', 'password' => 'password'],
+            ],
+            'Password must be correct' => [
+                fn () => ['email' => User::factory()->create()->email, 'password' => 'incorrect'],
+            ],
+        ];
     }
 
     /** @test */
