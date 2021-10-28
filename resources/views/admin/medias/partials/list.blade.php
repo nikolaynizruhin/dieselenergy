@@ -6,11 +6,11 @@
         <table class="table mb-0">
             <thead class="thead-light">
             <tr>
-                <th scope="col" class="bg-light text-muted border-bottom">#</th>
-                <th scope="col" class="bg-light text-muted border-bottom">{{ __('image.title') }}</th>
-                <th scope="col" class="bg-light text-muted border-bottom">{{ __('common.name') }}</th>
-                <th scope="col" class="bg-light text-muted border-bottom">{{ __('common.status') }}</th>
-                <th scope="col" class="bg-light text-muted border-bottom">{{ __('common.actions') }}</th>
+                <th scope="col" class="bg-light text-muted">#</th>
+                <th scope="col" class="bg-light text-muted">{{ __('image.title') }}</th>
+                <th scope="col" class="bg-light text-muted">{{ __('common.name') }}</th>
+                <th scope="col" class="bg-light text-muted">{{ __('common.status') }}</th>
+                <th scope="col" class="bg-light text-muted">{{ __('common.actions') }}</th>
             </tr>
             </thead>
             <tbody class="text-muted">

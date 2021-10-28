@@ -6,36 +6,36 @@
         <table class="table mb-0">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col" class="bg-light text-muted border-bottom">#</th>
-                    <th scope="col" class="bg-light text-muted border-bottom">
+                    <th scope="col" class="bg-light text-muted">#</th>
+                    <th scope="col" class="bg-light text-muted">
                         @include('admin.layouts.partials.sort', [
                             'title' => __('common.name'),
                             'field' => 'name',
                             'route' => ['name' => 'admin.products.index', 'parameters' => []],
                         ])
                     </th>
-                    <th scope="col" class="bg-light text-muted border-bottom">
+                    <th scope="col" class="bg-light text-muted">
                         @include('admin.layouts.partials.sort', [
                             'title' => __('category.title'),
                             'field' => 'categories.name',
                             'route' => ['name' => 'admin.products.index', 'parameters' => []],
                         ])
                     </th>
-                    <th scope="col" class="bg-light text-muted border-bottom">
+                    <th scope="col" class="bg-light text-muted">
                         @include('admin.layouts.partials.sort', [
                             'title' => __('common.status'),
                             'field' => 'status',
                             'route' => ['name' => 'admin.products.index', 'parameters' => []],
                         ])
                     </th>
-                    <th scope="col" class="bg-light text-muted border-bottom">
+                    <th scope="col" class="bg-light text-muted">
                         @include('admin.layouts.partials.sort', [
                             'title' => __('common.price'),
                             'field' => 'price',
                             'route' => ['name' => 'admin.products.index', 'parameters' => []],
                         ])
                     </th>
-                    <th scope="col" class="bg-light text-muted border-bottom">{{ __('common.actions') }}</th>
+                    <th scope="col" class="bg-light text-muted">{{ __('common.actions') }}</th>
                 </tr>
             </thead>
             <tbody class="text-muted">

@@ -6,9 +6,9 @@
         <table class="table mb-0">
             <thead>
             <tr class="table-light">
-                <th scope="col" class="text-muted border-bottom">#</th>
+                <th scope="col" class="text-muted">#</th>
                 @if ($route['name'] === 'admin.orders.index')
-                    <th scope="col" class="text-muted border-bottom">
+                    <th scope="col" class="text-muted">
                         @include('admin.layouts.partials.sort', [
                             'title' => __('customer.title'),
                             'field' => 'customers.name',
@@ -17,7 +17,7 @@
                         ])
                     </th>
                 @endif
-                <th scope="col" class="text-muted border-bottom">
+                <th scope="col" class="text-muted">
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.number'),
                         'field' => 'id',
@@ -25,7 +25,7 @@
                         'nested' => $nested ?? null,
                     ])
                 </th>
-                <th scope="col" class="text-muted border-bottom">
+                <th scope="col" class="text-muted">
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.status'),
                         'field' => 'status',
@@ -33,7 +33,7 @@
                         'nested' => $nested ?? null,
                     ])
                 </th>
-                <th scope="col" class="text-muted border-bottom">
+                <th scope="col" class="text-muted">
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.date'),
                         'field' => 'created_at',
@@ -41,7 +41,7 @@
                         'nested' => $nested ?? null,
                     ])
                 </th>
-                <th scope="col" class="text-muted border-bottom">
+                <th scope="col" class="text-muted">
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.total'),
                         'field' => 'total',
@@ -49,7 +49,7 @@
                         'nested' => $nested ?? null,
                     ])
                 </th>
-                <th scope="col" class="text-muted border-bottom">{{ __('common.actions') }}</th>
+                <th scope="col" class="text-muted">{{ __('common.actions') }}</th>
             </tr>
             </thead>
             <tbody class="text-muted">

@@ -6,29 +6,29 @@
         <table class="table mb-0">
             <thead class="thead-light">
             <tr>
-                <th scope="col" class="bg-light text-muted border-bottom">#</th>
-                <th scope="col" class="bg-light text-muted border-bottom">
+                <th scope="col" class="bg-light text-muted">#</th>
+                <th scope="col" class="bg-light text-muted">
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.name'),
                         'field' => 'name',
                         'route' => ['name' => 'admin.orders.show', 'parameters' => ['order' => $order]],
                     ])
                 </th>
-                <th scope="col" class="bg-light text-muted border-bottom">
+                <th scope="col" class="bg-light text-muted">
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.quantity'),
                         'field' => 'quantity',
                         'route' => ['name' => 'admin.orders.show', 'parameters' => ['order' => $order]],
                     ])
                 </th>
-                <th scope="col" class="bg-light text-muted border-bottom">
+                <th scope="col" class="bg-light text-muted">
                     @include('admin.layouts.partials.sort', [
                         'title' => __('common.price'),
                         'field' => 'total',
                         'route' => ['name' => 'admin.orders.show', 'parameters' => ['order' => $order]],
                     ])
                 </th>
-                <th scope="col" class="bg-light text-muted border-bottom">{{ __('common.actions') }}</th>
+                <th scope="col" class="bg-light text-muted">{{ __('common.actions') }}</th>
             </tr>
             </thead>
             <tbody class="text-muted">
