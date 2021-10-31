@@ -42,10 +42,14 @@
                         <a href="{{ route('admin.specifications.edit', $attribute->pivot->id) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#deleteSpecificationModal{{ $attribute->id }}">
-                            @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
-                        @include('admin.specifications.partials.delete')
+                        @include('admin.layouts.partials.delete', [
+                            'id' => 'deleteSpecificationModal'.$attribute->id,
+                            'label' => 'deleteSpecificationLabel'.$attribute->id,
+                            'title' => __('attribute.delete'),
+                            'body' => __('common.alert.detach').' '.$attribute->name.'?',
+                            'action' => route('admin.specifications.destroy', $attribute->pivot->id),
+                            'button' => __('common.detach'),
+                        ])
                     </td>
                 </tr>
             @endforeach

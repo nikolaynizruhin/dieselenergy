@@ -42,10 +42,14 @@
                         <a href="{{ route('admin.carts.edit', $product->pivot->id) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#deleteCartModal{{ $product->id }}">
-                            @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
-                        @include('admin.carts.partials.delete')
+                        @include('admin.layouts.partials.delete', [
+                            'id' => 'deleteCartModal'.$product->id,
+                            'label' => 'deleteCartLabel'.$product->id,
+                            'title' => __('cart.delete'),
+                            'body' => __('common.alert.detach').' '.$product->name.'?',
+                            'action' => route('admin.carts.destroy', $product->pivot->id),
+                            'button' => __('common.detach'),
+                        ])
                     </td>
                 </tr>
             @endforeach

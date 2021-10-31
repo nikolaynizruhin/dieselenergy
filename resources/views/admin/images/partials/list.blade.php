@@ -23,11 +23,14 @@
                         </td>
                         <td>{{ $image->name }}</td>
                         <td class="text-nowrap">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteImageModal{{ $image->id }}">
-                                @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                            </a>
                             @include('admin.layouts.partials.image')
-                            @include('admin.images.partials.delete')
+                            @include('admin.layouts.partials.delete', [
+                                'id' => 'deleteImageModal'.$image->id,
+                                'label' => 'deleteImageLabel'.$image->id,
+                                'title' => __('image.delete'),
+                                'body' => __('common.alert.delete').' '.$image->name.'?',
+                                'action' => route('admin.images.destroy', $image),
+                            ])
                         </td>
                     </tr>
                 @endforeach

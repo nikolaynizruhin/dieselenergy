@@ -34,10 +34,13 @@
                         <a href="{{ route('admin.brands.edit', $brand) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#deleteBrandModal{{ $brand->id }}">
-                            @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
-                        @include('admin.brands.partials.delete')
+                        @include('admin.layouts.partials.delete', [
+                            'id' => 'deleteBrandModal'.$brand->id,
+                            'label' => 'deleteBrandLabel'.$brand->id,
+                            'title' => __('brand.delete'),
+                            'body' => __('common.alert.delete').' '.$brand->name.'?',
+                            'action' => route('admin.brands.destroy', $brand),
+                        ])
                     </td>
                 </tr>
             @endforeach

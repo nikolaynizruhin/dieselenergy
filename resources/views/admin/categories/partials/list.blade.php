@@ -37,10 +37,13 @@
                         <a href="{{ route('admin.categories.edit', $category) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal{{ $category->id }}">
-                            @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
-                        @include('admin.categories.partials.delete')
+                        @include('admin.layouts.partials.delete', [
+                            'id' => 'deleteCategoryModal'.$category->id,
+                            'label' => 'deleteCategoryLabel'.$category->id,
+                            'title' => __('category.delete'),
+                            'body' => __('common.alert.delete').' '.$category->name.'?',
+                            'action' => route('admin.categories.destroy', $category),
+                        ])
                     </td>
                 </tr>
             @endforeach

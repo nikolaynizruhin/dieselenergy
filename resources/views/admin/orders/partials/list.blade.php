@@ -76,10 +76,13 @@
                         <a href="{{ route('admin.orders.edit', $order) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#deleteOrderModal{{ $order->id }}">
-                            @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
-                        @include('admin.orders.partials.delete')
+                        @include('admin.layouts.partials.delete', [
+                            'id' => 'deleteOrderModal'.$order->id,
+                            'label' => 'deleteOrderLabel'.$order->id,
+                            'title' => __('order.delete'),
+                            'body' => __('order.confirm_delete'),
+                            'action' => route('admin.orders.destroy', $order),
+                        ])
                     </td>
                 </tr>
             @endforeach

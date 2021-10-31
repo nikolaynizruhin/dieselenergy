@@ -45,10 +45,13 @@
                         <a href="{{ route('admin.customers.edit', $customer) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal{{ $customer->id }}">
-                            @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
-                        @include('admin.customers.partials.delete')
+                        @include('admin.layouts.partials.delete', [
+                            'id' => 'deleteCustomerModal'.$customer->id,
+                            'label' => 'deleteCustomerLabel'.$customer->id,
+                            'title' => __('customer.delete'),
+                            'body' => __('common.alert.delete').' '.$customer->name.'?',
+                            'action' => route('admin.customers.destroy', $customer),
+                        ])
                     </td>
                 </tr>
             @endforeach

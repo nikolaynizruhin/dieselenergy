@@ -34,10 +34,13 @@
                         <a href="{{ route('admin.attributes.edit', $attribute) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#deleteAttributeModal{{ $attribute->id }}">
-                            @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
-                        @include('admin.attributes.partials.delete')
+                        @include('admin.layouts.partials.delete', [
+                            'id' => 'deleteAttributeModal'.$attribute->id,
+                            'label' => 'deleteAttributeLabel'.$attribute->id,
+                            'title' => __('attribute.delete'),
+                            'body' => __('common.alert.delete').' '.$attribute->name.'?',
+                            'action' => route('admin.attributes.destroy', $attribute),
+                        ])
                     </td>
                 </tr>
             @endforeach

@@ -29,10 +29,13 @@
                         <a href="{{ route('admin.posts.edit', $post) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#deletePostModal{{ $post->id }}">
-                            @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
-                        @include('admin.posts.partials.delete')
+                        @include('admin.layouts.partials.delete', [
+                            'id' => 'deletePostModal'.$post->id,
+                            'label' => 'deletePostLabel'.$post->id,
+                            'title' => __('post.delete'),
+                            'body' => __('common.alert.delete').' '.$post->title.'?',
+                            'action' => route('admin.posts.destroy', $post),
+                        ])
                     </td>
                 </tr>
             @endforeach

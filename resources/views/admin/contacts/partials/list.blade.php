@@ -56,10 +56,13 @@
                         <a href="{{ route('admin.contacts.edit', $contact) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#deleteContactModal{{ $contact->id }}">
-                            @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
-                        @include('admin.contacts.partials.delete')
+                        @include('admin.layouts.partials.delete', [
+                            'id' => 'deleteContactModal'.$contact->id,
+                            'label' => 'deleteContactLabel'.$contact->id,
+                            'title' => __('contact.delete'),
+                            'body' => __('contact.confirm_delete'),
+                            'action' => route('admin.contacts.destroy', $contact),
+                        ])
                     </td>
                 </tr>
             @endforeach

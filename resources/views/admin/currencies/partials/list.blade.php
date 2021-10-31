@@ -36,10 +36,13 @@
                         <a href="{{ route('admin.currencies.edit', $currency) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#deleteCurrencyModal{{ $currency->id }}">
-                            @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
-                        @include('admin.currencies.partials.delete')
+                        @include('admin.layouts.partials.delete', [
+                            'id' => 'deleteCurrencyModal'.$currency->id,
+                            'label' => 'deleteCurrencyLabel'.$currency->id,
+                            'title' => __('currency.delete'),
+                            'body' => __('common.alert.delete').' '.$currency->code.'?',
+                            'action' => route('admin.currencies.destroy', $currency),
+                        ])
                     </td>
                 </tr>
             @endforeach
