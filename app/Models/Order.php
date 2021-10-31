@@ -15,21 +15,42 @@ class Order extends Model
      *
      * @var string
      */
-    const NEW = 'Новий';
+    const STATUS_NEW = 'Новий';
 
     /**
      * The pending order status.
      *
      * @var string
      */
-    const PENDING = 'В очікуванні';
+    const STATUS_PENDING = 'В очікуванні';
 
     /**
      * The done order status.
      *
      * @var string
      */
-    const DONE = 'Зроблено';
+    const STATUS_DONE = 'Зроблено';
+
+    /**
+     * The new order badge.
+     *
+     * @var string
+     */
+    const BADGE_NEW = 'primary';
+
+    /**
+     * The pending order badge.
+     *
+     * @var string
+     */
+    const BADGE_PENDING = 'warning';
+
+    /**
+     * The done order badge.
+     *
+     * @var string
+     */
+    const BADGE_DONE = 'success';
 
     /**
      * The attributes that are mass assignable.
@@ -67,9 +88,23 @@ class Order extends Model
     public static function statuses()
     {
         return [
-            self::NEW,
-            self::PENDING,
-            self::DONE,
+            self::STATUS_NEW,
+            self::STATUS_PENDING,
+            self::STATUS_DONE,
+        ];
+    }
+
+    /**
+     * Get badges.
+     *
+     * @return array
+     */
+    public static function badges()
+    {
+        return [
+            self::STATUS_NEW => self::BADGE_NEW,
+            self::STATUS_PENDING => self::BADGE_PENDING,
+            self::STATUS_DONE => self::BADGE_DONE,
         ];
     }
 
@@ -99,5 +134,15 @@ class Order extends Model
     public function getDecimalTotalAttribute()
     {
         return number_format($this->total / 100, 2, '.', '');
+    }
+
+    /**
+     * Formatted total.
+     *
+     * @return string
+     */
+    public function getBadgeAttribute()
+    {
+        return self::badges()[$this->status];
     }
 }

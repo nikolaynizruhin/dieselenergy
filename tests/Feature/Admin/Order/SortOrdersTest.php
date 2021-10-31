@@ -58,8 +58,8 @@ class SortOrdersTest extends TestCase
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
-                ['status' => Order::PENDING],
-                ['status' => Order::NEW],
+                ['status' => Order::STATUS_PENDING],
+                ['status' => Order::STATUS_NEW],
             ))->create();
 
         $this->login()
@@ -76,8 +76,8 @@ class SortOrdersTest extends TestCase
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
-                ['status' => Order::PENDING],
-                ['status' => Order::NEW],
+                ['status' => Order::STATUS_PENDING],
+                ['status' => Order::STATUS_NEW],
             ))->create();
 
         $this->login()
