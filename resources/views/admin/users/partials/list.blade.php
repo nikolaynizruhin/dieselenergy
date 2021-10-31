@@ -34,10 +34,13 @@
                             <a href="{{ route('admin.users.edit', $user) }}" class="me-2 text-decoration-none">
                                 @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                             </a>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteUserModal{{ $user->id }}">
-                                @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                            </a>
-                            @include('admin.users.partials.delete')
+                            @include('admin.layouts.partials.delete', [
+                                'id' => 'deleteUserModal'.$user->id,
+                                'label' => 'deleteUserLabel'.$user->id,
+                                'title' => __('user.delete'),
+                                'body' => __('common.alert.delete').' '.$user->name.'?',
+                                'action' => route('admin.users.destroy', $user),
+                            ])
                         </td>
                     </tr>
                 @endforeach

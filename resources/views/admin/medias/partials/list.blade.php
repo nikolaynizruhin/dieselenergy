@@ -32,11 +32,14 @@
                         <a href="{{ route('admin.medias.edit', $image->pivot->id) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
                         </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#deleteImageModal{{ $image->id }}">
-                            @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
                         @include('admin.layouts.partials.image')
-                        @include('admin.medias.partials.delete')
+                        @include('admin.layouts.partials.delete', [
+                            'id' => 'deleteImageModal'.$image->id,
+                            'label' => 'deleteImageLabel'.$image->id,
+                            'title' => __('image.delete'),
+                            'body' => __('common.alert.detach').' '.$image->name.'?',
+                            'action' => route('admin.medias.destroy', $image->pivot->id),
+                        ])
                     </td>
                 </tr>
             @endforeach

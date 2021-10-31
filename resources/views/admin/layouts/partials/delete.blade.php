@@ -1,19 +1,27 @@
-<div class="modal fade" id="deletePostModal{{ $post->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ $post->id }}" aria-hidden="true">
+<a href="#" data-bs-toggle="modal" data-bs-target="#{{ $id }}">
+    @include('layouts.partials.icon', ['name' => 'trash', 'width' => '1.1em', 'height' => '1.1em'])
+</a>
+
+<div class="modal fade" id="{{ $id }}" tabindex="-1" role="dialog" aria-labelledby="{{ $label }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header border-0">
-                <h5 class="modal-title" id="deleteModal{{ $post->id }}">{{ __('post.delete') }}</h5>
+                <h5 class="modal-title" id="{{ $label }}">
+                    {{ $title }}
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-muted">
-                {{ __('common.alert.delete') }} {{ $post->title }}?
+                {{ $body }}
             </div>
             <div class="modal-footer border-0 bg-light">
                 <button type="button" class="btn btn-link" data-bs-dismiss="modal">{{ __('common.close') }}</button>
-                <form action="{{ route('admin.posts.destroy', $post) }}" method="POST">
+                <form action="{{ $action }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">{{ __('common.remove') }}</button>
+                    <button type="submit" class="btn btn-danger">
+                        {{ $button ?? __('common.remove') }}
+                    </button>
                 </form>
             </div>
         </div>
