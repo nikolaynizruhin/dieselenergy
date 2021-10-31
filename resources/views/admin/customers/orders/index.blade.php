@@ -8,11 +8,19 @@
 </div>
 
 <div class="card shadow-sm mb-4">
-    @include('admin.orders.partials.'.($orders->isEmpty() ? 'empty' : 'list'), [
-        'route' => [
-            'name' => 'admin.customers.show',
-            'parameters' => ['customer' => $customer]
-        ],
-        'nested' => 'order'
-    ])
+    @if ($orders->isEmpty())
+        @include('admin.layouts.partials.empty', [
+            'body' => __('order.missing'),
+            'link' => route('admin.orders.create'),
+            'button' => __('order.add'),
+        ])
+    @else
+        @include('admin.orders.partials.list', [
+            'route' => [
+                'name' => 'admin.customers.show',
+                'parameters' => ['customer' => $customer]
+            ],
+            'nested' => 'order'
+        ])
+    @endif
 </div>

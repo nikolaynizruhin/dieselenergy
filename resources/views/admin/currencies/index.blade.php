@@ -11,6 +11,15 @@
     </div>
 
     <div class="card shadow-sm">
-        @include('admin.currencies.partials.'.($currencies->isEmpty() ? 'empty' : 'list'))
+        @if ($currencies->isEmpty())
+            @include('admin.layouts.partials.empty', [
+                'icon' => 'cash-stack',
+                'body' => __('currency.missing'),
+                'link' => route('admin.currencies.create'),
+                'button' => __('currency.add'),
+            ])
+        @else
+            @include('admin.currencies.partials.list')
+        @endif
     </div>
 @endsection

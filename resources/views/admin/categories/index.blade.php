@@ -11,6 +11,14 @@
     </div>
 
     <div class="card shadow-sm">
-        @include('admin.categories.partials.'.($categories->isEmpty() ? 'empty' : 'list'))
+        @if ($categories->isEmpty())
+            @include('admin.layouts.partials.empty', [
+                'body' => __('category.missing'),
+                'link' => route('admin.categories.create'),
+                'button' => __('category.add'),
+            ])
+        @else
+            @include('admin.categories.partials.list')
+        @endif
     </div>
 @endsection
