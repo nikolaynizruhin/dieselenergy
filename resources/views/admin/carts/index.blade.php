@@ -8,5 +8,13 @@
 </div>
 
 <div class="card shadow-sm">
-    @include('admin.carts.partials.'.($products->isEmpty() ? 'empty' : 'list'))
+    @if ($products->isEmpty())
+        @include('admin.layouts.partials.empty', [
+            'body' => __('cart.missing'),
+            'link' => route('admin.carts.create', ['order_id' => $order->id]),
+            'button' => __('cart.add'),
+        ])
+    @else
+        @include('admin.carts.partials.list')
+    @endif
 </div>

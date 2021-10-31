@@ -8,5 +8,13 @@
 </div>
 
 <div class="card shadow-sm">
-    @include('admin.medias.partials.'.($images->isEmpty() ? 'empty' : 'list'))
+    @if ($images->isEmpty())
+        @include('admin.layouts.partials.empty', [
+            'body' => __('image.missing'),
+            'link' => route('admin.medias.create', ['product_id' => $product->id]),
+            'button' => __('media.add'),
+        ])
+    @else
+        @include('admin.medias.partials.list')
+    @endif
 </div>

@@ -11,11 +11,19 @@
     </div>
 
     <div class="card shadow-sm">
-        @include('admin.contacts.partials.'.($contacts->isEmpty() ? 'empty' : 'list'), [
-            'route' => [
-                'name' => 'admin.contacts.index',
-                'parameters' => []
-            ],
-        ])
+        @if ($contacts->isEmpty())
+            @include('admin.layouts.partials.empty', [
+                'body' => __('contact.missing'),
+                'link' => route('admin.contacts.create'),
+                'button' => __('contact.add'),
+            ])
+        @else
+            @include('admin.contacts.partials.list', [
+                'route' => [
+                    'name' => 'admin.contacts.index',
+                    'parameters' => []
+                ],
+            ])
+        @endif
     </div>
 @endsection

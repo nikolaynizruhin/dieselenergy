@@ -11,11 +11,20 @@
     </div>
 
     <div class="card shadow-sm">
-        @include('admin.customers.partials.'.($customers->isEmpty() ? 'empty' : 'list'), [
-            'route' => [
-                'name' => 'admin.customers.index',
-                'parameters' => []
-            ],
-        ])
+        @if ($customers->isEmpty())
+            @include('admin.layouts.partials.empty', [
+                'icon' => 'person-plus',
+                'body' => __('customer.missing'),
+                'link' => route('admin.customers.create'),
+                'button' => __('customer.add'),
+            ])
+        @else
+            @include('admin.customers.partials.list', [
+                'route' => [
+                    'name' => 'admin.customers.index',
+                    'parameters' => []
+                ],
+            ])
+        @endif
     </div>
 @endsection

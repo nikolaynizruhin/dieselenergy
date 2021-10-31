@@ -8,5 +8,13 @@
 </div>
 
 <div class="card shadow-sm">
-    @include('admin.specifications.partials.'.($attributes->isEmpty() ? 'empty' : 'list'))
+    @if ($attributes->isEmpty())
+        @include('admin.layouts.partials.empty', [
+            'body' => __('attribute.missing'),
+            'link' => route('admin.specifications.create', ['category_id' => $category->id]),
+            'button' => __('specification.add'),
+        ])
+    @else
+        @include('admin.specifications.partials.list')
+    @endif
 </div>

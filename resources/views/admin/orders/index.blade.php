@@ -11,8 +11,16 @@
     </div>
 
     <div class="card shadow-sm">
-        @include('admin.orders.partials.'.($orders->isEmpty() ? 'empty' : 'list'), [
-            'route' => ['name' => 'admin.orders.index', 'parameters' => []],
-        ])
+        @if ($orders->isEmpty())
+            @include('admin.layouts.partials.empty', [
+                'body' => __('order.missing'),
+                'link' => route('admin.orders.create'),
+                'button' => __('order.add'),
+            ])
+        @else
+            @include('admin.orders.partials.list', [
+                'route' => ['name' => 'admin.orders.index', 'parameters' => []],
+            ])
+        @endif
     </div>
 @endsection

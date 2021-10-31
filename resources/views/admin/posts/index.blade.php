@@ -11,6 +11,14 @@
     </div>
 
     <div class="card shadow-sm">
-        @include('admin.posts.partials.'.($posts->isEmpty() ? 'empty' : 'list'))
+        @if ($posts->isEmpty())
+            @include('admin.layouts.partials.empty', [
+                'body' => __('post.missing'),
+                'link' => route('admin.posts.create'),
+                'button' => __('post.add'),
+            ])
+        @else
+            @include('admin.posts.partials.list')
+        @endif
     </div>
 @endsection
