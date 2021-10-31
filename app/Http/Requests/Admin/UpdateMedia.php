@@ -20,9 +20,7 @@ class UpdateMedia extends StoreMedia
                 'exists:products,id',
                 Rule::unique('image_product')
                     ->ignore($this->media)
-                    ->where(fn ($query) => $query->where([
-                        'image_id' => $this->image_id,
-                    ])),
+                    ->where('image_id', $this->image_id),
             ],
         ]);
     }

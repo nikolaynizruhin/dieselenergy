@@ -30,9 +30,8 @@ class StoreSpecification extends FormRequest
                 'required',
                 'numeric',
                 'exists:attributes,id',
-                Rule::unique('attribute_category')->where(fn ($query) => $query->where([
-                    'category_id' => $this->category_id,
-                ])),
+                Rule::unique('attribute_category')
+                    ->where('category_id', $this->category_id),
             ],
             'is_featured' => 'boolean',
         ];

@@ -20,9 +20,7 @@ class UpdateSpecification extends StoreSpecification
                 'exists:attributes,id',
                 Rule::unique('attribute_category')
                     ->ignore($this->specification)
-                    ->where(fn ($query) => $query->where([
-                        'category_id' => $this->category_id,
-                    ])),
+                    ->where('category_id', $this->category_id),
             ],
         ]);
     }

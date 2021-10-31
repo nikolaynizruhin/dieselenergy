@@ -31,9 +31,8 @@ class StoreMedia extends FormRequest
                 'required',
                 'numeric',
                 'exists:products,id',
-                Rule::unique('image_product')->where(fn ($query) => $query->where([
-                    'image_id' => $this->image_id,
-                ])),
+                Rule::unique('image_product')
+                    ->where('image_id', $this->image_id),
             ],
         ];
     }

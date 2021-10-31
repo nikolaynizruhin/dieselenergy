@@ -31,9 +31,8 @@ class StoreCart extends FormRequest
                 'required',
                 'numeric',
                 'exists:products,id',
-                Rule::unique('order_product')->where(fn ($query) => $query->where([
-                    'order_id' => $this->order_id,
-                ])),
+                Rule::unique('order_product')
+                    ->where('order_id', $this->order_id),
             ],
         ];
     }

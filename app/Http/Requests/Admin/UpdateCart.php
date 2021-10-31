@@ -20,9 +20,7 @@ class UpdateCart extends StoreCart
                 'exists:products,id',
                 Rule::unique('order_product')
                     ->ignore($this->cart)
-                    ->where(fn ($query) => $query->where([
-                        'order_id' => $this->order_id,
-                    ])),
+                    ->where('order_id', $this->order_id),
             ],
         ]);
     }
