@@ -33,7 +33,7 @@ class CurrencyController extends Controller
      */
     public function create()
     {
-        return view('admin.currencies.create');
+        return view('admin.currencies.create', ['currency' => new Currency]);
     }
 
     /**

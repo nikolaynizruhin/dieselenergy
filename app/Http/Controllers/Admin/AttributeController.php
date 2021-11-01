@@ -33,7 +33,7 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        return view('admin.attributes.create');
+        return view('admin.attributes.create', ['attribute' => new Attribute]);
     }
 
     /**

@@ -38,7 +38,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('admin.orders.create');
+        return view('admin.orders.create', ['order' => new Order]);
     }
 
     /**

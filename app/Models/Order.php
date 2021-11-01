@@ -137,7 +137,7 @@ class Order extends Model
     }
 
     /**
-     * Formatted total.
+     * Get badge.
      *
      * @return string
      */
