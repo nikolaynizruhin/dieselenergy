@@ -11,14 +11,11 @@
     </div>
 
     <div class="card shadow-sm">
-        @if ($images->isEmpty())
-            @include('admin.layouts.partials.empty', [
-                'body' => __('image.missing'),
-                'link' => route('admin.images.create'),
-                'button' => __('image.add'),
-            ])
-        @else
-            @include('admin.images.partials.list')
-        @endif
+        @includeWhen($images->isNotEmpty(), 'admin.images.partials.list')
+        @includeWhen($images->isEmpty(), 'admin.layouts.partials.empty', [
+            'body' => __('image.missing'),
+            'link' => route('admin.images.create'),
+            'button' => __('image.add'),
+        ])
     </div>
 @endsection

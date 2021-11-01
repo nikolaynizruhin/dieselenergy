@@ -11,15 +11,12 @@
     </div>
 
     <div class="card shadow-sm">
-        @if ($users->isEmpty())
-            @include('admin.layouts.partials.empty', [
-                'icon' => 'person-plus',
-                'body' => __('user.missing'),
-                'link' => route('admin.users.create'),
-                'button' => __('user.add'),
-            ])
-        @else
-            @include('admin.users.partials.list')
-        @endif
+        @includeWhen($users->isNotEmpty(), 'admin.users.partials.list')
+        @includeWhen($users->isEmpty(), 'admin.layouts.partials.empty', [
+            'icon' => 'person-plus',
+            'body' => __('user.missing'),
+            'link' => route('admin.users.create'),
+            'button' => __('user.add'),
+        ])
     </div>
 @endsection

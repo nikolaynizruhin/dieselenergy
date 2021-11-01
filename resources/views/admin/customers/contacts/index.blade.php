@@ -8,19 +8,16 @@
 </div>
 
 <div class="card shadow-sm">
-    @if ($contacts->isEmpty())
-        @include('admin.layouts.partials.empty', [
-            'body' => __('contact.missing'),
-            'link' => route('admin.contacts.create'),
-            'button' => __('contact.add'),
-        ])
-    @else
-        @include('admin.contacts.partials.list', [
-            'route' => [
-                'name' => 'admin.customers.show',
-                'parameters' => ['customer' => $customer]
-            ],
-            'nested' => 'contact'
-        ])
-    @endif
+    @includeWhen($contacts->isNotEmpty(), 'admin.contacts.partials.list', [
+        'route' => [
+            'name' => 'admin.customers.show',
+            'parameters' => ['customer' => $customer]
+        ],
+        'nested' => 'contact'
+    ])
+    @includeWhen($contacts->isEmpty(), 'admin.layouts.partials.empty', [
+        'body' => __('contact.missing'),
+        'link' => route('admin.contacts.create'),
+        'button' => __('contact.add'),
+    ])
 </div>

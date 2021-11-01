@@ -11,20 +11,18 @@
     </div>
 
     <div class="card shadow-sm">
-        @if ($customers->isEmpty())
-            @include('admin.layouts.partials.empty', [
-                'icon' => 'person-plus',
-                'body' => __('customer.missing'),
-                'link' => route('admin.customers.create'),
-                'button' => __('customer.add'),
-            ])
-        @else
-            @include('admin.customers.partials.list', [
-                'route' => [
-                    'name' => 'admin.customers.index',
-                    'parameters' => []
-                ],
-            ])
-        @endif
+        @includeWhen($customers->isNotEmpty(), 'admin.customers.partials.list', [
+            'route' => [
+                'name' => 'admin.customers.index',
+                'parameters' => []
+            ],
+        ])
+
+        @includeWhen($customers->isEmpty(), 'admin.layouts.partials.empty', [
+            'icon' => 'person-plus',
+            'body' => __('customer.missing'),
+            'link' => route('admin.customers.create'),
+            'button' => __('customer.add'),
+        ])
     </div>
 @endsection

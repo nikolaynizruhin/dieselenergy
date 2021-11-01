@@ -11,14 +11,11 @@
     </div>
 
     <div class="card shadow-sm">
-        @if ($categories->isEmpty())
-            @include('admin.layouts.partials.empty', [
-                'body' => __('category.missing'),
-                'link' => route('admin.categories.create'),
-                'button' => __('category.add'),
-            ])
-        @else
-            @include('admin.categories.partials.list')
-        @endif
+        @includeWhen($categories->isNotEmpty(), 'admin.categories.partials.list')
+        @includeWhen($categories->isEmpty(), 'admin.layouts.partials.empty', [
+            'body' => __('category.missing'),
+            'link' => route('admin.categories.create'),
+            'button' => __('category.add'),
+        ])
     </div>
 @endsection
