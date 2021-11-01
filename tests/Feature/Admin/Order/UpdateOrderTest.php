@@ -78,7 +78,7 @@ class UpdateOrderTest extends TestCase
         $this->assertDatabaseCount('orders', 1);
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return $this->provider() + [
             'Total is required' => [

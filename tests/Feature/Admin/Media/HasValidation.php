@@ -36,7 +36,7 @@ trait HasValidation
      * @param  array  $overrides
      * @return array
      */
-    private function validFields($overrides = [])
+    private function validFields(array $overrides = []): array
     {
         return Media::factory()->raw($overrides);
     }

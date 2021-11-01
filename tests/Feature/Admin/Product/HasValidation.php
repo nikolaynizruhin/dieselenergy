@@ -97,7 +97,7 @@ trait HasValidation
      * @param  array  $overrides
      * @return array
      */
-    private function validFields($overrides = [])
+    private function validFields(array $overrides = []): array
     {
         return Product::factory()->raw($overrides);
     }
@@ -108,7 +108,7 @@ trait HasValidation
      * @param  mixed  $value
      * @return array
      */
-    private function validAttributeFields($value)
+    private function validAttributeFields($value): array
     {
         $category = Category::factory()->create();
         $attribute = Attribute::factory()->create();

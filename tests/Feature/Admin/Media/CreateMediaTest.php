@@ -75,7 +75,7 @@ class CreateMediaTest extends TestCase
         $this->assertDatabaseCount('image_product', $count);
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return $this->provider() + [
             'Media must be unique' => [

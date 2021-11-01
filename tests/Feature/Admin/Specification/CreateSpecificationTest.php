@@ -59,7 +59,7 @@ class CreateSpecificationTest extends TestCase
         $this->assertDatabaseCount('attribute_category', $count);
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return $this->provider();
     }

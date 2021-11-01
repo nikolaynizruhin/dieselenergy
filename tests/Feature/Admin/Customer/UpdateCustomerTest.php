@@ -74,7 +74,7 @@ class UpdateCustomerTest extends TestCase
         $this->assertDatabaseCount('customers', $count);
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return $this->provider(2);
     }

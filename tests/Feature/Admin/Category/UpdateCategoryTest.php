@@ -75,7 +75,7 @@ class UpdateCategoryTest extends TestCase
         $this->assertDatabaseCount('categories', $count);
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return $this->provider(2);
     }

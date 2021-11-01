@@ -93,7 +93,7 @@ class UpdateMediaTest extends TestCase
         $this->assertDatabaseCount('image_product', 1);
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return $this->provider();
     }

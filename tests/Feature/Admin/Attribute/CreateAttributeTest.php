@@ -56,7 +56,7 @@ class CreateAttributeTest extends TestCase
         $this->assertDatabaseCount('attributes', $count);
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return $this->provider();
     }

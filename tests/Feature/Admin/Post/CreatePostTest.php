@@ -73,7 +73,7 @@ class CreatePostTest extends TestCase
         $this->assertDatabaseCount('posts', $count);
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return $this->provider();
     }

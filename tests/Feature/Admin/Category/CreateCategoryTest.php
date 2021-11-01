@@ -56,7 +56,7 @@ class CreateCategoryTest extends TestCase
         $this->assertDatabaseCount('categories', $count);
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return $this->provider();
     }

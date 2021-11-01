@@ -61,7 +61,7 @@ class CreateCartTest extends TestCase
         $this->assertDatabaseCount('order_product', $count);
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return $this->provider();
     }

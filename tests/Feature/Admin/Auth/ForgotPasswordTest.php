@@ -76,7 +76,7 @@ class ForgotPasswordTest extends TestCase
             ->assertSessionHasErrors('email');
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return [
             'Email is required' => [null],

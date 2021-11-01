@@ -56,7 +56,7 @@ class CreateBrandTest extends TestCase
         $this->assertDatabaseCount('brands', $count);
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return $this->provider();
     }

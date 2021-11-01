@@ -56,7 +56,7 @@ class CreateCurrencyTest extends TestCase
         $this->assertDatabaseCount('currencies', $count);
     }
 
-    public function validationProvider()
+    public function validationProvider(): array
     {
         return $this->provider();
     }

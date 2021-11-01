@@ -73,7 +73,7 @@ class CreateUserTest extends TestCase
      * @param  array  $overrides
      * @return array
      */
-    private function validFields($overrides = [])
+    private function validFields(array $overrides = []): array
     {
         $user = User::factory()->make();
 
