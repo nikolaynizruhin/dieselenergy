@@ -35,7 +35,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('admin.customers.create');
+        return view('admin.customers.create', ['customer' => new Customer]);
     }
 
     /**

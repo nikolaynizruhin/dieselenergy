@@ -35,7 +35,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        return view('admin.contacts.create');
+        return view('admin.contacts.create', ['contact' => new Contact]);
     }
 
     /**
