@@ -42,7 +42,7 @@ class UpdateRateTest extends TestCase
 
         $this->artisan('rate:update')
             ->expectsTable(['Currency', 'Rate'], [['USD', 28.3650], ['EUR', 33.2636]])
-            ->assertExitCode(Command::SUCCESS);
+            ->assertSuccessful();
 
         Http::assertSent(fn ($request) => $request->url() == config('services.minfin.url').'/mb/'.config('services.minfin.key'));
 

@@ -34,7 +34,7 @@ class CleanBackupsTest extends TestCase
 
         $this->artisan('backup:clean')
             ->expectsOutput('Backups cleaned successfully!')
-            ->assertExitCode(Command::SUCCESS);
+            ->assertSuccessful();
 
         Storage::disk('local')->assertMissing($this->backup);
     }
@@ -44,7 +44,7 @@ class CleanBackupsTest extends TestCase
     {
         $this->artisan('backup:clean')
             ->expectsOutput('Backups cleaned successfully!')
-            ->assertExitCode(Command::SUCCESS);
+            ->assertSuccessful();
 
         Storage::disk('local')->assertExists($this->backup);
     }

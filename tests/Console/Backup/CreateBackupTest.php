@@ -23,7 +23,7 @@ class CreateBackupTest extends TestCase
 
         $this->artisan('backup:create')
             ->expectsOutput('Backup created successfully!')
-            ->assertExitCode(Command::SUCCESS);
+            ->assertSuccessful();
 
         Storage::disk('local')
             ->assertExists(config('backup.folder').'/'.date(config('backup.format')).'.zip');
