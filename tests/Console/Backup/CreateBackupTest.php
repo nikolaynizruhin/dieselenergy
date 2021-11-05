@@ -2,7 +2,6 @@
 
 namespace Tests\Console\Backup;
 
-use Illuminate\Console\Command;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;

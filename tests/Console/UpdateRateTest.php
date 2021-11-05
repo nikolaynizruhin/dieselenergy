@@ -3,7 +3,6 @@
 namespace Tests\Console;
 
 use App\Models\Currency;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
