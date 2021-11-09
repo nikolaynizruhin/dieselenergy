@@ -32,16 +32,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Authentication Routes...
-Route::get('login', [LoginController::class, 'showLoginForm'])->withoutMiddleware('auth')->name('login');
-Route::post('login', [LoginController::class, 'login'])->withoutMiddleware('auth');
-Route::post('logout', [LoginController::class, 'logout'])->withoutMiddleware('auth')->name('logout');
+Route::withoutMiddleware('auth')->group(function () {
+    // Authentication Routes...
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [LoginController::class, 'login']);
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-// Password Reset Routes...
-Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->withoutMiddleware('auth')->name('password.request');
-Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->withoutMiddleware('auth')->name('password.email');
-Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->withoutMiddleware('auth')->name('password.reset');
-Route::post('password/reset', [ResetPasswordController::class, 'reset'])->withoutMiddleware('auth')->name('password.update');
+    // Password Reset Routes...
+    Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+});
 
 Route::get('/', DashboardController::class)->name('dashboard');
 
