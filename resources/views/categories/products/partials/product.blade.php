@@ -1,6 +1,6 @@
 <div class="col mb-4">
     <div class="card h-100 shadow-sm">
-        <img src="{{ asset('storage/'.$product->images->first()->path) }}" class="card-img-top" alt="{{ $product->name }}" loading="lazy">
+        <img src="{{ asset('storage/'.$product->defaultImage()->path) }}" class="card-img-top" alt="{{ $product->name }}" loading="lazy">
         <div class="card-body mb-n3">
             <h3 class="card-title h6">{{ $product->name }}</h3>
             <p class="card-subtitle mb-2 text-muted">{{ $product->category->name }}</p>
