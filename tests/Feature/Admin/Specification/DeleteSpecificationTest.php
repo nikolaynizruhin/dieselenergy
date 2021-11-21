@@ -7,26 +7,39 @@ use Tests\TestCase;
 
 class DeleteSpecificationTest extends TestCase
 {
+    /**
+     * Specification.
+     *
+     * @var \App\Models\Specification
+     */
+    private $specification;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->specification = Specification::factory()->create();
+    }
+
     /** @test */
     public function guest_cant_delete_specification()
     {
-        $specification = Specification::factory()->create();
-
-        $this->delete(route('admin.specifications.destroy', $specification))
+        $this->delete(route('admin.specifications.destroy', $this->specification))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_delete_specification()
     {
-        $specification = Specification::factory()->create();
-
         $this->login()
-            ->from(route('admin.categories.show', $specification->category_id))
-            ->delete(route('admin.specifications.destroy', $specification->id))
-            ->assertRedirect(route('admin.categories.show', $specification->category_id))
+            ->from(route('admin.categories.show', $this->specification->category_id))
+            ->delete(route('admin.specifications.destroy', $this->specification))
+            ->assertRedirect(route('admin.categories.show', $this->specification->category_id))
             ->assertSessionHas('status', trans('specification.deleted'));
 
-        $this->assertDatabaseMissing('attribute_category', ['id' => $specification->id]);
+        $this->assertDeleted($this->specification);
     }
 }

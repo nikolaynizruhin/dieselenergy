@@ -7,26 +7,39 @@ use Tests\TestCase;
 
 class DeleteOrderTest extends TestCase
 {
+    /**
+     * Order.
+     *
+     * @var \App\Models\Order
+     */
+    private $order;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->order = Order::factory()->create();
+    }
+
     /** @test */
     public function guest_cant_delete_order()
     {
-        $order = Order::factory()->create();
-
-        $this->delete(route('admin.orders.destroy', $order))
+        $this->delete(route('admin.orders.destroy', $this->order))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_delete_order()
     {
-        $order = Order::factory()->create();
-
         $this->login()
             ->from(route('admin.orders.index'))
-            ->delete(route('admin.orders.destroy', $order))
+            ->delete(route('admin.orders.destroy', $this->order))
             ->assertRedirect(route('admin.orders.index'))
             ->assertSessionHas('status', trans('order.deleted'));
 
-        $this->assertDatabaseMissing('orders', ['id' => $order->id]);
+        $this->assertDeleted($this->order);
     }
 }
