@@ -7,26 +7,39 @@ use Tests\TestCase;
 
 class DeleteImageTest extends TestCase
 {
+    /**
+     * Image.
+     *
+     * @var \App\Models\Image
+     */
+    private $image;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->image = Image::factory()->create();
+    }
+
     /** @test */
     public function guest_cant_delete_image()
     {
-        $image = Image::factory()->create();
-
-        $this->delete(route('admin.images.destroy', $image))
+        $this->delete(route('admin.images.destroy', $this->image))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_delete_image()
     {
-        $image = Image::factory()->create();
-
         $this->login()
             ->from(route('admin.images.index'))
-            ->delete(route('admin.images.destroy', $image))
+            ->delete(route('admin.images.destroy', $this->image))
             ->assertRedirect(route('admin.images.index'))
             ->assertSessionHas('status', trans('image.deleted'));
 
-        $this->assertDatabaseMissing('images', ['id' => $image->id]);
+        $this->assertDeleted($this->image);
     }
 }

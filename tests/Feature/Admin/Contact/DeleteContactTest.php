@@ -7,26 +7,39 @@ use Tests\TestCase;
 
 class DeleteContactTest extends TestCase
 {
+    /**
+     * Category.
+     *
+     * @var \App\Models\Contact
+     */
+    private $contact;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contact = Contact::factory()->create();
+    }
+
     /** @test */
     public function guest_cant_delete_contact()
     {
-        $contact = Contact::factory()->create();
-
-        $this->delete(route('admin.contacts.destroy', $contact))
+        $this->delete(route('admin.contacts.destroy', $this->contact))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_delete_contact()
     {
-        $contact = Contact::factory()->create();
-
         $this->login()
             ->from(route('admin.contacts.index'))
-            ->delete(route('admin.contacts.destroy', $contact))
+            ->delete(route('admin.contacts.destroy', $this->contact))
             ->assertRedirect(route('admin.contacts.index'))
             ->assertSessionHas('status', trans('contact.deleted'));
 
-        $this->assertDatabaseMissing('contacts', ['id' => $contact->id]);
+        $this->assertDeleted($this->contact);
     }
 }

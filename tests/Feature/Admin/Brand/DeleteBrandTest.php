@@ -7,26 +7,39 @@ use Tests\TestCase;
 
 class DeleteBrandTest extends TestCase
 {
+    /**
+     * Brand.
+     *
+     * @var \App\Models\Brand
+     */
+    private $brand;
+
+    /**
+     * Setup.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->brand = Brand::factory()->create();
+    }
+
     /** @test */
     public function guest_cant_delete_brand()
     {
-        $brand = Brand::factory()->create();
-
-        $this->delete(route('admin.brands.destroy', $brand))
+        $this->delete(route('admin.brands.destroy', $this->brand))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
     public function user_can_delete_brand()
     {
-        $brand = Brand::factory()->create();
-
         $this->login()
             ->from(route('admin.brands.index'))
-            ->delete(route('admin.brands.destroy', $brand))
+            ->delete(route('admin.brands.destroy', $this->brand))
             ->assertRedirect(route('admin.brands.index'))
             ->assertSessionHas('status', trans('brand.deleted'));
 
-        $this->assertDatabaseMissing('brands', ['id' => $brand->id]);
+        $this->assertDeleted($this->brand);
     }
 }
