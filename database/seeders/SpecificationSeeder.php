@@ -14,6 +14,6 @@ class SpecificationSeeder extends Seeder
      */
     public function run()
     {
-        Specification::factory()->count(10)->create();
+        Specification::factory()->count(3)->create();
     }
 }
