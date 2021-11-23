@@ -12,23 +12,32 @@ class ResetPassword extends ResetPasswordNotification implements ShouldQueue
     use Queueable;
 
     /**
-     * Build the mail representation of the notification.
+     * Get the reset password notification mail message for the given URL.
      *
-     * @param  mixed  $notifiable
+     * @param  string  $url
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    protected function buildMailMessage($url)
     {
-        $url = url(route('admin.password.reset', [
-            'token' => $this->token,
-            'email' => $notifiable->getEmailForPasswordReset(),
-        ], false));
-
         return (new MailMessage)
             ->subject(__('emails.reset_password.subject'))
             ->line(__('emails.reset_password.line_1'))
             ->action(__('emails.reset_password.action'), $url)
             ->line(__('emails.reset_password.line_2', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
             ->line(__('emails.reset_password.line_3'));
+    }
+
+    /**
+     * Get the reset URL for the given notifiable.
+     *
+     * @param  mixed  $notifiable
+     * @return string
+     */
+    protected function resetUrl($notifiable)
+    {
+        return url(route('admin.password.reset', [
+            'token' => $this->token,
+            'email' => $notifiable->getEmailForPasswordReset(),
+        ], false));
     }
 }
