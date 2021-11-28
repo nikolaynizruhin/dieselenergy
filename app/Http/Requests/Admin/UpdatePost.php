@@ -15,22 +15,25 @@ class UpdatePost extends StorePost
      */
     public function rules()
     {
-        return array_merge(parent::rules(), [
-            'title' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('posts')->ignore($this->post),
+        return [
+            ...parent::rules(),
+            ...[
+                'title' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('posts')->ignore($this->post),
+                ],
+                'slug' => [
+                    'required',
+                    'string',
+                    'alpha_dash',
+                    'max:255',
+                    Rule::unique('posts')->ignore($this->post),
+                ],
+                'image' => 'image',
             ],
-            'slug' => [
-                'required',
-                'string',
-                'alpha_dash',
-                'max:255',
-                Rule::unique('posts')->ignore($this->post),
-            ],
-            'image' => 'image',
-        ]);
+        ];
     }
 
     /**

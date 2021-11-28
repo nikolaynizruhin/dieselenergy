@@ -13,14 +13,17 @@ class UpdateCustomer extends StoreCustomer
      */
     public function rules()
     {
-        return array_merge(parent::rules(), [
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('customers')->ignore($this->customer),
+        return [
+            ...parent::rules(),
+            ...[
+                'email' => [
+                    'required',
+                    'string',
+                    'email',
+                    'max:255',
+                    Rule::unique('customers')->ignore($this->customer),
+                ],
             ],
-        ]);
+        ];
     }
 }

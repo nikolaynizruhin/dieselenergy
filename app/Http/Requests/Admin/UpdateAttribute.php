@@ -13,13 +13,16 @@ class UpdateAttribute extends StoreAttribute
      */
     public function rules()
     {
-        return array_merge(parent::rules(), [
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('attributes')->ignore($this->attribute),
+        return [
+            ...parent::rules(),
+            ...[
+                'name' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('attributes')->ignore($this->attribute),
+                ],
             ],
-        ]);
+        ];
     }
 }

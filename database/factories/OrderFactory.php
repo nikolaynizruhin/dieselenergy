@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\Status;
 use App\Models\Customer;
-use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderFactory extends Factory
@@ -17,7 +17,7 @@ class OrderFactory extends Factory
     {
         return [
             'customer_id' => Customer::factory(),
-            'status' => $this->faker->randomElement(Order::statuses()),
+            'status' => $this->faker->randomElement(Status::all()),
             'total' => $this->faker->randomNumber(5),
             'notes' => $this->faker->sentence(),
         ];

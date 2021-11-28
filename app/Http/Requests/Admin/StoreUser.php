@@ -38,8 +38,9 @@ class StoreUser extends FormRequest
      */
     public function getAttributes()
     {
-        return array_merge($this->validated(), [
-            'password' => Hash::make($this->password),
-        ]);
+        return [
+            ...$this->validated(),
+            ...['password' => Hash::make($this->password)],
+        ];
     }
 }

@@ -60,9 +60,10 @@ class StoreProduct extends FormRequest
     public function getProductAttributes()
     {
         return Arr::except(
-            array_merge($this->validated(), [
-                'price' => intval($this->price * 100),
-            ]),
+            [
+                ...$this->validated(),
+                ...['price' => intval($this->price * 100)],
+            ],
             'attributes',
         );
     }

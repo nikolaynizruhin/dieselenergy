@@ -37,6 +37,6 @@ class ReadDashboardTest extends TestCase
             ->assertViewHas('orders')
             ->assertViewHas('totalCustomers', 2)
             ->assertViewHas('soldProducts', 2)
-            ->assertSeeInOrder([$orderA->status, $orderB->status]);
+            ->assertSeeInOrder([$orderA->status->value, $orderB->status->value]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Status;
 use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,54 +12,21 @@ class Order extends Model
     use HasFactory, Filterable;
 
     /**
-     * The new order status.
-     *
-     * @var string
-     */
-    const STATUS_NEW = 'Новий';
-
-    /**
-     * The pending order status.
-     *
-     * @var string
-     */
-    const STATUS_PENDING = 'В очікуванні';
-
-    /**
-     * The done order status.
-     *
-     * @var string
-     */
-    const STATUS_DONE = 'Зроблено';
-
-    /**
-     * The new order badge.
-     *
-     * @var string
-     */
-    const BADGE_NEW = 'primary';
-
-    /**
-     * The pending order badge.
-     *
-     * @var string
-     */
-    const BADGE_PENDING = 'warning';
-
-    /**
-     * The done order badge.
-     *
-     * @var string
-     */
-    const BADGE_DONE = 'success';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
         'customer_id', 'status', 'total', 'notes',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => Status::class,
     ];
 
     /**
@@ -78,34 +46,6 @@ class Order extends Model
             ->using(Cart::class)
             ->withPivot('id', 'quantity')
             ->withTimestamps();
-    }
-
-    /**
-     * Get statuses.
-     *
-     * @return array
-     */
-    public static function statuses()
-    {
-        return [
-            self::STATUS_NEW,
-            self::STATUS_PENDING,
-            self::STATUS_DONE,
-        ];
-    }
-
-    /**
-     * Get badges.
-     *
-     * @return array
-     */
-    public static function badges()
-    {
-        return [
-            self::STATUS_NEW => self::BADGE_NEW,
-            self::STATUS_PENDING => self::BADGE_PENDING,
-            self::STATUS_DONE => self::BADGE_DONE,
-        ];
     }
 
     /**
@@ -134,15 +74,5 @@ class Order extends Model
     public function getDecimalTotalAttribute()
     {
         return number_format($this->total / 100, 2, '.', '');
-    }
-
-    /**
-     * Get badge.
-     *
-     * @return string
-     */
-    public function getBadgeAttribute()
-    {
-        return self::badges()[$this->status];
     }
 }

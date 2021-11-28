@@ -13,19 +13,21 @@ class UpdateCurrency extends StoreCurrency
      */
     public function rules()
     {
-        return array_merge(parent::rules(), [
-            'code' => [
-                'required',
-                'string',
-                'size:3',
-                Rule::unique('currencies')->ignore($this->currency),
+        return [
+            ...parent::rules(),
+            ...[
+                'code' => [
+                    'required',
+                    'string',
+                    'size:3',
+                    Rule::unique('currencies')->ignore($this->currency),
+                ],
+                'symbol' => [
+                    'required',
+                    'string',
+                    Rule::unique('currencies')->ignore($this->currency),
+                ],
             ],
-            'symbol' => [
-                'required',
-                'string',
-                Rule::unique('currencies')->ignore($this->currency),
-
-            ],
-        ]);
+        ];
     }
 }

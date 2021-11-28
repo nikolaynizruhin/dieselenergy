@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Status;
 use App\Filters\Filterable;
 use App\Notifications\OrderConfirmed;
 use Facades\App\Cart\Cart;
@@ -54,7 +55,7 @@ class Customer extends Model
     public function createOrder($notes = '')
     {
         $order = $this->orders()->create([
-            'status' => Order::STATUS_NEW,
+            'status' => Status::NEW,
             'notes' => $notes,
         ]);
 
