@@ -32,7 +32,7 @@ enum Status: string
      */
     public function badge()
     {
-        return match($this) {
+        return match ($this) {
             Status::NEW => 'primary',
             Status::PENDING => 'warning',
             Status::DONE => 'success',
