@@ -37,18 +37,6 @@ class UpdatePost extends StorePost
     }
 
     /**
-     * Create an image.
-     *
-     * @return \App\Models\Image
-     */
-    public function createImage()
-    {
-        return Image::create([
-            'path' => $this->file('image')->store('images'),
-        ]);
-    }
-
-    /**
      * Get validated product attributes.
      *
      * @return array
