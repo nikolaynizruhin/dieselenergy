@@ -55,7 +55,7 @@ class Customer extends Model
     public function createOrder($notes = '')
     {
         $order = $this->orders()->create([
-            'status' => Status::NEW,
+            'status' => Status::New,
             'notes' => $notes,
         ]);
 

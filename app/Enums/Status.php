@@ -9,21 +9,21 @@ enum Status: string
      *
      * @var string
      */
-    case NEW = 'Новий';
+    case New = 'Новий';
 
     /**
      * The pending order status.
      *
      * @var string
      */
-    case PENDING = 'В очікуванні';
+    case Pending = 'В очікуванні';
 
     /**
      * The done order status.
      *
      * @var string
      */
-    case DONE = 'Зроблено';
+    case Done = 'Зроблено';
 
     /**
      * Get badge.
@@ -33,9 +33,9 @@ enum Status: string
     public function badge()
     {
         return match ($this) {
-            Status::NEW => 'primary',
-            Status::PENDING => 'warning',
-            Status::DONE => 'success',
+            Status::New => 'primary',
+            Status::Pending => 'warning',
+            Status::Done => 'success',
         };
     }
 

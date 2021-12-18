@@ -75,7 +75,7 @@ class CreateOrderTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('orders', [
-            'status' => Status::NEW,
+            'status' => Status::New,
             'total' => $total,
             'notes' => $fields['notes'],
         ]);
