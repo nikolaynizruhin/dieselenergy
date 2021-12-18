@@ -13,15 +13,18 @@ class UpdateSpecification extends StoreSpecification
      */
     public function rules()
     {
-        return array_merge(parent::rules(), [
-            'attribute_id' => [
-                'required',
-                'numeric',
-                'exists:attributes,id',
-                Rule::unique('attribute_category')
-                    ->ignore($this->specification)
-                    ->where('category_id', $this->category_id),
+        return [
+            ...parent::rules(),
+            ...[
+                'attribute_id' => [
+                    'required',
+                    'numeric',
+                    'exists:attributes,id',
+                    Rule::unique('attribute_category')
+                        ->ignore($this->specification)
+                        ->where('category_id', $this->category_id),
+                ],
             ],
-        ]);
+        ];
     }
 }

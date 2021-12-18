@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin\Order;
 
+use App\Enums\Status;
 use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -58,8 +59,8 @@ class SortOrdersTest extends TestCase
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
-                ['status' => Order::STATUS_PENDING],
-                ['status' => Order::STATUS_NEW],
+                ['status' => Status::Pending],
+                ['status' => Status::New],
             ))->create();
 
         $this->login()
@@ -67,7 +68,7 @@ class SortOrdersTest extends TestCase
             ->assertSuccessful()
             ->assertViewIs('admin.orders.index')
             ->assertViewHas('orders')
-            ->assertSeeInOrder([$adam->status, $tom->status]);
+            ->assertSeeInOrder([$adam->status->value, $tom->status->value]);
     }
 
     /** @test */
@@ -76,8 +77,8 @@ class SortOrdersTest extends TestCase
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
-                ['status' => Order::STATUS_PENDING],
-                ['status' => Order::STATUS_NEW],
+                ['status' => Status::Pending],
+                ['status' => Status::New],
             ))->create();
 
         $this->login()
@@ -85,7 +86,7 @@ class SortOrdersTest extends TestCase
             ->assertSuccessful()
             ->assertViewIs('admin.orders.index')
             ->assertViewHas('orders')
-            ->assertSeeInOrder([$tom->status, $adam->status]);
+            ->assertSeeInOrder([$tom->status->value, $adam->status->value]);
     }
 
     /** @test */

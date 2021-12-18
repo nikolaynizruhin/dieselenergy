@@ -13,15 +13,18 @@ class UpdateMedia extends StoreMedia
      */
     public function rules()
     {
-        return array_merge(parent::rules(), [
-            'product_id' => [
-                'required',
-                'numeric',
-                'exists:products,id',
-                Rule::unique('image_product')
-                    ->ignore($this->media)
-                    ->where('image_id', $this->image_id),
+        return [
+            ...parent::rules(),
+            ...[
+                'product_id' => [
+                    'required',
+                    'numeric',
+                    'exists:products,id',
+                    Rule::unique('image_product')
+                        ->ignore($this->media)
+                        ->where('image_id', $this->image_id),
+                ],
             ],
-        ]);
+        ];
     }
 }

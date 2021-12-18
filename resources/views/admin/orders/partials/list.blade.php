@@ -65,7 +65,7 @@
                     @endif
                     <td>{{ $order->id }}</td>
                     <td>
-                        @include('admin.layouts.partials.status', ['status' => $order->status, 'type' => $order->badge])
+                        @include('admin.layouts.partials.status', ['status' => $order->status->value, 'type' => $order->status->badge()])
                     </td>
                     <td class="text-nowrap">{{ $order->created_at->format('Y-m-d H:i') }}</td>
                     <td class="text-nowrap">@uah($order->total)</td>

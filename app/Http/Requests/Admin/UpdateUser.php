@@ -17,14 +17,17 @@ class UpdateUser extends StoreUser
 
         unset($rules['password']);
 
-        return array_merge($rules, [
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users')->ignore($this->user),
+        return [
+            ...$rules,
+            ...[
+                'email' => [
+                    'required',
+                    'string',
+                    'email',
+                    'max:255',
+                    Rule::unique('users')->ignore($this->user),
+                ],
             ],
-        ]);
+        ];
     }
 }

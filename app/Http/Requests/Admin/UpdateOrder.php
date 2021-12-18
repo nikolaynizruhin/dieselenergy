@@ -21,8 +21,9 @@ class UpdateOrder extends StoreOrder
      */
     public function prepared()
     {
-        return array_merge($this->validated(), [
-            'total' => intval($this->total * 100),
-        ]);
+        return [
+            ...$this->validated(),
+            ...['total' => intval($this->total * 100)],
+        ];
     }
 }

@@ -30,6 +30,6 @@ class ReadOrdersTest extends TestCase
             ->assertSuccessful()
             ->assertViewIs('admin.orders.index')
             ->assertViewHas('orders')
-            ->assertSeeInOrder([$orderA->status, $orderB->status]);
+            ->assertSeeInOrder([$orderA->id, $orderB->id]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin\Customer;
 
+use App\Enums\Status;
 use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -65,8 +66,8 @@ class SortOrdersTest extends TestCase
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
             ->state(new Sequence(
-                ['status' => Order::STATUS_NEW],
-                ['status' => Order::STATUS_PENDING],
+                ['status' => Status::New],
+                ['status' => Status::Pending],
             ))->create(['customer_id' => $this->customer->id]);
 
         $this->login()
@@ -74,7 +75,7 @@ class SortOrdersTest extends TestCase
                 'customer' => $this->customer,
                 'sort' => ['order' => 'status'],
             ]))->assertSuccessful()
-            ->assertSeeInOrder([$orderTwo->status, $orderOne->status]);
+            ->assertSeeInOrder([$orderTwo->status->value, $orderOne->status->value]);
     }
 
     /** @test */
@@ -83,8 +84,8 @@ class SortOrdersTest extends TestCase
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
             ->state(new Sequence(
-                ['status' => Order::STATUS_NEW],
-                ['status' => Order::STATUS_PENDING],
+                ['status' => Status::New],
+                ['status' => Status::Pending],
             ))->create(['customer_id' => $this->customer->id]);
 
         $this->login()
@@ -92,7 +93,7 @@ class SortOrdersTest extends TestCase
                 'customer' => $this->customer,
                 'sort' => ['order' => '-status'],
             ]))->assertSuccessful()
-            ->assertSeeInOrder([$orderOne->status, $orderTwo->status]);
+            ->assertSeeInOrder([$orderOne->status->value, $orderTwo->status->value]);
     }
 
     /** @test */

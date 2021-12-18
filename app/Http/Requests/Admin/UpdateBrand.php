@@ -13,13 +13,16 @@ class UpdateBrand extends StoreBrand
      */
     public function rules()
     {
-        return array_merge(parent::rules(), [
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('brands')->ignore($this->brand),
+        return [
+            ...parent::rules(),
+            ...[
+                'name' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('brands')->ignore($this->brand),
+                ],
             ],
-        ]);
+        ];
     }
 }

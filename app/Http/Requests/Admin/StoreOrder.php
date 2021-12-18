@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Models\Order;
+use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreOrder extends FormRequest
 {
@@ -27,7 +27,7 @@ class StoreOrder extends FormRequest
     {
         return [
             'customer_id' => 'required|numeric|exists:customers,id',
-            'status' => ['required', 'string', Rule::in(Order::statuses())],
+            'status' => ['required', 'string', new Enum(Status::class)],
             'notes' => 'nullable|string',
         ];
     }

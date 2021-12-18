@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Order;
 
+use App\Enums\Status;
 use App\Events\OrderCreated as OrderCreatedEvent;
 use App\Models\Brand;
 use App\Models\Currency;
@@ -74,7 +75,7 @@ class CreateOrderTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('orders', [
-            'status' => Order::STATUS_NEW,
+            'status' => Status::New,
             'total' => $total,
             'notes' => $fields['notes'],
         ]);

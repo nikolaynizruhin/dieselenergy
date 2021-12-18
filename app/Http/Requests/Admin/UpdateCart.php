@@ -13,15 +13,18 @@ class UpdateCart extends StoreCart
      */
     public function rules()
     {
-        return array_merge(parent::rules(), [
-            'product_id' => [
-                'required',
-                'numeric',
-                'exists:products,id',
-                Rule::unique('order_product')
-                    ->ignore($this->cart)
-                    ->where('order_id', $this->order_id),
+        return [
+            ...parent::rules(),
+            ...[
+                'product_id' => [
+                    'required',
+                    'numeric',
+                    'exists:products,id',
+                    Rule::unique('order_product')
+                        ->ignore($this->cart)
+                        ->where('order_id', $this->order_id),
+                ],
             ],
-        ]);
+        ];
     }
 }
