@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Models\Image;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 
