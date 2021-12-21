@@ -68,6 +68,7 @@ return [
     'ip' => 'Поле :attribute має містити IP адресу.',
     'ipv4' => 'Поле :attribute має містити IPv4 адресу.',
     'ipv6' => 'Поле :attribute має містити IPv6 адресу.',
+    'mac_address' => 'Поле :attribute має містити MAC адресу.',
     'json' => 'Дані поля :attribute мають бути у форматі JSON.',
     'lt' => [
         'numeric' => 'Поле :attribute має бути менше ніж :value.',
