@@ -33,7 +33,7 @@ class StoreOrder extends FormRequest
         ];
 
         if ($this->isMethod(Request::METHOD_PUT)) {
-            $rules = $rules + ['total' => 'required|numeric|min:0'];
+            $rules['total'] = 'required|numeric|min:0';
         }
 
         return $rules;

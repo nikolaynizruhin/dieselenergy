@@ -40,7 +40,7 @@ class StoreUser extends FormRequest
         ];
 
         if ($this->isMethod(Request::METHOD_POST)) {
-            $rules = $rules + ['password' => 'required|string|min:8|confirmed'];
+            $rules['password'] = 'required|string|min:8|confirmed';
         }
 
         return $rules;
