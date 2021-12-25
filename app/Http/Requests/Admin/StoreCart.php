@@ -44,8 +44,8 @@ class StoreCart extends FormRequest
      */
     private function unique()
     {
-        return $this->isMethod(Request::METHOD_POST)
-            ? Rule::unique('order_product')->where('order_id', $this->order_id)
-            : Rule::unique('order_product')->ignore($this->cart)->where('order_id', $this->order_id);
+        $rule = Rule::unique('order_product')->where('order_id', $this->order_id);
+
+        return $this->isMethod(Request::METHOD_POST) ? $rule : $rule->ignore($this->cart);
     }
 }

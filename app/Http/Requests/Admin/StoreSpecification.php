@@ -44,9 +44,9 @@ class StoreSpecification extends FormRequest
      */
     private function unique()
     {
-        return $this->isMethod(Request::METHOD_POST)
-            ? Rule::unique('attribute_category')->where('category_id', $this->category_id)
-            : Rule::unique('attribute_category')->ignore($this->specification)->where('category_id', $this->category_id);
+        $rule = Rule::unique('attribute_category')->where('category_id', $this->category_id);
+
+        return $this->isMethod(Request::METHOD_POST) ? $rule : $rule->ignore($this->specification);
     }
 
     /**

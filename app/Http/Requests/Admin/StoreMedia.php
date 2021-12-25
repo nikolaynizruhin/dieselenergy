@@ -44,9 +44,9 @@ class StoreMedia extends FormRequest
      */
     private function unique()
     {
-        return $this->isMethod(Request::METHOD_POST)
-            ? Rule::unique('image_product')->where('image_id', $this->image_id)
-            : Rule::unique('image_product')->ignore($this->media)->where('image_id', $this->image_id);
+        $rule = Rule::unique('image_product')->where('image_id', $this->image_id);
+
+        return $this->isMethod(Request::METHOD_POST) ? $rule : $rule->ignore($this->media);
     }
 
     /**
