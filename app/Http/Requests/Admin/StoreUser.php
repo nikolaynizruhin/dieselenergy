@@ -35,7 +35,7 @@ class StoreUser extends FormRequest
                 'max:255',
                 $this->isMethod(Request::METHOD_POST)
                     ? Rule::unique('users')
-                    : Rule::unique('users')->ignore($this->user)
+                    : Rule::unique('users')->ignore($this->user),
             ],
         ];
 
