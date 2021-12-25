@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Filters\Admin\BrandFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreBrand;
-use App\Http\Requests\Admin\UpdateBrand;
 use App\Models\Brand;
 
 class BrandController extends Controller
@@ -68,11 +67,11 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdateBrand  $request
+     * @param  \App\Http\Requests\Admin\StoreBrand  $request
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBrand $request, Brand $brand)
+    public function update(StoreBrand $request, Brand $brand)
     {
         $brand->update($request->validated());
 

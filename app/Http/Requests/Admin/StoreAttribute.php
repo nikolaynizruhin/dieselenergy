@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class StoreAttribute extends FormRequest
 {
@@ -24,7 +26,14 @@ class StoreAttribute extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:attributes',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('attributes')
+                    : Rule::unique('attributes')->ignore($this->attribute),
+            ],
             'measure' => 'nullable|string|max:255',
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class StoreCart extends FormRequest
@@ -31,8 +32,9 @@ class StoreCart extends FormRequest
                 'required',
                 'numeric',
                 'exists:products,id',
-                Rule::unique('order_product')
-                    ->where('order_id', $this->order_id),
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('order_product')->where('order_id', $this->order_id)
+                    : Rule::unique('order_product')->ignore($this->cart)->where('order_id', $this->order_id),
             ],
         ];
     }

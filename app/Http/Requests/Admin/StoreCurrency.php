@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class StoreCurrency extends FormRequest
 {
@@ -24,8 +26,21 @@ class StoreCurrency extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required|string|size:3|unique:currencies',
-            'symbol' => 'required|string|unique:currencies',
+            'code' => [
+                'required',
+                'string',
+                'size:3',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('currencies')
+                    : Rule::unique('currencies')->ignore($this->currency),
+            ],
+            'symbol' => [
+                'required',
+                'string',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('currencies')
+                    : Rule::unique('currencies')->ignore($this->currency),
+            ],
             'rate' => 'required|numeric|min:0',
         ];
     }

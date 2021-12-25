@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Filters\Admin\PostFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePost;
-use App\Http\Requests\Admin\UpdatePost;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -76,11 +75,11 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdatePost  $request
+     * @param  \App\Http\Requests\Admin\StorePost  $request
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePost $request, Post $post)
+    public function update(StorePost $request, Post $post)
     {
         $post->update($request->getAttributes());
 

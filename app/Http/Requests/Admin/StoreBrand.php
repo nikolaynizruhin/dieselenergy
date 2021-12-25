@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class StoreBrand extends FormRequest
 {
@@ -24,7 +26,14 @@ class StoreBrand extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:brands',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('brands')
+                    : Rule::unique('brands')->ignore($this->brand),
+            ],
             'currency_id' => 'required|numeric|exists:currencies,id',
         ];
     }

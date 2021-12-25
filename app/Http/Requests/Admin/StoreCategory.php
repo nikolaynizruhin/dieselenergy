@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class StoreCategory extends FormRequest
 {
@@ -24,8 +26,23 @@ class StoreCategory extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:categories',
-            'slug' => 'required|string|max:255|alpha_dash|unique:categories',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('categories')
+                    : Rule::unique('categories')->ignore($this->category),
+            ],
+            'slug' => [
+                'required',
+                'string',
+                'alpha_dash',
+                'max:255',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('categories')
+                    : Rule::unique('categories')->ignore($this->category),
+            ],
         ];
     }
 }

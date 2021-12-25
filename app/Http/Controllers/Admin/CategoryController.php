@@ -6,7 +6,6 @@ use App\Filters\Admin\AttributeFilters;
 use App\Filters\Admin\CategoryFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCategory;
-use App\Http\Requests\Admin\UpdateCategory;
 use App\Models\Category;
 
 class CategoryController extends Controller
@@ -85,11 +84,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdateCategory  $request
+     * @param  \App\Http\Requests\Admin\StoreCategory  $request
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategory $request, Category $category)
+    public function update(StoreCategory $request, Category $category)
     {
         $category->update($request->validated());
 

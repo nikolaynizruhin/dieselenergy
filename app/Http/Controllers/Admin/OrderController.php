@@ -6,7 +6,6 @@ use App\Filters\Admin\OrderFilters;
 use App\Filters\Admin\ProductFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreOrder;
-use App\Http\Requests\Admin\UpdateOrder;
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 
@@ -89,11 +88,11 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdateOrder  $request
+     * @param  \App\Http\Requests\Admin\StoreOrder  $request
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOrder $request, Order $order)
+    public function update(StoreOrder $request, Order $order)
     {
         $order->update($request->prepared());
 

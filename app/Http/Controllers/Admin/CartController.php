@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCart;
-use App\Http\Requests\Admin\UpdateCart;
 use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -53,11 +52,11 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdateCart  $request
+     * @param  \App\Http\Requests\Admin\StoreCart  $request
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCart $request, Cart $cart)
+    public function update(StoreCart $request, Cart $cart)
     {
         $cart->update($request->validated());
 

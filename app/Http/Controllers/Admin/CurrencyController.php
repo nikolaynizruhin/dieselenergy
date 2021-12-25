@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Filters\Admin\CurrencyFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCurrency;
-use App\Http\Requests\Admin\UpdateCurrency;
 use App\Models\Currency;
 
 class CurrencyController extends Controller
@@ -65,11 +64,11 @@ class CurrencyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdateCurrency  $request
+     * @param  \App\Http\Requests\Admin\StoreCurrency  $request
      * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCurrency $request, Currency $currency)
+    public function update(StoreCurrency $request, Currency $currency)
     {
         $currency->update($request->validated());
 

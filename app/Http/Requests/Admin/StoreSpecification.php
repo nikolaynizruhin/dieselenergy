@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class StoreSpecification extends FormRequest
@@ -30,8 +31,9 @@ class StoreSpecification extends FormRequest
                 'required',
                 'numeric',
                 'exists:attributes,id',
-                Rule::unique('attribute_category')
-                    ->where('category_id', $this->category_id),
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('attribute_category')->where('category_id', $this->category_id)
+                    : Rule::unique('attribute_category')->ignore($this->specification)->where('category_id', $this->category_id),
             ],
             'is_featured' => 'boolean',
         ];

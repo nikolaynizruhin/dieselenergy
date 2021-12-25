@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreMedia;
-use App\Http\Requests\Admin\UpdateMedia;
 use App\Models\Media;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -53,11 +52,11 @@ class MediaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdateMedia  $request
+     * @param  \App\Http\Requests\Admin\StoreMedia  $request
      * @param  \App\Models\Media  $media
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMedia $request, Media $media)
+    public function update(StoreMedia $request, Media $media)
     {
         $media->update($request->validated());
 

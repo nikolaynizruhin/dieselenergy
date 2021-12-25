@@ -7,7 +7,6 @@ use App\Filters\Admin\Customer\OrderFilters;
 use App\Filters\Admin\CustomerFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCustomer;
-use App\Http\Requests\Admin\UpdateCustomer;
 use App\Models\Customer;
 
 class CustomerController extends Controller
@@ -94,11 +93,11 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdateCustomer  $request
+     * @param  \App\Http\Requests\Admin\StoreCustomer  $request
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCustomer $request, Customer $customer)
+    public function update(StoreCustomer $request, Customer $customer)
     {
         $customer->update($request->validated());
 

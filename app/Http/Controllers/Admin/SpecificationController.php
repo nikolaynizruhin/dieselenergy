@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreSpecification;
-use App\Http\Requests\Admin\UpdateSpecification;
 use App\Models\Category;
 use App\Models\Specification;
 use Illuminate\Http\Request;
@@ -53,11 +52,11 @@ class SpecificationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdateSpecification  $request
+     * @param  \App\Http\Requests\Admin\StoreSpecification  $request
      * @param  \App\Models\Specification  $specification
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSpecification $request, Specification $specification)
+    public function update(StoreSpecification $request, Specification $specification)
     {
         $specification->update($request->validated());
 

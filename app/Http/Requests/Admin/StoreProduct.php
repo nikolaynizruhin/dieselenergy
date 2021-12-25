@@ -4,7 +4,9 @@ namespace App\Http\Requests\Admin;
 
 use App\Models\Specification;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rule;
 
 class StoreProduct extends FormRequest
 {
@@ -26,9 +28,31 @@ class StoreProduct extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:products',
-            'model' => 'required|string|max:255|unique:products',
-            'slug' => 'required|string|alpha_dash|max:255|unique:products',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('products')
+                    : Rule::unique('products')->ignore($this->product),
+            ],
+            'model' => [
+                'required',
+                'string',
+                'max:255',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('products')
+                    : Rule::unique('products')->ignore($this->product),
+            ],
+            'slug' => [
+                'required',
+                'string',
+                'alpha_dash',
+                'max:255',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('products')
+                    : Rule::unique('products')->ignore($this->product),
+            ],
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:1',
             'is_active' => 'boolean',

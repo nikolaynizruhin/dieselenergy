@@ -3,7 +3,9 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class StoreUser extends FormRequest
 {
@@ -24,11 +26,24 @@ class StoreUser extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('users')
+                    : Rule::unique('users')->ignore($this->user)
+            ],
         ];
+
+        if ($this->isMethod(Request::METHOD_POST)) {
+            $rules = $rules + ['password' => 'required|string|min:8|confirmed'];
+        }
+
+        return $rules;
     }
 
     /**

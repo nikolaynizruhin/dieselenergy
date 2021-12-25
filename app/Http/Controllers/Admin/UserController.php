@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Filters\Admin\UserFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUser;
-use App\Http\Requests\Admin\UpdateUser;
 use App\Models\User;
 
 class UserController extends Controller
@@ -65,11 +64,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdateUser  $request
+     * @param  \App\Http\Requests\Admin\StoreUser  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUser $request, User $user)
+    public function update(StoreUser $request, User $user)
     {
         $user->update($request->validated());
 

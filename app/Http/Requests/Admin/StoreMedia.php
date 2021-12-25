@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class StoreMedia extends FormRequest
@@ -31,8 +32,9 @@ class StoreMedia extends FormRequest
                 'required',
                 'numeric',
                 'exists:products,id',
-                Rule::unique('image_product')
-                    ->where('image_id', $this->image_id),
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('image_product')->where('image_id', $this->image_id)
+                    : Rule::unique('image_product')->ignore($this->media)->where('image_id', $this->image_id),
             ],
         ];
     }

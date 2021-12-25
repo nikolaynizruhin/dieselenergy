@@ -4,7 +4,9 @@ namespace App\Http\Requests\Admin;
 
 use App\Models\Image;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rule;
 
 class StorePost extends FormRequest
 {
@@ -26,11 +28,26 @@ class StorePost extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:255|unique:posts',
-            'slug' => 'required|string|alpha_dash|max:255|unique:posts',
+            'title' => [
+                'required',
+                'string',
+                'max:255',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('posts')
+                    : Rule::unique('posts')->ignore($this->post),
+            ],
+            'slug' => [
+                'required',
+                'string',
+                'alpha_dash',
+                'max:255',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('posts')
+                    : Rule::unique('posts')->ignore($this->post),
+            ],
+            'image' => 'image'.($this->isMethod(Request::METHOD_POST) ? '|required' : ''),
             'excerpt' => 'required|string',
             'body' => 'required|string',
-            'image' => 'required|image',
         ];
     }
 
@@ -53,8 +70,12 @@ class StorePost extends FormRequest
      */
     public function getAttributes()
     {
-        return Arr::except($this->validated(), 'image') + [
-            'image_id' => $this->createImage()->id,
-        ];
+        $attributes = Arr::except($this->validated(), 'image');
+
+        if ($this->hasFile('image')) {
+            $attributes['image_id'] = $this->createImage()->id;
+        }
+
+        return $attributes;
     }
 }

@@ -6,7 +6,6 @@ use App\Filters\Admin\ImageFilters;
 use App\Filters\Admin\ProductFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreProduct;
-use App\Http\Requests\Admin\UpdateProduct;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -103,11 +102,11 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdateProduct  $request
+     * @param  \App\Http\Requests\Admin\StoreProduct  $request
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProduct $request, Product $product)
+    public function update(StoreProduct $request, Product $product)
     {
         $product->update($request->getProductAttributes());
 

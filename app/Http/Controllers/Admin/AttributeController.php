@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Filters\Admin\AttributeFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreAttribute;
-use App\Http\Requests\Admin\UpdateAttribute;
 use App\Models\Attribute;
 
 class AttributeController extends Controller
@@ -65,11 +64,11 @@ class AttributeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdateAttribute  $request
+     * @param  \App\Http\Requests\Admin\StoreAttribute  $request
      * @param  \App\Models\Attribute  $attribute
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAttribute $request, Attribute $attribute)
+    public function update(StoreAttribute $request, Attribute $attribute)
     {
         $attribute->update($request->validated());
 

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Enum;
 
 class StoreOrder extends FormRequest
@@ -25,10 +26,29 @@ class StoreOrder extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'customer_id' => 'required|numeric|exists:customers,id',
             'status' => ['required', 'string', new Enum(Status::class)],
             'notes' => 'nullable|string',
+        ];
+
+        if ($this->isMethod(Request::METHOD_PUT)) {
+            $rules = $rules + ['total' => 'required|numeric|min:0'];
+        }
+
+        return $rules;
+    }
+
+    /**
+     * Get prepared data.
+     *
+     * @return array
+     */
+    public function prepared()
+    {
+        return [
+            ...$this->validated(),
+            ...['total' => intval($this->total * 100)],
         ];
     }
 }

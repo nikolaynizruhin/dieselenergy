@@ -4,6 +4,8 @@ namespace App\Http\Requests\Admin;
 
 use App\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class StoreCustomer extends FormRequest
 {
@@ -26,7 +28,15 @@ class StoreCustomer extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:customers',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                $this->isMethod(Request::METHOD_POST)
+                    ? Rule::unique('customers')
+                    : Rule::unique('customers')->ignore($this->customer),
+            ],
             'phone' => 'required|regex:'.Customer::PHONE_REGEX,
             'notes' => 'nullable|string',
         ];
