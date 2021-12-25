@@ -41,7 +41,9 @@ class StorePost extends FormRequest
                 'max:255',
                 $this->unique(),
             ],
-            'image' => 'image'.($this->isMethod(Request::METHOD_POST) ? '|required' : ''),
+            'image' => $this->isMethod(Request::METHOD_POST)
+                ? 'required|image'
+                : 'image',
             'excerpt' => 'required|string',
             'body' => 'required|string',
         ];
