@@ -4,11 +4,11 @@ namespace App\Http\Requests\Admin;
 
 use App\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class StoreCustomer extends FormRequest
 {
+    use HasUniqueRule;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,22 +33,10 @@ class StoreCustomer extends FormRequest
                 'string',
                 'email',
                 'max:255',
-                $this->unique(),
+                $this->unique('customer'),
             ],
             'phone' => 'required|regex:'.Customer::PHONE_REGEX,
             'notes' => 'nullable|string',
         ];
-    }
-
-    /**
-     * Get unique rule.
-     *
-     * @return \Illuminate\Validation\Rules\Unique
-     */
-    private function unique()
-    {
-        return $this->isMethod(Request::METHOD_POST)
-            ? Rule::unique('customers')
-            : Rule::unique('customers')->ignore($this->customer);
     }
 }

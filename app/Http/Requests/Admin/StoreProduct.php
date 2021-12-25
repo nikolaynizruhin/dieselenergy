@@ -4,12 +4,12 @@ namespace App\Http\Requests\Admin;
 
 use App\Models\Specification;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Validation\Rule;
 
 class StoreProduct extends FormRequest
 {
+    use HasUniqueRule;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,20 +32,20 @@ class StoreProduct extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                $this->unique(),
+                $this->unique('product'),
             ],
             'model' => [
                 'required',
                 'string',
                 'max:255',
-                $this->unique(),
+                $this->unique('product'),
             ],
             'slug' => [
                 'required',
                 'string',
                 'alpha_dash',
                 'max:255',
-                $this->unique(),
+                $this->unique('product'),
             ],
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:1',
@@ -54,18 +54,6 @@ class StoreProduct extends FormRequest
             'category_id' => 'required|numeric|exists:categories,id',
             'images.*' => 'image',
         ] + $this->getAttributeRules('nullable|string|max:255');
-    }
-
-    /**
-     * Get unique rule.
-     *
-     * @return \Illuminate\Validation\Rules\Unique
-     */
-    private function unique()
-    {
-        return $this->isMethod(Request::METHOD_POST)
-            ? Rule::unique('products')
-            : Rule::unique('products')->ignore($this->product);
     }
 
     /**

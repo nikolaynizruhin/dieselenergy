@@ -5,10 +5,11 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class StoreUser extends FormRequest
 {
+    use HasUniqueRule;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,7 +34,7 @@ class StoreUser extends FormRequest
                 'string',
                 'email',
                 'max:255',
-                $this->unique(),
+                $this->unique('user'),
             ],
         ];
 
@@ -42,18 +43,6 @@ class StoreUser extends FormRequest
         }
 
         return $rules;
-    }
-
-    /**
-     * Get unique rule.
-     *
-     * @return \Illuminate\Validation\Rules\Unique
-     */
-    private function unique()
-    {
-        return $this->isMethod(Request::METHOD_POST)
-            ? Rule::unique('users')
-            : Rule::unique('users')->ignore($this->user);
     }
 
     /**

@@ -6,10 +6,11 @@ use App\Models\Image;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Validation\Rule;
 
 class StorePost extends FormRequest
 {
+    use HasUniqueRule;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,14 +33,14 @@ class StorePost extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                $this->unique(),
+                $this->unique('post'),
             ],
             'slug' => [
                 'required',
                 'string',
                 'alpha_dash',
                 'max:255',
-                $this->unique(),
+                $this->unique('post'),
             ],
             'image' => $this->isMethod(Request::METHOD_POST)
                 ? 'required|image'
@@ -47,18 +48,6 @@ class StorePost extends FormRequest
             'excerpt' => 'required|string',
             'body' => 'required|string',
         ];
-    }
-
-    /**
-     * Get unique rule.
-     *
-     * @return \Illuminate\Validation\Rules\Unique
-     */
-    private function unique()
-    {
-        return $this->isMethod(Request::METHOD_POST)
-            ? Rule::unique('posts')
-            : Rule::unique('posts')->ignore($this->post);
     }
 
     /**

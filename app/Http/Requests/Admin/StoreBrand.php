@@ -3,11 +3,11 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class StoreBrand extends FormRequest
 {
+    use HasUniqueRule;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,21 +30,9 @@ class StoreBrand extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                $this->unique(),
+                $this->unique('brand'),
             ],
             'currency_id' => 'required|numeric|exists:currencies,id',
         ];
-    }
-
-    /**
-     * Get unique rule.
-     *
-     * @return \Illuminate\Validation\Rules\Unique
-     */
-    private function unique()
-    {
-        return $this->isMethod(Request::METHOD_POST)
-            ? Rule::unique('brands')
-            : Rule::unique('brands')->ignore($this->brand);
     }
 }
