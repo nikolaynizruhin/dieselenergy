@@ -33,9 +33,7 @@ class StoreUser extends FormRequest
                 'string',
                 'email',
                 'max:255',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('users')
-                    : Rule::unique('users')->ignore($this->user),
+                $this->unique(),
             ],
         ];
 
@@ -44,6 +42,18 @@ class StoreUser extends FormRequest
         }
 
         return $rules;
+    }
+
+    /**
+     * Get unique rule.
+     *
+     * @return \Illuminate\Validation\Rules\Unique
+     */
+    private function unique()
+    {
+        return $this->isMethod(Request::METHOD_POST)
+            ? Rule::unique('users')
+            : Rule::unique('users')->ignore($this->user);
     }
 
     /**

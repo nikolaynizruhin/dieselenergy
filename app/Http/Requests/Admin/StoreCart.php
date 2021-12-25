@@ -32,10 +32,20 @@ class StoreCart extends FormRequest
                 'required',
                 'numeric',
                 'exists:products,id',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('order_product')->where('order_id', $this->order_id)
-                    : Rule::unique('order_product')->ignore($this->cart)->where('order_id', $this->order_id),
+                $this->unique(),
             ],
         ];
+    }
+
+    /**
+     * Get unique rule.
+     *
+     * @return \Illuminate\Validation\Rules\Unique
+     */
+    private function unique()
+    {
+        return $this->isMethod(Request::METHOD_POST)
+            ? Rule::unique('order_product')->where('order_id', $this->order_id)
+            : Rule::unique('order_product')->ignore($this->cart)->where('order_id', $this->order_id);
     }
 }

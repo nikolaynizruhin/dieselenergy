@@ -31,12 +31,22 @@ class StoreSpecification extends FormRequest
                 'required',
                 'numeric',
                 'exists:attributes,id',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('attribute_category')->where('category_id', $this->category_id)
-                    : Rule::unique('attribute_category')->ignore($this->specification)->where('category_id', $this->category_id),
+                $this->unique(),
             ],
             'is_featured' => 'boolean',
         ];
+    }
+
+    /**
+     * Get unique rule.
+     *
+     * @return \Illuminate\Validation\Rules\Unique
+     */
+    private function unique()
+    {
+        return $this->isMethod(Request::METHOD_POST)
+            ? Rule::unique('attribute_category')->where('category_id', $this->category_id)
+            : Rule::unique('attribute_category')->ignore($this->specification)->where('category_id', $this->category_id);
     }
 
     /**

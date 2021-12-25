@@ -30,11 +30,21 @@ class StoreBrand extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('brands')
-                    : Rule::unique('brands')->ignore($this->brand),
+                $this->unique(),
             ],
             'currency_id' => 'required|numeric|exists:currencies,id',
         ];
+    }
+
+    /**
+     * Get unique rule.
+     *
+     * @return \Illuminate\Validation\Rules\Unique
+     */
+    private function unique()
+    {
+        return $this->isMethod(Request::METHOD_POST)
+            ? Rule::unique('brands')
+            : Rule::unique('brands')->ignore($this->brand);
     }
 }

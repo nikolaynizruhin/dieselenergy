@@ -30,11 +30,21 @@ class StoreAttribute extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('attributes')
-                    : Rule::unique('attributes')->ignore($this->attribute),
+                $this->unique(),
             ],
             'measure' => 'nullable|string|max:255',
         ];
+    }
+
+    /**
+     * Get unique rule.
+     *
+     * @return \Illuminate\Validation\Rules\Unique
+     */
+    private function unique()
+    {
+        return $this->isMethod(Request::METHOD_POST)
+            ? Rule::unique('attributes')
+            : Rule::unique('attributes')->ignore($this->attribute);
     }
 }

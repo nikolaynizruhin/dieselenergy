@@ -32,11 +32,21 @@ class StoreMedia extends FormRequest
                 'required',
                 'numeric',
                 'exists:products,id',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('image_product')->where('image_id', $this->image_id)
-                    : Rule::unique('image_product')->ignore($this->media)->where('image_id', $this->image_id),
+                $this->unique(),
             ],
         ];
+    }
+
+    /**
+     * Get unique rule.
+     *
+     * @return \Illuminate\Validation\Rules\Unique
+     */
+    private function unique()
+    {
+        return $this->isMethod(Request::METHOD_POST)
+            ? Rule::unique('image_product')->where('image_id', $this->image_id)
+            : Rule::unique('image_product')->ignore($this->media)->where('image_id', $this->image_id);
     }
 
     /**

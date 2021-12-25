@@ -33,12 +33,22 @@ class StoreCustomer extends FormRequest
                 'string',
                 'email',
                 'max:255',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('customers')
-                    : Rule::unique('customers')->ignore($this->customer),
+                $this->unique(),
             ],
             'phone' => 'required|regex:'.Customer::PHONE_REGEX,
             'notes' => 'nullable|string',
         ];
+    }
+
+    /**
+     * Get unique rule.
+     *
+     * @return \Illuminate\Validation\Rules\Unique
+     */
+    private function unique()
+    {
+        return $this->isMethod(Request::METHOD_POST)
+            ? Rule::unique('customers')
+            : Rule::unique('customers')->ignore($this->customer);
     }
 }
