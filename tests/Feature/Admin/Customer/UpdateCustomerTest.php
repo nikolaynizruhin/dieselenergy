@@ -51,8 +51,6 @@ class UpdateCustomerTest extends TestCase
     /** @test */
     public function user_can_update_customer()
     {
-        $this->withoutExceptionHandling();
-
         $this->login()
             ->put(route('admin.customers.update', $this->customer), $fields = $this->validFields())
             ->assertRedirect(route('admin.customers.index'))
