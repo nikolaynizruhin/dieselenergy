@@ -30,19 +30,27 @@ class StoreCategory extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('categories')
-                    : Rule::unique('categories')->ignore($this->category),
+                $this->unique(),
             ],
             'slug' => [
                 'required',
                 'string',
                 'alpha_dash',
                 'max:255',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('categories')
-                    : Rule::unique('categories')->ignore($this->category),
+                $this->unique(),
             ],
         ];
+    }
+
+    /**
+     * Get unique rule.
+     *
+     * @return \Illuminate\Validation\Rules\Unique
+     */
+    private function unique()
+    {
+        return $this->isMethod(Request::METHOD_POST)
+            ? Rule::unique('categories')
+            : Rule::unique('categories')->ignore($this->category);
     }
 }

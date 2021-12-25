@@ -30,18 +30,26 @@ class StoreCurrency extends FormRequest
                 'required',
                 'string',
                 'size:3',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('currencies')
-                    : Rule::unique('currencies')->ignore($this->currency),
+                $this->unique(),
             ],
             'symbol' => [
                 'required',
                 'string',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('currencies')
-                    : Rule::unique('currencies')->ignore($this->currency),
+                $this->unique(),
             ],
             'rate' => 'required|numeric|min:0',
         ];
+    }
+
+    /**
+     * Get unique rule.
+     *
+     * @return \Illuminate\Validation\Rules\Unique
+     */
+    private function unique()
+    {
+        return $this->isMethod(Request::METHOD_POST)
+            ? Rule::unique('currencies')
+            : Rule::unique('currencies')->ignore($this->currency);
     }
 }

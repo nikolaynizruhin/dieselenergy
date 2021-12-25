@@ -32,26 +32,20 @@ class StoreProduct extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('products')
-                    : Rule::unique('products')->ignore($this->product),
+                $this->unique(),
             ],
             'model' => [
                 'required',
                 'string',
                 'max:255',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('products')
-                    : Rule::unique('products')->ignore($this->product),
+                $this->unique(),
             ],
             'slug' => [
                 'required',
                 'string',
                 'alpha_dash',
                 'max:255',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('products')
-                    : Rule::unique('products')->ignore($this->product),
+                $this->unique(),
             ],
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:1',
@@ -60,6 +54,18 @@ class StoreProduct extends FormRequest
             'category_id' => 'required|numeric|exists:categories,id',
             'images.*' => 'image',
         ] + $this->getAttributeRules('nullable|string|max:255');
+    }
+
+    /**
+     * Get unique rule.
+     *
+     * @return \Illuminate\Validation\Rules\Unique
+     */
+    private function unique()
+    {
+        return $this->isMethod(Request::METHOD_POST)
+            ? Rule::unique('products')
+            : Rule::unique('products')->ignore($this->product);
     }
 
     /**

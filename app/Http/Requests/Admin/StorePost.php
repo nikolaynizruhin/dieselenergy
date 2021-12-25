@@ -32,23 +32,31 @@ class StorePost extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('posts')
-                    : Rule::unique('posts')->ignore($this->post),
+                $this->unique(),
             ],
             'slug' => [
                 'required',
                 'string',
                 'alpha_dash',
                 'max:255',
-                $this->isMethod(Request::METHOD_POST)
-                    ? Rule::unique('posts')
-                    : Rule::unique('posts')->ignore($this->post),
+                $this->unique(),
             ],
             'image' => 'image'.($this->isMethod(Request::METHOD_POST) ? '|required' : ''),
             'excerpt' => 'required|string',
             'body' => 'required|string',
         ];
+    }
+
+    /**
+     * Get unique rule.
+     *
+     * @return \Illuminate\Validation\Rules\Unique
+     */
+    private function unique()
+    {
+        return $this->isMethod(Request::METHOD_POST)
+            ? Rule::unique('posts')
+            : Rule::unique('posts')->ignore($this->post);
     }
 
     /**
