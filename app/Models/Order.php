@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Status;
 use App\Filters\Filterable;
+use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -69,10 +70,12 @@ class Order extends Model
     /**
      * Formatted total.
      *
-     * @return float
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getDecimalTotalAttribute()
+    protected function decimalTotal(): AttributeCast
     {
-        return number_format($this->total / 100, 2, '.', '');
+        return new AttributeCast(
+            fn () => number_format($this->total / 100, 2, '.', '')
+        );
     }
 }

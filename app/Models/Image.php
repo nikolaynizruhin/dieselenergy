@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Filters\Filterable;
+use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -40,11 +41,11 @@ class Image extends Model
     /**
      * Get the name of the image file.
      *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getNameAttribute()
+    protected function name(): AttributeCast
     {
-        return basename($this->path);
+        return new AttributeCast(fn () => basename($this->path));
     }
 
     /**

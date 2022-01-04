@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Filters\Filterable;
+use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -107,21 +108,23 @@ class Product extends Model
     /**
      * Price in UAH.
      *
-     * @return float
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getUahPriceAttribute()
+    protected function uahPrice(): AttributeCast
     {
-        return round($this->price * $this->brand->currency->rate / 100);
+        return new AttributeCast(fn () => round($this->price * $this->brand->currency->rate / 100));
     }
 
     /**
      * Formatted price.
      *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getDecimalPriceAttribute()
+    protected function decimalPrice(): AttributeCast
     {
-        return number_format($this->price / 100, 2, '.', '');
+        return new AttributeCast(
+            fn () => number_format($this->price / 100, 2, '.', '')
+        );
     }
 
     /**

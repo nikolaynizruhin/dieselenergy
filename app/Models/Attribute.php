@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Filters\Filterable;
+use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,13 +23,15 @@ class Attribute extends Model
     /**
      * Get the attribute's field.
      *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getFieldAttribute()
+    protected function field(): AttributeCast
     {
-        return $this->measure
-            ? $this->name.', '.$this->measure
-            : $this->name;
+        return new AttributeCast(
+            fn () => $this->measure
+                ? $this->name.', '.$this->measure
+                : $this->name
+        );
     }
 
     /**
