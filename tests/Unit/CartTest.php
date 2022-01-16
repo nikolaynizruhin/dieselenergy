@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Unit\Cart;
+namespace Tests\Unit;
 
 use App\Models\Brand;
 use App\Models\Currency;
 use App\Models\Order;
 use App\Models\Product;
-use Facades\App\Cart\Cart;
+use Facades\App\Services\Cart;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
@@ -41,7 +41,7 @@ class CartTest extends TestCase
         $this->assertEquals($item->slug, $this->product->slug);
         $this->assertEquals($item->name, $this->product->name);
         $this->assertEquals($item->category, $this->product->category->name);
-        $this->assertEquals($item->price, $this->product->uah_price);
+        $this->assertEquals($item->price, $this->product->price->toUAH()->coins());
         $this->assertEquals($item->image, $this->product->defaultImage()->path);
         $this->assertEquals(1, $item->quantity);
     }
@@ -111,7 +111,7 @@ class CartTest extends TestCase
         Cart::add($generator, 2);
         Cart::add($waterPump);
 
-        $this->assertEquals(9000, Cart::total());
+        $this->assertEquals(900000, Cart::total());
     }
 
     /** @test */

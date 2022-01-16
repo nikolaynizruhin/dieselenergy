@@ -4,7 +4,7 @@
         <div class="card-body mb-n3">
             <h3 class="card-title h6">{{ $product->name }}</h3>
             <p class="card-subtitle mb-2 text-muted">{{ $product->category->name }}</p>
-            <p class="card-title text-primary h5">@uah($product->uah_price)</p>
+            <p class="card-title text-primary h5">{{ $product->price->toUAH()->format() }}</p>
         </div>
         @if ($hasAttributes && $product->attributes->isNotEmpty())
             <div class="card-body bg-light text-muted">

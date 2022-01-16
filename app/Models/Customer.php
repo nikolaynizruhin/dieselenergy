@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Enums\Status;
 use App\Filters\Filterable;
 use App\Notifications\OrderConfirmed;
-use Facades\App\Cart\Cart;
+use Facades\App\Services\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;

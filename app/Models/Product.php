@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Filters\Filterable;
+use App\Support\Money;
 use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -106,25 +107,13 @@ class Product extends Model
     }
 
     /**
-     * Price in UAH.
+     * Product price.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    protected function uahPrice(): AttributeCast
+    protected function price(): AttributeCast
     {
-        return new AttributeCast(fn () => round($this->price * $this->brand->currency->rate / 100));
-    }
-
-    /**
-     * Formatted price.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    protected function decimalPrice(): AttributeCast
-    {
-        return new AttributeCast(
-            fn () => number_format($this->price / 100, 2, '.', '')
-        );
+        return new AttributeCast(fn ($value) => new Money($value, $this->brand->currency));
     }
 
     /**

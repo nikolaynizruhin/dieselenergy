@@ -36,7 +36,7 @@
                     <p class="text-body fw-bold">{{ $product->brand->name }}</p>
                     <p class="text-muted mb-0">Модель:</p>
                     <p class="text-body fw-bold">{{ $product->model }}</p>
-                    <p class="text-primary mb-3 h4">@uah($product->uah_price)</p>
+                    <p class="text-primary mb-3 h4">{{ $product->price->toUAH()->format() }}</p>
                     <form class="mb-3" action="{{ route('carts.store') }}" method="POST">
                         @csrf
                         <div class="row">

@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Unit\Cart;
+namespace Tests\Unit;
 
-use App\Cart\Item;
 use App\Models\Brand;
 use App\Models\Currency;
 use App\Models\Product;
+use App\Support\CartItem;
 use Tests\TestCase;
 
-class ItemTest extends TestCase
+class CartItemTest extends TestCase
 {
     /** @test */
     public function it_can_get_total()
@@ -20,8 +20,8 @@ class ItemTest extends TestCase
             ->withDefaultImage()
             ->create(['price' => 10000]);
 
-        $item = new Item($product, 2);
+        $item = new CartItem($product, 2);
 
-        $this->assertEquals(6000, $item->total());
+        $this->assertEquals(600000, $item->total());
     }
 }

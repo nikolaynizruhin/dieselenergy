@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Status;
 use App\Filters\Filterable;
+use App\Support\Money;
 use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -54,7 +55,7 @@ class Order extends Model
      */
     public function updateTotal()
     {
-        $this->update(['total' => $this->total()]);
+        $this->update(['total' => $this->getTotal()]);
     }
 
     /**
@@ -62,20 +63,18 @@ class Order extends Model
      *
      * @return int
      */
-    public function total()
+    public function getTotal()
     {
-        return $this->products->sum(fn ($product) => $product->uah_price * $product->pivot->quantity);
+        return $this->products->sum(fn ($product) => $product->price->toUAH()->coins() * $product->pivot->quantity);
     }
 
     /**
-     * Formatted total.
+     * Total price.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    protected function decimalTotal(): AttributeCast
+    protected function total(): AttributeCast
     {
-        return new AttributeCast(
-            fn () => number_format($this->total / 100, 2, '.', '')
-        );
+        return new AttributeCast(fn ($value) => new Money($value));
     }
 }

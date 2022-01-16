@@ -108,7 +108,7 @@
                     <div class="col-md-6">
                         <div class="input-group has-validation">
                             <span class="input-group-text" id="basic-addon">{{ $product->brand->currency->symbol }}</span>
-                            <input type="number" min="0.01" step="0.01" id="inputPrice" class="form-control @error('price') is-invalid @enderror" aria-label="Price" aria-describedby="basic-addon" name="price" value="{{ old('price', $product->decimal_price) }}" required autocomplete="price">
+                            <input type="number" min="0.01" step="0.01" id="inputPrice" class="form-control @error('price') is-invalid @enderror" aria-label="Price" aria-describedby="basic-addon" name="price" value="{{ old('price', $product->price->decimal()) }}" required autocomplete="price">
 
                             @include('layouts.partials.error', ['name' => 'price'])
                         </div>

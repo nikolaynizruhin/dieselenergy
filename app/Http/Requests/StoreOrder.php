@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Customer;
-use Facades\App\Cart\Cart;
+use Facades\App\Services\Cart;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreOrder extends FormRequest
