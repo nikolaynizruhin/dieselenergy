@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Cart;
 
-use App\Cart\Item;
+use App\Support\CartItem;
 use App\Models\Brand;
 use App\Models\Currency;
 use App\Models\Product;
@@ -20,8 +20,8 @@ class ItemTest extends TestCase
             ->withDefaultImage()
             ->create(['price' => 10000]);
 
-        $item = new Item($product, 2);
+        $item = new CartItem($product, 2);
 
-        $this->assertEquals(6000, $item->total());
+        $this->assertEquals(600000, $item->total());
     }
 }

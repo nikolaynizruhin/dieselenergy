@@ -5,10 +5,10 @@ namespace Tests\Unit;
 use App\Models\Attribute;
 use App\Models\Brand;
 use App\Models\Category;
-use App\Models\Currency;
 use App\Models\Image;
 use App\Models\Order;
 use App\Models\Product;
+use App\Support\Money;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -81,20 +81,10 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function it_has_uah_price()
+    public function it_has_price_as_money()
     {
-        $currency = Currency::factory()->state(['rate' => 33.3057]);
-        $brand = Brand::factory()->for($currency);
-        $product = Product::factory()->for($brand)->create(['price' => 10000]);
+        $product = Product::factory()->create();
 
-        $this->assertEquals(3331, $product->uah_price);
-    }
-
-    /** @test */
-    public function it_has_decimal_price()
-    {
-        $product = Product::factory()->create(['price' => 10000]);
-
-        $this->assertEquals(100.00, $product->decimal_price);
+        $this->assertInstanceOf(Money::class, $product->price);
     }
 }

@@ -109,10 +109,8 @@ class CreateProductTest extends TestCase
     /** @test */
     public function by_default_product_should_be_inactive()
     {
-        $product = Product::factory()->make()->makeHidden('is_active');
-
         $this->login()
-            ->post(route('admin.products.store'), $product->toArray())
+            ->post(route('admin.products.store'), $this->validFields(['is_active' => null]))
             ->assertRedirect();
 
         $this->assertDatabaseHas('products', ['is_active' => 0]);

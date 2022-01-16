@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Cart;
+namespace App\Support;
 
-class Item
+use App\Models\Product;
+
+class CartItem
 {
     /**
      * Item id.
@@ -59,13 +61,13 @@ class Item
      * @param  \App\Models\Product  $product
      * @param  int  $quantity
      */
-    public function __construct($product, $quantity = 1)
+    public function __construct(Product $product, int $quantity = 1)
     {
         $this->id = $product->id;
         $this->slug = $product->slug;
         $this->name = $product->name;
         $this->category = $product->category->name;
-        $this->price = $product->uah_price;
+        $this->price = $product->price->toUAH()->coins();
         $this->quantity = $quantity;
         $this->image = $product->defaultImage()->path;
     }

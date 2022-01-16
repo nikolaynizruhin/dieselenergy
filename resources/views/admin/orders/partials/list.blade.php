@@ -68,7 +68,7 @@
                         @include('admin.layouts.partials.status', ['status' => $order->status->value, 'type' => $order->status->badge()])
                     </td>
                     <td class="text-nowrap">{{ $order->created_at->format('Y-m-d H:i') }}</td>
-                    <td class="text-nowrap">@uah($order->total)</td>
+                    <td class="text-nowrap">{{ $order->total->format() }}</td>
                     <td class="text-nowrap">
                         <a href="{{ route('admin.orders.show', $order) }}" class="me-2 text-decoration-none">
                             @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])

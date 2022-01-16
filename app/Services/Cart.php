@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Cart;
+namespace App\Services;
 
+use App\Support\CartItem;
 use App\Models\Order;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
@@ -37,7 +38,7 @@ class Cart
      *
      * @param  \App\Models\Product  $product
      * @param  int  $quantity
-     * @return \App\Cart\Item
+     * @return \App\Support\CartItem
      */
     public function add($product, $quantity = 1)
     {
@@ -46,7 +47,7 @@ class Cart
         $key = $items->search(fn ($item) => $item->id === $product->id);
 
         if ($key === false) {
-            $item = new Item($product, $quantity);
+            $item = new CartItem($product, $quantity);
             $items->push($item);
         } else {
             $item = $items->get($key);

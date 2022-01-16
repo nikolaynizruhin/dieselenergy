@@ -9,7 +9,7 @@ class DirectiveTest extends TestCase
     /** @test */
     public function it_compiles_uah_directive()
     {
-        $this->assertDirectiveOutput('10 000 ₴', '@uah(10000)');
+        $this->assertDirectiveOutput('1 000 ₴', '@uah(100000)');
     }
 
     /** @test */

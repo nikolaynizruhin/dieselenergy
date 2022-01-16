@@ -8,6 +8,7 @@ use App\Models\Currency;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
+use App\Support\Money;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -43,16 +44,13 @@ class OrderTest extends TestCase
     {
         $currency = Currency::factory()->state(['rate' => 30.0000]);
         $brand = Brand::factory()->for($currency);
+        $product = Product::factory()->for($brand)->state(fn () => ['price' => 10000]);
 
         $order = Order::factory()
-            ->hasAttached(
-                Product::factory()
-                    ->for($brand)
-                    ->state(fn (array $attributes, Order $order) => ['price' => 10000]),
-                ['quantity' => 3],
-            )->create(['total' => 0]);
+            ->hasAttached($product, ['quantity' => 3])
+            ->create(['total' => 0]);
 
-        $this->assertEquals(9000, $order->fresh()->total);
+        $this->assertEquals(900000, $order->fresh()->total->coins());
     }
 
     /** @test */
@@ -60,18 +58,18 @@ class OrderTest extends TestCase
     {
         $cart = Cart::factory()->create();
 
-        $this->assertGreaterThan(0, $cart->order->total);
+        $this->assertGreaterThan(0, $cart->order->total->coins());
 
         $cart->order->products()->detach($cart->product);
 
-        $this->assertEquals(0, $cart->order->fresh()->total);
+        $this->assertEquals(0, $cart->order->fresh()->total->coins());
     }
 
     /** @test */
-    public function it_has_decimal_total()
+    public function it_has_total_as_money()
     {
-        $order = Order::factory()->create(['total' => 10000]);
+        $order = Order::factory()->create();
 
-        $this->assertEquals(100.00, $order->decimal_total);
+        $this->assertInstanceOf(Money::class, $order->total);
     }
 }

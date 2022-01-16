@@ -50,7 +50,7 @@
                                 'type' => $product->is_active ? 'success' : 'danger',
                             ])
                         </td>
-                        <td class="text-nowrap">@uah($product->uah_price)</td>
+                        <td class="text-nowrap">{{ $product->price->toUAH()->format() }}</td>
                         <td class="text-nowrap">
                             <a href="{{ route('admin.products.show', $product) }}" class="me-2 text-decoration-none">
                                 @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1.1em', 'height' => '1.1em'])

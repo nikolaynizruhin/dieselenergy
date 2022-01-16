@@ -39,7 +39,7 @@
                 <li class="nav-item">
                     <a class="nav-link @if (request()->routeIs('carts.*')) active @endif position-relative" @if (request()->routeIs('posts.*')) aria-current="page" @endif href="{{ route('carts.index') }}">
                         @include('layouts.partials.icon', ['name' => 'cart2', 'classes' => 'pb-1', 'width' => '1.4em', 'height' => '1.4em'])
-                        @if(\Facades\App\Cart\Cart::items()->isNotEmpty())
+                        @if(\Facades\App\Services\Cart::items()->isNotEmpty())
                             @include('layouts.partials.icon', ['name' => 'dot', 'classes' => 'text-primary position-absolute top-0 ms-n2', 'width' => '1.5em', 'height' => '1.5em'])
                         @endif
                     </a>

@@ -5,11 +5,11 @@
 | #                      | Назва                | Ціна                      | К-сть                           | Загалом                                               |
 | ---------------------- | -------------------- |--------------------------:|:-------------------------------:|------------------------------------------------------:|
 @foreach($order->products as $product)
-| {{ $loop->iteration }} | {{ $product->name }} | @uah($product->uah_price) | {{ $product->pivot->quantity }} | @uah($product->pivot->quantity * $product->uah_price) |
+| {{ $loop->iteration }} | {{ $product->name }} | {{ $product->price->toUAH()->format() }} | {{ $product->pivot->quantity }} | @uah($product->pivot->quantity * $product->price->toUAH()->coins()) |
 @endforeach
 @endcomponent
 
-**Всього: @uah($order->total())**
+**Всього: @uah($order->getTotal())**
 
 
 З повагою,<br>
