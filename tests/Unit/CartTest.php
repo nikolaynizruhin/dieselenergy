@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Cart;
+namespace Tests\Unit;
 
 use App\Models\Brand;
 use App\Models\Currency;

@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Support\CartItem;
 use App\Models\Order;
+use App\Support\CartItem;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
 

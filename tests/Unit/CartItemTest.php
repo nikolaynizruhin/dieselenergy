@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Unit\Cart;
+namespace Tests\Unit;
 
-use App\Support\CartItem;
 use App\Models\Brand;
 use App\Models\Currency;
 use App\Models\Product;
+use App\Support\CartItem;
 use Tests\TestCase;
 
-class ItemTest extends TestCase
+class CartItemTest extends TestCase
 {
     /** @test */
     public function it_can_get_total()
