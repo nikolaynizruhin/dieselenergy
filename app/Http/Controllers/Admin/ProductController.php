@@ -20,6 +20,7 @@ class ProductController extends Controller
      */
     public function index(ProductFilters $filters)
     {
+        $categories = Category::orderBy('name')->get();
         $products = Product::select('products.*')
             ->join('categories', 'categories.id', '=', 'products.category_id')
             ->join('brands', 'brands.id', '=', 'products.brand_id')
@@ -30,7 +31,7 @@ class ProductController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('admin.products.index', compact('products'));
+        return view('admin.products.index', compact('products', 'categories'));
     }
 
     /**

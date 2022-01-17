@@ -37,15 +37,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         View::composer('layouts.app', CategoryComposer::class);
 
-        View::composer('carts.index', CartComposer::class);
-
         // Admin
-        View::composer('admin.dashboard', DashboardComposer::class);
-
-        View::composer('admin.products.index', ProductsComposer::class);
-
-        View::composer('admin.medias.create', MediaComposer::class);
-
         View::composer(['admin.products.create', 'admin.products.edit'], ProductComposer::class);
 
         View::composer(['admin.orders.create', 'admin.orders.edit'], OrderComposer::class);

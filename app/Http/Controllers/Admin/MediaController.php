@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreMedia;
+use App\Models\Image;
 use App\Models\Media;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -18,9 +19,10 @@ class MediaController extends Controller
      */
     public function create(Request $request)
     {
+        $images = Image::latest()->get();
         $product = Product::with('images')->findOrFail($request->product_id);
 
-        return view('admin.medias.create', compact('product'));
+        return view('admin.medias.create', compact('product', 'images'));
     }
 
     /**

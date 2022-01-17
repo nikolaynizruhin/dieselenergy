@@ -15,7 +15,10 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('carts.index', ['items' => Cart::items()]);
+        $items = Cart::items();
+        $total = Cart::total();
+
+        return view('carts.index', compact('items', 'total'));
     }
 
     /**
