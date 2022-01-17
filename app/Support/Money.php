@@ -39,7 +39,9 @@ class Money
      */
     public function format(): string
     {
-        return number_format($this->coins / 100, 0, '.', ' ').' ₴';
+        $symbol = $this->currency->symbol ?? '₴';
+
+        return number_format($this->coins / 100, 0, '.', ' ').' '.$symbol;
     }
 
     /**

@@ -8,28 +8,45 @@ use Tests\TestCase;
 
 class MoneyTest extends TestCase
 {
+    /**
+     * Money.
+     *
+     * @var \App\Support\Money
+     */
+    private $money;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->money = new Money(10000);
+    }
+
     /** @test */
     public function it_can_get_coins()
     {
-        $money = new Money(500);
-
-        $this->assertEquals(500, $money->coins());
+        $this->assertEquals(10000, $this->money->coins());
     }
 
     /** @test */
     public function it_can_get_decimal()
     {
-        $money = new Money(500);
-
-        $this->assertEquals(5.00, $money->decimal());
+        $this->assertEquals(100.00, $this->money->decimal());
     }
 
     /** @test */
-    public function it_can_get_uah()
+    public function it_can_be_formatted()
     {
-        $money = new Money(5000);
+        $this->assertEquals('100 ₴', $this->money->format());
+    }
 
-        $this->assertEquals('50 ₴', $money->format());
+    /** @test */
+    public function it_can_be_formatted_with_currency()
+    {
+        $currency = Currency::factory()->create(['symbol' => '$']);
+        $money = new Money(10000, $currency);
+
+        $this->assertEquals('100 $', $money->format());
     }
 
     /** @test */
