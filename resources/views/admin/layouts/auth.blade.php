@@ -19,7 +19,9 @@
                 <div class="col col-sm-9 col-md-7 col-lg-5 col-xl-4">
 
                     <div class="text-center my-5">
-                        <img src="{{ asset('/images/logo.svg') }}" alt="{{ config('app.name') }}" width="200">
+                        <a href="{{ route('home') }}">
+                            <img src="{{ asset('/images/logo.svg') }}" alt="{{ config('app.name') }}" width="200">
+                        </a>
                     </div>
 
                     <div class="card shadow-sm">
