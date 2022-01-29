@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin\Order;
 
-use App\Enums\Status;
+use App\Enums\OrderStatus;
 use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -59,8 +59,8 @@ class SortOrdersTest extends TestCase
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
-                ['status' => Status::Pending],
-                ['status' => Status::New],
+                ['status' => OrderStatus::Pending],
+                ['status' => OrderStatus::New],
             ))->create();
 
         $this->login()
@@ -77,8 +77,8 @@ class SortOrdersTest extends TestCase
         [$adam, $tom] = Order::factory()
             ->count(2)
             ->state(new Sequence(
-                ['status' => Status::Pending],
-                ['status' => Status::New],
+                ['status' => OrderStatus::Pending],
+                ['status' => OrderStatus::New],
             ))->create();
 
         $this->login()

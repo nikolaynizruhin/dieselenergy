@@ -2,7 +2,7 @@
 
 namespace App\Http\View\Composers\Admin;
 
-use App\Enums\Status;
+use App\Enums\OrderStatus;
 use App\Models\Customer;
 use App\Models\Product;
 use Illuminate\View\View;
@@ -20,7 +20,7 @@ class OrderComposer
         $view->with([
             'customers' => Customer::orderBy('name')->get(),
             'products' => Product::orderBy('name')->get(),
-            'statuses' => Status::all(),
+            'statuses' => OrderStatus::all(),
         ]);
     }
 }

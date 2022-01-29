@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\Status;
+use App\Enums\OrderStatus;
 use App\Filters\Filterable;
 use App\Support\Money;
 use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
@@ -28,7 +28,7 @@ class Order extends Model
      * @var array
      */
     protected $casts = [
-        'status' => Status::class,
+        'status' => OrderStatus::class,
     ];
 
     /**

@@ -80,21 +80,6 @@ class Product extends Model
     }
 
     /**
-     * Get sorts.
-     *
-     * @return array
-     */
-    public static function sorts()
-    {
-        return [
-            'name' => 'Назва (А - Я)',
-            '-name' => 'Назва (Я - А)',
-            'price' => 'Ціна (Низька > Висока)',
-            '-price' => 'Ціна (Висока > Низька)',
-        ];
-    }
-
-    /**
      * Get product default image.
      *
      * @return \App\Models\Image|null

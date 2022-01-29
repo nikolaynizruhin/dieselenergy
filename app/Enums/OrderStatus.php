@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum Status: string
+enum OrderStatus: string
 {
     /**
      * The new order status.
@@ -33,9 +33,9 @@ enum Status: string
     public function badge()
     {
         return match ($this) {
-            Status::New => 'primary',
-            Status::Pending => 'warning',
-            Status::Done => 'success',
+            OrderStatus::New => 'primary',
+            OrderStatus::Pending => 'warning',
+            OrderStatus::Done => 'success',
         };
     }
 
@@ -46,6 +46,6 @@ enum Status: string
      */
     public static function all()
     {
-        return array_map(fn (Status $status) => $status->value, Status::cases());
+        return array_map(fn (OrderStatus $status) => $status->value, OrderStatus::cases());
     }
 }
