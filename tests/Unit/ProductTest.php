@@ -72,6 +72,21 @@ class ProductTest extends TestCase
     }
 
     /** @test */
+    public function it_has_recommendations()
+    {
+        $product = Product::factory()->create();
+
+        $products = Product::factory()
+            ->active()
+            ->for(Category::factory())
+            ->count(3)
+            ->create();
+
+        $this->assertCount(2, $products->first()->recommendations());
+        $this->assertFalse($products->contains($product));
+    }
+
+    /** @test */
     public function it_has_default_image()
     {
         $product = Product::factory()->withDefaultImage()->create();
