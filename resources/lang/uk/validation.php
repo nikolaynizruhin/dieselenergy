@@ -68,7 +68,6 @@ return [
     'ip' => 'Поле :attribute має містити IP адресу.',
     'ipv4' => 'Поле :attribute має містити IPv4 адресу.',
     'ipv6' => 'Поле :attribute має містити IPv6 адресу.',
-    'mac_address' => 'Поле :attribute має містити MAC адресу.',
     'json' => 'Дані поля :attribute мають бути у форматі JSON.',
     'lt' => [
         'numeric' => 'Поле :attribute має бути менше ніж :value.',
@@ -82,6 +81,7 @@ return [
         'string' => 'Поле :attribute має дорівнювати чи бути менше ніж :value символів.',
         'array' => 'Поле :attribute має містити не більше ніж :value елементів.',
     ],
+    'mac_address' => 'Поле :attribute має містити MAC адресу.',
     'max' => [
         'numeric' => 'Поле :attribute має бути не більше :max.',
         'file' => 'Файл в полі :attribute має бути не більше :max кілобайт.',
@@ -108,6 +108,7 @@ return [
     'prohibits' => 'Поле :attribute забороняє :other від присутності.',
     'regex' => 'Поле :attribute має хибний формат.',
     'required' => "Поле :attribute є обов'язковим для заповнення.",
+    'required_array_keys' => "Поле :attribute повинно містити записи для: :values",
     'required_if' => "Поле :attribute є обов'язковим для заповнення, коли :other є рівним :value.",
     'required_unless' => "Поле :attribute є обов'язковим для заповнення, коли :other відрізняється від :values",
     'required_with' => "Поле :attribute є обов'язковим для заповнення, коли :values вказано.",
