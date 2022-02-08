@@ -108,7 +108,7 @@ return [
     'prohibits' => 'Поле :attribute забороняє :other від присутності.',
     'regex' => 'Поле :attribute має хибний формат.',
     'required' => "Поле :attribute є обов'язковим для заповнення.",
-    'required_array_keys' => "Поле :attribute повинно містити записи для: :values",
+    'required_array_keys' => "Поле :attribute повинно містити записи для: :values.",
     'required_if' => "Поле :attribute є обов'язковим для заповнення, коли :other є рівним :value.",
     'required_unless' => "Поле :attribute є обов'язковим для заповнення, коли :other відрізняється від :values",
     'required_with' => "Поле :attribute є обов'язковим для заповнення, коли :values вказано.",
