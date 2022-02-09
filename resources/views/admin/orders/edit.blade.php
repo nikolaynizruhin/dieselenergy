@@ -19,7 +19,7 @@
                                 name="status"
                                 required>
                             @foreach ($statuses as $status)
-                                <option value="{{ $status }}" @if (old('status', $order->$status) == $status) selected @endif>
+                                <option value="{{ $status }}" @selected(old('status', $order->$status) == $status)>
                                     {{ $status }}
                                 </option>
                             @endforeach
@@ -52,7 +52,7 @@
                                 required>
                             <option value="">{{ __('customer.select') }}</option>
                             @foreach ($customers as $customer)
-                                <option value="{{ $customer->id }}" @if (old('customer_id', $order->customer_id) == $customer->id) selected @endif>
+                                <option value="{{ $customer->id }}" @selected(old('customer_id', $order->customer_id) == $customer->id)>
                                     {{ $customer->email }}
                                 </option>
                             @endforeach

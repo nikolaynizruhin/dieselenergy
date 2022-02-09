@@ -9,7 +9,7 @@
                     required>
                 <option value="">{{ __('customer.select') }}</option>
                 @foreach ($customers as $customer)
-                    <option value="{{ $customer->id }}" @if (old('customer_id', $contact->customer_id ?? request('customer_id')) == $customer->id) selected @endif>
+                    <option value="{{ $customer->id }}" @selected(old('customer_id', $contact->customer_id ?? request('customer_id')) == $customer->id)>
                         {{ $customer->email }}
                     </option>
                 @endforeach

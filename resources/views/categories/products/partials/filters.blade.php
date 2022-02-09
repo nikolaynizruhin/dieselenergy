@@ -16,7 +16,7 @@
         <label for="selectSort" class="form-label visually-hidden">Сортувати</label>
         <select class="form-select form-select-sm" name="sort" onchange="this.form.submit()" id="selectSort">
             @foreach (\App\Enums\ProductSorts::all() as $value => $label)
-                <option value="{{ $value }}" @if (request('sort') === $value) selected @endif>{{ $label }}</option>
+                <option value="{{ $value }}" @selected(request('sort') === $value)>{{ $label }}</option>
             @endforeach
         </select>
     </div>

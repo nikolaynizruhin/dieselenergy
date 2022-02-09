@@ -230,7 +230,7 @@
                             @include('layouts.partials.error', ['name' => 'message'])
                         </div>
                         <div class="form-check form-switch mb-3">
-                            <input name="privacy" value="1" type="checkbox" class="form-check-input @error('privacy') is-invalid @enderror" @if(old('privacy')) checked @endif id="accept" required>
+                            <input name="privacy" value="1" type="checkbox" class="form-check-input @error('privacy') is-invalid @enderror" @checked(old('privacy')) id="accept" required>
                             <label class="form-check-label text-muted" for="accept">Згода на <a href="{{ route('privacy') }}">обробку персональних даних</a></label>
 
                             @include('layouts.partials.error', ['name' => 'privacy'])

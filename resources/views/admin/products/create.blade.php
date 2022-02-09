@@ -55,7 +55,7 @@
                     <div class="col-md-3">{{ __('common.status') }}</div>
                     <div class="col-md-6">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input @error('is_active') is-invalid @enderror" value="1" name="is_active" id="inputStatus" @if (old('is_active', true)) checked @endif>
+                            <input type="checkbox" class="form-check-input @error('is_active') is-invalid @enderror" value="1" name="is_active" id="inputStatus" @checked(old('is_active', true))>
                             <label class="form-check-label" for="inputStatus">{{ __('common.active') }}</label>
 
                             @include('layouts.partials.error', ['name' => 'is_active'])
@@ -70,7 +70,7 @@
                         <select class="form-select @error('brand_id') is-invalid @enderror" name="brand_id" id="inputBrand" required>
                             <option value="">{{ __('brand.select') }}</option>
                             @foreach ($brands as $brand)
-                                <option value="{{ $brand->id }}" @if (old('brand_id') == $brand->id) selected @endif>
+                                <option value="{{ $brand->id }}" @selected(old('brand_id') == $brand->id)>
                                     {{ $brand->name }}
                                 </option>
                             @endforeach

@@ -21,7 +21,7 @@
         </div>
 
         <div class="form-check mb-3">
-            <input type="checkbox" class="form-check-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+            <input type="checkbox" class="form-check-input" name="remember" id="remember" @checked(old('remember'))>
             <label class="form-check-label" for="remember">{{ __('auth.remember') }}</label>
         </div>
 

@@ -38,7 +38,7 @@
                                 required>
                             <option value="">{{ __('product.select') }}</option>
                             @foreach ($products as $product)
-                                <option value="{{ $product->id }}" @if (old('product_id', $cart->product_id) == $product->id) selected @endif>
+                                <option value="{{ $product->id }}" @selected(old('product_id', $cart->product_id) == $product->id)>
                                     {{ $product->name }}
                                 </option>
                             @endforeach

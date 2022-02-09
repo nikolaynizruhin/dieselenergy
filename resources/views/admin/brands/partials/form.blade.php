@@ -17,7 +17,7 @@
             <select class="form-select @error('currency_id') is-invalid @enderror" name="currency_id" id="inputCurrency" required>
                 <option value="">{{ __('currency.select') }}</option>
                 @foreach ($currencies as $currency)
-                    <option value="{{ $currency->id }}" @if (old('currency_id', $brand->currency_id) == $currency->id) selected @endif>
+                    <option value="{{ $currency->id }}" @selected(old('currency_id', $brand->currency_id) == $currency->id)>
                         {{ $currency->code }}
                     </option>
                 @endforeach

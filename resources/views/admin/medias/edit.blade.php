@@ -50,7 +50,7 @@
                     <div class="col-md-3">{{ __('common.status') }}</div>
                     <div class="col-md-6">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input @error('is_default') is-invalid @enderror" value="1" name="is_default" id="inputDefault" @if (old('is_default', $media->is_default)) checked @endif>
+                            <input type="checkbox" class="form-check-input @error('is_default') is-invalid @enderror" value="1" name="is_default" id="inputDefault" @checked(old('is_default', $media->is_default))>
                             <label class="form-check-label" for="inputDefault">{{ __('common.default') }}</label>
 
                             @include('layouts.partials.error', ['name' => 'is_default'])

@@ -3,14 +3,14 @@
 </p>
 
 <div class="form-check">
-    <input name="attribute[3][]" onchange="this.form.submit()" value="230" type="checkbox" class="form-check-input" id="customCheck1" @if(in_array('230', request('attribute.3', []))) checked @endif>
+    <input name="attribute[3][]" onchange="this.form.submit()" value="230" type="checkbox" class="form-check-input" id="customCheck1" @checked(in_array('230', request('attribute.3', [])))>
     <label class="form-check-label text-secondary" for="customCheck1">
         <small>230 В</small>
     </label>
 </div>
 
 <div class="form-check">
-    <input name="attribute[3][]" onchange="this.form.submit()" value="400" type="checkbox" class="form-check-input" id="customCheck2" @if(in_array('400', request('attribute.3', []))) checked @endif>
+    <input name="attribute[3][]" onchange="this.form.submit()" value="400" type="checkbox" class="form-check-input" id="customCheck2" @checked(in_array('400', request('attribute.3', [])))>
     <label class="form-check-label text-secondary" for="customCheck2">
         <small>400 В</small>
     </label>
