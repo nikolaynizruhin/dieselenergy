@@ -14,7 +14,7 @@ class MediaFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function definition()
     {
@@ -28,7 +28,7 @@ class MediaFactory extends Factory
     /**
      * Indicate that the media is default.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return static
      */
     public function default()
     {
@@ -38,7 +38,7 @@ class MediaFactory extends Factory
     /**
      * Indicate that the media is default.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return static
      */
     public function nonDefault()
     {

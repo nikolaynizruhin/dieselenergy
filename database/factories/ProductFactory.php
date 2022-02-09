@@ -15,7 +15,7 @@ class ProductFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function definition()
     {
@@ -34,7 +34,7 @@ class ProductFactory extends Factory
     /**
      * Indicate that the product is active.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return static
      */
     public function active()
     {
@@ -44,7 +44,7 @@ class ProductFactory extends Factory
     /**
      * Indicate that the product is inactive.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return static
      */
     public function inactive()
     {
@@ -54,7 +54,7 @@ class ProductFactory extends Factory
     /**
      * Attach default image.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return static
      */
     public function withDefaultImage()
     {
