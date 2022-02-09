@@ -45,8 +45,7 @@ class ImageController extends Controller
     {
         Image::insert($request->getImages());
 
-        return redirect()
-            ->route('admin.images.index')
+        return to_route('admin.images.index')
             ->with('status', __('image.created'));
     }
 

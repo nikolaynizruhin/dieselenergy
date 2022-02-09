@@ -33,8 +33,7 @@ class SpecificationController extends Controller
     {
         Specification::create($request->validated());
 
-        return redirect()
-            ->route('admin.categories.show', $request->category_id)
+        return to_route('admin.categories.show', $request->category_id)
             ->with('status', __('specification.created'));
     }
 
@@ -60,8 +59,7 @@ class SpecificationController extends Controller
     {
         $specification->update($request->validated());
 
-        return redirect()
-            ->route('admin.categories.show', $request->category_id)
+        return to_route('admin.categories.show', $request->category_id)
             ->with('status', __('specification.updated'));
     }
 

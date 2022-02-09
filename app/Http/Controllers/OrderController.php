@@ -36,7 +36,7 @@ class OrderController extends Controller
 
         OrderCreated::dispatch($order);
 
-        return redirect()->route('orders.show', [$order]);
+        return to_route('orders.show', [$order]);
     }
 
     /**

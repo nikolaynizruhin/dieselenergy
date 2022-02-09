@@ -45,8 +45,7 @@ class AttributeController extends Controller
     {
         Attribute::create($request->validated());
 
-        return redirect()
-            ->route('admin.attributes.index')
+        return to_route('admin.attributes.index')
             ->with('status', __('attribute.created'));
     }
 
@@ -72,8 +71,7 @@ class AttributeController extends Controller
     {
         $attribute->update($request->validated());
 
-        return redirect()
-            ->route('admin.attributes.index')
+        return to_route('admin.attributes.index')
             ->with('status', __('attribute.updated'));
     }
 

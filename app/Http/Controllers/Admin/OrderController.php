@@ -50,8 +50,7 @@ class OrderController extends Controller
     {
         Order::create($request->validated());
 
-        return redirect()
-            ->route('admin.orders.index')
+        return to_route('admin.orders.index')
             ->with('status', __('order.created'));
     }
 
@@ -96,8 +95,7 @@ class OrderController extends Controller
     {
         $order->update($request->prepared());
 
-        return redirect()
-            ->route('admin.orders.index')
+        return to_route('admin.orders.index')
             ->with('status', __('order.updated'));
     }
 

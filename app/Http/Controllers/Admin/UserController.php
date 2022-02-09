@@ -45,8 +45,7 @@ class UserController extends Controller
     {
         User::create($request->getAttributes());
 
-        return redirect()
-            ->route('admin.users.index')
+        return to_route('admin.users.index')
             ->with('status', __('user.created'));
     }
 
@@ -72,8 +71,7 @@ class UserController extends Controller
     {
         $user->update($request->validated());
 
-        return redirect()
-            ->route('admin.users.index')
+        return to_route('admin.users.index')
             ->with('status', __('user.updated'));
     }
 

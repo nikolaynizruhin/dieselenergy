@@ -48,8 +48,7 @@ class BrandController extends Controller
     {
         Brand::create($request->validated());
 
-        return redirect()
-            ->route('admin.brands.index')
+        return to_route('admin.brands.index')
             ->with('status', __('brand.created'));
     }
 
@@ -75,8 +74,7 @@ class BrandController extends Controller
     {
         $brand->update($request->validated());
 
-        return redirect()
-            ->route('admin.brands.index')
+        return to_route('admin.brands.index')
             ->with('status', __('brand.updated'));
     }
 

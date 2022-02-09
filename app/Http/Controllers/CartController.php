@@ -31,7 +31,7 @@ class CartController extends Controller
     {
         Cart::add($request->product, $request->quantity);
 
-        return redirect()->route('carts.index');
+        return to_route('carts.index');
     }
 
     /**
@@ -47,7 +47,7 @@ class CartController extends Controller
 
         Cart::update($id, $request->quantity);
 
-        return redirect()->route('carts.index');
+        return to_route('carts.index');
     }
 
     /**

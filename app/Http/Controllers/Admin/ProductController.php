@@ -61,8 +61,7 @@ class ProductController extends Controller
 
         $product->images()->createMany($request->getImages());
 
-        return redirect()
-            ->route('admin.products.index')
+        return to_route('admin.products.index')
             ->with('status', __('product.created'));
     }
 
@@ -115,8 +114,7 @@ class ProductController extends Controller
 
         $product->images()->createMany($request->getImages());
 
-        return redirect()
-            ->route('admin.products.index')
+        return to_route('admin.products.index')
             ->with('status', __('product.updated'));
     }
 

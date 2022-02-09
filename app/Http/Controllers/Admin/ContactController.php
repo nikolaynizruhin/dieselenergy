@@ -48,8 +48,7 @@ class ContactController extends Controller
     {
         Contact::create($request->validated());
 
-        return redirect()
-            ->route('admin.contacts.index')
+        return to_route('admin.contacts.index')
             ->with('status', __('contact.created'));
     }
 
@@ -86,8 +85,7 @@ class ContactController extends Controller
     {
         $contact->update($request->validated());
 
-        return redirect()
-            ->route('admin.contacts.index')
+        return to_route('admin.contacts.index')
             ->with('status', __('contact.updated'));
     }
 

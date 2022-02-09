@@ -46,8 +46,7 @@ class CategoryController extends Controller
     {
         Category::create($request->validated());
 
-        return redirect()
-            ->route('admin.categories.index')
+        return to_route('admin.categories.index')
             ->with('status', __('category.created'));
     }
 
@@ -92,8 +91,7 @@ class CategoryController extends Controller
     {
         $category->update($request->validated());
 
-        return redirect()
-            ->route('admin.categories.index')
+        return to_route('admin.categories.index')
             ->with('status', __('category.updated'));
     }
 

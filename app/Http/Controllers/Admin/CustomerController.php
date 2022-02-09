@@ -47,8 +47,7 @@ class CustomerController extends Controller
     {
         Customer::create($request->validated());
 
-        return redirect()
-            ->route('admin.customers.index')
+        return to_route('admin.customers.index')
             ->with('status', __('customer.created'));
     }
 
@@ -101,8 +100,7 @@ class CustomerController extends Controller
     {
         $customer->update($request->validated());
 
-        return redirect()
-            ->route('admin.customers.index')
+        return to_route('admin.customers.index')
             ->with('status', __('customer.updated'));
     }
 

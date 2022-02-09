@@ -22,8 +22,7 @@ class UserPasswordController extends Controller
 
         $user->update(['password' => Hash::make($request->password)]);
 
-        return redirect()
-            ->route('admin.users.index')
+        return to_route('admin.users.index')
             ->with('status', __('user.password.updated'));
     }
 }

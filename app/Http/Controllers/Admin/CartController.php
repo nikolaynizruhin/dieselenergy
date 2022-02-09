@@ -33,8 +33,7 @@ class CartController extends Controller
     {
         Cart::create($request->validated());
 
-        return redirect()
-            ->route('admin.orders.show', $request->order_id)
+        return to_route('admin.orders.show', $request->order_id)
             ->with('status', __('cart.created'));
     }
 
@@ -60,8 +59,7 @@ class CartController extends Controller
     {
         $cart->update($request->validated());
 
-        return redirect()
-            ->route('admin.orders.show', $request->order_id)
+        return to_route('admin.orders.show', $request->order_id)
             ->with('status', __('cart.updated'));
     }
 

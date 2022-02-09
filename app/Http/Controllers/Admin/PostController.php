@@ -45,8 +45,7 @@ class PostController extends Controller
     {
         Post::create($request->getAttributes());
 
-        return redirect()
-            ->route('admin.posts.index')
+        return to_route('admin.posts.index')
             ->with('status', __('post.created'));
     }
 
@@ -83,8 +82,7 @@ class PostController extends Controller
     {
         $post->update($request->getAttributes());
 
-        return redirect()
-            ->route('admin.posts.index')
+        return to_route('admin.posts.index')
             ->with('status', __('post.updated'));
     }
 

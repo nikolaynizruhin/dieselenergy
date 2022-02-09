@@ -35,8 +35,7 @@ class MediaController extends Controller
     {
         Media::create($request->validated());
 
-        return redirect()
-            ->route('admin.products.show', $request->product_id)
+        return to_route('admin.products.show', $request->product_id)
             ->with('status', __('media.created'));
     }
 
@@ -62,8 +61,7 @@ class MediaController extends Controller
     {
         $media->update($request->validated());
 
-        return redirect()
-            ->route('admin.products.show', $request->product_id)
+        return to_route('admin.products.show', $request->product_id)
             ->with('status', __('media.updated'));
     }
 
