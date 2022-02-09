@@ -40,6 +40,6 @@ class DeleteContactTest extends TestCase
             ->assertRedirect(route('admin.contacts.index'))
             ->assertSessionHas('status', trans('contact.deleted'));
 
-        $this->assertDeleted($this->contact);
+        $this->assertModelMissing($this->contact);
     }
 }

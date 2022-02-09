@@ -40,6 +40,6 @@ class DeleteAttributeTest extends TestCase
             ->assertRedirect(route('admin.attributes.index'))
             ->assertSessionHas('status', trans('attribute.deleted'));
 
-        $this->assertDeleted($this->attribute);
+        $this->assertModelMissing($this->attribute);
     }
 }

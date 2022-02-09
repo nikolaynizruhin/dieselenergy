@@ -6,6 +6,9 @@ use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Media>
+ */
 class MediaFactory extends Factory
 {
     /**

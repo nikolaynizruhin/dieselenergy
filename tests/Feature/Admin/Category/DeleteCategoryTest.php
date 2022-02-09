@@ -40,6 +40,6 @@ class DeleteCategoryTest extends TestCase
             ->assertRedirect(route('admin.categories.index'))
             ->assertSessionHas('status', trans('category.deleted'));
 
-        $this->assertDeleted($this->category);
+        $this->assertModelMissing($this->category);
     }
 }

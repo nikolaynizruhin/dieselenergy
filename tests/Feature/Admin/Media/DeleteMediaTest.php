@@ -40,6 +40,6 @@ class DeleteMediaTest extends TestCase
             ->assertRedirect(route('admin.products.show', $this->media->product))
             ->assertSessionHas('status', trans('media.deleted'));
 
-        $this->assertDeleted($this->media);
+        $this->assertModelMissing($this->media);
     }
 }

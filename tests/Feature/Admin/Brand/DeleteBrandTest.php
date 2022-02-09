@@ -40,6 +40,6 @@ class DeleteBrandTest extends TestCase
             ->assertRedirect(route('admin.brands.index'))
             ->assertSessionHas('status', trans('brand.deleted'));
 
-        $this->assertDeleted($this->brand);
+        $this->assertModelMissing($this->brand);
     }
 }

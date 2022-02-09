@@ -6,6 +6,9 @@ use App\Models\Attribute;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Specification>
+ */
 class SpecificationFactory extends Factory
 {
     /**

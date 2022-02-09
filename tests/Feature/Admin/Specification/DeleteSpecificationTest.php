@@ -40,6 +40,6 @@ class DeleteSpecificationTest extends TestCase
             ->assertRedirect(route('admin.categories.show', $this->specification->category_id))
             ->assertSessionHas('status', trans('specification.deleted'));
 
-        $this->assertDeleted($this->specification);
+        $this->assertModelMissing($this->specification);
     }
 }

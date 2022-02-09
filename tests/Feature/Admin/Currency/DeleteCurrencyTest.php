@@ -40,6 +40,6 @@ class DeleteCurrencyTest extends TestCase
             ->assertRedirect(route('admin.currencies.index'))
             ->assertSessionHas('status', trans('currency.deleted'));
 
-        $this->assertDeleted($this->currency);
+        $this->assertModelMissing($this->currency);
     }
 }

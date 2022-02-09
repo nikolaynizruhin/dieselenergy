@@ -40,6 +40,6 @@ class DeleteCartTest extends TestCase
             ->assertRedirect(route('admin.orders.show', $this->cart->order))
             ->assertSessionHas('status', trans('cart.deleted'));
 
-        $this->assertDeleted($this->cart);
+        $this->assertModelMissing($this->cart);
     }
 }

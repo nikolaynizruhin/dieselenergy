@@ -40,6 +40,6 @@ class DeleteProductTest extends TestCase
             ->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.deleted'));
 
-        $this->assertDeleted($this->product);
+        $this->assertModelMissing($this->product);
     }
 }
