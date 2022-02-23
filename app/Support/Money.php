@@ -6,6 +6,8 @@ use App\Models\Currency;
 
 class Money
 {
+    const DEFAULT_SYMBOL = '₴';
+
     public function __construct(
         private int $coins,
         private ?Currency $currency = null
@@ -39,7 +41,7 @@ class Money
      */
     public function format(): string
     {
-        $symbol = $this->currency->symbol ?? '₴';
+        $symbol = $this->currency->symbol ?? self::DEFAULT_SYMBOL;
 
         return number_format($this->coins / 100, 0, '.', ' ').' '.$symbol;
     }
