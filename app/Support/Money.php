@@ -6,8 +6,19 @@ use App\Models\Currency;
 
 class Money
 {
+    /**
+     * Default currency symbol
+     *
+     * @var string
+     */
     const DEFAULT_SYMBOL = '₴';
 
+    /**
+     * Money constructor.
+     *
+     * @param int $coins
+     * @param \App\Models\Currency|null $currency
+     */
     public function __construct(
         private int $coins,
         private ?Currency $currency = null
