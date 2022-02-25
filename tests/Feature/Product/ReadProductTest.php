@@ -28,7 +28,6 @@ class ReadProductTest extends TestCase
             ->assertSuccessful()
             ->assertViewIs('products.show')
             ->assertViewHas('product')
-            ->assertViewHas('recommendations')
             ->assertSee($product->name)
             ->assertSee($generator->name)
             ->assertDontSee($waterPump->name);
