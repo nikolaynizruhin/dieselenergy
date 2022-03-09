@@ -7,7 +7,7 @@ use App\Models\Currency;
 class Money
 {
     /**
-     * Default currency symbol
+     * Default currency symbol.
      *
      * @var string
      */
@@ -16,8 +16,8 @@ class Money
     /**
      * Money constructor.
      *
-     * @param int $coins
-     * @param \App\Models\Currency|null $currency
+     * @param  int  $coins
+     * @param  \App\Models\Currency|null  $currency
      */
     public function __construct(
         private int $coins,
