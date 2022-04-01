@@ -100,7 +100,6 @@ return [
     'not_in' => 'Вибране для :attribute значення не коректне.',
     'not_regex' => 'Формат поля :attribute не вірний.',
     'numeric' => 'Поле :attribute повинно містити число.',
-    'password' => 'Неправильний пароль.',
     'present' => 'Поле :attribute повинне бути присутнє.',
     'prohibited' => 'Поле :attribute заборонено.',
     'prohibited_if' => 'Поле :attribute заборонено, коли :other є рівним :value.',
