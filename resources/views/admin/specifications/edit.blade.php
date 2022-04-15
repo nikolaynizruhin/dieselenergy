@@ -39,7 +39,7 @@
                             <option value="">{{ __('attribute.select') }}</option>
                             @foreach ($attributes as $attribute)
                                 @unless ($specification->category->attributes->contains($attribute) && $specification->attribute_id != $attribute->id)
-                                    <option value="{{ $attribute->id }}" @selected(old('attribute_id', $specification->attribute_id) == $attribute->id)>
+                                    <option value="{{ $attribute->id }}" @selected(old('attribute_id', $specification) == $attribute->id)>
                                         {{ $attribute->name }}
                                     </option>
                                 @endunless
@@ -55,7 +55,7 @@
                     <div class="col-md-3">{{ __('common.feature') }}</div>
                     <div class="col-md-6">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input @error('is_featured') is-invalid @enderror" value="1" name="is_featured" id="inputFeatured" @checked(old('is_featured', $specification->is_featured))>
+                            <input type="checkbox" class="form-check-input @error('is_featured') is-invalid @enderror" value="1" name="is_featured" id="inputFeatured" @checked(old('is_featured', $specification))>
                             <label class="form-check-label" for="inputFeatured">{{ __('common.is_featured') }}</label>
 
                             @include('layouts.partials.error', ['name' => 'is_active'])

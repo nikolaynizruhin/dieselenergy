@@ -4,7 +4,7 @@
     <div class="mb-3 row">
         <label for="inputTitle" class="col-md-3 col-form-label">{{ __('common.title') }}</label>
         <div class="col-md-6">
-            <input type="text" id="inputTitle" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $post->title) }}" required autocomplete="title" autofocus>
+            <input type="text" id="inputTitle" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $post) }}" required autocomplete="title" autofocus>
 
             @include('layouts.partials.error', ['name' => 'title'])
         </div>
@@ -14,7 +14,7 @@
     <div class="mb-3 row">
         <label for="inputSlug" class="col-md-3 col-form-label">{{ __('common.slug') }}</label>
         <div class="col-md-6">
-            <input type="text" id="inputSlug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug', $post->slug) }}" required autocomplete="slug">
+            <input type="text" id="inputSlug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug', $post) }}" required autocomplete="slug">
 
             @include('layouts.partials.error', ['name' => 'slug'])
         </div>
@@ -38,7 +38,7 @@
     <div class="mb-3 row">
         <label for="inputExcerpt" class="col-md-3 col-form-label">{{ __('post.excerpt') }}</label>
         <div class="col-md-6">
-            <textarea name="excerpt" class="form-control @error('excerpt') is-invalid @enderror" id="inputExcerpt" rows="3">{{ old('excerpt', $post->excerpt) }}</textarea>
+            <textarea name="excerpt" class="form-control @error('excerpt') is-invalid @enderror" id="inputExcerpt" rows="3">{{ old('excerpt', $post) }}</textarea>
 
             @include('layouts.partials.error', ['name' => 'excerpt'])
         </div>
@@ -53,7 +53,7 @@
             </div>
         </label>
         <div class="col-md-6">
-            <textarea name="body" class="form-control @error('body') is-invalid @enderror" id="inputBody" rows="10" aria-describedby="bodyHelpBlock">{{ old('body', $post->body) }}</textarea>
+            <textarea name="body" class="form-control @error('body') is-invalid @enderror" id="inputBody" rows="10" aria-describedby="bodyHelpBlock">{{ old('body', $post) }}</textarea>
 
             @include('layouts.partials.error', ['name' => 'body'])
         </div>

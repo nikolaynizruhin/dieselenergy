@@ -15,7 +15,7 @@
                 <div class="mb-3 row">
                     <label for="inputName" class="col-md-3 col-form-label">{{ __('user.name') }}</label>
                     <div class="col-md-6">
-                        <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
+                        <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user) }}" required autocomplete="name" autofocus>
 
                         @include('layouts.partials.error', ['name' => 'name'])
                     </div>
@@ -25,7 +25,7 @@
                 <div class="mb-3 row">
                     <label for="inputEmail" class="col-md-3 col-form-label">{{ __('common.email') }}</label>
                     <div class="col-md-6">
-                        <input type="email" id="inputEmail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
+                        <input type="email" id="inputEmail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user) }}" required autocomplete="email">
 
                         @include('layouts.partials.error', ['name' => 'email'])
                     </div>

@@ -38,7 +38,7 @@
                                 required>
                             <option value="">{{ __('product.select') }}</option>
                             @foreach ($products as $product)
-                                <option value="{{ $product->id }}" @selected(old('product_id', $cart->product_id) == $product->id)>
+                                <option value="{{ $product->id }}" @selected(old('product_id', $cart) == $product->id)>
                                     {{ $product->name }}
                                 </option>
                             @endforeach
@@ -52,7 +52,7 @@
                 <div class="mb-3 row">
                     <label for="inputQuantity" class="col-md-3 col-form-label">{{ __('common.quantity') }}</label>
                     <div class="col-md-6">
-                        <input type="number" id="inputQuantity" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity', $cart->quantity) }}" required min="1">
+                        <input type="number" id="inputQuantity" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity', $cart) }}" required min="1">
 
                         @include('layouts.partials.error', ['name' => 'quantity'])
                     </div>

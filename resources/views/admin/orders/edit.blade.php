@@ -19,7 +19,7 @@
                                 name="status"
                                 required>
                             @foreach ($statuses as $status)
-                                <option value="{{ $status }}" @selected(old('status', $order->$status) == $status)>
+                                <option value="{{ $status }}" @selected(old('status', $order) == $status)>
                                     {{ $status }}
                                 </option>
                             @endforeach
@@ -52,7 +52,7 @@
                                 required>
                             <option value="">{{ __('customer.select') }}</option>
                             @foreach ($customers as $customer)
-                                <option value="{{ $customer->id }}" @selected(old('customer_id', $order->customer_id) == $customer->id)>
+                                <option value="{{ $customer->id }}" @selected(old('customer_id', $order) == $customer->id)>
                                     {{ $customer->email }}
                                 </option>
                             @endforeach
@@ -66,7 +66,7 @@
                 <div class="mb-3 row">
                     <label for="inputNotes" class="col-md-3 col-form-label">{{ __('common.notes') }}</label>
                     <div class="col-md-6">
-                        <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" id="inputNotes" rows="3">{{ old('notes', $order->notes) }}</textarea>
+                        <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" id="inputNotes" rows="3">{{ old('notes', $order) }}</textarea>
 
                         @include('layouts.partials.error', ['name' => 'notes'])
                     </div>

@@ -9,7 +9,7 @@
                     required>
                 <option value="">{{ __('customer.select') }}</option>
                 @foreach ($customers as $customer)
-                    <option value="{{ $customer->id }}" @selected(old('customer_id', $contact->customer_id ?? request('customer_id')) == $customer->id)>
+                    <option value="{{ $customer->id }}" @selected(old('customer_id', $contact ?? request('customer_id')) == $customer->id)>
                         {{ $customer->email }}
                     </option>
                 @endforeach
@@ -23,7 +23,7 @@
     <div class="mb-3 row">
         <label for="inputMessage" class="col-md-3 col-form-label">{{ __('contact.message') }}</label>
         <div class="col-md-6">
-            <textarea name="message" class="form-control @error('message') is-invalid @enderror" id="inputMessage" rows="3">{{ old('message', $contact->message) }}</textarea>
+            <textarea name="message" class="form-control @error('message') is-invalid @enderror" id="inputMessage" rows="3">{{ old('message', $contact) }}</textarea>
 
             @include('layouts.partials.error', ['name' => 'message'])
         </div>

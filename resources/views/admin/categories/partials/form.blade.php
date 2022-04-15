@@ -3,7 +3,7 @@
     <div class="mb-3 row">
         <label for="inputName" class="col-md-3 col-form-label">{{ __('common.name') }}</label>
         <div class="col-md-6">
-            <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $category->name) }}" required autocomplete="name" autofocus>
+            <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $category) }}" required autocomplete="name" autofocus>
 
             @include('layouts.partials.error', ['name' => 'name'])
         </div>
@@ -13,7 +13,7 @@
     <div class="mb-3 row">
         <label for="inputSlug" class="col-md-3 col-form-label">{{ __('common.slug') }}</label>
         <div class="col-md-6">
-            <input type="text" id="inputSlug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug', $category->slug) }}" required autocomplete="slug">
+            <input type="text" id="inputSlug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug', $category) }}" required autocomplete="slug">
 
             @include('layouts.partials.error', ['name' => 'slug'])
         </div>

@@ -30,7 +30,7 @@
                 <div class="mb-3 row">
                     <label for="inputName" class="col-md-3 col-form-label">{{ __('common.name') }}</label>
                     <div class="col-md-6">
-                        <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $product->name) }}" required autocomplete="name" autofocus>
+                        <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $product) }}" required autocomplete="name" autofocus>
 
                         @include('layouts.partials.error', ['name' => 'name'])
                     </div>
@@ -40,7 +40,7 @@
                 <div class="mb-3 row">
                     <label for="inputModel" class="col-md-3 col-form-label">{{ __('product.model') }}</label>
                     <div class="col-md-6">
-                        <input type="text" id="inputModel" class="form-control @error('model') is-invalid @enderror" name="model" value="{{ old('model', $product->model) }}" required autocomplete="model">
+                        <input type="text" id="inputModel" class="form-control @error('model') is-invalid @enderror" name="model" value="{{ old('model', $product) }}" required autocomplete="model">
 
                         @include('layouts.partials.error', ['name' => 'model'])
                     </div>
@@ -50,7 +50,7 @@
                 <div class="mb-3 row">
                     <label for="inputSlug" class="col-md-3 col-form-label">{{ __('common.slug') }}</label>
                     <div class="col-md-6">
-                        <input type="text" id="inputSlug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug', $product->slug) }}" required autocomplete="slug">
+                        <input type="text" id="inputSlug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug', $product) }}" required autocomplete="slug">
 
                         @include('layouts.partials.error', ['name' => 'slug'])
                     </div>
@@ -61,7 +61,7 @@
                     <div class="col-md-3">{{ __('common.status') }}</div>
                     <div class="col-md-6">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input @error('is_active') is-invalid @enderror" value="1" name="is_active" id="inputStatus" @checked(old('is_active', $product->is_active))>
+                            <input type="checkbox" class="form-check-input @error('is_active') is-invalid @enderror" value="1" name="is_active" id="inputStatus" @checked(old('is_active', $product))>
                             <label class="form-check-label" for="inputStatus">{{ __('common.active') }}</label>
 
                             @include('layouts.partials.error', ['name' => 'is_active'])
@@ -76,7 +76,7 @@
                         <select class="form-select @error('brand_id') is-invalid @enderror" name="brand_id" id="inputBrand" required>
                             <option value="">{{ __('brand.select') }}</option>
                             @foreach ($brands as $brand)
-                                <option value="{{ $brand->id }}" @selected(old('brand_id', $product->brand_id) == $brand->id)>
+                                <option value="{{ $brand->id }}" @selected(old('brand_id', $product) == $brand->id)>
                                     {{ $brand->name }}
                                 </option>
                             @endforeach
@@ -124,7 +124,7 @@
                         </div>
                     </label>
                     <div class="col-md-6">
-                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="10" aria-describedby="descriptionHelpBlock">{{ old('description', $product->description) }}</textarea>
+                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="10" aria-describedby="descriptionHelpBlock">{{ old('description', $product) }}</textarea>
 
                         @include('layouts.partials.error', ['name' => 'description'])
                     </div>
