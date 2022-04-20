@@ -100,6 +100,13 @@ return [
     'not_in' => 'Вибране для :attribute значення не коректне.',
     'not_regex' => 'Формат поля :attribute не вірний.',
     'numeric' => 'Поле :attribute повинно містити число.',
+    'password' => [
+        'mixed' => 'Поле :attribute повинен містити принаймні одну велику і одну малу літери.',
+        'letters' => 'Поле :attribute має містити хоча б одну букву.',
+        'symbols' => 'Поле :attribute має містити принаймні один символ.',
+        'numbers' => 'Поле :attribute має містити хоча б одне число.',
+        'uncompromised' => "Поле :attribute з'явилося в результаті витоку даних. Будь ласка, виберіть інший :attribute.",
+    ],
     'present' => 'Поле :attribute повинне бути присутнє.',
     'prohibited' => 'Поле :attribute заборонено.',
     'prohibited_if' => 'Поле :attribute заборонено, коли :other є рівним :value.',
