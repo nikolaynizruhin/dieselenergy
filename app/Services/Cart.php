@@ -72,10 +72,10 @@ class Cart
     }
 
     /**
-     * Update cart
+     * Update cart.
      *
-     * @param  string $key
-     * @param  int $quantity
+     * @param  string  $key
+     * @param  int  $quantity
      * @return CartItem
      */
     public function update(string $key, int $quantity): CartItem
@@ -130,7 +130,7 @@ class Cart
     /**
      * Delete item.
      *
-     * @param string $key
+     * @param  string  $key
      */
     public function delete(string $key): void
     {
