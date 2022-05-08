@@ -6,6 +6,8 @@ use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
@@ -21,8 +23,10 @@ class Image extends Model
 
     /**
      * The products that belong to the image.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function products()
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class)
             ->using(Media::class)
@@ -32,8 +36,10 @@ class Image extends Model
 
     /**
      * Get the posts for the image.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function posts()
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }

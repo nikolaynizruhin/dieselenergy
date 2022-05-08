@@ -4,9 +4,13 @@ namespace App\Models;
 
 use App\Filters\Filterable;
 use App\Support\Money;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
@@ -34,7 +38,7 @@ class Product extends Model
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeActive($query)
+    public function scopeActive(Builder $query)
     {
         return $query->where('is_active', 1);
     }
@@ -46,7 +50,7 @@ class Product extends Model
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeWithFeaturedAttributes($query, $category)
+    public function scopeWithFeaturedAttributes(Builder $query, Category $category)
     {
         return $query->with([
             'attributes' => fn ($query) => $query->wherePivotIn(
@@ -61,7 +65,7 @@ class Product extends Model
      *
      * @return \App\Models\Product
      */
-    public function loadAttributes()
+    public function loadAttributes(): Product
     {
         return $this->load(['attributes' => fn ($query) => $query->whereNotNull('value')]);
     }
@@ -84,7 +88,7 @@ class Product extends Model
      *
      * @return \App\Models\Image|null
      */
-    public function defaultImage()
+    public function defaultImage(): ?Image
     {
         return $this->images()
             ->wherePivot('is_default', 1)
@@ -103,24 +107,30 @@ class Product extends Model
 
     /**
      * Get the brand of the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function brand()
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }
 
     /**
      * Get the category of the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
     /**
      * The orders that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function orders()
+    public function orders(): BelongsToMany
     {
         return $this->belongsToMany(Order::class)
             ->using(Cart::class)
@@ -130,8 +140,10 @@ class Product extends Model
 
     /**
      * The images that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function images()
+    public function images(): BelongsToMany
     {
         return $this->belongsToMany(Image::class)
             ->using(Media::class)
@@ -141,8 +153,10 @@ class Product extends Model
 
     /**
      * The attributes that belong to the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function attributes()
+    public function attributes(): BelongsToMany
     {
         return $this->belongsToMany(Attribute::class)
             ->withPivot('id', 'value')
@@ -154,7 +168,7 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function recommendations()
+    public function recommendations(): Collection
     {
         return self::active()
             ->withDefaultImage()

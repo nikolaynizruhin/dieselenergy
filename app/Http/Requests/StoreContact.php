@@ -38,7 +38,7 @@ class StoreContact extends FormRequest
      *
      * @return array
      */
-    public function getCustomerAttributes()
+    public function getCustomerAttributes(): array
     {
         return $this->only(['name', 'phone']);
     }
@@ -48,7 +48,7 @@ class StoreContact extends FormRequest
      *
      * @return string
      */
-    protected function getRedirectUrl()
+    protected function getRedirectUrl(): string
     {
         return parent::getRedirectUrl().'#contact';
     }

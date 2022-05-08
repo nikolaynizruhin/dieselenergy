@@ -14,7 +14,7 @@ class AttributeFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['search', 'sort'];
+    protected array $filters = ['search', 'sort'];
 
     /**
      * Filter the query by a given name.
@@ -22,7 +22,7 @@ class AttributeFilters extends Filters
      * @param  string  $name
      * @return void
      */
-    protected function search($name)
+    protected function search(string $name)
     {
         $this->builder->where('name', 'like', '%'.$name.'%');
     }

@@ -44,7 +44,7 @@ class StoreOrder extends FormRequest
      *
      * @return array
      */
-    public function prepared()
+    public function prepared(): array
     {
         return [
             ...$this->validated(),

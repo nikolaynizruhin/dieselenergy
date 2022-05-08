@@ -14,7 +14,7 @@ class PostFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['search', 'sort'];
+    protected array $filters = ['search', 'sort'];
 
     /**
      * Filter the query by a given title.
@@ -22,7 +22,7 @@ class PostFilters extends Filters
      * @param  string  $title
      * @return void
      */
-    protected function search($title)
+    protected function search(string $title)
     {
         $this->builder->where('title', 'like', '%'.$title.'%');
     }

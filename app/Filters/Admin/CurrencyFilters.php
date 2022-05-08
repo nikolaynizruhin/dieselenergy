@@ -14,7 +14,7 @@ class CurrencyFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['search', 'sort'];
+    protected array $filters = ['search', 'sort'];
 
     /**
      * Filter the query by a given code.
@@ -22,7 +22,7 @@ class CurrencyFilters extends Filters
      * @param  string  $code
      * @return void
      */
-    protected function search($code)
+    protected function search(string $code)
     {
         $this->builder->where('code', 'like', '%'.$code.'%');
     }

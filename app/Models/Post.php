@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
 {
@@ -21,8 +22,10 @@ class Post extends Model
 
     /**
      * Get the image that owns the post.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function image()
+    public function image(): BelongsTo
     {
         return $this->belongsTo(Image::class);
     }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Media extends Pivot
@@ -32,16 +33,20 @@ class Media extends Pivot
 
     /**
      * Get the product that owns the media.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function product()
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
 
     /**
      * Get the image that owns the media.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function image()
+    public function image(): BelongsTo
     {
         return $this->belongsTo(Image::class);
     }

@@ -11,7 +11,7 @@ abstract class Dumper
      *
      * @var array
      */
-    protected $config;
+    protected array $config;
 
     /**
      * Dumper constructor.
@@ -28,7 +28,7 @@ abstract class Dumper
      *
      * @param  string  $path
      */
-    abstract public function dump($path);
+    abstract public function dump(string $path);
 
     /**
      * Run shell command.
@@ -36,7 +36,7 @@ abstract class Dumper
      * @param  string  $command
      * @param  array  $parameters
      */
-    protected function run($command, $parameters)
+    protected function run(string $command, array $parameters)
     {
         $process = Process::fromShellCommandline($command);
 

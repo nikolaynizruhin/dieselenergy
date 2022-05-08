@@ -39,7 +39,7 @@ class StoreOrder extends FormRequest
      *
      * @return array
      */
-    public function getCustomerAttributes()
+    public function getCustomerAttributes(): array
     {
         return $this->only(['name', 'phone']);
     }

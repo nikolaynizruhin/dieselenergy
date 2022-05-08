@@ -33,7 +33,7 @@ class StoreImage extends FormRequest
      *
      * @return array
      */
-    public function getImages()
+    public function getImages(): array
     {
         return collect($this->file('images'))->map(fn ($image) => [
             'path' => $image->store('images'),

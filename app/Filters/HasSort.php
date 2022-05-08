@@ -12,7 +12,7 @@ trait HasSort
      * @param  string  $field
      * @return void
      */
-    protected function sort($field)
+    protected function sort(string $field)
     {
         $direction = Str::startsWith($field, '-') ? 'desc' : 'asc';
 

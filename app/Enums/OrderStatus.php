@@ -30,7 +30,7 @@ enum OrderStatus: string
      *
      * @return string
      */
-    public function badge()
+    public function badge(): string
     {
         return match ($this) {
             OrderStatus::New => 'primary',
@@ -44,7 +44,7 @@ enum OrderStatus: string
      *
      * @return array
      */
-    public static function all()
+    public static function all(): array
     {
         return array_map(fn (OrderStatus $status) => $status->value, OrderStatus::cases());
     }

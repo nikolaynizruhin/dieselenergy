@@ -32,10 +32,10 @@ class CleanBackups implements ShouldQueue
     /**
      * Check if backup can be removed.
      *
-     * @param  string  $backup
+     * @param  string $backup
      * @return bool
      */
-    private function canBeRemoved($backup)
+    private function canBeRemoved(string $backup): bool
     {
         return Str::endsWith($backup, '.zip') && $this->isOutdated($backup);
     }
@@ -43,10 +43,10 @@ class CleanBackups implements ShouldQueue
     /**
      * Check if backup is outdated.
      *
-     * @param  string  $backup
+     * @param  string $backup
      * @return bool
      */
-    private function isOutdated($backup)
+    private function isOutdated(string $backup): bool
     {
         $timestamp = Storage::disk('local')->lastModified($backup);
 
@@ -60,7 +60,7 @@ class CleanBackups implements ShouldQueue
      *
      * @return array
      */
-    private function backups()
+    private function backups(): array
     {
         return Storage::disk('local')->files(config('backup.folder'));
     }

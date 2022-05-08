@@ -11,49 +11,49 @@ class CartItem
      *
      * @var int
      */
-    public $id;
+    public int $id;
 
     /**
      * Item slug.
      *
      * @var string
      */
-    public $slug;
+    public string $slug;
 
     /**
      * Item name.
      *
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * Item category.
      *
      * @var string
      */
-    public $category;
+    public string $category;
 
     /**
      * Item Price.
      *
      * @var float
      */
-    public $price;
+    public float $price;
 
     /**
      * Item quantity.
      *
      * @var int
      */
-    public $quantity;
+    public int $quantity;
 
     /**
      * Item image.
      *
      * @var string
      */
-    public $image;
+    public string $image;
 
     /**
      * Item constructor.
@@ -77,7 +77,7 @@ class CartItem
      *
      * @return float
      */
-    public function total()
+    public function total(): float
     {
         return $this->quantity * $this->price;
     }

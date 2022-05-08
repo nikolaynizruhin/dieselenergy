@@ -7,9 +7,9 @@ class MySQLDumper extends Dumper
     /**
      * Dump database.
      *
-     * @param  string  $path
+     * @param string $path
      */
-    public function dump($path)
+    public function dump(string $path)
     {
         $command = 'mysqldump -u"${:USERNAME}" -p"${:PASSWORD}" "${:DATABASE}" > "${:DESTINATION}"';
 

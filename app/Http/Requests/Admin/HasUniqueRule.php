@@ -5,6 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 
 trait HasUniqueRule
 {
@@ -13,7 +14,7 @@ trait HasUniqueRule
      *
      * @return \Illuminate\Validation\Rules\Unique
      */
-    protected function unique($field)
+    protected function unique($field): Unique
     {
         $rule = Rule::unique(Str::plural($field));
 

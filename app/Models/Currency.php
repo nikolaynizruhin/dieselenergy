@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Currency extends Model
 {
@@ -28,8 +29,10 @@ class Currency extends Model
 
     /**
      * Get the brands for the currency.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function brands()
+    public function brands(): HasMany
     {
         return $this->hasMany(Brand::class);
     }

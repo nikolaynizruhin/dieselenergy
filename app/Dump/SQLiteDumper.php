@@ -7,9 +7,9 @@ class SQLiteDumper extends Dumper
     /**
      * Dump database.
      *
-     * @param  string  $path
+     * @param string $path
      */
-    public function dump($path)
+    public function dump(string $path)
     {
         $command = 'sqlite3 "${:SOURCE}" .dump > "${:DESTINATION}"';
 

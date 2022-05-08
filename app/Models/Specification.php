@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Support\Collection;
 
 class Specification extends Pivot
 {
@@ -33,10 +35,10 @@ class Specification extends Pivot
     /**
      * Get featured attribute ids by category.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Support\Collection
      */
-    public static function featured($category)
+    public static function featured(Category $category): Collection
     {
         return self::where([
             'category_id' => $category->id,
@@ -46,16 +48,20 @@ class Specification extends Pivot
 
     /**
      * Get the attribute that owns the specification.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function attribute()
+    public function attribute(): BelongsTo
     {
         return $this->belongsTo(Attribute::class);
     }
 
     /**
      * Get the category that owns the specification.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
@@ -67,7 +73,7 @@ class Specification extends Pivot
      * @param  string|array  $rules
      * @return array
      */
-    public static function getValidationRules($categoryId, $rules)
+    public static function getValidationRules($categoryId, array|string $rules): array
     {
         return self::where('category_id', $categoryId)
             ->pluck('attribute_id')

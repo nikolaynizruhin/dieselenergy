@@ -16,7 +16,7 @@ class OrderCreated
      *
      * @var \App\Models\Order
      */
-    public $order;
+    public Order $order;
 
     /**
      * Create a new event instance.

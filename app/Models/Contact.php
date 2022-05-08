@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Contact extends Model
 {
@@ -21,8 +22,10 @@ class Contact extends Model
 
     /**
      * Get the customer that owns the order.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function customer()
+    public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
     }

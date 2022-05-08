@@ -50,7 +50,7 @@ class StoreUser extends FormRequest
      *
      * @return array
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return [
             ...$this->validated(),

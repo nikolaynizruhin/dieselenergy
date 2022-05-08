@@ -14,7 +14,7 @@ class OrderFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['search', 'sort'];
+    protected array $filters = ['search', 'sort'];
 
     /**
      * Filter the query by a given id.
@@ -22,7 +22,7 @@ class OrderFilters extends Filters
      * @param  string  $id
      * @return void
      */
-    protected function search($id)
+    protected function search(string $id)
     {
         $this->builder->where('orders.id', 'like', '%'.$id.'%');
     }

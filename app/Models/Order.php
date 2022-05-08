@@ -8,6 +8,8 @@ use App\Support\Money;
 use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Order extends Model
 {
@@ -33,16 +35,20 @@ class Order extends Model
 
     /**
      * Get the customer that owns the order.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function customer()
+    public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
     }
 
     /**
      * The products that belong to the order.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function products()
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class)
             ->using(Cart::class)
@@ -63,7 +69,7 @@ class Order extends Model
      *
      * @return int
      */
-    public function getTotal()
+    public function getTotal(): int
     {
         return $this->products->sum(fn ($product) => $product->price->toUAH()->coins() * $product->pivot->quantity);
     }

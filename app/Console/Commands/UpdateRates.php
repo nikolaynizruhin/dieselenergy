@@ -41,6 +41,6 @@ class UpdateRates extends Command
 
         $this->table(['Currency', 'Rate'], $currencies);
 
-        return 0;
+        return self::SUCCESS;
     }
 }

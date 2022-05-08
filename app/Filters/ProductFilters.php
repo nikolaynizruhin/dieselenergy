@@ -13,7 +13,7 @@ class ProductFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['search', 'attribute', 'sort'];
+    protected array $filters = ['search', 'attribute', 'sort'];
 
     /**
      * Filter the query by a given name.

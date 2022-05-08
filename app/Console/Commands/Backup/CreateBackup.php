@@ -32,6 +32,6 @@ class CreateBackup extends Command
 
         $this->info('Backup created successfully!');
 
-        return 0;
+        return self::SUCCESS;
     }
 }

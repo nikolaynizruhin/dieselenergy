@@ -5,6 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 
 class StoreSpecification extends FormRequest
 {
@@ -42,7 +43,7 @@ class StoreSpecification extends FormRequest
      *
      * @return \Illuminate\Validation\Rules\Unique
      */
-    private function unique()
+    private function unique(): Unique
     {
         $rule = Rule::unique('attribute_category')->where('category_id', $this->category_id);
 

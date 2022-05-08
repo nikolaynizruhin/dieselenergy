@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Order;
+use App\Models\Product;
 use App\Support\CartItem;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
@@ -40,7 +41,7 @@ class Cart
      * @param  int  $quantity
      * @return \App\Support\CartItem
      */
-    public function add($product, $quantity = 1)
+    public function add(Product $product, int $quantity = 1): CartItem
     {
         $items = $this->items();
 
@@ -65,12 +66,19 @@ class Cart
      *
      * @return \Illuminate\Support\Collection
      */
-    public function items()
+    public function items(): Collection
     {
         return $this->session->get(self::KEY, new Collection());
     }
 
-    public function update($key, $quantity)
+    /**
+     * Update cart
+     *
+     * @param  string $key
+     * @param  int $quantity
+     * @return CartItem
+     */
+    public function update(string $key, int $quantity): CartItem
     {
         $items = $this->items();
 
@@ -90,7 +98,7 @@ class Cart
      *
      * @return int
      */
-    public function total()
+    public function total(): int
     {
         return $this->items()->sum(fn ($item) => $item->price * $item->quantity);
     }
@@ -98,7 +106,7 @@ class Cart
     /**
      * Clear a cart.
      */
-    public function clear()
+    public function clear(): void
     {
         $this->session->put(self::KEY, new Collection());
     }
@@ -108,7 +116,7 @@ class Cart
      *
      * @param  \App\Models\Order  $order
      */
-    public function store(Order $order)
+    public function store(Order $order): void
     {
         $products = $this->items()->mapWithKeys(fn ($item) => [
             $item->id => ['quantity' => $item->quantity],
@@ -122,9 +130,9 @@ class Cart
     /**
      * Delete item.
      *
-     * @param  string  $key
+     * @param string $key
      */
-    public function delete($key)
+    public function delete(string $key): void
     {
         $items = $this->items();
 

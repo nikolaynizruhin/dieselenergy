@@ -38,7 +38,7 @@ class BlockSpam
      * @param  Request  $request
      * @return bool
      */
-    private function submittedTooQuickly(Request $request)
+    private function submittedTooQuickly(Request $request): bool
     {
         $start = $request->input(config('honeypot.valid_from_field'));
 

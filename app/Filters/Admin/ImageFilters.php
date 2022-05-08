@@ -11,7 +11,7 @@ class ImageFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['search'];
+    protected array $filters = ['search'];
 
     /**
      * Filter the query by a given name.
@@ -19,7 +19,7 @@ class ImageFilters extends Filters
      * @param  string  $path
      * @return void
      */
-    protected function search($path)
+    protected function search(string $path)
     {
         $this->builder->where('path', 'like', '%'.$path.'%');
     }

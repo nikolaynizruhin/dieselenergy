@@ -14,7 +14,7 @@ class ContactFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['search', 'sort'];
+    protected array $filters = ['search', 'sort'];
 
     /**
      * Filter the query by a given name.
@@ -22,7 +22,7 @@ class ContactFilters extends Filters
      * @param  string  $message
      * @return void
      */
-    protected function search($message)
+    protected function search(string $message)
     {
         $this->builder->where('contacts.message', 'like', '%'.$message.'%');
     }

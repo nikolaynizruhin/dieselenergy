@@ -9,7 +9,7 @@ if (! function_exists('view_modified_date')) {
      * @param  string  $format
      * @return string
      */
-    function view_modified_date($path, $format = 'Y-m-d')
+    function view_modified_date($path, $format = 'Y-m-d'): string
     {
         return date($format, filemtime(resource_path('views/'.$path.'.blade.php')));
     }
@@ -20,11 +20,11 @@ if (! function_exists('pages')) {
     /**
      * Get amount of pages.
      *
-     * @param  int  $total
-     * @param  int  $perPage
+     * @param  int $total
+     * @param  int $perPage
      * @return int
      */
-    function pages($total, $perPage = 9)
+    function pages(int $total, int $perPage = 9): int
     {
         return max((int) ceil($total / $perPage), 1);
     }

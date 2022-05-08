@@ -25,7 +25,7 @@ abstract class Filters
      *
      * @var array
      */
-    protected $filters = [];
+    protected array $filters = [];
 
     /**
      * Create a new instance.
@@ -61,7 +61,7 @@ abstract class Filters
      *
      * @return array
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return array_filter($this->request->only($this->filters));
     }

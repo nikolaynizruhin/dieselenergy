@@ -38,9 +38,9 @@ class CreateBackup implements ShouldQueue
     /**
      * Backup images.
      *
-     * @param  \ZipArchive  $zip
+     * @param \ZipArchive $zip
      */
-    private function backupImages($zip)
+    private function backupImages(ZipArchive $zip)
     {
         foreach ($this->images() as $image) {
             $zip->addFile(Storage::disk('local')->path($image), ltrim($image, 'public'));
@@ -50,9 +50,9 @@ class CreateBackup implements ShouldQueue
     /**
      * Backup database.
      *
-     * @param  \ZipArchive  $zip
+     * @param  \ZipArchive $zip
      */
-    private function backupDatabase($zip)
+    private function backupDatabase(ZipArchive $zip)
     {
         Dumper::dump(Storage::disk('local')->path(config('backup.database')));
 
@@ -72,7 +72,7 @@ class CreateBackup implements ShouldQueue
      *
      * @return string
      */
-    private function filename()
+    private function filename(): string
     {
         return Storage::disk('local')->path($this->file());
     }
@@ -82,7 +82,7 @@ class CreateBackup implements ShouldQueue
      *
      * @return string
      */
-    private function file()
+    private function file(): string
     {
         return config('backup.folder').'/'.date(config('backup.format')).'.zip';
     }
@@ -92,7 +92,7 @@ class CreateBackup implements ShouldQueue
      *
      * @return array
      */
-    private function images()
+    private function images(): array
     {
         return Storage::disk('local')->files(config('backup.files'));
     }

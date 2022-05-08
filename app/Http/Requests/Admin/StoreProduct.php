@@ -5,6 +5,7 @@ namespace App\Http\Requests\Admin;
 use App\Models\Specification;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class StoreProduct extends FormRequest
 {
@@ -61,7 +62,7 @@ class StoreProduct extends FormRequest
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getAttributeValues()
+    public function getAttributeValues(): Collection
     {
         $attributes = Arr::get($this->validated(), 'attributes', []);
 
@@ -75,7 +76,7 @@ class StoreProduct extends FormRequest
      *
      * @return array
      */
-    public function getProductAttributes()
+    public function getProductAttributes(): array
     {
         return Arr::except(
             [
@@ -91,7 +92,7 @@ class StoreProduct extends FormRequest
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getImages()
+    public function getImages(): Collection
     {
         return collect($this->file('images'))->map(fn ($image) => [
             'path' => $image->store('images'),
@@ -114,7 +115,7 @@ class StoreProduct extends FormRequest
      * @param  string|array  $rules
      * @return array
      */
-    protected function getAttributeRules($rules)
+    protected function getAttributeRules(array|string $rules): array
     {
         return Specification::getValidationRules($this->category_id, $rules);
     }

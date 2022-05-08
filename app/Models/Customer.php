@@ -8,6 +8,7 @@ use App\Notifications\OrderConfirmed;
 use Facades\App\Services\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
 class Customer extends Model
@@ -32,16 +33,20 @@ class Customer extends Model
 
     /**
      * Get the orders for the customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function orders()
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
 
     /**
      * Get the contacts for the customer.
+     *
+     * @return HasMany
      */
-    public function contacts()
+    public function contacts(): HasMany
     {
         return $this->hasMany(Contact::class);
     }
@@ -52,7 +57,7 @@ class Customer extends Model
      * @param  string  $notes
      * @return \App\Models\Order
      */
-    public function createOrder($notes = '')
+    public function createOrder(string $notes = ''): Order
     {
         $order = $this->orders()->create([
             'status' => OrderStatus::New,
@@ -70,7 +75,7 @@ class Customer extends Model
      * @param  string  $message
      * @return \App\Models\Contact
      */
-    public function createContact($message)
+    public function createContact(string $message): Contact
     {
         return $this->contacts()->create(['message' => $message]);
     }
@@ -81,7 +86,7 @@ class Customer extends Model
      * @param  \App\Models\Order  $order
      * @return void
      */
-    public function sendOrderConfirmationNotification($order)
+    public function sendOrderConfirmationNotification(Order $order)
     {
         $this->notify(new OrderConfirmed($order));
     }

@@ -32,6 +32,6 @@ class CleanBackups extends Command
 
         $this->info('Backups cleaned successfully!');
 
-        return 0;
+        return self::SUCCESS;
     }
 }

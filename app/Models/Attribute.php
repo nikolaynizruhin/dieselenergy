@@ -6,6 +6,7 @@ use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Attribute extends Model
 {
@@ -36,8 +37,10 @@ class Attribute extends Model
 
     /**
      * The categories that belong to the attribute.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class)
             ->using(Specification::class)
@@ -47,8 +50,10 @@ class Attribute extends Model
 
     /**
      * The products that belong to the attribute.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function products()
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class)
             ->withPivot('id', 'value')
