@@ -20,8 +20,8 @@ if (! function_exists('pages')) {
     /**
      * Get amount of pages.
      *
-     * @param  int $total
-     * @param  int $perPage
+     * @param  int  $total
+     * @param  int  $perPage
      * @return int
      */
     function pages(int $total, int $perPage = 9): int

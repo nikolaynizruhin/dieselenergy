@@ -32,7 +32,7 @@ class CleanBackups implements ShouldQueue
     /**
      * Check if backup can be removed.
      *
-     * @param  string $backup
+     * @param  string  $backup
      * @return bool
      */
     private function canBeRemoved(string $backup): bool
@@ -43,7 +43,7 @@ class CleanBackups implements ShouldQueue
     /**
      * Check if backup is outdated.
      *
-     * @param  string $backup
+     * @param  string  $backup
      * @return bool
      */
     private function isOutdated(string $backup): bool

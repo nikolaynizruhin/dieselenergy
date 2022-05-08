@@ -7,7 +7,7 @@ class MySQLDumper extends Dumper
     /**
      * Dump database.
      *
-     * @param string $path
+     * @param  string  $path
      */
     public function dump(string $path)
     {

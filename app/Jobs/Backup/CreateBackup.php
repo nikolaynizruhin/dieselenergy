@@ -38,7 +38,7 @@ class CreateBackup implements ShouldQueue
     /**
      * Backup images.
      *
-     * @param \ZipArchive $zip
+     * @param  \ZipArchive  $zip
      */
     private function backupImages(ZipArchive $zip)
     {
@@ -50,7 +50,7 @@ class CreateBackup implements ShouldQueue
     /**
      * Backup database.
      *
-     * @param  \ZipArchive $zip
+     * @param  \ZipArchive  $zip
      */
     private function backupDatabase(ZipArchive $zip)
     {
