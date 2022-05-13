@@ -24,7 +24,7 @@ class DirectiveTest extends TestCase
      * @param  string  $expected
      * @param  string  $directive
      */
-    private function assertDirectiveOutput($expected, $directive)
+    private function assertDirectiveOutput(string $expected, string $directive)
     {
         ob_start();
 

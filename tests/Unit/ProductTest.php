@@ -78,7 +78,7 @@ class ProductTest extends TestCase
 
         $products = Product::factory()
             ->active()
-            ->for(Category::factory())
+            ->forCategory()
             ->count(3)
             ->create();
 
