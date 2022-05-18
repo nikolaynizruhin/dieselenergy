@@ -23,5 +23,4 @@ class AttributeFilters extends Filters
      * @var string
      */
     protected string $search = 'name';
-
 }
