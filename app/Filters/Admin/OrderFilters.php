@@ -3,11 +3,12 @@
 namespace App\Filters\Admin;
 
 use App\Filters\Filters;
+use App\Filters\HasSearch;
 use App\Filters\HasSort;
 
 class OrderFilters extends Filters
 {
-    use HasSort;
+    use HasSort, HasSearch;
 
     /**
      * Registered filters to operate upon.
@@ -17,13 +18,9 @@ class OrderFilters extends Filters
     protected array $filters = ['search', 'sort'];
 
     /**
-     * Filter the query by a given id.
+     * Search field.
      *
-     * @param  string  $id
-     * @return void
+     * @var string
      */
-    protected function search(string $id): void
-    {
-        $this->builder->where('orders.id', 'like', '%'.$id.'%');
-    }
+    protected string $search = 'orders.id';
 }

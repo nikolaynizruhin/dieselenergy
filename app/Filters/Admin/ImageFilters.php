@@ -3,9 +3,12 @@
 namespace App\Filters\Admin;
 
 use App\Filters\Filters;
+use App\Filters\HasSearch;
 
 class ImageFilters extends Filters
 {
+    use HasSearch;
+
     /**
      * Registered filters to operate upon.
      *
@@ -14,13 +17,9 @@ class ImageFilters extends Filters
     protected array $filters = ['search'];
 
     /**
-     * Filter the query by a given name.
+     * Search field.
      *
-     * @param  string  $path
-     * @return void
+     * @var string
      */
-    protected function search(string $path): void
-    {
-        $this->builder->where('path', 'like', '%'.$path.'%');
-    }
+    protected string $search = 'path';
 }

@@ -3,12 +3,17 @@
 namespace App\Filters\Admin\Customer;
 
 use App\Filters\Filters;
+use App\Filters\HasSearch;
 use App\Filters\HasSort;
 
 class ContactFilters extends Filters
 {
     use HasSort {
         sort as sortBy;
+    }
+
+    use HasSearch {
+        search as searchBy;
     }
 
     /**
@@ -19,6 +24,13 @@ class ContactFilters extends Filters
     protected array $filters = ['search', 'sort'];
 
     /**
+     * Search field.
+     *
+     * @var string
+     */
+    protected string $search = 'message';
+
+    /**
      * Filter the query by a given name.
      *
      * @param  array  $search
@@ -27,7 +39,7 @@ class ContactFilters extends Filters
     protected function search(array $search): void
     {
         if (isset($search['contact'])) {
-            $this->builder->where('message', 'like', '%'.$search['contact'].'%');
+            $this->searchBy($search['contact']);
         }
     }
 

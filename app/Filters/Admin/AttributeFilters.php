@@ -3,11 +3,12 @@
 namespace App\Filters\Admin;
 
 use App\Filters\Filters;
+use App\Filters\HasSearch;
 use App\Filters\HasSort;
 
 class AttributeFilters extends Filters
 {
-    use HasSort;
+    use HasSort, HasSearch;
 
     /**
      * Registered filters to operate upon.
@@ -17,13 +18,10 @@ class AttributeFilters extends Filters
     protected array $filters = ['search', 'sort'];
 
     /**
-     * Filter the query by a given name.
+     * Search field.
      *
-     * @param  string  $name
-     * @return void
+     * @var string
      */
-    protected function search(string $name): void
-    {
-        $this->builder->where('name', 'like', '%'.$name.'%');
-    }
+    protected string $search = 'name';
+
 }
