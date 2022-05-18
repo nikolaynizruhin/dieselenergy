@@ -22,7 +22,7 @@ class OrderFilters extends Filters
      * @param  string  $id
      * @return void
      */
-    protected function search(string $id)
+    protected function search(string $id): void
     {
         $this->builder->where('orders.id', 'like', '%'.$id.'%');
     }

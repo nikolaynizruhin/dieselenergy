@@ -21,7 +21,7 @@ class ProductFilters extends Filters
      * @param  string  $name
      * @return void
      */
-    protected function search($name)
+    protected function search(string $name): void
     {
         $this->builder->where('name', 'like', '%'.$name.'%');
     }
@@ -32,7 +32,7 @@ class ProductFilters extends Filters
      * @param  array  $attributes
      * @return void
      */
-    protected function attribute($attributes)
+    protected function attribute(array $attributes): void
     {
         collect($attributes)->each(fn ($values, $id) => $this->builder
             ->whereHas('attributes', fn (Builder $query) => $query

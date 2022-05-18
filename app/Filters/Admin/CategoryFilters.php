@@ -22,7 +22,7 @@ class CategoryFilters extends Filters
      * @param  string  $name
      * @return void
      */
-    protected function search(string $name)
+    protected function search(string $name): void
     {
         $this->builder->where('name', 'like', '%'.$name.'%');
     }

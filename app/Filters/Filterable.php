@@ -13,7 +13,7 @@ trait Filterable
      * @param  \App\Filters\Filters  $filters
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeFilter(Builder $query, Filters $filters)
+    public function scopeFilter(Builder $query, Filters $filters): Builder
     {
         return $filters->apply($query);
     }

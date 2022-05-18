@@ -24,7 +24,7 @@ class OrderFilters extends Filters
      * @param  array  $search
      * @return void
      */
-    protected function search(array $search)
+    protected function search(array $search): void
     {
         if (isset($search['order'])) {
             $this->builder->where('id', 'like', '%'.$search['order'].'%');
@@ -37,7 +37,7 @@ class OrderFilters extends Filters
      * @param  string|array  $field
      * @return void
      */
-    protected function sort($field)
+    protected function sort($field): void
     {
         if (isset($field['order'])) {
             $this->sortBy($field['order']);

@@ -22,7 +22,7 @@ class PostFilters extends Filters
      * @param  string  $title
      * @return void
      */
-    protected function search(string $title)
+    protected function search(string $title): void
     {
         $this->builder->where('title', 'like', '%'.$title.'%');
     }

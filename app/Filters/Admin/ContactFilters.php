@@ -22,7 +22,7 @@ class ContactFilters extends Filters
      * @param  string  $message
      * @return void
      */
-    protected function search(string $message)
+    protected function search(string $message): void
     {
         $this->builder->where('contacts.message', 'like', '%'.$message.'%');
     }

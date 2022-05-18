@@ -19,7 +19,7 @@ class ImageFilters extends Filters
      * @param  string  $path
      * @return void
      */
-    protected function search(string $path)
+    protected function search(string $path): void
     {
         $this->builder->where('path', 'like', '%'.$path.'%');
     }

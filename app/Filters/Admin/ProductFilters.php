@@ -22,7 +22,7 @@ class ProductFilters extends Filters
      * @param  string  $name
      * @return void
      */
-    protected function search(string $name)
+    protected function search(string $name): void
     {
         $this->builder->where('products.name', 'like', '%'.$name.'%');
     }

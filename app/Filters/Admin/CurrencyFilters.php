@@ -22,7 +22,7 @@ class CurrencyFilters extends Filters
      * @param  string  $code
      * @return void
      */
-    protected function search(string $code)
+    protected function search(string $code): void
     {
         $this->builder->where('code', 'like', '%'.$code.'%');
     }
