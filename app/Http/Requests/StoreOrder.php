@@ -35,16 +35,6 @@ class StoreOrder extends FormRequest
     }
 
     /**
-     * Get validated customer attributes.
-     *
-     * @return array
-     */
-    public function getCustomerAttributes(): array
-    {
-        return $this->only(['name', 'phone']);
-    }
-
-    /**
      * Configure the validator instance.
      *
      * @param  \Illuminate\Validation\Validator  $validator

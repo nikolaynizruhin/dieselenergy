@@ -29,7 +29,7 @@ class OrderController extends Controller
     {
         $customer = Customer::updateOrCreate(
             ['email' => $request->email],
-            $request->getCustomerAttributes(),
+            $request->only(['name', 'phone']),
         );
 
         $order = $customer->createOrder($request->notes);
