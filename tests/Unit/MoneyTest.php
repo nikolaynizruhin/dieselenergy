@@ -13,7 +13,7 @@ class MoneyTest extends TestCase
      *
      * @var \App\Support\Money
      */
-    private $money;
+    private Money $money;
 
     protected function setUp(): void
     {

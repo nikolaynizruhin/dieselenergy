@@ -13,7 +13,7 @@ class UpdateCartTest extends TestCase
      *
      * @var \App\Models\Product
      */
-    private $product;
+    private Product $product;
 
     /**
      * Setup.

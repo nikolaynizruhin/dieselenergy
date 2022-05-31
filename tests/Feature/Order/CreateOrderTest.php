@@ -29,14 +29,14 @@ class CreateOrderTest extends TestCase
      *
      * @var \App\Models\Product
      */
-    private $product;
+    private Product $product;
 
     /**
      * Amount of products in the cart.
      *
      * @var int
      */
-    private $quantity;
+    private int $quantity;
 
     /**
      * Setup.
@@ -234,7 +234,7 @@ class CreateOrderTest extends TestCase
      * @param  array  $overrides
      * @return array
      */
-    private function validFields($overrides = [])
+    private function validFields(array $overrides = []): array
     {
         $customer = Customer::factory()->make();
 

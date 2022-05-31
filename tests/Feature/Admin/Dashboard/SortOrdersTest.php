@@ -13,14 +13,14 @@ class SortOrdersTest extends TestCase
      *
      * @var \App\Models\Order
      */
-    private $adam;
+    private Order $adam;
 
     /**
      * Tom's order.
      *
      * @var \App\Models\Order
      */
-    private $tom;
+    private Order $tom;
 
     protected function setUp(): void
     {

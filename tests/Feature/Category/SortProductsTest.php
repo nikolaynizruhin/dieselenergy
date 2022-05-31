@@ -14,21 +14,21 @@ class SortProductsTest extends TestCase
      *
      * @var \App\Models\Product
      */
-    private $patrol;
+    private Product $patrol;
 
     /**
      * Diesel generator.
      *
      * @var \App\Models\Product
      */
-    private $diesel;
+    private Product $diesel;
 
     /**
      * Generators category.
      *
      * @var \App\Models\Category
      */
-    private $generators;
+    private Category $generators;
 
     protected function setUp(): void
     {

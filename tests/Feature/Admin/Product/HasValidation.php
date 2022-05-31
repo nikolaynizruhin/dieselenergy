@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 trait HasValidation
 {
-    public function provider($count = 1): array
+    public function provider(int $count = 1): array
     {
         return [
             'Name is required' => [

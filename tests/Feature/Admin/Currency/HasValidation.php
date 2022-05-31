@@ -6,7 +6,7 @@ use App\Models\Currency;
 
 trait HasValidation
 {
-    public function provider($count = 1): array
+    public function provider(int $count = 1): array
     {
         return [
             'Code cant be an integer' => [
