@@ -14,7 +14,7 @@
 
             <div class="row justify-content-center mb-4">
                 <div class="col col-md-10 col-lg-8">
-                    @include('layouts.partials.breadcrumb', ['links' => ['Блог' => route('posts.index'), $post->title => route('posts.index', $post)]])
+                    @include('layouts.partials.breadcrumb', ['links' => ['Блог' => route('posts.index'), $post->title => route('posts.show', $post)]])
                 </div>
             </div>
 
