@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Facades\App\Actions\CreateContact;
 use App\Http\Requests\StoreContact;
-use App\Models\Customer;
-use App\Notifications\ContactCreated;
-use Illuminate\Support\Facades\Notification;
 
 class ContactController extends Controller
 {
@@ -27,15 +25,7 @@ class ContactController extends Controller
      */
     public function store(StoreContact $request)
     {
-        $customer = Customer::updateOrCreate(
-            ['email' => $request->email],
-            $request->getCustomerAttributes(),
-        );
-
-        $contact = $customer->createContact($request->message);
-
-        Notification::route('mail', config('company.email'))
-            ->notify(new ContactCreated($contact));
+        CreateContact::handle($request->getContactAttributes());
 
         return redirect(route('home').'#contact')->with('status', __('contact.created'));
     }

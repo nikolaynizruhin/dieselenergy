@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\OrderCreated;
+use Facades\App\Actions\CreateOrder;
 use App\Http\Requests\StoreOrder;
-use App\Models\Customer;
 use App\Models\Order;
 
 class OrderController extends Controller
@@ -27,14 +26,7 @@ class OrderController extends Controller
      */
     public function store(StoreOrder $request)
     {
-        $customer = Customer::updateOrCreate(
-            ['email' => $request->email],
-            $request->only(['name', 'phone']),
-        );
-
-        $order = $customer->createOrder($request->notes);
-
-        OrderCreated::dispatch($order);
+        $order = CreateOrder::handle($request->getOrderAttributes());
 
         return to_route('orders.show', [$order]);
     }

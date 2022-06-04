@@ -38,9 +38,9 @@ class StoreContact extends FormRequest
      *
      * @return array
      */
-    public function getCustomerAttributes(): array
+    public function getContactAttributes(): array
     {
-        return $this->only(['name', 'phone']);
+        return $this->only(['name', 'phone', 'email', 'message']);
     }
 
     /**

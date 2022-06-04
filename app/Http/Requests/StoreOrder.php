@@ -35,6 +35,16 @@ class StoreOrder extends FormRequest
     }
 
     /**
+     * Get order attributes.
+     *
+     * @return array
+     */
+    public function getOrderAttributes(): array
+    {
+        return $this->only(['name', 'email', 'phone', 'notes']);
+    }
+
+    /**
      * Configure the validator instance.
      *
      * @param  \Illuminate\Validation\Validator  $validator
