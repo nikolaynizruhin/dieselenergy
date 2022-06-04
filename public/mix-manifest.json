@@ -2,17 +2,5 @@
     "/js/app.js": "/js/app.js",
     "/css/admin.css": "/css/admin.css",
     "/css/app.css": "/css/app.css",
-    "/images/bootstrap-icons.svg": "/images/bootstrap-icons.svg",
-    "/images/envelope.png": "/images/envelope.png",
-    "/images/facebook.png": "/images/facebook.png",
-    "/images/logo-white.svg": "/images/logo-white.svg",
-    "/images/logo.png": "/images/logo.png",
-    "/images/logo.svg": "/images/logo.svg",
-    "/images/logos/figaro.svg": "/images/logos/figaro.svg",
-    "/images/logos/ictv.png": "/images/logos/ictv.png",
-    "/images/logos/iev.png": "/images/logos/iev.png",
-    "/images/logos/metro.svg": "/images/logos/metro.svg",
-    "/images/logos/motto.png": "/images/logos/motto.png",
-    "/images/logos/well.png": "/images/logos/well.png",
-    "/images/telephone.png": "/images/telephone.png"
+    "/images/bootstrap-icons.svg": "/images/bootstrap-icons.svg"
 }
