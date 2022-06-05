@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Facades\App\Actions\CreateContact;
 use App\Http\Requests\StoreContact;
+use Facades\App\Actions\CreateContact;
 
 class ContactController extends Controller
 {

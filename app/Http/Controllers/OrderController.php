@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Facades\App\Actions\CreateOrder;
 use App\Http\Requests\StoreOrder;
 use App\Models\Order;
+use Facades\App\Actions\CreateOrder;
 
 class OrderController extends Controller
 {
