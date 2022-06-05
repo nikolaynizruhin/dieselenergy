@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Customer;
+use App\Rules\Phone;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +20,7 @@ class CustomerFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'phone' => $this->faker->regexify(Customer::PHONE_REGEX),
+            'phone' => $this->faker->regexify(Phone::REGEX),
             'notes' => $this->faker->sentence(),
         ];
     }

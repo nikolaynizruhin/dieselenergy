@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Customer;
+use App\Rules\Phone;
 use Facades\App\Services\Cart;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -29,7 +29,7 @@ class StoreOrder extends FormRequest
             'privacy' => 'accepted',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'phone' => 'required|regex:'.Customer::PHONE_REGEX,
+            'phone' => ['required', new Phone],
             'notes' => 'nullable|string',
         ];
     }

@@ -107,6 +107,7 @@ return [
         'symbols' => 'Поле :attribute має містити принаймні один символ.',
         'uncompromised' => "Поле :attribute з'явилося в результаті витоку даних. Будь ласка, виберіть інший :attribute.",
     ],
+    'phone' => 'Поле :attribute має містити номер телефону.',
     'present' => 'Поле :attribute повинне бути присутнє.',
     'prohibited' => 'Поле :attribute заборонено.',
     'prohibited_if' => 'Поле :attribute заборонено, коли :other є рівним :value.',

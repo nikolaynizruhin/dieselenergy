@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Models\Customer;
+use App\Rules\Phone;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCustomer extends FormRequest
@@ -35,7 +35,7 @@ class StoreCustomer extends FormRequest
                 'max:255',
                 $this->unique('customer'),
             ],
-            'phone' => 'required|regex:'.Customer::PHONE_REGEX,
+            'phone' => ['required', new Phone],
             'notes' => 'nullable|string',
         ];
     }
