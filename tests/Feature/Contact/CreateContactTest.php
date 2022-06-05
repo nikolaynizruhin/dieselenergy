@@ -113,7 +113,7 @@ class CreateContactTest extends TestCase
         $this->assertDatabaseCount('contacts', 0);
     }
 
-    public function spamProvider()
+    public function spamProvider(): array
     {
         return [
             'Contact cant contain spam' => [
