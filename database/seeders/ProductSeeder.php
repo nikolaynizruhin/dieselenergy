@@ -7,12 +7,9 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
-use Illuminate\Foundation\Testing\WithFaker;
 
 class ProductSeeder extends Seeder
 {
-    use WithFaker;
-
     /**
      * Run the database seeds.
      *
@@ -25,10 +22,9 @@ class ProductSeeder extends Seeder
             ->sequence(fn ($sequence) => [
                 'brand_id' => Brand::all()->random(),
                 'category_id' => Category::all()->random(),
-            ])->withDefaultImage()
-            ->hasAttached(
-                Attribute::all()->random(),
-                ['value' => $this->makeFaker()->randomDigit()],
-            )->create();
+            ])
+            ->withDefaultImage()
+            ->hasAttached(Attribute::all()->random(), ['value' => 1])
+            ->create();
     }
 }
