@@ -18,7 +18,8 @@ class CategoryController extends Controller
      */
     public function index(CategoryFilters $filters)
     {
-        $categories = Category::filter($filters)
+        $categories = Category::query()
+            ->filter($filters)
             ->orderBy('name')
             ->paginate(10)
             ->withQueryString();

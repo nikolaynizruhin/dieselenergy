@@ -17,7 +17,8 @@ class PostController extends Controller
      */
     public function index(PostFilters $filters)
     {
-        $posts = Post::filter($filters)
+        $posts = Post::query()
+            ->filter($filters)
             ->latest()
             ->paginate(10)
             ->withQuerySTring();

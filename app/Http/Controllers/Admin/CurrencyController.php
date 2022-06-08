@@ -17,7 +17,8 @@ class CurrencyController extends Controller
      */
     public function index(CurrencyFilters $filters)
     {
-        $currencies = Currency::filter($filters)
+        $currencies = Currency::query()
+            ->filter($filters)
             ->orderBy('code')
             ->paginate(10)
             ->withQueryString();

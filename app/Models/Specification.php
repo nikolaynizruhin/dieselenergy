@@ -75,7 +75,8 @@ class Specification extends Pivot
      */
     public static function getValidationRules($categoryId, array|string $rules): array
     {
-        return self::where('category_id', $categoryId)
+        return self::query()
+            ->where('category_id', $categoryId)
             ->pluck('attribute_id')
             ->mapWithKeys(fn ($id) => ['attributes.'.$id => $rules])
             ->all();

@@ -170,7 +170,8 @@ class Product extends Model
      */
     public function recommendations(): Collection
     {
-        return self::active()
+        return self::query()
+            ->active()
             ->withDefaultImage()
             ->with(['category', 'brand.currency'])
             ->where('id', '<>', $this->id)

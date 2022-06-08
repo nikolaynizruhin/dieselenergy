@@ -17,7 +17,8 @@ class ImageController extends Controller
      */
     public function index(ImageFilters $filters)
     {
-        $images = Image::filter($filters)
+        $images = Image::query()
+            ->filter($filters)
             ->latest()
             ->paginate(10)
             ->withQueryString();

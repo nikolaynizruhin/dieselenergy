@@ -19,7 +19,8 @@ class CustomerController extends Controller
      */
     public function index(CustomerFilters $filters)
     {
-        $customers = Customer::filter($filters)
+        $customers = Customer::query()
+            ->filter($filters)
             ->latest()
             ->paginate(10)
             ->withQueryString();

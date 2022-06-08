@@ -20,7 +20,8 @@ class DashboardController extends Controller
     {
         $totalCustomers = Customer::count();
         $soldProducts = DB::table('order_product')->sum('quantity');
-        $orders = Order::with('customer')
+        $orders = Order::query()
+            ->with('customer')
             ->filter($filters)
             ->latest()
             ->paginate(10)

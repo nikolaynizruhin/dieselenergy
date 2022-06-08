@@ -17,7 +17,8 @@ class UserController extends Controller
      */
     public function index(UserFilters $filters)
     {
-        $users = User::filter($filters)
+        $users = User::query()
+            ->filter($filters)
             ->orderBy('name')
             ->paginate(10)
             ->withQueryString();
