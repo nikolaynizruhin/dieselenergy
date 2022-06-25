@@ -12,7 +12,6 @@ use App\Models\Product;
 use App\Notifications\OrderConfirmed;
 use App\Notifications\OrderCreated;
 use Facades\App\Services\Cart;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
@@ -22,7 +21,7 @@ use Tests\TestCase;
 
 class CreateOrderTest extends TestCase
 {
-    use WithFaker, Honeypot;
+    use Honeypot;
 
     /**
      * Product.
@@ -52,7 +51,7 @@ class CreateOrderTest extends TestCase
             ->withDefaultImage()
             ->create();
 
-        Cart::add($this->product, $this->quantity = $this->faker->randomDigitNotNull());
+        Cart::add($this->product, $this->quantity = fake()->randomDigitNotNull());
     }
 
     /** @test */

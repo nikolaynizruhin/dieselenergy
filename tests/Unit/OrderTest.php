@@ -10,13 +10,10 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Support\Money;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class OrderTest extends TestCase
 {
-    use WithFaker;
-
     /** @test */
     public function it_has_customer()
     {
@@ -32,7 +29,7 @@ class OrderTest extends TestCase
     {
         $order = Order::factory()
             ->hasAttached(Product::factory(), [
-                'quantity' => $quantity = $this->faker->randomDigit(),
+                'quantity' => $quantity = fake()->randomDigit(),
             ])->create();
 
         $this->assertInstanceOf(Collection::class, $order->products);

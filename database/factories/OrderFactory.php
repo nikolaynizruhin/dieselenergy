@@ -20,9 +20,9 @@ class OrderFactory extends Factory
     {
         return [
             'customer_id' => Customer::factory(),
-            'status' => $this->faker->randomElement(OrderStatus::all()),
-            'total' => $this->faker->randomNumber(5),
-            'notes' => $this->faker->sentence(),
+            'status' => fake()->randomElement(OrderStatus::all()),
+            'total' => fake()->randomNumber(5),
+            'notes' => fake()->sentence(),
         ];
     }
 }

@@ -6,14 +6,13 @@ use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UpdateProductTest extends TestCase
 {
-    use WithFaker, HasValidation;
+    use HasValidation;
 
     /**
      * Product.
@@ -85,7 +84,7 @@ class UpdateProductTest extends TestCase
         $this->login()
             ->put(route('admin.products.update', $this->product), $stub + [
                 'attributes' => [
-                    $attribute->id => $value = $this->faker->word(),
+                    $attribute->id => $value = fake()->word(),
                 ],
             ])->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.updated'));
@@ -137,7 +136,7 @@ class UpdateProductTest extends TestCase
 
         $stub = $this->validFields([
             'category_id' => $category->id,
-            'attributes' => [$unrelated->id => $this->faker->randomDigit()],
+            'attributes' => [$unrelated->id => fake()->randomDigit()],
         ]);
 
         $this->login()

@@ -7,14 +7,11 @@ use App\Models\Currency;
 use App\Models\Order;
 use App\Models\Product;
 use Facades\App\Services\Cart;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
 
 class CartTest extends TestCase
 {
-    use WithFaker;
-
     /**
      * Product.
      *
@@ -131,7 +128,7 @@ class CartTest extends TestCase
     {
         $order = Order::factory()->create();
 
-        Cart::add($this->product, $quantity = $this->faker->randomDigitNotNull());
+        Cart::add($this->product, $quantity = fake()->randomDigitNotNull());
 
         $this->assertDatabaseCount('order_product', 0);
 

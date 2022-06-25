@@ -10,13 +10,10 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Support\Money;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
-    use WithFaker;
-
     /** @test */
     public function it_has_brand()
     {
@@ -42,7 +39,7 @@ class ProductTest extends TestCase
     {
         $product = Product::factory()
             ->hasAttached(Attribute::factory(), [
-                'value' => $value = $this->faker->randomDigit(),
+                'value' => $value = fake()->randomDigit(),
             ])->create();
 
         $this->assertInstanceOf(Collection::class, $product->attributes);
@@ -54,7 +51,7 @@ class ProductTest extends TestCase
     {
         $product = Product::factory()
             ->hasAttached(Order::factory(), [
-                'quantity' => $quantity = $this->faker->randomDigit(),
+                'quantity' => $quantity = fake()->randomDigit(),
             ])->create();
 
         $this->assertInstanceOf(Collection::class, $product->orders);

@@ -5,13 +5,10 @@ namespace Tests\Feature\Admin\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ReadCartsTest extends TestCase
 {
-    use WithFaker;
-
     /** @test */
     public function user_can_read_carts()
     {
@@ -25,8 +22,8 @@ class ReadCartsTest extends TestCase
         $order = Order::factory()->create();
 
         $order->products()->attach([
-            $patrol->id => ['quantity' => $this->faker->randomDigit()],
-            $diesel->id => ['quantity' => $this->faker->randomDigit()],
+            $patrol->id => ['quantity' => fake()->randomDigit()],
+            $diesel->id => ['quantity' => fake()->randomDigit()],
         ]);
 
         $this->login()

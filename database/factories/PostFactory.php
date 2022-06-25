@@ -18,10 +18,10 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'slug' => $this->faker->unique()->slug(),
-            'title' => $this->faker->unique()->sentence(),
-            'excerpt' => $this->faker->sentence(),
-            'body' => $this->faker->paragraph(),
+            'slug' => fake()->unique()->slug(),
+            'title' => fake()->unique()->sentence(),
+            'excerpt' => fake()->sentence(),
+            'body' => fake()->paragraph(),
             'image_id' => Image::factory(),
         ];
     }

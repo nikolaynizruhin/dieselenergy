@@ -18,10 +18,10 @@ class CustomerFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'phone' => $this->faker->regexify(Phone::REGEX),
-            'notes' => $this->faker->sentence(),
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'phone' => fake()->regexify(Phone::REGEX),
+            'notes' => fake()->sentence(),
         ];
     }
 }

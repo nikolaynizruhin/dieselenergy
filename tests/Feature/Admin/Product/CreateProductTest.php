@@ -6,14 +6,13 @@ use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class CreateProductTest extends TestCase
 {
-    use WithFaker, HasValidation;
+    use HasValidation;
 
     /** @test */
     public function guest_cant_visit_create_product_page()
@@ -66,7 +65,7 @@ class CreateProductTest extends TestCase
         $this->login()
             ->post(route('admin.products.store'), $product + [
                 'attributes' => [
-                    $attribute->id => $value = $this->faker->word(),
+                    $attribute->id => $value = fake()->word(),
                 ],
             ])->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.created'));
@@ -161,7 +160,7 @@ class CreateProductTest extends TestCase
 
         $stub = Product::factory()->raw([
             'category_id' => $category->id,
-            'attributes' => [$unrelated->id => $this->faker->randomDigit()],
+            'attributes' => [$unrelated->id => fake()->randomDigit()],
         ]);
 
         $this->login()

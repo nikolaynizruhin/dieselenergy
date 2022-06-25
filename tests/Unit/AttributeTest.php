@@ -5,13 +5,10 @@ namespace Tests\Unit;
 use App\Models\Attribute;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AttributeTest extends TestCase
 {
-    use WithFaker;
-
     /** @test */
     public function it_has_many_categories()
     {
@@ -27,7 +24,7 @@ class AttributeTest extends TestCase
     {
         $attribute = Attribute::factory()
             ->hasAttached(Product::factory(), [
-                'value' => $value = $this->faker->randomDigit(),
+                'value' => $value = fake()->randomDigit(),
             ])->create();
 
         $this->assertInstanceOf(Collection::class, $attribute->products);

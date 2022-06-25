@@ -21,7 +21,7 @@ class CartFactory extends Factory
         return [
             'order_id' => Order::factory(),
             'product_id' => Product::factory(),
-            'quantity' => $this->faker->randomDigitNot(0),
+            'quantity' => fake()->randomDigitNot(0),
         ];
     }
 }

@@ -21,7 +21,7 @@ class MediaFactory extends Factory
         return [
             'image_id' => Image::factory(),
             'product_id' => Product::factory(),
-            'is_default' => $this->faker->boolean(),
+            'is_default' => fake()->boolean(),
         ];
     }
 
