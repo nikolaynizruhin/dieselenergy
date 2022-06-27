@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Http\Client\Factory;
+use Illuminate\Http\Client\PendingRequest;
 
 class Minfin
 {
@@ -11,7 +12,7 @@ class Minfin
      *
      * @var \Illuminate\Http\Client\PendingRequest
      */
-    private $http;
+    private PendingRequest $http;
 
     /**
      * Minfin constructor.
