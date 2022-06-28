@@ -24,8 +24,8 @@
 
     @stack('meta')
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Scripts & Styles -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <!-- Facebook Pixel Code -->
     <script>
@@ -62,8 +62,5 @@
     </main>
 
     @include('layouts.partials.footer')
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
