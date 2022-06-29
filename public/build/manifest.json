@@ -4,14 +4,14 @@
     "src": "resources/js/app.js",
     "isEntry": true
   },
-  "resources/sass/admin/admin.scss": {
-    "file": "assets/admin.f9013fe9.css",
-    "src": "resources/sass/admin/admin.scss",
-    "isEntry": true
-  },
   "resources/sass/app.scss": {
     "file": "assets/app.a6e51b22.css",
     "src": "resources/sass/app.scss",
+    "isEntry": true
+  },
+  "resources/sass/admin/admin.scss": {
+    "file": "assets/admin.f9013fe9.css",
+    "src": "resources/sass/admin/admin.scss",
     "isEntry": true
   }
 }
