@@ -3,10 +3,13 @@ import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
     plugins: [
-        laravel([
-            'resources/sass/admin/admin.scss',
-            'resources/sass/app.scss',
-            'resources/js/app.js',
-        ]),
+        laravel({
+            input: [
+                'resources/sass/admin/admin.scss',
+                'resources/sass/app.scss',
+                'resources/js/app.js',
+            ],
+            refresh: true,
+        }),
     ],
 });
