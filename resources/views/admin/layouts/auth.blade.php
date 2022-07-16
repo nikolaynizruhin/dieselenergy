@@ -9,8 +9,8 @@
 
     <title>{{ config('app.name') }}</title>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    <!-- Scripts & Styles -->
+    @vite(['resources/sass/admin/admin.scss', 'resources/js/app.js'])
 </head>
 <body>
     <main class="py-5">
@@ -33,8 +33,5 @@
             </div>
         </div>
     </main>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
