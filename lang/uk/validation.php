@@ -43,6 +43,7 @@ return [
     'digits_between' => 'Довжина цифрового поля :attribute повинна бути від :min до :max.',
     'dimensions' => 'Поле :attribute містить неприпустимі розміри зображення.',
     'distinct' => 'Поле :attribute містить значення, яке дублюється.',
+    'doesnt_end_with' => 'Поле :attribute може не закінчуватися з одного з наведеного нижче: :values.',
     'doesnt_start_with' => 'Поле :attribute може не починатися з одного з наведеного нижче: :values.',
     'email' => 'Поле :attribute повинне містити коректну електронну адресу.',
     'ends_with' => 'Поле :attribute має закінчуватися одним з наступних значень: :values',
