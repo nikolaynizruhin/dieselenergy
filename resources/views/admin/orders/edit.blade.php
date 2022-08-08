@@ -33,7 +33,7 @@
                 <div class="mb-3 row">
                     <label for="inputTotal" class="col-md-3 col-form-label">{{ __('common.total') }}</label>
                     <div class="col-md-6">
-                        <div class="input-group has-validation">
+                        <div class="input-group">
                             <span class="input-group-text" id="basic-addon">UAH</span>
                             <input type="number" min="0.00" step="0.01" id="inputTotal" class="form-control @error('total') is-invalid @enderror" aria-label="Total" aria-describedby="basic-addon" name="total" value="{{ old('total', $order->total->decimal()) }}" required autocomplete="total">
 
