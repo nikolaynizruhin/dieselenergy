@@ -27,7 +27,7 @@ class Cart extends Pivot
     /**
      * Get the order that owns the cart.
      */
-    public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
     }

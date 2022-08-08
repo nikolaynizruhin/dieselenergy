@@ -11,7 +11,6 @@ class OrderFilters extends Filters
     use HasSort {
         sort as sortBy;
     }
-
     use HasSearch {
         search as searchBy;
     }

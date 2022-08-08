@@ -130,8 +130,8 @@ class SortProductsTest extends TestCase
         [$ats, $generators] = Category::factory()
             ->count(2)
             ->state(new Sequence(
-                ['name' =>'ATS'],
-                ['name' =>'Generators'],
+                ['name' => 'ATS'],
+                ['name' => 'Generators'],
             ))->create();
 
         Product::factory()
@@ -155,8 +155,8 @@ class SortProductsTest extends TestCase
         [$ats, $generators] = Category::factory()
             ->count(2)
             ->state(new Sequence(
-                ['name' =>'ATS'],
-                ['name' =>'Generators'],
+                ['name' => 'ATS'],
+                ['name' => 'Generators'],
             ))->create();
 
         Product::factory()
