@@ -12,7 +12,7 @@ class DumperFactory
      * @param  array  $config
      * @return \App\Dump\Dumper
      */
-    public static function make($config)
+    public static function make(array $config)
     {
         return match ($config['driver']) {
             'mysql' => new MySQLDumper($config),
