@@ -48,12 +48,9 @@
     <div class="mb-3 row">
         <label for="inputBody" class="col-md-3 col-form-label">
             {{ __('post.body') }}
-            <div id="bodyHelpBlock" class="form-text text-muted">
-                {{ __('common.support') }} <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown</a>
-            </div>
         </label>
         <div class="col-md-6">
-            <textarea name="body" class="form-control @error('body') is-invalid @enderror" id="inputBody" rows="10" aria-describedby="bodyHelpBlock">{{ old('body', $post) }}</textarea>
+            <textarea name="body" class="markdown form-control @error('body') is-invalid @enderror" id="inputBody" rows="10" aria-describedby="bodyHelpBlock">{{ old('body', $post) }}</textarea>
 
             @include('layouts.partials.error', ['name' => 'body'])
         </div>

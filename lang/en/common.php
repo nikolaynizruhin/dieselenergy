@@ -47,7 +47,6 @@ return [
     'settings' => 'Settings',
     'slug' => 'Slug',
     'status' => 'Status',
-    'support' => 'Support',
     'title' => 'Title',
     'total' => 'Total',
     'update' => 'Update',
