@@ -119,12 +119,9 @@
                 <div class="mb-3 row">
                     <label for="inputDescription" class="col-md-3 col-form-label">
                         {{ __('common.description') }}
-                        <div id="descriptionHelpBlock" class="form-text text-muted">
-                            {{ __('common.support') }} <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown</a>
-                        </div>
                     </label>
                     <div class="col-md-6">
-                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="10" aria-describedby="descriptionHelpBlock">{{ old('description', $product) }}</textarea>
+                        <textarea name="description" class="markdown form-control @error('description') is-invalid @enderror" id="inputDescription" rows="10" aria-describedby="descriptionHelpBlock">{{ old('description', $product) }}</textarea>
 
                         @include('layouts.partials.error', ['name' => 'description'])
                     </div>

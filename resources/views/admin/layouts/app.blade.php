@@ -10,7 +10,7 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Scripts & Styles -->
-    @vite(['resources/sass/admin/admin.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/admin/admin.scss', 'resources/js/admin/admin.js'])
 </head>
 <body>
     @include('admin.layouts.partials.header')
