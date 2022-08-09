@@ -35,7 +35,11 @@
             @foreach ($products as $key => $product)
                 <tr>
                     <th scope="row" class="fw-normal">{{ $products->firstItem() + $key }}</th>
-                    <td>{{ $product->name }}</td>
+                    <td>
+                        <a href="{{ route('admin.products.show', $product->id) }}">
+                            {{ $product->name }}
+                        </a>
+                    </td>
                     <td>{{ $product->pivot->quantity }}</td>
                     <td class="text-nowrap">@uah($product->pivot->quantity * $product->price->toUAH()->coins())</td>
                     <td class="text-nowrap">
