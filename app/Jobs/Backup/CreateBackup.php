@@ -54,9 +54,11 @@ class CreateBackup implements ShouldQueue
      */
     private function backupDatabase(ZipArchive $zip)
     {
-        Dumper::dump(Storage::disk('local')->path(config('backup.database')));
+        $backup = Storage::disk('local')->path(config('backup.database'));
 
-        $zip->addFile(Storage::disk('local')->path(config('backup.database')), 'database.sql');
+        Dumper::dump($backup);
+
+        $zip->addFile($backup, 'database.sql');
     }
 
     /**
