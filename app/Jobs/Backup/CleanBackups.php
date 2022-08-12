@@ -20,10 +20,6 @@ class CleanBackups implements ShouldQueue
      */
     public function handle()
     {
-        Backup::all()
-            ->filter
-            ->isOutdated()
-            ->each
-            ->delete();
+        Backup::outdated()->each->delete();
     }
 }

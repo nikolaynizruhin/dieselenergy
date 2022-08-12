@@ -33,6 +33,16 @@ class Backup
     }
 
     /**
+     * Get outdated backups.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function outdated(): Collection
+    {
+        return static::all()->filter->isOutdated();
+    }
+
+    /**
      * Check if backup is outdated.
      *
      * @return bool
