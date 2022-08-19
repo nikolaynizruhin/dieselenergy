@@ -18,14 +18,14 @@
   "_bootstrap.bundle.2bf787e8.js": {
     "file": "assets/bootstrap.bundle.2bf787e8.js"
   },
-  "resources/sass/admin/admin.scss": {
-    "file": "assets/admin.fbc2777c.css",
-    "src": "resources/sass/admin/admin.scss",
-    "isEntry": true
-  },
   "resources/sass/app.scss": {
     "file": "assets/app.c690a971.css",
     "src": "resources/sass/app.scss",
+    "isEntry": true
+  },
+  "resources/sass/admin/admin.scss": {
+    "file": "assets/admin.fbc2777c.css",
+    "src": "resources/sass/admin/admin.scss",
     "isEntry": true
   }
 }
