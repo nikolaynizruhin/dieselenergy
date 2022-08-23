@@ -90,6 +90,7 @@ return [
         'numeric' => 'Поле :attribute має бути не більше :max.',
         'string' => 'Текст в полі :attribute повинен мати довжину не більшу за :max.',
     ],
+    'max_digits' => 'Поле :attribute не може містити більше :max цифр.',
     'mimes' => 'Поле :attribute повинне містити файл одного з типів: :values.',
     'mimetypes' => 'Поле :attribute повинне містити файл одного з типів: :values.',
     'min' => [
@@ -98,6 +99,7 @@ return [
         'numeric' => 'Поле :attribute повинне бути не менше :min.',
         'string' => 'Текст у полі :attribute повинен містити не менше :min символів.',
     ],
+    'min_digits' => 'Поле :attribute має містити принаймні :min цифр.',
     'multiple_of' => 'Поле :attribute має бути кратним :value.',
     'not_in' => 'Вибране для :attribute значення не коректне.',
     'not_regex' => 'Формат поля :attribute не вірний.',
