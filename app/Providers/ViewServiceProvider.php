@@ -44,6 +44,6 @@ class ViewServiceProvider extends ServiceProvider
 
         View::composer(['admin.specifications.create', 'admin.specifications.edit'], SpecificationComposer::class);
 
-        View::composer(['admin.brands.create', 'admin.brands.edit', 'admin.brands.index'], BrandComposer::class);
+        View::composer(['admin.brands.create', 'admin.brands.edit'], BrandComposer::class);
     }
 }
