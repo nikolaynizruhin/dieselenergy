@@ -891,16 +891,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.26.0",
+            "version": "v9.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "53e20ba7c4df1d1628102811f5b7119e138247f8"
+                "reference": "1ccfb91afee7a351b09ba1f1b97739096a3ad1cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/53e20ba7c4df1d1628102811f5b7119e138247f8",
-                "reference": "53e20ba7c4df1d1628102811f5b7119e138247f8",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/1ccfb91afee7a351b09ba1f1b97739096a3ad1cf",
+                "reference": "1ccfb91afee7a351b09ba1f1b97739096a3ad1cf",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1067,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-08-23T13:31:34+00:00"
+            "time": "2022-08-23T19:00:07+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -5250,16 +5250,16 @@
     "packages-dev": [
         {
             "name": "brianium/paratest",
-            "version": "v6.6.2",
+            "version": "v6.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paratestphp/paratest.git",
-                "reference": "5249af4e25e79da66d1ec3b54b474047999c10b8"
+                "reference": "f2d781bb9136cda2f5e73ee778049e80ba681cf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/5249af4e25e79da66d1ec3b54b474047999c10b8",
-                "reference": "5249af4e25e79da66d1ec3b54b474047999c10b8",
+                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/f2d781bb9136cda2f5e73ee778049e80ba681cf6",
+                "reference": "f2d781bb9136cda2f5e73ee778049e80ba681cf6",
                 "shasum": ""
             },
             "require": {
@@ -5269,10 +5269,10 @@
                 "ext-simplexml": "*",
                 "jean85/pretty-package-versions": "^2.0.5",
                 "php": "^7.3 || ^8.0",
-                "phpunit/php-code-coverage": "^9.2.15",
+                "phpunit/php-code-coverage": "^9.2.16",
                 "phpunit/php-file-iterator": "^3.0.6",
                 "phpunit/php-timer": "^5.0.3",
-                "phpunit/phpunit": "^9.5.21",
+                "phpunit/phpunit": "^9.5.23",
                 "sebastian/environment": "^5.1.4",
                 "symfony/console": "^5.4.9 || ^6.1.2",
                 "symfony/polyfill-php80": "^v1.26.0",
@@ -5327,7 +5327,7 @@
             ],
             "support": {
                 "issues": "https://github.com/paratestphp/paratest/issues",
-                "source": "https://github.com/paratestphp/paratest/tree/v6.6.2"
+                "source": "https://github.com/paratestphp/paratest/tree/v6.6.3"
             },
             "funding": [
                 {
@@ -5339,7 +5339,7 @@
                     "type": "paypal"
                 }
             ],
-            "time": "2022-08-22T10:45:51+00:00"
+            "time": "2022-08-25T05:44:14+00:00"
         },
         {
             "name": "doctrine/instantiator",
