@@ -40,7 +40,7 @@ class MediaFactory extends Factory
      *
      * @return static
      */
-    public function nonDefault()
+    public function regular()
     {
         return $this->state(['is_default' => 0]);
     }

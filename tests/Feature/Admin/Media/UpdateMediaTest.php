@@ -67,7 +67,7 @@ class UpdateMediaTest extends TestCase
             ->create();
 
         $media = Media::factory()
-            ->nonDefault()
+            ->regular()
             ->create(['product_id' => $defaultMedia->product_id]);
 
         $this->login()
