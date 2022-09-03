@@ -102,13 +102,12 @@
                                 @include('layouts.partials.icon', ['name' => 'gear', 'classes' => 'me-2', 'width' => '1.1em', 'height' => '1.1em'])
                                 {{ __('common.settings') }}
                             </a>
-                            <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                @include('layouts.partials.icon', ['name' => 'box-arrow-right', 'classes' => 'me-2', 'width' => '1.1em', 'height' => '1.1em'])
-                                {{ __('auth.logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+                            <form action="{{ route('admin.logout') }}" method="POST">
                                 @csrf
+                                <button type="submit" class="dropdown-item d-flex align-items-center">
+                                    @include('layouts.partials.icon', ['name' => 'box-arrow-right', 'classes' => 'me-2', 'width' => '1.1em', 'height' => '1.1em'])
+                                    {{ __('auth.logout') }}
+                                </button>
                             </form>
                         </div>
                     </li>
