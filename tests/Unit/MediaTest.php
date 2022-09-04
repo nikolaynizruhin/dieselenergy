@@ -28,4 +28,17 @@ class MediaTest extends TestCase
 
         $this->assertInstanceOf(Image::class, $media->image);
     }
+
+    /** @test */
+    public function it_can_be_marked_as_default()
+    {
+        $media = Media::factory()
+            ->regular()
+            ->forImage()
+            ->create();
+
+        $media->markAsDefault();
+
+        $this->assertTrue($media->is_default);
+    }
 }

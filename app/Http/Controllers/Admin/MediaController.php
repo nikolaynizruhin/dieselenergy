@@ -40,32 +40,6 @@ class MediaController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Media  $media
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Media $media)
-    {
-        return view('admin.medias.edit', compact('media'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreMedia  $request
-     * @param  \App\Models\Media  $media
-     * @return \Illuminate\Http\Response
-     */
-    public function update(StoreMedia $request, Media $media)
-    {
-        $media->update($request->validated());
-
-        return to_route('admin.products.show', $request->product_id)
-            ->with('status', __('media.updated'));
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Media  $media

@@ -41,7 +41,7 @@ class Category extends Model
     {
         return $this->belongsToMany(Attribute::class)
             ->using(Specification::class)
-            ->withPivot('id')
+            ->withPivot('id', 'is_featured')
             ->withTimestamps();
     }
 
