@@ -1,7 +1,6 @@
 <?php
 
 if (! function_exists('view_modified_date')) {
-
     /**
      * Get view modified date.
      *
@@ -16,7 +15,6 @@ if (! function_exists('view_modified_date')) {
 }
 
 if (! function_exists('pages')) {
-
     /**
      * Get amount of pages.
      *

@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
-class UpdateUserPasswordTest extends TestCase
+class UpdatePasswordTest extends TestCase
 {
     use HasValidation;
 

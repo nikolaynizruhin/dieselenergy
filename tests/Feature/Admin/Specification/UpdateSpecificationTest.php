@@ -7,8 +7,6 @@ use Tests\TestCase;
 
 class UpdateSpecificationTest extends TestCase
 {
-    use HasValidation;
-
     /**
      * Product.
      *
@@ -23,59 +21,24 @@ class UpdateSpecificationTest extends TestCase
     {
         parent::setUp();
 
-        $this->specification = Specification::factory()->create();
+        $this->specification = Specification::factory()->regular()->create();
     }
 
     /** @test */
-    public function guest_cant_visit_update_specification_page()
+    public function guest_cant_update_specification_feature()
     {
-        $this->get(route('admin.specifications.edit', $this->specification))
+        $this->put(route('admin.specifications.feature.update', $this->specification))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_update_specification_page()
+    public function user_can_update_specification_feature()
     {
         $this->login()
-            ->get(route('admin.specifications.edit', $this->specification))
-            ->assertViewIs('admin.specifications.edit');
-    }
-
-    /** @test */
-    public function guest_cant_update_specification()
-    {
-        $this->put(route('admin.specifications.update', $this->specification))
-            ->assertRedirect(route('admin.login'));
-    }
-
-    /** @test */
-    public function user_can_update_specification()
-    {
-        $this->login()
-            ->put(route('admin.specifications.update', $this->specification), $fields = $this->validFields())
-            ->assertRedirect(route('admin.categories.show', $fields['category_id']))
+            ->put(route('admin.specifications.feature.update', $this->specification))
+            ->assertRedirect(route('admin.categories.show', $this->specification->category_id))
             ->assertSessionHas('status', trans('specification.updated'));
 
-        $this->assertDatabaseHas('attribute_category', $fields);
-    }
-
-    /**
-     * @test
-     * @dataProvider validationProvider
-     */
-    public function user_cant_update_specification_with_invalid_data($field, $data, $count = 1)
-    {
-        $this->login()
-            ->from(route('admin.specifications.edit', $this->specification))
-            ->put(route('admin.specifications.update', $this->specification), $data())
-            ->assertRedirect(route('admin.specifications.edit', $this->specification))
-            ->assertSessionHasErrors($field);
-
-        $this->assertDatabaseCount('attribute_category', $count);
-    }
-
-    public function validationProvider(): array
-    {
-        return $this->provider(2);
+        $this->assertTrue($this->specification->fresh()->is_featured);
     }
 }

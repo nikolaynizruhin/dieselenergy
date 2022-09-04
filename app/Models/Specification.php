@@ -67,6 +67,16 @@ class Specification extends Pivot
     }
 
     /**
+     * Toggle feature.
+     *
+     * @return bool
+     */
+    public function toggle(): bool
+    {
+        return $this->update(['is_featured' => ! $this->is_featured]);
+    }
+
+    /**
      * Get validation rules for category.
      *
      * @param  int  $categoryId

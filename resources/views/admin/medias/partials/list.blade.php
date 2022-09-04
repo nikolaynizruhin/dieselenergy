@@ -29,9 +29,15 @@
                         @endif
                     </td>
                     <td class="text-nowrap">
-                        <a href="{{ route('admin.medias.edit', $image->pivot->id) }}" class="me-2 text-decoration-none">
-                            @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
+                        @unless ($image->pivot->is_default)
+                            <form action="{{ route('admin.medias.default.update', $image->pivot) }}" method="POST" class="me-2 d-inline">
+                                @csrf
+                                @method('PUT')
+                                <button class="all-unset cursor-pointer">
+                                    @include('layouts.partials.icon', ['name' => 'check-square', 'width' => '1.1em', 'height' => '1.1em'])
+                                </button>
+                            </form>
+                        @endunless
                         @include('admin.layouts.partials.image')
                         @include('admin.layouts.partials.delete', [
                             'id' => 'deleteImageModal'.$image->id,

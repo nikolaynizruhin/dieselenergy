@@ -28,6 +28,9 @@
                    ])
                 </th>
                 <th scope="col" class="bg-light text-muted">
+                    {{ __('common.feature') }}
+                </th>
+                <th scope="col" class="bg-light text-muted">
                     {{ __('common.actions') }}
                 </th>
             </tr>
@@ -38,10 +41,19 @@
                     <th scope="row" class="fw-normal">{{ $attributes->firstItem() + $key }}</th>
                     <td>{{ $attribute->name }}</td>
                     <td>{{ $attribute->measure }}</td>
+                    <td>
+                        @if ($attribute->pivot->is_featured)
+                            @include('admin.layouts.partials.status', ['status' => __('common.is_featured'), 'type' => 'success'])
+                        @endif
+                    </td>
                     <td class="text-nowrap">
-                        <a href="{{ route('admin.specifications.edit', $attribute->pivot->id) }}" class="me-2 text-decoration-none">
-                            @include('layouts.partials.icon', ['name' => 'pencil-square', 'width' => '1.1em', 'height' => '1.1em'])
-                        </a>
+                        <form action="{{ route('admin.specifications.feature.update', $attribute->pivot) }}" method="POST" class="me-2 d-inline">
+                            @csrf
+                            @method('PUT')
+                            <button class="all-unset cursor-pointer">
+                                @include('layouts.partials.icon', ['name' => $attribute->pivot->is_featured ? 'toggle-on' : 'toggle-off', 'width' => '1.1em', 'height' => '1.1em'])
+                            </button>
+                        </form>
                         @include('admin.layouts.partials.delete', [
                             'id' => 'deleteSpecificationModal'.$attribute->id,
                             'label' => 'deleteSpecificationLabel'.$attribute->id,

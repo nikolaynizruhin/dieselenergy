@@ -24,4 +24,24 @@ class SpecificationFactory extends Factory
             'is_featured' => fake()->boolean(),
         ];
     }
+
+    /**
+     * Indicate that the media is featured.
+     *
+     * @return static
+     */
+    public function featured()
+    {
+        return $this->state(['is_featured' => 1]);
+    }
+
+    /**
+     * Indicate that the media is default.
+     *
+     * @return static
+     */
+    public function regular()
+    {
+        return $this->state(['is_featured' => 0]);
+    }
 }
