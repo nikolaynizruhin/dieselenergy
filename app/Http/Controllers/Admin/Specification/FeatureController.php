@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\Specification;
 
 use App\Http\Controllers\Controller;
-use App\Models\Media;
 use App\Models\Specification;
 use Illuminate\Http\Request;
 
