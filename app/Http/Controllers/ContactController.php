@@ -27,6 +27,9 @@ class ContactController extends Controller
     {
         CreateContact::handle($request->getContactAttributes());
 
-        return redirect(route('home').'#contact')->with('status', __('contact.created'));
+        return redirect()
+            ->back()
+            ->withFragment('contact')
+            ->with('status', __('contact.created'));
     }
 }
