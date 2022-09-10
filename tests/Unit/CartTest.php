@@ -17,7 +17,7 @@ class CartTest extends TestCase
      *
      * @var \App\Models\Product
      */
-    private $product;
+    private Product $product;
 
     /**
      * Setup.
@@ -41,6 +41,7 @@ class CartTest extends TestCase
         $this->assertEquals($item->price, $this->product->price->toUAH()->coins());
         $this->assertEquals($item->image, $this->product->defaultImage()->path);
         $this->assertEquals(1, $item->quantity);
+        $this->assertCount(1, Cart::items());
     }
 
     /** @test */
@@ -83,10 +84,9 @@ class CartTest extends TestCase
     {
         Cart::add($this->product);
 
-        $item = Cart::update(0, 5);
+        Cart::update(0, 5);
 
-        $this->assertEquals($this->product->id, $item->id);
-        $this->assertEquals(5, $item->quantity);
+        $this->assertEquals(5, Cart::items()->first()->quantity);
     }
 
     /** @test */

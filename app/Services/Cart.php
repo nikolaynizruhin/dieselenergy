@@ -76,9 +76,9 @@ class Cart
      *
      * @param  string  $key
      * @param  int  $quantity
-     * @return CartItem
+     * @return bool
      */
-    public function update(string $key, int $quantity): CartItem
+    public function update(string $key, int $quantity): bool
     {
         $items = $this->items();
 
@@ -90,7 +90,7 @@ class Cart
 
         $this->session->put(self::KEY, $items);
 
-        return $item;
+        return true;
     }
 
     /**
@@ -131,13 +131,16 @@ class Cart
      * Delete item.
      *
      * @param  string  $key
+     * @return bool
      */
-    public function delete(string $key): void
+    public function delete(string $key): bool
     {
         $items = $this->items();
 
         $items->forget($key);
 
         $this->session->put(self::KEY, $items);
+
+        return true;
     }
 }
