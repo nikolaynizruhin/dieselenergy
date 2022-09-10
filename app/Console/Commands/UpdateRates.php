@@ -27,7 +27,7 @@ class UpdateRates extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $rates = Minfin::getRates();
 

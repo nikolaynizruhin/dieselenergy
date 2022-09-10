@@ -17,7 +17,7 @@ class ResetPassword extends ResetPasswordNotification implements ShouldQueue
      * @param  string  $url
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    protected function buildMailMessage($url)
+    protected function buildMailMessage($url): MailMessage
     {
         return (new MailMessage)
             ->subject(__('emails.reset_password.subject'))
@@ -33,7 +33,7 @@ class ResetPassword extends ResetPasswordNotification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return string
      */
-    protected function resetUrl($notifiable)
+    protected function resetUrl($notifiable): string
     {
         return url(route('admin.password.reset', [
             'token' => $this->token,

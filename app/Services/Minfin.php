@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Collection;
 
 class Minfin
 {
@@ -27,9 +28,9 @@ class Minfin
     /**
      * Get currency rates.
      *
-     * @return array|mixed
+     * @return \Illuminate\Support\Collection
      */
-    public function getRates()
+    public function getRates(): Collection
     {
         return $this->http->get('/mb/'.config('services.minfin.key'))->collect();
     }

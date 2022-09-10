@@ -20,7 +20,7 @@ class Phone implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         return preg_match(self::REGEX, $value);
     }
@@ -30,7 +30,7 @@ class Phone implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return trans('validation.phone');
     }

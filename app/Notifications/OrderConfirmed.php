@@ -17,7 +17,7 @@ class OrderConfirmed extends Notification implements ShouldQueue
      *
      * @var \App\Models\Order
      */
-    public $order;
+    public Order $order;
 
     /**
      * Create a new notification instance.
@@ -35,7 +35,7 @@ class OrderConfirmed extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return ['mail'];
     }
@@ -46,7 +46,7 @@ class OrderConfirmed extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
             ->subject('Підтвердження замовлення')

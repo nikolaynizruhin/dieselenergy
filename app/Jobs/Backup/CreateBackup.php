@@ -20,7 +20,7 @@ class CreateBackup implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $zip = new ZipArchive;
 

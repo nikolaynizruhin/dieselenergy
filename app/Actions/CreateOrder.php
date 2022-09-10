@@ -14,7 +14,7 @@ class CreateOrder
      * @param  array  $params
      * @return Order
      */
-    public function handle(array $params)
+    public function handle(array $params): Order
     {
         $customer = Customer::updateOrCreate(
             ['email' => $params['email']],

@@ -15,7 +15,7 @@ class CreateContact
      * @param  array  $params
      * @return Contact
      */
-    public function handle(array $params)
+    public function handle(array $params): Contact
     {
         $customer = Customer::updateOrCreate(
             ['email' => $params['email']],

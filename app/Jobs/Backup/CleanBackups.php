@@ -18,7 +18,7 @@ class CleanBackups implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         Backup::outdated()->each->delete();
     }

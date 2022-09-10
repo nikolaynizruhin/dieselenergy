@@ -36,7 +36,7 @@ abstract class Dumper
      * @param  string  $command
      * @param  array  $parameters
      */
-    protected function run(string $command, array $parameters)
+    protected function run(string $command, array $parameters): void
     {
         $process = Process::fromShellCommandline($command);
 
