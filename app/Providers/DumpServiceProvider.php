@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Dump\Dumper;
-use App\Dump\DumperFactory;
+use App\Services\Dump\Dumper;
+use App\Services\Dump\DumperFactory;
 use Illuminate\Support\ServiceProvider;
 
 class DumpServiceProvider extends ServiceProvider

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dump;
+namespace App\Services\Dump;
 
 class MySQLDumper extends Dumper
 {

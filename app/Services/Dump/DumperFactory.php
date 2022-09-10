@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dump;
+namespace App\Services\Dump;
 
 use InvalidArgumentException;
 
@@ -10,7 +10,7 @@ class DumperFactory
      * Dumper factory.
      *
      * @param  array  $config
-     * @return \App\Dump\Dumper
+     * @return \App\Services\Dump\Dumper
      */
     public static function make(array $config)
     {
