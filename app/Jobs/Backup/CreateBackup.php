@@ -2,7 +2,7 @@
 
 namespace App\Jobs\Backup;
 
-use Facades\App\Dump\Dumper;
+use Facades\App\Services\Dump\Dumper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
