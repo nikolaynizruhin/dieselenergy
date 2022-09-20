@@ -1,6 +1,6 @@
 {
   "resources/js/admin/admin.js": {
-    "file": "assets/admin.8d509e00.js",
+    "file": "assets/admin.fa5d3254.js",
     "src": "resources/js/admin/admin.js",
     "isEntry": true,
     "imports": [
@@ -19,7 +19,7 @@
     "file": "assets/bootstrap.bundle.7a010bd9.js"
   },
   "resources/sass/admin/admin.scss": {
-    "file": "assets/admin.22ff8842.css",
+    "file": "assets/admin.56d7e0da.css",
     "src": "resources/sass/admin/admin.scss",
     "isEntry": true
   },
