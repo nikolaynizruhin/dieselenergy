@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Attribute;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -17,22 +16,21 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $products = Product::factory()
+        Product::factory()
             ->count(20)
             ->sequence(fn ($sequence) => [
                 'brand_id' => Brand::all()->random(),
                 'category_id' => Category::all()->random(),
             ])
             ->withDefaultImage()
-            ->create();
-
-        $products->each(
-            fn (Product $product) => $product
-                ->attributes()
-                ->attach(
-                    $product->category->attributes->random(),
-                    ['value' => rand(1, 10)]
-                )
-        );
+            ->create()
+            ->each(
+                fn (Product $product) => $product
+                    ->attributes()
+                    ->attach(
+                        $product->category->attributes->random(),
+                        ['value' => rand(1, 10)]
+                    )
+            );
     }
 }
