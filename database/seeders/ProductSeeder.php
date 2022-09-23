@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
                 'category_id' => Category::all()->random(),
             ])
             ->withDefaultImage()
-            ->hasAttached(Attribute::all()->random(), ['value' => 1])
+            ->hasAttached(Attribute::all()->random(), fn () => ['value' => rand(1, 10)])
             ->create();
     }
 }
