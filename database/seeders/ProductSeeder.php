@@ -17,14 +17,22 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        Product::factory()
+        $products = Product::factory()
             ->count(20)
             ->sequence(fn ($sequence) => [
                 'brand_id' => Brand::all()->random(),
                 'category_id' => Category::all()->random(),
             ])
             ->withDefaultImage()
-            ->hasAttached(Attribute::all()->random(), fn () => ['value' => rand(1, 10)])
             ->create();
+
+        $products->each(
+            fn (Product $product) => $product
+                ->attributes()
+                ->attach(
+                    $product->category->attributes->random(),
+                    ['value' => rand(1, 10)]
+                )
+        );
     }
 }
