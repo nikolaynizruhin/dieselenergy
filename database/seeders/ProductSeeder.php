@@ -23,14 +23,13 @@ class ProductSeeder extends Seeder
                 'category_id' => Category::all()->random(),
             ])
             ->withDefaultImage()
-            ->create()
-            ->each(
-                fn (Product $product) => $product
-                    ->attributes()
-                    ->attach(
-                        $product->category->attributes->random(),
-                        ['value' => rand(1, 10)]
-                    )
-            );
+            ->afterCreating(fn (Product $product) => $product
+                ->attributes()
+                ->attach(
+                    $product->category->attributes->random(),
+                    ['value' => rand(1, 10)]
+                )
+            )
+            ->create();
     }
 }
