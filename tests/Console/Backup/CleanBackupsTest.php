@@ -13,7 +13,7 @@ class CleanBackupsTest extends TestCase
      *
      * @var string
      */
-    private $backup;
+    private string $backup;
 
     protected function setUp(): void
     {
