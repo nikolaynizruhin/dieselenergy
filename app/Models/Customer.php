@@ -70,7 +70,7 @@ class Customer extends Model
      */
     public function createContact(string $message): Contact
     {
-        return $this->contacts()->create(['message' => $message]);
+        return $this->contacts()->create(compact('message'));
     }
 
     /**
