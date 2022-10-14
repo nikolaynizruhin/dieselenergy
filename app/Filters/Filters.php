@@ -8,13 +8,6 @@ use Illuminate\Http\Request;
 abstract class Filters
 {
     /**
-     * Request instance.
-     *
-     * @var Request
-     */
-    protected Request $request;
-
-    /**
      * The Eloquent builder.
      *
      * @var \Illuminate\Database\Eloquent\Builder
@@ -33,9 +26,8 @@ abstract class Filters
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function __construct(Request $request)
+    public function __construct(readonly protected Request $request)
     {
-        $this->request = $request;
     }
 
     /**

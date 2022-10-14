@@ -13,20 +13,12 @@ class OrderConfirmed extends Notification implements ShouldQueue
     use Queueable;
 
     /**
-     * An order.
-     *
-     * @var \App\Models\Order
-     */
-    public Order $order;
-
-    /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(readonly public Order $order)
     {
-        $this->order = $order;
     }
 
     /**

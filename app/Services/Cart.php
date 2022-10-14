@@ -18,20 +18,12 @@ class Cart
     const KEY = 'cart';
 
     /**
-     * Session manager.
-     *
-     * @var SessionManager
-     */
-    private SessionManager $session;
-
-    /**
      * Cart constructor.
      *
      * @param  SessionManager  $session
      */
-    public function __construct(SessionManager $session)
+    public function __construct(readonly private SessionManager $session)
     {
-        $this->session = $session;
     }
 
     /**

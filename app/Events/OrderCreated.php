@@ -12,20 +12,12 @@ class OrderCreated
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * An order.
-     *
-     * @var \App\Models\Order
-     */
-    public Order $order;
-
-    /**
      * Create a new event instance.
      *
      * @param  \App\Models\Order  $order
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(readonly public Order $order)
     {
-        $this->order = $order;
     }
 }

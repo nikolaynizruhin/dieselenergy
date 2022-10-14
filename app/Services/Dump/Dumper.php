@@ -7,20 +7,12 @@ use Symfony\Component\Process\Process;
 abstract class Dumper
 {
     /**
-     * Database connection config.
-     *
-     * @var array
-     */
-    protected array $config;
-
-    /**
      * Dumper constructor.
      *
      * @param  array  $config
      */
-    public function __construct(array $config)
+    public function __construct(readonly protected array $config)
     {
-        $this->config = $config;
     }
 
     /**

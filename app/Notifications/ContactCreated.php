@@ -13,21 +13,13 @@ class ContactCreated extends Notification implements ShouldQueue
     use Queueable;
 
     /**
-     * A contact.
-     *
-     * @var \App\Models\Contact
-     */
-    public Contact $contact;
-
-    /**
      * Create a new notification instance.
      *
      * @param  \App\Models\Contact  $contact
      * @return void
      */
-    public function __construct(Contact $contact)
+    public function __construct(readonly public Contact $contact)
     {
-        $this->contact = $contact;
     }
 
     /**
