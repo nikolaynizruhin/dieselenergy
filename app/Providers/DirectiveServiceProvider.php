@@ -24,8 +24,8 @@ class DirectiveServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::directive('uah', fn ($price) => "<?php echo number_format($price / 100, 0, '.', ' ').' ₴'; ?>");
+        Blade::directive('uah', fn ($price) => "<?= number_format($price / 100, 0, '.', ' ').' ₴'; ?>");
 
-        Blade::directive('markdown', fn ($content) => "<?php echo Str::markdown($content) ?>");
+        Blade::directive('markdown', fn ($content) => "<?= Str::markdown($content) ?>");
     }
 }
