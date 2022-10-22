@@ -4,51 +4,57 @@
 
     <div class="row">
         <div class="col-md-4 mb-3">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.total.order') }}</h6>
-                    <div class="row">
-                        <div class="col">
-                            <h2>{{ $orders->total() }}</h2>
-                        </div>
-                        <div class="col text-muted text-end">
-                            @include('layouts.partials.icon', ['name' => 'basket', 'width' => '2em', 'height' => '2em'])
+            <a href="{{ route('admin.orders.index') }}" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.total.order') }}</h6>
+                        <div class="row">
+                            <div class="col">
+                                <h2>{{ $orders->total() }}</h2>
+                            </div>
+                            <div class="col text-muted text-end">
+                                @include('layouts.partials.icon', ['name' => 'basket', 'width' => '2em', 'height' => '2em'])
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <div class="col-md-4 mb-3">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.total.customer') }}</h6>
-                    <div class="row">
-                        <div class="col">
-                            <h2>{{ $totalCustomers }}</h2>
-                        </div>
-                        <div class="col text-muted text-end">
-                            @include('layouts.partials.icon', ['name' => 'people', 'width' => '2em', 'height' => '2em'])
+            <a href="{{ route('admin.customers.index') }}" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.total.customer') }}</h6>
+                        <div class="row">
+                            <div class="col">
+                                <h2>{{ $totalCustomers }}</h2>
+                            </div>
+                            <div class="col text-muted text-end">
+                                @include('layouts.partials.icon', ['name' => 'people', 'width' => '2em', 'height' => '2em'])
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <div class="col-md-4 mb-3">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.sold_product') }}</h6>
-                    <div class="row">
-                        <div class="col">
-                            <h2>{{ $soldProducts }}</h2>
-                        </div>
-                        <div class="col text-muted text-end">
-                            @include('layouts.partials.icon', ['name' => 'cart3', 'width' => '2em', 'height' => '2em'])
+            <a href="{{ route('admin.products.index') }}" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">{{ __('dashboard.sold_product') }}</h6>
+                        <div class="row">
+                            <div class="col">
+                                <h2>{{ $soldProducts }}</h2>
+                            </div>
+                            <div class="col text-muted text-end">
+                                @include('layouts.partials.icon', ['name' => 'cart3', 'width' => '2em', 'height' => '2em'])
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
