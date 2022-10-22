@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Enums\OrderStatus;
 use App\Filters\Filterable;
 use App\Support\Money;
-use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -79,8 +79,8 @@ class Order extends Model
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    protected function total(): AttributeCast
+    protected function total(): Attribute
     {
-        return new AttributeCast(fn ($value) => new Money($value));
+        return new Attribute(fn ($value) => new Money($value));
     }
 }
