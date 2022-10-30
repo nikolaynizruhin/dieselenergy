@@ -1,10 +1,10 @@
-<section class="bg-light py-5">
+<section class="py-5">
     <div class="container">
         <div class="row">
             <div class="col-12 col-md mb-5 mb-md-0">
                 <div class="row">
                     <div class="col-2 col-sm-3 text-center">
-                        @include('layouts.partials.icon', ['name' => 'truck', 'width' => '2.3em', 'height' => '2.3em', 'classes' => 'text-secondary'])
+                        @include('layouts.partials.icon', ['name' => 'truck', 'width' => '2.3em', 'height' => '2.3em'])
                     </div>
                     <div class="col">
                         ДОСТАВКА
@@ -16,7 +16,7 @@
             <div class="col-12 col-md mb-5 mb-md-0">
                 <div class="row">
                     <div class="col-2 col-sm-3 text-center">
-                        @include('layouts.partials.icon', ['name' => 'shield-check', 'width' => '2.3em', 'height' => '2.3em', 'classes' => 'text-secondary'])
+                        @include('layouts.partials.icon', ['name' => 'shield-check', 'width' => '2.3em', 'height' => '2.3em'])
                     </div>
                     <div class="col">
                         ГАРАНТІЯ
@@ -28,7 +28,7 @@
             <div class="col-12 col-md">
                 <div class="row">
                     <div class="col-2 col-sm-3 text-center">
-                        @include('layouts.partials.icon', ['name' => 'tools', 'width' => '2.3em', 'height' => '2.3em', 'classes' => 'text-secondary'])
+                        @include('layouts.partials.icon', ['name' => 'tools', 'width' => '2.3em', 'height' => '2.3em'])
                     </div>
                     <div class="col">
                         ТЕХНІЧНА ПІДТРИМКА
