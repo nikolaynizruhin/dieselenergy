@@ -1,6 +1,6 @@
 {
   "resources/js/admin/admin.js": {
-    "file": "assets/admin.abdb74ea.js",
+    "file": "assets/admin.200be656.js",
     "src": "resources/js/admin/admin.js",
     "isEntry": true,
     "imports": [
@@ -18,14 +18,14 @@
   "_bootstrap.bundle.a6d9ff2f.js": {
     "file": "assets/bootstrap.bundle.a6d9ff2f.js"
   },
-  "resources/sass/admin/admin.scss": {
-    "file": "assets/admin.03a9f9c0.css",
-    "src": "resources/sass/admin/admin.scss",
-    "isEntry": true
-  },
   "resources/sass/app.scss": {
     "file": "assets/app.da82ce3c.css",
     "src": "resources/sass/app.scss",
+    "isEntry": true
+  },
+  "resources/sass/admin/admin.scss": {
+    "file": "assets/admin.03a9f9c0.css",
+    "src": "resources/sass/admin/admin.scss",
     "isEntry": true
   }
 }
