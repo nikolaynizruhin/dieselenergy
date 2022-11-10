@@ -71,6 +71,7 @@ return [
     'ipv4' => 'Поле :attribute має містити IPv4 адресу.',
     'ipv6' => 'Поле :attribute має містити IPv6 адресу.',
     'json' => 'Дані поля :attribute мають бути у форматі JSON.',
+    'lowercase' => 'Поле :attribute має бути в нижньому регістрі.',
     'lt' => [
         'array' => 'Поле :attribute має містити менше ніж :value items.',
         'file' => 'Поле :attribute має бути менше ніж :value кілобайт.',
