@@ -140,6 +140,7 @@ return [
     'timezone' => 'Поле :attribute повинне містити коректну часову зону.',
     'unique' => 'Вказане значення поля :attribute вже існує.',
     'uploaded' => 'Завантаження :attribute не вдалося.',
+    'uppercase' => 'Поле :attribute має бути в верхньому регістрі.',
     'url' => 'Формат поля :attribute хибний.',
     'uuid' => 'Поле :attribute має бути коректним UUID ідентифікатором.',
 
