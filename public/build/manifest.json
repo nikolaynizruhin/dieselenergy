@@ -1,12 +1,12 @@
 {
-  "resources/sass/app.scss": {
-    "file": "assets/app-f4fb6dad.css",
-    "src": "resources/sass/app.scss",
-    "isEntry": true
-  },
   "resources/sass/admin/admin.scss": {
     "file": "assets/admin-1ed8ab47.css",
     "src": "resources/sass/admin/admin.scss",
+    "isEntry": true
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-f4fb6dad.css",
+    "src": "resources/sass/app.scss",
     "isEntry": true
   },
   "resources/js/app.js": {
