@@ -148,6 +148,7 @@ class UpdateProductTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function user_cant_update_product_with_invalid_data($field, $data, $count = 1)
@@ -168,6 +169,7 @@ class UpdateProductTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationAttributeProvider
      */
     public function user_cant_update_product_with_integer_attributes($data)

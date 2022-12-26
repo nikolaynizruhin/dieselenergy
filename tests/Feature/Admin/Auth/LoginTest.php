@@ -59,6 +59,7 @@ class LoginTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function user_cant_login_with_invalid_data($data)

@@ -41,6 +41,7 @@ class UpdateCartTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function guest_cant_create_cart_with_invalid_data($quantity)

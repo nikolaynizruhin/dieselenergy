@@ -45,6 +45,7 @@ class CreateSpecificationTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function user_cant_create_specification_with_invalid_data($field, $data, $count = 0)

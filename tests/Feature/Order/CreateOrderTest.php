@@ -145,6 +145,7 @@ class CreateOrderTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function guest_cant_create_order_with_invalid_data($field, $data)
@@ -204,6 +205,7 @@ class CreateOrderTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider spamProvider
      */
     public function guest_cant_create_order_with_spam($data)

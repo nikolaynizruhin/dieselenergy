@@ -55,6 +55,7 @@ class CreateImageTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function user_cant_create_image_with_invalid_data($data)

@@ -49,6 +49,7 @@ class CreateContactTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function guest_cant_create_contact_with_invalid_data($field, $data)
@@ -102,6 +103,7 @@ class CreateContactTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider spamProvider
      */
     public function guest_cant_create_contact_with_spam($data)

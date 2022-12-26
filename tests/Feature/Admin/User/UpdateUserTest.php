@@ -65,6 +65,7 @@ class UpdateUserTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function user_cant_update_user_with_invalid_data($field, $data, $count = 1)

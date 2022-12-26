@@ -43,6 +43,7 @@ class CreateCategoryTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function user_cant_create_category_with_invalid_data($field, $data, $count = 0)

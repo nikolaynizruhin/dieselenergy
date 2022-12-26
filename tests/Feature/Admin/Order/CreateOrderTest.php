@@ -44,6 +44,7 @@ class CreateOrderTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider provider
      */
     public function user_cant_create_order_with_invalid_data($field, $data, $count = 0)

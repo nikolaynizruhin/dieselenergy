@@ -65,6 +65,7 @@ class UpdateOrderTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function user_cant_update_order_with_invalid_data($field, $data)

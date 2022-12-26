@@ -61,6 +61,7 @@ class CreateMediaTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function user_cant_create_media_with_invalid_data($field, $data, $count = 0)

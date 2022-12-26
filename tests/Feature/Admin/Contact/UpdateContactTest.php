@@ -61,6 +61,7 @@ class UpdateContactTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function user_cant_update_contact_with_invalid_data($field, $data)

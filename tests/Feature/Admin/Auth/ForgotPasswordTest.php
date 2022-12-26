@@ -66,6 +66,7 @@ class ForgotPasswordTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validationProvider
      */
     public function user_cant_get_reset_password_email_with_invalid_email($email)
