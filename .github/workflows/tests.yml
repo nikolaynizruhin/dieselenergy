@@ -29,6 +29,9 @@ jobs:
       - name: Generate app key
         run: php artisan key:generate
 
+      - name: Build assets
+        run: npm install && npm run build
+
       - name: Check code style
         run: ./vendor/bin/pint --test
 
