@@ -37,6 +37,7 @@ return [
     'date' => 'Поле :attribute не є датою.',
     'date_equals' => 'Поле :attribute має бути датою рівною :date.',
     'date_format' => 'Поле :attribute не відповідає формату :format.',
+    'decimal' => 'Поле :attribute повинен мати :decimal знаків після коми.',
     'declined' => 'Поле :attribute має бути відхилено.',
     'declined_if' => 'Поле :attribute має бути відхилено коли :other є :value.',
     'different' => 'Поля :attribute та :other повинні бути різними.',
