@@ -9,7 +9,7 @@
 @section('content')
     <section class="pt-4 pb-5">
         <div class="container position-relative">
-            <div class="dots top-0 end-0 height-72 width-48 position-absolute z-n1"></div>
+            <div class="dots top-0 end-0 height-72 width-48 position-absolute d-none d-md-block z-n1"></div>
 
             <div class="row mb-4">
                 <div class="col">

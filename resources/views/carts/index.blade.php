@@ -10,7 +10,7 @@
     <section class="py-5">
 
         <div class="container position-relative">
-            <div class="dots top-0 end-0 height-72 width-48 position-absolute z-n1"></div>
+            <div class="dots top-0 end-0 height-72 width-48 position-absolute d-none d-md-block z-n1"></div>
 
             <h2 class="text-center">Ваше замовлення</h2>
             <h5 class="text-center text-muted">Наш консультант зв'яжеться з Вами для уточнення деталей</h5>

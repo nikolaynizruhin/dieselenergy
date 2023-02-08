@@ -9,7 +9,7 @@
 @section('content')
     <section class="py-5">
         <div class="container position-relative">
-            <div class="dots top-0 end-0 height-64 width-40 position-absolute z-n1"></div>
+            <div class="dots top-0 end-0 height-64 width-40 position-absolute d-none d-md-block z-n1"></div>
 
             <div class="row justify-content-center">
                 <div class="col col-md-6 py-5 text-center">

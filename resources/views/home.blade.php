@@ -9,7 +9,7 @@
 @section('content')
 <section class="py-5">
     <div class="container position-relative py-md-7">
-        <div class="dots top-0 start-0 height-72 width-48 position-absolute z-n1"></div>
+        <div class="dots top-0 start-0 height-72 width-48 position-absolute d-none d-md-block z-n1"></div>
 
         <div class="row justify-content-center">
             <div class="col col-md-10 col-lg-9 text-center">
@@ -58,7 +58,7 @@
 
 <section id="services" class="position-relative py-6">
     <div class="container position-relative">
-        <div class="dots top-0 start-0 width-40 height-64 position-absolute z-n1"></div>
+        <div class="dots top-0 start-0 width-40 height-64 position-absolute d-none d-md-block z-n1"></div>
 
         <div class="row justify-content-center mb-5">
             <div class="col col-md-8 text-center">
@@ -118,7 +118,7 @@
             </div>
         </div>
 
-        <div class="dots bottom-0 end-0 width-40 height-64 position-absolute z-n1"></div>
+        <div class="dots bottom-0 end-0 width-40 height-64 position-absolute d-none d-md-block z-n1"></div>
     </div>
 </section>
 
@@ -185,7 +185,7 @@
 <section id="contact" class="py-6">
 
     <div class="container position-relative">
-        <div class="dots top-0 start-0 height-80 width-48 position-absolute z-n1"></div>
+        <div class="dots top-0 start-0 height-80 width-48 position-absolute d-none d-md-block z-n1"></div>
 
         <div class="row justify-content-center">
             <div class="col col-md-8 col-lg-6 col-xl-5 @if (session('status')) py-5 text-center @endif">
@@ -243,7 +243,7 @@
             </div>
         </div>
 
-        <div class="dots bottom-0 end-0 height-80 width-48 position-absolute z-n1"></div>
+        <div class="dots bottom-0 end-0 height-80 width-48 position-absolute d-none d-md-block z-n1"></div>
     </div>
 </section>
 
