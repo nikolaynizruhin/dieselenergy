@@ -10,11 +10,9 @@ class UpdateUserTest extends TestCase
     use HasValidation;
 
     /**
-     * Product.
-     *
-     * @var \App\Models\User
+     * User.
      */
-    private $user;
+    private User $user;
 
     /**
      * Setup.
@@ -27,14 +25,14 @@ class UpdateUserTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_visit_update_user_page()
+    public function guest_cant_visit_update_user_page(): void
     {
         $this->get(route('admin.users.edit', $this->user))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_update_user_page()
+    public function user_can_visit_update_user_page(): void
     {
         $this->actingAs($this->user)
             ->get(route('admin.users.edit', $this->user))
@@ -43,17 +41,17 @@ class UpdateUserTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_user()
+    public function guest_cant_update_user(): void
     {
-        $this->put(route('admin.users.update', $this->user), $this->validFields())
+        $this->put(route('admin.users.update', $this->user), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_user()
+    public function user_can_update_user(): void
     {
         $this->actingAs($this->user)
-            ->put(route('admin.users.update', $this->user), $fields = $this->validFields())
+            ->put(route('admin.users.update', $this->user), $fields = self::validFields())
             ->assertRedirect(route('admin.users.index'))
             ->assertSessionHas('status', trans('user.updated'));
 
@@ -68,7 +66,7 @@ class UpdateUserTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_update_user_with_invalid_data($field, $data, $count = 1)
+    public function user_cant_update_user_with_invalid_data(string $field, callable $data, int $count = 1): void
     {
         $this->actingAs($this->user)
             ->from(route('admin.users.edit', $this->user))
@@ -79,10 +77,10 @@ class UpdateUserTest extends TestCase
         $this->assertDatabaseCount('users', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
         return array_filter(
-            $this->provider(2),
+            self::provider(2),
             fn ($name) => in_array($name, [
                 'Name is required',
                 'Name cant be an integer',
@@ -99,11 +97,8 @@ class UpdateUserTest extends TestCase
 
     /**
      * Get valid user fields.
-     *
-     * @param  array  $overrides
-     * @return array
      */
-    private function validFields(array $overrides = []): array
+    private static function validFields(array $overrides = []): array
     {
         $user = User::factory()->make();
 

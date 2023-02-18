@@ -9,7 +9,7 @@ use Tests\TestCase;
 class SearchCustomersTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_customers()
+    public function guest_cant_search_customers(): void
     {
         Customer::factory()->create(['name' => 'John Doe']);
 
@@ -18,7 +18,7 @@ class SearchCustomersTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_customers()
+    public function user_can_search_customers(): void
     {
         [$john, $jane, $tom] = Customer::factory()
             ->count(3)

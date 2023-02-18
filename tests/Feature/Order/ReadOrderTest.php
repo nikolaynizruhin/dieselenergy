@@ -8,7 +8,7 @@ use Tests\TestCase;
 class ReadOrderTest extends TestCase
 {
     /** @test */
-    public function guest_can_read_order()
+    public function guest_can_read_order(): void
     {
         $order = Order::factory()->create();
 

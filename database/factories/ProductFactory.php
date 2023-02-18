@@ -17,7 +17,7 @@ class ProductFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'name' => fake()->unique()->sentence(),
@@ -34,9 +34,9 @@ class ProductFactory extends Factory
     /**
      * Indicate that the product is active.
      *
-     * @return static
+     * @return $this
      */
-    public function active()
+    public function active(): static
     {
         return $this->state(['is_active' => true]);
     }
@@ -44,9 +44,9 @@ class ProductFactory extends Factory
     /**
      * Indicate that the product is inactive.
      *
-     * @return static
+     * @return $this
      */
-    public function inactive()
+    public function inactive(): static
     {
         return $this->state(['is_active' => false]);
     }
@@ -54,9 +54,9 @@ class ProductFactory extends Factory
     /**
      * Attach default image.
      *
-     * @return static
+     * @return $this
      */
-    public function withDefaultImage()
+    public function withDefaultImage(): static
     {
         return $this->hasAttached(Image::factory(), ['is_default' => 1]);
     }

@@ -9,10 +9,8 @@ class DeleteUserTest extends TestCase
 {
     /**
      * User.
-     *
-     * @var \App\Models\User
      */
-    private $user;
+    private User $user;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_user()
+    public function guest_cant_delete_user(): void
     {
         $this->delete(route('admin.users.destroy', $this->user))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_user()
+    public function user_can_delete_user(): void
     {
         $this->login()
             ->from(route('admin.users.index'))

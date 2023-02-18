@@ -10,11 +10,9 @@ class UpdateCurrencyTest extends TestCase
     use HasValidation;
 
     /**
-     * Product.
-     *
-     * @var \App\Models\Currency
+     * Currency.
      */
-    private $currency;
+    private Currency $currency;
 
     /**
      * Setup.
@@ -27,14 +25,14 @@ class UpdateCurrencyTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_visit_edit_currency_page()
+    public function guest_cant_visit_edit_currency_page(): void
     {
         $this->get(route('admin.currencies.edit', $this->currency))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_edit_currency_page()
+    public function user_can_visit_edit_currency_page(): void
     {
         $this->login()
             ->get(route('admin.currencies.edit', $this->currency))
@@ -42,17 +40,17 @@ class UpdateCurrencyTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_currency()
+    public function guest_cant_update_currency(): void
     {
-        $this->put(route('admin.currencies.update', $this->currency), $this->validFields())
+        $this->put(route('admin.currencies.update', $this->currency), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_currency()
+    public function user_can_update_currency(): void
     {
         $this->login()
-            ->put(route('admin.currencies.update', $this->currency), $fields = $this->validFields())
+            ->put(route('admin.currencies.update', $this->currency), $fields = self::validFields())
             ->assertRedirect(route('admin.currencies.index'))
             ->assertSessionHas('status', trans('currency.updated'));
 
@@ -64,7 +62,7 @@ class UpdateCurrencyTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_update_currency_with_invalid_data($field, $data, $count = 1)
+    public function user_cant_update_currency_with_invalid_data(string $field, callable $data, int $count = 1): void
     {
         $this->login()
             ->from(route('admin.currencies.edit', $this->currency))
@@ -75,8 +73,8 @@ class UpdateCurrencyTest extends TestCase
         $this->assertDatabaseCount('currencies', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider(2);
+        return self::provider(2);
     }
 }

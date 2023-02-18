@@ -9,14 +9,14 @@ use Tests\TestCase;
 class SortCategoriesTest extends TestCase
 {
     /** @test */
-    public function guest_cant_sort_categories()
+    public function guest_cant_sort_categories(): void
     {
         $this->get(route('admin.categories.index', ['sort' => 'name']))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function admin_can_sort_categories_by_name_ascending()
+    public function admin_can_sort_categories_by_name_ascending(): void
     {
         [$ats, $generators] = Category::factory()
             ->count(2)
@@ -34,7 +34,7 @@ class SortCategoriesTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_categories_by_name_descending()
+    public function admin_can_sort_categories_by_name_descending(): void
     {
         [$ats, $generators] = Category::factory()
             ->count(2)
@@ -52,7 +52,7 @@ class SortCategoriesTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_categories_by_slug_ascending()
+    public function admin_can_sort_categories_by_slug_ascending(): void
     {
         [$ats, $generators] = Category::factory()
             ->count(2)
@@ -70,7 +70,7 @@ class SortCategoriesTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_categories_by_slug_descending()
+    public function admin_can_sort_categories_by_slug_descending(): void
     {
         [$ats, $generators] = Category::factory()
             ->count(2)

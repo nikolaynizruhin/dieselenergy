@@ -9,14 +9,14 @@ use Tests\TestCase;
 class ReadContactsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_contacts()
+    public function guest_cant_read_contacts(): void
     {
         $this->get(route('admin.contacts.index'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_read_contacts()
+    public function user_can_read_contacts(): void
     {
         [$contactSale, $contactSupport] = Contact::factory()
             ->count(2)

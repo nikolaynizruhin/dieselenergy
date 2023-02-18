@@ -10,8 +10,6 @@ class UpdateCartTest extends TestCase
 {
     /**
      * Product.
-     *
-     * @var \App\Models\Product
      */
     private Product $product;
 
@@ -28,7 +26,7 @@ class UpdateCartTest extends TestCase
     }
 
     /** @test */
-    public function guest_can_update_cart()
+    public function guest_can_update_cart(): void
     {
         $this->put(route('carts.update', ['cart' => 0, 'quantity' => 3]))
             ->assertRedirect(route('carts.index'))
@@ -44,13 +42,13 @@ class UpdateCartTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function guest_cant_create_cart_with_invalid_data($quantity)
+    public function guest_cant_create_cart_with_invalid_data($quantity): void
     {
         $this->put(route('carts.update', ['cart' => 0, 'quantity' => $quantity]))
             ->assertInvalid('quantity');
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
         return [
             'Quantity is required' => [null],

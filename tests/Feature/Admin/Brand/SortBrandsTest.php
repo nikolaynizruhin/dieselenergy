@@ -10,14 +10,14 @@ use Tests\TestCase;
 class SortBrandsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_sort_brands()
+    public function guest_cant_sort_brands(): void
     {
         $this->get(route('admin.brands.index', ['sort' => 'name']))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function admin_can_sort_brands_by_name_ascending()
+    public function admin_can_sort_brands_by_name_ascending(): void
     {
         [$hyundai, $sdmo] = Brand::factory()
             ->count(2)
@@ -35,7 +35,7 @@ class SortBrandsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_brands_by_name_descending()
+    public function admin_can_sort_brands_by_name_descending(): void
     {
         [$hyundai, $sdmo] = Brand::factory()
             ->count(2)
@@ -53,7 +53,7 @@ class SortBrandsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_brands_by_currency_ascending()
+    public function admin_can_sort_brands_by_currency_ascending(): void
     {
         [$usd, $eur] = Currency::factory()
             ->count(2)
@@ -78,7 +78,7 @@ class SortBrandsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_brands_by_currency_descending()
+    public function admin_can_sort_brands_by_currency_descending(): void
     {
         [$usd, $eur] = Currency::factory()
             ->count(2)

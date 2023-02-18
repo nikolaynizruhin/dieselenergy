@@ -10,7 +10,7 @@ use Tests\TestCase;
 class MediaTest extends TestCase
 {
     /** @test */
-    public function it_has_product()
+    public function it_has_product(): void
     {
         $media = Media::factory()
             ->forProduct()
@@ -20,7 +20,7 @@ class MediaTest extends TestCase
     }
 
     /** @test */
-    public function it_has_image()
+    public function it_has_image(): void
     {
         $media = Media::factory()
             ->forImage()
@@ -30,7 +30,7 @@ class MediaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_marked_as_default()
+    public function it_can_be_marked_as_default(): void
     {
         $media = Media::factory()
             ->regular()

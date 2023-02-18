@@ -9,10 +9,8 @@ class DeleteMediaTest extends TestCase
 {
     /**
      * Media.
-     *
-     * @var \App\Models\Media
      */
-    private $media;
+    private Media $media;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteMediaTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_media()
+    public function guest_cant_delete_media(): void
     {
         $this->delete(route('admin.medias.destroy', $this->media))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_media()
+    public function user_can_delete_media(): void
     {
         $this->login()
             ->from(route('admin.products.show', $this->media->product))

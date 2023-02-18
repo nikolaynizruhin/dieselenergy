@@ -9,14 +9,14 @@ use Tests\TestCase;
 class ReadUsersTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_users()
+    public function guest_cant_read_users(): void
     {
         $this->get(route('admin.users.index'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_read_users()
+    public function user_can_read_users(): void
     {
         [$john, $jane] = User::factory()
             ->count(2)

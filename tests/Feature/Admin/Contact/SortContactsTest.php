@@ -10,14 +10,14 @@ use Tests\TestCase;
 class SortContactsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_sort_contacts()
+    public function guest_cant_sort_contacts(): void
     {
         $this->get(route('admin.contacts.index', ['sort' => 'created_at']))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function admin_can_sort_contacts_by_date_ascending()
+    public function admin_can_sort_contacts_by_date_ascending(): void
     {
         [$adam, $tom] = Contact::factory()
             ->count(2)
@@ -35,7 +35,7 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_contacts_by_date_descending()
+    public function admin_can_sort_contacts_by_date_descending(): void
     {
         [$adam, $tom] = Contact::factory()
             ->count(2)
@@ -53,7 +53,7 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_contacts_by_message_ascending()
+    public function admin_can_sort_contacts_by_message_ascending(): void
     {
         [$adam, $tom] = Contact::factory()
             ->count(2)
@@ -71,7 +71,7 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_contacts_by_message_descending()
+    public function admin_can_sort_contacts_by_message_descending(): void
     {
         [$adam, $tom] = Contact::factory()
             ->count(2)
@@ -89,7 +89,7 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_contacts_by_customer_ascending()
+    public function admin_can_sort_contacts_by_customer_ascending(): void
     {
         [$adam, $tom] = Customer::factory()
             ->count(2)
@@ -114,7 +114,7 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_contacts_by_customer_descending()
+    public function admin_can_sort_contacts_by_customer_descending(): void
     {
         [$adam, $tom] = Customer::factory()
             ->count(2)

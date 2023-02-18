@@ -9,10 +9,8 @@ class DeleteCustomerTest extends TestCase
 {
     /**
      * Customer.
-     *
-     * @var \App\Models\Customer
      */
-    private $customer;
+    private Customer $customer;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteCustomerTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_customer()
+    public function guest_cant_delete_customer(): void
     {
         $this->delete(route('admin.customers.destroy', $this->customer))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_customer()
+    public function user_can_delete_customer(): void
     {
         $this->login()
             ->from(route('admin.customers.index'))

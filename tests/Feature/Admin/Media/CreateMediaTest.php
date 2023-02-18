@@ -9,14 +9,14 @@ use Tests\TestCase;
 class CreateMediaTest extends TestCase
 {
     /** @test */
-    public function guest_cant_visit_create_media_page()
+    public function guest_cant_visit_create_media_page(): void
     {
         $this->get(route('admin.medias.create'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_create_media_page()
+    public function user_can_visit_create_media_page(): void
     {
         $product = Product::factory()->create();
 
@@ -26,17 +26,17 @@ class CreateMediaTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_media()
+    public function guest_cant_create_media(): void
     {
-        $this->post(route('admin.medias.store'), $this->validFields())
+        $this->post(route('admin.medias.store'), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_create_media()
+    public function user_can_create_media(): void
     {
         $this->login()
-            ->post(route('admin.medias.store'), $fields = $this->validFields())
+            ->post(route('admin.medias.store'), $fields = self::validFields())
             ->assertRedirect(route('admin.products.show', $fields['product_id']))
             ->assertSessionHas('status', trans('media.created'));
 
@@ -44,7 +44,7 @@ class CreateMediaTest extends TestCase
     }
 
     /** @test */
-    public function it_should_unmark_other_default_medias()
+    public function it_should_unmark_other_default_medias(): void
     {
         $media = Media::factory()->default()->create();
         $stub = Media::factory()->default()->raw([
@@ -64,7 +64,7 @@ class CreateMediaTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_create_media_with_invalid_data($field, $data, $count = 0)
+    public function user_cant_create_media_with_invalid_data(string $field, callable $data, int $count = 0): void
     {
         $this->login()
             ->post(route('admin.medias.store'), $data())
@@ -74,26 +74,26 @@ class CreateMediaTest extends TestCase
         $this->assertDatabaseCount('image_product', $count);
     }
 
-    private function validationProvider(): array
+    public static function validationProvider(): array
     {
         return [
             'Product is required' => [
-                'product_id', fn () => $this->validFields(['product_id' => null]),
+                'product_id', fn () => self::validFields(['product_id' => null]),
             ],
             'Product cant be string' => [
-                'product_id', fn () => $this->validFields(['product_id' => 'string']),
+                'product_id', fn () => self::validFields(['product_id' => 'string']),
             ],
             'Product must exists' => [
-                'product_id', fn () => $this->validFields(['product_id' => 10]),
+                'product_id', fn () => self::validFields(['product_id' => 10]),
             ],
             'Image is required' => [
-                'image_id', fn () => $this->validFields(['image_id' => null]),
+                'image_id', fn () => self::validFields(['image_id' => null]),
             ],
             'Image cant be string' => [
-                'image_id', fn () => $this->validFields(['image_id' => 'string']),
+                'image_id', fn () => self::validFields(['image_id' => 'string']),
             ],
             'Image must exists' => [
-                'image_id', fn () => $this->validFields(['image_id' => 10]),
+                'image_id', fn () => self::validFields(['image_id' => 10]),
             ],
             'Media must be unique' => [
                 'product_id', fn () => Media::factory()->create()->toArray(), 1,
@@ -103,11 +103,8 @@ class CreateMediaTest extends TestCase
 
     /**
      * Get valid media fields.
-     *
-     * @param  array  $overrides
-     * @return array
      */
-    private function validFields(array $overrides = []): array
+    private static function validFields(array $overrides = []): array
     {
         return Media::factory()->raw($overrides);
     }

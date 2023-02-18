@@ -10,11 +10,9 @@ class UpdateCategoryTest extends TestCase
     use HasValidation;
 
     /**
-     * Product.
-     *
-     * @var \App\Models\Category
+     * Category.
      */
-    private $category;
+    private Category $category;
 
     /**
      * Setup.
@@ -27,14 +25,14 @@ class UpdateCategoryTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_visit_update_category_page()
+    public function guest_cant_visit_update_category_page(): void
     {
         $this->get(route('admin.categories.edit', $this->category))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_update_category_page()
+    public function user_can_visit_update_category_page(): void
     {
         $this->login()
             ->get(route('admin.categories.edit', $this->category))
@@ -43,17 +41,17 @@ class UpdateCategoryTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_category()
+    public function guest_cant_update_category(): void
     {
-        $this->put(route('admin.categories.update', $this->category), $this->validFields())
+        $this->put(route('admin.categories.update', $this->category), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_category()
+    public function user_can_update_category(): void
     {
         $this->login()
-            ->put(route('admin.categories.update', $this->category), $fields = $this->validFields())
+            ->put(route('admin.categories.update', $this->category), $fields = self::validFields())
             ->assertRedirect(route('admin.categories.index'))
             ->assertSessionHas('status', trans('category.updated'));
 
@@ -65,7 +63,7 @@ class UpdateCategoryTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_update_category_with_invalid_data($field, $data, $count = 1)
+    public function user_cant_update_category_with_invalid_data(string $field, callable $data, int $count = 1): void
     {
         $this->login()
             ->from(route('admin.categories.edit', $this->category))
@@ -76,8 +74,8 @@ class UpdateCategoryTest extends TestCase
         $this->assertDatabaseCount('categories', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider(2);
+        return self::provider(2);
     }
 }

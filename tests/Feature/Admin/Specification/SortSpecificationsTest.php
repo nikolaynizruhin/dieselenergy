@@ -11,24 +11,18 @@ class SortSpecificationsTest extends TestCase
 {
     /**
      * Height attribute.
-     *
-     * @var \App\Models\Attribute
      */
-    private $height;
+    private Attribute $height;
 
     /**
      * Width attribute.
-     *
-     * @var \App\Models\Attribute
      */
-    private $width;
+    private Attribute $width;
 
     /**
      * Category.
-     *
-     * @var \App\Models\Category
      */
-    private $category;
+    private Category $category;
 
     protected function setUp(): void
     {
@@ -47,7 +41,7 @@ class SortSpecificationsTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_sort_specification()
+    public function guest_cant_sort_specification(): void
     {
         $this->get(route('admin.categories.show', [
             'category' => $this->category,
@@ -56,7 +50,7 @@ class SortSpecificationsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_specifications_ascending()
+    public function user_can_sort_specifications_ascending(): void
     {
         $this->login()
             ->get(route('admin.categories.show', [
@@ -67,7 +61,7 @@ class SortSpecificationsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_specifications_descending()
+    public function user_can_sort_specifications_descending(): void
     {
         $this->login()
             ->get(route('admin.categories.show', [

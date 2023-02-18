@@ -9,7 +9,7 @@ use Tests\TestCase;
 class ReadSitemapTest extends TestCase
 {
     /** @test */
-    public function guest_can_read_sitemap()
+    public function guest_can_read_sitemap(): void
     {
         $post = Post::factory()->create();
         $product = Product::factory()->active()->create();

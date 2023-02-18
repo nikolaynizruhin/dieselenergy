@@ -10,7 +10,7 @@ use Tests\TestCase;
 class ReadProductTest extends TestCase
 {
     /** @test */
-    public function user_can_read_product()
+    public function user_can_read_product(): void
     {
         [$generators, $waterPumps] = Category::factory()->count(2)->create();
 

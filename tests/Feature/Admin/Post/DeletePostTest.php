@@ -9,10 +9,8 @@ class DeletePostTest extends TestCase
 {
     /**
      * Post.
-     *
-     * @var \App\Models\Post
      */
-    private $post;
+    private Post $post;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeletePostTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_post()
+    public function guest_cant_delete_post(): void
     {
         $this->delete(route('admin.posts.destroy', $this->post))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_post()
+    public function user_can_delete_post(): void
     {
         $this->login()
             ->from(route('admin.posts.index'))

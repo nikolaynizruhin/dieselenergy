@@ -9,7 +9,7 @@ use Tests\TestCase;
 class SearchCategoriesTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_categories()
+    public function guest_cant_search_categories(): void
     {
         $category = Category::factory()->create();
 
@@ -18,7 +18,7 @@ class SearchCategoriesTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_categories()
+    public function user_can_search_categories(): void
     {
         [$patrol, $diesel, $waterPumps] = Category::factory()
             ->count(3)

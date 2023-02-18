@@ -9,14 +9,14 @@ class CreateContactTest extends TestCase
     use HasValidation;
 
     /** @test */
-    public function guest_cant_visit_create_contact_page()
+    public function guest_cant_visit_create_contact_page(): void
     {
         $this->get(route('admin.contacts.create'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_create_contact_page()
+    public function user_can_visit_create_contact_page(): void
     {
         $this->login()
             ->get(route('admin.contacts.create'))
@@ -24,17 +24,17 @@ class CreateContactTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_contact()
+    public function guest_cant_create_contact(): void
     {
-        $this->post(route('admin.contacts.store'), $this->validFields())
+        $this->post(route('admin.contacts.store'), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_create_contact()
+    public function user_can_create_contact(): void
     {
         $this->login()
-            ->post(route('admin.contacts.store'), $fields = $this->validFields())
+            ->post(route('admin.contacts.store'), $fields = self::validFields())
             ->assertRedirect(route('admin.contacts.index'))
             ->assertSessionHas('status', trans('contact.created'));
 
@@ -46,7 +46,7 @@ class CreateContactTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_create_contact_with_invalid_data($field, $data)
+    public function user_cant_create_contact_with_invalid_data(string $field, callable $data): void
     {
         $this->login()
             ->from(route('admin.contacts.create'))

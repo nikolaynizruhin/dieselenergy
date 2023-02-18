@@ -9,10 +9,8 @@ class DeleteImageTest extends TestCase
 {
     /**
      * Image.
-     *
-     * @var \App\Models\Image
      */
-    private $image;
+    private Image $image;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteImageTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_image()
+    public function guest_cant_delete_image(): void
     {
         $this->delete(route('admin.images.destroy', $this->image))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_image()
+    public function user_can_delete_image(): void
     {
         $this->login()
             ->from(route('admin.images.index'))

@@ -10,15 +10,11 @@ class SortOrdersTest extends TestCase
 {
     /**
      * Adam's order.
-     *
-     * @var \App\Models\Order
      */
     private Order $adam;
 
     /**
      * Tom's order.
-     *
-     * @var \App\Models\Order
      */
     private Order $tom;
 
@@ -35,14 +31,14 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_sort_orders()
+    public function guest_cant_sort_orders(): void
     {
         $this->get(route('admin.dashboard', ['sort' => 'id']))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function admin_can_sort_orders_ascending()
+    public function admin_can_sort_orders_ascending(): void
     {
         $this->login()
             ->get(route('admin.dashboard', ['sort' => 'id']))
@@ -53,7 +49,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_orders_descending()
+    public function admin_can_sort_orders_descending(): void
     {
         $this->login()
             ->get(route('admin.dashboard', ['sort' => '-id']))

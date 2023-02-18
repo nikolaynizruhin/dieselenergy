@@ -10,7 +10,7 @@ use Tests\TestCase;
 class SearchMediasTest extends TestCase
 {
     /** @test */
-    public function user_can_search_media()
+    public function user_can_search_media(): void
     {
         [$diesel, $patrol, $waterPump] = Image::factory()
             ->count(3)

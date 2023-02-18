@@ -9,7 +9,7 @@ use Tests\TestCase;
 class CreateCartTest extends TestCase
 {
     /** @test */
-    public function guest_can_add_product_to_cart()
+    public function guest_can_add_product_to_cart(): void
     {
         $product = Product::factory()->withDefaultImage()->create();
 
@@ -28,7 +28,7 @@ class CreateCartTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function guest_cant_create_cart_with_invalid_data($field, $data)
+    public function guest_cant_create_cart_with_invalid_data(string $field, callable $data): void
     {
         $this->post(route('carts.store', $data()))
             ->assertInvalid($field);
@@ -36,7 +36,7 @@ class CreateCartTest extends TestCase
         $this->assertEmpty(Cart::items());
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
         return [
             'Product is required' => [

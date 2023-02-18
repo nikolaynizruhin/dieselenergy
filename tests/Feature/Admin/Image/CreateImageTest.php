@@ -9,14 +9,14 @@ use Tests\TestCase;
 class CreateImageTest extends TestCase
 {
     /** @test */
-    public function guest_cant_visit_create_image_page()
+    public function guest_cant_visit_create_image_page(): void
     {
         $this->get(route('admin.images.create'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_create_image_page()
+    public function user_can_visit_create_image_page(): void
     {
         $this->login()
             ->get(route('admin.images.create'))
@@ -24,7 +24,7 @@ class CreateImageTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_image()
+    public function guest_cant_create_image(): void
     {
         Storage::fake();
 
@@ -36,7 +36,7 @@ class CreateImageTest extends TestCase
     }
 
     /** @test */
-    public function user_can_create_image()
+    public function user_can_create_image(): void
     {
         Storage::fake();
 
@@ -58,7 +58,7 @@ class CreateImageTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_create_image_with_invalid_data($data)
+    public function user_cant_create_image_with_invalid_data(callable $data): void
     {
         $this->login()
             ->from(route('admin.images.create'))
@@ -69,7 +69,7 @@ class CreateImageTest extends TestCase
         $this->assertDatabaseCount('images', 0);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
         return [
             'Image is required' => [

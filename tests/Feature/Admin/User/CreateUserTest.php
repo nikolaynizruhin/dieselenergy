@@ -11,14 +11,14 @@ class CreateUserTest extends TestCase
     use HasValidation;
 
     /** @test */
-    public function guest_cant_visit_create_user_page()
+    public function guest_cant_visit_create_user_page(): void
     {
         $this->get(route('admin.users.create'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_create_user_page()
+    public function user_can_visit_create_user_page(): void
     {
         $this->login()
             ->get(route('admin.users.create'))
@@ -26,17 +26,17 @@ class CreateUserTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_user()
+    public function guest_cant_create_user(): void
     {
-        $this->post(route('admin.users.store'), $this->validFields())
+        $this->post(route('admin.users.store'), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_create_user()
+    public function user_can_create_user(): void
     {
         $this->login()
-            ->post(route('admin.users.store'), $fields = $this->validFields())
+            ->post(route('admin.users.store'), $fields = self::validFields())
             ->assertRedirect(route('admin.users.index'))
             ->assertSessionHas('status', trans('user.created'));
 
@@ -52,7 +52,7 @@ class CreateUserTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_create_user_with_invalid_data($field, $data, $count = 1)
+    public function user_cant_create_user_with_invalid_data(string $field, callable $data, int $count = 1): void
     {
         $this->login()
             ->from(route('admin.users.create'))
@@ -63,18 +63,15 @@ class CreateUserTest extends TestCase
         $this->assertDatabaseCount('users', $count);
     }
 
-    public function validationProvider()
+    public static function validationProvider(): array
     {
-        return $this->provider(2);
+        return self::provider(2);
     }
 
     /**
      * Get valid user fields.
-     *
-     * @param  array  $overrides
-     * @return array
      */
-    private function validFields(array $overrides = []): array
+    private static function validFields(array $overrides = []): array
     {
         $user = User::factory()->make();
 

@@ -9,14 +9,14 @@ class CreateCategoryTest extends TestCase
     use HasValidation;
 
     /** @test */
-    public function guest_cant_visit_create_category_page()
+    public function guest_cant_visit_create_category_page(): void
     {
         $this->get(route('admin.categories.create'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_create_category_page()
+    public function user_can_visit_create_category_page(): void
     {
         $this->login()
             ->get(route('admin.categories.create'))
@@ -24,17 +24,17 @@ class CreateCategoryTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_category()
+    public function guest_cant_create_category(): void
     {
-        $this->post(route('admin.categories.store'), $this->validFields())
+        $this->post(route('admin.categories.store'), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_create_category()
+    public function user_can_create_category(): void
     {
         $this->login()
-            ->post(route('admin.categories.store'), $fields = $this->validFields())
+            ->post(route('admin.categories.store'), $fields = self::validFields())
             ->assertRedirect(route('admin.categories.index'))
             ->assertSessionHas('status', trans('category.created'));
 
@@ -46,7 +46,7 @@ class CreateCategoryTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_create_category_with_invalid_data($field, $data, $count = 0)
+    public function user_cant_create_category_with_invalid_data(string $field, callable $data, int $count = 0): void
     {
         $this->login()
             ->from(route('admin.categories.create'))
@@ -57,8 +57,8 @@ class CreateCategoryTest extends TestCase
         $this->assertDatabaseCount('categories', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider();
+        return self::provider();
     }
 }

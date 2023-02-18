@@ -12,14 +12,14 @@ class CreatePostTest extends TestCase
     use HasValidation;
 
     /** @test */
-    public function guest_cant_visit_create_post_page()
+    public function guest_cant_visit_create_post_page(): void
     {
         $this->get(route('admin.posts.create'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_create_post_page()
+    public function user_can_visit_create_post_page(): void
     {
         $this->login()
             ->get(route('admin.posts.create'))
@@ -27,20 +27,20 @@ class CreatePostTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_post()
+    public function guest_cant_create_post(): void
     {
-        $this->post(route('admin.posts.store'), $this->validFields())
+        $this->post(route('admin.posts.store'), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_create_post()
+    public function user_can_create_post(): void
     {
         Storage::fake();
 
         $image = UploadedFile::fake()->image('post.jpg');
 
-        $post = $this->validFields();
+        $post = self::validFields();
 
         unset($post['image_id']);
 
@@ -63,7 +63,7 @@ class CreatePostTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_create_post_with_invalid_data($field, $data, $count = 0)
+    public function user_cant_create_post_with_invalid_data(string $field, callable $data, int $count = 0): void
     {
         $this->login()
             ->from(route('admin.posts.create'))
@@ -74,8 +74,8 @@ class CreatePostTest extends TestCase
         $this->assertDatabaseCount('posts', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider();
+        return self::provider();
     }
 }

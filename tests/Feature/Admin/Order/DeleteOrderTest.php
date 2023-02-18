@@ -9,10 +9,8 @@ class DeleteOrderTest extends TestCase
 {
     /**
      * Order.
-     *
-     * @var \App\Models\Order
      */
-    private $order;
+    private Order $order;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteOrderTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_order()
+    public function guest_cant_delete_order(): void
     {
         $this->delete(route('admin.orders.destroy', $this->order))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_order()
+    public function user_can_delete_order(): void
     {
         $this->login()
             ->from(route('admin.orders.index'))

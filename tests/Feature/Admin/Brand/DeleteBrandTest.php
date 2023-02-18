@@ -9,10 +9,8 @@ class DeleteBrandTest extends TestCase
 {
     /**
      * Brand.
-     *
-     * @var \App\Models\Brand
      */
-    private $brand;
+    private Brand $brand;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteBrandTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_brand()
+    public function guest_cant_delete_brand(): void
     {
         $this->delete(route('admin.brands.destroy', $this->brand))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_brand()
+    public function user_can_delete_brand(): void
     {
         $this->login()
             ->from(route('admin.brands.index'))

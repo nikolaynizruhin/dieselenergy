@@ -10,11 +10,9 @@ class UpdateCartTest extends TestCase
     use HasValidation;
 
     /**
-     * Product.
-     *
-     * @var \App\Models\Cart
+     * Cart.
      */
-    private $cart;
+    private Cart $cart;
 
     /**
      * Setup.
@@ -27,14 +25,14 @@ class UpdateCartTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_visit_update_cart_page()
+    public function guest_cant_visit_update_cart_page(): void
     {
         $this->get(route('admin.carts.edit', $this->cart))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_update_cart_page()
+    public function user_can_visit_update_cart_page(): void
     {
         $this->login()
             ->get(route('admin.carts.edit', $this->cart))
@@ -44,17 +42,17 @@ class UpdateCartTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_cart()
+    public function guest_cant_update_cart(): void
     {
-        $this->put(route('admin.carts.update', $this->cart), $this->validFields())
+        $this->put(route('admin.carts.update', $this->cart), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_cart()
+    public function user_can_update_cart(): void
     {
         $this->login()
-            ->put(route('admin.carts.update', $this->cart), $fields = $this->validFields())
+            ->put(route('admin.carts.update', $this->cart), $fields = self::validFields())
             ->assertRedirect(route('admin.orders.show', $fields['order_id']))
             ->assertSessionHas('status', trans('cart.updated'));
 
@@ -66,7 +64,7 @@ class UpdateCartTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_update_cart_with_invalid_data($field, $data, $count = 1)
+    public function user_cant_update_cart_with_invalid_data(string $field, callable $data, int $count = 1): void
     {
         $this->login()
             ->from(route('admin.carts.edit', $this->cart))
@@ -77,8 +75,8 @@ class UpdateCartTest extends TestCase
         $this->assertDatabaseCount('order_product', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider(2);
+        return self::provider(2);
     }
 }

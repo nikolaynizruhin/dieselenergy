@@ -13,7 +13,6 @@ abstract class TestCase extends BaseTestCase
     /**
      * Login user.
      *
-     * @param  \App\Models\User|null  $user
      * @return $this
      */
     protected function login(?User $user = null): static

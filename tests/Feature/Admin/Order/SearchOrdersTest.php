@@ -9,7 +9,7 @@ use Tests\TestCase;
 class SearchOrdersTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_orders()
+    public function guest_cant_search_orders(): void
     {
         $order = Order::factory()->create();
 
@@ -18,7 +18,7 @@ class SearchOrdersTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_orders()
+    public function user_can_search_orders(): void
     {
         [$orderA, $orderB, $orderC] = Order::factory()
             ->count(3)

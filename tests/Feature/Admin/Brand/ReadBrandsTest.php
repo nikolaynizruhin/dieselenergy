@@ -9,14 +9,14 @@ use Tests\TestCase;
 class ReadBrandsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_brands()
+    public function guest_cant_read_brands(): void
     {
         $this->get(route('admin.brands.index'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_read_brands()
+    public function user_can_read_brands(): void
     {
         [$sdmo, $hyundai] = Brand::factory()
             ->count(2)

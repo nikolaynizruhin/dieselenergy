@@ -9,7 +9,7 @@ use Tests\TestCase;
 class CurrencyTest extends TestCase
 {
     /** @test */
-    public function it_has_many_brands()
+    public function it_has_many_brands(): void
     {
         $currency = Currency::factory()
             ->hasBrands(1)

@@ -8,7 +8,7 @@ use Tests\TestCase;
 class ReadCategoryTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_category()
+    public function guest_cant_read_category(): void
     {
         $category = Category::factory()->create();
 
@@ -17,7 +17,7 @@ class ReadCategoryTest extends TestCase
     }
 
     /** @test */
-    public function user_can_read_category()
+    public function user_can_read_category(): void
     {
         $category = Category::factory()->create();
 

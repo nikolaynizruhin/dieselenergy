@@ -14,8 +14,6 @@ class CartTest extends TestCase
 {
     /**
      * Product.
-     *
-     * @var \App\Models\Product
      */
     private Product $product;
 
@@ -30,7 +28,7 @@ class CartTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add()
+    public function it_can_add(): void
     {
         $item = Cart::add($this->product);
 
@@ -45,7 +43,7 @@ class CartTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_existing_product()
+    public function it_can_add_existing_product(): void
     {
         $item = Cart::add($this->product, 2);
 
@@ -57,7 +55,7 @@ class CartTest extends TestCase
     }
 
     /** @test */
-    public function it_can_remove()
+    public function it_can_remove(): void
     {
         Cart::add($this->product);
 
@@ -69,7 +67,7 @@ class CartTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_items()
+    public function it_can_get_items(): void
     {
         $item = Cart::add($this->product);
 
@@ -80,7 +78,7 @@ class CartTest extends TestCase
     }
 
     /** @test */
-    public function it_can_update_cart_item()
+    public function it_can_update_cart_item(): void
     {
         Cart::add($this->product);
 
@@ -90,7 +88,7 @@ class CartTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_total()
+    public function it_can_get_total(): void
     {
         $currency = Currency::factory()->state(['rate' => 30.0000]);
         $brand = Brand::factory()->for($currency);
@@ -112,7 +110,7 @@ class CartTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_cleared()
+    public function it_can_be_cleared(): void
     {
         Cart::add($this->product);
 
@@ -124,7 +122,7 @@ class CartTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_stored()
+    public function it_can_be_stored(): void
     {
         $order = Order::factory()->create();
 

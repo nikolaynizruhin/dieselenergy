@@ -12,7 +12,7 @@ use Tests\TestCase;
 class ResetPasswordTest extends TestCase
 {
     /** @test */
-    public function user_can_view_password_reset_page()
+    public function user_can_view_password_reset_page(): void
     {
         $user = User::factory()->create();
 
@@ -25,7 +25,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function authenticated_user_can_view_password_reset_page()
+    public function authenticated_user_can_view_password_reset_page(): void
     {
         $user = User::factory()->create();
 
@@ -39,7 +39,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function user_can_reset_password_with_valid_token()
+    public function user_can_reset_password_with_valid_token(): void
     {
         Event::fake();
 
@@ -65,7 +65,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_reset_password_with_invalid_token()
+    public function user_cannot_reset_password_with_invalid_token(): void
     {
         $user = User::factory()->create();
 
@@ -83,7 +83,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_reset_password_without_providing_new_password()
+    public function user_cannot_reset_password_without_providing_new_password(): void
     {
         $user = User::factory()->create();
 
@@ -106,7 +106,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_reset_password_without_providing_email()
+    public function user_cannot_reset_password_without_providing_email(): void
     {
         $user = User::factory()->create();
 

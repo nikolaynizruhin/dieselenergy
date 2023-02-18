@@ -7,24 +7,21 @@ use Tests\TestCase;
 class DirectiveTest extends TestCase
 {
     /** @test */
-    public function it_compiles_uah_directive()
+    public function it_compiles_uah_directive(): void
     {
         $this->assertDirectiveOutput('1 000 ₴', '@uah(100000)');
     }
 
     /** @test */
-    public function it_compiles_markdown_directive()
+    public function it_compiles_markdown_directive(): void
     {
         $this->assertDirectiveOutput("<h1>Markdown</h1>\n", '@markdown("# Markdown")');
     }
 
     /**
      * Assert directive output.
-     *
-     * @param  string  $expected
-     * @param  string  $directive
      */
-    private function assertDirectiveOutput(string $expected, string $directive)
+    private function assertDirectiveOutput(string $expected, string $directive): void
     {
         ob_start();
 

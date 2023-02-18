@@ -9,10 +9,8 @@ class DeleteCartTest extends TestCase
 {
     /**
      * Cart.
-     *
-     * @var \App\Models\Cart
      */
-    private $cart;
+    private Cart $cart;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteCartTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_cart()
+    public function guest_cant_delete_cart(): void
     {
         $this->delete(route('admin.carts.destroy', $this->cart))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_cart()
+    public function user_can_delete_cart(): void
     {
         $this->login()
             ->from(route('admin.orders.show', $this->cart->order))

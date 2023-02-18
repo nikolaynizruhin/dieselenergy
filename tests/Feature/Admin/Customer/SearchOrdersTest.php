@@ -10,7 +10,7 @@ use Tests\TestCase;
 class SearchOrdersTest extends TestCase
 {
     /** @test */
-    public function user_can_search_customer_orders()
+    public function user_can_search_customer_orders(): void
     {
         $customer = Customer::factory()->create();
 

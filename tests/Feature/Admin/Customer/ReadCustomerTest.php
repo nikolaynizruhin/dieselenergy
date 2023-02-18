@@ -8,7 +8,7 @@ use Tests\TestCase;
 class ReadCustomerTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_customer()
+    public function guest_cant_read_customer(): void
     {
         $customer = Customer::factory()->create();
 
@@ -17,7 +17,7 @@ class ReadCustomerTest extends TestCase
     }
 
     /** @test */
-    public function user_can_read_customer()
+    public function user_can_read_customer(): void
     {
         $customer = Customer::factory()->create();
 

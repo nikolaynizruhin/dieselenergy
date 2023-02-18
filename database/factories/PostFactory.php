@@ -15,7 +15,7 @@ class PostFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'slug' => fake()->unique()->slug(),

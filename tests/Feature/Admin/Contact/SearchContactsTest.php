@@ -9,7 +9,7 @@ use Tests\TestCase;
 class SearchContactsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_contacts()
+    public function guest_cant_search_contacts(): void
     {
         $contact = Contact::factory()->create();
 
@@ -18,7 +18,7 @@ class SearchContactsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_contacts()
+    public function user_can_search_contacts(): void
     {
         [$contactSale, $contactSupport, $contactOther] = Contact::factory()
             ->count(3)

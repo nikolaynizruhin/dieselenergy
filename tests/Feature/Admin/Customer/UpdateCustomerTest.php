@@ -10,11 +10,9 @@ class UpdateCustomerTest extends TestCase
     use HasValidation;
 
     /**
-     * Product.
-     *
-     * @var \App\Models\Customer
+     * Customer.
      */
-    private $customer;
+    private Customer $customer;
 
     /**
      * Setup.
@@ -27,14 +25,14 @@ class UpdateCustomerTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_visit_update_customer_page()
+    public function guest_cant_visit_update_customer_page(): void
     {
         $this->get(route('admin.customers.edit', $this->customer))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_update_customer_page()
+    public function user_can_visit_update_customer_page(): void
     {
         $this->login()
             ->get(route('admin.customers.edit', $this->customer))
@@ -42,17 +40,17 @@ class UpdateCustomerTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_customer()
+    public function guest_cant_update_customer(): void
     {
-        $this->put(route('admin.customers.update', $this->customer), $this->validFields())
+        $this->put(route('admin.customers.update', $this->customer), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_customer()
+    public function user_can_update_customer(): void
     {
         $this->login()
-            ->put(route('admin.customers.update', $this->customer), $fields = $this->validFields())
+            ->put(route('admin.customers.update', $this->customer), $fields = self::validFields())
             ->assertRedirect(route('admin.customers.index'))
             ->assertSessionHas('status', trans('customer.updated'));
 
@@ -64,7 +62,7 @@ class UpdateCustomerTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_update_customer_with_invalid_data($field, $data, $count = 1)
+    public function user_cant_update_customer_with_invalid_data(string $field, callable $data, int $count = 1): void
     {
         $this->login()
             ->from(route('admin.customers.edit', $this->customer))
@@ -75,8 +73,8 @@ class UpdateCustomerTest extends TestCase
         $this->assertDatabaseCount('customers', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider(2);
+        return self::provider(2);
     }
 }

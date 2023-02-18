@@ -9,7 +9,7 @@ use Tests\TestCase;
 class CreateBackupTest extends TestCase
 {
     /** @test */
-    public function it_can_backup_database_and_images()
+    public function it_can_backup_database_and_images(): void
     {
         Storage::fake('local');
 

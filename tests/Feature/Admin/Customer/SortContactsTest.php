@@ -11,10 +11,8 @@ class SortContactsTest extends TestCase
 {
     /**
      * Customer.
-     *
-     * @var \App\Models\Customer
      */
-    private $customer;
+    private Customer $customer;
 
     protected function setUp(): void
     {
@@ -24,7 +22,7 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_sort_customer_contacts()
+    public function guest_cant_sort_customer_contacts(): void
     {
         $this->get(route('admin.customers.show', [
             'customer' => $this->customer,
@@ -33,7 +31,7 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_contacts_by_message_ascending()
+    public function user_can_sort_customer_contacts_by_message_ascending(): void
     {
         [$support, $faq] = Contact::factory()
             ->count(2)
@@ -51,7 +49,7 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_contacts_by_message_descending()
+    public function user_can_sort_customer_contacts_by_message_descending(): void
     {
         [$support, $faq] = Contact::factory()
             ->count(2)
@@ -69,7 +67,7 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_contacts_by_date_ascending()
+    public function user_can_sort_customer_contacts_by_date_ascending(): void
     {
         [$support, $faq] = Contact::factory()
             ->count(2)
@@ -87,7 +85,7 @@ class SortContactsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_contacts_by_date_descending()
+    public function user_can_sort_customer_contacts_by_date_descending(): void
     {
         [$support, $faq] = Contact::factory()
             ->count(2)

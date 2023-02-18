@@ -16,10 +16,8 @@ class UpdateProductTest extends TestCase
 
     /**
      * Product.
-     *
-     * @var \App\Models\Product
      */
-    private $product;
+    private Product $product;
 
     /**
      * Setup.
@@ -32,14 +30,14 @@ class UpdateProductTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_visit_update_product_page()
+    public function guest_cant_visit_update_product_page(): void
     {
         $this->get(route('admin.products.edit', $this->product))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_update_product_page()
+    public function user_can_visit_update_product_page(): void
     {
         $attribute = Attribute::factory()->create();
         $this->product->category->attributes()->attach($attribute);
@@ -52,17 +50,17 @@ class UpdateProductTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_product()
+    public function guest_cant_update_product(): void
     {
-        $this->put(route('admin.products.update', $this->product), $this->validFields())
+        $this->put(route('admin.products.update', $this->product), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_product()
+    public function user_can_update_product(): void
     {
         $this->login()
-            ->put(route('admin.products.update', $this->product), $fields = $this->validFields())
+            ->put(route('admin.products.update', $this->product), $fields = self::validFields())
             ->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.updated'));
 
@@ -72,14 +70,14 @@ class UpdateProductTest extends TestCase
     }
 
     /** @test */
-    public function user_can_update_product_with_attributes()
+    public function user_can_update_product_with_attributes(): void
     {
         $category = Category::factory()->create();
         $attribute = Attribute::factory()->create();
 
         $category->attributes()->attach($attribute);
 
-        $stub = $this->validFields(['category_id' => $category->id]);
+        $stub = self::validFields(['category_id' => $category->id]);
 
         $this->login()
             ->put(route('admin.products.update', $this->product), $stub + [
@@ -100,13 +98,13 @@ class UpdateProductTest extends TestCase
     }
 
     /** @test */
-    public function user_can_update_product_with_images()
+    public function user_can_update_product_with_images(): void
     {
         Storage::fake();
 
         $image = UploadedFile::fake()->image('product.jpg');
 
-        $stub = $this->validFields();
+        $stub = self::validFields();
 
         $this->login()
             ->put(route('admin.products.update', $this->product), $stub + [
@@ -129,12 +127,12 @@ class UpdateProductTest extends TestCase
     }
 
     /** @test */
-    public function unrelated_attribute_should_not_be_attached_to_product()
+    public function unrelated_attribute_should_not_be_attached_to_product(): void
     {
         $category = Category::factory()->create();
         $unrelated = Attribute::factory()->create();
 
-        $stub = $this->validFields([
+        $stub = self::validFields([
             'category_id' => $category->id,
             'attributes' => [$unrelated->id => fake()->randomDigit()],
         ]);
@@ -151,7 +149,7 @@ class UpdateProductTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_update_product_with_invalid_data($field, $data, $count = 1)
+    public function user_cant_update_product_with_invalid_data(string $field, callable $data, int $count = 1): void
     {
         $this->login()
             ->from(route('admin.products.edit', $this->product))
@@ -162,9 +160,9 @@ class UpdateProductTest extends TestCase
         $this->assertDatabaseCount('products', $count);
     }
 
-    public function validationProvider()
+    public static function validationProvider(): array
     {
-        return $this->provider(2);
+        return self::provider(2);
     }
 
     /**
@@ -172,7 +170,7 @@ class UpdateProductTest extends TestCase
      *
      * @dataProvider validationAttributeProvider
      */
-    public function user_cant_update_product_with_integer_attributes($data)
+    public function user_cant_update_product_with_integer_attributes(callable $data): void
     {
         [$attributeId, $fields] = $data();
 

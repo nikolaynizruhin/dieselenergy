@@ -15,7 +15,7 @@ use Tests\TestCase;
 class ProductTest extends TestCase
 {
     /** @test */
-    public function it_has_brand()
+    public function it_has_brand(): void
     {
         $product = Product::factory()
             ->forBrand()
@@ -25,7 +25,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function it_has_category()
+    public function it_has_category(): void
     {
         $product = Product::factory()
             ->forCategory()
@@ -35,7 +35,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function it_has_many_attributes()
+    public function it_has_many_attributes(): void
     {
         $product = Product::factory()
             ->hasAttached(Attribute::factory(), [
@@ -47,7 +47,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function it_has_many_orders()
+    public function it_has_many_orders(): void
     {
         $product = Product::factory()
             ->hasAttached(Order::factory(), [
@@ -59,7 +59,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function it_has_many_images()
+    public function it_has_many_images(): void
     {
         $product = Product::factory()
             ->hasImages()
@@ -69,7 +69,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function it_has_recommendations()
+    public function it_has_recommendations(): void
     {
         $product = Product::factory()->create();
 
@@ -84,7 +84,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function it_has_default_image()
+    public function it_has_default_image(): void
     {
         $product = Product::factory()->withDefaultImage()->create();
 
@@ -93,7 +93,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function it_has_price_as_money()
+    public function it_has_price_as_money(): void
     {
         $product = Product::factory()->create();
 

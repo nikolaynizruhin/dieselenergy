@@ -9,14 +9,14 @@ use Tests\TestCase;
 class SortPostsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_sort_posts()
+    public function guest_cant_sort_posts(): void
     {
         $this->get(route('admin.posts.index', ['sort' => 'title']))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function admin_can_sort_posts_by_title_ascending()
+    public function admin_can_sort_posts_by_title_ascending(): void
     {
         [$about, $history] = Post::factory()
             ->count(2)
@@ -34,7 +34,7 @@ class SortPostsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_posts_by_title_descending()
+    public function admin_can_sort_posts_by_title_descending(): void
     {
         [$about, $history] = Post::factory()
             ->count(2)

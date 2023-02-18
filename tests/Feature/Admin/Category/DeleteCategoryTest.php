@@ -9,10 +9,8 @@ class DeleteCategoryTest extends TestCase
 {
     /**
      * Category.
-     *
-     * @var \App\Models\Category
      */
-    private $category;
+    private Category $category;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteCategoryTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_category()
+    public function guest_cant_delete_category(): void
     {
         $this->delete(route('admin.categories.destroy', $this->category))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_category()
+    public function user_can_delete_category(): void
     {
         $this->login()
             ->from(route('admin.categories.index'))
