@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCart;
 use Facades\App\Services\Cart;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $items = Cart::items();
         $total = Cart::total();
@@ -23,10 +23,8 @@ class CartController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreCart $request)
+    public function store(StoreCart $request): RedirectResponse
     {
         Cart::add($request->product, $request->quantity);
 
@@ -35,11 +33,8 @@ class CartController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): RedirectResponse
     {
         $request->validate(['quantity' => 'required|numeric|min:1']);
 
@@ -50,11 +45,8 @@ class CartController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  string  $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id): RedirectResponse
     {
         Cart::delete($id);
 

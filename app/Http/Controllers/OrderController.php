@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrder;
 use App\Models\Order;
 use Facades\App\Actions\CreateOrder;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
@@ -20,10 +22,8 @@ class OrderController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrder $request)
+    public function store(StoreOrder $request): RedirectResponse
     {
         $order = CreateOrder::handle($request->getOrderAttributes());
 
@@ -32,10 +32,8 @@ class OrderController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Order $order): View
     {
         return view('orders.show', compact('order'));
     }

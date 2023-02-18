@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreContact;
 use Facades\App\Actions\CreateContact;
+use Illuminate\Http\RedirectResponse;
 
 class ContactController extends Controller
 {
@@ -19,10 +20,8 @@ class ContactController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreContact $request)
+    public function store(StoreContact $request): RedirectResponse
     {
         CreateContact::handle($request->getContactAttributes());
 
