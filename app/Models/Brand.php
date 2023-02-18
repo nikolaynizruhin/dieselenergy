@@ -23,8 +23,6 @@ class Brand extends Model
 
     /**
      * Get the products for the brand.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function products(): HasMany
     {
@@ -33,8 +31,6 @@ class Brand extends Model
 
     /**
      * Get the currency that owns the brand.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function currency(): BelongsTo
     {

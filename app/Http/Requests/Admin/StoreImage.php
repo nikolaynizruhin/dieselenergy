@@ -30,8 +30,6 @@ class StoreImage extends FormRequest
 
     /**
      * Get images.
-     *
-     * @return array
      */
     public function getImages(): array
     {

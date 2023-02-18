@@ -6,17 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCart;
 use App\Models\Cart;
 use App\Models\Order;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CartController extends Controller
 {
     /**
      * Show the form for creating a new resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $order = Order::with('customer')->findOrFail($request->order_id);
 
@@ -25,11 +24,8 @@ class CartController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreCart  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreCart $request)
+    public function store(StoreCart $request): RedirectResponse
     {
         Cart::create($request->validated());
 
@@ -39,23 +35,16 @@ class CartController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Cart $cart)
+    public function edit(Cart $cart): View
     {
         return view('admin.carts.edit', compact('cart'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreCart  $request
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
      */
-    public function update(StoreCart $request, Cart $cart)
+    public function update(StoreCart $request, Cart $cart): RedirectResponse
     {
         $cart->update($request->validated());
 
@@ -65,11 +54,8 @@ class CartController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function destroy(Cart $cart): RedirectResponse
     {
         $cart->delete();
 

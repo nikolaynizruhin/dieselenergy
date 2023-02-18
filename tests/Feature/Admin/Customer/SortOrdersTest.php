@@ -12,10 +12,8 @@ class SortOrdersTest extends TestCase
 {
     /**
      * Customer.
-     *
-     * @var \App\Models\Customer
      */
-    private $customer;
+    private Customer $customer;
 
     protected function setUp(): void
     {
@@ -25,7 +23,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_orders_by_id_ascending()
+    public function user_can_sort_customer_orders_by_id_ascending(): void
     {
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -43,7 +41,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_orders_by_id_descending()
+    public function user_can_sort_customer_orders_by_id_descending(): void
     {
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -61,7 +59,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_orders_by_status_ascending()
+    public function user_can_sort_customer_orders_by_status_ascending(): void
     {
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -79,7 +77,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_orders_by_status_descending()
+    public function user_can_sort_customer_orders_by_status_descending(): void
     {
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -97,7 +95,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_orders_by_date_ascending()
+    public function user_can_sort_customer_orders_by_date_ascending(): void
     {
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -115,7 +113,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_orders_by_date_descending()
+    public function user_can_sort_customer_orders_by_date_descending(): void
     {
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -133,7 +131,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_orders_by_total_ascending()
+    public function user_can_sort_customer_orders_by_total_ascending(): void
     {
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)
@@ -151,7 +149,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function user_can_sort_customer_orders_by_total_descending()
+    public function user_can_sort_customer_orders_by_total_descending(): void
     {
         [$orderOne, $orderTwo] = Order::factory()
             ->count(2)

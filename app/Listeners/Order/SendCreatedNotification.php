@@ -11,7 +11,6 @@ class SendCreatedNotification
     /**
      * Handle the event.
      *
-     * @param  OrderCreated  $event
      * @return void
      */
     public function handle(OrderCreated $event)

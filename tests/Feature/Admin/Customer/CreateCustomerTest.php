@@ -9,14 +9,14 @@ class CreateCustomerTest extends TestCase
     use HasValidation;
 
     /** @test */
-    public function guest_cant_visit_create_customer_page()
+    public function guest_cant_visit_create_customer_page(): void
     {
         $this->get(route('admin.customers.create'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_create_customer_page()
+    public function user_can_visit_create_customer_page(): void
     {
         $this->login()
             ->get(route('admin.customers.create'))
@@ -24,17 +24,17 @@ class CreateCustomerTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_customer()
+    public function guest_cant_create_customer(): void
     {
-        $this->post(route('admin.customers.store'), $this->validFields())
+        $this->post(route('admin.customers.store'), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_create_customer()
+    public function user_can_create_customer(): void
     {
         $this->login()
-            ->post(route('admin.customers.store'), $fields = $this->validFields())
+            ->post(route('admin.customers.store'), $fields = self::validFields())
             ->assertRedirect(route('admin.customers.index'))
             ->assertSessionHas('status', trans('customer.created'));
 
@@ -46,7 +46,7 @@ class CreateCustomerTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_create_customer_with_invalid_data($field, $data, $count = 0)
+    public function user_cant_create_customer_with_invalid_data(string $field, callable $data, int $count = 0): void
     {
         $this->login()
             ->from(route('admin.customers.create'))
@@ -57,8 +57,8 @@ class CreateCustomerTest extends TestCase
         $this->assertDatabaseCount('customers', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider();
+        return self::provider();
     }
 }

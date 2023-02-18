@@ -10,11 +10,9 @@ class UpdateBrandTest extends TestCase
     use HasValidation;
 
     /**
-     * Product.
-     *
-     * @var \App\Models\Brand
+     * Brand.
      */
-    private $brand;
+    private Brand $brand;
 
     /**
      * Setup.
@@ -27,14 +25,14 @@ class UpdateBrandTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_visit_update_brand_page()
+    public function guest_cant_visit_update_brand_page(): void
     {
         $this->get(route('admin.brands.edit', $this->brand))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_update_brand_page()
+    public function user_can_visit_update_brand_page(): void
     {
         $this->login()
             ->get(route('admin.brands.edit', $this->brand))
@@ -43,17 +41,17 @@ class UpdateBrandTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_brand()
+    public function guest_cant_update_brand(): void
     {
-        $this->put(route('admin.brands.update', $this->brand), $this->validFields())
+        $this->put(route('admin.brands.update', $this->brand), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_brand()
+    public function user_can_update_brand(): void
     {
         $this->login()
-            ->put(route('admin.brands.update', $this->brand), $fields = $this->validFields())
+            ->put(route('admin.brands.update', $this->brand), $fields = self::validFields())
             ->assertRedirect(route('admin.brands.index'))
             ->assertSessionHas('status', trans('brand.updated'));
 
@@ -65,7 +63,7 @@ class UpdateBrandTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_update_brand_with_invalid_data($field, $data, $count = 1)
+    public function user_cant_update_brand_with_invalid_data(string $field, callable $data, $count = 1): void
     {
         $this->login()
             ->from(route('admin.brands.edit', $this->brand))
@@ -76,8 +74,8 @@ class UpdateBrandTest extends TestCase
         $this->assertDatabaseCount('brands', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider(2);
+        return self::provider(2);
     }
 }

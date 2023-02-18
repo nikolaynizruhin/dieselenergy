@@ -9,7 +9,7 @@ use Tests\TestCase;
 class SearchBrandsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_brands()
+    public function guest_cant_search_brands(): void
     {
         $brand = Brand::factory()->create();
 
@@ -18,7 +18,7 @@ class SearchBrandsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_brands()
+    public function user_can_search_brands(): void
     {
         [$sdmo, $hyundai, $bosch] = Brand::factory()
             ->count(3)

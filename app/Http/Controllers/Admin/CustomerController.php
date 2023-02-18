@@ -8,16 +8,15 @@ use App\Filters\Admin\CustomerFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCustomer;
 use App\Models\Customer;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @param  \App\Filters\Admin\CustomerFilters  $filters
-     * @return \Illuminate\Http\Response
      */
-    public function index(CustomerFilters $filters)
+    public function index(CustomerFilters $filters): View
     {
         $customers = Customer::query()
             ->filter($filters)
@@ -30,21 +29,16 @@ class CustomerController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.customers.create', ['customer' => new Customer]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreCustomer  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreCustomer $request)
+    public function store(StoreCustomer $request): RedirectResponse
     {
         Customer::create($request->validated());
 
@@ -54,13 +48,8 @@ class CustomerController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @param  \App\Filters\Admin\Customer\ContactFilters  $contactFilters
-     * @param  \App\Filters\Admin\Customer\OrderFilters  $orderFilters
-     * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer, ContactFilters $contactFilters, OrderFilters $orderFilters)
+    public function show(Customer $customer, ContactFilters $contactFilters, OrderFilters $orderFilters): View
     {
         $contacts = $customer
             ->contacts()
@@ -81,23 +70,16 @@ class CustomerController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit(Customer $customer): View
     {
         return view('admin.customers.edit', compact('customer'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreCustomer  $request
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
      */
-    public function update(StoreCustomer $request, Customer $customer)
+    public function update(StoreCustomer $request, Customer $customer): RedirectResponse
     {
         $customer->update($request->validated());
 
@@ -107,11 +89,8 @@ class CustomerController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy(Customer $customer): RedirectResponse
     {
         $customer->delete();
 

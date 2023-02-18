@@ -10,14 +10,14 @@ use Tests\TestCase;
 class SortProductsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_sort_products()
+    public function guest_cant_sort_products(): void
     {
         $this->get(route('admin.products.index', ['sort' => 'name']))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function admin_can_sort_products_by_name_ascending()
+    public function admin_can_sort_products_by_name_ascending(): void
     {
         [$patrol, $diesel] = Product::factory()
             ->count(2)
@@ -35,7 +35,7 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_products_by_name_descending()
+    public function admin_can_sort_products_by_name_descending(): void
     {
         [$patrol, $diesel] = Product::factory()
             ->count(2)
@@ -53,7 +53,7 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_products_by_price_ascending()
+    public function admin_can_sort_products_by_price_ascending(): void
     {
         [$patrol, $diesel] = Product::factory()
             ->count(2)
@@ -71,7 +71,7 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_products_by_price_descending()
+    public function admin_can_sort_products_by_price_descending(): void
     {
         [$patrol, $diesel] = Product::factory()
             ->count(2)
@@ -89,7 +89,7 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_products_by_status_ascending()
+    public function admin_can_sort_products_by_status_ascending(): void
     {
         [$patrol, $diesel] = Product::factory()
             ->count(2)
@@ -107,7 +107,7 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_products_by_status_descending()
+    public function admin_can_sort_products_by_status_descending(): void
     {
         [$patrol, $diesel] = Product::factory()
             ->count(2)
@@ -125,7 +125,7 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_products_by_category_ascending()
+    public function admin_can_sort_products_by_category_ascending(): void
     {
         [$ats, $generators] = Category::factory()
             ->count(2)
@@ -150,7 +150,7 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_products_by_category_descending()
+    public function admin_can_sort_products_by_category_descending(): void
     {
         [$ats, $generators] = Category::factory()
             ->count(2)

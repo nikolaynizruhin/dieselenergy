@@ -8,7 +8,7 @@ use Tests\TestCase;
 class ReadProductTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_product()
+    public function guest_cant_read_product(): void
     {
         $product = Product::factory()->create();
 
@@ -17,7 +17,7 @@ class ReadProductTest extends TestCase
     }
 
     /** @test */
-    public function user_can_read_product()
+    public function user_can_read_product(): void
     {
         $product = Product::factory()->create();
 

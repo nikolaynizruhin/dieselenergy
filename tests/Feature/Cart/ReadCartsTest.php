@@ -9,7 +9,7 @@ use Tests\TestCase;
 class ReadCartsTest extends TestCase
 {
     /** @test */
-    public function guest_can_read_carts()
+    public function guest_can_read_carts(): void
     {
         $product = Product::factory()->withDefaultImage()->create();
 

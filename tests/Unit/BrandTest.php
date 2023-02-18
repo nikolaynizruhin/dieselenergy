@@ -10,7 +10,7 @@ use Tests\TestCase;
 class BrandTest extends TestCase
 {
     /** @test */
-    public function it_has_many_products()
+    public function it_has_many_products(): void
     {
         $brand = Brand::factory()
             ->hasProducts(1)
@@ -20,7 +20,7 @@ class BrandTest extends TestCase
     }
 
     /** @test */
-    public function it_has_currency()
+    public function it_has_currency(): void
     {
         $brand = Brand::factory()->create();
 

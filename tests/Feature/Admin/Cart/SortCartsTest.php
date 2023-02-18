@@ -12,10 +12,8 @@ class SortCartsTest extends TestCase
 {
     /**
      * Order.
-     *
-     * @var \App\Models\Order
      */
-    private $order;
+    private Order $order;
 
     protected function setUp(): void
     {
@@ -25,7 +23,7 @@ class SortCartsTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_sort_carts()
+    public function guest_cant_sort_carts(): void
     {
         $this->get(route('admin.orders.show', [
             'order' => $this->order,
@@ -34,7 +32,7 @@ class SortCartsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_carts_by_quantity_ascending()
+    public function admin_can_sort_carts_by_quantity_ascending(): void
     {
         [$hyundai, $sdmo] = Cart::factory()
             ->count(2)
@@ -55,7 +53,7 @@ class SortCartsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_carts_by_quantity_descending()
+    public function admin_can_sort_carts_by_quantity_descending(): void
     {
         [$hyundai, $sdmo] = Cart::factory()
             ->count(2)
@@ -76,7 +74,7 @@ class SortCartsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_carts_by_product_name_ascending()
+    public function admin_can_sort_carts_by_product_name_ascending(): void
     {
         [$diesel, $patrol] = Product::factory()
             ->count(2)
@@ -104,7 +102,7 @@ class SortCartsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_carts_by_product_name_descending()
+    public function admin_can_sort_carts_by_product_name_descending(): void
     {
         [$diesel, $patrol] = Product::factory()
             ->count(2)
@@ -132,7 +130,7 @@ class SortCartsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_carts_by_total_price_ascending()
+    public function admin_can_sort_carts_by_total_price_ascending(): void
     {
         [$diesel, $patrol] = Product::factory()
             ->count(2)
@@ -160,7 +158,7 @@ class SortCartsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_carts_by_total_price_descending()
+    public function admin_can_sort_carts_by_total_price_descending(): void
     {
         [$diesel, $patrol] = Product::factory()
             ->count(2)

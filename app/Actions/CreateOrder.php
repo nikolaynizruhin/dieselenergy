@@ -10,9 +10,6 @@ class CreateOrder
 {
     /**
      * Create order.
-     *
-     * @param  array  $params
-     * @return Order
      */
     public function handle(array $params): Order
     {

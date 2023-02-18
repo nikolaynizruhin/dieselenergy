@@ -11,14 +11,14 @@ use Tests\TestCase;
 class SortOrdersTest extends TestCase
 {
     /** @test */
-    public function guest_cant_sort_orders()
+    public function guest_cant_sort_orders(): void
     {
         $this->get(route('admin.orders.index', ['sort' => 'id']))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function admin_can_sort_orders_by_id_ascending()
+    public function admin_can_sort_orders_by_id_ascending(): void
     {
         [$adam, $tom] = Order::factory()
             ->count(2)
@@ -36,7 +36,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_orders_by_id_descending()
+    public function admin_can_sort_orders_by_id_descending(): void
     {
         [$adam, $tom] = Order::factory()
             ->count(2)
@@ -54,7 +54,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_orders_by_status_ascending()
+    public function admin_can_sort_orders_by_status_ascending(): void
     {
         [$adam, $tom] = Order::factory()
             ->count(2)
@@ -72,7 +72,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_orders_by_status_descending()
+    public function admin_can_sort_orders_by_status_descending(): void
     {
         [$adam, $tom] = Order::factory()
             ->count(2)
@@ -90,7 +90,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_orders_by_created_date_ascending()
+    public function admin_can_sort_orders_by_created_date_ascending(): void
     {
         [$adam, $tom] = Order::factory()
             ->count(2)
@@ -108,7 +108,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_orders_by_created_date_descending()
+    public function admin_can_sort_orders_by_created_date_descending(): void
     {
         [$adam, $tom] = Order::factory()
             ->count(2)
@@ -126,7 +126,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_orders_by_total_ascending()
+    public function admin_can_sort_orders_by_total_ascending(): void
     {
         [$adam, $tom] = Order::factory()
             ->count(2)
@@ -144,7 +144,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_orders_by_total_descending()
+    public function admin_can_sort_orders_by_total_descending(): void
     {
         [$adam, $tom] = Order::factory()
             ->count(2)
@@ -162,7 +162,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_orders_by_client_ascending()
+    public function admin_can_sort_orders_by_client_ascending(): void
     {
         [$adam, $tom] = Customer::factory()
             ->count(2)
@@ -187,7 +187,7 @@ class SortOrdersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_orders_by_client_descending()
+    public function admin_can_sort_orders_by_client_descending(): void
     {
         [$adam, $tom] = Customer::factory()
             ->count(2)

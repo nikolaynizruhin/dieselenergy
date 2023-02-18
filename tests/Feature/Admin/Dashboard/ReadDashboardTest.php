@@ -10,14 +10,14 @@ use Tests\TestCase;
 class ReadDashboardTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_dashboard()
+    public function guest_cant_read_dashboard(): void
     {
         $this->get(route('admin.dashboard'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_read_dashboard()
+    public function user_can_read_dashboard(): void
     {
         $product = Product::factory()->create();
 

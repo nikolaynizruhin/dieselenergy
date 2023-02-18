@@ -9,14 +9,14 @@ use Tests\TestCase;
 class ReadImagesTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_images()
+    public function guest_cant_read_images(): void
     {
         $this->get(route('admin.images.index'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_read_images()
+    public function user_can_read_images(): void
     {
         [$diesel, $patrol] = Image::factory()
             ->count(2)

@@ -9,7 +9,6 @@ class DumperFactory
     /**
      * Dumper factory.
      *
-     * @param  array  $config
      * @return \App\Services\Dump\Dumper
      */
     public static function make(array $config)

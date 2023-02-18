@@ -15,10 +15,10 @@ class CreateContactTest extends TestCase
     use Honeypot;
 
     /** @test */
-    public function guest_can_create_contact()
+    public function guest_can_create_contact(): void
     {
         $this->from(route('home'))
-            ->post(route('contacts.store'), $fields = $this->validFields())
+            ->post(route('contacts.store'), $fields = self::validFields())
             ->assertRedirect(route('home').'#contact')
             ->assertSessionHas('status', trans('contact.created'));
 
@@ -32,12 +32,12 @@ class CreateContactTest extends TestCase
     }
 
     /** @test */
-    public function admin_should_receive_an_email_when_contact_created()
+    public function admin_should_receive_an_email_when_contact_created(): void
     {
         Notification::fake();
 
         $this->from(route('home'))
-            ->post(route('contacts.store'), $fields = $this->validFields())
+            ->post(route('contacts.store'), $fields = self::validFields())
             ->assertRedirect(route('home').'#contact');
 
         Notification::assertSentTo(
@@ -52,7 +52,7 @@ class CreateContactTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function guest_cant_create_contact_with_invalid_data($field, $data)
+    public function guest_cant_create_contact_with_invalid_data(string $field, callable $data)
     {
         $this->from(route('home'))
             ->post(route('contacts.store'), $data())
@@ -62,41 +62,41 @@ class CreateContactTest extends TestCase
         $this->assertDatabaseCount('contacts', 0);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
         return [
             'Privacy is required' => [
-                'privacy', fn () => $this->validFields(['privacy' => null]),
+                'privacy', fn () => self::validFields(['privacy' => null]),
             ],
             'Name is required' => [
-                'name', fn () => $this->validFields(['name' => null]),
+                'name', fn () => self::validFields(['name' => null]),
             ],
             'Name cant be an integer' => [
-                'name', fn () => $this->validFields(['name' => 1]),
+                'name', fn () => self::validFields(['name' => 1]),
             ],
             'Name cant be more than 255 chars' => [
-                'name', fn () => $this->validFields(['name' => Str::random(256)]),
+                'name', fn () => self::validFields(['name' => Str::random(256)]),
             ],
             'Email is required' => [
-                'email', fn () => $this->validFields(['email' => null]),
+                'email', fn () => self::validFields(['email' => null]),
             ],
             'Email cant be an integer' => [
-                'email', fn () => $this->validFields(['email' => 1]),
+                'email', fn () => self::validFields(['email' => 1]),
             ],
             'Email cant be more than 255 chars' => [
-                'email', fn () => $this->validFields(['email' => Str::random(256)]),
+                'email', fn () => self::validFields(['email' => Str::random(256)]),
             ],
             'Email must be valid' => [
-                'email', fn () => $this->validFields(['email' => 'invalid']),
+                'email', fn () => self::validFields(['email' => 'invalid']),
             ],
             'Phone is required' => [
-                'phone', fn () => $this->validFields(['phone' => null]),
+                'phone', fn () => self::validFields(['phone' => null]),
             ],
             'Phone must have valid format' => [
-                'phone', fn () => $this->validFields(['phone' => 0631234567]),
+                'phone', fn () => self::validFields(['phone' => 0631234567]),
             ],
             'Message cant be an integer' => [
-                'message', fn () => $this->validFields(['message' => 1]),
+                'message', fn () => self::validFields(['message' => 1]),
             ],
         ];
     }
@@ -106,7 +106,7 @@ class CreateContactTest extends TestCase
      *
      * @dataProvider spamProvider
      */
-    public function guest_cant_create_contact_with_spam($data)
+    public function guest_cant_create_contact_with_spam($data): void
     {
         $this->from(route('home'))
             ->post(route('contacts.store'), $data())
@@ -115,25 +115,22 @@ class CreateContactTest extends TestCase
         $this->assertDatabaseCount('contacts', 0);
     }
 
-    public function spamProvider(): array
+    public static function spamProvider(): array
     {
         return [
             'Contact cant contain spam' => [
-                fn () => $this->validFields([config('honeypot.field') => 'spam']),
+                fn () => self::validFields([config('honeypot.field') => 'spam']),
             ],
             'Contact cant be created too quickly' => [
-                fn () => $this->validFields([config('honeypot.valid_from_field') => time()]),
+                fn () => self::validFields([config('honeypot.valid_from_field') => time()]),
             ],
         ];
     }
 
     /**
      * Get valid contact fields.
-     *
-     * @param  array  $overrides
-     * @return array
      */
-    private function validFields(array $overrides = []): array
+    private static function validFields(array $overrides = []): array
     {
         $contact = Contact::factory()->make();
 
@@ -143,6 +140,6 @@ class CreateContactTest extends TestCase
             'email' => $contact->customer->email,
             'phone' => $contact->customer->phone,
             'message' => $contact->message,
-        ] + $this->honeypot(), $overrides);
+        ] + self::honeypot(), $overrides);
     }
 }

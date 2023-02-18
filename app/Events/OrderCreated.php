@@ -14,7 +14,6 @@ class OrderCreated
     /**
      * Create a new event instance.
      *
-     * @param  \App\Models\Order  $order
      * @return void
      */
     public function __construct(readonly public Order $order)

@@ -10,7 +10,7 @@ use Tests\TestCase;
 class SearchProductsTest extends TestCase
 {
     /** @test */
-    public function guest_can_search_products()
+    public function guest_can_search_products(): void
     {
         $generators = Category::factory()->create();
 

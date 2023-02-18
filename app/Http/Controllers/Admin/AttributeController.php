@@ -6,16 +6,15 @@ use App\Filters\Admin\AttributeFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreAttribute;
 use App\Models\Attribute;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class AttributeController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @param  \App\Filters\Admin\AttributeFilters  $filters
-     * @return \Illuminate\Http\Response
      */
-    public function index(AttributeFilters $filters)
+    public function index(AttributeFilters $filters): View
     {
         $attributes = Attribute::query()
             ->filter($filters)
@@ -28,21 +27,16 @@ class AttributeController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.attributes.create', ['attribute' => new Attribute]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreAttribute  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreAttribute $request)
+    public function store(StoreAttribute $request): RedirectResponse
     {
         Attribute::create($request->validated());
 
@@ -52,23 +46,16 @@ class AttributeController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Attribute  $attribute
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Attribute $attribute)
+    public function edit(Attribute $attribute): View
     {
         return view('admin.attributes.edit', compact('attribute'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreAttribute  $request
-     * @param  \App\Models\Attribute  $attribute
-     * @return \Illuminate\Http\Response
      */
-    public function update(StoreAttribute $request, Attribute $attribute)
+    public function update(StoreAttribute $request, Attribute $attribute): RedirectResponse
     {
         $attribute->update($request->validated());
 
@@ -78,11 +65,8 @@ class AttributeController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Attribute  $attribute
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Attribute $attribute)
+    public function destroy(Attribute $attribute): RedirectResponse
     {
         $attribute->delete();
 

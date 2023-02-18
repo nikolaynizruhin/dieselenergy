@@ -12,15 +12,11 @@ class CategoryFilters extends Filters
 
     /**
      * Registered filters to operate upon.
-     *
-     * @var array
      */
     protected array $filters = ['search', 'sort'];
 
     /**
      * Search field.
-     *
-     * @var string
      */
     protected string $search = 'name';
 }

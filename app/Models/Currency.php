@@ -29,8 +29,6 @@ class Currency extends Model
 
     /**
      * Get the brands for the currency.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function brands(): HasMany
     {

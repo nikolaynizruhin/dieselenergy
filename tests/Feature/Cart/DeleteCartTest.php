@@ -9,7 +9,7 @@ use Tests\TestCase;
 class DeleteCartTest extends TestCase
 {
     /** @test */
-    public function guest_can_delete_cart_item()
+    public function guest_can_delete_cart_item(): void
     {
         $product = Product::factory()->withDefaultImage()->create();
 

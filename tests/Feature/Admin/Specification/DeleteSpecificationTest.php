@@ -9,10 +9,8 @@ class DeleteSpecificationTest extends TestCase
 {
     /**
      * Specification.
-     *
-     * @var \App\Models\Specification
      */
-    private $specification;
+    private Specification $specification;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteSpecificationTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_specification()
+    public function guest_cant_delete_specification(): void
     {
         $this->delete(route('admin.specifications.destroy', $this->specification))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_specification()
+    public function user_can_delete_specification(): void
     {
         $this->login()
             ->from(route('admin.categories.show', $this->specification->category_id))

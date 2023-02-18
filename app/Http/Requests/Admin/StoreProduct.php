@@ -59,8 +59,6 @@ class StoreProduct extends FormRequest
 
     /**
      * Get attribute values.
-     *
-     * @return \Illuminate\Support\Collection
      */
     public function getAttributeValues(): Collection
     {
@@ -73,8 +71,6 @@ class StoreProduct extends FormRequest
 
     /**
      * Get validated product attributes.
-     *
-     * @return array
      */
     public function getProductAttributes(): array
     {
@@ -89,8 +85,6 @@ class StoreProduct extends FormRequest
 
     /**
      * Get images.
-     *
-     * @return \Illuminate\Support\Collection
      */
     public function getImages(): Collection
     {
@@ -111,9 +105,6 @@ class StoreProduct extends FormRequest
 
     /**
      * Get attributes rules.
-     *
-     * @param  string|array  $rules
-     * @return array
      */
     protected function getAttributeRules(array|string $rules): array
     {

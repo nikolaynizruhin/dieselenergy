@@ -8,9 +8,6 @@ trait HasSort
 {
     /**
      * Sort the query by a given user field.
-     *
-     * @param  string  $field
-     * @return void
      */
     protected function sort(string $field): void
     {

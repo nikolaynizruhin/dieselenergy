@@ -17,8 +17,6 @@ class CreateBackup implements ShouldQueue
 
     /**
      * Execute the job.
-     *
-     * @return void
      */
     public function handle(): void
     {
@@ -37,8 +35,6 @@ class CreateBackup implements ShouldQueue
 
     /**
      * Backup images.
-     *
-     * @param  \ZipArchive  $zip
      */
     private function backupImages(ZipArchive $zip)
     {
@@ -49,8 +45,6 @@ class CreateBackup implements ShouldQueue
 
     /**
      * Backup database.
-     *
-     * @param  \ZipArchive  $zip
      */
     private function backupDatabase(ZipArchive $zip)
     {
@@ -71,8 +65,6 @@ class CreateBackup implements ShouldQueue
 
     /**
      * Get backup filename.
-     *
-     * @return string
      */
     private function filename(): string
     {
@@ -81,8 +73,6 @@ class CreateBackup implements ShouldQueue
 
     /**
      * Get backup file.
-     *
-     * @return string
      */
     private function file(): string
     {
@@ -91,8 +81,6 @@ class CreateBackup implements ShouldQueue
 
     /**
      * Get images.
-     *
-     * @return array
      */
     private function images(): array
     {

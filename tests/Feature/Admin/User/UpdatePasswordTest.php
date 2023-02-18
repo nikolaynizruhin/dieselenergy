@@ -11,11 +11,9 @@ class UpdatePasswordTest extends TestCase
     use HasValidation;
 
     /**
-     * Product.
-     *
-     * @var \App\Models\User
+     * User.
      */
-    private $user;
+    private User $user;
 
     /**
      * Setup.
@@ -28,20 +26,20 @@ class UpdatePasswordTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_user_password()
+    public function guest_cant_update_user_password(): void
     {
-        $this->put(route('admin.users.password.update', $this->user), $this->validFields())
+        $this->put(route('admin.users.password.update', $this->user), self::validFields())
             ->assertRedirect(route('admin.login'));
 
         $this->assertTrue(Hash::check('password', $this->user->fresh()->password));
     }
 
     /** @test */
-    public function user_can_update_user_password()
+    public function user_can_update_user_password(): void
     {
         $this->actingAs($this->user)
             ->from(route('admin.users.password.update', $this->user))
-            ->put(route('admin.users.password.update', $this->user), $this->validFields())
+            ->put(route('admin.users.password.update', $this->user), self::validFields())
             ->assertRedirect(route('admin.users.index'))
             ->assertSessionHas('status', trans('user.password.updated'));
 
@@ -53,7 +51,7 @@ class UpdatePasswordTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_update_user_with_invalid_password($field, $data)
+    public function user_cant_update_user_with_invalid_password(string $field, callable $data): void
     {
         $this->actingAs($this->user)
             ->from(route('admin.users.password.update', $this->user))
@@ -64,10 +62,10 @@ class UpdatePasswordTest extends TestCase
         $this->assertTrue(Hash::check('password', $this->user->fresh()->password));
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
         return array_filter(
-            $this->provider(2),
+            self::provider(2),
             fn ($name) => in_array($name, [
                 'Password is required',
                 'Password confirmation is required',
@@ -80,11 +78,8 @@ class UpdatePasswordTest extends TestCase
 
     /**
      * Get valid user fields.
-     *
-     * @param  array  $overrides
-     * @return array
      */
-    private function validFields($overrides = [])
+    private static function validFields(array $overrides = []): array
     {
         return array_merge([
             'password' => 'new-password',

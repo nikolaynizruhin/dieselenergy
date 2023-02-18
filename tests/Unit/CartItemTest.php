@@ -11,7 +11,7 @@ use Tests\TestCase;
 class CartItemTest extends TestCase
 {
     /** @test */
-    public function it_can_get_total()
+    public function it_can_get_total(): void
     {
         $currency = Currency::factory()->state(['rate' => 30.0000]);
         $brand = Brand::factory()->for($currency);

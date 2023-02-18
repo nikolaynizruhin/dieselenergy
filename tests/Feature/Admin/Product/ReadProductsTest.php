@@ -9,14 +9,14 @@ use Tests\TestCase;
 class ReadProductsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_products()
+    public function guest_cant_read_products(): void
     {
         $this->get(route('admin.products.index'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_read_products()
+    public function user_can_read_products(): void
     {
         [$petrol, $diesel] = Product::factory()
             ->count(2)

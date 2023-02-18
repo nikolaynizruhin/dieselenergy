@@ -26,8 +26,6 @@ class Customer extends Model
 
     /**
      * Get the orders for the customer.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function orders(): HasMany
     {
@@ -36,8 +34,6 @@ class Customer extends Model
 
     /**
      * Get the contacts for the customer.
-     *
-     * @return HasMany
      */
     public function contacts(): HasMany
     {
@@ -47,7 +43,6 @@ class Customer extends Model
     /**
      * Create a new order.
      *
-     * @param  string  $notes
      * @return \App\Models\Order
      */
     public function createOrder(string $notes = ''): Order
@@ -65,7 +60,6 @@ class Customer extends Model
     /**
      * Create contact.
      *
-     * @param  string  $message
      * @return \App\Models\Contact
      */
     public function createContact(string $message): Contact

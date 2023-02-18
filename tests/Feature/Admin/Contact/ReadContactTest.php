@@ -8,7 +8,7 @@ use Tests\TestCase;
 class ReadContactTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_contact()
+    public function guest_cant_read_contact(): void
     {
         $contact = Contact::factory()->create();
 
@@ -17,7 +17,7 @@ class ReadContactTest extends TestCase
     }
 
     /** @test */
-    public function user_can_read_contact()
+    public function user_can_read_contact(): void
     {
         $contact = Contact::factory()->create();
 

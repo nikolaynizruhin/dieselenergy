@@ -9,10 +9,8 @@ class SpecificationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         Specification::factory()->count(3)->create();
     }

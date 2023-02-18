@@ -15,14 +15,14 @@ class CreateProductTest extends TestCase
     use HasValidation;
 
     /** @test */
-    public function guest_cant_visit_create_product_page()
+    public function guest_cant_visit_create_product_page(): void
     {
         $this->get(route('admin.products.create'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_create_product_page()
+    public function user_can_visit_create_product_page(): void
     {
         $category = Category::factory()->create();
 
@@ -33,17 +33,17 @@ class CreateProductTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_product()
+    public function guest_cant_create_product(): void
     {
-        $this->post(route('admin.products.store'), $this->validFields())
+        $this->post(route('admin.products.store'), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_create_product()
+    public function user_can_create_product(): void
     {
         $this->login()
-            ->post(route('admin.products.store'), $product = $this->validFields())
+            ->post(route('admin.products.store'), $product = self::validFields())
             ->assertRedirect(route('admin.products.index'))
             ->assertSessionHas('status', trans('product.created'));
 
@@ -53,14 +53,14 @@ class CreateProductTest extends TestCase
     }
 
     /** @test */
-    public function user_can_create_product_with_attributes()
+    public function user_can_create_product_with_attributes(): void
     {
         $category = Category::factory()->create();
         $attribute = Attribute::factory()->create();
 
         $category->attributes()->attach($attribute);
 
-        $product = $this->validFields(['category_id' => $category->id]);
+        $product = self::validFields(['category_id' => $category->id]);
 
         $this->login()
             ->post(route('admin.products.store'), $product + [
@@ -77,13 +77,13 @@ class CreateProductTest extends TestCase
     }
 
     /** @test */
-    public function user_can_create_product_with_images()
+    public function user_can_create_product_with_images(): void
     {
         Storage::fake();
 
         $image = UploadedFile::fake()->image('product.jpg');
 
-        $product = $this->validFields();
+        $product = self::validFields();
 
         $this->login()
             ->post(route('admin.products.store'), $product + [
@@ -106,10 +106,10 @@ class CreateProductTest extends TestCase
     }
 
     /** @test */
-    public function by_default_product_should_be_inactive()
+    public function by_default_product_should_be_inactive(): void
     {
         $this->login()
-            ->post(route('admin.products.store'), $this->validFields(['is_active' => null]))
+            ->post(route('admin.products.store'), self::validFields(['is_active' => null]))
             ->assertRedirect();
 
         $this->assertDatabaseHas('products', ['is_active' => 0]);
@@ -120,7 +120,7 @@ class CreateProductTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_create_product_with_invalid_data($field, $data, $count = 0)
+    public function user_cant_create_product_with_invalid_data(string $field, callable $data, int $count = 0): void
     {
         $this->login()
             ->from(route('admin.products.create'))
@@ -131,9 +131,9 @@ class CreateProductTest extends TestCase
         $this->assertDatabaseCount('products', $count);
     }
 
-    public function validationProvider()
+    public static function validationProvider(): array
     {
-        return $this->provider();
+        return self::provider();
     }
 
     /**
@@ -141,7 +141,7 @@ class CreateProductTest extends TestCase
      *
      * @dataProvider validationAttributeProvider
      */
-    public function user_cant_create_product_with_invalid_attributes($data)
+    public function user_cant_create_product_with_invalid_attributes(callable $data): void
     {
         [$attributeId, $fields] = $data();
 
@@ -155,7 +155,7 @@ class CreateProductTest extends TestCase
     }
 
     /** @test */
-    public function unrelated_attribute_should_not_be_attached_to_product()
+    public function unrelated_attribute_should_not_be_attached_to_product(): void
     {
         $category = Category::factory()->create();
         $unrelated = Attribute::factory()->create();

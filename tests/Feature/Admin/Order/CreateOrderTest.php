@@ -9,14 +9,14 @@ class CreateOrderTest extends TestCase
     use HasValidation;
 
     /** @test */
-    public function guest_cant_visit_create_order_page()
+    public function guest_cant_visit_create_order_page(): void
     {
         $this->get(route('admin.orders.create'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_create_order_page()
+    public function user_can_visit_create_order_page(): void
     {
         $this->login()
             ->get(route('admin.orders.create'))
@@ -25,17 +25,17 @@ class CreateOrderTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_product()
+    public function guest_cant_create_product(): void
     {
-        $this->post(route('admin.orders.store'), $this->validFields())
+        $this->post(route('admin.orders.store'), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_create_order()
+    public function user_can_create_order(): void
     {
         $this->login()
-            ->post(route('admin.orders.store'), $fields = $this->validFields(['total' => 0]))
+            ->post(route('admin.orders.store'), $fields = self::validFields(['total' => 0]))
             ->assertRedirect(route('admin.orders.index'))
             ->assertSessionHas('status', trans('order.created'));
 
@@ -47,7 +47,7 @@ class CreateOrderTest extends TestCase
      *
      * @dataProvider provider
      */
-    public function user_cant_create_order_with_invalid_data($field, $data, $count = 0)
+    public function user_cant_create_order_with_invalid_data(string $field, callable $data, int $count = 0): void
     {
         $this->login()
             ->from(route('admin.orders.create'))

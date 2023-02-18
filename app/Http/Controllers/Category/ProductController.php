@@ -6,17 +6,14 @@ use App\Filters\ProductFilters;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @param  \App\Filters\ProductFilters  $filters
-     * @return \Illuminate\Http\Response
      */
-    public function index(Category $category, ProductFilters $filters)
+    public function index(Category $category, ProductFilters $filters): View
     {
         $products = $category
             ->products()
@@ -34,11 +31,8 @@ class ProductController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Product $product): View
     {
         return view('products.show', ['product' => $product->loadAttributes()]);
     }

@@ -9,14 +9,14 @@ use Tests\TestCase;
 class ReadOrdersTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_orders()
+    public function guest_cant_read_orders(): void
     {
         $this->get(route('admin.orders.index'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_read_orders()
+    public function user_can_read_orders(): void
     {
         [$orderB, $orderA] = Order::factory()
             ->count(2)

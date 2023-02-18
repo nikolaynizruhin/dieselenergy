@@ -9,14 +9,14 @@ class CreateCurrencyTest extends TestCase
     use HasValidation;
 
     /** @test */
-    public function guest_cant_visit_create_currency_page()
+    public function guest_cant_visit_create_currency_page(): void
     {
         $this->get(route('admin.currencies.create'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_create_currency_page()
+    public function user_can_visit_create_currency_page(): void
     {
         $this->login()
             ->get(route('admin.currencies.create'))
@@ -24,17 +24,17 @@ class CreateCurrencyTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_currency()
+    public function guest_cant_create_currency(): void
     {
-        $this->post(route('admin.currencies.store'), $this->validFields())
+        $this->post(route('admin.currencies.store'), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_create_currency()
+    public function user_can_create_currency(): void
     {
         $this->login()
-            ->post(route('admin.currencies.store'), $fields = $this->validFields())
+            ->post(route('admin.currencies.store'), $fields = self::validFields())
             ->assertRedirect(route('admin.currencies.index'))
             ->assertSessionHas('status', trans('currency.created'));
 
@@ -46,7 +46,7 @@ class CreateCurrencyTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_create_currency_with_invalid_data($field, $data, $count = 0)
+    public function user_cant_create_currency_with_invalid_data(string $field, callable $data, int $count = 0): void
     {
         $this->login()
             ->from(route('admin.currencies.create'))
@@ -57,8 +57,8 @@ class CreateCurrencyTest extends TestCase
         $this->assertDatabaseCount('currencies', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider();
+        return self::provider();
     }
 }

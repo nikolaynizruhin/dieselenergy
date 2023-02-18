@@ -6,8 +6,6 @@ class SQLiteDumper extends Dumper
 {
     /**
      * Dump database.
-     *
-     * @param  string  $path
      */
     public function dump(string $path)
     {

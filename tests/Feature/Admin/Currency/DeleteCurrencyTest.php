@@ -9,10 +9,8 @@ class DeleteCurrencyTest extends TestCase
 {
     /**
      * Currency.
-     *
-     * @var \App\Models\Currency
      */
-    private $currency;
+    private Currency $currency;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteCurrencyTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_currency()
+    public function guest_cant_delete_currency(): void
     {
         $this->delete(route('admin.currencies.destroy', $this->currency))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_category()
+    public function user_can_delete_category(): void
     {
         $this->login()
             ->from(route('admin.currencies.index'))

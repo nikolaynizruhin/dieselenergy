@@ -10,23 +10,16 @@ class ProductFilters extends Filters
 
     /**
      * Registered filters to operate upon.
-     *
-     * @var array
      */
     protected array $filters = ['search', 'attribute', 'sort'];
 
     /**
      * Search field.
-     *
-     * @var string
      */
     protected string $search = 'name';
 
     /**
      * Filter the query by a given attributes.
-     *
-     * @param  array  $attributes
-     * @return void
      */
     protected function attribute(array $attributes): void
     {

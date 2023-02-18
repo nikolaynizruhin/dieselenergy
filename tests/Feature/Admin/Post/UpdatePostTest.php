@@ -13,11 +13,9 @@ class UpdatePostTest extends TestCase
     use HasValidation;
 
     /**
-     * Product.
-     *
-     * @var \App\Models\Post
+     * Post.
      */
-    private $post;
+    private Post $post;
 
     /**
      * Setup.
@@ -30,14 +28,14 @@ class UpdatePostTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_visit_update_post_page()
+    public function guest_cant_visit_update_post_page(): void
     {
         $this->get(route('admin.posts.edit', $this->post))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_update_post_page()
+    public function user_can_visit_update_post_page(): void
     {
         $this->login()
             ->get(route('admin.posts.edit', $this->post))
@@ -46,20 +44,20 @@ class UpdatePostTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_post()
+    public function guest_cant_update_post(): void
     {
-        $this->put(route('admin.posts.update', $this->post), $this->validFields())
+        $this->put(route('admin.posts.update', $this->post), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_post()
+    public function user_can_update_post(): void
     {
         Storage::fake();
 
         $image = UploadedFile::fake()->image('post.jpg');
 
-        $stub = $this->validFields();
+        $stub = self::validFields();
 
         unset($stub['image_id']);
 
@@ -82,7 +80,7 @@ class UpdatePostTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_update_post_with_invalid_data($field, $data, $count = 1)
+    public function user_cant_update_post_with_invalid_data(string $field, callable $data, int $count = 1): void
     {
         $this->login()
             ->from(route('admin.posts.edit', $this->post))
@@ -93,8 +91,8 @@ class UpdatePostTest extends TestCase
         $this->assertDatabaseCount('posts', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider(2);
+        return self::provider(2);
     }
 }

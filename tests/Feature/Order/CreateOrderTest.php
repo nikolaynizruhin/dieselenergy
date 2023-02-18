@@ -25,15 +25,11 @@ class CreateOrderTest extends TestCase
 
     /**
      * Product.
-     *
-     * @var \App\Models\Product
      */
     private Product $product;
 
     /**
      * Amount of products in the cart.
-     *
-     * @var int
      */
     private int $quantity;
 
@@ -55,11 +51,11 @@ class CreateOrderTest extends TestCase
     }
 
     /** @test */
-    public function guest_can_create_order()
+    public function guest_can_create_order(): void
     {
         $total = Cart::total();
 
-        $this->post(route('orders.store'), $fields = $this->validFields())
+        $this->post(route('orders.store'), $fields = self::validFields())
             ->assertRedirect(route('orders.show', Order::first()));
 
         $this->assertDatabaseHas('customers', [
@@ -83,11 +79,11 @@ class CreateOrderTest extends TestCase
     }
 
     /** @test */
-    public function it_should_update_existing_customer()
+    public function it_should_update_existing_customer(): void
     {
         $customer = Customer::factory()->create();
 
-        $this->post(route('orders.store'), $fields = $this->validFields(['email' => $customer->email]))
+        $this->post(route('orders.store'), $fields = self::validFields(['email' => $customer->email]))
             ->assertRedirect();
 
         $this->assertDatabaseHas('customers', [
@@ -100,11 +96,11 @@ class CreateOrderTest extends TestCase
     }
 
     /** @test */
-    public function it_should_send_order_confirmation_email_to_customer()
+    public function it_should_send_order_confirmation_email_to_customer(): void
     {
         Notification::fake();
 
-        $this->post(route('orders.store'), $fields = $this->validFields());
+        $this->post(route('orders.store'), $fields = self::validFields());
 
         $customer = Customer::firstWhere('email', $fields['email']);
 
@@ -117,11 +113,11 @@ class CreateOrderTest extends TestCase
     }
 
     /** @test */
-    public function it_should_send_order_created_email_to_admin()
+    public function it_should_send_order_created_email_to_admin(): void
     {
         Notification::fake();
 
-        $this->post(route('orders.store'), $fields = $this->validFields());
+        $this->post(route('orders.store'), $fields = self::validFields());
 
         $order = Customer::firstWhere('email', $fields['email'])->orders()->first();
 
@@ -134,11 +130,11 @@ class CreateOrderTest extends TestCase
     }
 
     /** @test */
-    public function it_should_trigger_order_created_event()
+    public function it_should_trigger_order_created_event(): void
     {
         Event::fake();
 
-        $this->post(route('orders.store'), $this->validFields());
+        $this->post(route('orders.store'), self::validFields());
 
         Event::assertDispatched(OrderCreatedEvent::class);
     }
@@ -148,7 +144,7 @@ class CreateOrderTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function guest_cant_create_order_with_invalid_data($field, $data)
+    public function guest_cant_create_order_with_invalid_data(string $field, callable $data)
     {
         $this->post(route('orders.store'), $data())
             ->assertSessionHasErrors($field);
@@ -157,47 +153,47 @@ class CreateOrderTest extends TestCase
         $this->assertDatabaseCount('customers', 0);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
         return [
             'Privacy is required' => [
-                'privacy', fn () => $this->validFields(['privacy' => null]),
+                'privacy', fn () => self::validFields(['privacy' => null]),
             ],
             'Name is required' => [
-                'name', fn () => $this->validFields(['name' => null]),
+                'name', fn () => self::validFields(['name' => null]),
             ],
             'Name cant be an integer' => [
-                'name', fn () => $this->validFields(['name' => 1]),
+                'name', fn () => self::validFields(['name' => 1]),
             ],
             'Name cant be more than 255 chars' => [
-                'name', fn () => $this->validFields(['name' => Str::random(256)]),
+                'name', fn () => self::validFields(['name' => Str::random(256)]),
             ],
             'Email is required' => [
-                'email', fn () => $this->validFields(['email' => null]),
+                'email', fn () => self::validFields(['email' => null]),
             ],
             'Email cant be an integer' => [
-                'email', fn () => $this->validFields(['email' => 1]),
+                'email', fn () => self::validFields(['email' => 1]),
             ],
             'Email cant be more than 255 chars' => [
-                'email', fn () => $this->validFields(['email' => Str::random(256)]),
+                'email', fn () => self::validFields(['email' => Str::random(256)]),
             ],
             'Email must be valid' => [
-                'email', fn () => $this->validFields(['email' => 'invalid']),
+                'email', fn () => self::validFields(['email' => 'invalid']),
             ],
             'Phone is required' => [
-                'phone', fn () => $this->validFields(['phone' => null]),
+                'phone', fn () => self::validFields(['phone' => null]),
             ],
             'Phone must have valid format' => [
-                'phone', fn () => $this->validFields(['phone' => 0631234567]),
+                'phone', fn () => self::validFields(['phone' => 0631234567]),
             ],
             'Notes cant be an integer' => [
-                'notes', fn () => $this->validFields(['notes' => 1]),
+                'notes', fn () => self::validFields(['notes' => 1]),
             ],
             'Cart cant be empty' => [
                 'cart', function () {
                     Cart::clear();
 
-                    return $this->validFields();
+                    return self::validFields();
                 },
             ],
         ];
@@ -208,7 +204,7 @@ class CreateOrderTest extends TestCase
      *
      * @dataProvider spamProvider
      */
-    public function guest_cant_create_order_with_spam($data)
+    public function guest_cant_create_order_with_spam($data): void
     {
         $this->post(route('orders.store'), $data())
             ->assertSuccessful();
@@ -217,25 +213,22 @@ class CreateOrderTest extends TestCase
         $this->assertDatabaseCount('customers', 0);
     }
 
-    public function spamProvider()
+    public static function spamProvider(): array
     {
         return [
             'Order cant contain spam' => [
-                fn () => $this->validFields([config('honeypot.field') => 'spam']),
+                fn () => self::validFields([config('honeypot.field') => 'spam']),
             ],
             'Order cant be created too quickly' => [
-                fn () => $this->validFields([config('honeypot.valid_from_field') => time()]),
+                fn () => self::validFields([config('honeypot.valid_from_field') => time()]),
             ],
         ];
     }
 
     /**
      * Get valid order fields.
-     *
-     * @param  array  $overrides
-     * @return array
      */
-    private function validFields(array $overrides = []): array
+    private static function validFields(array $overrides = []): array
     {
         $customer = Customer::factory()->make();
 
@@ -245,6 +238,6 @@ class CreateOrderTest extends TestCase
             'email' => $customer->email,
             'phone' => $customer->phone,
             'notes' => $customer->notes,
-        ] + $this->honeypot(), $overrides);
+        ] + self::honeypot(), $overrides);
     }
 }

@@ -10,7 +10,7 @@ use Tests\TestCase;
 class ReadCartsTest extends TestCase
 {
     /** @test */
-    public function user_can_read_carts()
+    public function user_can_read_carts(): void
     {
         [$patrol, $diesel] = Product::factory()
             ->count(2)

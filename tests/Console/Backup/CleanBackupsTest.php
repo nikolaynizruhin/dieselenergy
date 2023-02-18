@@ -10,8 +10,6 @@ class CleanBackupsTest extends TestCase
 {
     /**
      * Backup path.
-     *
-     * @var string
      */
     private string $backup;
 
@@ -27,7 +25,7 @@ class CleanBackupsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_clean_backups_older_than_a_week()
+    public function it_can_clean_backups_older_than_a_week(): void
     {
         $this->travel(config('backup.lifetime'))->days();
 
@@ -39,7 +37,7 @@ class CleanBackupsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_should_not_clean_backups_less_than_a_week()
+    public function it_can_should_not_clean_backups_less_than_a_week(): void
     {
         $this->artisan('backup:clean')
             ->expectsOutput('Backups cleaned successfully!')

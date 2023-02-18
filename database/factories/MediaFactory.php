@@ -16,7 +16,7 @@ class MediaFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'image_id' => Image::factory(),
@@ -28,9 +28,9 @@ class MediaFactory extends Factory
     /**
      * Indicate that the media is default.
      *
-     * @return static
+     * @return $this
      */
-    public function default()
+    public function default(): static
     {
         return $this->state(['is_default' => 1]);
     }
@@ -38,9 +38,9 @@ class MediaFactory extends Factory
     /**
      * Indicate that the media is default.
      *
-     * @return static
+     * @return $this
      */
-    public function regular()
+    public function regular(): static
     {
         return $this->state(['is_default' => 0]);
     }

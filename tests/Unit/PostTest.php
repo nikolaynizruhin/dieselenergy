@@ -9,7 +9,7 @@ use Tests\TestCase;
 class PostTest extends TestCase
 {
     /** @test */
-    public function it_has_image()
+    public function it_has_image(): void
     {
         $post = Post::factory()->create();
 

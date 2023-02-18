@@ -11,15 +11,11 @@ class ImageFilters extends Filters
 
     /**
      * Registered filters to operate upon.
-     *
-     * @var array
      */
     protected array $filters = ['search'];
 
     /**
      * Search field.
-     *
-     * @var string
      */
     protected string $search = 'path';
 }

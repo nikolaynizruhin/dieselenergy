@@ -11,22 +11,16 @@ class SortProductsTest extends TestCase
 {
     /**
      * Patrol generator.
-     *
-     * @var \App\Models\Product
      */
     private Product $patrol;
 
     /**
      * Diesel generator.
-     *
-     * @var \App\Models\Product
      */
     private Product $diesel;
 
     /**
      * Generators category.
-     *
-     * @var \App\Models\Category
      */
     private Category $generators;
 
@@ -47,7 +41,7 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function guest_can_sort_products_ascending()
+    public function guest_can_sort_products_ascending(): void
     {
         $this->get(route('categories.products.index', [
             'category' => $this->generators,
@@ -59,7 +53,7 @@ class SortProductsTest extends TestCase
     }
 
     /** @test */
-    public function guest_can_sort_products_descending()
+    public function guest_can_sort_products_descending(): void
     {
         $this->get(route('categories.products.index', [
             'category' => $this->generators,

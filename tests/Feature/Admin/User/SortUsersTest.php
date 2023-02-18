@@ -9,14 +9,14 @@ use Tests\TestCase;
 class SortUsersTest extends TestCase
 {
     /** @test */
-    public function guest_cant_sort_users()
+    public function guest_cant_sort_users(): void
     {
         $this->get(route('admin.users.index', ['sort' => 'name']))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function admin_can_sort_users_by_name_ascending()
+    public function admin_can_sort_users_by_name_ascending(): void
     {
         [$adam, $ben] = User::factory()
             ->count(2)
@@ -34,7 +34,7 @@ class SortUsersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_users_by_name_descending()
+    public function admin_can_sort_users_by_name_descending(): void
     {
         [$adam, $ben] = User::factory()
             ->count(2)
@@ -52,7 +52,7 @@ class SortUsersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_users_by_email_ascending()
+    public function admin_can_sort_users_by_email_ascending(): void
     {
         [$adam, $ben] = User::factory()
             ->count(2)
@@ -70,7 +70,7 @@ class SortUsersTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_users_by_email_descending()
+    public function admin_can_sort_users_by_email_descending(): void
     {
         [$adam, $ben] = User::factory()
             ->count(2)

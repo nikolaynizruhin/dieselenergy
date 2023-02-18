@@ -9,10 +9,8 @@ class DeleteProductTest extends TestCase
 {
     /**
      * Product.
-     *
-     * @var \App\Models\Product
      */
-    private $product;
+    private Product $product;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteProductTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_product()
+    public function guest_cant_delete_product(): void
     {
         $this->delete(route('admin.products.destroy', $this->product))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_product()
+    public function user_can_delete_product(): void
     {
         $this->login()
             ->from(route('admin.products.index'))

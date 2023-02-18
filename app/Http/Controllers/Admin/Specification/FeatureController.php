@@ -4,18 +4,15 @@ namespace App\Http\Controllers\Admin\Specification;
 
 use App\Http\Controllers\Controller;
 use App\Models\Specification;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class FeatureController extends Controller
 {
     /**
      * Toggle feature.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Specification  $specification
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Specification $specification)
+    public function update(Request $request, Specification $specification): RedirectResponse
     {
         $specification->toggle();
 

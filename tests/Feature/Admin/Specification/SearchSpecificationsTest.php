@@ -10,7 +10,7 @@ use Tests\TestCase;
 class SearchSpecificationsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_cart()
+    public function guest_cant_search_cart(): void
     {
         $attribute = Attribute::factory()->create(['name' => 'width attribute']);
 
@@ -25,7 +25,7 @@ class SearchSpecificationsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_specifications()
+    public function user_can_search_specifications(): void
     {
         [$width, $height, $weight] = Attribute::factory()
             ->count(3)

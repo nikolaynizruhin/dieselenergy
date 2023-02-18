@@ -9,14 +9,14 @@ use Tests\TestCase;
 class ReadCurrenciesTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_currencies()
+    public function guest_cant_read_currencies(): void
     {
         $this->get(route('admin.currencies.index'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_read_currencies()
+    public function user_can_read_currencies(): void
     {
         [$eur, $usd] = Currency::factory()
             ->count(2)

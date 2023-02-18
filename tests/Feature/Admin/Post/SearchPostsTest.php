@@ -9,7 +9,7 @@ use Tests\TestCase;
 class SearchPostsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_posts()
+    public function guest_cant_search_posts(): void
     {
         $post = Post::factory()->create();
 
@@ -18,7 +18,7 @@ class SearchPostsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_posts()
+    public function user_can_search_posts(): void
     {
         [$aboutUs, $howTo, $comparison] = Post::factory()
             ->count(3)

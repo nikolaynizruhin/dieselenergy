@@ -36,7 +36,6 @@ class Specification extends Pivot
      * Get featured attribute ids by category.
      *
      * @param  \App\Models\Category  $category
-     * @return \Illuminate\Support\Collection
      */
     public static function featured(Category $category): Collection
     {
@@ -48,8 +47,6 @@ class Specification extends Pivot
 
     /**
      * Get the attribute that owns the specification.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function attribute(): BelongsTo
     {
@@ -58,8 +55,6 @@ class Specification extends Pivot
 
     /**
      * Get the category that owns the specification.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function category(): BelongsTo
     {
@@ -68,8 +63,6 @@ class Specification extends Pivot
 
     /**
      * Toggle feature.
-     *
-     * @return bool
      */
     public function toggle(): bool
     {
@@ -80,8 +73,6 @@ class Specification extends Pivot
      * Get validation rules for category.
      *
      * @param  int  $categoryId
-     * @param  string|array  $rules
-     * @return array
      */
     public static function getValidationRules($categoryId, array|string $rules): array
     {

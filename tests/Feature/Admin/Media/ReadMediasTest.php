@@ -10,7 +10,7 @@ use Tests\TestCase;
 class ReadMediasTest extends TestCase
 {
     /** @test */
-    public function user_can_read_medias()
+    public function user_can_read_medias(): void
     {
         [$diesel, $patrol] = Image::factory()
             ->count(2)

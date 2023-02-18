@@ -11,7 +11,7 @@ use Tests\TestCase;
 class FilterProductsTest extends TestCase
 {
     /** @test */
-    public function guest_can_filter_products()
+    public function guest_can_filter_products(): void
     {
         $generators = Category::factory()->create();
         $attribute = Attribute::factory()->create();

@@ -8,7 +8,7 @@ use Tests\TestCase;
 class ReadPostTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_post()
+    public function guest_cant_read_post(): void
     {
         $post = Post::factory()->create();
 
@@ -17,7 +17,7 @@ class ReadPostTest extends TestCase
     }
 
     /** @test */
-    public function user_can_read_post()
+    public function user_can_read_post(): void
     {
         $post = Post::factory()->create();
 

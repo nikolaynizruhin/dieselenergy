@@ -15,7 +15,6 @@ class ResetPassword extends ResetPasswordNotification implements ShouldQueue
      * Get the reset password notification mail message for the given URL.
      *
      * @param  string  $url
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
     protected function buildMailMessage($url): MailMessage
     {
@@ -31,7 +30,6 @@ class ResetPassword extends ResetPasswordNotification implements ShouldQueue
      * Get the reset URL for the given notifiable.
      *
      * @param  mixed  $notifiable
-     * @return string
      */
     protected function resetUrl($notifiable): string
     {

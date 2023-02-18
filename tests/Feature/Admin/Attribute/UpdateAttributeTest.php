@@ -10,11 +10,9 @@ class UpdateAttributeTest extends TestCase
     use HasValidation;
 
     /**
-     * Product.
-     *
-     * @var \App\Models\Attribute
+     * Attribute.
      */
-    private $attribute;
+    private Attribute $attribute;
 
     /**
      * Setup.
@@ -27,14 +25,14 @@ class UpdateAttributeTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_visit_update_attribute_page()
+    public function guest_cant_visit_update_attribute_page(): void
     {
         $this->get(route('admin.attributes.edit', $this->attribute))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_update_attribute_page()
+    public function user_can_visit_update_attribute_page(): void
     {
         $this->login()
             ->get(route('admin.attributes.edit', $this->attribute))
@@ -43,17 +41,17 @@ class UpdateAttributeTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_attribute()
+    public function guest_cant_update_attribute(): void
     {
-        $this->put(route('admin.attributes.update', $this->attribute), $this->validFields())
+        $this->put(route('admin.attributes.update', $this->attribute), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_attribute()
+    public function user_can_update_attribute(): void
     {
         $this->login()
-            ->put(route('admin.attributes.update', $this->attribute), $fields = $this->validFields())
+            ->put(route('admin.attributes.update', $this->attribute), $fields = self::validFields())
             ->assertRedirect(route('admin.attributes.index'))
             ->assertSessionHas('status', trans('attribute.updated'));
 
@@ -65,7 +63,7 @@ class UpdateAttributeTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_update_attribute_with_invalid_data($field, $data, $count = 1)
+    public function user_cant_update_attribute_with_invalid_data(string $field, callable $data, int $count = 1): void
     {
         $this->login()
             ->from(route('admin.attributes.edit', $this->attribute))
@@ -76,8 +74,8 @@ class UpdateAttributeTest extends TestCase
         $this->assertDatabaseCount('attributes', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider(2);
+        return self::provider(2);
     }
 }

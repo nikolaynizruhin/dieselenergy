@@ -40,8 +40,6 @@ class StoreCart extends FormRequest
 
     /**
      * Get unique rule.
-     *
-     * @return \Illuminate\Validation\Rules\Unique
      */
     private function unique(): Unique
     {

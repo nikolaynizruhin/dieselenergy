@@ -15,9 +15,6 @@ class Money
 
     /**
      * Money constructor.
-     *
-     * @param  int  $coins
-     * @param  \App\Models\Currency|null  $currency
      */
     public function __construct(
         private int $coins,
@@ -27,8 +24,6 @@ class Money
 
     /**
      * Get money in coins.
-     *
-     * @return int
      */
     public function coins(): int
     {
@@ -37,8 +32,6 @@ class Money
 
     /**
      * Get money in coins.
-     *
-     * @return string
      */
     public function decimal(): string
     {
@@ -47,8 +40,6 @@ class Money
 
     /**
      * Get uah formatted money.
-     *
-     * @return string
      */
     public function format(): string
     {
@@ -59,8 +50,6 @@ class Money
 
     /**
      * Convert currency to UAH.
-     *
-     * @return static
      */
     public function toUAH(): static
     {

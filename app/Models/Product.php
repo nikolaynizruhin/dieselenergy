@@ -35,7 +35,6 @@ class Product extends Model
     /**
      * Scope a query to only include active products.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeActive(Builder $query)
@@ -46,7 +45,6 @@ class Product extends Model
     /**
      * Scope a query with featured attributes.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -97,8 +95,6 @@ class Product extends Model
 
     /**
      * Product price.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
     protected function price(): AttributeCast
     {
@@ -107,8 +103,6 @@ class Product extends Model
 
     /**
      * Get the brand of the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function brand(): BelongsTo
     {
@@ -117,8 +111,6 @@ class Product extends Model
 
     /**
      * Get the category of the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function category(): BelongsTo
     {
@@ -127,8 +119,6 @@ class Product extends Model
 
     /**
      * The orders that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function orders(): BelongsToMany
     {
@@ -140,8 +130,6 @@ class Product extends Model
 
     /**
      * The images that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function images(): BelongsToMany
     {
@@ -153,8 +141,6 @@ class Product extends Model
 
     /**
      * The attributes that belong to the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function attributes(): BelongsToMany
     {
@@ -165,8 +151,6 @@ class Product extends Model
 
     /**
      * Get list of recommended products.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function recommendations(): Collection
     {

@@ -9,7 +9,7 @@ use Tests\TestCase;
 class CategoryTest extends TestCase
 {
     /** @test */
-    public function it_has_many_products()
+    public function it_has_many_products(): void
     {
         $category = Category::factory()
             ->hasProducts()
@@ -19,7 +19,7 @@ class CategoryTest extends TestCase
     }
 
     /** @test */
-    public function it_has_many_attributes()
+    public function it_has_many_attributes(): void
     {
         $category = Category::factory()
             ->hasAttributes()

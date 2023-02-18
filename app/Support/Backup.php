@@ -11,8 +11,6 @@ class Backup
 {
     /**
      * Backup construct.
-     *
-     * @param  string  $path
      */
     public function __construct(readonly private string $path)
     {
@@ -20,8 +18,6 @@ class Backup
 
     /**
      * Get all backups.
-     *
-     * @return \Illuminate\Support\Collection
      */
     public static function all(): Collection
     {
@@ -34,8 +30,6 @@ class Backup
 
     /**
      * Get outdated backups.
-     *
-     * @return \Illuminate\Support\Collection
      */
     public static function outdated(): Collection
     {
@@ -44,8 +38,6 @@ class Backup
 
     /**
      * Check if backup is outdated.
-     *
-     * @return bool
      */
     public function isOutdated(): bool
     {
@@ -58,8 +50,6 @@ class Backup
 
     /**
      * Delete backup.
-     *
-     * @return bool
      */
     public function delete(): bool
     {

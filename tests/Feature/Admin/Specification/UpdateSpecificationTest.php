@@ -8,11 +8,9 @@ use Tests\TestCase;
 class UpdateSpecificationTest extends TestCase
 {
     /**
-     * Product.
-     *
-     * @var \App\Models\Specification
+     * Specification.
      */
-    private $specification;
+    private Specification $specification;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class UpdateSpecificationTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_specification_feature()
+    public function guest_cant_update_specification_feature(): void
     {
         $this->put(route('admin.specifications.feature.update', $this->specification))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_specification_feature()
+    public function user_can_update_specification_feature(): void
     {
         $this->login()
             ->put(route('admin.specifications.feature.update', $this->specification))

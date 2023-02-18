@@ -9,22 +9,16 @@ abstract class Filters
 {
     /**
      * The Eloquent builder.
-     *
-     * @var \Illuminate\Database\Eloquent\Builder
      */
     protected Builder $builder;
 
     /**
      * Registered filters to operate upon.
-     *
-     * @var array
      */
     protected array $filters = [];
 
     /**
      * Create a new instance.
-     *
-     * @param  \Illuminate\Http\Request  $request
      */
     public function __construct(readonly protected Request $request)
     {
@@ -32,9 +26,6 @@ abstract class Filters
 
     /**
      * Apply the filters.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $builder
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function apply(Builder $builder): Builder
     {
@@ -51,8 +42,6 @@ abstract class Filters
 
     /**
      * Fetch all relevant filters from the request.
-     *
-     * @return array
      */
     public function getFilters(): array
     {

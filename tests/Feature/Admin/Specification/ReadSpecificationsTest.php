@@ -10,7 +10,7 @@ use Tests\TestCase;
 class ReadSpecificationsTest extends TestCase
 {
     /** @test */
-    public function user_can_read_specifications()
+    public function user_can_read_specifications(): void
     {
         [$width, $height] = Attribute::factory()
             ->count(2)

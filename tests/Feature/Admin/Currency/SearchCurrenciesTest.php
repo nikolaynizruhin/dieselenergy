@@ -9,7 +9,7 @@ use Tests\TestCase;
 class SearchCurrenciesTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_currencies()
+    public function guest_cant_search_currencies(): void
     {
         $currency = Currency::factory()->create();
 
@@ -18,7 +18,7 @@ class SearchCurrenciesTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_currencies()
+    public function user_can_search_currencies(): void
     {
         [$usd, $eur, $rub] = Currency::factory()
             ->count(3)

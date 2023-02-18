@@ -6,16 +6,15 @@ use App\Filters\Admin\ImageFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreImage;
 use App\Models\Image;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @param  \App\Filters\Admin\ImageFilters  $filters
-     * @return \Illuminate\Http\Response
      */
-    public function index(ImageFilters $filters)
+    public function index(ImageFilters $filters): View
     {
         $images = Image::query()
             ->filter($filters)
@@ -28,21 +27,16 @@ class ImageController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.images.create');
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreImage  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreImage $request)
+    public function store(StoreImage $request): RedirectResponse
     {
         Image::insert($request->getImages());
 
@@ -52,11 +46,8 @@ class ImageController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Image $image)
+    public function destroy(Image $image): RedirectResponse
     {
         $image->delete();
 

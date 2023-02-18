@@ -10,7 +10,7 @@ class CreateCartTest extends TestCase
     use HasValidation;
 
     /** @test */
-    public function guest_cant_visit_create_cart_page()
+    public function guest_cant_visit_create_cart_page(): void
     {
         $order = Order::factory()->create();
 
@@ -19,7 +19,7 @@ class CreateCartTest extends TestCase
     }
 
     /** @test */
-    public function user_can_visit_create_cart_page()
+    public function user_can_visit_create_cart_page(): void
     {
         $order = Order::factory()->create();
 
@@ -29,17 +29,17 @@ class CreateCartTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_create_cart()
+    public function guest_cant_create_cart(): void
     {
-        $this->post(route('admin.carts.store'), $this->validFields())
+        $this->post(route('admin.carts.store'), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_create_cart()
+    public function user_can_create_cart(): void
     {
         $this->login()
-            ->post(route('admin.carts.store'), $fields = $this->validFields())
+            ->post(route('admin.carts.store'), $fields = self::validFields())
             ->assertRedirect(route('admin.orders.show', $fields['order_id']))
             ->assertSessionHas('status', trans('cart.created'));
 
@@ -51,7 +51,7 @@ class CreateCartTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_create_cart_with_invalid_data($field, $data, $count = 0)
+    public function user_cant_create_cart_with_invalid_data(string $field, callable $data, int $count = 0): void
     {
         $this->login()
             ->from(route('admin.carts.create'))
@@ -62,8 +62,8 @@ class CreateCartTest extends TestCase
         $this->assertDatabaseCount('order_product', $count);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider();
+        return self::provider();
     }
 }

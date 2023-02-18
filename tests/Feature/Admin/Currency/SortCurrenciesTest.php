@@ -9,14 +9,14 @@ use Tests\TestCase;
 class SortCurrenciesTest extends TestCase
 {
     /** @test */
-    public function guest_cant_sort_currencies()
+    public function guest_cant_sort_currencies(): void
     {
         $this->get(route('admin.currencies.index', ['sort' => 'code']))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function admin_can_sort_currencies_by_code_ascending()
+    public function admin_can_sort_currencies_by_code_ascending(): void
     {
         [$euro, $dollar] = Currency::factory()
             ->count(2)
@@ -34,7 +34,7 @@ class SortCurrenciesTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_currencies_by_code_descending()
+    public function admin_can_sort_currencies_by_code_descending(): void
     {
         [$euro, $dollar] = Currency::factory()
             ->count(2)
@@ -52,7 +52,7 @@ class SortCurrenciesTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_currencies_by_rate_ascending()
+    public function admin_can_sort_currencies_by_rate_ascending(): void
     {
         [$dollar, $euro] = Currency::factory()
             ->count(2)
@@ -70,7 +70,7 @@ class SortCurrenciesTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_currencies_by_rate_descending()
+    public function admin_can_sort_currencies_by_rate_descending(): void
     {
         [$dollar, $euro] = Currency::factory()
             ->count(2)

@@ -6,16 +6,15 @@ use App\Filters\Admin\ContactFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreContact;
 use App\Models\Contact;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @param  \App\Filters\Admin\ContactFilters  $filters
-     * @return \Illuminate\Http\Response
      */
-    public function index(ContactFilters $filters)
+    public function index(ContactFilters $filters): View
     {
         $contacts = Contact::select('contacts.*')
             ->join('customers', 'customers.id', '=', 'contacts.customer_id')
@@ -30,21 +29,16 @@ class ContactController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.contacts.create', ['contact' => new Contact]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreContact  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreContact $request)
+    public function store(StoreContact $request): RedirectResponse
     {
         Contact::create($request->validated());
 
@@ -54,34 +48,24 @@ class ContactController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
      */
-    public function show(Contact $contact)
+    public function show(Contact $contact): View
     {
         return view('admin.contacts.show', compact('contact'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Contact $contact)
+    public function edit(Contact $contact): View
     {
         return view('admin.contacts.edit', compact('contact'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreContact  $request
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
      */
-    public function update(StoreContact $request, Contact $contact)
+    public function update(StoreContact $request, Contact $contact): RedirectResponse
     {
         $contact->update($request->validated());
 
@@ -91,11 +75,8 @@ class ContactController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    public function destroy(Contact $contact): RedirectResponse
     {
         $contact->delete();
 

@@ -7,16 +7,15 @@ use App\Filters\Admin\CategoryFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCategory;
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @param  \App\Filters\Admin\CategoryFilters  $filters
-     * @return \Illuminate\Http\Response
      */
-    public function index(CategoryFilters $filters)
+    public function index(CategoryFilters $filters): View
     {
         $categories = Category::query()
             ->filter($filters)
@@ -29,21 +28,16 @@ class CategoryController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.categories.create', ['category' => new Category]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreCategory  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategory $request)
+    public function store(StoreCategory $request): RedirectResponse
     {
         Category::create($request->validated());
 
@@ -53,12 +47,8 @@ class CategoryController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @param  \App\Filters\Admin\AttributeFilters  $filters
-     * @return \Illuminate\Http\Response
      */
-    public function show(Category $category, AttributeFilters $filters)
+    public function show(Category $category, AttributeFilters $filters): View
     {
         $attributes = $category
             ->attributes()
@@ -72,23 +62,16 @@ class CategoryController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Category $category): View
     {
         return view('admin.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreCategory  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
-    public function update(StoreCategory $request, Category $category)
+    public function update(StoreCategory $request, Category $category): RedirectResponse
     {
         $category->update($request->validated());
 
@@ -98,11 +81,8 @@ class CategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
 

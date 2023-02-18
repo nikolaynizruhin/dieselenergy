@@ -10,7 +10,7 @@ use Tests\TestCase;
 class AttributeTest extends TestCase
 {
     /** @test */
-    public function it_has_many_categories()
+    public function it_has_many_categories(): void
     {
         $attribute = Attribute::factory()
             ->hasCategories()
@@ -20,7 +20,7 @@ class AttributeTest extends TestCase
     }
 
     /** @test */
-    public function it_has_many_products()
+    public function it_has_many_products(): void
     {
         $attribute = Attribute::factory()
             ->hasAttached(Product::factory(), [

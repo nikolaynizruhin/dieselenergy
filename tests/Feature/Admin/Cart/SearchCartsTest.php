@@ -10,7 +10,7 @@ use Tests\TestCase;
 class SearchCartsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_cart()
+    public function guest_cant_search_cart(): void
     {
         $product = Product::factory()->create(['name' => 'Diesel Generator']);
 
@@ -25,7 +25,7 @@ class SearchCartsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_cart()
+    public function user_can_search_cart(): void
     {
         [$patrol, $diesel, $waterPump] = Product::factory()
             ->count(3)

@@ -11,7 +11,7 @@ use Tests\TestCase;
 class LoginTest extends TestCase
 {
     /** @test */
-    public function user_can_view_login_page()
+    public function user_can_view_login_page(): void
     {
         $this->get(route('admin.login'))
             ->assertSuccessful()
@@ -19,7 +19,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function authenticated_user_cant_view_login_page()
+    public function authenticated_user_cant_view_login_page(): void
     {
         $this->login()
             ->get(route('admin.login'))
@@ -27,7 +27,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function user_can_login_with_correct_credentials()
+    public function user_can_login_with_correct_credentials(): void
     {
         $user = User::factory()->create();
 
@@ -40,7 +40,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function user_can_login_with_remember_me()
+    public function user_can_login_with_remember_me(): void
     {
         $user = User::factory()->create();
 
@@ -62,7 +62,7 @@ class LoginTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_login_with_invalid_data($data)
+    public function user_cant_login_with_invalid_data(callable $data): void
     {
         $this->from(route('admin.login'))
             ->post(route('admin.login'), $data())
@@ -75,7 +75,7 @@ class LoginTest extends TestCase
         $this->assertGuest();
     }
 
-    public function validationProvider()
+    public static function validationProvider(): array
     {
         return [
             'Email must exists' => [
@@ -88,7 +88,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function user_can_logout()
+    public function user_can_logout(): void
     {
         $this->login()
             ->post(route('admin.logout'))
@@ -98,7 +98,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function unauthenticated_user_cant_logout()
+    public function unauthenticated_user_cant_logout(): void
     {
         $this->post(route('admin.logout'))
             ->assertRedirect('/');
@@ -107,7 +107,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function user_cant_make_more_than_five_attempts_in_a_minute()
+    public function user_cant_make_more_than_five_attempts_in_a_minute(): void
     {
         Carbon::setTestNow(now()->startOfDay());
 

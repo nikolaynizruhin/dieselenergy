@@ -19,8 +19,6 @@ class Cart
 
     /**
      * Cart constructor.
-     *
-     * @param  SessionManager  $session
      */
     public function __construct(readonly private SessionManager $session)
     {
@@ -28,10 +26,6 @@ class Cart
 
     /**
      * Add product to cart.
-     *
-     * @param  \App\Models\Product  $product
-     * @param  int  $quantity
-     * @return \App\Support\CartItem
      */
     public function add(Product $product, int $quantity = 1): CartItem
     {
@@ -55,8 +49,6 @@ class Cart
 
     /**
      * Get items.
-     *
-     * @return \Illuminate\Support\Collection
      */
     public function items(): Collection
     {
@@ -65,10 +57,6 @@ class Cart
 
     /**
      * Update cart.
-     *
-     * @param  string  $key
-     * @param  int  $quantity
-     * @return bool
      */
     public function update(string $key, int $quantity): bool
     {
@@ -87,8 +75,6 @@ class Cart
 
     /**
      * Get cart total.
-     *
-     * @return int
      */
     public function total(): int
     {
@@ -105,8 +91,6 @@ class Cart
 
     /**
      * Store a cart.
-     *
-     * @param  \App\Models\Order  $order
      */
     public function store(Order $order): void
     {
@@ -121,9 +105,6 @@ class Cart
 
     /**
      * Delete item.
-     *
-     * @param  string  $key
-     * @return bool
      */
     public function delete(string $key): bool
     {

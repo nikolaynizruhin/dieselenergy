@@ -33,8 +33,6 @@ class Media extends Pivot
 
     /**
      * Get the product that owns the media.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product(): BelongsTo
     {
@@ -43,8 +41,6 @@ class Media extends Pivot
 
     /**
      * Get the image that owns the media.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function image(): BelongsTo
     {
@@ -67,8 +63,6 @@ class Media extends Pivot
 
     /**
      * Marks as default.
-     *
-     * @return bool
      */
     public function markAsDefault(): bool
     {

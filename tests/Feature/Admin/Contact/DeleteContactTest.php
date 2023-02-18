@@ -8,11 +8,9 @@ use Tests\TestCase;
 class DeleteContactTest extends TestCase
 {
     /**
-     * Category.
-     *
-     * @var \App\Models\Contact
+     * Contract.
      */
-    private $contact;
+    private Contact $contact;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteContactTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_contact()
+    public function guest_cant_delete_contact(): void
     {
         $this->delete(route('admin.contacts.destroy', $this->contact))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_contact()
+    public function user_can_delete_contact(): void
     {
         $this->login()
             ->from(route('admin.contacts.index'))

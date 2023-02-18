@@ -10,11 +10,9 @@ class UpdateOrderTest extends TestCase
     use HasValidation;
 
     /**
-     * Product.
-     *
-     * @var \App\Models\Order
+     * Order.
      */
-    private $order;
+    private Order $order;
 
     /**
      * Setup.
@@ -27,14 +25,14 @@ class UpdateOrderTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_visit_update_order_page()
+    public function guest_cant_visit_update_order_page(): void
     {
         $this->get(route('admin.orders.edit', $this->order))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_update_order_page()
+    public function user_can_visit_update_order_page(): void
     {
         $this->login()
             ->get(route('admin.orders.edit', $this->order))
@@ -44,17 +42,17 @@ class UpdateOrderTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_order()
+    public function guest_cant_update_order(): void
     {
-        $this->put(route('admin.orders.update', $this->order), $this->validFields())
+        $this->put(route('admin.orders.update', $this->order), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_order()
+    public function user_can_update_order(): void
     {
         $this->login()
-            ->put(route('admin.orders.update', $this->order), $fields = $this->validFields())
+            ->put(route('admin.orders.update', $this->order), $fields = self::validFields())
             ->assertRedirect(route('admin.orders.index'))
             ->assertSessionHas('status', trans('order.updated'));
 
@@ -68,7 +66,7 @@ class UpdateOrderTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_update_order_with_invalid_data($field, $data)
+    public function user_cant_update_order_with_invalid_data(string $field, callable $data): void
     {
         $this->login()
             ->from(route('admin.orders.edit', $this->order))
@@ -79,17 +77,17 @@ class UpdateOrderTest extends TestCase
         $this->assertDatabaseCount('orders', 1);
     }
 
-    public function validationProvider(): array
+    public static function validationProvider(): array
     {
-        return $this->provider() + [
+        return self::provider() + [
             'Total is required' => [
-                'total', fn () => $this->validFields(['total' => null]),
+                'total', fn () => self::validFields(['total' => null]),
             ],
             'Total cant be string' => [
-                'total', fn () => $this->validFields(['total' => 'string']),
+                'total', fn () => self::validFields(['total' => 'string']),
             ],
             'Total cant be negative' => [
-                'total', fn () => $this->validFields(['total' => -1]),
+                'total', fn () => self::validFields(['total' => -1]),
             ],
         ];
     }

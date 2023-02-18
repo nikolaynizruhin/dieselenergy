@@ -6,16 +6,15 @@ use App\Filters\Admin\UserFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUser;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @param  \App\Filters\Admin\UserFilters  $filters
-     * @return \Illuminate\Http\Response
      */
-    public function index(UserFilters $filters)
+    public function index(UserFilters $filters): View
     {
         $users = User::query()
             ->filter($filters)
@@ -28,21 +27,16 @@ class UserController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.users.create');
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreUser  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreUser $request)
+    public function store(StoreUser $request): RedirectResponse
     {
         User::create($request->getAttributes());
 
@@ -52,23 +46,16 @@ class UserController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user): View
     {
         return view('admin.users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreUser  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function update(StoreUser $request, User $user)
+    public function update(StoreUser $request, User $user): RedirectResponse
     {
         $user->update($request->validated());
 
@@ -78,11 +65,8 @@ class UserController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
         $user->delete();
 

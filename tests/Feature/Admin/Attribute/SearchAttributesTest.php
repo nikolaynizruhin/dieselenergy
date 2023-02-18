@@ -9,7 +9,7 @@ use Tests\TestCase;
 class SearchAttributesTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_attributes()
+    public function guest_cant_search_attributes(): void
     {
         $attribute = Attribute::factory()->create();
 
@@ -18,7 +18,7 @@ class SearchAttributesTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_attributes()
+    public function user_can_search_attributes(): void
     {
         [$power, $width, $height] = Attribute::factory()
             ->count(3)

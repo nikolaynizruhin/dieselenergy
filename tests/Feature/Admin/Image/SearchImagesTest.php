@@ -9,7 +9,7 @@ use Tests\TestCase;
 class SearchImagesTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_images()
+    public function guest_cant_search_images(): void
     {
         $image = Image::factory()->create();
 
@@ -18,7 +18,7 @@ class SearchImagesTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_images()
+    public function user_can_search_images(): void
     {
         [$diesel, $patrol, $waterPump] = Image::factory()
             ->count(3)

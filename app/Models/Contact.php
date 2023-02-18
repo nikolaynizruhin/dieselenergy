@@ -22,8 +22,6 @@ class Contact extends Model
 
     /**
      * Get the customer that owns the order.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function customer(): BelongsTo
     {

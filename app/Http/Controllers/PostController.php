@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\View\View;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $posts = Post::with('image')->paginate(9)->withQueryString();
 
@@ -20,11 +19,8 @@ class PostController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $post): View
     {
         return view('posts.show', compact('post'));
     }

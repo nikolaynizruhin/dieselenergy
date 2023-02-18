@@ -9,14 +9,14 @@ use Tests\TestCase;
 class ReadAttributesTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_attributes()
+    public function guest_cant_read_attributes(): void
     {
         $this->get(route('admin.attributes.index'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_read_attributes()
+    public function user_can_read_attributes(): void
     {
         [$weight, $power] = Attribute::factory()
             ->count(2)

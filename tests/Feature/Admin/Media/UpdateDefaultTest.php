@@ -8,11 +8,9 @@ use Tests\TestCase;
 class UpdateDefaultTest extends TestCase
 {
     /**
-     * Product.
-     *
-     * @var \App\Models\Media
+     * Media.
      */
-    private $media;
+    private Media $media;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class UpdateDefaultTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_default_media()
+    public function guest_cant_update_default_media(): void
     {
         $this->put(route('admin.medias.default.update', $this->media))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_default_media()
+    public function user_can_update_default_media(): void
     {
         $this->login()
             ->put(route('admin.medias.default.update', $this->media))
@@ -43,7 +41,7 @@ class UpdateDefaultTest extends TestCase
     }
 
     /** @test */
-    public function it_should_unmark_other_default_medias()
+    public function it_should_unmark_other_default_medias(): void
     {
         $defaultMedia = Media::factory()
             ->default()

@@ -9,7 +9,7 @@ use Tests\TestCase;
 class SearchUsersTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_users()
+    public function guest_cant_search_users(): void
     {
         User::factory()->create(['name' => 'John Doe']);
 
@@ -18,7 +18,7 @@ class SearchUsersTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_users()
+    public function user_can_search_users(): void
     {
         [$john, $jane, $tom] = User::factory()
             ->count(3)

@@ -8,58 +8,41 @@ class CartItem
 {
     /**
      * Item id.
-     *
-     * @var int
      */
     public int $id;
 
     /**
      * Item slug.
-     *
-     * @var string
      */
     public string $slug;
 
     /**
      * Item name.
-     *
-     * @var string
      */
     public string $name;
 
     /**
      * Item category.
-     *
-     * @var string
      */
     public string $category;
 
     /**
      * Item Price.
-     *
-     * @var float
      */
     public float $price;
 
     /**
      * Item quantity.
-     *
-     * @var int
      */
     public int $quantity;
 
     /**
      * Item image.
-     *
-     * @var string
      */
     public string $image;
 
     /**
      * Item constructor.
-     *
-     * @param  \App\Models\Product  $product
-     * @param  int  $quantity
      */
     public function __construct(Product $product, int $quantity = 1)
     {
@@ -74,8 +57,6 @@ class CartItem
 
     /**
      * Get item total price.
-     *
-     * @return float
      */
     public function total(): float
     {

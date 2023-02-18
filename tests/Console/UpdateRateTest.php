@@ -9,7 +9,7 @@ use Tests\TestCase;
 class UpdateRateTest extends TestCase
 {
     /** @test */
-    public function it_updates_currency_rates()
+    public function it_updates_currency_rates(): void
     {
         Http::fake([
             'api.minfin.com.ua/mb/'.config('services.minfin.key') => Http::response([

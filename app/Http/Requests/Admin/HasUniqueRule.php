@@ -11,8 +11,6 @@ trait HasUniqueRule
 {
     /**
      * Get unique rule.
-     *
-     * @return \Illuminate\Validation\Rules\Unique
      */
     protected function unique($field): Unique
     {

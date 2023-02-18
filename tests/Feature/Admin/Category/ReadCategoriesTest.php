@@ -9,14 +9,14 @@ use Tests\TestCase;
 class ReadCategoriesTest extends TestCase
 {
     /** @test */
-    public function guest_cant_read_categories()
+    public function guest_cant_read_categories(): void
     {
         $this->get(route('admin.categories.index'))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_read_categories()
+    public function user_can_read_categories(): void
     {
         [$generators, $ats] = Category::factory()
             ->count(2)

@@ -7,17 +7,16 @@ use App\Filters\Admin\ProductFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreOrder;
 use App\Models\Order;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @param  \App\Filters\Admin\OrderFilters  $filters
-     * @return \Illuminate\Http\Response
      */
-    public function index(OrderFilters $filters)
+    public function index(OrderFilters $filters): View
     {
         $orders = Order::select('orders.*')
             ->join('customers', 'customers.id', '=', 'orders.customer_id')
@@ -32,21 +31,16 @@ class OrderController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.orders.create', ['order' => new Order]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreOrder  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrder $request)
+    public function store(StoreOrder $request): RedirectResponse
     {
         Order::create($request->validated());
 
@@ -56,12 +50,8 @@ class OrderController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @param  \App\Filters\Admin\ProductFilters  $filters
-     * @return \Illuminate\Http\Response
      */
-    public function show(Order $order, ProductFilters $filters)
+    public function show(Order $order, ProductFilters $filters): View
     {
         $products = $order->products()
             ->select('products.*', DB::raw('price * quantity total'))
@@ -75,23 +65,16 @@ class OrderController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit(Order $order): View
     {
         return view('admin.orders.edit', compact('order'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreOrder  $request
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
      */
-    public function update(StoreOrder $request, Order $order)
+    public function update(StoreOrder $request, Order $order): RedirectResponse
     {
         $order->update($request->prepared());
 
@@ -101,11 +84,8 @@ class OrderController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy(Order $order): RedirectResponse
     {
         $order->delete();
 

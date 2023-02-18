@@ -9,14 +9,14 @@ use Tests\TestCase;
 class SortAttributesTest extends TestCase
 {
     /** @test */
-    public function guest_cant_sort_attributes()
+    public function guest_cant_sort_attributes(): void
     {
         $this->get(route('admin.attributes.index', ['sort' => 'name']))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function admin_can_sort_attributes_by_name_ascending()
+    public function admin_can_sort_attributes_by_name_ascending(): void
     {
         [$height, $weight] = Attribute::factory()
             ->count(2)
@@ -34,7 +34,7 @@ class SortAttributesTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_attributes_by_name_descending()
+    public function admin_can_sort_attributes_by_name_descending(): void
     {
         [$height, $weight] = Attribute::factory()
             ->count(2)
@@ -52,7 +52,7 @@ class SortAttributesTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_attributes_by_measure_ascending()
+    public function admin_can_sort_attributes_by_measure_ascending(): void
     {
         [$height, $weight] = Attribute::factory()
             ->count(2)
@@ -70,7 +70,7 @@ class SortAttributesTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_sort_attributes_by_measure_descending()
+    public function admin_can_sort_attributes_by_measure_descending(): void
     {
         [$height, $weight] = Attribute::factory()
             ->count(2)

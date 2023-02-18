@@ -10,11 +10,9 @@ class UpdateContactTest extends TestCase
     use HasValidation;
 
     /**
-     * Product.
-     *
-     * @var \App\Models\Contact
+     * Contract.
      */
-    private $contact;
+    private Contact $contact;
 
     /**
      * Setup.
@@ -27,14 +25,14 @@ class UpdateContactTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_visit_edit_contact_page()
+    public function guest_cant_visit_edit_contact_page(): void
     {
         $this->get(route('admin.contacts.edit', $this->contact))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_visit_update_contact_page()
+    public function user_can_visit_update_contact_page(): void
     {
         $this->login()
             ->get(route('admin.contacts.edit', $this->contact))
@@ -42,17 +40,17 @@ class UpdateContactTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_update_contact()
+    public function guest_cant_update_contact(): void
     {
-        $this->put(route('admin.contacts.update', $this->contact), $this->validFields())
+        $this->put(route('admin.contacts.update', $this->contact), self::validFields())
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_update_contact()
+    public function user_can_update_contact(): void
     {
         $this->login()
-            ->put(route('admin.contacts.update', $this->contact), $fields = $this->validFields())
+            ->put(route('admin.contacts.update', $this->contact), $fields = self::validFields())
             ->assertRedirect(route('admin.contacts.index'))
             ->assertSessionHas('status', trans('contact.updated'));
 
@@ -64,7 +62,7 @@ class UpdateContactTest extends TestCase
      *
      * @dataProvider validationProvider
      */
-    public function user_cant_update_contact_with_invalid_data($field, $data)
+    public function user_cant_update_contact_with_invalid_data(string $field, callable $data): void
     {
         $this->login()
             ->from(route('admin.contacts.edit', $this->contact))

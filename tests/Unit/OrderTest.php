@@ -15,7 +15,7 @@ use Tests\TestCase;
 class OrderTest extends TestCase
 {
     /** @test */
-    public function it_has_customer()
+    public function it_has_customer(): void
     {
         $order = Order::factory()
             ->forCustomer()
@@ -25,7 +25,7 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function it_has_many_products()
+    public function it_has_many_products(): void
     {
         $order = Order::factory()
             ->hasAttached(Product::factory(), [
@@ -37,7 +37,7 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function it_calculates_total_after_adding_product()
+    public function it_calculates_total_after_adding_product(): void
     {
         $currency = Currency::factory()->state(['rate' => 30.0000]);
         $brand = Brand::factory()->for($currency);
@@ -51,7 +51,7 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function it_calculates_total_after_removing_product()
+    public function it_calculates_total_after_removing_product(): void
     {
         $cart = Cart::factory()->create();
 
@@ -63,7 +63,7 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function it_has_total_as_money()
+    public function it_has_total_as_money(): void
     {
         $order = Order::factory()->create();
 

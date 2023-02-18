@@ -8,11 +8,9 @@ use Tests\TestCase;
 class DeleteAttributeTest extends TestCase
 {
     /**
-     * Product.
-     *
-     * @var \App\Models\Attribute
+     * Attribute.
      */
-    private $attribute;
+    private Attribute $attribute;
 
     /**
      * Setup.
@@ -25,14 +23,14 @@ class DeleteAttributeTest extends TestCase
     }
 
     /** @test */
-    public function guest_cant_delete_attribute()
+    public function guest_cant_delete_attribute(): void
     {
         $this->delete(route('admin.attributes.destroy', $this->attribute))
             ->assertRedirect(route('admin.login'));
     }
 
     /** @test */
-    public function user_can_delete_attribute()
+    public function user_can_delete_attribute(): void
     {
         $this->login()
             ->from(route('admin.attributes.index'))

@@ -11,7 +11,7 @@ use Tests\TestCase;
 class ImageTest extends TestCase
 {
     /** @test */
-    public function it_has_many_products()
+    public function it_has_many_products(): void
     {
         $image = Image::factory()
             ->hasProducts()
@@ -21,7 +21,7 @@ class ImageTest extends TestCase
     }
 
     /** @test */
-    public function it_has_many_posts()
+    public function it_has_many_posts(): void
     {
         $image = Image::factory()
             ->hasPosts()
@@ -31,7 +31,7 @@ class ImageTest extends TestCase
     }
 
     /** @test */
-    public function it_should_remove_file_after_image_deleted()
+    public function it_should_remove_file_after_image_deleted(): void
     {
         Storage::fake();
 

@@ -9,7 +9,7 @@ use Tests\TestCase;
 class SearchProductsTest extends TestCase
 {
     /** @test */
-    public function guest_cant_search_products()
+    public function guest_cant_search_products(): void
     {
         $product = Product::factory()->create();
 
@@ -18,7 +18,7 @@ class SearchProductsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_search_products()
+    public function user_can_search_products(): void
     {
         [$diesel, $patrol, $waterPump] = Product::factory()
             ->count(3)
