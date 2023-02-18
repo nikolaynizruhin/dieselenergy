@@ -11,8 +11,6 @@ class DefaultController extends Controller
     /**
      * Mark media as default.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Media  $media
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Media $media)

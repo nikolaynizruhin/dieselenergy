@@ -34,8 +34,6 @@ enum ProductSorts: string
 
     /**
      * Get all sorts.
-     *
-     * @return array
      */
     public static function all(): array
     {

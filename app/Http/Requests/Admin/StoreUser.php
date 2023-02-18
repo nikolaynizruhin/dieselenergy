@@ -47,8 +47,6 @@ class StoreUser extends FormRequest
 
     /**
      * Get user attributes.
-     *
-     * @return array
      */
     public function getAttributes(): array
     {

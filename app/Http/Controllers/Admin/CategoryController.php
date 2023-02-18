@@ -13,7 +13,6 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Filters\Admin\CategoryFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(CategoryFilters $filters)
@@ -40,7 +39,6 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreCategory  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCategory $request)
@@ -54,8 +52,6 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
-     * @param  \App\Filters\Admin\AttributeFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category, AttributeFilters $filters)
@@ -73,7 +69,6 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
@@ -84,8 +79,6 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreCategory  $request
-     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function update(StoreCategory $request, Category $category)
@@ -99,7 +92,6 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)

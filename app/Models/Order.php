@@ -35,8 +35,6 @@ class Order extends Model
 
     /**
      * Get the customer that owns the order.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function customer(): BelongsTo
     {
@@ -66,8 +64,6 @@ class Order extends Model
 
     /**
      * Get order total.
-     *
-     * @return int
      */
     public function getTotal(): int
     {
@@ -76,8 +72,6 @@ class Order extends Model
 
     /**
      * Total price.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
     protected function total(): Attribute
     {

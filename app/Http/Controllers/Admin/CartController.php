@@ -13,7 +13,6 @@ class CartController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
@@ -26,7 +25,6 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreCart  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCart $request)
@@ -40,7 +38,6 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
     public function edit(Cart $cart)
@@ -51,8 +48,6 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreCart  $request
-     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
     public function update(StoreCart $request, Cart $cart)
@@ -66,7 +61,6 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
     public function destroy(Cart $cart)

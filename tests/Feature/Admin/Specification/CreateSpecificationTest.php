@@ -88,9 +88,6 @@ class CreateSpecificationTest extends TestCase
 
     /**
      * Get valid specification fields.
-     *
-     * @param  array  $overrides
-     * @return array
      */
     private static function validFields(array $overrides = []): array
     {

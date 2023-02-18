@@ -22,8 +22,6 @@ class Post extends Model
 
     /**
      * Get the image that owns the post.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function image(): BelongsTo
     {

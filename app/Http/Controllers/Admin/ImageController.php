@@ -12,7 +12,6 @@ class ImageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Filters\Admin\ImageFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(ImageFilters $filters)
@@ -39,7 +38,6 @@ class ImageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreImage  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreImage $request)
@@ -53,7 +51,6 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
     public function destroy(Image $image)

@@ -15,7 +15,6 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Filters\Admin\ProductFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(ProductFilters $filters)
@@ -37,7 +36,6 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
@@ -50,7 +48,6 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreProduct  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreProduct $request)
@@ -68,8 +65,6 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
-     * @param  \App\Filters\Admin\ImageFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product, ImageFilters $filters)
@@ -89,7 +84,6 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -102,8 +96,6 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreProduct  $request
-     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function update(StoreProduct $request, Product $product)
@@ -121,7 +113,6 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)

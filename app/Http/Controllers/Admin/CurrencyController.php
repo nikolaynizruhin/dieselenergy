@@ -12,7 +12,6 @@ class CurrencyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Filters\Admin\CurrencyFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(CurrencyFilters $filters)
@@ -39,7 +38,6 @@ class CurrencyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreCurrency  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCurrency $request)
@@ -53,7 +51,6 @@ class CurrencyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
     public function edit(Currency $currency)
@@ -64,8 +61,6 @@ class CurrencyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreCurrency  $request
-     * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
     public function update(StoreCurrency $request, Currency $currency)
@@ -79,7 +74,6 @@ class CurrencyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
     public function destroy(Currency $currency)

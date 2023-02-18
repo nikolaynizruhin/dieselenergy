@@ -52,8 +52,6 @@ class StorePost extends FormRequest
 
     /**
      * Create an image.
-     *
-     * @return \App\Models\Image
      */
     public function createImage(): Image
     {
@@ -64,8 +62,6 @@ class StorePost extends FormRequest
 
     /**
      * Get validated product attributes.
-     *
-     * @return array
      */
     public function getAttributes(): array
     {

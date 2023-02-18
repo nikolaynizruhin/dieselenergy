@@ -36,8 +36,6 @@ class StoreContact extends FormRequest
 
     /**
      * Get validated customer attributes.
-     *
-     * @return array
      */
     public function getContactAttributes(): array
     {
@@ -46,8 +44,6 @@ class StoreContact extends FormRequest
 
     /**
      * Get the URL to redirect to on a validation error.
-     *
-     * @return string
      */
     protected function getRedirectUrl(): string
     {

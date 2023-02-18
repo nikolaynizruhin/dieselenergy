@@ -12,7 +12,6 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Filters\Admin\UserFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(UserFilters $filters)
@@ -39,7 +38,6 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreUser  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUser $request)
@@ -53,7 +51,6 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -64,8 +61,6 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreUser  $request
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(StoreUser $request, User $user)
@@ -79,7 +74,6 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)

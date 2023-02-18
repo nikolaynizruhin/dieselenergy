@@ -17,23 +17,16 @@ class ContactFilters extends Filters
 
     /**
      * Registered filters to operate upon.
-     *
-     * @var array
      */
     protected array $filters = ['search', 'sort'];
 
     /**
      * Search field.
-     *
-     * @var string
      */
     protected string $search = 'message';
 
     /**
      * Filter the query by a given name.
-     *
-     * @param  array  $search
-     * @return void
      */
     protected function search(array $search): void
     {
@@ -46,7 +39,6 @@ class ContactFilters extends Filters
      * Sort the query by a given user field.
      *
      * @param  string|array  $field
-     * @return void
      */
     protected function sort($field): void
     {

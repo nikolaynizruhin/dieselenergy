@@ -13,7 +13,6 @@ class SpecificationController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
@@ -26,7 +25,6 @@ class SpecificationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreSpecification  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreSpecification $request)
@@ -40,7 +38,6 @@ class SpecificationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Specification  $specification
      * @return \Illuminate\Http\Response
      */
     public function edit(Specification $specification)
@@ -51,8 +48,6 @@ class SpecificationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreSpecification  $request
-     * @param  \App\Models\Specification  $specification
      * @return \Illuminate\Http\Response
      */
     public function update(StoreSpecification $request, Specification $specification)
@@ -66,7 +61,6 @@ class SpecificationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Specification  $specification
      * @return \Illuminate\Http\Response
      */
     public function destroy(Specification $specification)

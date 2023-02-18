@@ -34,8 +34,6 @@ class Cart extends Pivot
 
     /**
      * Get the product that owns the cart.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product(): BelongsTo
     {

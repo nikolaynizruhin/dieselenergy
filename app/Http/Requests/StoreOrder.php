@@ -36,8 +36,6 @@ class StoreOrder extends FormRequest
 
     /**
      * Get order attributes.
-     *
-     * @return array
      */
     public function getOrderAttributes(): array
     {

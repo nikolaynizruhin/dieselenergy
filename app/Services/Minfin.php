@@ -10,8 +10,6 @@ class Minfin
 {
     /**
      * Http client.
-     *
-     * @var \Illuminate\Http\Client\PendingRequest
      */
     private PendingRequest $http;
 
@@ -27,8 +25,6 @@ class Minfin
 
     /**
      * Get currency rates.
-     *
-     * @return \Illuminate\Support\Collection
      */
     public function getRates(): Collection
     {

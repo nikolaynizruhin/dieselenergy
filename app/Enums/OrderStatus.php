@@ -27,8 +27,6 @@ enum OrderStatus: string
 
     /**
      * Get badge.
-     *
-     * @return string
      */
     public function badge(): string
     {
@@ -41,8 +39,6 @@ enum OrderStatus: string
 
     /**
      * Get all statuses.
-     *
-     * @return array
      */
     public static function all(): array
     {

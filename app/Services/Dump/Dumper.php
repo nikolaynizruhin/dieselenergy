@@ -8,8 +8,6 @@ abstract class Dumper
 {
     /**
      * Dumper constructor.
-     *
-     * @param  array  $config
      */
     public function __construct(readonly protected array $config)
     {
@@ -17,16 +15,11 @@ abstract class Dumper
 
     /**
      * Dump database.
-     *
-     * @param  string  $path
      */
     abstract public function dump(string $path);
 
     /**
      * Run shell command.
-     *
-     * @param  string  $command
-     * @param  array  $parameters
      */
     protected function run(string $command, array $parameters): void
     {

@@ -21,7 +21,6 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreOrder  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreOrder $request)
@@ -34,7 +33,6 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)

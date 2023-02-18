@@ -24,7 +24,6 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCart  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCart $request)
@@ -37,7 +36,6 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

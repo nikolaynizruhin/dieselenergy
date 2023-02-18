@@ -6,9 +6,6 @@ trait HasSearch
 {
     /**
      * Filter the query by a given name.
-     *
-     * @param  string  $query
-     * @return void
      */
     protected function search(string $query): void
     {

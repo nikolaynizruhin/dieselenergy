@@ -24,8 +24,6 @@ class Category extends Model
 
     /**
      * Get the products for the category.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function products(): HasMany
     {
@@ -48,7 +46,6 @@ class Category extends Model
     /**
      * Scope a query with active product count.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeWithProductCount(Builder $query)

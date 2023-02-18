@@ -14,7 +14,6 @@ class MediaController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
@@ -28,7 +27,6 @@ class MediaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreMedia  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreMedia $request)
@@ -42,7 +40,6 @@ class MediaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Media  $media
      * @return \Illuminate\Http\Response
      */
     public function destroy(Media $media)

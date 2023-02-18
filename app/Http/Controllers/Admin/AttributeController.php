@@ -12,7 +12,6 @@ class AttributeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Filters\Admin\AttributeFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(AttributeFilters $filters)
@@ -39,7 +38,6 @@ class AttributeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreAttribute  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreAttribute $request)
@@ -53,7 +51,6 @@ class AttributeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Attribute  $attribute
      * @return \Illuminate\Http\Response
      */
     public function edit(Attribute $attribute)
@@ -64,8 +61,6 @@ class AttributeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreAttribute  $request
-     * @param  \App\Models\Attribute  $attribute
      * @return \Illuminate\Http\Response
      */
     public function update(StoreAttribute $request, Attribute $attribute)
@@ -79,7 +74,6 @@ class AttributeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Attribute  $attribute
      * @return \Illuminate\Http\Response
      */
     public function destroy(Attribute $attribute)

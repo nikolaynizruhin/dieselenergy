@@ -12,7 +12,6 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Filters\Admin\ContactFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(ContactFilters $filters)
@@ -41,7 +40,6 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreContact  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreContact $request)
@@ -55,7 +53,6 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function show(Contact $contact)
@@ -66,7 +63,6 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function edit(Contact $contact)
@@ -77,8 +73,6 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreContact  $request
-     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function update(StoreContact $request, Contact $contact)
@@ -92,7 +86,6 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function destroy(Contact $contact)

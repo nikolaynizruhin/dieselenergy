@@ -14,7 +14,6 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Filters\Admin\OrderFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(OrderFilters $filters)
@@ -43,7 +42,6 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreOrder  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreOrder $request)
@@ -57,8 +55,6 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Order  $order
-     * @param  \App\Filters\Admin\ProductFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order, ProductFilters $filters)
@@ -76,7 +72,6 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function edit(Order $order)
@@ -87,8 +82,6 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreOrder  $request
-     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function update(StoreOrder $request, Order $order)
@@ -102,7 +95,6 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function destroy(Order $order)

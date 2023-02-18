@@ -23,8 +23,6 @@ class Image extends Model
 
     /**
      * The products that belong to the image.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function products(): BelongsToMany
     {
@@ -36,8 +34,6 @@ class Image extends Model
 
     /**
      * Get the posts for the image.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function posts(): HasMany
     {
@@ -46,8 +42,6 @@ class Image extends Model
 
     /**
      * Get the name of the image file.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
     protected function name(): AttributeCast
     {

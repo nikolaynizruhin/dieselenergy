@@ -23,8 +23,6 @@ class Attribute extends Model
 
     /**
      * Get the attribute's field.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
     protected function field(): AttributeCast
     {

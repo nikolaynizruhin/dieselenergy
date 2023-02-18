@@ -41,8 +41,6 @@ class StoreOrder extends FormRequest
 
     /**
      * Get prepared data.
-     *
-     * @return array
      */
     public function prepared(): array
     {

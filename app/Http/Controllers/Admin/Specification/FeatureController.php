@@ -11,8 +11,6 @@ class FeatureController extends Controller
     /**
      * Toggle feature.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Specification  $specification
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Specification $specification)

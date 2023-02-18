@@ -33,9 +33,6 @@ trait HasValidation
 
     /**
      * Get valid attribute fields.
-     *
-     * @param  array  $overrides
-     * @return array
      */
     private static function validFields(array $overrides = []): array
     {

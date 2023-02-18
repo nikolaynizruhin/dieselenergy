@@ -11,9 +11,6 @@ class CreateContact
 {
     /**
      * Create contact.
-     *
-     * @param  array  $params
-     * @return Contact
      */
     public function handle(array $params): Contact
     {

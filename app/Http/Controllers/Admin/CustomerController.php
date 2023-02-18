@@ -14,7 +14,6 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Filters\Admin\CustomerFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(CustomerFilters $filters)
@@ -41,7 +40,6 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreCustomer  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCustomer $request)
@@ -55,9 +53,6 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Customer  $customer
-     * @param  \App\Filters\Admin\Customer\ContactFilters  $contactFilters
-     * @param  \App\Filters\Admin\Customer\OrderFilters  $orderFilters
      * @return \Illuminate\Http\Response
      */
     public function show(Customer $customer, ContactFilters $contactFilters, OrderFilters $orderFilters)
@@ -82,7 +77,6 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function edit(Customer $customer)
@@ -93,8 +87,6 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\StoreCustomer  $request
-     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function update(StoreCustomer $request, Customer $customer)
@@ -108,7 +100,6 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function destroy(Customer $customer)

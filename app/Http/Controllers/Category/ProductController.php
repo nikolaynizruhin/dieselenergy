@@ -12,8 +12,6 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Models\Category  $category
-     * @param  \App\Filters\ProductFilters  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(Category $category, ProductFilters $filters)
@@ -35,7 +33,6 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
