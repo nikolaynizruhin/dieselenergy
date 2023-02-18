@@ -7,15 +7,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
     /**
      * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function __invoke(OrderFilters $filters)
+    public function __invoke(OrderFilters $filters): View
     {
         $totalCustomers = Customer::count();
         $soldProducts = DB::table('order_product')->sum('quantity');

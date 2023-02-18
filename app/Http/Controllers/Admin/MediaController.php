@@ -7,16 +7,16 @@ use App\Http\Requests\Admin\StoreMedia;
 use App\Models\Image;
 use App\Models\Media;
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class MediaController extends Controller
 {
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $images = Image::latest()->get();
         $product = Product::with('images')->findOrFail($request->product_id);
@@ -26,10 +26,8 @@ class MediaController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreMedia $request)
+    public function store(StoreMedia $request): RedirectResponse
     {
         Media::create($request->validated());
 
@@ -39,10 +37,8 @@ class MediaController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Media $media)
+    public function destroy(Media $media): RedirectResponse
     {
         $media->delete();
 

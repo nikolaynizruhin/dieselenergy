@@ -8,16 +8,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreProduct;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index(ProductFilters $filters)
+    public function index(ProductFilters $filters): View
     {
         $categories = Category::orderBy('name')->get();
         $products = Product::select('products.*')
@@ -35,10 +35,8 @@ class ProductController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $category = Category::with('attributes')->findOrFail($request->category_id);
 
@@ -47,10 +45,8 @@ class ProductController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreProduct $request)
+    public function store(StoreProduct $request): RedirectResponse
     {
         $product = Product::create($request->getProductAttributes());
 
@@ -64,10 +60,8 @@ class ProductController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function show(Product $product, ImageFilters $filters)
+    public function show(Product $product, ImageFilters $filters): View
     {
         $product = $product->loadAttributes();
 
@@ -83,10 +77,8 @@ class ProductController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         $product->category->loadAttributes($product);
 
@@ -95,10 +87,8 @@ class ProductController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function update(StoreProduct $request, Product $product)
+    public function update(StoreProduct $request, Product $product): RedirectResponse
     {
         $product->update($request->getProductAttributes());
 
@@ -112,10 +102,8 @@ class ProductController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product): RedirectResponse
     {
         $product->delete();
 

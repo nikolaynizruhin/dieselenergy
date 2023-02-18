@@ -7,15 +7,15 @@ use App\Filters\Admin\CategoryFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCategory;
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index(CategoryFilters $filters)
+    public function index(CategoryFilters $filters): View
     {
         $categories = Category::query()
             ->filter($filters)
@@ -28,20 +28,16 @@ class CategoryController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.categories.create', ['category' => new Category]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategory $request)
+    public function store(StoreCategory $request): RedirectResponse
     {
         Category::create($request->validated());
 
@@ -51,10 +47,8 @@ class CategoryController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function show(Category $category, AttributeFilters $filters)
+    public function show(Category $category, AttributeFilters $filters): View
     {
         $attributes = $category
             ->attributes()
@@ -68,20 +62,16 @@ class CategoryController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Category $category): View
     {
         return view('admin.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function update(StoreCategory $request, Category $category)
+    public function update(StoreCategory $request, Category $category): RedirectResponse
     {
         $category->update($request->validated());
 
@@ -91,10 +81,8 @@ class CategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
 

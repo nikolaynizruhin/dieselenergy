@@ -6,15 +6,15 @@ use App\Filters\Admin\BrandFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreBrand;
 use App\Models\Brand;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index(BrandFilters $filters)
+    public function index(BrandFilters $filters): View
     {
         $brands = Brand::select('brands.*')
             ->join('currencies', 'currencies.id', '=', 'brands.currency_id')
@@ -29,20 +29,16 @@ class BrandController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.brands.create', ['brand' => new Brand]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreBrand $request)
+    public function store(StoreBrand $request): RedirectResponse
     {
         Brand::create($request->validated());
 
@@ -52,20 +48,16 @@ class BrandController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Brand $brand)
+    public function edit(Brand $brand): View
     {
         return view('admin.brands.edit', compact('brand'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function update(StoreBrand $request, Brand $brand)
+    public function update(StoreBrand $request, Brand $brand): RedirectResponse
     {
         $brand->update($request->validated());
 
@@ -75,10 +67,8 @@ class BrandController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Brand $brand)
+    public function destroy(Brand $brand): RedirectResponse
     {
         $brand->delete();
 

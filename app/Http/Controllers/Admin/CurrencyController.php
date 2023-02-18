@@ -6,15 +6,15 @@ use App\Filters\Admin\CurrencyFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCurrency;
 use App\Models\Currency;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class CurrencyController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index(CurrencyFilters $filters)
+    public function index(CurrencyFilters $filters): View
     {
         $currencies = Currency::query()
             ->filter($filters)
@@ -27,20 +27,16 @@ class CurrencyController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.currencies.create', ['currency' => new Currency]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreCurrency $request)
+    public function store(StoreCurrency $request): RedirectResponse
     {
         Currency::create($request->validated());
 
@@ -50,20 +46,16 @@ class CurrencyController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Currency $currency)
+    public function edit(Currency $currency): View
     {
         return view('admin.currencies.edit', compact('currency'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function update(StoreCurrency $request, Currency $currency)
+    public function update(StoreCurrency $request, Currency $currency): RedirectResponse
     {
         $currency->update($request->validated());
 
@@ -73,10 +65,8 @@ class CurrencyController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Currency $currency)
+    public function destroy(Currency $currency): RedirectResponse
     {
         $currency->delete();
 

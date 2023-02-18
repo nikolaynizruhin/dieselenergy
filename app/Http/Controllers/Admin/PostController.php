@@ -6,15 +6,15 @@ use App\Filters\Admin\PostFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePost;
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index(PostFilters $filters)
+    public function index(PostFilters $filters): View
     {
         $posts = Post::query()
             ->filter($filters)
@@ -27,20 +27,16 @@ class PostController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.posts.create', ['post' => new Post]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function store(StorePost $request)
+    public function store(StorePost $request): RedirectResponse
     {
         Post::create($request->getAttributes());
 
@@ -50,30 +46,24 @@ class PostController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $post): View
     {
         return view('admin.posts.show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Post $post): View
     {
         return view('admin.posts.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function update(StorePost $request, Post $post)
+    public function update(StorePost $request, Post $post): RedirectResponse
     {
         $post->update($request->getAttributes());
 
@@ -83,10 +73,8 @@ class PostController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post): RedirectResponse
     {
         $post->delete();
 

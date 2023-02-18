@@ -6,16 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreSpecification;
 use App\Models\Category;
 use App\Models\Specification;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SpecificationController extends Controller
 {
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $category = Category::with('attributes')->findOrFail($request->category_id);
 
@@ -24,10 +24,8 @@ class SpecificationController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreSpecification $request)
+    public function store(StoreSpecification $request): RedirectResponse
     {
         Specification::create($request->validated());
 
@@ -37,20 +35,16 @@ class SpecificationController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Specification $specification)
+    public function edit(Specification $specification): View
     {
         return view('admin.specifications.edit', compact('specification'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function update(StoreSpecification $request, Specification $specification)
+    public function update(StoreSpecification $request, Specification $specification): RedirectResponse
     {
         $specification->update($request->validated());
 
@@ -60,10 +54,8 @@ class SpecificationController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Specification $specification)
+    public function destroy(Specification $specification): RedirectResponse
     {
         $specification->delete();
 

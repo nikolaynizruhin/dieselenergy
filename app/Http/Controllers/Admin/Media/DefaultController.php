@@ -4,16 +4,15 @@ namespace App\Http\Controllers\Admin\Media;
 
 use App\Http\Controllers\Controller;
 use App\Models\Media;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class DefaultController extends Controller
 {
     /**
      * Mark media as default.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Media $media)
+    public function update(Request $request, Media $media): RedirectResponse
     {
         $media->markAsDefault();
 
