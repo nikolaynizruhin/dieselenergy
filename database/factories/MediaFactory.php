@@ -27,8 +27,6 @@ class MediaFactory extends Factory
 
     /**
      * Indicate that the media is default.
-     *
-     * @return $this
      */
     public function default(): static
     {
@@ -37,8 +35,6 @@ class MediaFactory extends Factory
 
     /**
      * Indicate that the media is default.
-     *
-     * @return $this
      */
     public function regular(): static
     {

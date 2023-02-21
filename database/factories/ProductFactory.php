@@ -43,8 +43,6 @@ class ProductFactory extends Factory
 
     /**
      * Indicate that the product is inactive.
-     *
-     * @return $this
      */
     public function inactive(): static
     {
@@ -53,8 +51,6 @@ class ProductFactory extends Factory
 
     /**
      * Attach default image.
-     *
-     * @return $this
      */
     public function withDefaultImage(): static
     {

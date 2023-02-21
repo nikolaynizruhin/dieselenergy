@@ -27,8 +27,6 @@ class SpecificationFactory extends Factory
 
     /**
      * Indicate that the media is featured.
-     *
-     * @return static
      */
     public function featured()
     {
@@ -37,8 +35,6 @@ class SpecificationFactory extends Factory
 
     /**
      * Indicate that the media is default.
-     *
-     * @return static
      */
     public function regular()
     {
