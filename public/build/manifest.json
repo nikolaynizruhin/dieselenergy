@@ -1,19 +1,19 @@
 {
-  "_bootstrap.bundle-cb4cdcec.js": {
-    "file": "assets/bootstrap.bundle-cb4cdcec.js"
+  "_bootstrap.bundle-5a7f16d3.js": {
+    "file": "assets/bootstrap.bundle-5a7f16d3.js"
   },
   "resources/js/admin/admin.js": {
-    "file": "assets/admin-b7e67a6b.js",
+    "file": "assets/admin-10f6a3ba.js",
     "imports": [
-      "_bootstrap.bundle-cb4cdcec.js"
+      "_bootstrap.bundle-5a7f16d3.js"
     ],
     "isEntry": true,
     "src": "resources/js/admin/admin.js"
   },
   "resources/js/app.js": {
-    "file": "assets/app-241e6d68.js",
+    "file": "assets/app-8b5d83ae.js",
     "imports": [
-      "_bootstrap.bundle-cb4cdcec.js"
+      "_bootstrap.bundle-5a7f16d3.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
