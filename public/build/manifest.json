@@ -19,12 +19,12 @@
     "src": "resources/js/app.js"
   },
   "resources/sass/admin/admin.scss": {
-    "file": "assets/admin-67aeb361.css",
+    "file": "assets/admin-4915576d.css",
     "isEntry": true,
     "src": "resources/sass/admin/admin.scss"
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-c0c6beb6.css",
+    "file": "assets/app-cde41f31.css",
     "isEntry": true,
     "src": "resources/sass/app.scss"
   }
