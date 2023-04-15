@@ -1,24 +1,16 @@
 <?php
 
-namespace Tests\Feature\Cart;
-
 use App\Models\Product;
 use Facades\App\Services\Cart;
-use Tests\TestCase;
 
-class DeleteCartTest extends TestCase
-{
-    /** @test */
-    public function guest_can_delete_cart_item(): void
-    {
-        $product = Product::factory()->withDefaultImage()->create();
+test('guest can delete cart item', function () {
+    $product = Product::factory()->withDefaultImage()->create();
 
-        Cart::add($product);
+    Cart::add($product);
 
-        $this->from(route('carts.index'))
-            ->delete(route('carts.destroy', 0))
-            ->assertRedirect(route('carts.index'));
+    $this->from(route('carts.index'))
+        ->delete(route('carts.destroy', 0))
+        ->assertRedirect(route('carts.index'));
 
-        $this->assertCount(0, Cart::items());
-    }
-}
+    $this->assertCount(0, Cart::items());
+});

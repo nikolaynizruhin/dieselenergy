@@ -1,21 +1,13 @@
 <?php
 
-namespace Tests\Feature\Post;
-
 use App\Models\Post;
-use Tests\TestCase;
 
-class ReadPostTest extends TestCase
-{
-    /** @test */
-    public function guest_can_read_posts(): void
-    {
-        $post = Post::factory()->create();
+test('guest can read posts', function () {
+    $post = Post::factory()->create();
 
-        $this->get(route('posts.show', $post))
-            ->assertSuccessful()
-            ->assertViewIs('posts.show')
-            ->assertViewHas('post')
-            ->assertSee($post->title);
-    }
-}
+    $this->get(route('posts.show', $post))
+        ->assertSuccessful()
+        ->assertViewIs('posts.show')
+        ->assertViewHas('post')
+        ->assertSee($post->title);
+});

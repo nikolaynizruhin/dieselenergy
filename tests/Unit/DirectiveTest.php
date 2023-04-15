@@ -1,32 +1,17 @@
 <?php
 
-namespace Tests\Unit;
+it('compiles uah_directive', function () {
+    assertDirectiveOutput('1 000 ₴', '@uah(100000)');
+});
 
-use Tests\TestCase;
+it('compiles markdown_directive', function () {
+    assertDirectiveOutput("<h1>Markdown</h1>\n", '@markdown("# Markdown")');
+});
 
-class DirectiveTest extends TestCase
-{
-    /** @test */
-    public function it_compiles_uah_directive(): void
-    {
-        $this->assertDirectiveOutput('1 000 ₴', '@uah(100000)');
-    }
+function assertDirectiveOutput(string $expected, string $directive): void {
+    ob_start();
 
-    /** @test */
-    public function it_compiles_markdown_directive(): void
-    {
-        $this->assertDirectiveOutput("<h1>Markdown</h1>\n", '@markdown("# Markdown")');
-    }
+    eval('?>'.app('blade.compiler')->compileString($directive));
 
-    /**
-     * Assert directive output.
-     */
-    private function assertDirectiveOutput(string $expected, string $directive): void
-    {
-        ob_start();
-
-        eval('?>'.app('blade.compiler')->compileString($directive));
-
-        $this->assertEquals($expected, ob_get_clean());
-    }
+    test()->assertEquals($expected, ob_get_clean());
 }

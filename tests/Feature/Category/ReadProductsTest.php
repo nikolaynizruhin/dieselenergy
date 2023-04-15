@@ -1,54 +1,44 @@
 <?php
 
-namespace Tests\Feature\Category;
-
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Tests\TestCase;
 
-class ReadProductsTest extends TestCase
-{
-    /** @test */
-    public function guest_can_read_category_products(): void
-    {
-        [$generators, $waterPumps] = Category::factory()->count(2)->create();
+test('guest can read category products', function () {
+    [$generators, $waterPumps] = Category::factory()->count(2)->create();
 
-        [$generator, $waterPump] = Product::factory()
-            ->count(2)
-            ->active()
-            ->withDefaultImage()
-            ->state(new Sequence(
-                ['category_id' => $generators->id],
-                ['category_id' => $waterPumps->id],
-            ))->create();
+    [$generator, $waterPump] = Product::factory()
+        ->count(2)
+        ->active()
+        ->withDefaultImage()
+        ->state(new Sequence(
+            ['category_id' => $generators->id],
+            ['category_id' => $waterPumps->id],
+        ))->create();
 
-        $this->get(route('categories.products.index', $generators))
-            ->assertSuccessful()
-            ->assertViewIs('categories.products.index')
-            ->assertViewHas('products')
-            ->assertSee($generator->name)
-            ->assertDontSee($waterPump->name);
-    }
+    $this->get(route('categories.products.index', $generators))
+        ->assertSuccessful()
+        ->assertViewIs('categories.products.index')
+        ->assertViewHas('products')
+        ->assertSee($generator->name)
+        ->assertDontSee($waterPump->name);
+});
 
-    /** @test */
-    public function guest_can_read_only_category_active_products(): void
-    {
-        $generators = Category::factory()->create();
+test('guest can read only category active products', function () {
+    $generators = Category::factory()->create();
 
-        [$generator, $waterPump] = Product::factory()
-            ->count(2)
-            ->withDefaultImage()
-            ->state(new Sequence(
-                ['is_active' => true],
-                ['is_active' => false],
-            ))->create(['category_id' => $generators->id]);
+    [$generator, $waterPump] = Product::factory()
+        ->count(2)
+        ->withDefaultImage()
+        ->state(new Sequence(
+            ['is_active' => true],
+            ['is_active' => false],
+        ))->create(['category_id' => $generators->id]);
 
-        $this->get(route('categories.products.index', $generators))
-            ->assertSuccessful()
-            ->assertViewIs('categories.products.index')
-            ->assertViewHas('products')
-            ->assertSee($generator->name)
-            ->assertDontSee($waterPump->name);
-    }
-}
+    $this->get(route('categories.products.index', $generators))
+        ->assertSuccessful()
+        ->assertViewIs('categories.products.index')
+        ->assertViewHas('products')
+        ->assertSee($generator->name)
+        ->assertDontSee($waterPump->name);
+});

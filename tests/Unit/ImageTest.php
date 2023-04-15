@@ -1,48 +1,36 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\Models\Image;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
 
-class ImageTest extends TestCase
-{
-    /** @test */
-    public function it_has_many_products(): void
-    {
-        $image = Image::factory()
-            ->hasProducts()
-            ->create();
+it('has many products', function () {
+    $image = Image::factory()
+        ->hasProducts()
+        ->create();
 
-        $this->assertInstanceOf(Collection::class, $image->products);
-    }
+    $this->assertInstanceOf(Collection::class, $image->products);
+});
 
-    /** @test */
-    public function it_has_many_posts(): void
-    {
-        $image = Image::factory()
-            ->hasPosts()
-            ->create();
+it('has many posts', function () {
+    $image = Image::factory()
+        ->hasPosts()
+        ->create();
 
-        $this->assertInstanceOf(Collection::class, $image->posts);
-    }
+    $this->assertInstanceOf(Collection::class, $image->posts);
+});
 
-    /** @test */
-    public function it_should_remove_file_after_image_deleted(): void
-    {
-        Storage::fake();
+it('should remove file after image deleted', function () {
+    Storage::fake();
 
-        $path = UploadedFile::fake()->image('product.jpg')->store('images');
+    $path = UploadedFile::fake()->image('product.jpg')->store('images');
 
-        $image = Image::create(['path' => $path]);
+    $image = Image::create(['path' => $path]);
 
-        Storage::assertExists($path);
+    Storage::assertExists($path);
 
-        $image->delete();
+    $image->delete();
 
-        Storage::assertMissing($path);
-    }
-}
+    Storage::assertMissing($path);
+});
