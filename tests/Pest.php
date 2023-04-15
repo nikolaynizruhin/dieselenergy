@@ -39,6 +39,7 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function honeypot(): array {
+function honeypot(): array
+{
     return [config('honeypot.valid_from_field') => time() - (config('honeypot.seconds') + 1)];
 }

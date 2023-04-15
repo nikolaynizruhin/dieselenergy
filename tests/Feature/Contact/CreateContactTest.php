@@ -95,7 +95,8 @@ test('guest cant create contact with spam', function (callable $data) {
     ],
 ]);
 
-function validFields(array $overrides = []): array {
+function validFields(array $overrides = []): array
+{
     $contact = Contact::factory()->make();
 
     return array_merge([

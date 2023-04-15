@@ -8,7 +8,8 @@ it('compiles markdown_directive', function () {
     assertDirectiveOutput("<h1>Markdown</h1>\n", '@markdown("# Markdown")');
 });
 
-function assertDirectiveOutput(string $expected, string $directive): void {
+function assertDirectiveOutput(string $expected, string $directive): void
+{
     ob_start();
 
     eval('?>'.app('blade.compiler')->compileString($directive));
