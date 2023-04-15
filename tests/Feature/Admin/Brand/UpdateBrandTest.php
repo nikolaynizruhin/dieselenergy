@@ -8,8 +8,7 @@ beforeEach(function () {
     $this->brand = Brand::factory()->create();
 });
 
-test('guest cant visit update brand page', function (): void
-{
+test('guest cant visit update brand page', function () {
     $this->get(route('admin.brands.edit', $this->brand))
         ->assertRedirect(route('admin.login'));
 });

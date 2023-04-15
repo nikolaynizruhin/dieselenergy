@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 

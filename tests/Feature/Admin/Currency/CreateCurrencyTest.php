@@ -7,7 +7,6 @@ test('guest cant visit create currency page', function () {
         ->assertRedirect(route('admin.login'));
 });
 
-
 test('user can visit create currency page', function () {
     $this->login()
         ->get(route('admin.currencies.create'))
