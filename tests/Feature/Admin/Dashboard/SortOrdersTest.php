@@ -1,61 +1,37 @@
 <?php
 
-namespace Tests\Feature\Admin\Dashboard;
 
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Tests\TestCase;
 
-class SortOrdersTest extends TestCase
-{
-    /**
-     * Adam's order.
-     */
-    private Order $adam;
+beforeEach(function () {
+    [$this->adam, $this->tom] = Order::factory()
+        ->count(2)
+        ->state(new Sequence(
+            ['id' => 788365],
+            ['id' => 987445],
+        ))->create();
+});
 
-    /**
-     * Tom's order.
-     */
-    private Order $tom;
+test('guest cant sort orders', function () {
+    $this->get(route('admin.dashboard', ['sort' => 'id']))
+        ->assertRedirect(route('admin.login'));
+});
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('admin can sort orders ascending', function () {
+    $this->login()
+        ->get(route('admin.dashboard', ['sort' => 'id']))
+        ->assertSuccessful()
+        ->assertViewIs('admin.dashboard')
+        ->assertViewHas('orders')
+        ->assertSeeInOrder([$this->adam->id, $this->tom->id]);
+});
 
-        [$this->adam, $this->tom] = Order::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['id' => 788365],
-                ['id' => 987445],
-            ))->create();
-    }
-
-    /** @test */
-    public function guest_cant_sort_orders(): void
-    {
-        $this->get(route('admin.dashboard', ['sort' => 'id']))
-            ->assertRedirect(route('admin.login'));
-    }
-
-    /** @test */
-    public function admin_can_sort_orders_ascending(): void
-    {
-        $this->login()
-            ->get(route('admin.dashboard', ['sort' => 'id']))
-            ->assertSuccessful()
-            ->assertViewIs('admin.dashboard')
-            ->assertViewHas('orders')
-            ->assertSeeInOrder([$this->adam->id, $this->tom->id]);
-    }
-
-    /** @test */
-    public function admin_can_sort_orders_descending(): void
-    {
-        $this->login()
-            ->get(route('admin.dashboard', ['sort' => '-id']))
-            ->assertSuccessful()
-            ->assertViewIs('admin.dashboard')
-            ->assertViewHas('orders')
-            ->assertSeeInOrder([$this->tom->id, $this->adam->id]);
-    }
-}
+test('admin can sort orders descending', function () {
+    $this->login()
+        ->get(route('admin.dashboard', ['sort' => '-id']))
+        ->assertSuccessful()
+        ->assertViewIs('admin.dashboard')
+        ->assertViewHas('orders')
+        ->assertSeeInOrder([$this->tom->id, $this->adam->id]);
+});

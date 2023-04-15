@@ -1,43 +1,22 @@
 <?php
 
-namespace Tests\Feature\Admin\Contact;
-
 use App\Models\Contact;
-use Tests\TestCase;
 
-class DeleteContactTest extends TestCase
-{
-    /**
-     * Contract.
-     */
-    private Contact $contact;
+beforeEach(function () {
+    $this->contact = Contact::factory()->create();
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('guest cant delete contact', function () {
+    $this->delete(route('admin.contacts.destroy', $this->contact))
+        ->assertRedirect(route('admin.login'));
+});
 
-        $this->contact = Contact::factory()->create();
-    }
+test('user can delete contact', function () {
+    $this->login()
+        ->from(route('admin.contacts.index'))
+        ->delete(route('admin.contacts.destroy', $this->contact))
+        ->assertRedirect(route('admin.contacts.index'))
+        ->assertSessionHas('status', trans('contact.deleted'));
 
-    /** @test */
-    public function guest_cant_delete_contact(): void
-    {
-        $this->delete(route('admin.contacts.destroy', $this->contact))
-            ->assertRedirect(route('admin.login'));
-    }
-
-    /** @test */
-    public function user_can_delete_contact(): void
-    {
-        $this->login()
-            ->from(route('admin.contacts.index'))
-            ->delete(route('admin.contacts.destroy', $this->contact))
-            ->assertRedirect(route('admin.contacts.index'))
-            ->assertSessionHas('status', trans('contact.deleted'));
-
-        $this->assertModelMissing($this->contact);
-    }
-}
+    $this->assertModelMissing($this->contact);
+});

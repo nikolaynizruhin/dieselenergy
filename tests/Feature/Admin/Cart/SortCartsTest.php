@@ -1,187 +1,159 @@
 <?php
 
-namespace Tests\Feature\Admin\Cart;
-
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Tests\TestCase;
 
-class SortCartsTest extends TestCase
-{
-    /**
-     * Order.
-     */
-    private Order $order;
+beforeEach(function () {
+    $this->order = Order::factory()->create();
+});
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('guest cant sort carts', function () {
+    $this->get(route('admin.orders.show', [
+        'order' => $this->order,
+        'sort' => 'quantity',
+    ]))->assertRedirect(route('admin.login'));
+});
 
-        $this->order = Order::factory()->create();
-    }
+test('admin can sort carts by quantity ascending', function () {
+    [$hyundai, $sdmo] = Cart::factory()
+        ->count(2)
+        ->for($this->order)
+        ->state(new Sequence(
+            ['quantity' => 1],
+            ['quantity' => 2],
+        ))->create();
 
-    /** @test */
-    public function guest_cant_sort_carts(): void
-    {
-        $this->get(route('admin.orders.show', [
+    $this->login()
+        ->get(route('admin.orders.show', [
             'order' => $this->order,
             'sort' => 'quantity',
-        ]))->assertRedirect(route('admin.login'));
-    }
+        ]))->assertSuccessful()
+        ->assertViewIs('admin.orders.show')
+        ->assertViewHas('products')
+        ->assertSeeInOrder([$hyundai->product->name, $sdmo->product->name]);
+});
 
-    /** @test */
-    public function admin_can_sort_carts_by_quantity_ascending(): void
-    {
-        [$hyundai, $sdmo] = Cart::factory()
-            ->count(2)
-            ->for($this->order)
-            ->state(new Sequence(
-                ['quantity' => 1],
-                ['quantity' => 2],
-            ))->create();
+test('admin can sort carts by quantity descending', function () {
+    [$hyundai, $sdmo] = Cart::factory()
+        ->count(2)
+        ->for($this->order)
+        ->state(new Sequence(
+            ['quantity' => 1],
+            ['quantity' => 2],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.orders.show', [
-                'order' => $this->order,
-                'sort' => 'quantity',
-            ]))->assertSuccessful()
-            ->assertViewIs('admin.orders.show')
-            ->assertViewHas('products')
-            ->assertSeeInOrder([$hyundai->product->name, $sdmo->product->name]);
-    }
+    $this->login()
+        ->get(route('admin.orders.show', [
+            'order' => $this->order,
+            'sort' => '-quantity',
+        ]))->assertSuccessful()
+        ->assertViewIs('admin.orders.show')
+        ->assertViewHas('products')
+        ->assertSeeInOrder([$sdmo->product->name, $hyundai->product->name]);
+});
 
-    /** @test */
-    public function admin_can_sort_carts_by_quantity_descending(): void
-    {
-        [$hyundai, $sdmo] = Cart::factory()
-            ->count(2)
-            ->for($this->order)
-            ->state(new Sequence(
-                ['quantity' => 1],
-                ['quantity' => 2],
-            ))->create();
+test('admin can sort carts by product name ascending', function () {
+    [$diesel, $patrol] = Product::factory()
+        ->count(2)
+        ->state(new Sequence(
+            ['name' => 'Diesel'],
+            ['name' => 'Patrol'],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.orders.show', [
-                'order' => $this->order,
-                'sort' => '-quantity',
-            ]))->assertSuccessful()
-            ->assertViewIs('admin.orders.show')
-            ->assertViewHas('products')
-            ->assertSeeInOrder([$sdmo->product->name, $hyundai->product->name]);
-    }
+    [$hyundai, $sdmo] = Cart::factory()
+        ->count(2)
+        ->for($this->order)
+        ->state(new Sequence(
+            ['product_id' => $diesel],
+            ['product_id' => $patrol],
+        ))->create();
 
-    /** @test */
-    public function admin_can_sort_carts_by_product_name_ascending(): void
-    {
-        [$diesel, $patrol] = Product::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['name' => 'Diesel'],
-                ['name' => 'Patrol'],
-            ))->create();
+    $this->login()
+        ->get(route('admin.orders.show', [
+            'order' => $this->order,
+            'sort' => 'name',
+        ]))->assertSuccessful()
+        ->assertViewIs('admin.orders.show')
+        ->assertViewHas('products')
+        ->assertSeeInOrder([$hyundai->product->name, $sdmo->product->name]);
+});
 
-        [$hyundai, $sdmo] = Cart::factory()
-            ->count(2)
-            ->for($this->order)
-            ->state(new Sequence(
-                ['product_id' => $diesel],
-                ['product_id' => $patrol],
-            ))->create();
+test('admin can sort carts by product name descending', function () {
+    [$diesel, $patrol] = Product::factory()
+        ->count(2)
+        ->state(new Sequence(
+            ['name' => 'Diesel'],
+            ['name' => 'Patrol'],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.orders.show', [
-                'order' => $this->order,
-                'sort' => 'name',
-            ]))->assertSuccessful()
-            ->assertViewIs('admin.orders.show')
-            ->assertViewHas('products')
-            ->assertSeeInOrder([$hyundai->product->name, $sdmo->product->name]);
-    }
+    [$hyundai, $sdmo] = Cart::factory()
+        ->count(2)
+        ->for($this->order)
+        ->state(new Sequence(
+            ['product_id' => $diesel],
+            ['product_id' => $patrol],
+        ))->create();
 
-    /** @test */
-    public function admin_can_sort_carts_by_product_name_descending(): void
-    {
-        [$diesel, $patrol] = Product::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['name' => 'Diesel'],
-                ['name' => 'Patrol'],
-            ))->create();
+    $this->login()
+        ->get(route('admin.orders.show', [
+            'order' => $this->order,
+            'sort' => '-name',
+        ]))->assertSuccessful()
+        ->assertViewIs('admin.orders.show')
+        ->assertViewHas('products')
+        ->assertSeeInOrder([$sdmo->product->name, $hyundai->product->name]);
+});
 
-        [$hyundai, $sdmo] = Cart::factory()
-            ->count(2)
-            ->for($this->order)
-            ->state(new Sequence(
-                ['product_id' => $diesel],
-                ['product_id' => $patrol],
-            ))->create();
+test('admin can sort carts by total price ascending', function () {
+    [$diesel, $patrol] = Product::factory()
+        ->count(2)
+        ->state(new Sequence(
+            ['price' => 1000],
+            ['price' => 2000],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.orders.show', [
-                'order' => $this->order,
-                'sort' => '-name',
-            ]))->assertSuccessful()
-            ->assertViewIs('admin.orders.show')
-            ->assertViewHas('products')
-            ->assertSeeInOrder([$sdmo->product->name, $hyundai->product->name]);
-    }
+    [$hyundai, $sdmo] = Cart::factory()
+        ->count(2)
+        ->for($this->order)
+        ->state(new Sequence(
+            ['product_id' => $diesel, 'quantity' => 1],
+            ['product_id' => $patrol, 'quantity' => 1],
+        ))->create();
 
-    /** @test */
-    public function admin_can_sort_carts_by_total_price_ascending(): void
-    {
-        [$diesel, $patrol] = Product::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['price' => 1000],
-                ['price' => 2000],
-            ))->create();
+    $this->login()
+        ->get(route('admin.orders.show', [
+            'order' => $this->order,
+            'sort' => 'total',
+        ]))->assertSuccessful()
+        ->assertViewIs('admin.orders.show')
+        ->assertViewHas('products')
+        ->assertSeeInOrder([$hyundai->product->name, $sdmo->product->name]);
+});
 
-        [$hyundai, $sdmo] = Cart::factory()
-            ->count(2)
-            ->for($this->order)
-            ->state(new Sequence(
-                ['product_id' => $diesel, 'quantity' => 1],
-                ['product_id' => $patrol, 'quantity' => 1],
-            ))->create();
+test('admin can sort carts by total price descending', function () {
+    [$diesel, $patrol] = Product::factory()
+        ->count(2)
+        ->state(new Sequence(
+            ['price' => 1000],
+            ['price' => 2000],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.orders.show', [
-                'order' => $this->order,
-                'sort' => 'total',
-            ]))->assertSuccessful()
-            ->assertViewIs('admin.orders.show')
-            ->assertViewHas('products')
-            ->assertSeeInOrder([$hyundai->product->name, $sdmo->product->name]);
-    }
+    [$hyundai, $sdmo] = Cart::factory()
+        ->count(2)
+        ->for($this->order)
+        ->state(new Sequence(
+            ['product_id' => $diesel, 'quantity' => 1],
+            ['product_id' => $patrol, 'quantity' => 1],
+        ))->create();
 
-    /** @test */
-    public function admin_can_sort_carts_by_total_price_descending(): void
-    {
-        [$diesel, $patrol] = Product::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['price' => 1000],
-                ['price' => 2000],
-            ))->create();
-
-        [$hyundai, $sdmo] = Cart::factory()
-            ->count(2)
-            ->for($this->order)
-            ->state(new Sequence(
-                ['product_id' => $diesel, 'quantity' => 1],
-                ['product_id' => $patrol, 'quantity' => 1],
-            ))->create();
-
-        $this->login()
-            ->get(route('admin.orders.show', [
-                'order' => $this->order,
-                'sort' => '-total',
-            ]))->assertSuccessful()
-            ->assertViewIs('admin.orders.show')
-            ->assertViewHas('products')
-            ->assertSeeInOrder([$sdmo->product->name, $hyundai->product->name]);
-    }
-}
+    $this->login()
+        ->get(route('admin.orders.show', [
+            'order' => $this->order,
+            'sort' => '-total',
+        ]))->assertSuccessful()
+        ->assertViewIs('admin.orders.show')
+        ->assertViewHas('products')
+        ->assertSeeInOrder([$sdmo->product->name, $hyundai->product->name]);
+});

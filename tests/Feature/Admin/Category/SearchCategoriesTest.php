@@ -1,36 +1,26 @@
 <?php
 
-namespace Tests\Feature\Admin\Category;
-
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Tests\TestCase;
 
-class SearchCategoriesTest extends TestCase
-{
-    /** @test */
-    public function guest_cant_search_categories(): void
-    {
-        $category = Category::factory()->create();
+test('guest cant search categories', function () {
+    $category = Category::factory()->create();
 
-        $this->get(route('admin.categories.index', ['search' => $category->name]))
-            ->assertRedirect(route('admin.login'));
-    }
+    $this->get(route('admin.categories.index', ['search' => $category->name]))
+        ->assertRedirect(route('admin.login'));
+});
 
-    /** @test */
-    public function user_can_search_categories(): void
-    {
-        [$patrol, $diesel, $waterPumps] = Category::factory()
-            ->count(3)
-            ->state(new Sequence(
-                ['name' => 'Patrol Generators'],
-                ['name' => 'Diesel Generators'],
-                ['name' => 'Water Pumps'],
-            ))->create();
+test('user can search categories', function () {
+    [$patrol, $diesel, $waterPumps] = Category::factory()
+        ->count(3)
+        ->state(new Sequence(
+            ['name' => 'Patrol Generators'],
+            ['name' => 'Diesel Generators'],
+            ['name' => 'Water Pumps'],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.categories.index', ['search' => 'Generators']))
-            ->assertSeeInOrder([$diesel->name, $patrol->name])
-            ->assertDontSee($waterPumps->name);
-    }
-}
+    $this->login()
+        ->get(route('admin.categories.index', ['search' => 'Generators']))
+        ->assertSeeInOrder([$diesel->name, $patrol->name])
+        ->assertDontSee($waterPumps->name);
+});

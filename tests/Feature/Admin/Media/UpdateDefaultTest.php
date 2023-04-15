@@ -1,57 +1,34 @@
 <?php
 
-namespace Tests\Feature\Admin\Media;
-
 use App\Models\Media;
-use Tests\TestCase;
 
-class UpdateDefaultTest extends TestCase
-{
-    /**
-     * Media.
-     */
-    private Media $media;
+beforeEach(function () {
+    $this->media = Media::factory()->regular()->create();
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('guest cant update default media', function () {
+    $this->put(route('admin.medias.default.update', $this->media))
+        ->assertRedirect(route('admin.login'));
+});
 
-        $this->media = Media::factory()->regular()->create();
-    }
+test('user can update default media', function () {
+    $this->login()
+        ->put(route('admin.medias.default.update', $this->media))
+        ->assertRedirect(route('admin.products.show', $this->media->product_id))
+        ->assertSessionHas('status', trans('media.updated'));
 
-    /** @test */
-    public function guest_cant_update_default_media(): void
-    {
-        $this->put(route('admin.medias.default.update', $this->media))
-            ->assertRedirect(route('admin.login'));
-    }
+    $this->assertTrue($this->media->fresh()->is_default);
+});
 
-    /** @test */
-    public function user_can_update_default_media(): void
-    {
-        $this->login()
-            ->put(route('admin.medias.default.update', $this->media))
-            ->assertRedirect(route('admin.products.show', $this->media->product_id))
-            ->assertSessionHas('status', trans('media.updated'));
+test('it should unmark other default medias', function () {
+    $defaultMedia = Media::factory()
+        ->default()
+        ->create(['product_id' => $this->media->product_id]);
 
-        $this->assertTrue($this->media->fresh()->is_default);
-    }
+    $this->login()
+        ->put(route('admin.medias.default.update', $this->media))
+        ->assertRedirect();
 
-    /** @test */
-    public function it_should_unmark_other_default_medias(): void
-    {
-        $defaultMedia = Media::factory()
-            ->default()
-            ->create(['product_id' => $this->media->product_id]);
-
-        $this->login()
-            ->put(route('admin.medias.default.update', $this->media))
-            ->assertRedirect();
-
-        $this->assertFalse($defaultMedia->fresh()->is_default);
-        $this->assertTrue($this->media->fresh()->is_default);
-    }
-}
+    $this->assertFalse($defaultMedia->fresh()->is_default);
+    $this->assertTrue($this->media->fresh()->is_default);
+});
