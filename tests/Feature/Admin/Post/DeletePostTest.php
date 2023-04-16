@@ -1,43 +1,22 @@
 <?php
 
-namespace Tests\Feature\Admin\Post;
-
 use App\Models\Post;
-use Tests\TestCase;
 
-class DeletePostTest extends TestCase
-{
-    /**
-     * Post.
-     */
-    private Post $post;
+beforeEach(function () {
+    $this->post = Post::factory()->create();
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('guest cant delete post', function () {
+    $this->delete(route('admin.posts.destroy', $this->post))
+        ->assertRedirect(route('admin.login'));
+});
 
-        $this->post = Post::factory()->create();
-    }
+test('user can delete post', function () {
+    $this->login()
+        ->from(route('admin.posts.index'))
+        ->delete(route('admin.posts.destroy', $this->post))
+        ->assertRedirect(route('admin.posts.index'))
+        ->assertSessionHas('status', trans('post.deleted'));
 
-    /** @test */
-    public function guest_cant_delete_post(): void
-    {
-        $this->delete(route('admin.posts.destroy', $this->post))
-            ->assertRedirect(route('admin.login'));
-    }
-
-    /** @test */
-    public function user_can_delete_post(): void
-    {
-        $this->login()
-            ->from(route('admin.posts.index'))
-            ->delete(route('admin.posts.destroy', $this->post))
-            ->assertRedirect(route('admin.posts.index'))
-            ->assertSessionHas('status', trans('post.deleted'));
-
-        $this->assertModelMissing($this->post);
-    }
-}
+    $this->assertModelMissing($this->post);
+});
