@@ -1,18 +1,10 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\Models\Image;
 use App\Models\Post;
-use Tests\TestCase;
 
-class PostTest extends TestCase
-{
-    /** @test */
-    public function it_has_image(): void
-    {
-        $post = Post::factory()->create();
+it('has image', function () {
+    $post = Post::factory()->create();
 
-        $this->assertInstanceOf(Image::class, $post->image);
-    }
-}
+    $this->assertInstanceOf(Image::class, $post->image);
+});

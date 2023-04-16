@@ -3,79 +3,43 @@
 namespace Tests\Feature\Admin\Brand;
 
 use App\Models\Brand;
-use Tests\TestCase;
 
-class UpdateBrandTest extends TestCase
-{
-    use HasValidation;
+beforeEach(function () {
+    $this->brand = Brand::factory()->create();
+});
 
-    /**
-     * Brand.
-     */
-    private Brand $brand;
+test('guest cant visit update brand page', function () {
+    $this->get(route('admin.brands.edit', $this->brand))
+        ->assertRedirect(route('admin.login'));
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('user can visit update brand page', function () {
+    $this->login()
+        ->get(route('admin.brands.edit', $this->brand))
+        ->assertViewIs('admin.brands.edit')
+        ->assertViewHas('brand', $this->brand);
+});
 
-        $this->brand = Brand::factory()->create();
-    }
+test('guest cant update brand', function () {
+    $this->put(route('admin.brands.update', $this->brand), validFields())
+        ->assertRedirect(route('admin.login'));
+});
 
-    /** @test */
-    public function guest_cant_visit_update_brand_page(): void
-    {
-        $this->get(route('admin.brands.edit', $this->brand))
-            ->assertRedirect(route('admin.login'));
-    }
+test('user can update brand', function () {
+    $this->login()
+        ->put(route('admin.brands.update', $this->brand), $fields = validFields())
+        ->assertRedirect(route('admin.brands.index'))
+        ->assertSessionHas('status', trans('brand.updated'));
 
-    /** @test */
-    public function user_can_visit_update_brand_page(): void
-    {
-        $this->login()
-            ->get(route('admin.brands.edit', $this->brand))
-            ->assertViewIs('admin.brands.edit')
-            ->assertViewHas('brand', $this->brand);
-    }
+    $this->assertDatabaseHas('brands', $fields);
+});
 
-    /** @test */
-    public function guest_cant_update_brand(): void
-    {
-        $this->put(route('admin.brands.update', $this->brand), self::validFields())
-            ->assertRedirect(route('admin.login'));
-    }
+test('user cant update brand with invalid data', function (string $field, callable $data, $count = 1) {
+    $this->login()
+        ->from(route('admin.brands.edit', $this->brand))
+        ->put(route('admin.brands.update', $this->brand), $data())
+        ->assertRedirect(route('admin.brands.edit', $this->brand))
+        ->assertSessionHasErrors($field);
 
-    /** @test */
-    public function user_can_update_brand(): void
-    {
-        $this->login()
-            ->put(route('admin.brands.update', $this->brand), $fields = self::validFields())
-            ->assertRedirect(route('admin.brands.index'))
-            ->assertSessionHas('status', trans('brand.updated'));
-
-        $this->assertDatabaseHas('brands', $fields);
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider validationProvider
-     */
-    public function user_cant_update_brand_with_invalid_data(string $field, callable $data, $count = 1): void
-    {
-        $this->login()
-            ->from(route('admin.brands.edit', $this->brand))
-            ->put(route('admin.brands.update', $this->brand), $data())
-            ->assertRedirect(route('admin.brands.edit', $this->brand))
-            ->assertSessionHasErrors($field);
-
-        $this->assertDatabaseCount('brands', $count);
-    }
-
-    public static function validationProvider(): array
-    {
-        return self::provider(2);
-    }
-}
+    $this->assertDatabaseCount('brands', $count);
+})->with('update_brand');

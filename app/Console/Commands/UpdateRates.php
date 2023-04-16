@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Currency;
-use Facades\App\Services\Minfin;
+use Facades\App\Services\ExchangeRate;
 use Illuminate\Console\Command;
 
 class UpdateRates extends Command
@@ -27,7 +27,7 @@ class UpdateRates extends Command
      */
     public function handle(): int
     {
-        $rates = Minfin::getRates();
+        $rates = ExchangeRate::get();
 
         $currencies = Currency::all()->map(function ($currency) use ($rates) {
             $rate = $rates->firstWhere('currency', strtolower($currency->code));

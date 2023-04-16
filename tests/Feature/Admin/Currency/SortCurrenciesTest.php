@@ -1,89 +1,73 @@
 <?php
 
-namespace Tests\Feature\Admin\Currency;
-
 use App\Models\Currency;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Tests\TestCase;
 
-class SortCurrenciesTest extends TestCase
-{
-    /** @test */
-    public function guest_cant_sort_currencies(): void
-    {
-        $this->get(route('admin.currencies.index', ['sort' => 'code']))
-            ->assertRedirect(route('admin.login'));
-    }
+test('guest cant sort currencies', function () {
+    $this->get(route('admin.currencies.index', ['sort' => 'code']))
+        ->assertRedirect(route('admin.login'));
+});
 
-    /** @test */
-    public function admin_can_sort_currencies_by_code_ascending(): void
-    {
-        [$euro, $dollar] = Currency::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['code' => 'EUR'],
-                ['code' => 'USD'],
-            ))->create();
+test('admin can sort currencies by code ascending', function () {
+    [$euro, $dollar] = Currency::factory()
+        ->count(2)
+        ->state(new Sequence(
+            ['code' => 'EUR'],
+            ['code' => 'USD'],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.currencies.index', ['sort' => 'code']))
-            ->assertSuccessful()
-            ->assertViewIs('admin.currencies.index')
-            ->assertViewHas('currencies')
-            ->assertSeeInOrder([$euro->code, $dollar->code]);
-    }
+    $this->login()
+        ->get(route('admin.currencies.index', ['sort' => 'code']))
+        ->assertSuccessful()
+        ->assertViewIs('admin.currencies.index')
+        ->assertViewHas('currencies')
+        ->assertSeeInOrder([$euro->code, $dollar->code]);
+});
 
-    /** @test */
-    public function admin_can_sort_currencies_by_code_descending(): void
-    {
-        [$euro, $dollar] = Currency::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['code' => 'EUR'],
-                ['code' => 'USD'],
-            ))->create();
+test('admin can sort currencies by code descending', function () {
+    [$euro, $dollar] = Currency::factory()
+        ->count(2)
+        ->state(new Sequence(
+            ['code' => 'EUR'],
+            ['code' => 'USD'],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.currencies.index', ['sort' => '-code']))
-            ->assertSuccessful()
-            ->assertViewIs('admin.currencies.index')
-            ->assertViewHas('currencies')
-            ->assertSeeInOrder([$dollar->code, $euro->code]);
-    }
+    $this->login()
+        ->get(route('admin.currencies.index', ['sort' => '-code']))
+        ->assertSuccessful()
+        ->assertViewIs('admin.currencies.index')
+        ->assertViewHas('currencies')
+        ->assertSeeInOrder([$dollar->code, $euro->code]);
+});
 
-    /** @test */
-    public function admin_can_sort_currencies_by_rate_ascending(): void
-    {
-        [$dollar, $euro] = Currency::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['rate' => 30.0000],
-                ['rate' => 28.0000],
-            ))->create();
+test('admin can sort currencies by rate ascending', function () {
+    [$dollar, $euro] = Currency::factory()
+        ->count(2)
+        ->state(new Sequence(
+            ['rate' => 30.0000],
+            ['rate' => 28.0000],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.currencies.index', ['sort' => 'rate']))
-            ->assertSuccessful()
-            ->assertViewIs('admin.currencies.index')
-            ->assertViewHas('currencies')
-            ->assertSeeInOrder([$euro->rate, $dollar->rate]);
-    }
+    $this->login()
+        ->get(route('admin.currencies.index', ['sort' => 'rate']))
+        ->assertSuccessful()
+        ->assertViewIs('admin.currencies.index')
+        ->assertViewHas('currencies')
+        ->assertSeeInOrder([$euro->rate, $dollar->rate]);
+});
 
-    /** @test */
-    public function admin_can_sort_currencies_by_rate_descending(): void
-    {
-        [$dollar, $euro] = Currency::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['rate' => 30.0000],
-                ['rate' => 28.0000],
-            ))->create();
+test('admin can sort currencies by rate descending', function () {
+    [$dollar, $euro] = Currency::factory()
+        ->count(2)
+        ->state(new Sequence(
+            ['rate' => 30.0000],
+            ['rate' => 28.0000],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.currencies.index', ['sort' => '-rate']))
-            ->assertSuccessful()
-            ->assertViewIs('admin.currencies.index')
-            ->assertViewHas('currencies')
-            ->assertSeeInOrder([$dollar->rate, $euro->rate]);
-    }
-}
+    $this->login()
+        ->get(route('admin.currencies.index', ['sort' => '-rate']))
+        ->assertSuccessful()
+        ->assertViewIs('admin.currencies.index')
+        ->assertViewHas('currencies')
+        ->assertSeeInOrder([$dollar->rate, $euro->rate]);
+});

@@ -1,48 +1,30 @@
 <?php
 
-namespace Tests\Console\Backup;
-
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
 
-class CleanBackupsTest extends TestCase
-{
-    /**
-     * Backup path.
-     */
-    private string $backup;
+beforeEach(function () {
+    Storage::fake('local');
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+    $this->backup = UploadedFile::fake()
+        ->create('backup.zip')
+        ->storeAs(config('backup.folder'), 'backup.zip', 'local');
+});
 
-        Storage::fake('local');
+it('can clean backups older than a week', function () {
+    $this->travel(config('backup.lifetime'))->days();
 
-        $this->backup = UploadedFile::fake()
-            ->create('backup.zip')
-            ->storeAs(config('backup.folder'), 'backup.zip', 'local');
-    }
+    $this->artisan('backup:clean')
+        ->expectsOutput('Backups cleaned successfully!')
+        ->assertSuccessful();
 
-    /** @test */
-    public function it_can_clean_backups_older_than_a_week(): void
-    {
-        $this->travel(config('backup.lifetime'))->days();
+    Storage::disk('local')->assertMissing($this->backup);
+});
 
-        $this->artisan('backup:clean')
-            ->expectsOutput('Backups cleaned successfully!')
-            ->assertSuccessful();
+it('can should not clean backups less than a week', function () {
+    $this->artisan('backup:clean')
+        ->expectsOutput('Backups cleaned successfully!')
+        ->assertSuccessful();
 
-        Storage::disk('local')->assertMissing($this->backup);
-    }
-
-    /** @test */
-    public function it_can_should_not_clean_backups_less_than_a_week(): void
-    {
-        $this->artisan('backup:clean')
-            ->expectsOutput('Backups cleaned successfully!')
-            ->assertSuccessful();
-
-        Storage::disk('local')->assertExists($this->backup);
-    }
-}
+    Storage::disk('local')->assertExists($this->backup);
+});

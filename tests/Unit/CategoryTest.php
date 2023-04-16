@@ -1,30 +1,20 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
-use Tests\TestCase;
 
-class CategoryTest extends TestCase
-{
-    /** @test */
-    public function it_has_many_products(): void
-    {
-        $category = Category::factory()
-            ->hasProducts()
-            ->create();
+it('has many products', function () {
+    $category = Category::factory()
+        ->hasProducts()
+        ->create();
 
-        $this->assertInstanceOf(Collection::class, $category->products);
-    }
+    $this->assertInstanceOf(Collection::class, $category->products);
+});
 
-    /** @test */
-    public function it_has_many_attributes(): void
-    {
-        $category = Category::factory()
-            ->hasAttributes()
-            ->create();
+it('has many attributes', function () {
+    $category = Category::factory()
+        ->hasAttributes()
+        ->create();
 
-        $this->assertInstanceOf(Collection::class, $category->attributes);
-    }
-}
+    $this->assertInstanceOf(Collection::class, $category->attributes);
+});

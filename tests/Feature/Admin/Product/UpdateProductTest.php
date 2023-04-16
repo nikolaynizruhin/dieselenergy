@@ -8,178 +8,130 @@ use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
 
-class UpdateProductTest extends TestCase
-{
-    use HasValidation;
+beforeEach(function () {
+    $this->product = Product::factory()->create();
+});
 
-    /**
-     * Product.
-     */
-    private Product $product;
+test('guest cant visit update product page', function () {
+    $this->get(route('admin.products.edit', $this->product))
+        ->assertRedirect(route('admin.login'));
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('user can visit update product page', function () {
+    $attribute = Attribute::factory()->create();
+    $this->product->category->attributes()->attach($attribute);
 
-        $this->product = Product::factory()->create();
-    }
+    $this->login()
+        ->get(route('admin.products.edit', $this->product))
+        ->assertViewIs('admin.products.edit')
+        ->assertViewHas('product', $this->product)
+        ->assertViewHas(['brands']);
+});
 
-    /** @test */
-    public function guest_cant_visit_update_product_page(): void
-    {
-        $this->get(route('admin.products.edit', $this->product))
-            ->assertRedirect(route('admin.login'));
-    }
+test('guest cant update product', function () {
+    $this->put(route('admin.products.update', $this->product), validFields())
+        ->assertRedirect(route('admin.login'));
+});
 
-    /** @test */
-    public function user_can_visit_update_product_page(): void
-    {
-        $attribute = Attribute::factory()->create();
-        $this->product->category->attributes()->attach($attribute);
+test('user can update product', function () {
+    $this->login()
+        ->put(route('admin.products.update', $this->product), $fields = validFields())
+        ->assertRedirect(route('admin.products.index'))
+        ->assertSessionHas('status', trans('product.updated'));
 
-        $this->login()
-            ->get(route('admin.products.edit', $this->product))
-            ->assertViewIs('admin.products.edit')
-            ->assertViewHas('product', $this->product)
-            ->assertViewHas(['brands']);
-    }
+    $this->assertDatabaseHas('products', array_merge($fields, [
+        'price' => $fields['price'] * 100,
+    ]));
+});
 
-    /** @test */
-    public function guest_cant_update_product(): void
-    {
-        $this->put(route('admin.products.update', $this->product), self::validFields())
-            ->assertRedirect(route('admin.login'));
-    }
+test('user can update product with attributes', function () {
+    $category = Category::factory()->create();
+    $attribute = Attribute::factory()->create();
 
-    /** @test */
-    public function user_can_update_product(): void
-    {
-        $this->login()
-            ->put(route('admin.products.update', $this->product), $fields = self::validFields())
-            ->assertRedirect(route('admin.products.index'))
-            ->assertSessionHas('status', trans('product.updated'));
+    $category->attributes()->attach($attribute);
 
-        $this->assertDatabaseHas('products', array_merge($fields, [
-            'price' => $fields['price'] * 100,
-        ]));
-    }
+    $stub = validFields(['category_id' => $category->id]);
 
-    /** @test */
-    public function user_can_update_product_with_attributes(): void
-    {
-        $category = Category::factory()->create();
-        $attribute = Attribute::factory()->create();
+    $this->login()
+        ->put(route('admin.products.update', $this->product), $stub + [
+            'attributes' => [
+                $attribute->id => $value = fake()->word(),
+            ],
+        ])->assertRedirect(route('admin.products.index'))
+        ->assertSessionHas('status', trans('product.updated'));
 
-        $category->attributes()->attach($attribute);
+    $this->assertDatabaseHas('products', array_merge($stub, [
+        'price' => $stub['price'] * 100,
+    ]));
 
-        $stub = self::validFields(['category_id' => $category->id]);
+    $this->assertDatabaseHas('attribute_product', [
+        'product_id' => $this->product->id,
+        'value' => $value,
+    ]);
+});
 
-        $this->login()
-            ->put(route('admin.products.update', $this->product), $stub + [
-                'attributes' => [
-                    $attribute->id => $value = fake()->word(),
-                ],
-            ])->assertRedirect(route('admin.products.index'))
-            ->assertSessionHas('status', trans('product.updated'));
+test('user can update product with images', function () {
+    Storage::fake();
 
-        $this->assertDatabaseHas('products', array_merge($stub, [
-            'price' => $stub['price'] * 100,
-        ]));
+    $image = UploadedFile::fake()->image('product.jpg');
 
-        $this->assertDatabaseHas('attribute_product', [
-            'product_id' => $this->product->id,
-            'value' => $value,
-        ]);
-    }
+    $stub = validFields();
 
-    /** @test */
-    public function user_can_update_product_with_images(): void
-    {
-        Storage::fake();
+    $this->login()
+        ->put(route('admin.products.update', $this->product), $stub + [
+            'images' => [$image],
+        ])->assertRedirect(route('admin.products.index'))
+        ->assertSessionHas('status', trans('product.updated'));
 
-        $image = UploadedFile::fake()->image('product.jpg');
+    Storage::assertExists($path = 'images/'.$image->hashName());
 
-        $stub = self::validFields();
+    $this->assertDatabaseHas('images', ['path' => $path]);
 
-        $this->login()
-            ->put(route('admin.products.update', $this->product), $stub + [
-                'images' => [$image],
-            ])->assertRedirect(route('admin.products.index'))
-            ->assertSessionHas('status', trans('product.updated'));
+    $this->assertDatabaseHas('image_product', [
+        'image_id' => Image::firstWhere('path', $path)->id,
+        'product_id' => $this->product->id,
+    ]);
 
-        Storage::assertExists($path = 'images/'.$image->hashName());
+    $this->assertDatabaseHas('products', array_merge($stub, [
+        'price' => $stub['price'] * 100,
+    ]));
+});
 
-        $this->assertDatabaseHas('images', ['path' => $path]);
+test('unrelated attribute should not be attached to product', function () {
+    $category = Category::factory()->create();
+    $unrelated = Attribute::factory()->create();
 
-        $this->assertDatabaseHas('image_product', [
-            'image_id' => Image::firstWhere('path', $path)->id,
-            'product_id' => $this->product->id,
-        ]);
+    $stub = validFields([
+        'category_id' => $category->id,
+        'attributes' => [$unrelated->id => fake()->randomDigit()],
+    ]);
 
-        $this->assertDatabaseHas('products', array_merge($stub, [
-            'price' => $stub['price'] * 100,
-        ]));
-    }
+    $this->login()
+        ->put(route('admin.products.update', $this->product), $stub)
+        ->assertRedirect();
 
-    /** @test */
-    public function unrelated_attribute_should_not_be_attached_to_product(): void
-    {
-        $category = Category::factory()->create();
-        $unrelated = Attribute::factory()->create();
+    $this->assertFalse($this->product->fresh()->attributes->contains($unrelated));
+});
 
-        $stub = self::validFields([
-            'category_id' => $category->id,
-            'attributes' => [$unrelated->id => fake()->randomDigit()],
-        ]);
+test('user cant update product with invalid data', function (string $field, callable $data, int $count = 1) {
+    $this->login()
+        ->from(route('admin.products.edit', $this->product))
+        ->put(route('admin.products.update', $this->product), $data())
+        ->assertRedirect(route('admin.products.edit', $this->product))
+        ->assertSessionHasErrors($field);
 
-        $this->login()
-            ->put(route('admin.products.update', $this->product), $stub)
-            ->assertRedirect();
+    $this->assertDatabaseCount('products', $count);
+})->with('udpate_product');
 
-        $this->assertFalse($this->product->fresh()->attributes->contains($unrelated));
-    }
+test('user cant update product with integer attributes', function (callable $data) {
+    [$attributeId, $fields] = $data();
 
-    /**
-     * @test
-     *
-     * @dataProvider validationProvider
-     */
-    public function user_cant_update_product_with_invalid_data(string $field, callable $data, int $count = 1): void
-    {
-        $this->login()
-            ->from(route('admin.products.edit', $this->product))
-            ->put(route('admin.products.update', $this->product), $data())
-            ->assertRedirect(route('admin.products.edit', $this->product))
-            ->assertSessionHasErrors($field);
+    $this->login()
+        ->from(route('admin.products.edit', $this->product))
+        ->put(route('admin.products.update', $this->product), $fields)
+        ->assertRedirect(route('admin.products.edit', $this->product))
+        ->assertSessionHasErrors('attributes.'.$attributeId);
 
-        $this->assertDatabaseCount('products', $count);
-    }
-
-    public static function validationProvider(): array
-    {
-        return self::provider(2);
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider validationAttributeProvider
-     */
-    public function user_cant_update_product_with_integer_attributes(callable $data): void
-    {
-        [$attributeId, $fields] = $data();
-
-        $this->login()
-            ->from(route('admin.products.edit', $this->product))
-            ->put(route('admin.products.update', $this->product), $fields)
-            ->assertRedirect(route('admin.products.edit', $this->product))
-            ->assertSessionHasErrors('attributes.'.$attributeId);
-
-        $this->assertDatabaseCount('products', 1);
-    }
-}
+    $this->assertDatabaseCount('products', 1);
+})->with('attribute');

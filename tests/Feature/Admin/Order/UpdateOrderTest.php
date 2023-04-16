@@ -3,92 +3,46 @@
 namespace Tests\Feature\Admin\Order;
 
 use App\Models\Order;
-use Tests\TestCase;
 
-class UpdateOrderTest extends TestCase
-{
-    use HasValidation;
+beforeEach(function () {
+    $this->order = Order::factory()->create();
+});
 
-    /**
-     * Order.
-     */
-    private Order $order;
+test('guest cant visit update order page', function () {
+    $this->get(route('admin.orders.edit', $this->order))
+        ->assertRedirect(route('admin.login'));
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('user can visit update order page', function () {
+    $this->login()
+        ->get(route('admin.orders.edit', $this->order))
+        ->assertViewIs('admin.orders.edit')
+        ->assertViewHas('order', $this->order)
+        ->assertViewHas(['customers', 'statuses', 'products']);
+});
 
-        $this->order = Order::factory()->create();
-    }
+test('guest cant update order', function () {
+    $this->put(route('admin.orders.update', $this->order), validFields())
+        ->assertRedirect(route('admin.login'));
+});
 
-    /** @test */
-    public function guest_cant_visit_update_order_page(): void
-    {
-        $this->get(route('admin.orders.edit', $this->order))
-            ->assertRedirect(route('admin.login'));
-    }
+test('user can update order', function () {
+    $this->login()
+        ->put(route('admin.orders.update', $this->order), $fields = validFields())
+        ->assertRedirect(route('admin.orders.index'))
+        ->assertSessionHas('status', trans('order.updated'));
 
-    /** @test */
-    public function user_can_visit_update_order_page(): void
-    {
-        $this->login()
-            ->get(route('admin.orders.edit', $this->order))
-            ->assertViewIs('admin.orders.edit')
-            ->assertViewHas('order', $this->order)
-            ->assertViewHas(['customers', 'statuses', 'products']);
-    }
+    $this->assertDatabaseHas('orders', array_merge($fields, [
+        'total' => $fields['total'] * 100,
+    ]));
+});
 
-    /** @test */
-    public function guest_cant_update_order(): void
-    {
-        $this->put(route('admin.orders.update', $this->order), self::validFields())
-            ->assertRedirect(route('admin.login'));
-    }
+test('user cant update order with invalid data', function (string $field, callable $data) {
+    $this->login()
+        ->from(route('admin.orders.edit', $this->order))
+        ->put(route('admin.orders.update', $this->order), $data())
+        ->assertRedirect(route('admin.orders.edit', $this->order))
+        ->assertSessionHasErrors($field);
 
-    /** @test */
-    public function user_can_update_order(): void
-    {
-        $this->login()
-            ->put(route('admin.orders.update', $this->order), $fields = self::validFields())
-            ->assertRedirect(route('admin.orders.index'))
-            ->assertSessionHas('status', trans('order.updated'));
-
-        $this->assertDatabaseHas('orders', array_merge($fields, [
-            'total' => $fields['total'] * 100,
-        ]));
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider validationProvider
-     */
-    public function user_cant_update_order_with_invalid_data(string $field, callable $data): void
-    {
-        $this->login()
-            ->from(route('admin.orders.edit', $this->order))
-            ->put(route('admin.orders.update', $this->order), $data())
-            ->assertRedirect(route('admin.orders.edit', $this->order))
-            ->assertSessionHasErrors($field);
-
-        $this->assertDatabaseCount('orders', 1);
-    }
-
-    public static function validationProvider(): array
-    {
-        return self::provider() + [
-            'Total is required' => [
-                'total', fn () => self::validFields(['total' => null]),
-            ],
-            'Total cant be string' => [
-                'total', fn () => self::validFields(['total' => 'string']),
-            ],
-            'Total cant be negative' => [
-                'total', fn () => self::validFields(['total' => -1]),
-            ],
-        ];
-    }
-}
+    $this->assertDatabaseCount('orders', 1);
+})->with('update_order');

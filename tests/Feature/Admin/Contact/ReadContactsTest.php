@@ -1,35 +1,25 @@
 <?php
 
-namespace Tests\Feature\Admin\Contact;
-
 use App\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Tests\TestCase;
 
-class ReadContactsTest extends TestCase
-{
-    /** @test */
-    public function guest_cant_read_contacts(): void
-    {
-        $this->get(route('admin.contacts.index'))
-            ->assertRedirect(route('admin.login'));
-    }
+test('guest cant read contacts', function () {
+    $this->get(route('admin.contacts.index'))
+        ->assertRedirect(route('admin.login'));
+});
 
-    /** @test */
-    public function user_can_read_contacts(): void
-    {
-        [$contactSale, $contactSupport] = Contact::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['message' => 'Support'],
-                ['message' => 'Sale'],
-            ))->create();
+test('user can read contacts', function () {
+    [$contactSale, $contactSupport] = Contact::factory()
+        ->count(2)
+        ->state(new Sequence(
+            ['message' => 'Support'],
+            ['message' => 'Sale'],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.contacts.index'))
-            ->assertSuccessful()
-            ->assertViewIs('admin.contacts.index')
-            ->assertViewHas('contacts')
-            ->assertSeeInOrder([$contactSale->message, $contactSupport->message]);
-    }
-}
+    $this->login()
+        ->get(route('admin.contacts.index'))
+        ->assertSuccessful()
+        ->assertViewIs('admin.contacts.index')
+        ->assertViewHas('contacts')
+        ->assertSeeInOrder([$contactSale->message, $contactSupport->message]);
+});

@@ -1,43 +1,22 @@
 <?php
 
-namespace Tests\Feature\Admin\Image;
-
 use App\Models\Image;
-use Tests\TestCase;
 
-class DeleteImageTest extends TestCase
-{
-    /**
-     * Image.
-     */
-    private Image $image;
+beforeEach(function () {
+    $this->image = Image::factory()->create();
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('guest cant delete image', function () {
+    $this->delete(route('admin.images.destroy', $this->image))
+        ->assertRedirect(route('admin.login'));
+});
 
-        $this->image = Image::factory()->create();
-    }
+test('user can delete image', function () {
+    $this->login()
+        ->from(route('admin.images.index'))
+        ->delete(route('admin.images.destroy', $this->image))
+        ->assertRedirect(route('admin.images.index'))
+        ->assertSessionHas('status', trans('image.deleted'));
 
-    /** @test */
-    public function guest_cant_delete_image(): void
-    {
-        $this->delete(route('admin.images.destroy', $this->image))
-            ->assertRedirect(route('admin.login'));
-    }
-
-    /** @test */
-    public function user_can_delete_image(): void
-    {
-        $this->login()
-            ->from(route('admin.images.index'))
-            ->delete(route('admin.images.destroy', $this->image))
-            ->assertRedirect(route('admin.images.index'))
-            ->assertSessionHas('status', trans('image.deleted'));
-
-        $this->assertModelMissing($this->image);
-    }
-}
+    $this->assertModelMissing($this->image);
+});

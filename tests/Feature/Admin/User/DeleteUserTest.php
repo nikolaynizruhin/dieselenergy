@@ -1,43 +1,22 @@
 <?php
 
-namespace Tests\Feature\Admin\User;
-
 use App\Models\User;
-use Tests\TestCase;
 
-class DeleteUserTest extends TestCase
-{
-    /**
-     * User.
-     */
-    private User $user;
+beforeEach(function () {
+    $this->user = User::factory()->create();
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('guest cant delete user', function () {
+    $this->delete(route('admin.users.destroy', $this->user))
+        ->assertRedirect(route('admin.login'));
+});
 
-        $this->user = User::factory()->create();
-    }
+test('user can delete user', function () {
+    $this->login()
+        ->from(route('admin.users.index'))
+        ->delete(route('admin.users.destroy', $this->user))
+        ->assertRedirect(route('admin.users.index'))
+        ->assertSessionHas('status', trans('user.deleted'));
 
-    /** @test */
-    public function guest_cant_delete_user(): void
-    {
-        $this->delete(route('admin.users.destroy', $this->user))
-            ->assertRedirect(route('admin.login'));
-    }
-
-    /** @test */
-    public function user_can_delete_user(): void
-    {
-        $this->login()
-            ->from(route('admin.users.index'))
-            ->delete(route('admin.users.destroy', $this->user))
-            ->assertRedirect(route('admin.users.index'))
-            ->assertSessionHas('status', trans('user.deleted'));
-
-        $this->assertModelMissing($this->user);
-    }
-}
+    $this->assertModelMissing($this->user);
+});

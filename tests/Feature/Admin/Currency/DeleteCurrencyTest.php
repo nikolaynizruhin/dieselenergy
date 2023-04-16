@@ -1,43 +1,22 @@
 <?php
 
-namespace Tests\Feature\Admin\Currency;
-
 use App\Models\Currency;
-use Tests\TestCase;
 
-class DeleteCurrencyTest extends TestCase
-{
-    /**
-     * Currency.
-     */
-    private Currency $currency;
+beforeEach(function () {
+    $this->currency = Currency::factory()->create();
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('guest cant delete currency', function () {
+    $this->delete(route('admin.currencies.destroy', $this->currency))
+        ->assertRedirect(route('admin.login'));
+});
 
-        $this->currency = Currency::factory()->create();
-    }
+test('user can delete category', function () {
+    $this->login()
+        ->from(route('admin.currencies.index'))
+        ->delete(route('admin.currencies.destroy', $this->currency))
+        ->assertRedirect(route('admin.currencies.index'))
+        ->assertSessionHas('status', trans('currency.deleted'));
 
-    /** @test */
-    public function guest_cant_delete_currency(): void
-    {
-        $this->delete(route('admin.currencies.destroy', $this->currency))
-            ->assertRedirect(route('admin.login'));
-    }
-
-    /** @test */
-    public function user_can_delete_category(): void
-    {
-        $this->login()
-            ->from(route('admin.currencies.index'))
-            ->delete(route('admin.currencies.destroy', $this->currency))
-            ->assertRedirect(route('admin.currencies.index'))
-            ->assertSessionHas('status', trans('currency.deleted'));
-
-        $this->assertModelMissing($this->currency);
-    }
-}
+    $this->assertModelMissing($this->currency);
+});

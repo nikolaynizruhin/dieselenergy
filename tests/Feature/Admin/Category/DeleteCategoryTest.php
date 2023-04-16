@@ -1,43 +1,22 @@
 <?php
 
-namespace Tests\Feature\Admin\Category;
-
 use App\Models\Category;
-use Tests\TestCase;
 
-class DeleteCategoryTest extends TestCase
-{
-    /**
-     * Category.
-     */
-    private Category $category;
+beforeEach(function () {
+    $this->category = Category::factory()->create();
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('guest cant delete category', function () {
+    $this->delete(route('admin.categories.destroy', $this->category))
+        ->assertRedirect(route('admin.login'));
+});
 
-        $this->category = Category::factory()->create();
-    }
+test('user can delete category', function () {
+    $this->login()
+        ->from(route('admin.categories.index'))
+        ->delete(route('admin.categories.destroy', $this->category))
+        ->assertRedirect(route('admin.categories.index'))
+        ->assertSessionHas('status', trans('category.deleted'));
 
-    /** @test */
-    public function guest_cant_delete_category(): void
-    {
-        $this->delete(route('admin.categories.destroy', $this->category))
-            ->assertRedirect(route('admin.login'));
-    }
-
-    /** @test */
-    public function user_can_delete_category(): void
-    {
-        $this->login()
-            ->from(route('admin.categories.index'))
-            ->delete(route('admin.categories.destroy', $this->category))
-            ->assertRedirect(route('admin.categories.index'))
-            ->assertSessionHas('status', trans('category.deleted'));
-
-        $this->assertModelMissing($this->category);
-    }
-}
+    $this->assertModelMissing($this->category);
+});

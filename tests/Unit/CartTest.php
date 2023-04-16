@@ -1,141 +1,108 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\Models\Brand;
 use App\Models\Currency;
 use App\Models\Order;
 use App\Models\Product;
 use Facades\App\Services\Cart;
 use Illuminate\Support\Collection;
-use Tests\TestCase;
 
-class CartTest extends TestCase
-{
-    /**
-     * Product.
-     */
-    private Product $product;
+beforeEach(function () {
+    $this->product = Product::factory()->withDefaultImage()->create();
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+it('can add', function () {
+    $item = Cart::add($this->product);
 
-        $this->product = Product::factory()->withDefaultImage()->create();
-    }
+    $this->assertEquals($item->id, $this->product->id);
+    $this->assertEquals($item->slug, $this->product->slug);
+    $this->assertEquals($item->name, $this->product->name);
+    $this->assertEquals($item->category, $this->product->category->name);
+    $this->assertEquals($item->price, $this->product->price->toUAH()->coins());
+    $this->assertEquals($item->image, $this->product->defaultImage()->path);
+    $this->assertEquals(1, $item->quantity);
+    $this->assertCount(1, Cart::items());
+});
 
-    /** @test */
-    public function it_can_add(): void
-    {
-        $item = Cart::add($this->product);
+it('can add existing product', function () {
+    $item = Cart::add($this->product, 2);
 
-        $this->assertEquals($item->id, $this->product->id);
-        $this->assertEquals($item->slug, $this->product->slug);
-        $this->assertEquals($item->name, $this->product->name);
-        $this->assertEquals($item->category, $this->product->category->name);
-        $this->assertEquals($item->price, $this->product->price->toUAH()->coins());
-        $this->assertEquals($item->image, $this->product->defaultImage()->path);
-        $this->assertEquals(1, $item->quantity);
-        $this->assertCount(1, Cart::items());
-    }
+    $this->assertEquals(2, $item->quantity);
 
-    /** @test */
-    public function it_can_add_existing_product(): void
-    {
-        $item = Cart::add($this->product, 2);
+    $item = Cart::add($this->product, 2);
 
-        $this->assertEquals(2, $item->quantity);
+    $this->assertEquals(4, $item->quantity);
+});
 
-        $item = Cart::add($this->product, 2);
+it('can remove', function () {
+    Cart::add($this->product);
 
-        $this->assertEquals(4, $item->quantity);
-    }
+    $this->assertCount(1, Cart::items());
 
-    /** @test */
-    public function it_can_remove(): void
-    {
-        Cart::add($this->product);
+    Cart::delete(0);
 
-        $this->assertCount(1, Cart::items());
+    $this->assertCount(0, Cart::items());
+});
 
-        Cart::delete(0);
+it('can get items', function () {
+    $item = Cart::add($this->product);
 
-        $this->assertCount(0, Cart::items());
-    }
+    $items = Cart::items();
 
-    /** @test */
-    public function it_can_get_items(): void
-    {
-        $item = Cart::add($this->product);
+    $this->assertTrue($items->contains($item));
+    $this->assertInstanceOf(Collection::class, $items);
+});
 
-        $items = Cart::items();
+it('can_update_cart_item', function () {
+    Cart::add($this->product);
 
-        $this->assertTrue($items->contains($item));
-        $this->assertInstanceOf(Collection::class, $items);
-    }
+    Cart::update(0, 5);
 
-    /** @test */
-    public function it_can_update_cart_item(): void
-    {
-        Cart::add($this->product);
+    $this->assertEquals(5, Cart::items()->first()->quantity);
+});
 
-        Cart::update(0, 5);
+it('can get total', function () {
+    $currency = Currency::factory()->state(['rate' => 30.0000]);
+    $brand = Brand::factory()->for($currency);
 
-        $this->assertEquals(5, Cart::items()->first()->quantity);
-    }
+    $generator = Product::factory()
+        ->for($brand)
+        ->withDefaultImage()
+        ->create(['price' => 10000]);
 
-    /** @test */
-    public function it_can_get_total(): void
-    {
-        $currency = Currency::factory()->state(['rate' => 30.0000]);
-        $brand = Brand::factory()->for($currency);
+    $waterPump = Product::factory()
+        ->for($brand)
+        ->withDefaultImage()
+        ->create(['price' => 10000]);
 
-        $generator = Product::factory()
-            ->for($brand)
-            ->withDefaultImage()
-            ->create(['price' => 10000]);
+    Cart::add($generator, 2);
+    Cart::add($waterPump);
 
-        $waterPump = Product::factory()
-            ->for($brand)
-            ->withDefaultImage()
-            ->create(['price' => 10000]);
+    $this->assertEquals(900000, Cart::total());
+});
 
-        Cart::add($generator, 2);
-        Cart::add($waterPump);
+it('can be cleared', function () {
+    Cart::add($this->product);
 
-        $this->assertEquals(900000, Cart::total());
-    }
+    $this->assertCount(1, Cart::items());
 
-    /** @test */
-    public function it_can_be_cleared(): void
-    {
-        Cart::add($this->product);
+    Cart::clear();
 
-        $this->assertCount(1, Cart::items());
+    $this->assertCount(0, Cart::items());
+});
 
-        Cart::clear();
+it('can be stored', function () {
+    $order = Order::factory()->create();
 
-        $this->assertCount(0, Cart::items());
-    }
+    Cart::add($this->product, $quantity = fake()->randomDigitNotNull());
 
-    /** @test */
-    public function it_can_be_stored(): void
-    {
-        $order = Order::factory()->create();
+    $this->assertDatabaseCount('order_product', 0);
 
-        Cart::add($this->product, $quantity = fake()->randomDigitNotNull());
+    Cart::store($order);
 
-        $this->assertDatabaseCount('order_product', 0);
-
-        Cart::store($order);
-
-        $this->assertDatabaseHas('order_product', [
-            'product_id' => $this->product->id,
-            'order_id' => $order->id,
-            'quantity' => $quantity,
-        ]);
-    }
-}
+    $this->assertDatabaseHas('order_product', [
+        'product_id' => $this->product->id,
+        'order_id' => $order->id,
+        'quantity' => $quantity,
+    ]);
+});

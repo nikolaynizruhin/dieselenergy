@@ -1,36 +1,26 @@
 <?php
 
-namespace Tests\Feature\Admin\Image;
-
 use App\Models\Image;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Tests\TestCase;
 
-class SearchImagesTest extends TestCase
-{
-    /** @test */
-    public function guest_cant_search_images(): void
-    {
-        $image = Image::factory()->create();
+test('guest cant search images', function () {
+    $image = Image::factory()->create();
 
-        $this->get(route('admin.images.index', ['search' => $image->path]))
-            ->assertRedirect(route('admin.login'));
-    }
+    $this->get(route('admin.images.index', ['search' => $image->path]))
+        ->assertRedirect(route('admin.login'));
+});
 
-    /** @test */
-    public function user_can_search_images(): void
-    {
-        [$diesel, $patrol, $waterPump] = Image::factory()
-            ->count(3)
-            ->state(new Sequence(
-                ['path' => 'images/abcpath.jpg', 'created_at' => now()->subDay()],
-                ['path' => 'images/bcapath.jpg'],
-                ['path' => 'images/token.jpg'],
-            ))->create();
+test('user can search images', function () {
+    [$diesel, $patrol, $waterPump] = Image::factory()
+        ->count(3)
+        ->state(new Sequence(
+            ['path' => 'images/abcpath.jpg', 'created_at' => now()->subDay()],
+            ['path' => 'images/bcapath.jpg'],
+            ['path' => 'images/token.jpg'],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.images.index', ['search' => 'path']))
-            ->assertSeeInOrder([$patrol->name, $diesel->path])
-            ->assertDontSee($waterPump->path);
-    }
-}
+    $this->login()
+        ->get(route('admin.images.index', ['search' => 'path']))
+        ->assertSeeInOrder([$patrol->name, $diesel->path])
+        ->assertDontSee($waterPump->path);
+});

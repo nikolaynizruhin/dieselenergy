@@ -1,35 +1,25 @@
 <?php
 
-namespace Tests\Feature\Admin\Brand;
-
 use App\Models\Brand;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Tests\TestCase;
 
-class ReadBrandsTest extends TestCase
-{
-    /** @test */
-    public function guest_cant_read_brands(): void
-    {
-        $this->get(route('admin.brands.index'))
-            ->assertRedirect(route('admin.login'));
-    }
+test('guest cant read brands', function () {
+    $this->get(route('admin.brands.index'))
+        ->assertRedirect(route('admin.login'));
+});
 
-    /** @test */
-    public function user_can_read_brands(): void
-    {
-        [$sdmo, $hyundai] = Brand::factory()
-            ->count(2)
-            ->state(new Sequence(
-                ['name' => 'SDMO'],
-                ['name' => 'Hyundai']
-            ))->create();
+test('user can read brands', function () {
+    [$sdmo, $hyundai] = Brand::factory()
+        ->count(2)
+        ->state(new Sequence(
+            ['name' => 'SDMO'],
+            ['name' => 'Hyundai']
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.brands.index'))
-            ->assertSuccessful()
-            ->assertViewIs('admin.brands.index')
-            ->assertViewHas('brands')
-            ->assertSeeInOrder([$hyundai->name, $sdmo->name]);
-    }
-}
+    $this->login()
+        ->get(route('admin.brands.index'))
+        ->assertSuccessful()
+        ->assertViewIs('admin.brands.index')
+        ->assertViewHas('brands')
+        ->assertSeeInOrder([$hyundai->name, $sdmo->name]);
+});

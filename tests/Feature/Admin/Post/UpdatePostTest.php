@@ -6,93 +6,57 @@ use App\Models\Image;
 use App\Models\Post;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
 
-class UpdatePostTest extends TestCase
-{
-    use HasValidation;
+beforeEach(function () {
+    $this->post = Post::factory()->create();
+});
 
-    /**
-     * Post.
-     */
-    private Post $post;
+test('guest cant visit update post page', function () {
+    $this->get(route('admin.posts.edit', $this->post))
+        ->assertRedirect(route('admin.login'));
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('user can visit update post page', function () {
+    $this->login()
+        ->get(route('admin.posts.edit', $this->post))
+        ->assertViewIs('admin.posts.edit')
+        ->assertViewHas('post', $this->post);
+});
 
-        $this->post = Post::factory()->create();
-    }
+test('guest cant update post', function () {
+    $this->put(route('admin.posts.update', $this->post), validFields())
+        ->assertRedirect(route('admin.login'));
+});
 
-    /** @test */
-    public function guest_cant_visit_update_post_page(): void
-    {
-        $this->get(route('admin.posts.edit', $this->post))
-            ->assertRedirect(route('admin.login'));
-    }
+test('user can update post', function () {
+    Storage::fake();
 
-    /** @test */
-    public function user_can_visit_update_post_page(): void
-    {
-        $this->login()
-            ->get(route('admin.posts.edit', $this->post))
-            ->assertViewIs('admin.posts.edit')
-            ->assertViewHas('post', $this->post);
-    }
+    $image = UploadedFile::fake()->image('post.jpg');
 
-    /** @test */
-    public function guest_cant_update_post(): void
-    {
-        $this->put(route('admin.posts.update', $this->post), self::validFields())
-            ->assertRedirect(route('admin.login'));
-    }
+    $stub = validFields();
 
-    /** @test */
-    public function user_can_update_post(): void
-    {
-        Storage::fake();
+    unset($stub['image_id']);
 
-        $image = UploadedFile::fake()->image('post.jpg');
+    $this->login()
+        ->put(route('admin.posts.update', $this->post), $stub + [
+            'image' => $image,
+        ])->assertRedirect(route('admin.posts.index'))
+        ->assertSessionHas('status', trans('post.updated'));
 
-        $stub = self::validFields();
+    Storage::assertExists($path = 'images/'.$image->hashName());
 
-        unset($stub['image_id']);
+    $this->assertDatabaseHas('images', ['path' => $path]);
+    $this->assertDatabaseHas('posts', $stub + [
+        'image_id' => Image::firstWhere('path', $path)->id,
+    ]);
+});
 
-        $this->login()
-            ->put(route('admin.posts.update', $this->post), $stub + [
-                'image' => $image,
-            ])->assertRedirect(route('admin.posts.index'))
-            ->assertSessionHas('status', trans('post.updated'));
+test('user cant update post with invalid data', function (string $field, callable $data, int $count = 1) {
+    $this->login()
+        ->from(route('admin.posts.edit', $this->post))
+        ->put(route('admin.posts.update', $this->post), $data())
+        ->assertRedirect(route('admin.posts.edit', $this->post))
+        ->assertSessionHasErrors($field);
 
-        Storage::assertExists($path = 'images/'.$image->hashName());
-
-        $this->assertDatabaseHas('images', ['path' => $path]);
-        $this->assertDatabaseHas('posts', $stub + [
-            'image_id' => Image::firstWhere('path', $path)->id,
-        ]);
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider validationProvider
-     */
-    public function user_cant_update_post_with_invalid_data(string $field, callable $data, int $count = 1): void
-    {
-        $this->login()
-            ->from(route('admin.posts.edit', $this->post))
-            ->put(route('admin.posts.update', $this->post), $data())
-            ->assertRedirect(route('admin.posts.edit', $this->post))
-            ->assertSessionHasErrors($field);
-
-        $this->assertDatabaseCount('posts', $count);
-    }
-
-    public static function validationProvider(): array
-    {
-        return self::provider(2);
-    }
-}
+    $this->assertDatabaseCount('posts', $count);
+})->with('update_post');

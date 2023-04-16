@@ -6,7 +6,7 @@ use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Collection;
 
-class Minfin
+class ExchangeRate
 {
     /**
      * Http client.
@@ -14,7 +14,7 @@ class Minfin
     private PendingRequest $http;
 
     /**
-     * Minfin constructor.
+     * ExchangeRate constructor.
      *
      * @return void
      */
@@ -26,7 +26,7 @@ class Minfin
     /**
      * Get currency rates.
      */
-    public function getRates(): Collection
+    public function get(): Collection
     {
         return $this->http->get('/mb/'.config('services.minfin.key'))->collect();
     }

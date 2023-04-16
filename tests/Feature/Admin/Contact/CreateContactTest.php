@@ -2,58 +2,37 @@
 
 namespace Tests\Feature\Admin\Contact;
 
-use Tests\TestCase;
+test('guest cant visit create contact page', function () {
+    $this->get(route('admin.contacts.create'))
+        ->assertRedirect(route('admin.login'));
+});
 
-class CreateContactTest extends TestCase
-{
-    use HasValidation;
+test('user can visit create contact page', function () {
+    $this->login()
+        ->get(route('admin.contacts.create'))
+        ->assertViewIs('admin.contacts.create');
+});
 
-    /** @test */
-    public function guest_cant_visit_create_contact_page(): void
-    {
-        $this->get(route('admin.contacts.create'))
-            ->assertRedirect(route('admin.login'));
-    }
+test('guest cant create contact', function () {
+    $this->post(route('admin.contacts.store'), validFields())
+        ->assertRedirect(route('admin.login'));
+});
 
-    /** @test */
-    public function user_can_visit_create_contact_page(): void
-    {
-        $this->login()
-            ->get(route('admin.contacts.create'))
-            ->assertViewIs('admin.contacts.create');
-    }
+test('user can create contact', function () {
+    $this->login()
+        ->post(route('admin.contacts.store'), $fields = validFields())
+        ->assertRedirect(route('admin.contacts.index'))
+        ->assertSessionHas('status', trans('contact.created'));
 
-    /** @test */
-    public function guest_cant_create_contact(): void
-    {
-        $this->post(route('admin.contacts.store'), self::validFields())
-            ->assertRedirect(route('admin.login'));
-    }
+    $this->assertDatabaseHas('contacts', $fields);
+});
 
-    /** @test */
-    public function user_can_create_contact(): void
-    {
-        $this->login()
-            ->post(route('admin.contacts.store'), $fields = self::validFields())
-            ->assertRedirect(route('admin.contacts.index'))
-            ->assertSessionHas('status', trans('contact.created'));
+test('user cant create contact with invalid data', function (string $field, callable $data) {
+    $this->login()
+        ->from(route('admin.contacts.create'))
+        ->post(route('admin.contacts.store'), $data())
+        ->assertRedirect(route('admin.contacts.create'))
+        ->assertSessionHasErrors($field);
 
-        $this->assertDatabaseHas('contacts', $fields);
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider validationProvider
-     */
-    public function user_cant_create_contact_with_invalid_data(string $field, callable $data): void
-    {
-        $this->login()
-            ->from(route('admin.contacts.create'))
-            ->post(route('admin.contacts.store'), $data())
-            ->assertRedirect(route('admin.contacts.create'))
-            ->assertSessionHasErrors($field);
-
-        $this->assertDatabaseCount('contacts', 0);
-    }
-}
+    $this->assertDatabaseCount('contacts', 0);
+})->with('create_contact');

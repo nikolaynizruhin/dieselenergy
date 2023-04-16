@@ -1,20 +1,12 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\Collection;
-use Tests\TestCase;
 
-class CustomerTest extends TestCase
-{
-    /** @test */
-    public function it_has_many_orders(): void
-    {
-        $customer = Customer::factory()
-            ->hasOrders(1)
-            ->create();
+it('has many orders', function () {
+    $customer = Customer::factory()
+        ->hasOrders(1)
+        ->create();
 
-        $this->assertInstanceOf(Collection::class, $customer->orders);
-    }
-}
+    $this->assertInstanceOf(Collection::class, $customer->orders);
+});
