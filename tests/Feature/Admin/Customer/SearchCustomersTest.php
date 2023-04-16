@@ -1,36 +1,26 @@
 <?php
 
-namespace Tests\Feature\Admin\Customer;
-
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Tests\TestCase;
 
-class SearchCustomersTest extends TestCase
-{
-    /** @test */
-    public function guest_cant_search_customers(): void
-    {
-        Customer::factory()->create(['name' => 'John Doe']);
+test('guest cant search customers', function () {
+    Customer::factory()->create(['name' => 'John Doe']);
 
-        $this->get(route('admin.customers.index', ['search' => 'john']))
-            ->assertRedirect(route('admin.login'));
-    }
+    $this->get(route('admin.customers.index', ['search' => 'john']))
+        ->assertRedirect(route('admin.login'));
+});
 
-    /** @test */
-    public function user_can_search_customers(): void
-    {
-        [$john, $jane, $tom] = Customer::factory()
-            ->count(3)
-            ->state(new Sequence(
-                ['name' => 'John Doe', 'created_at' => now()->subDay()],
-                ['name' => 'Jane Doe'],
-                ['name' => 'Tom Jo'],
-            ))->create();
+test('user can search customers', function () {
+    [$john, $jane, $tom] = Customer::factory()
+        ->count(3)
+        ->state(new Sequence(
+            ['name' => 'John Doe', 'created_at' => now()->subDay()],
+            ['name' => 'Jane Doe'],
+            ['name' => 'Tom Jo'],
+        ))->create();
 
-        $this->login()
-            ->get(route('admin.customers.index', ['search' => 'Doe']))
-            ->assertSeeInOrder([$jane->email, $john->email])
-            ->assertDontSee($tom->email);
-    }
-}
+    $this->login()
+        ->get(route('admin.customers.index', ['search' => 'Doe']))
+        ->assertSeeInOrder([$jane->email, $john->email])
+        ->assertDontSee($tom->email);
+});

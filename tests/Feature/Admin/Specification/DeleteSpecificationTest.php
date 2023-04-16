@@ -1,43 +1,22 @@
 <?php
 
-namespace Tests\Feature\Admin\Specification;
-
 use App\Models\Specification;
-use Tests\TestCase;
 
-class DeleteSpecificationTest extends TestCase
-{
-    /**
-     * Specification.
-     */
-    private Specification $specification;
+beforeEach(function () {
+    $this->specification = Specification::factory()->create();
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('guest cant delete specification', function () {
+    $this->delete(route('admin.specifications.destroy', $this->specification))
+        ->assertRedirect(route('admin.login'));
+});
 
-        $this->specification = Specification::factory()->create();
-    }
+test('user can delete specification', function () {
+    $this->login()
+        ->from(route('admin.categories.show', $this->specification->category_id))
+        ->delete(route('admin.specifications.destroy', $this->specification))
+        ->assertRedirect(route('admin.categories.show', $this->specification->category_id))
+        ->assertSessionHas('status', trans('specification.deleted'));
 
-    /** @test */
-    public function guest_cant_delete_specification(): void
-    {
-        $this->delete(route('admin.specifications.destroy', $this->specification))
-            ->assertRedirect(route('admin.login'));
-    }
-
-    /** @test */
-    public function user_can_delete_specification(): void
-    {
-        $this->login()
-            ->from(route('admin.categories.show', $this->specification->category_id))
-            ->delete(route('admin.specifications.destroy', $this->specification))
-            ->assertRedirect(route('admin.categories.show', $this->specification->category_id))
-            ->assertSessionHas('status', trans('specification.deleted'));
-
-        $this->assertModelMissing($this->specification);
-    }
-}
+    $this->assertModelMissing($this->specification);
+});
