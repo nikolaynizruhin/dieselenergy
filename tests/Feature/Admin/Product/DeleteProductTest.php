@@ -1,43 +1,22 @@
 <?php
 
-namespace Tests\Feature\Admin\Product;
-
 use App\Models\Product;
-use Tests\TestCase;
 
-class DeleteProductTest extends TestCase
-{
-    /**
-     * Product.
-     */
-    private Product $product;
+beforeEach(function () {
+    $this->product = Product::factory()->create();
+});
 
-    /**
-     * Setup.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+test('guest cant delete product', function () {
+    $this->delete(route('admin.products.destroy', $this->product))
+        ->assertRedirect(route('admin.login'));
+});
 
-        $this->product = Product::factory()->create();
-    }
+test('user can delete product', function () {
+    $this->login()
+        ->from(route('admin.products.index'))
+        ->delete(route('admin.products.destroy', $this->product))
+        ->assertRedirect(route('admin.products.index'))
+        ->assertSessionHas('status', trans('product.deleted'));
 
-    /** @test */
-    public function guest_cant_delete_product(): void
-    {
-        $this->delete(route('admin.products.destroy', $this->product))
-            ->assertRedirect(route('admin.login'));
-    }
-
-    /** @test */
-    public function user_can_delete_product(): void
-    {
-        $this->login()
-            ->from(route('admin.products.index'))
-            ->delete(route('admin.products.destroy', $this->product))
-            ->assertRedirect(route('admin.products.index'))
-            ->assertSessionHas('status', trans('product.deleted'));
-
-        $this->assertModelMissing($this->product);
-    }
-}
+    $this->assertModelMissing($this->product);
+});
