@@ -2,11 +2,7 @@
 
 namespace Tests\Feature\Admin\Order;
 
-use App\Models\Customer;
 use App\Models\Order;
-use App\Models\Post;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Str;
 
 dataset('create_order', provider());
 dataset('update_order', provider() + totalProvider());
@@ -49,7 +45,6 @@ function totalProvider(): array
         ],
     ];
 }
-
 
 function validFields(array $overrides = []): array
 {

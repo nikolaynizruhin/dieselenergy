@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Admin\Post;
 
-use App\Models\Customer;
 use App\Models\Post;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
