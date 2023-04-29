@@ -21,7 +21,7 @@ class PostFactory extends Factory
             'slug' => fake()->unique()->slug(),
             'title' => fake()->unique()->sentence(),
             'excerpt' => fake()->sentence(),
-            'body' => fake()->paragraph(),
+            'body' => fake()->paragraph(10),
             'image_id' => Image::factory(),
         ];
     }
