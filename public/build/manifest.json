@@ -1,20 +1,14 @@
 {
-  "_bootstrap.bundle-08821599.js": {
-    "file": "assets/bootstrap.bundle-08821599.js"
-  },
   "resources/js/admin/admin.js": {
-    "file": "assets/admin-859075ab.js",
+    "file": "assets/admin-47bac3d2.js",
     "imports": [
-      "_bootstrap.bundle-08821599.js"
+      "resources/js/app.js"
     ],
     "isEntry": true,
     "src": "resources/js/admin/admin.js"
   },
   "resources/js/app.js": {
-    "file": "assets/app-72868f79.js",
-    "imports": [
-      "_bootstrap.bundle-08821599.js"
-    ],
+    "file": "assets/app-08821599.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
