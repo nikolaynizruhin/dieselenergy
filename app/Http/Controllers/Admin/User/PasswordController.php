@@ -17,7 +17,7 @@ class PasswordController extends Controller
     {
         $request->validate(['password' => 'required|string|min:8|confirmed']);
 
-        $user->update(['password' => Hash::make($request->password)]);
+        $user->update(['password' => $request->password]);
 
         return to_route('admin.users.index')
             ->with('status', __('user.password.updated'));
