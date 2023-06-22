@@ -10,8 +10,8 @@
         "easymde": "^2.16.1",
         "laravel-vite-plugin": "^0.7.4",
         "resolve-url-loader": "^5.0.0",
-        "sass": "^1.34.0",
-        "sass-loader": "^13.0.0",
+        "sass": "^1.63.6",
+        "sass-loader": "^13.3.2",
         "vite": "^4.0.0"
     }
 }
