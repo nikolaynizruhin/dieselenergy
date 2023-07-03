@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Customer;
 use App\Rules\Phone;
 use Illuminate\Foundation\Http\FormRequest;
 
