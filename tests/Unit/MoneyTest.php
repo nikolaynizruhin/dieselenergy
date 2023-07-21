@@ -8,27 +8,27 @@ beforeEach(function () {
 });
 
 it('can get coins', function () {
-    $this->assertEquals(10000, $this->money->coins());
+    expect($this->money->coins())->toEqual(10000);
 });
 
 it('can get decimal', function () {
-    $this->assertEquals(100.00, $this->money->decimal());
+    expect($this->money->decimal())->toEqual(100.00);
 });
 
 it('can be formatted', function () {
-    $this->assertEquals('100 ₴', $this->money->format());
+    expect($this->money->format())->toEqual('100 ₴');
 });
 
 it('can be formatted with currency', function () {
     $currency = Currency::factory()->create(['symbol' => '$']);
     $money = new Money(10000, $currency);
 
-    $this->assertEquals('100 $', $money->format());
+    expect($money->format())->toEqual('100 $');
 });
 
 it('can be converted to uah', function () {
     $currency = Currency::factory()->create(['rate' => 33.3057]);
     $money = new Money(10000, $currency);
 
-    $this->assertEquals(333057, $money->toUAH()->coins());
+    expect($money->toUAH()->coins())->toEqual(333057);
 });

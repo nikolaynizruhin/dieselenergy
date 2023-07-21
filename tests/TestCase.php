@@ -15,7 +15,7 @@ abstract class TestCase extends BaseTestCase
      *
      * @return $this
      */
-    protected function login(?User $user = null): static
+    protected function login(User $user = null): static
     {
         $user = $user ?: User::factory()->create();
 

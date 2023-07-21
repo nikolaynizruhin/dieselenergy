@@ -12,5 +12,5 @@ test('guest can delete cart item', function () {
         ->delete(route('carts.destroy', 0))
         ->assertRedirect(route('carts.index'));
 
-    $this->assertCount(0, Cart::items());
+    expect(Cart::items())->toHaveCount(0);
 });

@@ -43,7 +43,7 @@ test('it should unmark other default medias', function () {
         ->post(route('admin.medias.store'), $stub)
         ->assertRedirect(route('admin.products.show', $media->product));
 
-    $this->assertFalse($media->fresh()->is_default);
+    expect($media->fresh()->is_default)->toBeFalse();
 });
 
 test('user cant create media with invalid data', function (string $field, callable $data, int $count = 0) {

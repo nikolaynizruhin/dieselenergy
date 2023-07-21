@@ -14,7 +14,7 @@ it('has customer', function () {
         ->forCustomer()
         ->create();
 
-    $this->assertInstanceOf(Customer::class, $order->customer);
+    expect($order->customer)->toBeInstanceOf(Customer::class);
 });
 
 it('has many products', function () {
@@ -23,8 +23,8 @@ it('has many products', function () {
             'quantity' => $quantity = fake()->randomDigit(),
         ])->create();
 
-    $this->assertInstanceOf(Collection::class, $order->products);
-    $this->assertEquals($quantity, $order->products->first()->pivot->quantity);
+    expect($order->products)->toBeInstanceOf(Collection::class);
+    expect($order->products->first()->pivot->quantity)->toEqual($quantity);
 });
 
 it('calculates total after adding product', function () {
@@ -36,21 +36,21 @@ it('calculates total after adding product', function () {
         ->hasAttached($product, ['quantity' => 3])
         ->create(['total' => 0]);
 
-    $this->assertEquals(900000, $order->fresh()->total->coins());
+    expect($order->fresh()->total->coins())->toEqual(900000);
 });
 
 it('calculates total after removing product', function () {
     $cart = Cart::factory()->create();
 
-    $this->assertGreaterThan(0, $cart->order->total->coins());
+    expect($cart->order->total->coins())->toBeGreaterThan(0);
 
     $cart->order->products()->detach($cart->product);
 
-    $this->assertEquals(0, $cart->order->fresh()->total->coins());
+    expect($cart->order->fresh()->total->coins())->toEqual(0);
 });
 
 it('has total as money', function () {
     $order = Order::factory()->create();
 
-    $this->assertInstanceOf(Money::class, $order->total);
+    expect($order->total)->toBeInstanceOf(Money::class);
 });

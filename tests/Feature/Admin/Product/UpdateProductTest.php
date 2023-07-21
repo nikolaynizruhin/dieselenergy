@@ -111,7 +111,7 @@ test('unrelated attribute should not be attached to product', function () {
         ->put(route('admin.products.update', $this->product), $stub)
         ->assertRedirect();
 
-    $this->assertFalse($this->product->fresh()->attributes->contains($unrelated));
+    expect($this->product->fresh()->attributes->contains($unrelated))->toBeFalse();
 });
 
 test('user cant update product with invalid data', function (string $field, callable $data, int $count = 1) {

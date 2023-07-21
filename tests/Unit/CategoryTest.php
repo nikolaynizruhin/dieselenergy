@@ -8,7 +8,7 @@ it('has many products', function () {
         ->hasProducts()
         ->create();
 
-    $this->assertInstanceOf(Collection::class, $category->products);
+    expect($category->products)->toBeInstanceOf(Collection::class);
 });
 
 it('has many attributes', function () {
@@ -16,5 +16,5 @@ it('has many attributes', function () {
         ->hasAttributes()
         ->create();
 
-    $this->assertInstanceOf(Collection::class, $category->attributes);
+    expect($category->attributes)->toBeInstanceOf(Collection::class);
 });

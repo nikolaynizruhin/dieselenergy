@@ -17,5 +17,5 @@ test('user can update specification feature', function () {
         ->assertRedirect(route('admin.categories.show', $this->specification->category_id))
         ->assertSessionHas('status', trans('specification.updated'));
 
-    $this->assertTrue($this->specification->fresh()->is_featured);
+    expect($this->specification->fresh()->is_featured)->toBeTrue();
 });

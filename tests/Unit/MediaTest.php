@@ -9,7 +9,7 @@ it('has product', function () {
         ->forProduct()
         ->create();
 
-    $this->assertInstanceOf(Product::class, $media->product);
+    expect($media->product)->toBeInstanceOf(Product::class);
 });
 
 it('has image', function () {
@@ -17,7 +17,7 @@ it('has image', function () {
         ->forImage()
         ->create();
 
-    $this->assertInstanceOf(Image::class, $media->image);
+    expect($media->image)->toBeInstanceOf(Image::class);
 });
 
 it('can be marked as default', function () {
@@ -28,5 +28,5 @@ it('can be marked as default', function () {
 
     $media->markAsDefault();
 
-    $this->assertTrue($media->is_default);
+    expect($media->is_default)->toBeTrue();
 });

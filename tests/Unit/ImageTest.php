@@ -10,7 +10,7 @@ it('has many products', function () {
         ->hasProducts()
         ->create();
 
-    $this->assertInstanceOf(Collection::class, $image->products);
+    expect($image->products)->toBeInstanceOf(Collection::class);
 });
 
 it('has many posts', function () {
@@ -18,7 +18,7 @@ it('has many posts', function () {
         ->hasPosts()
         ->create();
 
-    $this->assertInstanceOf(Collection::class, $image->posts);
+    expect($image->posts)->toBeInstanceOf(Collection::class);
 });
 
 it('should remove file after image deleted', function () {

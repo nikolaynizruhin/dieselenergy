@@ -13,7 +13,7 @@ test('guest cant update user password', function () {
     $this->put(route('admin.users.password.update', $this->user), passwordFields())
         ->assertRedirect(route('admin.login'));
 
-    $this->assertTrue(Hash::check('password', $this->user->fresh()->password));
+    expect(Hash::check('password', $this->user->fresh()->password))->toBeTrue();
 });
 
 test('user can update user password', function () {
@@ -23,7 +23,7 @@ test('user can update user password', function () {
         ->assertRedirect(route('admin.users.index'))
         ->assertSessionHas('status', trans('user.password.updated'));
 
-    $this->assertTrue(Hash::check('new-password', $this->user->fresh()->password));
+    expect(Hash::check('new-password', $this->user->fresh()->password))->toBeTrue();
 });
 
 test('user cant update user with invalid password', function (string $field, callable $data) {
@@ -33,5 +33,5 @@ test('user cant update user with invalid password', function (string $field, cal
         ->assertRedirect(route('admin.users.password.update', $this->user))
         ->assertSessionHasErrors($field);
 
-    $this->assertTrue(Hash::check('password', $this->user->fresh()->password));
+    expect(Hash::check('password', $this->user->fresh()->password))->toBeTrue();
 })->with('update_password');

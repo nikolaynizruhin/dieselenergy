@@ -133,5 +133,5 @@ test('unrelated attribute should not be attached to product', function () {
 
     $product = Product::firstWhere('name', $stub['name']);
 
-    $this->assertFalse($product->attributes->contains($unrelated));
+    expect($product->attributes->contains($unrelated))->toBeFalse();
 });

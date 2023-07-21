@@ -51,7 +51,7 @@ test('guest can create order', function () {
         'notes' => $fields['notes'],
     ]);
 
-    $this->assertTrue(Cart::items()->isEmpty());
+    expect(Cart::items()->isEmpty())->toBeTrue();
 });
 
 test('it should update existing customer', function () {

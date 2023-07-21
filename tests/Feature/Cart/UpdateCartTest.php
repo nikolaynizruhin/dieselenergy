@@ -14,9 +14,9 @@ test('guest can update cart', function () {
         ->assertRedirect(route('carts.index'))
         ->assertSessionHas('cart');
 
-    $this->assertCount(1, $items = Cart::items());
-    $this->assertEquals($this->product->id, $items->first()->id);
-    $this->assertEquals(3, $items->first()->quantity);
+    expect($items = Cart::items())->toHaveCount(1);
+    expect($items->first()->id)->toEqual($this->product->id);
+    expect($items->first()->quantity)->toEqual(3);
 });
 
 test('guest cant create cart with invalid data', function ($quantity) {

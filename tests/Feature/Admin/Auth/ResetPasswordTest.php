@@ -43,8 +43,8 @@ test('user can reset password with valid token', function () {
         'password_confirmation' => 'new-password',
     ])->assertRedirect(route('admin.dashboard'));
 
-    $this->assertEquals($user->email, $user->fresh()->email);
-    $this->assertTrue(Hash::check('new-password', $user->fresh()->password));
+    expect($user->fresh()->email)->toEqual($user->email);
+    expect(Hash::check('new-password', $user->fresh()->password))->toBeTrue();
     $this->assertAuthenticatedAs($user);
 
     Event::assertDispatched(
@@ -64,8 +64,8 @@ test('user cannot reset password with invalid token', function () {
             'password_confirmation' => 'new-password',
         ])->assertRedirect(route('admin.password.reset', 'invalid'));
 
-    $this->assertEquals($user->email, $user->fresh()->email);
-    $this->assertTrue(Hash::check('password', $user->fresh()->password));
+    expect($user->fresh()->email)->toEqual($user->email);
+    expect(Hash::check('password', $user->fresh()->password))->toBeTrue();
     $this->assertGuest();
 });
 
@@ -83,10 +83,10 @@ test('user cannot reset password without providing new password', function () {
         ])->assertRedirect(route('admin.password.reset', $token))
         ->assertSessionHasErrors('password');
 
-    $this->assertTrue(session()->hasOldInput('email'));
-    $this->assertFalse(session()->hasOldInput('password'));
-    $this->assertEquals($user->email, $user->fresh()->email);
-    $this->assertTrue(Hash::check('password', $user->fresh()->password));
+    expect(session()->hasOldInput('email'))->toBeTrue();
+    expect(session()->hasOldInput('password'))->toBeFalse();
+    expect($user->fresh()->email)->toEqual($user->email);
+    expect(Hash::check('password', $user->fresh()->password))->toBeTrue();
     $this->assertGuest();
 });
 
@@ -104,8 +104,8 @@ test('user cannot reset password without providing email', function () {
         ])->assertRedirect(route('admin.password.reset', $token))
         ->assertSessionHasErrors('email');
 
-    $this->assertFalse(session()->hasOldInput('password'));
-    $this->assertEquals($user->email, $user->fresh()->email);
-    $this->assertTrue(Hash::check('password', $user->fresh()->password));
+    expect(session()->hasOldInput('password'))->toBeFalse();
+    expect($user->fresh()->email)->toEqual($user->email);
+    expect(Hash::check('password', $user->fresh()->password))->toBeTrue();
     $this->assertGuest();
 });

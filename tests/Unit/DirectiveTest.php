@@ -14,5 +14,5 @@ function assertDirectiveOutput(string $expected, string $directive): void
 
     eval('?>'.app('blade.compiler')->compileString($directive));
 
-    test()->assertEquals($expected, ob_get_clean());
+    expect(ob_get_clean())->toEqual($expected);
 }

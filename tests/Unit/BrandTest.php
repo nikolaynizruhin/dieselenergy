@@ -9,11 +9,11 @@ it('has many products', function () {
         ->hasProducts(1)
         ->create();
 
-    $this->assertInstanceOf(Collection::class, $brand->products);
+    expect($brand->products)->toBeInstanceOf(Collection::class);
 });
 
 it('has currency', function () {
     $brand = Brand::factory()->create();
 
-    $this->assertInstanceOf(Currency::class, $brand->currency);
+    expect($brand->currency)->toBeInstanceOf(Currency::class);
 });

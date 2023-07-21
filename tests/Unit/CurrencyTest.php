@@ -8,5 +8,5 @@ it('has many brands', function () {
         ->hasBrands(1)
         ->create();
 
-    $this->assertInstanceOf(Collection::class, $currency->brands);
+    expect($currency->brands)->toBeInstanceOf(Collection::class);
 });

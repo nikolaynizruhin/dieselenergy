@@ -33,7 +33,7 @@ class ResetPasswordController extends Controller
      *
      * If no token is present, display the link request form.
      */
-    public function showResetForm(Request $request, ?string $token = null): View
+    public function showResetForm(Request $request, string $token = null): View
     {
         return view('admin.auth.passwords.reset')->with(
             ['token' => $token, 'email' => $request->email]

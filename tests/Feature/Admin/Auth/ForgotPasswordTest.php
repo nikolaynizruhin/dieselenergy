@@ -28,7 +28,7 @@ test('user receives email with password reset link', function () {
 
     $token = DB::table('password_reset_tokens')->where(['email' => $user->email])->first();
 
-    $this->assertNotNull($token);
+    expect($token)->not->toBeNull();
 
     Notification::assertSentTo(
         $user,

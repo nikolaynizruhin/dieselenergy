@@ -29,9 +29,9 @@ test('user can create user', function () {
 
     $user = User::firstWhere('email', $fields['email']);
 
-    $this->assertEquals($user->name, $fields['name']);
-    $this->assertEquals($user->email, $fields['email']);
-    $this->assertTrue(Hash::check('new-password', $user->password));
+    expect($fields['name'])->toEqual($user->name);
+    expect($fields['email'])->toEqual($user->email);
+    expect(Hash::check('new-password', $user->password))->toBeTrue();
 });
 
 test('user_cant_create_user_with_invalid_data', function (string $field, callable $data, int $count = 1) {

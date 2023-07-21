@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\Models\Brand;
 use App\Models\Currency;
 use App\Models\Product;
@@ -17,5 +15,5 @@ it('can get total', function () {
 
     $item = new CartItem($product, 2);
 
-    $this->assertEquals(600000, $item->total());
+    expect($item->total())->toEqual(600000);
 });

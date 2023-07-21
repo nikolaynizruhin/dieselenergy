@@ -39,6 +39,6 @@ it('updates currency rates', function () {
     Http::assertSent(fn ($request) => $request->url() == config('services.minfin.url').'/mb/'.config('services.minfin.key'));
     Http::assertSentCount(1);
 
-    $this->assertEquals(28.3650, $usd->fresh()->rate);
-    $this->assertEquals(33.2636, $eur->fresh()->rate);
+    expect($usd->fresh()->rate)->toEqual(28.3650);
+    expect($eur->fresh()->rate)->toEqual(33.2636);
 });

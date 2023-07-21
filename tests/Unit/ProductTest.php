@@ -14,7 +14,7 @@ it('has brand', function () {
         ->forBrand()
         ->create();
 
-    $this->assertInstanceOf(Brand::class, $product->brand);
+    expect($product->brand)->toBeInstanceOf(Brand::class);
 });
 
 it('has category', function () {
@@ -22,7 +22,7 @@ it('has category', function () {
         ->forCategory()
         ->create();
 
-    $this->assertInstanceOf(Category::class, $product->category);
+    expect($product->category)->toBeInstanceOf(Category::class);
 });
 
 it('has many attributes', function () {
@@ -31,8 +31,8 @@ it('has many attributes', function () {
             'value' => $value = fake()->randomDigit(),
         ])->create();
 
-    $this->assertInstanceOf(Collection::class, $product->attributes);
-    $this->assertEquals($value, $product->attributes->first()->pivot->value);
+    expect($product->attributes)->toBeInstanceOf(Collection::class);
+    expect($product->attributes->first()->pivot->value)->toEqual($value);
 });
 
 it('has many orders', function () {
@@ -41,8 +41,8 @@ it('has many orders', function () {
             'quantity' => $quantity = fake()->randomDigit(),
         ])->create();
 
-    $this->assertInstanceOf(Collection::class, $product->orders);
-    $this->assertEquals($quantity, $product->orders->first()->pivot->quantity);
+    expect($product->orders)->toBeInstanceOf(Collection::class);
+    expect($product->orders->first()->pivot->quantity)->toEqual($quantity);
 });
 
 it('has many images', function () {
@@ -50,7 +50,7 @@ it('has many images', function () {
         ->hasImages()
         ->create();
 
-    $this->assertInstanceOf(Collection::class, $product->images);
+    expect($product->images)->toBeInstanceOf(Collection::class);
 });
 
 it('has recommendations', function () {
@@ -62,19 +62,19 @@ it('has recommendations', function () {
         ->count(3)
         ->create();
 
-    $this->assertCount(2, $products->first()->recommendations());
-    $this->assertFalse($products->contains($product));
+    expect($products->first()->recommendations())->toHaveCount(2);
+    expect($products->contains($product))->toBeFalse();
 });
 
 it('has default image', function () {
     $product = Product::factory()->withDefaultImage()->create();
 
-    $this->assertNotNull($product->defaultImage());
-    $this->assertInstanceOf(Image::class, $product->defaultImage());
+    expect($product->defaultImage())->not->toBeNull();
+    expect($product->defaultImage())->toBeInstanceOf(Image::class);
 });
 
 it('has price as money', function () {
     $product = Product::factory()->create();
 
-    $this->assertInstanceOf(Money::class, $product->price);
+    expect($product->price)->toBeInstanceOf(Money::class);
 });

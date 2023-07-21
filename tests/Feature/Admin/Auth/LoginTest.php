@@ -50,8 +50,8 @@ test('user cant login with invalid data', function (callable $data) {
         ->assertRedirect(route('admin.login'))
         ->assertSessionHasErrors('email');
 
-    $this->assertTrue(session()->hasOldInput('email'));
-    $this->assertFalse(session()->hasOldInput('password'));
+    expect(session()->hasOldInput('email'))->toBeTrue();
+    expect(session()->hasOldInput('password'))->toBeFalse();
 
     $this->assertGuest();
 })->with([
@@ -99,8 +99,8 @@ test('user cant make more than five attempts in a minute', function () {
             ]),
         ]);
 
-    $this->assertTrue(session()->hasOldInput('email'));
-    $this->assertFalse(session()->hasOldInput('password'));
+    expect(session()->hasOldInput('email'))->toBeTrue();
+    expect(session()->hasOldInput('password'))->toBeFalse();
 
     $this->assertGuest();
 });

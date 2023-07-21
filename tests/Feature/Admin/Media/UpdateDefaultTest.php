@@ -17,7 +17,7 @@ test('user can update default media', function () {
         ->assertRedirect(route('admin.products.show', $this->media->product_id))
         ->assertSessionHas('status', trans('media.updated'));
 
-    $this->assertTrue($this->media->fresh()->is_default);
+    expect($this->media->fresh()->is_default)->toBeTrue();
 });
 
 test('it should unmark other default medias', function () {
@@ -29,6 +29,6 @@ test('it should unmark other default medias', function () {
         ->put(route('admin.medias.default.update', $this->media))
         ->assertRedirect();
 
-    $this->assertFalse($defaultMedia->fresh()->is_default);
-    $this->assertTrue($this->media->fresh()->is_default);
+    expect($defaultMedia->fresh()->is_default)->toBeFalse();
+    expect($this->media->fresh()->is_default)->toBeTrue();
 });

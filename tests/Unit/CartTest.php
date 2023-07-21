@@ -14,34 +14,34 @@ beforeEach(function () {
 it('can add', function () {
     $item = Cart::add($this->product);
 
-    $this->assertEquals($item->id, $this->product->id);
-    $this->assertEquals($item->slug, $this->product->slug);
-    $this->assertEquals($item->name, $this->product->name);
-    $this->assertEquals($item->category, $this->product->category->name);
-    $this->assertEquals($item->price, $this->product->price->toUAH()->coins());
-    $this->assertEquals($item->image, $this->product->defaultImage()->path);
-    $this->assertEquals(1, $item->quantity);
-    $this->assertCount(1, Cart::items());
+    expect($this->product->id)->toEqual($item->id);
+    expect($this->product->slug)->toEqual($item->slug);
+    expect($this->product->name)->toEqual($item->name);
+    expect($this->product->category->name)->toEqual($item->category);
+    expect($this->product->price->toUAH()->coins())->toEqual($item->price);
+    expect($this->product->defaultImage()->path)->toEqual($item->image);
+    expect($item->quantity)->toEqual(1);
+    expect(Cart::items())->toHaveCount(1);
 });
 
 it('can add existing product', function () {
     $item = Cart::add($this->product, 2);
 
-    $this->assertEquals(2, $item->quantity);
+    expect($item->quantity)->toEqual(2);
 
     $item = Cart::add($this->product, 2);
 
-    $this->assertEquals(4, $item->quantity);
+    expect($item->quantity)->toEqual(4);
 });
 
 it('can remove', function () {
     Cart::add($this->product);
 
-    $this->assertCount(1, Cart::items());
+    expect(Cart::items())->toHaveCount(1);
 
     Cart::delete(0);
 
-    $this->assertCount(0, Cart::items());
+    expect(Cart::items())->toHaveCount(0);
 });
 
 it('can get items', function () {
@@ -49,8 +49,8 @@ it('can get items', function () {
 
     $items = Cart::items();
 
-    $this->assertTrue($items->contains($item));
-    $this->assertInstanceOf(Collection::class, $items);
+    expect($items->contains($item))->toBeTrue();
+    expect($items)->toBeInstanceOf(Collection::class);
 });
 
 it('can_update_cart_item', function () {
@@ -58,7 +58,7 @@ it('can_update_cart_item', function () {
 
     Cart::update(0, 5);
 
-    $this->assertEquals(5, Cart::items()->first()->quantity);
+    expect(Cart::items()->first()->quantity)->toEqual(5);
 });
 
 it('can get total', function () {
@@ -78,17 +78,17 @@ it('can get total', function () {
     Cart::add($generator, 2);
     Cart::add($waterPump);
 
-    $this->assertEquals(900000, Cart::total());
+    expect(Cart::total())->toEqual(900000);
 });
 
 it('can be cleared', function () {
     Cart::add($this->product);
 
-    $this->assertCount(1, Cart::items());
+    expect(Cart::items())->toHaveCount(1);
 
     Cart::clear();
 
-    $this->assertCount(0, Cart::items());
+    expect(Cart::items())->toHaveCount(0);
 });
 
 it('can be stored', function () {

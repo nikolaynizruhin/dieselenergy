@@ -8,5 +8,5 @@ it('has many orders', function () {
         ->hasOrders(1)
         ->create();
 
-    $this->assertInstanceOf(Collection::class, $customer->orders);
+    expect($customer->orders)->toBeInstanceOf(Collection::class);
 });

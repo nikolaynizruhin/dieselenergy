@@ -8,7 +8,7 @@ it('has_attribute', function () {
         ->forAttribute()
         ->create();
 
-    $this->assertInstanceOf(Attribute::class, $specification->attribute);
+    expect($specification->attribute)->toBeInstanceOf(Attribute::class);
 });
 
 it('can_toggle_feature', function () {
@@ -19,5 +19,5 @@ it('can_toggle_feature', function () {
 
     $specification->toggle();
 
-    $this->assertTrue($specification->is_featured);
+    expect($specification->is_featured)->toBeTrue();
 });

@@ -9,7 +9,7 @@ it('has many categories', function () {
         ->hasCategories()
         ->create();
 
-    $this->assertInstanceOf(Collection::class, $attribute->categories);
+    expect($attribute->categories)->toBeInstanceOf(Collection::class);
 });
 
 it('has many products', function () {
@@ -18,6 +18,6 @@ it('has many products', function () {
             'value' => $value = fake()->randomDigit(),
         ])->create();
 
-    $this->assertInstanceOf(Collection::class, $attribute->products);
-    $this->assertEquals($value, $attribute->products->first()->pivot->value);
+    expect($attribute->products)->toBeInstanceOf(Collection::class);
+    expect($attribute->products->first()->pivot->value)->toEqual($value);
 });

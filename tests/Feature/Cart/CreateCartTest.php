@@ -11,16 +11,16 @@ test('guest can add product to cart', function () {
         ->assertRedirect(route('carts.index'))
         ->assertSessionHas('cart');
 
-    $this->assertCount(1, $items = Cart::items());
-    $this->assertEquals($product->id, $items->first()->id);
-    $this->assertEquals(2, $items->first()->quantity);
+    expect($items = Cart::items())->toHaveCount(1);
+    expect($items->first()->id)->toEqual($product->id);
+    expect($items->first()->quantity)->toEqual(2);
 });
 
 test('guest cant create cart with invalid data', function (string $field, callable $data) {
     $this->post(route('carts.store', $data()))
         ->assertInvalid($field);
 
-    $this->assertEmpty(Cart::items());
+    expect(Cart::items())->toBeEmpty();
 })->with([
     'Product is required' => [
         'product_id', fn () => ['product_id' => null, 'quantity' => 1],
