@@ -1,18 +1,9 @@
 <?php
 
-it('compiles uah_directive', function () {
-    assertDirectiveOutput('1 000 ₴', '@uah(100000)');
+it('compiles uah directive', function () {
+    expect('@uah(100000)')->toBeCompiled('1 000 ₴');
 });
 
-it('compiles markdown_directive', function () {
-    assertDirectiveOutput("<h1>Markdown</h1>\n", '@markdown("# Markdown")');
+it('compiles markdown directive', function () {
+    expect('@markdown("# Markdown")')->toBeCompiled("<h1>Markdown</h1>\n");
 });
-
-function assertDirectiveOutput(string $expected, string $directive): void
-{
-    ob_start();
-
-    eval('?>'.app('blade.compiler')->compileString($directive));
-
-    expect(ob_get_clean())->toEqual($expected);
-}

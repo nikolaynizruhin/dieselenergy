@@ -24,8 +24,12 @@ uses(Tests\TestCase::class)->in('Feature', 'Unit', 'Console');
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
+expect()->extend('toBeCompiled', function (string $output) {
+    ob_start();
+
+    eval('?>'.app('blade.compiler')->compileString($this->value));
+
+    expect(ob_get_clean())->toEqual($output);
 });
 
 /*
