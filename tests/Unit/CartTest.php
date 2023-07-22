@@ -14,12 +14,14 @@ beforeEach(function () {
 it('can add', function () {
     $item = Cart::add($this->product);
 
-    expect($this->product->id)->toEqual($item->id);
-    expect($this->product->slug)->toEqual($item->slug);
-    expect($this->product->name)->toEqual($item->name);
-    expect($this->product->category->name)->toEqual($item->category);
-    expect($this->product->price->toUAH()->coins())->toEqual($item->price);
-    expect($this->product->defaultImage()->path)->toEqual($item->image);
+    expect($this->product)
+        ->id->toEqual($item->id)
+        ->slug->toEqual($item->slug)
+        ->name->toEqual($item->name)
+        ->category->name->toEqual($item->category)
+        ->price->toUAH()->coins()->toEqual($item->price)
+        ->defaultImage()->path->toEqual($item->image);
+
     expect($item->quantity)->toEqual(1);
     expect(Cart::items())->toHaveCount(1);
 });
@@ -49,7 +51,7 @@ it('can get items', function () {
 
     $items = Cart::items();
 
-    expect($items->contains($item))->toBeTrue();
+    expect($items)->toContain($item);
     expect($items)->toBeInstanceOf(Collection::class);
 });
 
