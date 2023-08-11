@@ -2,9 +2,10 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class Phone implements Rule
+class Phone implements ValidationRule
 {
     /**
      * Phone number regex pattern.
@@ -14,21 +15,14 @@ class Phone implements Rule
     const REGEX = '/^\+380[0-9]{9}$/';
 
     /**
-     * Determine if the validation rule passes.
+     * Run the validation rule.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
      */
-    public function passes($attribute, $value): bool
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        return preg_match(self::REGEX, $value);
-    }
-
-    /**
-     * Get the validation error message.
-     */
-    public function message(): string
-    {
-        return trans('validation.phone');
+        if (! preg_match(self::REGEX, $value)) {
+            $fail('validation.phone')->translate();
+        }
     }
 }
