@@ -2,8 +2,6 @@
 
 namespace App\Filters;
 
-use Illuminate\Support\Str;
-
 trait HasSort
 {
     /**
@@ -11,7 +9,7 @@ trait HasSort
      */
     protected function sort(string $field): void
     {
-        $direction = Str::startsWith($field, '-') ? 'desc' : 'asc';
+        $direction = str_starts_with($field, '-') ? 'desc' : 'asc';
 
         $field = ltrim($field, '-');
 

@@ -37,10 +37,8 @@ class ContactFilters extends Filters
 
     /**
      * Sort the query by a given user field.
-     *
-     * @param  string|array  $field
      */
-    protected function sort($field): void
+    protected function sort(string|array $field): void
     {
         if (isset($field['contact'])) {
             $this->sortBy($field['contact']);

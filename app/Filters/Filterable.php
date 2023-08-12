@@ -8,8 +8,6 @@ trait Filterable
 {
     /**
      * Apply filters.
-     *
-     * @param  \App\Filters\Filters  $filters
      */
     public function scopeFilter(Builder $query, Filters $filters): Builder
     {
