@@ -34,21 +34,16 @@ class Product extends Model
 
     /**
      * Scope a query to only include active products.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeActive(Builder $query)
+    public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', 1);
     }
 
     /**
      * Scope a query with featured attributes.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeWithFeaturedAttributes(Builder $query, Category $category)
+    public function scopeWithFeaturedAttributes(Builder $query, Category $category): Builder
     {
         return $query->with([
             'attributes' => fn ($query) => $query->wherePivotIn(
@@ -60,8 +55,6 @@ class Product extends Model
 
     /**
      * Load product attributes.
-     *
-     * @return \App\Models\Product
      */
     public function loadAttributes(): Product
     {
@@ -70,11 +63,8 @@ class Product extends Model
 
     /**
      * Scope a query with default image.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeWithDefaultImage($query)
+    public function scopeWithDefaultImage(Builder $query): Builder
     {
         return $query->with([
             'images' => fn ($query) => $query->wherePivot('is_default', 1),
@@ -83,8 +73,6 @@ class Product extends Model
 
     /**
      * Get product default image.
-     *
-     * @return \App\Models\Image|null
      */
     public function defaultImage(): ?Image
     {

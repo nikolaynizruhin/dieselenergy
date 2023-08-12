@@ -42,10 +42,8 @@ class Cart extends Pivot
 
     /**
      * The "booted" method of the model.
-     *
-     * @return void
      */
-    protected static function booted()
+    protected static function booted(): void
     {
         static::saved(fn ($cart) => $cart->order->updateTotal());
         static::deleted(fn ($cart) => $cart->order->updateTotal());

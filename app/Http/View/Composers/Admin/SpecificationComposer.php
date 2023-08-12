@@ -9,10 +9,8 @@ class SpecificationComposer
 {
     /**
      * Bind data to the view.
-     *
-     * @return void
      */
-    public function compose(View $view)
+    public function compose(View $view): void
     {
         $view->with(['attributes' => Attribute::orderBy('name')->get()]);
     }

@@ -10,10 +10,8 @@ class DumpServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->singleton(Dumper::class, function ($app) {
             $config = $app['db.connection']->getConfig();
@@ -24,10 +22,8 @@ class DumpServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }

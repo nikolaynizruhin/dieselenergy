@@ -50,7 +50,7 @@ class Media extends Pivot
     /**
      * Unmark others default medias.
      */
-    public function unmarkOtherDefaults()
+    public function unmarkOtherDefaults(): void
     {
         if ($this->is_default) {
             self::where([
@@ -71,10 +71,8 @@ class Media extends Pivot
 
     /**
      * The "booted" method of the model.
-     *
-     * @return void
      */
-    protected static function booted()
+    protected static function booted(): void
     {
         static::saved(fn (Media $media) => $media->unmarkOtherDefaults());
     }

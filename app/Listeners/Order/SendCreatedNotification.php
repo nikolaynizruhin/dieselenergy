@@ -10,10 +10,8 @@ class SendCreatedNotification
 {
     /**
      * Handle the event.
-     *
-     * @return void
      */
-    public function handle(OrderCreated $event)
+    public function handle(OrderCreated $event): void
     {
         Notification::route('mail', config('company.email'))
             ->notify(new OrderCreatedNotification($event->order));

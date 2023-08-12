@@ -8,10 +8,8 @@ class SendConfirmedNotification
 {
     /**
      * Handle the event.
-     *
-     * @return void
      */
-    public function handle(OrderCreated $event)
+    public function handle(OrderCreated $event): void
     {
         $event->order->customer->sendOrderConfirmationNotification($event->order);
     }

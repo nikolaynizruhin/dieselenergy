@@ -42,8 +42,6 @@ class Customer extends Model
 
     /**
      * Create a new order.
-     *
-     * @return \App\Models\Order
      */
     public function createOrder(string $notes = ''): Order
     {
@@ -59,8 +57,6 @@ class Customer extends Model
 
     /**
      * Create contact.
-     *
-     * @return \App\Models\Contact
      */
     public function createContact(string $message): Contact
     {
@@ -69,11 +65,8 @@ class Customer extends Model
 
     /**
      * Send the order confirmation notification.
-     *
-     * @param  \App\Models\Order  $order
-     * @return void
      */
-    public function sendOrderConfirmationNotification(Order $order)
+    public function sendOrderConfirmationNotification(Order $order): void
     {
         $this->notify(new OrderConfirmed($order));
     }

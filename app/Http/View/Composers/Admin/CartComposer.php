@@ -9,10 +9,8 @@ class CartComposer
 {
     /**
      * Bind data to the view.
-     *
-     * @return void
      */
-    public function compose(View $view)
+    public function compose(View $view): void
     {
         $view->with(['products' => Product::orderBy('name')->get()]);
     }

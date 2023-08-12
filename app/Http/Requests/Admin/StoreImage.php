@@ -8,20 +8,16 @@ class StoreImage extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'images.*' => 'required|image',
@@ -33,10 +29,11 @@ class StoreImage extends FormRequest
      */
     public function getImages(): array
     {
-        return collect($this->file('images'))->map(fn ($image) => [
-            'path' => $image->store('images'),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ])->all();
+        return collect($this->file('images'))
+            ->map(fn ($image) => [
+                'path' => $image->store('images'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ])->all();
     }
 }

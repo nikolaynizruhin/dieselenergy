@@ -14,8 +14,6 @@ class OrderConfirmed extends Notification implements ShouldQueue
 
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
     public function __construct(readonly public Order $order)
     {
@@ -23,20 +21,16 @@ class OrderConfirmed extends Notification implements ShouldQueue
 
     /**
      * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
      */
-    public function via($notifiable): array
+    public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
 
     /**
      * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
      */
-    public function toMail($notifiable): MailMessage
+    public function toMail(mixed $notifiable): MailMessage
     {
         return (new MailMessage)
             ->subject('Підтвердження замовлення')

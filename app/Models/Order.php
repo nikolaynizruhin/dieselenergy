@@ -43,8 +43,6 @@ class Order extends Model
 
     /**
      * The products that belong to the order.
-     *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function products(): BelongsToMany
     {
@@ -57,7 +55,7 @@ class Order extends Model
     /**
      * Calculate and update order total.
      */
-    public function updateTotal()
+    public function updateTotal(): void
     {
         $this->update(['total' => $this->getTotal()]);
     }

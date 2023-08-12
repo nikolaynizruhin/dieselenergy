@@ -45,19 +45,14 @@ class Category extends Model
 
     /**
      * Scope a query with active product count.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeWithProductCount(Builder $query)
+    public function scopeWithProductCount(Builder $query): Builder
     {
         return $query->withCount(['products' => fn (Builder $query) => $query->active()]);
     }
 
     /**
      * Load product category attributes.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \App\Models\Category
      */
     public function loadAttributes(Product $product): Category
     {
