@@ -12,10 +12,10 @@
                     <tbody>
                     @foreach ($product->attributes as $attribute)
                         <tr>
-                            <td class="p-1 letter-spacing text-gray-500 text-uppercase">
+                            <td class="p-1 letter-spacing text-gray-500 text-uppercase bg-light">
                                 <small>{{ $attribute->name }}</small>
                             </td>
-                            <td class="p-1 text-secondary">
+                            <td class="p-1 text-secondary bg-light">
                                 <small>{{ $attribute->pivot->value }} {{ $attribute->measure }}</small>
                             </td>
                         </tr>
