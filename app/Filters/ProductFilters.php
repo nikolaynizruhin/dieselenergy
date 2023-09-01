@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ProductFilters extends Filters
 {
-    use HasSort, HasSearch;
+    use HasSearch, HasSort;
 
     /**
      * Registered filters to operate upon.

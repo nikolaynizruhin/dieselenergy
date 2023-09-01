@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Attribute extends Model
 {
-    use HasFactory, Filterable;
+    use Filterable, HasFactory;
 
     /**
      * The attributes that are mass assignable.

@@ -8,7 +8,7 @@ use App\Filters\HasSort;
 
 class UserFilters extends Filters
 {
-    use HasSort, HasSearch;
+    use HasSearch, HasSort;
 
     /**
      * Registered filters to operate upon.

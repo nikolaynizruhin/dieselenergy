@@ -34,8 +34,6 @@ class Specification extends Pivot
 
     /**
      * Get featured attribute ids by category.
-     *
-     * @param  \App\Models\Category  $category
      */
     public static function featured(Category $category): Collection
     {

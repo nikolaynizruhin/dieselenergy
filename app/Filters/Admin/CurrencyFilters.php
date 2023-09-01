@@ -8,7 +8,7 @@ use App\Filters\HasSort;
 
 class CurrencyFilters extends Filters
 {
-    use HasSort, HasSearch;
+    use HasSearch, HasSort;
 
     /**
      * Registered filters to operate upon.

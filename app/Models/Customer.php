@@ -13,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Customer extends Model
 {
-    use HasFactory, Filterable, Notifiable;
+    use Filterable, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.

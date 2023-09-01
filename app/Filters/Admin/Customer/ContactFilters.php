@@ -8,11 +8,11 @@ use App\Filters\HasSort;
 
 class ContactFilters extends Filters
 {
-    use HasSort {
-        sort as sortBy;
-    }
     use HasSearch {
         search as searchBy;
+    }
+    use HasSort {
+        sort as sortBy;
     }
 
     /**
