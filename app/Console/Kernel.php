@@ -18,9 +18,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('backup:clean')->daily();
 
-        $schedule->command('rate:update')
-            ->dailyAt('7:00')
-            ->days([Schedule::MONDAY, Schedule::THURSDAY]);
+        $schedule->command('rate:update')->weekly();
     }
 
     /**
