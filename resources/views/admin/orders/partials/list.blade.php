@@ -1,11 +1,11 @@
-<div class="card-header text-muted bg-white lead">
+<div class="card-header text-muted lead">
     {{ __('order.plural') }}
 </div>
 <div class="card-body p-0">
     <div class="table-responsive">
         <table class="table mb-0">
-            <thead>
-            <tr class="table-light">
+            <thead class="table-light">
+            <tr>
                 <th scope="col" class="text-muted">#</th>
                 @if ($route['name'] === 'admin.orders.index')
                     <th scope="col" class="text-muted">
@@ -90,7 +90,7 @@
         </table>
     </div>
 </div>
-<div class="card-footer bg-white text-muted border-0">
+<div class="card-footer text-muted border-0">
     <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
         {{ __('common.total') }} {{ $orders->total() }} {{ __('common.records') }}
         {{ $orders->links() }}

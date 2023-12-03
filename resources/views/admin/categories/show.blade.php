@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card shadow-sm mb-4">
-        <div class="card-header border-0 bg-white lead">
+        <div class="card-header border-0 lead">
             {{ __('category.details') }}
             <a class="float-end" href="{{ route('admin.categories.edit', $category) }}" role="button">
                 @include('layouts.partials.icon', ['name' => 'pencil', 'width' => '1em', 'height' => '1em'])

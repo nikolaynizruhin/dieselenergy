@@ -27,6 +27,6 @@
     </div>
 </div>
 
-<div class="card-footer bg-light text-end border-0">
+<div class="card-footer text-end border-0">
     <button type="submit" class="btn btn-primary text-white">{{ $button ?? __('common.create') }}</button>
 </div>

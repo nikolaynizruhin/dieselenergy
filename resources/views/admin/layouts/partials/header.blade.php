@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md bg-white shadow-sm">
     <div class="container-lg">
         <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('/images/logo.svg') }}" alt="{{ config('app.name') }}" width="130">

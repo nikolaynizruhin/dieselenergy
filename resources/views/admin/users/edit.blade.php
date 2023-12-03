@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card shadow-sm mb-4">
-        <div class="card-header border-0 bg-white lead">
+        <div class="card-header border-0 lead">
             {{ __('user.update') }}
         </div>
 
@@ -32,14 +32,14 @@
                 </div>
             </div>
 
-            <div class="card-footer bg-light text-end border-0">
+            <div class="card-footer text-end border-0">
                 <button type="submit" class="btn btn-primary text-white">{{ __('common.update') }}</button>
             </div>
         </form>
     </div>
 
     <div class="card shadow-sm">
-        <div class="card-header border-0 bg-white lead">
+        <div class="card-header border-0 lead">
             {{ __('user.password.update') }}
         </div>
 
@@ -67,7 +67,7 @@
                 </div>
             </div>
 
-            <div class="card-footer bg-light text-end border-0">
+            <div class="card-footer text-end border-0">
                 <button type="submit" class="btn btn-primary text-white">{{ __('common.update') }}</button>
             </div>
         </form>

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card shadow-sm">
-        <div class="card-header border-0 bg-white lead">
+        <div class="card-header border-0 lead">
             {{ __('image.add') }}
         </div>
 
@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <div class="card-footer bg-light text-end border-0">
+            <div class="card-footer text-end border-0">
                 <button type="submit" class="btn btn-primary text-white">{{ __('common.create') }}</button>
             </div>
         </form>

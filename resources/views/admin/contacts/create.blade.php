@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card shadow-sm">
-        <div class="card-header border-0 bg-white lead">
+        <div class="card-header border-0 lead">
             {{ __('contact.add') }}
         </div>
 

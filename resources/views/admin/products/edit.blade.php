@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card shadow-sm">
-        <div class="card-header border-0 bg-white lead">
+        <div class="card-header border-0 lead">
             {{ __('product.update') }}
             <a class="float-end" href="{{ route('admin.products.show', $product) }}" role="button">
                 @include('layouts.partials.icon', ['name' => 'eye', 'width' => '1em', 'height' => '1em'])
@@ -143,7 +143,7 @@
                 @endforeach
             </div>
 
-            <div class="card-footer bg-light text-end border-0">
+            <div class="card-footer text-end border-0">
                 <button type="submit" class="btn btn-primary text-white">{{ __('common.update') }}</button>
             </div>
         </form>
