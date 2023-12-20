@@ -37,7 +37,7 @@ test('user can update cart', function () {
 
 test('user cant update cart with invalid data', function (string $field, callable $data, int $count = 1) {
     $this->login()
-        ->from(route('admin.carts.edit', $this->cart))
+        ->fromRoute('admin.carts.edit', $this->cart)
         ->put(route('admin.carts.update', $this->cart), $data())
         ->assertRedirect(route('admin.carts.edit', $this->cart))
         ->assertSessionHasErrors($field);

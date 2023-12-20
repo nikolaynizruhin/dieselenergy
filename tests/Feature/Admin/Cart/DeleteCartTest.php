@@ -13,7 +13,7 @@ test('guest cant delete cart', function () {
 
 test('user can delete cart', function () {
     $this->login()
-        ->from(route('admin.orders.show', $this->cart->order))
+        ->fromRoute('admin.orders.show', $this->cart->order)
         ->delete(route('admin.carts.destroy', $this->cart))
         ->assertRedirect(route('admin.orders.show', $this->cart->order))
         ->assertSessionHas('status', trans('cart.deleted'));

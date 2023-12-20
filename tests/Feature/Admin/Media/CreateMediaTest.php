@@ -39,7 +39,7 @@ test('it should unmark other default medias', function () {
     ]);
 
     $this->login()
-        ->from(route('admin.medias.create'))
+        ->fromRoute('admin.medias.create')
         ->post(route('admin.medias.store'), $stub)
         ->assertRedirect(route('admin.products.show', $media->product));
 

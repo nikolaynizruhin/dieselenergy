@@ -29,7 +29,7 @@ test('user can create attribute', function () {
 
 test('user cant create attribute with invalid data', function (string $field, callable $data, int $count = 0) {
     $this->login()
-        ->from(route('admin.attributes.create'))
+        ->fromRoute('admin.attributes.create')
         ->post(route('admin.attributes.store'), $data())
         ->assertRedirect(route('admin.attributes.create'))
         ->assertSessionHasErrors($field);

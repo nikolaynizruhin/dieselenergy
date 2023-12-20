@@ -42,7 +42,7 @@ test('user can create image', function () {
 
 test('user cant create image with invalid data', function (callable $data) {
     $this->login()
-        ->from(route('admin.images.create'))
+        ->fromRoute('admin.images.create')
         ->post(route('admin.images.store'), ['images' => $data()])
         ->assertRedirect(route('admin.images.create'))
         ->assertSessionHasErrors('images.*');

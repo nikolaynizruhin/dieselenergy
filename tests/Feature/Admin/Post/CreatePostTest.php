@@ -47,7 +47,7 @@ test('user can create post', function () {
 
 test('user cant create post with invalid data', function (string $field, callable $data, int $count = 0) {
     $this->login()
-        ->from(route('admin.posts.create'))
+        ->fromRoute('admin.posts.create')
         ->post(route('admin.posts.store'), $data())
         ->assertRedirect(route('admin.posts.create'))
         ->assertSessionHasErrors($field);

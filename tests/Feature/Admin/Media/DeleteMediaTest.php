@@ -13,7 +13,7 @@ test('guest cant delete media', function () {
 
 test('user can delete media', function () {
     $this->login()
-        ->from(route('admin.products.show', $this->media->product))
+        ->fromRoute('admin.products.show', $this->media->product)
         ->delete(route('admin.medias.destroy', $this->media))
         ->assertRedirect(route('admin.products.show', $this->media->product))
         ->assertSessionHas('status', trans('media.deleted'));

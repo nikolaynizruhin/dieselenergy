@@ -13,7 +13,7 @@ test('guest cant delete image', function () {
 
 test('user can delete image', function () {
     $this->login()
-        ->from(route('admin.images.index'))
+        ->fromRoute('admin.images.index')
         ->delete(route('admin.images.destroy', $this->image))
         ->assertRedirect(route('admin.images.index'))
         ->assertSessionHas('status', trans('image.deleted'));

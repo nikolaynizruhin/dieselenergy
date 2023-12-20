@@ -29,7 +29,7 @@ test('user can create category', function () {
 
 test('user cant create category with invalid data', function (string $field, callable $data, int $count = 0) {
     $this->login()
-        ->from(route('admin.categories.create'))
+        ->fromRoute('admin.categories.create')
         ->post(route('admin.categories.store'), $data())
         ->assertRedirect(route('admin.categories.create'))
         ->assertSessionHasErrors($field);

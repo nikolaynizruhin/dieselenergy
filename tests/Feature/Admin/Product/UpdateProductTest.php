@@ -116,7 +116,7 @@ test('unrelated attribute should not be attached to product', function () {
 
 test('user cant update product with invalid data', function (string $field, callable $data, int $count = 1) {
     $this->login()
-        ->from(route('admin.products.edit', $this->product))
+        ->fromRoute('admin.products.edit', $this->product)
         ->put(route('admin.products.update', $this->product), $data())
         ->assertRedirect(route('admin.products.edit', $this->product))
         ->assertSessionHasErrors($field);
@@ -128,7 +128,7 @@ test('user cant update product with integer attributes', function (callable $dat
     [$attributeId, $fields] = $data();
 
     $this->login()
-        ->from(route('admin.products.edit', $this->product))
+        ->fromRoute('admin.products.edit', $this->product)
         ->put(route('admin.products.update', $this->product), $fields)
         ->assertRedirect(route('admin.products.edit', $this->product))
         ->assertSessionHasErrors('attributes.'.$attributeId);

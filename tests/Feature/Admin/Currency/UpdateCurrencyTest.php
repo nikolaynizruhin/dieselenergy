@@ -35,7 +35,7 @@ test('user can update currency', function () {
 
 test('user cant update currency with invalid data', function (string $field, callable $data, int $count = 1) {
     $this->login()
-        ->from(route('admin.currencies.edit', $this->currency))
+        ->fromRoute('admin.currencies.edit', $this->currency)
         ->put(route('admin.currencies.update', $this->currency), $data())
         ->assertRedirect(route('admin.currencies.edit', $this->currency))
         ->assertSessionHasErrors($field);

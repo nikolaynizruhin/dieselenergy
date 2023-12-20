@@ -36,7 +36,7 @@ test('user_can_update_attribute', function () {
 
 test('user_cant_update_attribute_with_invalid_data', function (string $field, callable $data, int $count = 1) {
     $this->login()
-        ->from(route('admin.attributes.edit', $this->attribute))
+        ->fromRoute('admin.attributes.edit', $this->attribute)
         ->put(route('admin.attributes.update', $this->attribute), $data())
         ->assertRedirect(route('admin.attributes.edit', $this->attribute))
         ->assertSessionHasErrors($field);

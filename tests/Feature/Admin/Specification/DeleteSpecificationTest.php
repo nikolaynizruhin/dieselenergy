@@ -13,7 +13,7 @@ test('guest cant delete specification', function () {
 
 test('user can delete specification', function () {
     $this->login()
-        ->from(route('admin.categories.show', $this->specification->category_id))
+        ->fromRoute('admin.categories.show', $this->specification->category_id)
         ->delete(route('admin.specifications.destroy', $this->specification))
         ->assertRedirect(route('admin.categories.show', $this->specification->category_id))
         ->assertSessionHas('status', trans('specification.deleted'));

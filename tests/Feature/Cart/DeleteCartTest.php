@@ -8,7 +8,7 @@ test('guest can delete cart item', function () {
 
     Cart::add($product);
 
-    $this->from(route('carts.index'))
+    $this->fromRoute('carts.index')
         ->delete(route('carts.destroy', 0))
         ->assertRedirect(route('carts.index'));
 

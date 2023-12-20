@@ -13,7 +13,7 @@ test('guest cant delete currency', function () {
 
 test('user can delete category', function () {
     $this->login()
-        ->from(route('admin.currencies.index'))
+        ->fromRoute('admin.currencies.index')
         ->delete(route('admin.currencies.destroy', $this->currency))
         ->assertRedirect(route('admin.currencies.index'))
         ->assertSessionHas('status', trans('currency.deleted'));

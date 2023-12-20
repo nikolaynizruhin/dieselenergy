@@ -35,7 +35,7 @@ test('user can update customer', function () {
 
 test('user cant update customer with invalid data', function (string $field, callable $data, int $count = 1) {
     $this->login()
-        ->from(route('admin.customers.edit', $this->customer))
+        ->fromRoute('admin.customers.edit', $this->customer)
         ->put(route('admin.customers.update', $this->customer), $data())
         ->assertRedirect(route('admin.customers.edit', $this->customer))
         ->assertSessionHasErrors($field);

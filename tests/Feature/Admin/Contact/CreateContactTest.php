@@ -29,7 +29,7 @@ test('user can create contact', function () {
 
 test('user cant create contact with invalid data', function (string $field, callable $data) {
     $this->login()
-        ->from(route('admin.contacts.create'))
+        ->fromRoute('admin.contacts.create')
         ->post(route('admin.contacts.store'), $data())
         ->assertRedirect(route('admin.contacts.create'))
         ->assertSessionHasErrors($field);

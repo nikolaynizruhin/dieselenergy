@@ -39,7 +39,7 @@ test('user can update order', function () {
 
 test('user cant update order with invalid data', function (string $field, callable $data) {
     $this->login()
-        ->from(route('admin.orders.edit', $this->order))
+        ->fromRoute('admin.orders.edit', $this->order)
         ->put(route('admin.orders.update', $this->order), $data())
         ->assertRedirect(route('admin.orders.edit', $this->order))
         ->assertSessionHasErrors($field);

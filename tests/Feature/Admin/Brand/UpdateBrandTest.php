@@ -36,7 +36,7 @@ test('user can update brand', function () {
 
 test('user cant update brand with invalid data', function (string $field, callable $data, $count = 1) {
     $this->login()
-        ->from(route('admin.brands.edit', $this->brand))
+        ->fromRoute('admin.brands.edit', $this->brand)
         ->put(route('admin.brands.update', $this->brand), $data())
         ->assertRedirect(route('admin.brands.edit', $this->brand))
         ->assertSessionHasErrors($field);

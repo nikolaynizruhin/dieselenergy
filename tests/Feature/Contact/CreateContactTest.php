@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
 test('guest can create contact', function () {
-    $this->from(route('home'))
+    $this->fromRoute('home')
         ->post(route('contacts.store'), $fields = validFields())
         ->assertRedirect(route('home').'#contact')
         ->assertSessionHas('status', trans('contact.created'));
@@ -26,7 +26,7 @@ test('guest can create contact', function () {
 test('admin should receive an email when contact created', function () {
     Notification::fake();
 
-    $this->from(route('home'))
+    $this->fromRoute('home')
         ->post(route('contacts.store'), $fields = validFields())
         ->assertRedirect(route('home').'#contact');
 
@@ -38,7 +38,7 @@ test('admin should receive an email when contact created', function () {
 });
 
 test('guest cant create contact with invalid data', function (string $field, callable $data) {
-    $this->from(route('home'))
+    $this->fromRoute('home')
         ->post(route('contacts.store'), $data())
         ->assertRedirect(route('home').'#contact')
         ->assertInvalid($field);
@@ -81,7 +81,7 @@ test('guest cant create contact with invalid data', function (string $field, cal
 ]);
 
 test('guest cant create contact with spam', function (callable $data) {
-    $this->from(route('home'))
+    $this->fromRoute('home')
         ->post(route('contacts.store'), $data())
         ->assertSuccessful();
 

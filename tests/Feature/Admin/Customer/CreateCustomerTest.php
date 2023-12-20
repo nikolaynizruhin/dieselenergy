@@ -29,7 +29,7 @@ test('user can create customer', function () {
 
 test('user cant create customer with invalid data', function (string $field, callable $data, int $count = 0) {
     $this->login()
-        ->from(route('admin.customers.create'))
+        ->fromRoute('admin.customers.create')
         ->post(route('admin.customers.store'), $data())
         ->assertRedirect(route('admin.customers.create'))
         ->assertSessionHasErrors($field);

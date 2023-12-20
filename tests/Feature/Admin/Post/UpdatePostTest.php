@@ -53,7 +53,7 @@ test('user can update post', function () {
 
 test('user cant update post with invalid data', function (string $field, callable $data, int $count = 1) {
     $this->login()
-        ->from(route('admin.posts.edit', $this->post))
+        ->fromRoute('admin.posts.edit', $this->post)
         ->put(route('admin.posts.update', $this->post), $data())
         ->assertRedirect(route('admin.posts.edit', $this->post))
         ->assertSessionHasErrors($field);

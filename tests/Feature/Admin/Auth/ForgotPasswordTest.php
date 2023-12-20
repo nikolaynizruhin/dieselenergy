@@ -42,7 +42,7 @@ test('user does not receive email when not registered', function () {
 
     $user = User::factory()->make();
 
-    $this->from(route('admin.password.request'))
+    $this->fromRoute('admin.password.request')
         ->post(route('admin.password.email'), [
             'email' => $user->email,
         ])->assertRedirect(route('admin.password.request'))
@@ -52,7 +52,7 @@ test('user does not receive email when not registered', function () {
 });
 
 test('user cant get reset password email with invalid email', function ($email) {
-    $this->from(route('admin.password.request'))
+    $this->fromRoute('admin.password.request')
         ->post(route('admin.password.email'), ['email' => $email])
         ->assertRedirect(route('admin.password.request'))
         ->assertSessionHasErrors('email');

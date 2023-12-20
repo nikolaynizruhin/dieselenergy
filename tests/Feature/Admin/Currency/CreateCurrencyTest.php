@@ -29,7 +29,7 @@ test('user can create currency', function () {
 
 test('user cant create currency with invalid data', function (string $field, callable $data, int $count = 0) {
     $this->login()
-        ->from(route('admin.currencies.create'))
+        ->fromRoute('admin.currencies.create')
         ->post(route('admin.currencies.store'), $data())
         ->assertRedirect(route('admin.currencies.create'))
         ->assertSessionHasErrors($field);

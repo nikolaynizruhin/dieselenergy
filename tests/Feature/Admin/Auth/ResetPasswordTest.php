@@ -56,7 +56,7 @@ test('user can reset password with valid token', function () {
 test('user cannot reset password with invalid token', function () {
     $user = User::factory()->create();
 
-    $this->from(route('admin.password.reset', 'invalid'))
+    $this->fromRoute('admin.password.reset', 'invalid')
         ->post('/admin/password/reset', [
             'token' => 'invalid',
             'email' => $user->email,
@@ -74,7 +74,7 @@ test('user cannot reset password without providing new password', function () {
 
     $token = Password::broker()->createToken($user);
 
-    $this->from(route('admin.password.reset', $token))
+    $this->fromRoute('admin.password.reset', $token)
         ->post('/admin/password/reset', [
             'token' => $token,
             'email' => $user->email,
@@ -95,7 +95,7 @@ test('user cannot reset password without providing email', function () {
 
     $token = Password::broker()->createToken($user);
 
-    $this->from(route('admin.password.reset', $token))
+    $this->fromRoute('admin.password.reset', $token)
         ->post('/admin/password/reset', [
             'token' => $token,
             'email' => '',

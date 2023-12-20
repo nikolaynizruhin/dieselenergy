@@ -45,7 +45,7 @@ test('user can login with remember me', function () {
 });
 
 test('user cant login with invalid data', function (callable $data) {
-    $this->from(route('admin.login'))
+    $this->fromRoute('admin.login')
         ->post(route('admin.login'), $data())
         ->assertRedirect(route('admin.login'))
         ->assertSessionHasErrors('email');
@@ -84,7 +84,7 @@ test('user cant make more than five attempts in a minute', function () {
     $user = User::factory()->create();
 
     foreach (range(0, 5) as $attempt) {
-        $response = $this->from(route('admin.login'))
+        $response = $this->fromRoute('admin.login')
             ->post(route('admin.login'), [
                 'email' => $user->email,
                 'password' => 'incorrect',

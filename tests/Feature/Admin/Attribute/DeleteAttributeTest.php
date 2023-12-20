@@ -13,7 +13,7 @@ test('guest cant delete attribute', function () {
 
 test('user can delete attribute', function () {
     $this->login()
-        ->from(route('admin.attributes.index'))
+        ->fromRoute('admin.attributes.index')
         ->delete(route('admin.attributes.destroy', $this->attribute))
         ->assertRedirect(route('admin.attributes.index'))
         ->assertSessionHas('status', trans('attribute.deleted'));

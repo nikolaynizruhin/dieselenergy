@@ -18,7 +18,7 @@ test('guest cant update user password', function () {
 
 test('user can update user password', function () {
     $this->actingAs($this->user)
-        ->from(route('admin.users.password.update', $this->user))
+        ->fromRoute('admin.users.password.update', $this->user)
         ->put(route('admin.users.password.update', $this->user), passwordFields())
         ->assertRedirect(route('admin.users.index'))
         ->assertSessionHas('status', trans('user.password.updated'));
@@ -28,7 +28,7 @@ test('user can update user password', function () {
 
 test('user cant update user with invalid password', function (string $field, callable $data) {
     $this->actingAs($this->user)
-        ->from(route('admin.users.password.update', $this->user))
+        ->fromRoute('admin.users.password.update', $this->user)
         ->put(route('admin.users.password.update', $this->user), $data())
         ->assertRedirect(route('admin.users.password.update', $this->user))
         ->assertSessionHasErrors($field);

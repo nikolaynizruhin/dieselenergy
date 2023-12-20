@@ -6,7 +6,7 @@ use Facades\App\Services\Cart;
 test('guest can add product to cart', function () {
     $product = Product::factory()->withDefaultImage()->create();
 
-    $this->from(route('categories.products.index', $product->category))
+    $this->fromRoute('categories.products.index', $product->category)
         ->post(route('carts.store', ['product_id' => $product->id, 'quantity' => 2]))
         ->assertRedirect(route('carts.index'))
         ->assertSessionHas('cart');

@@ -36,7 +36,7 @@ test('user can update category', function () {
 
 test('user cant update category with invalid data', function (string $field, callable $data, int $count = 1) {
     $this->login()
-        ->from(route('admin.categories.edit', $this->category))
+        ->fromRoute('admin.categories.edit', $this->category)
         ->put(route('admin.categories.update', $this->category), $data())
         ->assertRedirect(route('admin.categories.edit', $this->category))
         ->assertSessionHasErrors($field);

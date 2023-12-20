@@ -34,7 +34,7 @@ test('user can create specification', function () {
 
 test('user cant create specification with invalid data', function (string $field, callable $data, int $count = 0) {
     $this->login()
-        ->from(route('admin.specifications.create'))
+        ->fromRoute('admin.specifications.create')
         ->post(route('admin.specifications.store'), $data())
         ->assertRedirect(route('admin.specifications.create'))
         ->assertSessionHasErrors($field);

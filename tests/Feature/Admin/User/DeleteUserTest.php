@@ -13,7 +13,7 @@ test('guest cant delete user', function () {
 
 test('user can delete user', function () {
     $this->login()
-        ->from(route('admin.users.index'))
+        ->fromRoute('admin.users.index')
         ->delete(route('admin.users.destroy', $this->user))
         ->assertRedirect(route('admin.users.index'))
         ->assertSessionHas('status', trans('user.deleted'));

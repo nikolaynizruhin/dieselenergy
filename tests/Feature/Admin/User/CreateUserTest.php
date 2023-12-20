@@ -36,7 +36,7 @@ test('user can create user', function () {
 
 test('user_cant_create_user_with_invalid_data', function (string $field, callable $data, int $count = 1) {
     $this->login()
-        ->from(route('admin.users.create'))
+        ->fromRoute('admin.users.create')
         ->post(route('admin.users.store'), $data())
         ->assertRedirect(route('admin.users.create'))
         ->assertSessionHasErrors($field);

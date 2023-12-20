@@ -35,7 +35,7 @@ test('user can create cart', function () {
 
 test('user cant create cart with invalid data', function (string $field, callable $data, int $count = 0) {
     $this->login()
-        ->from(route('admin.carts.create'))
+        ->fromRoute('admin.carts.create')
         ->post(route('admin.carts.store'), $data())
         ->assertRedirect(route('admin.carts.create'))
         ->assertSessionHasErrors($field);

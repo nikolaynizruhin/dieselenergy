@@ -98,7 +98,7 @@ test('default product should be inactive', function () {
 
 test('user cant create product with invalid data', function (string $field, callable $data, int $count = 0) {
     $this->login()
-        ->from(route('admin.products.create'))
+        ->fromRoute('admin.products.create')
         ->post(route('admin.products.store'), $data())
         ->assertRedirect(route('admin.products.create'))
         ->assertSessionHasErrors($field);
@@ -110,7 +110,7 @@ test('user cant create product with invalid attributes', function (callable $dat
     [$attributeId, $fields] = $data();
 
     $this->login()
-        ->from(route('admin.products.create'))
+        ->fromRoute('admin.products.create')
         ->post(route('admin.products.store'), $fields)
         ->assertRedirect(route('admin.products.create'))
         ->assertSessionHasErrors('attributes.'.$attributeId);
