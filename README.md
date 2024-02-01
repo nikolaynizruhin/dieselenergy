@@ -19,7 +19,7 @@ composer install
 ```
 4. Install and compile npm dependencies:
 ```
-npm install && npm run dev
+npm install && npm run build
 ```
 5. Migrate database (--seed optional):
 ```
