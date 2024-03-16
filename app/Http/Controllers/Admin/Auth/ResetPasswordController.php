@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -45,7 +44,6 @@ class ResetPasswordController extends Controller
      *
      * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
      * @param  string  $password
-     * @return void
      */
     protected function setUserPassword($user, $password): void
     {
