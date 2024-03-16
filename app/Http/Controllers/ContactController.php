@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreContact;
 use Facades\App\Actions\CreateContact;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class ContactController extends Controller
+class ContactController extends Controller implements HasMiddleware
 {
     /**
-     * Instantiate a new controller instance.
-     *
-     * @return void
+     * Get the middleware that should be assigned to the controller.
      */
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware('spam.block');
+        return [new Middleware('spam.block')];
     }
 
     /**

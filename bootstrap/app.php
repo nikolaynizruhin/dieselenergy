@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\BlockSpam;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -21,10 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->alias([
-            'auth' => Authenticate::class,
-            'spam.block' => BlockSpam::class,
-        ]);
+        $middleware->alias(['spam.block' => BlockSpam::class]);
 
         $middleware->redirectGuestsTo(fn (Request $request) => route('admin.login'));
     })

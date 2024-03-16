@@ -26,7 +26,7 @@ class ResetPasswordController extends Controller
     /**
      * Where to redirect users after resetting their password.
      */
-    protected string $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = '/admin';
 
     /**
      * Display the password reset view for the given token.
@@ -47,7 +47,7 @@ class ResetPasswordController extends Controller
      * @param  string  $password
      * @return void
      */
-    protected function setUserPassword($user, $password)
+    protected function setUserPassword($user, $password): void
     {
         $user->password = $password;
     }

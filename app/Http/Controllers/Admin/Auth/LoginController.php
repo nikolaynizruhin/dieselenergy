@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\View\View;
 
-class LoginController extends Controller
+class LoginController extends Controller implements HasMiddleware
 {
     /*
     |--------------------------------------------------------------------------
@@ -25,16 +26,14 @@ class LoginController extends Controller
     /**
      * Where to redirect users after login.
      */
-    protected string $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = '/admin';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Get the middleware that should be assigned to the controller.
      */
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware('guest')->except('logout');
+        return [new Middleware('guest', except: ['logout'])];
     }
 
     /**
