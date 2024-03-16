@@ -45,7 +45,7 @@ class Backup
 
         $modifiedAt = Carbon::createFromTimestamp($timestamp);
 
-        return now()->diffInDays($modifiedAt) >= config('backup.lifetime');
+        return (int) now()->diffInDays($modifiedAt, true) >= config('backup.lifetime');
     }
 
     /**
