@@ -43,9 +43,9 @@ class Backup
     {
         $timestamp = Storage::disk('local')->lastModified($this->path);
 
-        $modifiedAt = Carbon::createFromTimestamp($timestamp);
-
-        return (int) now()->diffInDays($modifiedAt, true) >= config('backup.lifetime');
+        return Carbon::createFromTimestamp($timestamp)
+            ->addDays(config('backup.lifetime'))
+            ->isPast();
     }
 
     /**
