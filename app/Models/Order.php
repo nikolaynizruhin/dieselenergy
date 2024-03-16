@@ -25,13 +25,14 @@ class Order extends Model
     ];
 
     /**
-     * The attributes that should be cast.
+     * Get the attributes that should be cast.
      *
-     * @var array
+     * @return array<string, string>
      */
-    protected $casts = [
-        'status' => OrderStatus::class,
-    ];
+    protected function casts(): array
+    {
+        return ['status' => OrderStatus::class];
+    }
 
     /**
      * Get the customer that owns the order.

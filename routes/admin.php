@@ -23,17 +23,6 @@ use App\Http\Controllers\Admin\User\PasswordController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Admin Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register admin web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" and "auth" middleware groups. Now create something great!
-|
-*/
-
 Route::withoutMiddleware('auth')->group(function () {
     // Authentication Routes...
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
