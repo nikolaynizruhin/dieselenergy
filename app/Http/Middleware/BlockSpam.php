@@ -36,7 +36,8 @@ class BlockSpam
     private function submittedTooQuickly(Request $request): bool
     {
         $start = $request->input(config('honeypot.valid_from_field'));
+        $diffInSeconds = (int) now()->diffInSeconds(Carbon::createFromTimestamp($start), true);
 
-        return now()->diffInSeconds(Carbon::createFromTimestamp($start)) <= config('honeypot.seconds');
+        return $diffInSeconds <= config('honeypot.seconds');
     }
 }
