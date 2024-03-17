@@ -37,6 +37,8 @@ class BlockSpam
     {
         $start = $request->input(config('honeypot.valid_from_field'));
 
-        return now()->diffInSeconds(Carbon::createFromTimestamp($start)) <= config('honeypot.seconds');
+        return Carbon::createFromTimestamp($start)
+            ->addSeconds(config('honeypot.seconds'))
+            ->isFuture();
     }
 }

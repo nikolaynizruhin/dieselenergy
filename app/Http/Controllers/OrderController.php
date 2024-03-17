@@ -6,18 +6,18 @@ use App\Http\Requests\StoreOrder;
 use App\Models\Order;
 use Facades\App\Actions\CreateOrder;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\View\View;
 
-class OrderController extends Controller
+class OrderController extends Controller implements HasMiddleware
 {
     /**
-     * Instantiate a new controller instance.
-     *
-     * @return void
+     * Get the middleware that should be assigned to the controller.
      */
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware('spam.block')->only('store');
+        return [new Middleware('spam.block', only: ['store'])];
     }
 
     /**

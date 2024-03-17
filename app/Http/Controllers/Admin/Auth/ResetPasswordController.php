@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -26,7 +25,7 @@ class ResetPasswordController extends Controller
     /**
      * Where to redirect users after resetting their password.
      */
-    protected string $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = '/admin';
 
     /**
      * Display the password reset view for the given token.
@@ -45,9 +44,8 @@ class ResetPasswordController extends Controller
      *
      * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
      * @param  string  $password
-     * @return void
      */
-    protected function setUserPassword($user, $password)
+    protected function setUserPassword($user, $password): void
     {
         $user->password = $password;
     }

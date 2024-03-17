@@ -26,11 +26,14 @@ class Product extends Model
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * Get the attributes that should be cast.
      *
-     * @var array
+     * @return array<string, string>
      */
-    protected $casts = ['is_active' => 'boolean'];
+    protected function casts(): array
+    {
+        return ['is_active' => 'boolean'];
+    }
 
     /**
      * Scope a query to only include active products.
