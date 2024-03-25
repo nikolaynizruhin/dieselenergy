@@ -1,6 +1,7 @@
 {
   "resources/js/admin/admin.js": {
     "file": "assets/admin-CsFhb2pl.js",
+    "name": "admin",
     "src": "resources/js/admin/admin.js",
     "isEntry": true,
     "imports": [
@@ -9,6 +10,7 @@
   },
   "resources/js/app.js": {
     "file": "assets/app-DvV8I5Iz.js",
+    "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   },
