@@ -20,9 +20,7 @@ class Cart
     /**
      * Cart constructor.
      */
-    public function __construct(readonly private SessionManager $session)
-    {
-    }
+    public function __construct(readonly private SessionManager $session) {}
 
     /**
      * Add product to cart.
@@ -52,7 +50,7 @@ class Cart
      */
     public function items(): Collection
     {
-        return $this->session->get(self::KEY, new Collection());
+        return $this->session->get(self::KEY, new Collection);
     }
 
     /**
@@ -86,7 +84,7 @@ class Cart
      */
     public function clear(): void
     {
-        $this->session->put(self::KEY, new Collection());
+        $this->session->put(self::KEY, new Collection);
     }
 
     /**

@@ -15,9 +15,7 @@ class ContactCreated extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      */
-    public function __construct(readonly public Contact $contact)
-    {
-    }
+    public function __construct(readonly public Contact $contact) {}
 
     /**
      * Get the notification's delivery channels.

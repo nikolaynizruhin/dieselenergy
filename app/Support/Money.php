@@ -19,8 +19,7 @@ class Money
     public function __construct(
         private int $coins,
         private ?Currency $currency = null
-    ) {
-    }
+    ) {}
 
     /**
      * Get money in coins.

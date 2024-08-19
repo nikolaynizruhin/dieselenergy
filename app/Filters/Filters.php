@@ -20,9 +20,7 @@ abstract class Filters
     /**
      * Create a new instance.
      */
-    public function __construct(readonly protected Request $request)
-    {
-    }
+    public function __construct(readonly protected Request $request) {}
 
     /**
      * Apply the filters.
