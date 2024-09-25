@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
+    /** @use HasFactory<\Database\Factories\CartFactory> */
     use Filterable, HasFactory;
 
     /**

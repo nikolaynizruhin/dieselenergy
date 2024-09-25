@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Cart extends Pivot
 {
+    /** @use HasFactory<\Database\Factories\CartFactory> */
     use HasFactory;
 
     /**

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
 {
+    /** @use HasFactory<\Database\Factories\ImageFactory> */
     use Filterable, HasFactory;
 
     /**

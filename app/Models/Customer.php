@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Customer extends Model
 {
+    /** @use HasFactory<\Database\Factories\CustomerFactory> */
     use Filterable, HasFactory, Notifiable;
 
     /**

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Contact extends Model
 {
+    /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use Filterable, HasFactory;
 
     /**

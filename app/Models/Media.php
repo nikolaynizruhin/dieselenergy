@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Media extends Pivot
 {
+    /** @use HasFactory<\Database\Factories\MediaFactory> */
     use HasFactory;
 
     /**

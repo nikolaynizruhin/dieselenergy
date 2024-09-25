@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 
 class Specification extends Pivot
 {
+    /** @use HasFactory<\Database\Factories\SpecificationFactory> */
     use HasFactory;
 
     /**

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Order extends Model
 {
+    /** @use HasFactory<\Database\Factories\OrderFactory> */
     use Filterable, HasFactory;
 
     /**

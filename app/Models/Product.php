@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
+    /** @use HasFactory<\Database\Factories\ProductFactory> */
     use Filterable, HasFactory;
 
     /**
