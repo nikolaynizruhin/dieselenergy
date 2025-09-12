@@ -1,20 +1,20 @@
 <footer class="bg-dark mt-auto py-5">
     <div class="container">
         <div class="row mb-5">
-            <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
+            <div class="col-12 col-md-6 mb-3 mb-md-0">
                 <a href="{{ route('home') }}">
                     <img src="{{ asset('/images/logo-white.svg') }}" alt="{{ config('app.name') }}" width="150" height="39" class="mb-3" loading="lazy">
                 </a>
                 <p class="text-gray-300">Надійні рішення для постачання<br>електроенергії</p>
             </div>
-            <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
-                <strong class="d-block text-gray-500 mb-2 letter-spacing">ТОВАРИ</strong>
-                @foreach($categories as $category)
-                    <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('categories.products.index', $category) }}">
-                        {{ $category->name }}
-                    </a>
-                @endforeach
-            </div>
+{{--            <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">--}}
+{{--                <strong class="d-block text-gray-500 mb-2 letter-spacing">ТОВАРИ</strong>--}}
+{{--                @foreach($categories as $category)--}}
+{{--                    <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('categories.products.index', $category) }}">--}}
+{{--                        {{ $category->name }}--}}
+{{--                    </a>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
             <div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
                 <strong class="d-block text-gray-500 mb-2 letter-spacing">КОМПАНІЯ</strong>
                 <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('home').'#services' }}">
@@ -23,9 +23,9 @@
                 <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('home').'#about-us' }}">
                     Про нас
                 </a>
-                <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('posts.index') }}">
-                    Блог
-                </a>
+{{--                <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('posts.index') }}">--}}
+{{--                    Блог--}}
+{{--                </a>--}}
                 <a class="d-block text-gray-300 text-decoration-none mb-2" href="{{ route('privacy') }}">
                     Політика конфіденційності
                 </a>
