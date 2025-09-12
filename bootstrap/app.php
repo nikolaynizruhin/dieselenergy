@@ -19,13 +19,13 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->group(base_path('routes/admin.php'));
         },
     )
-    ->withMiddleware(function (Middleware $middleware) {
+    ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias(['spam.block' => BlockSpam::class]);
 
         $middleware->redirectGuestsTo(fn (Request $request) => route('admin.login'));
 
         $middleware->redirectUsersTo(fn (Request $request) => route('admin.dashboard'));
     })
-    ->withExceptions(function (Exceptions $exceptions) {
+    ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();
