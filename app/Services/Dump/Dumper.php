@@ -9,7 +9,7 @@ abstract class Dumper
     /**
      * Dumper constructor.
      */
-    public function __construct(readonly protected array $config) {}
+    public function __construct(protected readonly array $config) {}
 
     /**
      * Dump database.

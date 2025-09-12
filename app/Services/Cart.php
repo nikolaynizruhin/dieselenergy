@@ -20,7 +20,7 @@ class Cart
     /**
      * Cart constructor.
      */
-    public function __construct(readonly private SessionManager $session) {}
+    public function __construct(private readonly SessionManager $session) {}
 
     /**
      * Add product to cart.

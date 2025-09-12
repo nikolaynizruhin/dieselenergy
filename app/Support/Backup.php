@@ -12,7 +12,7 @@ class Backup
     /**
      * Backup construct.
      */
-    public function __construct(readonly private string $path) {}
+    public function __construct(private readonly string $path) {}
 
     /**
      * Get all backups.
