@@ -122,7 +122,7 @@ test('user cant update product with invalid data', function (string $field, call
         ->assertSessionHasErrors($field);
 
     $this->assertDatabaseCount('products', $count);
-})->with('udpate_product');
+})->with('update_product');
 
 test('user cant update product with integer attributes', function (callable $data) {
     [$attributeId, $fields] = $data();
