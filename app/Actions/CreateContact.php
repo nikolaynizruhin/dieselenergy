@@ -21,8 +21,8 @@ class CreateContact
 
         $contact = $customer->createContact($params['message']);
 
-//        Notification::route('mail', config('company.email'))
-//            ->notify(new ContactCreated($contact));
+        // Notification::route('mail', config('company.email'))
+        //     ->notify(new ContactCreated($contact));
 
         return $contact;
     }

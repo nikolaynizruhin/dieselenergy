@@ -23,19 +23,19 @@ test('guest can create contact', function () {
     $this->assertDatabaseHas('contacts', ['message' => $fields['message']]);
 });
 
-//test('admin should receive an email when contact created', function () {
-//    Notification::fake();
+// test('admin should receive an email when contact created', function () {
+//     Notification::fake();
 //
-//    $this->fromRoute('home')
-//        ->post(route('contacts.store'), $fields = validFields())
-//        ->assertRedirect(route('home').'#contact');
+//     $this->fromRoute('home')
+//         ->post(route('contacts.store'), $fields = validFields())
+//         ->assertRedirect(route('home').'#contact');
 //
-//    Notification::assertSentTo(
-//        new AnonymousNotifiable,
-//        ContactCreated::class,
-//        fn ($notification, $channels) => $notification->contact->customer->email === $fields['email'],
-//    );
-//});
+//     Notification::assertSentTo(
+//         new AnonymousNotifiable,
+//         ContactCreated::class,
+//         fn ($notification, $channels) => $notification->contact->customer->email === $fields['email'],
+//     );
+// });
 
 test('guest cant create contact with invalid data', function (string $field, callable $data) {
     $this->fromRoute('home')
