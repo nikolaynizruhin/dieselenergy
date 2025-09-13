@@ -24,7 +24,7 @@
 
     <meta property="og:title" content="@yield('title')" />
     <meta property="og:description" content="@yield('description')" />
-    <meta property="og:image" content="{{ asset('/images/logo.svg') }}" />
+    <meta property="og:image" content="{{ asset('/images/logo.png') }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
 
