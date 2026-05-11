@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Database\Factories\CartFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Cart extends Pivot
 {
-    /** @use HasFactory<\Database\Factories\CartFactory> */
+    /** @use HasFactory<CartFactory> */
     use HasFactory;
 
     /**

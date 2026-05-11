@@ -1,9 +1,15 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use App\Providers\DirectiveServiceProvider;
+use App\Providers\DumpServiceProvider;
+use App\Providers\PaginatorServiceProvider;
+use App\Providers\ViewServiceProvider;
+
 return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\DirectiveServiceProvider::class,
-    App\Providers\DumpServiceProvider::class,
-    App\Providers\PaginatorServiceProvider::class,
-    App\Providers\ViewServiceProvider::class,
+    AppServiceProvider::class,
+    DirectiveServiceProvider::class,
+    DumpServiceProvider::class,
+    PaginatorServiceProvider::class,
+    ViewServiceProvider::class,
 ];

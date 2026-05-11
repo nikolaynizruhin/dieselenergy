@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\OrderStatus;
 use App\Filters\Filterable;
 use App\Notifications\OrderConfirmed;
+use Database\Factories\CustomerFactory;
 use Facades\App\Services\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Customer extends Model
 {
-    /** @use HasFactory<\Database\Factories\CustomerFactory> */
+    /** @use HasFactory<CustomerFactory> */
     use Filterable, HasFactory, Notifiable;
 
     /**

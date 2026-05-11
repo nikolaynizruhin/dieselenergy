@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\SpecificationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -9,7 +10,7 @@ use Illuminate\Support\Collection;
 
 class Specification extends Pivot
 {
-    /** @use HasFactory<\Database\Factories\SpecificationFactory> */
+    /** @use HasFactory<SpecificationFactory> */
     use HasFactory;
 
     /**

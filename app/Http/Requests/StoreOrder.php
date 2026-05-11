@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Rules\Phone;
 use Facades\App\Services\Cart;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class StoreOrder extends FormRequest
 {
@@ -45,7 +46,7 @@ class StoreOrder extends FormRequest
     /**
      * Configure the validator instance.
      *
-     * @param  \Illuminate\Validation\Validator  $validator
+     * @param  Validator  $validator
      * @return void
      */
     public function withValidator($validator)
