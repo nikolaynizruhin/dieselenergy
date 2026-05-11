@@ -4,24 +4,17 @@ namespace App\Models;
 
 use App\Filters\Filterable;
 use Database\Factories\AttributeFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+#[Fillable(['name', 'measure'])]
 class Attribute extends Model
 {
     /** @use HasFactory<AttributeFactory> */
     use Filterable, HasFactory;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name', 'measure',
-    ];
 
     /**
      * Get the attribute's field.

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Filters\Filterable;
 use App\Support\Money;
 use Database\Factories\ProductFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute as AttributeCast;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,19 +14,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+#[Fillable(['name', 'model', 'slug', 'description', 'price', 'brand_id', 'category_id', 'is_active'])]
 class Product extends Model
 {
     /** @use HasFactory<ProductFactory> */
     use Filterable, HasFactory;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name', 'model', 'slug', 'description', 'price', 'brand_id', 'category_id', 'is_active',
-    ];
 
     /**
      * Get the attributes that should be cast.

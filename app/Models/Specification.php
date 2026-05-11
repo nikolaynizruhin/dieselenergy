@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Database\Factories\SpecificationFactory;
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Support\Collection;
 
+#[Table('attribute_category')]
 class Specification extends Pivot
 {
     /** @use HasFactory<SpecificationFactory> */
@@ -19,13 +21,6 @@ class Specification extends Pivot
      * @var bool
      */
     public $incrementing = true;
-
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'attribute_category';
 
     /**
      * Get the attributes that should be cast.

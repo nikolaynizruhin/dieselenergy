@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Database\Factories\CartFactory;
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
+#[Table('order_product')]
 class Cart extends Pivot
 {
     /** @use HasFactory<CartFactory> */
@@ -18,13 +20,6 @@ class Cart extends Pivot
      * @var bool
      */
     public $incrementing = true;
-
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'order_product';
 
     /**
      * Get the order that owns the cart.

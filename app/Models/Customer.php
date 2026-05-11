@@ -7,24 +7,17 @@ use App\Filters\Filterable;
 use App\Notifications\OrderConfirmed;
 use Database\Factories\CustomerFactory;
 use Facades\App\Services\Cart;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
+#[Fillable(['name', 'email', 'phone', 'notes', 'status'])]
 class Customer extends Model
 {
     /** @use HasFactory<CustomerFactory> */
     use Filterable, HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name', 'email', 'phone', 'notes', 'status',
-    ];
 
     /**
      * Get the orders for the customer.

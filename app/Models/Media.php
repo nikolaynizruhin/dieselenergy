@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Database\Factories\MediaFactory;
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
+#[Table('image_product')]
 class Media extends Pivot
 {
     /** @use HasFactory<MediaFactory> */
@@ -18,13 +20,6 @@ class Media extends Pivot
      * @var bool
      */
     public $incrementing = true;
-
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'image_product';
 
     /**
      * Get the attributes that should be cast.

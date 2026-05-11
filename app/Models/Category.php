@@ -4,25 +4,18 @@ namespace App\Models;
 
 use App\Filters\Filterable;
 use Database\Factories\CartFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[Fillable(['name', 'slug'])]
 class Category extends Model
 {
     /** @use HasFactory<CartFactory> */
     use Filterable, HasFactory;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name', 'slug',
-    ];
 
     /**
      * Get the products for the category.
