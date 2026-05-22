@@ -1,35 +1,42 @@
 {
+  "_bootstrap.bundle-DzjqSbZx.js": {
+    "file": "assets/bootstrap.bundle-DzjqSbZx.js",
+    "name": "bootstrap.bundle"
+  },
   "resources/js/admin/admin.js": {
-    "file": "assets/admin-B0Vm_Tbv.js",
+    "file": "assets/admin-BPvyRu4h.js",
     "name": "admin",
     "src": "resources/js/admin/admin.js",
     "isEntry": true,
     "imports": [
-      "resources/js/app.js"
+      "_bootstrap.bundle-DzjqSbZx.js"
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-BOaejVOD.js",
+    "file": "assets/app-LDNUfpKX.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_bootstrap.bundle-DzjqSbZx.js"
+    ]
   },
   "resources/sass/admin/admin.scss": {
-    "file": "assets/admin-DYV1erza.css",
-    "src": "resources/sass/admin/admin.scss",
-    "isEntry": true,
+    "file": "assets/admin-BSI8uuX1.css",
     "name": "admin",
     "names": [
       "admin.css"
-    ]
+    ],
+    "src": "resources/sass/admin/admin.scss",
+    "isEntry": true
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-DLrSTflq.css",
-    "src": "resources/sass/app.scss",
-    "isEntry": true,
+    "file": "assets/app-CTfXUDmM.css",
     "name": "app",
     "names": [
       "app.css"
-    ]
+    ],
+    "src": "resources/sass/app.scss",
+    "isEntry": true
   }
 }
