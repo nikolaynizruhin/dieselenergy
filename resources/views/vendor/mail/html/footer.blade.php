@@ -12,6 +12,9 @@
 <a href="{{ config('company.facebook') }}">
 <img src="{{ asset('/images/facebook.png') }}" width="24" alt="Facebook">
 </a>
+<a href="{{ config('company.instagram') }}">
+<img src="{{ asset('/images/instagram.png') }}" width="24" alt="Instagram">
+</a>
 {{ Illuminate\Mail\Markdown::parse($slot) }}
 </td>
 </tr>

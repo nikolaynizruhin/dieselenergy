@@ -34,7 +34,7 @@
                 <strong class="d-block text-gray-500 mb-2 letter-spacing">КОНТАКТИ</strong>
                 <a href="tel:{{ config('company.phone') }}" class="d-block icon-link  text-gray-300 text-decoration-none mb-2">
                     @include('layouts.partials.icon', ['name' => 'telephone', 'classes' => 'me-2', 'width' => '1.3em', 'height' => '1.3em'])
-                    +38 (097) 799 75 42
+                    +38 (067) 700 77 91
                 </a>
                 <a href="mailto:{{ config('company.email') }}" class="d-block icon-link text-gray-300 text-decoration-none mb-2">
                     @include('layouts.partials.icon', ['name' => 'envelope', 'classes' => 'me-2', 'width' => '1.3em', 'height' => '1.3em'])
@@ -42,7 +42,11 @@
                 </a>
                 <a href="{{ config('company.facebook') }}" class="d-block icon-link  text-gray-300 text-decoration-none mb-2">
                     @include('layouts.partials.icon', ['name' => 'facebook', 'classes' => 'me-2', 'width' => '1.3em', 'height' => '1.3em'])
-                    {{ config('app.name') }}
+                    Facebook
+                </a>
+                <a href="{{ config('company.instagram') }}" class="d-block icon-link  text-gray-300 text-decoration-none mb-2">
+                    @include('layouts.partials.icon', ['name' => 'instagram', 'classes' => 'me-2', 'width' => '1.3em', 'height' => '1.3em'])
+                    Instagram
                 </a>
             </div>
         </div>
