@@ -68,5 +68,10 @@
     </main>
 
     @include('layouts.partials.footer')
+
+    <!-- GetCall -->
+    <script src="https://widgets.binotel.com/getcall/widgets/fry0q2h1xx8ljt59v96u.js" async></script>
+    <!-- Online Chat -->
+    <script src="https://widgets.binotel.com/chat/widgets/G6tcNWdTuylkRIF29bEH.js" async></script>
 </body>
 </html>
