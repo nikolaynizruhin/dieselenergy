@@ -50,6 +50,8 @@
         <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2369428963843404&ev=PageView&noscript=1"/>
     </noscript>
     <!-- End Meta Pixel Code -->
+
+    <meta name="facebook-domain-verification" content="lwdfizez6a3bf3jfsyjz7h4hpl2lyt" />
 </head>
 <body class="d-flex flex-column h-100">
     <!-- Google Tag Manager (noscript) -->
